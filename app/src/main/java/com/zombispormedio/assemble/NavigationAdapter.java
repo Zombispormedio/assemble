@@ -2,21 +2,20 @@ package com.zombispormedio.assemble;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 
 /**
  * Created by Master on 25/06/2016.
  */
-public final class Navigation {
+public final class NavigationAdapter {
     private Context ctx;
     private Type type;
 
-    public Navigation(Context ctx){
+    public NavigationAdapter(Context ctx){
         this.ctx=ctx;
         this.type=Type.MAIN;
     }
 
-    public Navigation(Context ctx, Type type){
+    public NavigationAdapter(Context ctx, Type type){
         this.ctx=ctx;
         this.type=type;
     }
@@ -45,11 +44,11 @@ public final class Navigation {
     }
 
     public void goHome(){
-        Navigation.Home(ctx);
+        NavigationAdapter.Home(ctx);
     }
 
     public void  goToLogin(){
-        Navigation.Login(ctx);
+        NavigationAdapter.Login(ctx);
     }
 
     public void Combo(boolean statement){
