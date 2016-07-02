@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">Assemble</string>
+    <string name="login_title">Login</string>
+    <string name="home_title">Home</string>
+    <string name="app_title">Assemble</string>
+    <string name="description_logo">logo</string>
+    <string name="log_in">Log in</string>
+    <string name="email_input_hint">Email</string>
+    <string name="pass_input_hint">Password</string>
+    <string name="register_link_text"><u>Sign up</u></string>
+    <string name="signup_message">Account created</string>
+    <string name="signup_title">Sign in Assemble. It\'s Free.</string>
+    <string name="login_message">Login successfully</string>
+    <string name="repeat_pass_input_hint">Repeat password</string>
+    <string name="register_button_hint">Sign up</string>
+    <string name="email_empty">Email is empty</string>
+    <string name="pass_empty">Password is empty</string>
+    <string name="rep_pass_empty">Repeat password is empty</string>
+    <string name="pass_equals">Repeat password is not equal.</string>
+    <string name="invalid_email">Invalid email</string>
+    <string name="error_sign_up">Error signing up</string>
+    <string name="success_signing_up">Sign up succesfully</string>
 </resources>

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "496424724698",
+    "firebase_url": "https://assemble-7ce9e.firebaseio.com",
+    "project_id": "assemble-7ce9e",
+    "storage_bucket": "assemble-7ce9e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:496424724698:android:a8363acd5af1a06c",
+        "android_client_info": {
+          "package_name": "com.zombispormedio.assemble"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "496424724698-75prcclbfo984rvbeath92u8tgml5h9e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zombispormedio.assemble",
+            "certificate_hash": "EB952D5F1B6D6BD0B903FE2B1A5F837CF5030A2D"
+          }
+        },
+        {
+          "client_id": "496424724698-jf389qnqantevdd74m2t4gm65dhpbg2d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCmWE_mArf7srgcld3d3UYVsaNx3o-_kSs"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "496424724698-jf389qnqantevdd74m2t4gm65dhpbg2d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
