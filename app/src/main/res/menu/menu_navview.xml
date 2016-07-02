@@ -1,4 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+<group android:checkableBehavior="single">
 
+</group>
+
+    <item android:id="@+id/navigation_header"
+        android:title="@string/settings">
+        <menu>
+            <item android:id="@+id/signout_menu"
+                android:icon="@drawable/ic_power"
+                android:title="@string/signout"/>
+
+        </menu>
+
+    </item>
 </menu>

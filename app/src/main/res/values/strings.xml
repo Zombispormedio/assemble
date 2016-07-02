@@ -20,4 +20,12 @@
     <string name="invalid_email">Invalid email</string>
     <string name="error_sign_up">Error signing up</string>
     <string name="success_signing_up">Sign up succesfully</string>
+    <string name="icon_user">icon user</string>
+    <string name="default_user_name">User 1</string>
+
+
+    <string name="settings">Settings</string>
+    <string name="signout">Sign out</string>
+    <string name="open_drawer_desc">Drawer Opened</string>
+    <string name="close_drawer_desc">Drawer Closed</string>
 </resources>
