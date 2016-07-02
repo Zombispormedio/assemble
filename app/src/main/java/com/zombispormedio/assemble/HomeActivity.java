@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble;
 
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -8,11 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -29,7 +25,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
 
-        mAuthListener=FirebaseTools.checkAccess(this, Navigation.Type.HOME);
+        mAuthListener=FirebaseTools.checkAccess(this, NavigationAdapter.Type.HOME);
         drawer= (DrawerLayout)findViewById(R.id.drawer_layout_home);
         nav=(NavigationView)findViewById(R.id.navview);
         drawerTools=new HomeDrawerTools(this, drawer,nav);

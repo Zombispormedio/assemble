@@ -13,8 +13,8 @@ import com.google.firebase.auth.FirebaseUser;
 public class FirebaseTools {
     private static final String TAG = "FirebaseTools";
 
-    public static FirebaseAuth.AuthStateListener checkAccess(Navigation acc) {
-        final Navigation accesor = acc;
+    public static FirebaseAuth.AuthStateListener checkAccess(NavigationAdapter acc) {
+        final NavigationAdapter accesor = acc;
         return new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -27,13 +27,13 @@ public class FirebaseTools {
         };
     }
 
-    public static FirebaseAuth.AuthStateListener checkAccess(Context ctx, Navigation.Type accesor_type) {
-        final Navigation accesor = new Navigation(ctx, accesor_type);
+    public static FirebaseAuth.AuthStateListener checkAccess(Context ctx, NavigationAdapter.Type accesor_type) {
+        final NavigationAdapter accesor = new NavigationAdapter(ctx, accesor_type);
         return checkAccess(accesor);
     }
 
     public static FirebaseAuth.AuthStateListener checkAccess(Context ctx) {
-        Navigation accesor = new Navigation(ctx);
+        NavigationAdapter accesor = new NavigationAdapter(ctx);
         return checkAccess(accesor);
     }
 

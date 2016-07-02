@@ -22,7 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
 
-        mAuthListener=FirebaseTools.checkAccess(this, Navigation.Type.LOGIN);
+        mAuthListener=FirebaseTools.checkAccess(this, NavigationAdapter.Type.LOGIN);
     }
 
 
@@ -47,7 +47,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void SignUp(View view){
-        Navigation.Register(this);
+        NavigationAdapter.Register(this);
     }
     @Override
     public void onBackPressed() {
@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Tools.showAlert(LoginActivity.this, R.string.login_message);
-                            Navigation.Home(LoginActivity.this);
+                            NavigationAdapter.Home(LoginActivity.this);
                         }else{
 
                             Tools.showAlert(LoginActivity.this, task.getException().getMessage());

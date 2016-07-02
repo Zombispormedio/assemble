@@ -21,9 +21,11 @@ public class HomeDrawerTools {
     private DrawerLayout drawer;
     private NavigationView nav;
     private FirebaseAuth mAuth;
+    private NavigationAdapter navTool;
 
     public HomeDrawerTools(Context ctx,DrawerLayout drawer,NavigationView nav ){
         this.ctx=ctx;
+        navTool=new NavigationAdapter(ctx);
         view=(Activity)ctx;
         this.drawer=drawer;
         this.nav=nav;
@@ -47,8 +49,13 @@ public class HomeDrawerTools {
                 switch(item.getItemId()){
                     case R.id.signout_menu:
                         mAuth.signOut();
-                        Navigation.Login(ctx);
+                        navTool.Login();
                         break;
+
+                    case R.id.profile_menu:
+                        navTool.Profile();
+                        break;
+
                 }
                 drawer.closeDrawers();
                 return true;

@@ -43,32 +43,42 @@ public final class NavigationAdapter {
         goTo(ctx, MainActivity.class);
     }
 
-    public void goHome(){
+    public  static void Profile(Context ctx){
+        goTo(ctx, ProfileActivity.class);
+    }
+
+
+    public void Home(){
         NavigationAdapter.Home(ctx);
     }
 
-    public void  goToLogin(){
+    public void Login(){
         NavigationAdapter.Login(ctx);
+    }
+
+    public void Profile(){
+        NavigationAdapter.Profile(ctx);
     }
 
     public void Combo(boolean statement){
         switch (type){
             case MAIN:{
                 if(statement){
-                    goHome();
-                }else{goToLogin();}
+                    Home();
+                }else{
+                    Login();}
                 break;
             }
             case LOGIN:{
                 if(statement){
-                    goHome();
+                    Home();
                 }
                 break;
             }
 
             case HOME:{
                 if(!statement){
-                    goToLogin();
+                    Login();
                 }
                 break;
             }
