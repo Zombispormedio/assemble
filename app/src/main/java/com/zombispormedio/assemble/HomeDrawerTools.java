@@ -57,6 +57,7 @@ public class HomeDrawerTools {
                         break;
 
                 }
+                item.setChecked(false);
                 drawer.closeDrawers();
                 return true;
             }

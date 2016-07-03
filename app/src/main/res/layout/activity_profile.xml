@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:clickable="true"
-    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.zombispormedio.assemble.ProfileActivity">
 
     <android.support.v7.widget.Toolbar
