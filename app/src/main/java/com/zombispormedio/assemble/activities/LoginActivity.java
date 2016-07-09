@@ -13,7 +13,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.zombispormedio.assemble.BasicInput;
 import com.zombispormedio.assemble.FirebaseTools;
-import com.zombispormedio.assemble.utils.NavigationAdapter;
+import com.zombispormedio.assemble.utils.NavigationTools;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.utils.Tools;
 
@@ -27,7 +27,7 @@ public class LoginActivity extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
 
-        mAuthListener= FirebaseTools.checkAccess(this, NavigationAdapter.Type.LOGIN);
+        mAuthListener= FirebaseTools.checkAccess(this, NavigationTools.Type.LOGIN);
     }
 
 
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void SignUp(View view){
-        NavigationAdapter.Register(this);
+        NavigationTools.Register(this);
     }
     @Override
     public void onBackPressed() {
@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
                             Tools.showAlert(LoginActivity.this, R.string.login_message);
-                            NavigationAdapter.Home(LoginActivity.this);
+                            NavigationTools.Home(LoginActivity.this);
                         }else{
 
                             Tools.showAlert(LoginActivity.this, task.getException().getMessage());

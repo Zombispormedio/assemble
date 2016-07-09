@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.zombispormedio.assemble.utils.NavigationAdapter;
+import com.zombispormedio.assemble.utils.NavigationTools;
 
 /**
  * Created by Master on 02/07/2016.
@@ -22,11 +22,11 @@ public class HomeDrawerTools {
     private DrawerLayout drawer;
     private NavigationView nav;
     private FirebaseAuth mAuth;
-    private NavigationAdapter navTool;
+    private NavigationTools navTool;
 
     public HomeDrawerTools(Context ctx,DrawerLayout drawer,NavigationView nav ){
         this.ctx=ctx;
-        navTool=new NavigationAdapter(ctx);
+        navTool=new NavigationTools(ctx);
         view=(Activity)ctx;
         this.drawer=drawer;
         this.nav=nav;

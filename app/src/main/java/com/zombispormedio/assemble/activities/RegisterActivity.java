@@ -13,7 +13,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.zombispormedio.assemble.BasicInput;
-import com.zombispormedio.assemble.utils.NavigationAdapter;
+import com.zombispormedio.assemble.utils.NavigationTools;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.utils.Tools;
 
@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void goMain(){
-        NavigationAdapter.Main(this);
+        NavigationTools.Main(this);
     }
 
 

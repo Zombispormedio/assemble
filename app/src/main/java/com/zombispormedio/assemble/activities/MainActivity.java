@@ -1,21 +1,24 @@
 package com.zombispormedio.assemble.activities;
-import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
 import android.view.Window;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.zombispormedio.assemble.FirebaseTools;
-import com.zombispormedio.assemble.utils.NavigationAdapter;
+
+import com.zombispormedio.assemble.controllers.MainController;
+import com.zombispormedio.assemble.utils.NavigationTools;
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.views.IMainView;
 
 
-public class MainActivity extends AppCompatActivity implements IMainView{
+public class MainActivity extends AppCompatActivity implements IMainView {
 
     private FirebaseAuth mAuth;
     private  FirebaseAuth.AuthStateListener mAuthListener;
-    private static final String TAG = "Main";
+
+    private MainController ctrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,43 +28,40 @@ public class MainActivity extends AppCompatActivity implements IMainView{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
-        mAuth=FirebaseAuth.getInstance();
 
-        mAuthListener= FirebaseTools.checkAccess(this);
-
+        ctrl=new MainController(this);
 
 
     }
 
-    private void goToLogin(){
-        NavigationAdapter.Login(this);
+    public void goToLogin(){
+        NavigationTools.Login(this);
+        finish();
     }
 
-    private void goHome(){
-        NavigationAdapter.Home(this);
+    public void goHome(){
+        NavigationTools.Home(this);
+        finish();
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
+        ctrl.onStart();
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if(mAuthListener!=null){
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-
-    @Override
-    public void Hello() {
+       ctrl.onStop();
 
     }
 
     @Override
-    public Context getContext() {
-        return null;
+    protected void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+
     }
 }

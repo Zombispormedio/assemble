@@ -31,6 +31,7 @@ public final class NavigationTools {
         Intent dst=new Intent(ctx, cls);
 
         ctx.startActivity(dst);
+
     }
 
     public  static void Login(Context ctx){

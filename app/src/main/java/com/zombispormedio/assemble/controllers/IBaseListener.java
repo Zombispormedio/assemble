@@ -6,4 +6,5 @@ package com.zombispormedio.assemble.controllers;
 public interface IBaseListener<T> {
     void onError(T ...args);
     void onSuccess(T ...args);
+
 }

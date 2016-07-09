@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.zombispormedio.assemble.FirebaseTools;
 import com.zombispormedio.assemble.HomeDrawerTools;
-import com.zombispormedio.assemble.utils.NavigationAdapter;
+import com.zombispormedio.assemble.utils.NavigationTools;
 import com.zombispormedio.assemble.R;
 
 public class HomeActivity extends AppCompatActivity {
@@ -29,7 +29,7 @@ public class HomeActivity extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
 
-        mAuthListener= FirebaseTools.checkAccess(this, NavigationAdapter.Type.HOME);
+        mAuthListener= FirebaseTools.checkAccess(this, NavigationTools.Type.HOME);
         drawer= (DrawerLayout)findViewById(R.id.drawer_layout_home);
         nav=(NavigationView)findViewById(R.id.navview);
         drawerTools=new HomeDrawerTools(this, drawer,nav);

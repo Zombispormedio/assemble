@@ -7,4 +7,8 @@ public interface IBaseController {
 
     void onDestroy();
 
+    void onStart();
+
+    void onStop();
+
 }
