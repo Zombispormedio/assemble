@@ -1,4 +1,5 @@
 package com.zombispormedio.assemble.activities;
+import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,11 +7,11 @@ import android.view.Window;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.zombispormedio.assemble.FirebaseTools;
-import com.zombispormedio.assemble.NavigationAdapter;
+import com.zombispormedio.assemble.utils.NavigationAdapter;
 import com.zombispormedio.assemble.R;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements IMainView{
 
     private FirebaseAuth mAuth;
     private  FirebaseAuth.AuthStateListener mAuthListener;
@@ -52,5 +53,15 @@ public class MainActivity extends AppCompatActivity {
         if(mAuthListener!=null){
             mAuth.removeAuthStateListener(mAuthListener);
         }
+    }
+
+    @Override
+    public void Hello() {
+
+    }
+
+    @Override
+    public Context getContext() {
+        return null;
     }
 }

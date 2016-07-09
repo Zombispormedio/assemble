@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.zombispormedio.assemble.FirebaseTools;
 import com.zombispormedio.assemble.HomeDrawerTools;
-import com.zombispormedio.assemble.NavigationAdapter;
+import com.zombispormedio.assemble.utils.NavigationAdapter;
 import com.zombispormedio.assemble.R;
 
 public class HomeActivity extends AppCompatActivity {

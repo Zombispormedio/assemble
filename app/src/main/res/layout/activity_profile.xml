@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:clickable="true"
-    tools:context="com.zombispormedio.assemble.ProfileActivity">
+    tools:context=".activities.ProfileActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/profile_bar"

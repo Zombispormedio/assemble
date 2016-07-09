@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.zombispormedio.assemble.utils.NavigationAdapter;
 
 /**
  * Created by Master on 27/06/2016.

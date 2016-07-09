@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.zombispormedio.assemble.utils.NavigationAdapter;
 
 /**
  * Created by Master on 02/07/2016.
