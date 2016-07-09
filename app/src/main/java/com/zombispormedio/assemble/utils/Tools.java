@@ -1,11 +1,10 @@
-package com.zombispormedio.assemble;
+package com.zombispormedio.assemble.utils;
 
 import android.content.Context;
 
-import android.util.Log;
-
 import android.widget.Toast;
 
+import com.zombispormedio.assemble.BasicInput;
 
 
 /**

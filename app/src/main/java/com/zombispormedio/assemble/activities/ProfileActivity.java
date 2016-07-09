@@ -1,9 +1,11 @@
-package com.zombispormedio.assemble;
+package com.zombispormedio.assemble.activities;
 
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+
+import com.zombispormedio.assemble.R;
 
 public class ProfileActivity extends AppCompatActivity {
     private Toolbar bar;

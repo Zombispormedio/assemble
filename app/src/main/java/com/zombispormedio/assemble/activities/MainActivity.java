@@ -1,10 +1,13 @@
-package com.zombispormedio.assemble;
+package com.zombispormedio.assemble.activities;
 import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Window;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.zombispormedio.assemble.FirebaseTools;
+import com.zombispormedio.assemble.NavigationAdapter;
+import com.zombispormedio.assemble.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth=FirebaseAuth.getInstance();
 
-        mAuthListener=FirebaseTools.checkAccess(this);
+        mAuthListener= FirebaseTools.checkAccess(this);
 
 
 

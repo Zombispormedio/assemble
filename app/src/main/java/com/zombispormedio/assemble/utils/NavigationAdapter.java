@@ -1,7 +1,13 @@
-package com.zombispormedio.assemble;
+package com.zombispormedio.assemble.utils;
 
 import android.content.Context;
 import android.content.Intent;
+
+import com.zombispormedio.assemble.activities.HomeActivity;
+import com.zombispormedio.assemble.activities.LoginActivity;
+import com.zombispormedio.assemble.activities.MainActivity;
+import com.zombispormedio.assemble.activities.ProfileActivity;
+import com.zombispormedio.assemble.activities.RegisterActivity;
 
 /**
  * Created by Master on 25/06/2016.

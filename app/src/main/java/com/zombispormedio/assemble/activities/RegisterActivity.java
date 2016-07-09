@@ -1,4 +1,4 @@
-package com.zombispormedio.assemble;
+package com.zombispormedio.assemble.activities;
 
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +12,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.zombispormedio.assemble.BasicInput;
+import com.zombispormedio.assemble.NavigationAdapter;
+import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.Tools;
 
 
 public class RegisterActivity extends AppCompatActivity {
