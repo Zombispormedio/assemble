@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import android.view.Window;
 
-import com.google.firebase.auth.FirebaseAuth;
+
 
 import com.zombispormedio.assemble.controllers.MainController;
 import com.zombispormedio.assemble.utils.NavigationTools;
@@ -14,9 +14,6 @@ import com.zombispormedio.assemble.views.IMainView;
 
 
 public class MainActivity extends AppCompatActivity implements IMainView {
-
-    private FirebaseAuth mAuth;
-    private  FirebaseAuth.AuthStateListener mAuthListener;
 
     private MainController ctrl;
 
@@ -30,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements IMainView {
 
 
         ctrl=new MainController(this);
+
 
 
     }

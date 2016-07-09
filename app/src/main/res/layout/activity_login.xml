@@ -110,7 +110,7 @@
         android:layout_marginBottom="25dp"
         android:background="@color/colorAccent"
         android:textColor="@color/abc_primary_text_material_dark"
-        android:onClick="Login" />
+        />
 
     <TextView
         android:layout_width="wrap_content"
@@ -124,7 +124,7 @@
         android:textColorLink="@color/colorPrimary"
         android:textIsSelectable="false"
         android:textColorHighlight="@color/colorPrimary"
-        android:onClick="SignUp" />
+         />
 
 
 </LinearLayout>
