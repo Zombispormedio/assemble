@@ -3,13 +3,9 @@ package com.zombispormedio.assemble.views;
 /**
  * Created by Master on 09/07/2016.
  */
-public interface ILoginView {
+public interface IRegisterView {
 
-    void goHome();
-    
-    void goToRegister();
-
-     void showProgressBar();
+    void showProgressBar();
 
     void hideProgressBar();
 
@@ -21,11 +17,17 @@ public interface ILoginView {
 
     String getPassword();
 
+    String getRepPassword();
+
+    void goMain();
+
     void showEmptyEmail();
 
     void showEmptyPassword();
 
-    void showAlert(String msg);
-    void showSuccessfulLogin();
+    void showEmptyRepPassword();
 
+    void showNotEqualsBothPassword();
+
+    void showAlert(String msg);
 }

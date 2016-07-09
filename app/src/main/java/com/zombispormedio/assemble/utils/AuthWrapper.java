@@ -2,6 +2,9 @@ package com.zombispormedio.assemble.utils;
 
 import android.support.annotation.NonNull;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -14,7 +17,7 @@ import com.zombispormedio.assemble.controllers.IBaseListener;
  */
 public class AuthWrapper {
 
-    private static final String TAG = AuthWrapper.class.getName();
+
 
     private FirebaseAuth mAuth;
 
@@ -50,6 +53,41 @@ public class AuthWrapper {
         if (authListener!=null){
             mAuth.removeAuthStateListener(authListener);
         }
+    }
+
+    public void login(String email, String password, final IBaseListener<String> listener){
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            listener.onSuccess(task.getResult().getUser().getUid());
+
+                        }else{
+                            listener.onError(task.getException().getMessage());
+                        }
+                    }
+                });
+    }
+
+
+    public void create(String email, String password, final IBaseListener<String> listener){
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            listener.onSuccess(task.getResult().getUser().getUid());
+
+                        }else{
+                            listener.onError(task.getException().getMessage());
+                        }
+                    }
+                });
+    }
+
+    public void signOut(){
+        mAuth.signOut();
     }
 
 

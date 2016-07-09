@@ -19,7 +19,11 @@
             android:name=".activities.HomeActivity"
             android:label="@string/home_title" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.RegisterActivity"  android:parentActivityName=".activities.LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.LoginActivity" />
+        </activity>
         <activity android:name=".activities.ProfileActivity"
             android:parentActivityName=".activities.HomeActivity"
             >

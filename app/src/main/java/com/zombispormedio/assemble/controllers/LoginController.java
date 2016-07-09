@@ -21,10 +21,61 @@ public class LoginController implements IBaseController {
     }
 
     public void onClickLoginButton() {
-        
+        whileLogin();
+
+        String email=ctx.getEmail();
+        String pass=ctx.getPassword();
+
+        if(email.isEmpty() || pass.isEmpty()){
+            afterTryLogin();
+            if(email.isEmpty()){
+                ctx.showEmptyEmail();
+            }else{
+                if(pass.isEmpty()){
+                    ctx.showEmptyPassword();
+                }
+            }
+
+        }else{
+            user.login(email, pass, new LoginListener());
+
+        }
+
+
+    }
+
+    public class LoginListener implements IBaseListener<String>{
+
+        @Override
+        public void onError(String... args) {
+            String error=args[0];
+
+            ctx.showAlert(error);
+            afterTryLogin();
+
+        }
+
+        @Override
+        public void onSuccess(String... args) {
+            afterTryLogin();
+            ctx.showSuccessfulLogin();
+
+            ctx.goHome();
+        }
+    }
+
+    private void whileLogin(){
+        ctx.hideForm();
+        ctx.showProgressBar();
+    }
+
+    private void afterTryLogin(){
+        ctx.hideProgressBar();
+        ctx.showForm();
     }
 
     public void onClickRegisterLink() {
+        ctx.goToRegister();
     }
 
 

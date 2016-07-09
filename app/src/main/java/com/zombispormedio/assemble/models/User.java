@@ -16,22 +16,6 @@ public class User implements IBaseModel {
     }
 
 
-
-    @Override
-    public void create() {
-        //TODO
-    }
-
-    @Override
-    public void update() {
-        //TODO
-    }
-
-    @Override
-    public void remove() {
-        //TODO
-    }
-
     public class AccessVerifier{
         private AuthWrapper auth;
         public AccessVerifier(AuthWrapper auth0, IBaseListener<Integer> listener) {
@@ -51,5 +35,34 @@ public class User implements IBaseModel {
 
     public AccessVerifier createAccessVerifier(IBaseListener<Integer> listener){
         return new AccessVerifier(auth, listener);
+    }
+
+    public void login(String email, String password, IBaseListener<String> listener){
+        auth.login(email, password, listener);
+    }
+
+
+
+    public void create(String email, String password, IBaseListener<String> listener) {
+        auth.create(email, password, listener);
+    }
+
+    public void signOut(){
+        auth.signOut();
+    }
+
+    @Override
+    public void create() {
+
+    }
+
+    @Override
+    public void update() {
+        //TODO
+    }
+
+    @Override
+    public void remove() {
+        //TODO
     }
 }
