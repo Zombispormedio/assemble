@@ -12,16 +12,16 @@ import com.zombispormedio.assemble.activities.RegisterActivity;
 /**
  * Created by Master on 25/06/2016.
  */
-public final class NavigationAdapter {
+public final class NavigationTools {
     private Context ctx;
     private Type type;
 
-    public NavigationAdapter(Context ctx){
+    public NavigationTools(Context ctx){
         this.ctx=ctx;
         this.type=Type.MAIN;
     }
 
-    public NavigationAdapter(Context ctx, Type type){
+    public NavigationTools(Context ctx, Type type){
         this.ctx=ctx;
         this.type=type;
     }
@@ -55,15 +55,15 @@ public final class NavigationAdapter {
 
 
     public void Home(){
-        NavigationAdapter.Home(ctx);
+        NavigationTools.Home(ctx);
     }
 
     public void Login(){
-        NavigationAdapter.Login(ctx);
+        NavigationTools.Login(ctx);
     }
 
     public void Profile(){
-        NavigationAdapter.Profile(ctx);
+        NavigationTools.Profile(ctx);
     }
 
     public void Combo(boolean statement){
