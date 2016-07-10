@@ -1,4 +1,4 @@
-package com.zombispormedio.assemble.utils;
+package com.zombispormedio.assemble.wrappers.firebase;
 
 import android.support.annotation.NonNull;
 
@@ -15,7 +15,7 @@ import com.zombispormedio.assemble.controllers.IBaseListener;
 /**
  * Created by Master on 08/07/2016.
  */
-public class AuthWrapper {
+public class FirebaseAuthWrapper {
 
 
 
@@ -23,7 +23,7 @@ public class AuthWrapper {
 
     private FirebaseAuth.AuthStateListener authListener;
 
-    public AuthWrapper() {
+    public FirebaseAuthWrapper() {
         mAuth=FirebaseAuth.getInstance();
         authListener=null;
     }
