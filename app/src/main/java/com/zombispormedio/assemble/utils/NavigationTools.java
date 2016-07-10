@@ -14,16 +14,10 @@ import com.zombispormedio.assemble.activities.RegisterActivity;
  */
 public final class NavigationTools {
     private Context ctx;
-    private Type type;
 
     public NavigationTools(Context ctx){
         this.ctx=ctx;
-        this.type=Type.MAIN;
-    }
 
-    public NavigationTools(Context ctx, Type type){
-        this.ctx=ctx;
-        this.type=type;
     }
 
 
@@ -67,35 +61,5 @@ public final class NavigationTools {
         NavigationTools.Profile(ctx);
     }
 
-    public void Combo(boolean statement){
-        switch (type){
-            case MAIN:{
-                if(statement){
-                    Home();
-                }else{
-                    Login();}
-                break;
-            }
-            case LOGIN:{
-                if(statement){
-                    Home();
-                }
-                break;
-            }
-
-            case HOME:{
-                if(!statement){
-                    Login();
-                }
-                break;
-            }
-        }
-    }
-
-    public enum Type{
-        MAIN,
-        LOGIN,
-        HOME
-    }
 
 }

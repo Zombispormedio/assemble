@@ -90,7 +90,20 @@ public class FirebaseAuthWrapper  implements IAuthWrapper {
         mAuth.signOut();
     }
 
+    @Override
+    public String getValue(String field) {
+        String value="";
 
+        if(mAuth.getCurrentUser()!=null) {
+            switch (field) {
+                case "email": value=mAuth.getCurrentUser().getEmail();
+                    break;
+            }
+
+        }
+
+        return value;
+    }
 
 
 }

@@ -1,8 +1,8 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.zombispormedio.assemble.models.builders.ModelBuilder;
 import com.zombispormedio.assemble.models.User;
 import com.zombispormedio.assemble.views.ILoginView;
-import com.zombispormedio.assemble.wrappers.firebase.FirebaseAuthWrapper;
 
 /**
  * Created by Master on 09/07/2016.
@@ -16,7 +16,7 @@ public class LoginController implements IBaseController {
     public LoginController(ILoginView ctx) {
         this.ctx = ctx;
 
-        user=new User(new FirebaseAuthWrapper());
+        user= ModelBuilder.createUser();
         verifier=user.createAccessVerifier(new AccessListener());
 
     }

@@ -1,8 +1,8 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.zombispormedio.assemble.models.builders.ModelBuilder;
 import com.zombispormedio.assemble.models.User;
 import com.zombispormedio.assemble.views.IRegisterView;
-import com.zombispormedio.assemble.wrappers.firebase.FirebaseAuthWrapper;
 
 /**
  * Created by Master on 09/07/2016.
@@ -15,7 +15,7 @@ public class RegisterController implements IBaseController {
     public RegisterController(IRegisterView ctx) {
         this.ctx = ctx;
 
-        user=new User(new FirebaseAuthWrapper());
+        user= ModelBuilder.createUser();
     }
 
     public void onClickRegisterButton() {

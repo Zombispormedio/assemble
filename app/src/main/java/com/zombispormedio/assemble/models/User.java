@@ -8,13 +8,14 @@ import com.zombispormedio.assemble.wrappers.firebase.FirebaseAuthWrapper;
 /**
  * Created by Master on 08/07/2016.
  */
-public class User implements IBaseModel {
-    private static final String TAG = User.class.getName();
+public class User implements IRemovable {
+
     private IAuthWrapper auth;
 
     public User(IAuthWrapper auth) {
         this.auth=auth;
     }
+
 
 
     public class AccessVerifier{
@@ -52,18 +53,17 @@ public class User implements IBaseModel {
         auth.signOut();
     }
 
-    @Override
-    public void create() {
-
-    }
-
-    @Override
-    public void update() {
-        //TODO
-    }
 
     @Override
     public void remove() {
         //TODO
+    }
+
+    public String getValue(String field) {
+        return auth.getValue(field);
+    }
+
+    public String getEmail() {
+        return auth.getValue("email");
     }
 }

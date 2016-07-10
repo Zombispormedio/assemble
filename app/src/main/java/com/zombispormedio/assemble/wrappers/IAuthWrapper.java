@@ -17,4 +17,6 @@ public interface IAuthWrapper{
     void create(String email, String password, final IBaseListener<String> listener);
 
     void signOut();
+
+    String getValue(String field);
 }
