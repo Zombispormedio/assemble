@@ -57,7 +57,7 @@ public class LoginController implements IBaseController {
 
         @Override
         public void onSuccess(String... args) {
-            afterTryLogin();
+
             ctx.showSuccessfulLogin();
 
             ctx.goHome();

@@ -38,7 +38,7 @@ public class RegisterController implements IBaseController {
                 }
             }
         }else{
-            if(pass.equals(rep_pass)){
+            if(!pass.equals(rep_pass)){
                 afterTryLogin();
                 ctx.showNotEqualsBothPassword();
 
@@ -60,8 +60,9 @@ public class RegisterController implements IBaseController {
 
         @Override
         public void onSuccess(String... args) {
-            afterTryLogin();
+
             user.signOut();
+            ctx.showSuccessfulRegister();
             ctx.goMain();
 
         }

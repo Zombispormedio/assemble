@@ -57,55 +57,7 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
 
     }
 
-    public void Register(View view){
-       /* enableRegisterButton(false);
 
-        BasicInput email=createInput(R.id.email_input, R.string.email_empty);
-
-        BasicInput pass=createInput(R.id.pass_input, R.string.pass_empty);
-        BasicInput rep_pass=createInput(R.id.repeat_pass_input, R.string.rep_pass_empty);
-
-        if(!Tools.isEmptyForm(email, pass, rep_pass)){
-
-            if(Tools.InputEquals(pass, rep_pass, R.string.pass_equals)){
-
-                FirebaseRegister(email.getValue(), pass.getValue());
-
-            }else{
-                enableRegisterButton(true);
-            }
-
-        }else{
-            enableRegisterButton(true);
-        }*/
-
-    }
-
-
-  /*  private BasicInput createInput(int id, int msg){
-        EditText edit=(EditText) findViewById(id);
-
-        return new BasicInput(this, edit, msg);
-    }*/
-
-   /* public void FirebaseRegister(String email, String pass){
-
-        mAuth.createUserWithEmailAndPassword(email, pass)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if(!task.isSuccessful()){
-                            Tools.showAlert(RegisterActivity.this, R.string.error_sign_up);
-                            enableRegisterButton(true);
-                        }else{
-                            Tools.showAlert(RegisterActivity.this, R.string.success_signing_up);
-                            FirebaseAuth.getInstance().signOut();
-                            goMain();
-                        }
-                    }
-                });
-    }*/
 
     public void goMain(){
         NavigationTools.Main(this);
@@ -136,6 +88,11 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
     @Override
     public void showAlert(String msg) {
         Tools.showAlert(this, msg);
+    }
+
+    @Override
+    public void showSuccessfulRegister() {
+        Tools.showAlert(RegisterActivity.this, R.string.success_signing_up);
     }
 
 

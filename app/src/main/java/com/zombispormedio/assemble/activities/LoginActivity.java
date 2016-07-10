@@ -112,7 +112,7 @@ public class LoginActivity extends AppCompatActivity  implements ILoginView{
 
     public void goToRegister(){
         NavigationTools.Register(this);
-        finish();
+
     }
 
     @Override

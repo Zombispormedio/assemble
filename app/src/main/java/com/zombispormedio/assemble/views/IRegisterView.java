@@ -30,4 +30,6 @@ public interface IRegisterView {
     void showNotEqualsBothPassword();
 
     void showAlert(String msg);
+
+    void showSuccessfulRegister();
 }
