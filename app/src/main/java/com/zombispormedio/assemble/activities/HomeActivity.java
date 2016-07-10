@@ -11,10 +11,15 @@ import android.view.MenuItem;
 import com.google.firebase.auth.FirebaseAuth;
 import com.zombispormedio.assemble.FirebaseTools;
 import com.zombispormedio.assemble.HomeDrawerTools;
+import com.zombispormedio.assemble.controllers.HomeController;
 import com.zombispormedio.assemble.utils.NavigationTools;
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.views.IHomeView;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements IHomeView {
+
+    private HomeController ctrl;
+
     private FirebaseAuth mAuth;
     private  FirebaseAuth.AuthStateListener mAuthListener;
     private Toolbar homebar;
@@ -41,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
+        ctrl=new HomeController(this);
 
 
     }
@@ -75,5 +81,9 @@ public class HomeActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

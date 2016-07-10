@@ -6,9 +6,15 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.controllers.ProfileController;
+import com.zombispormedio.assemble.views.IProfileView;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements IProfileView{
+
+    private ProfileController ctrl;
+
     private Toolbar bar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,5 +24,13 @@ public class ProfileActivity extends AppCompatActivity {
 
         ActionBar ab=getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
+
+        ctrl=new ProfileController(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
     }
 }
