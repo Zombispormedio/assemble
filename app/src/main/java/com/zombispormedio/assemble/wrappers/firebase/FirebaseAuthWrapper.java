@@ -9,13 +9,13 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 import com.zombispormedio.assemble.controllers.IBaseListener;
-
+import com.zombispormedio.assemble.wrappers.IAuthWrapper;
 
 
 /**
  * Created by Master on 08/07/2016.
  */
-public class FirebaseAuthWrapper {
+public class FirebaseAuthWrapper  implements IAuthWrapper {
 
 
 

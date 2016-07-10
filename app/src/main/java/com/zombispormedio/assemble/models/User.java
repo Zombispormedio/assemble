@@ -2,23 +2,24 @@ package com.zombispormedio.assemble.models;
 
 
 import com.zombispormedio.assemble.controllers.IBaseListener;
-import com.zombispormedio.assemble.utils.AuthWrapper;
+import com.zombispormedio.assemble.wrappers.IAuthWrapper;
+import com.zombispormedio.assemble.wrappers.firebase.FirebaseAuthWrapper;
 
 /**
  * Created by Master on 08/07/2016.
  */
 public class User implements IBaseModel {
     private static final String TAG = User.class.getName();
-    private AuthWrapper auth;
+    private IAuthWrapper auth;
 
-    public User() {
-        auth=new AuthWrapper();
+    public User(IAuthWrapper auth) {
+        this.auth=auth;
     }
 
 
     public class AccessVerifier{
-        private AuthWrapper auth;
-        public AccessVerifier(AuthWrapper auth0, IBaseListener<Integer> listener) {
+        private IAuthWrapper auth;
+        public AccessVerifier(IAuthWrapper auth0, IBaseListener<Integer> listener) {
             auth=auth0;
             auth.initCheckAccess(listener);
 
