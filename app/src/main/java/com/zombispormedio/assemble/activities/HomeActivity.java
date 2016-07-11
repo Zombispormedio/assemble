@@ -11,8 +11,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+
 import com.zombispormedio.assemble.controllers.HomeController;
-import com.zombispormedio.assemble.utils.NavigationTools;
+import com.zombispormedio.assemble.utils.NavigationUtils;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.IHomeView;
 
@@ -20,7 +21,7 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
 
     private HomeController ctrl;
 
-    private Toolbar homebar;
+    private Toolbar toolbar;
     private DrawerLayout drawer;
     private NavigationView nav;
     private TextView nav_title;
@@ -35,10 +36,9 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
 
         drawer= (DrawerLayout)findViewById(R.id.drawer_layout_home);
         nav=(NavigationView)findViewById(R.id.navview);
-        homebar=(Toolbar) findViewById(R.id.home_bar);
-        nav_title=(TextView) findViewById(R.id.nav_title);
+        toolbar =(Toolbar) findViewById(R.id.home_bar);
         
-        setSupportActionBar(homebar);
+        setSupportActionBar(toolbar);
 
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -125,13 +125,13 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
 
     @Override
     public void goToLogin() {
-        NavigationTools.Login(this);
+        NavigationUtils.Login(this);
         finish();
     }
 
     @Override
     public void goToProfile() {
-        NavigationTools.Profile(this);
+        NavigationUtils.Profile(this);
     }
 
     @Override

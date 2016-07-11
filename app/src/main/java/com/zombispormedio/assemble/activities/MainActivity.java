@@ -8,7 +8,7 @@ import android.view.Window;
 
 
 import com.zombispormedio.assemble.controllers.MainController;
-import com.zombispormedio.assemble.utils.NavigationTools;
+import com.zombispormedio.assemble.utils.NavigationUtils;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.IMainView;
 
@@ -33,12 +33,12 @@ public class MainActivity extends AppCompatActivity implements IMainView {
     }
 
     public void goToLogin(){
-        NavigationTools.Login(this);
+        NavigationUtils.Login(this);
         finish();
     }
 
     public void goHome(){
-        NavigationTools.Home(this);
+        NavigationUtils.Home(this);
         finish();
     }
 

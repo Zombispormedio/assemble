@@ -9,9 +9,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zombispormedio.assemble.controllers.LoginController;
-import com.zombispormedio.assemble.utils.NavigationTools;
+import com.zombispormedio.assemble.utils.NavigationUtils;
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.utils.Tools;
+import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.ILoginView;
 
 public class LoginActivity extends AppCompatActivity  implements ILoginView{
@@ -88,30 +88,30 @@ public class LoginActivity extends AppCompatActivity  implements ILoginView{
 
     @Override
     public void showEmptyEmail() {
-        Tools.showAlert(this, R.string.email_empty);
+        Utils.showAlert(this, R.string.email_empty);
     }
 
     @Override
     public void showEmptyPassword() {
-        Tools.showAlert(this, R.string.pass_empty);
+        Utils.showAlert(this, R.string.pass_empty);
     }
 
     public void showSuccessfulLogin(){
-        Tools.showAlert(this,R.string.login_message);
+        Utils.showAlert(this,R.string.login_message);
     }
 
     public void showAlert(String msg){
-        Tools.showAlert(this, msg);
+        Utils.showAlert(this, msg);
     }
 
 
     public void goHome(){
-        NavigationTools.Home(this);
+        NavigationUtils.Home(this);
         finish();
     }
 
     public void goToRegister(){
-        NavigationTools.Register(this);
+        NavigationUtils.Register(this);
 
     }
 

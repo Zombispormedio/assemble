@@ -29,4 +29,6 @@
     <string name="open_drawer_desc">Drawer Opened</string>
     <string name="close_drawer_desc">Drawer Closed</string>
     <string name="p_menu">Profile</string>
+    <string name="profile_title">Profile</string>
+    <string name="profile_image_desc">Profile Image</string>
 </resources>

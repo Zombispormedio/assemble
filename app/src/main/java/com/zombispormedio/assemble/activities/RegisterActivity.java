@@ -12,10 +12,10 @@ import android.widget.ProgressBar;
 
 
 import com.zombispormedio.assemble.controllers.RegisterController;
-import com.zombispormedio.assemble.utils.NavigationTools;
+import com.zombispormedio.assemble.utils.NavigationUtils;
 import com.zombispormedio.assemble.R;
 
-import com.zombispormedio.assemble.utils.Tools;
+import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IRegisterView;
 
 
@@ -60,39 +60,39 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
 
 
     public void goMain(){
-        NavigationTools.Main(this);
+        NavigationUtils.Main(this);
         finish();
     }
 
     @Override
     public void showEmptyEmail() {
-        Tools.showAlert(this, R.string.email_empty);
+        Utils.showAlert(this, R.string.email_empty);
     }
 
     @Override
     public void showEmptyPassword() {
-        Tools.showAlert(this, R.string.pass_empty);
+        Utils.showAlert(this, R.string.pass_empty);
     }
 
     @Override
     public void showEmptyRepPassword() {
-        Tools.showAlert(this, R.string.rep_pass_empty);
+        Utils.showAlert(this, R.string.rep_pass_empty);
     }
 
     @Override
     public void showNotEqualsBothPassword() {
 
-        Tools.showAlert(this,   R.string.pass_equals);
+        Utils.showAlert(this,   R.string.pass_equals);
     }
 
     @Override
     public void showAlert(String msg) {
-        Tools.showAlert(this, msg);
+        Utils.showAlert(this, msg);
     }
 
     @Override
     public void showSuccessfulRegister() {
-        Tools.showAlert(RegisterActivity.this, R.string.success_signing_up);
+        Utils.showAlert(RegisterActivity.this, R.string.success_signing_up);
     }
 
 
