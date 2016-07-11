@@ -12,10 +12,10 @@ import com.zombispormedio.assemble.activities.RegisterActivity;
 /**
  * Created by Master on 25/06/2016.
  */
-public final class NavigationTools {
+public final class NavigationUtils {
     private Context ctx;
 
-    public NavigationTools(Context ctx){
+    public NavigationUtils(Context ctx){
         this.ctx=ctx;
 
     }
@@ -50,15 +50,15 @@ public final class NavigationTools {
 
 
     public void Home(){
-        NavigationTools.Home(ctx);
+        NavigationUtils.Home(ctx);
     }
 
     public void Login(){
-        NavigationTools.Login(ctx);
+        NavigationUtils.Login(ctx);
     }
 
     public void Profile(){
-        NavigationTools.Profile(ctx);
+        NavigationUtils.Profile(ctx);
     }
 
 

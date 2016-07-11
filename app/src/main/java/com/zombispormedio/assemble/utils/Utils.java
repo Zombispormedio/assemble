@@ -8,7 +8,7 @@ import android.widget.Toast;
 /**
  * Created by Master on 26/06/2016.
  */
-public final class Tools {
+public final class Utils {
 
 
     public static void showAlert(Context ctx, int msg){
