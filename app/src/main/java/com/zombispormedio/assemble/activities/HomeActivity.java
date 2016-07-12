@@ -1,7 +1,10 @@
 package com.zombispormedio.assemble.activities;
 
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 
 
+import com.zombispormedio.assemble.adapters.HomeTabPagerAdapter;
 import com.zombispormedio.assemble.controllers.HomeController;
 import com.zombispormedio.assemble.utils.NavigationUtils;
 import com.zombispormedio.assemble.R;
@@ -25,6 +29,8 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
     private DrawerLayout drawer;
     private NavigationView nav;
     private TextView nav_title;
+    private TabLayout tabLayout;
+
 
 
     @Override
@@ -40,12 +46,47 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         
         setSupportActionBar(toolbar);
 
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_bar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         nav.setNavigationItemSelectedListener(NavListener());
         drawer.addDrawerListener(DrawerListener());
 
+
+        tabLayout=(TabLayout)findViewById(R.id.home_tab_layout);
+
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.gatherings_tab_title));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.teams_tab_title));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.messages_tab_title));
+
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        final ViewPager viewTabPager= (ViewPager) findViewById(R.id.home_pager);
+
+        final HomeTabPagerAdapter adapterTabPager = new HomeTabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+
+        viewTabPager.setAdapter(adapterTabPager);
+
+        viewTabPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener( new TabLayout.OnTabSelectedListener(){
+
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewTabPager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 

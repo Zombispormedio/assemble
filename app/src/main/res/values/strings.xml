@@ -31,4 +31,11 @@
     <string name="p_menu">Profile</string>
     <string name="profile_title">Profile</string>
     <string name="profile_image_desc">Profile Image</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="gatherings_tab_title">Gatherings</string>
+    <string name="messages_tab_title">Messages</string>
+    <string name="teams_tab_title">Teams</string>
+
 </resources>
