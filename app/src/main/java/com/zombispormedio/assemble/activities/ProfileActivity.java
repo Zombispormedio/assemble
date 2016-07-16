@@ -27,14 +27,15 @@ public class ProfileActivity extends AppCompatActivity implements IProfileView{
         bar=(Toolbar) findViewById(R.id.profile_bar);
         setSupportActionBar(bar);
 
-        ActionBar ab=getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         ctrl=new ProfileController(this);
 
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
 
-       // Picasso.with(this).load(R.drawable.profile_image_square).transform(new ImageUtils.CircleTransform()).into(imageProfile);
+
 
 
     }

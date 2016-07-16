@@ -8,7 +8,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import com.zombispormedio.assemble.controllers.IBaseListener;
+import com.zombispormedio.assemble.listeners.IListener;
+import com.zombispormedio.assemble.listeners.IListenerWithArgs;
 import com.zombispormedio.assemble.wrappers.IAuthWrapper;
 
 
@@ -28,16 +29,16 @@ public class FirebaseAuthWrapper  implements IAuthWrapper {
         authListener=null;
     }
 
-    public void initCheckAccess(final IBaseListener<Integer> listener){
+    public void initCheckAccess(final IListener listener){
         authListener=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
 
                 if(user!=null){
-                    listener.onSuccess(0);
+                    listener.onSuccess();
                 }else{
-                    listener.onError(1);
+                    listener.onError();
                 }
 
 
@@ -55,7 +56,7 @@ public class FirebaseAuthWrapper  implements IAuthWrapper {
         }
     }
 
-    public void login(String email, String password, final IBaseListener<String> listener){
+    public void login(String email, String password, final IListenerWithArgs<String> listener){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -71,7 +72,7 @@ public class FirebaseAuthWrapper  implements IAuthWrapper {
     }
 
 
-    public void create(String email, String password, final IBaseListener<String> listener){
+    public void create(String email, String password, final IListenerWithArgs<String> listener){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

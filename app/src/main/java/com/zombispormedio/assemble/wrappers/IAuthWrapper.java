@@ -1,20 +1,21 @@
 package com.zombispormedio.assemble.wrappers;
 
-import com.zombispormedio.assemble.controllers.IBaseListener;
+import com.zombispormedio.assemble.listeners.IListener;
+import com.zombispormedio.assemble.listeners.IListenerWithArgs;
 
 /**
  * Created by Master on 10/07/2016.
  */
 public interface IAuthWrapper{
-    void initCheckAccess(final IBaseListener<Integer> listener);
+    void initCheckAccess(final IListener listener);
 
     void startCheckAccess();
 
     void stopCheckAccess();
 
-    void login(String email, String password, final IBaseListener<String> listener);
+    void login(String email, String password, final IListenerWithArgs<String> listener);
 
-    void create(String email, String password, final IBaseListener<String> listener);
+    void create(String email, String password, final IListenerWithArgs<String> listener);
 
     void signOut();
 

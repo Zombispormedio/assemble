@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.zombispormedio.assemble.listeners.IListenerWithArgs;
 import com.zombispormedio.assemble.models.builders.ModelBuilder;
 import com.zombispormedio.assemble.models.User;
 import com.zombispormedio.assemble.views.IRegisterView;
@@ -51,7 +52,7 @@ public class RegisterController implements IBaseController {
         }
     }
 
-    private class CreateListener implements IBaseListener<String> {
+    private class CreateListener implements IListenerWithArgs<String> {
         @Override
         public void onError(String... args) {
             String error=args[0];

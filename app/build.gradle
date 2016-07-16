@@ -31,7 +31,11 @@ dependencies {
     compile 'com.android.support:support-v4:24.0.0'
     compile 'com.orhanobut:logger:1.15'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'org.jetbrains:annotations-java5:15.0'
 }
+
+
+
 
 
 

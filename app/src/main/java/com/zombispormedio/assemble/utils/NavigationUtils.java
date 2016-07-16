@@ -3,11 +3,13 @@ package com.zombispormedio.assemble.utils;
 import android.content.Context;
 import android.content.Intent;
 
+
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.activities.LoginActivity;
 import com.zombispormedio.assemble.activities.MainActivity;
 import com.zombispormedio.assemble.activities.ProfileActivity;
 import com.zombispormedio.assemble.activities.RegisterActivity;
+import com.zombispormedio.assemble.activities.SettingsActivity;
 
 /**
  * Created by Master on 25/06/2016.
@@ -48,6 +50,11 @@ public final class NavigationUtils {
         goTo(ctx, ProfileActivity.class);
     }
 
+    public  static void Settings(Context ctx){
+        goTo(ctx, SettingsActivity.class);
+    }
+
+
 
     public void Home(){
         NavigationUtils.Home(ctx);
@@ -59,6 +66,10 @@ public final class NavigationUtils {
 
     public void Profile(){
         NavigationUtils.Profile(ctx);
+    }
+
+    public void Register(){
+        NavigationUtils.Register(ctx);
     }
 
 

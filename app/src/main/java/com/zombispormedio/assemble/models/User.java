@@ -1,9 +1,9 @@
 package com.zombispormedio.assemble.models;
 
 
-import com.zombispormedio.assemble.controllers.IBaseListener;
+import com.zombispormedio.assemble.listeners.IListener;
+import com.zombispormedio.assemble.listeners.IListenerWithArgs;
 import com.zombispormedio.assemble.wrappers.IAuthWrapper;
-import com.zombispormedio.assemble.wrappers.firebase.FirebaseAuthWrapper;
 
 /**
  * Created by Master on 08/07/2016.
@@ -20,7 +20,7 @@ public class User implements IRemovable {
 
     public class AccessVerifier{
         private IAuthWrapper auth;
-        public AccessVerifier(IAuthWrapper auth0, IBaseListener<Integer> listener) {
+        public AccessVerifier(IAuthWrapper auth0, IListener listener) {
             auth=auth0;
             auth.initCheckAccess(listener);
 
@@ -35,17 +35,17 @@ public class User implements IRemovable {
         }
     }
 
-    public AccessVerifier createAccessVerifier(IBaseListener<Integer> listener){
+    public AccessVerifier createAccessVerifier(IListener listener){
         return new AccessVerifier(auth, listener);
     }
 
-    public void login(String email, String password, IBaseListener<String> listener){
+    public void login(String email, String password, IListenerWithArgs<String> listener){
         auth.login(email, password, listener);
     }
 
 
 
-    public void create(String email, String password, IBaseListener<String> listener) {
+    public void create(String email, String password, IListenerWithArgs<String> listener) {
         auth.create(email, password, listener);
     }
 

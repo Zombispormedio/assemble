@@ -29,11 +29,12 @@ public class HomeTabPagerAdapter extends FragmentStatePagerAdapter{
 
         switch (position){
             case 0:
-                item= new GatheringsTabFragment();
-                break;
-            case 1:
                 item = new TeamsTabFragment();
                 break;
+            case 1:
+                item= new GatheringsTabFragment();
+                break;
+
             case 2:
                 item= new MessagesTabFragment();
                 break;

@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-<group android:checkableBehavior="single">
+<group android:checkableBehavior="single" android:id="@+id/features_group_menu">
     <item android:id="@+id/profile_menu"
         android:icon="@drawable/account_card_details"
         android:title="@string/p_menu"/>
+    <item android:id="@+id/friends_menu"
+        android:icon="@drawable/account_multiple_plus"
+        android:title="@string/f_menu"/>
 </group>
+    <group android:checkableBehavior="single" android:id="@+id/options_group_menu">
+    <item android:id="@+id/settings_menu"
+        android:icon="@drawable/settings"
+        android:title="@string/settings_title"/>
 
-    <item android:id="@+id/navigation_header"
-        android:title="@string/settings">
-        <menu>
-            <item android:id="@+id/signout_menu"
-                android:icon="@drawable/ic_power"
-                android:title="@string/signout"/>
-
-        </menu>
-
-    </item>
+        <item android:id="@+id/help_menu"
+            android:icon="@drawable/help_circle"
+            android:title="@string/help_title"/>
+    </group>
 </menu>

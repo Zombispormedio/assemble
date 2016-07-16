@@ -8,5 +8,7 @@ public interface IHomeView {
 
     void goToProfile();
 
+    void goToSettings();
+
     void setNavTitleText(String hello);
 }

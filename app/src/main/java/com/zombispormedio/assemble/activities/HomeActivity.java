@@ -56,8 +56,9 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
 
         tabLayout=(TabLayout)findViewById(R.id.home_tab_layout);
 
-        tabLayout.addTab(tabLayout.newTab().setText(R.string.gatherings_tab_title));
+
         tabLayout.addTab(tabLayout.newTab().setText(R.string.teams_tab_title));
+        tabLayout.addTab(tabLayout.newTab().setText(R.string.gatherings_tab_title));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.messages_tab_title));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
@@ -69,6 +70,7 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
         viewTabPager.setAdapter(adapterTabPager);
 
         viewTabPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+        viewTabPager.setCurrentItem(1);
 
         tabLayout.addOnTabSelectedListener( new TabLayout.OnTabSelectedListener(){
 
@@ -111,8 +113,8 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
             public boolean onNavigationItemSelected(MenuItem item) {
 
                 switch(item.getItemId()){
-                    case R.id.signout_menu:
-                        ctrl.onSignOutMenuItemClick();
+                    case R.id.settings_menu:
+                        ctrl.onSettingsMenuItemClick();
                         break;
 
                     case R.id.profile_menu:
@@ -173,6 +175,11 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
     @Override
     public void goToProfile() {
         NavigationUtils.Profile(this);
+    }
+
+    @Override
+    public void goToSettings() {
+        NavigationUtils.Settings(this);
     }
 
     @Override

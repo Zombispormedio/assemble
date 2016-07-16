@@ -1,2 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Assemble</string>
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="home_title">Inicio</string>
+    <string name="app_title">Assemble</string>
+    <string name="description_logo">logo</string>
+    <string name="log_in">Iniciar Sesión</string>
+    <string name="email_input_hint">Correo Electrónico</string>
+    <string name="pass_input_hint">Contraseña</string>
+    <string name="register_link_text"><u>Regístrate</u></string>
+    <string name="signup_message">Cuenta creada</string>
+    <string name="signup_title">Regístrate en Assemble. Es gratis.</string>
+    <string name="login_message">Inicio de sesión con éxito</string>
+    <string name="repeat_pass_input_hint">Repite contraseña</string>
+    <string name="register_button_hint">Regístrate</string>
+    <string name="email_empty">El correo electrónico está en blanco</string>
+    <string name="pass_empty">La constraseña está en blanco</string>
+    <string name="rep_pass_empty">El Repite contraseña está en blanco</string>
+    <string name="pass_equals">Las contraseñas no son iguales</string>
+    <string name="invalid_email">Correo electrónico inválido</string>
+    <string name="error_sign_up">Error iniciando sesión</string>
+    <string name="success_signing_up">Inicio de sesión con éxito</string>
+    <string name="icon_user">Icono de usuario</string>
+
+
+
+    <string name="settings_title">Configuración</string>
+    <string name="signout">Cerrar Sesión</string>
+    <string name="open_drawer_desc">Drawer Opened</string>
+    <string name="close_drawer_desc">Drawer Closed</string>
+    <string name="p_menu">Perfil</string>
+    <string name="profile_title">Perfil</string>
+    <string name="profile_image_desc">Imagen de perfil</string>
+
+
+    <string name="gatherings_tab_title">Reuniones</string>
+    <string name="messages_tab_title">Mensajes</string>
+    <string name="teams_tab_title">Equipos</string>
+    <string name="f_menu">Amigos</string>
+    <string name="help_title">Ayuda</string>
+
+
+
+
+    <string name="account_title">Cuenta</string>
+    <string name="signout_dialog_msg">¿Quieres cerrar sesión?</string>
+    <string name="yes_title">Sí</string>
+    <string name="no_title">No</string>
+
+</resources>

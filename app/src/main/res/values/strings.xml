@@ -24,7 +24,7 @@
     <string name="default_user_name">User 1</string>
 
 
-    <string name="settings">Settings</string>
+    <string name="settings_title">Settings</string>
     <string name="signout">Sign out</string>
     <string name="open_drawer_desc">Drawer Opened</string>
     <string name="close_drawer_desc">Drawer Closed</string>
@@ -32,10 +32,20 @@
     <string name="profile_title">Profile</string>
     <string name="profile_image_desc">Profile Image</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="gatherings_tab_title">Gatherings</string>
     <string name="messages_tab_title">Messages</string>
     <string name="teams_tab_title">Teams</string>
+    <string name="f_menu">Friends</string>
+    <string name="help_title">Help</string>
+
+
+
+
+
+    <string name="account_title">Account</string>
+    <string name="signout_dialog_msg">Do you want to sign out?</string>
+    <string name="yes_title">Yes</string>
+    <string name="no_title">No</string>
 
 </resources>
