@@ -20,7 +20,7 @@
     <string name="pass_equals">Las contraseñas no son iguales</string>
     <string name="invalid_email">Correo electrónico inválido</string>
     <string name="error_sign_up">Error iniciando sesión</string>
-    <string name="success_signing_up">Inicio de sesión con éxito</string>
+    <string name="success_signing_up">Registro con éxito</string>
     <string name="icon_user">Icono de usuario</string>
 
 

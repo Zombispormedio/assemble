@@ -106,5 +106,10 @@ public class FirebaseAuthWrapper  implements IAuthWrapper {
         return value;
     }
 
+    @Override
+    public String getID() {
+        return mAuth.getCurrentUser().getUid();
+    }
+
 
 }

@@ -20,6 +20,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/settings_bar"
-        android:layout_centerHorizontal="true"></FrameLayout>
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

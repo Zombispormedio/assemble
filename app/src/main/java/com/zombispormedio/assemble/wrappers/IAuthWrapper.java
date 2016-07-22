@@ -20,4 +20,6 @@ public interface IAuthWrapper{
     void signOut();
 
     String getValue(String field);
+
+    String getID();
 }

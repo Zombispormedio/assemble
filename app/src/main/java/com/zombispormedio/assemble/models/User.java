@@ -1,9 +1,15 @@
 package com.zombispormedio.assemble.models;
 
 
+import android.util.Pair;
+
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.listeners.IListener;
 import com.zombispormedio.assemble.listeners.IListenerWithArgs;
 import com.zombispormedio.assemble.wrappers.IAuthWrapper;
+import com.zombispormedio.assemble.wrappers.IPersistenceWrapper;
+
+import java.util.TreeMap;
 
 /**
  * Created by Master on 08/07/2016.
@@ -11,9 +17,11 @@ import com.zombispormedio.assemble.wrappers.IAuthWrapper;
 public class User implements IRemovable {
 
     private IAuthWrapper auth;
+    private IPersistenceWrapper persistence;
 
-    public User(IAuthWrapper auth) {
+    public User(IAuthWrapper auth, IPersistenceWrapper persistence) {
         this.auth=auth;
+        this.persistence=persistence;
     }
 
 
@@ -45,9 +53,22 @@ public class User implements IRemovable {
 
 
 
-    public void create(String email, String password, IListenerWithArgs<String> listener) {
+    public void signin(String email, String password, IListenerWithArgs<String> listener) {
         auth.create(email, password, listener);
     }
+
+    public void create(String email, String name){
+        TreeMap<String, String> map=new TreeMap<String, String>();
+        map.put("email", email);
+
+        map.put("name", name);
+
+        Logger.d(map.size());
+
+        persistence.save(auth.getID(), "profile", map);
+
+    }
+
 
     public void signOut(){
         auth.signOut();
@@ -65,5 +86,10 @@ public class User implements IRemovable {
 
     public String getEmail() {
         return auth.getValue("email");
+    }
+
+
+    public static String getNameByEmail(String email){
+        return "";
     }
 }

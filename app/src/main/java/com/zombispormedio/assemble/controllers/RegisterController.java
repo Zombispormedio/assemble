@@ -45,7 +45,9 @@ public class RegisterController implements IBaseController {
                 ctx.showNotEqualsBothPassword();
 
             }else{
-                user.create(email, pass, new CreateListener());
+                user.signin(email, pass, new CreateListener(email));
+
+
             }
 
 
@@ -53,6 +55,11 @@ public class RegisterController implements IBaseController {
     }
 
     private class CreateListener implements IListenerWithArgs<String> {
+        private String email;
+        public CreateListener(String email) {
+            this.email=email;
+        }
+
         @Override
         public void onError(String... args) {
             String error=args[0];
@@ -62,7 +69,7 @@ public class RegisterController implements IBaseController {
 
         @Override
         public void onSuccess(String... args) {
-
+            user.create(email, email);
             user.signOut();
             ctx.showSuccessfulRegister();
             ctx.goMain();
