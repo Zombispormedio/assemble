@@ -14,10 +14,10 @@ import com.zombispormedio.assemble.activities.SettingsActivity;
 /**
  * Created by Master on 25/06/2016.
  */
-public final class NavigationUtils {
+public final class NavigationManager {
     private Context ctx;
 
-    public NavigationUtils(Context ctx){
+    public NavigationManager(Context ctx){
         this.ctx=ctx;
 
     }
@@ -57,19 +57,19 @@ public final class NavigationUtils {
 
 
     public void Home(){
-        NavigationUtils.Home(ctx);
+        NavigationManager.Home(ctx);
     }
 
     public void Login(){
-        NavigationUtils.Login(ctx);
+        NavigationManager.Login(ctx);
     }
 
     public void Profile(){
-        NavigationUtils.Profile(ctx);
+        NavigationManager.Profile(ctx);
     }
 
     public void Register(){
-        NavigationUtils.Register(ctx);
+        NavigationManager.Register(ctx);
     }
 
 

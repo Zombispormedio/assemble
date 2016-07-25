@@ -1,4 +1,4 @@
-package com.zombispormedio.assemble.wrappers.firebase;
+package com.zombispormedio.assemble.services.firebase;
 
 import android.support.annotation.NonNull;
 
@@ -8,15 +8,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import com.zombispormedio.assemble.listeners.IListener;
-import com.zombispormedio.assemble.listeners.IListenerWithArgs;
-import com.zombispormedio.assemble.wrappers.IAuthWrapper;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.IServiceHandlerWithArgs;
+import com.zombispormedio.assemble.services.IAuthService;
 
 
 /**
  * Created by Master on 08/07/2016.
  */
-public class FirebaseAuthWrapper  implements IAuthWrapper {
+public class FirebaseAuthService implements IAuthService {
 
 
 
@@ -24,12 +24,12 @@ public class FirebaseAuthWrapper  implements IAuthWrapper {
 
     private FirebaseAuth.AuthStateListener authListener;
 
-    public FirebaseAuthWrapper() {
+    public FirebaseAuthService() {
         mAuth=FirebaseAuth.getInstance();
         authListener=null;
     }
 
-    public void initCheckAccess(final IListener listener){
+    public void initCheckAccess(final IServiceHandler listener){
         authListener=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -56,7 +56,7 @@ public class FirebaseAuthWrapper  implements IAuthWrapper {
         }
     }
 
-    public void login(String email, String password, final IListenerWithArgs<String> listener){
+    public void login(String email, String password, final IServiceHandlerWithArgs<String> listener){
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -72,7 +72,7 @@ public class FirebaseAuthWrapper  implements IAuthWrapper {
     }
 
 
-    public void create(String email, String password, final IListenerWithArgs<String> listener){
+    public void create(String email, String password, final IServiceHandlerWithArgs<String> listener){
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override

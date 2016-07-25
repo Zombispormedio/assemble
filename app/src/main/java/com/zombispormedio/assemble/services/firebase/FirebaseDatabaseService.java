@@ -1,11 +1,8 @@
-package com.zombispormedio.assemble.wrappers.firebase;
-
-import android.util.Pair;
+package com.zombispormedio.assemble.services.firebase;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.wrappers.IPersistenceWrapper;
+import com.zombispormedio.assemble.services.IPersistenceService;
 
 
 import java.util.Map;
@@ -15,13 +12,13 @@ import java.util.TreeMap;
 /**
  * Created by Master on 17/07/2016.
  */
-public class FirebaseDatabaseWrapper implements IPersistenceWrapper {
+public class FirebaseDatabaseService implements IPersistenceService {
 
 
    private FirebaseDatabase database;
 
 
-    public FirebaseDatabaseWrapper() {
+    public FirebaseDatabaseService() {
         database=FirebaseDatabase.getInstance();
     }
 
