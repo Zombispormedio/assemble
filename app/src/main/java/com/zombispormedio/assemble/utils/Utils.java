@@ -4,9 +4,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 
 import android.content.DialogInterface;
+import android.os.Handler;
+import android.os.Looper;
 import android.widget.Toast;
 
-import com.zombispormedio.assemble.listeners.IListener;
+import com.zombispormedio.assemble.handlers.IServiceHandler2;
 
 
 /**
@@ -38,7 +40,7 @@ public final class Utils {
     }
 
 
-    public static DialogInterface.OnClickListener createDialogClickListener(final IListener listener){
+    public static DialogInterface.OnClickListener createDialogClickListener(final IServiceHandler2 listener){
         return new DialogInterface.OnClickListener(){
 
             @Override
@@ -54,6 +56,14 @@ public final class Utils {
                 }
             }
         };
+    }
+
+    public static void runOnUiThread(final Runnable runnable) {
+        if (Looper.myLooper() != Looper.getMainLooper()) {
+            new Handler(Looper.getMainLooper()).post(runnable);
+        } else {
+            runnable.run();
+        }
     }
 
 

@@ -3,7 +3,6 @@ package com.zombispormedio.assemble.activities;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -17,7 +16,7 @@ import android.widget.TextView;
 
 import com.zombispormedio.assemble.adapters.HomeTabPagerAdapter;
 import com.zombispormedio.assemble.controllers.HomeController;
-import com.zombispormedio.assemble.utils.NavigationUtils;
+import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.IHomeView;
 
@@ -168,18 +167,18 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
 
     @Override
     public void goToLogin() {
-        NavigationUtils.Login(this);
+        NavigationManager.Login(this);
         finish();
     }
 
     @Override
     public void goToProfile() {
-        NavigationUtils.Profile(this);
+        NavigationManager.Profile(this);
     }
 
     @Override
     public void goToSettings() {
-        NavigationUtils.Settings(this);
+        NavigationManager.Settings(this);
     }
 
     @Override

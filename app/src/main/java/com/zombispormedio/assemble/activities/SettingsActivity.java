@@ -9,8 +9,8 @@ import android.support.v7.widget.Toolbar;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.fragments.SettingsFragment;
 import com.zombispormedio.assemble.controllers.SettingsController;
-import com.zombispormedio.assemble.listeners.IListener;
-import com.zombispormedio.assemble.utils.NavigationUtils;
+import com.zombispormedio.assemble.handlers.IServiceHandler2;
+import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.ISettingsView;
 
@@ -69,7 +69,7 @@ public class SettingsActivity extends AppCompatActivity implements ISettingsView
         ctrl.onStop();
     }
 
-    public void showConfirmSignOutDialog( IListener listener){
+    public void showConfirmSignOutDialog( IServiceHandler2 listener){
         String msg=getResources().getString(R.string.signout_dialog_msg);
 
         String positive=getResources().getString(R.string.yes_title);
@@ -82,6 +82,6 @@ public class SettingsActivity extends AppCompatActivity implements ISettingsView
 
     @Override
     public void goToLogin() {
-        NavigationUtils.Login(this);
+        NavigationManager.Login(this);
     }
 }

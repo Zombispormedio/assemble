@@ -1,8 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.listeners.IListener;
-import com.zombispormedio.assemble.models.User;
+import com.zombispormedio.assemble.handlers.IServiceHandler2;
+import com.zombispormedio.assemble.models.resources.UserResources;
 import com.zombispormedio.assemble.models.builders.ModelBuilder;
 import com.zombispormedio.assemble.views.ISettingsFragmentView;
 import com.zombispormedio.assemble.views.ISettingsView;
@@ -13,7 +12,7 @@ import com.zombispormedio.assemble.views.ISettingsView;
 public class SettingsController implements IBaseController {
     private ISettingsView ctx;
     private ISettingsFragmentView fctx;
-    private User user;
+    private UserResources user;
     public SettingsController(ISettingsView ctx) {
         this.ctx = ctx;
         user= ModelBuilder.createUser();
@@ -43,18 +42,18 @@ public class SettingsController implements IBaseController {
 
     }
 
-    private class SignOutDialogEvent implements IListener{
+    private class SignOutDialogEvent implements IServiceHandler2<String, String> {
+
 
         @Override
-        public void onError() {
+        public void onError(String... args) {
 
         }
 
         @Override
-        public void onSuccess() {
-           user.signOut();
-           ctx.goToLogin();
-
+        public void onSuccess(String... args) {
+            user.signOut();
+            ctx.goToLogin();
         }
     }
 }

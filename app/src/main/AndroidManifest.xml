@@ -14,7 +14,9 @@
         android:logo="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity">
+        <activity
+            android:name=".activities.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -40,11 +42,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.HomeActivity" />
         </activity>
-        <activity android:name=".activities.SettingsActivity"    android:label="@string/settings_title"   android:parentActivityName=".activities.HomeActivity">>
+        <activity
+            android:name=".activities.SettingsActivity"
+            android:label="@string/settings_title"
+            android:parentActivityName=".activities.HomeActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.HomeActivity" />
         </activity>
+        <activity android:name=".activities.BaseActivity"></activity>
     </application>
 
 </manifest>

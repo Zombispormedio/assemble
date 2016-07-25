@@ -1,10 +1,9 @@
 package com.zombispormedio.assemble.controllers;
 
 
-import com.zombispormedio.assemble.listeners.IListener;
-import com.zombispormedio.assemble.listeners.IListenerWithArgs;
+import com.zombispormedio.assemble.handlers.IServiceHandler2;
 import com.zombispormedio.assemble.models.builders.ModelBuilder;
-import com.zombispormedio.assemble.models.User;
+import com.zombispormedio.assemble.models.resources.UserResources;
 import com.zombispormedio.assemble.views.IMainView;
 
 /**
@@ -15,27 +14,18 @@ public class MainController implements IBaseController {
 
 
     private IMainView ctx;
-    private User user;
-    private User.AccessVerifier verifier;
+    private UserResources user;
+
     public MainController(IMainView ctx) {
         this.ctx=ctx;
         user= ModelBuilder.createUser();
-        verifier=user.createAccessVerifier(new AccessListener());
+
     }
 
-    public class AccessListener implements IListener {
+    public void checkAccess() {
 
-        @Override
-        public void onError() {
-
-            ctx.goToLogin();
-        }
-
-        @Override
-        public void onSuccess() {
-            ctx.goHome();
-        }
     }
+
 
     @Override
     public void onDestroy() {
@@ -44,11 +34,11 @@ public class MainController implements IBaseController {
 
     @Override
     public void onStart() {
-        verifier.start();
+
     }
 
     @Override
     public void onStop() {
-        verifier.stop();
+
     }
 }

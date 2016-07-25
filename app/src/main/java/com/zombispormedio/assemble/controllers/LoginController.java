@@ -1,9 +1,9 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.listeners.IListener;
-import com.zombispormedio.assemble.listeners.IListenerWithArgs;
+import com.zombispormedio.assemble.handlers.IServiceHandler2;
+
 import com.zombispormedio.assemble.models.builders.ModelBuilder;
-import com.zombispormedio.assemble.models.User;
+import com.zombispormedio.assemble.models.resources.UserResources;
 import com.zombispormedio.assemble.views.ILoginView;
 
 /**
@@ -12,14 +12,13 @@ import com.zombispormedio.assemble.views.ILoginView;
 public class LoginController implements IBaseController {
 
     private ILoginView ctx;
-    private User user;
-    private User.AccessVerifier verifier;
+    private UserResources user;
 
     public LoginController(ILoginView ctx) {
         this.ctx = ctx;
 
         user= ModelBuilder.createUser();
-        verifier=user.createAccessVerifier(new AccessListener());
+
 
     }
 
@@ -40,14 +39,14 @@ public class LoginController implements IBaseController {
             }
 
         }else{
-            user.login(email, pass, new LoginListener());
+            user.login(email, pass, new LoginServiceHandler());
 
         }
 
 
     }
 
-    public class LoginListener implements IListenerWithArgs<String> {
+    public class LoginServiceHandler implements IServiceHandler2<String, String> {
 
         @Override
         public void onError(String... args) {
@@ -82,19 +81,6 @@ public class LoginController implements IBaseController {
     }
 
 
-    public class AccessListener implements IListener {
-
-        @Override
-        public void onError() {
-
-        }
-
-        @Override
-        public void onSuccess() {
-            ctx.goHome();
-        }
-    }
-
 
     @Override
     public void onDestroy() {
@@ -103,11 +89,11 @@ public class LoginController implements IBaseController {
 
     @Override
     public void onStart() {
-        verifier.start();
+
     }
 
     @Override
     public void onStop() {
-        verifier.stop();
+
     }
 }

@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zombispormedio.assemble.controllers.LoginController;
-import com.zombispormedio.assemble.utils.NavigationUtils;
+import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.ILoginView;
@@ -106,12 +106,12 @@ public class LoginActivity extends AppCompatActivity  implements ILoginView{
 
 
     public void goHome(){
-        NavigationUtils.Home(this);
+        NavigationManager.Home(this);
         finish();
     }
 
     public void goToRegister(){
-        NavigationUtils.Register(this);
+        NavigationManager.Register(this);
 
     }
 

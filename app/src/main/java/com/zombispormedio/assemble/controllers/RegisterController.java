@@ -1,8 +1,9 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.listeners.IListenerWithArgs;
+import com.zombispormedio.assemble.handlers.IServiceHandler2;
+
 import com.zombispormedio.assemble.models.builders.ModelBuilder;
-import com.zombispormedio.assemble.models.User;
+import com.zombispormedio.assemble.models.resources.UserResources;
 import com.zombispormedio.assemble.views.IRegisterView;
 
 /**
@@ -11,7 +12,7 @@ import com.zombispormedio.assemble.views.IRegisterView;
 public class RegisterController implements IBaseController {
 
     private IRegisterView ctx;
-    private User user;
+    private UserResources user;
 
     public RegisterController(IRegisterView ctx) {
         this.ctx = ctx;
@@ -45,7 +46,7 @@ public class RegisterController implements IBaseController {
                 ctx.showNotEqualsBothPassword();
 
             }else{
-                user.signin(email, pass, new CreateListener(email));
+                user.signin(email, pass, new CreateServiceHandler(email));
 
 
             }
@@ -54,9 +55,9 @@ public class RegisterController implements IBaseController {
         }
     }
 
-    private class CreateListener implements IListenerWithArgs<String> {
+    private class CreateServiceHandler implements IServiceHandler2<String, String> {
         private String email;
-        public CreateListener(String email) {
+        public CreateServiceHandler(String email) {
             this.email=email;
         }
 

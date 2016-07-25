@@ -12,7 +12,7 @@ import android.widget.ProgressBar;
 
 
 import com.zombispormedio.assemble.controllers.RegisterController;
-import com.zombispormedio.assemble.utils.NavigationUtils;
+import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 
 import com.zombispormedio.assemble.utils.Utils;
@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
 
 
     public void goMain(){
-        NavigationUtils.Main(this);
+        NavigationManager.Main(this);
         finish();
     }
 
