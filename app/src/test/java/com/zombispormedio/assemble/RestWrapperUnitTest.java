@@ -1,8 +1,8 @@
 package com.zombispormedio.assemble;
 
 import com.zombispormedio.assemble.models.User;
-import com.zombispormedio.assemble.rest.AbstractResponse;
-import com.zombispormedio.assemble.rest.DefaultResponse;
+import com.zombispormedio.assemble.rest.responses.AbstractResponse;
+import com.zombispormedio.assemble.rest.responses.DefaultResponse;
 import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.wrappers.moshi.JSONWrapper;
 import com.zombispormedio.assemble.wrappers.okhttp.RestWrapper;

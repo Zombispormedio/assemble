@@ -7,7 +7,7 @@ package com.zombispormedio.assemble.utils;
  */
 public class StringUtils {
 
-    public static String join(String delimiter, String[] in){
+    public static String join(String delimiter, Object[] in){
         String out="";
 
         if(in.length>0){
