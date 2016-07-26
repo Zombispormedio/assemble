@@ -1,4 +1,5 @@
 package com.zombispormedio.assemble;
+import com.zombispormedio.assemble.rest.METHOD;
 import com.zombispormedio.assemble.rest.Request;
 
 import org.junit.Test;
@@ -13,19 +14,19 @@ public class RequestUnitTest {
 
 
         Request req= new Request.Builder()
-                .method("POST")
+                .method(METHOD.POST)
                 .url("https://hello.com/:id/:work")
                 .params("s", 5)
                 .headers("auth", "5")
                 .build();
 
-        assertEquals("POST", req.getMethod());
+        assertEquals(METHOD.POST, req.getMethod());
 
         assertEquals("https://hello.com?s=5", req.getUrl());
 
         assertEquals("5", req.getHeaders("auth"));
 
-        assertEquals("https://hello.com/45?s=5", new Request.Builder().method("GET").url("https://hello.com/:id/:work").params("id", 45).params("s", 5).build().getUrl());
+        assertEquals("https://hello.com/45?s=5", new Request.Builder().method(METHOD.GET).url("https://hello.com/:id/:work").params("id", 45).params("s", 5).build().getUrl());
 
 
 

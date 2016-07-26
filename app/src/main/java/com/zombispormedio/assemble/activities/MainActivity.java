@@ -8,19 +8,17 @@ import android.view.Window;
 
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.controllers.MainController;
+import com.zombispormedio.assemble.handlers.IPromiseHandler;
+import com.zombispormedio.assemble.rest.AsyncRequest;
+import com.zombispormedio.assemble.rest.Request;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.IMainView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+
 
 
 public class MainActivity extends BaseActivity implements IMainView {
@@ -41,6 +39,8 @@ public class MainActivity extends BaseActivity implements IMainView {
         ctrl=new MainController(this);
 
         navigation= new NavigationManager(this);
+
+
 
         final Thread thread = new Thread(new Runnable() {
             @Override
@@ -77,6 +77,19 @@ public class MainActivity extends BaseActivity implements IMainView {
                     e.printStackTrace();
                 }
 
+                Request req=new Request.Builder()
+                        .url("https://assemble-api.herokuapp.com")
+                        .get()
+                        .handler(new IPromiseHandler() {
+                            @Override
+                            public void onSuccess(String... args) {
+                                Logger.d(args[0]);
+
+                            }
+                        })
+                        .build();
+
+                new AsyncRequest().execute(req);
 
             }
         });

@@ -24,4 +24,8 @@ public class Promise {
     public IPromiseHandler getHandler() {
         return handler;
     }
+
+    public void handle(){
+        handler.onSuccess(result);
+    }
 }

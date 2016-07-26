@@ -42,7 +42,8 @@ public class Request {
     }
 
     public String[] getHeadersKeys() {
-        return (String[])headers.keySet().toArray();
+
+        return headers==null?null:(String[])headers.keySet().toArray();
     }
 
     private void setHeaders(HashMap<String, String> headers) {
@@ -89,6 +90,49 @@ public class Request {
 
         public Builder method(METHOD method){
             this.method=method;
+            return this;
+        }
+
+        public Builder get(){
+            this.method=METHOD.GET;
+            return this;
+        }
+
+        public Builder post(){
+            this.method=METHOD.POST;
+            return this;
+        }
+
+        public Builder post(String body){
+            this.method=METHOD.POST;
+            this.body=body;
+            return this;
+        }
+
+        public Builder patch(){
+            this.method=METHOD.PATCH;
+            return this;
+        }
+
+        public Builder patch(String body){
+            this.method=METHOD.PATCH;
+            this.body=body;
+            return this;
+        }
+
+        public Builder put(){
+            this.method=METHOD.PUT;
+            return this;
+        }
+
+        public Builder put(String body){
+            this.method=METHOD.PUT;
+            this.body=body;
+            return this;
+        }
+
+        public Builder delete(){
+            this.method=METHOD.DELETE;
             return this;
         }
 
