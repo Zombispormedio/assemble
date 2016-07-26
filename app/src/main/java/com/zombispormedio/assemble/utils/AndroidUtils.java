@@ -8,13 +8,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
-import com.zombispormedio.assemble.handlers.IServiceHandler2;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
 
 
 /**
  * Created by Master on 26/06/2016.
  */
-public final class Utils {
+public final class AndroidUtils {
 
 
     public static void showAlert(Context ctx, int msg){
@@ -40,7 +40,7 @@ public final class Utils {
     }
 
 
-    public static DialogInterface.OnClickListener createDialogClickListener(final IServiceHandler2 listener){
+    public static DialogInterface.OnClickListener createDialogClickListener(final IServiceHandler listener){
         return new DialogInterface.OnClickListener(){
 
             @Override

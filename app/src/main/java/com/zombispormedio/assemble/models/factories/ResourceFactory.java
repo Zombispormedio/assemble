@@ -1,4 +1,4 @@
-package com.zombispormedio.assemble.models.builders;
+package com.zombispormedio.assemble.models.factories;
 
 import com.zombispormedio.assemble.models.resources.UserResources;
 import com.zombispormedio.assemble.services.api.APIAuthService;
@@ -7,9 +7,9 @@ import com.zombispormedio.assemble.services.api.APIAuthService;
 /**
  * Created by Master on 10/07/2016.
  */
-public class ModelBuilder {
+public class ResourceFactory {
 
     public static UserResources createUser(){
-        return new UserResources(null, null);
+        return new UserResources(new APIAuthService(), null);
     }
 }
