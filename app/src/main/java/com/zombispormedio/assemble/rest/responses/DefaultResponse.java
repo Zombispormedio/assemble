@@ -1,4 +1,8 @@
-package com.zombispormedio.assemble.rest;
+package com.zombispormedio.assemble.rest.responses;
+
+import com.zombispormedio.assemble.rest.Error;
+import com.zombispormedio.assemble.rest.Result;
+import com.zombispormedio.assemble.rest.responses.AbstractResponse;
 
 /**
  * Created by Master on 26/07/2016.

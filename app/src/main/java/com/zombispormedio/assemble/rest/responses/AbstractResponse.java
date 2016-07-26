@@ -1,4 +1,6 @@
-package com.zombispormedio.assemble.rest;
+package com.zombispormedio.assemble.rest.responses;
+
+import com.zombispormedio.assemble.rest.Error;
 
 import org.json.JSONObject;
 
