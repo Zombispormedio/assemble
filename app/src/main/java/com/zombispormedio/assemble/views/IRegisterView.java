@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.views;
 /**
  * Created by Master on 09/07/2016.
  */
-public interface IRegisterView {
+public interface IRegisterView  extends IBaseView{
 
     void showProgressBar();
 
@@ -19,7 +19,7 @@ public interface IRegisterView {
 
     String getRepPassword();
 
-    void goMain();
+    void goToLogin();
 
     void showEmptyEmail();
 
@@ -29,7 +29,8 @@ public interface IRegisterView {
 
     void showNotEqualsBothPassword();
 
-    void showAlert(String msg);
 
     void showSuccessfulRegister();
+
+    void showUnknowError();
 }

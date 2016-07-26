@@ -12,7 +12,7 @@ import com.zombispormedio.assemble.controllers.ProfileController;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.views.IProfileView;
 
-public class ProfileActivity extends AppCompatActivity implements IProfileView{
+public class ProfileActivity extends BaseActivity implements IProfileView{
 
     private ProfileController ctrl;
 

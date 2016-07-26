@@ -1,14 +1,13 @@
 package com.zombispormedio.assemble.services;
 
-import java.util.TreeMap;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.rest.Error;
 
 /**
  * Created by Master on 10/07/2016.
  */
-public interface IPersistenceService {
-    //TODO
+public interface IPersistenceService<T> {
 
-    void save(String userID, String table, Object value);
-    void save(String userID, String table, TreeMap<String, String> values);
+    void retrieve(final IServiceHandler<T, Error> handler);
 
 }

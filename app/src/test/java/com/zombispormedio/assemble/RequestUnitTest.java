@@ -24,7 +24,7 @@ public class RequestUnitTest {
 
         assertEquals("https://hello.com?s=5", req.getUrl());
 
-        assertEquals("5", req.getHeaders("auth"));
+        assertEquals("5", req.getHeader("auth"));
 
         assertEquals("https://hello.com/45?s=5", new Request.Builder().method(METHOD.GET).url("https://hello.com/:id/:work").params("id", 45).params("s", 5).build().getUrl());
 

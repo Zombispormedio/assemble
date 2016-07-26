@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.models.resources;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.models.User;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.services.IAuthService;
@@ -30,24 +31,23 @@ public class UserResource {
 
 
 
-    public void login(String email, String password, IServiceHandler<String, String> listener){
+    public void login(String email, String password, IServiceHandler<Result, Error> listener){
         auth.login(email, password, listener);
     }
 
 
 
-    public void signin(String email, String password, IServiceHandler<String, String> listener) {
+    public void signin(String email, String password, IServiceHandler<Result, Error> listener) {
         auth.register(email, password, listener);
     }
 
-    public void create(String email, String name){
 
-
+    public void signOut(final IServiceHandler<Result, Error> handler){
+        auth.signOut(handler);
     }
 
-
-    public void signOut(){
-        auth.signOut();
+    public void getProfile(final IServiceHandler<User, Error> handler){
+        persistence.retrieve(handler);
     }
 
 

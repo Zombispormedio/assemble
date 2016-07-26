@@ -37,13 +37,12 @@ public class Request {
         return url;
     }
 
-    public String getHeaders(String key) {
+    public String getHeader(String key) {
         return headers.get(key);
     }
 
-    public String[] getHeadersKeys() {
-
-        return headers==null?null:(String[])headers.keySet().toArray();
+    public HashMap<String, String> getHeaders() {
+        return headers;
     }
 
     private void setHeaders(HashMap<String, String> headers) {
@@ -64,6 +63,10 @@ public class Request {
 
     public IPromiseHandler getHandler() {
         return handler;
+    }
+
+    public void start(){
+        new AsyncRequest().execute(this);
     }
 
     public static class Builder{
@@ -93,47 +96,56 @@ public class Request {
             return this;
         }
 
-        public Builder get(){
+        public void  get(){
             this.method=METHOD.GET;
-            return this;
+            build()
+            .start();
         }
 
-        public Builder post(){
+        public void post(){
             this.method=METHOD.POST;
-            return this;
+            build()
+            .start();
         }
 
-        public Builder post(String body){
+        public void post(String body){
             this.method=METHOD.POST;
             this.body=body;
-            return this;
+            build()
+            .start();
         }
 
-        public Builder patch(){
+        public void patch(){
             this.method=METHOD.PATCH;
-            return this;
+            build()
+            .start();
         }
 
-        public Builder patch(String body){
+        public void patch(String body){
             this.method=METHOD.PATCH;
             this.body=body;
-            return this;
+            build()
+            .start();
         }
 
-        public Builder put(){
+        public void put(){
             this.method=METHOD.PUT;
-            return this;
+            build()
+            .start();
+
         }
 
-        public Builder put(String body){
+        public void put(String body){
             this.method=METHOD.PUT;
             this.body=body;
-            return this;
+            build()
+            .start();
         }
 
-        public Builder delete(){
+        public void delete(){
             this.method=METHOD.DELETE;
-            return this;
+            build()
+            .start();
         }
 
         public Builder params(String key, Object param){

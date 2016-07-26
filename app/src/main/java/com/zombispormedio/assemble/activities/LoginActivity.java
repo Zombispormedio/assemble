@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.activities;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -11,10 +10,10 @@ import android.widget.TextView;
 import com.zombispormedio.assemble.controllers.LoginController;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.utils.Utils;
+import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.ILoginView;
 
-public class LoginActivity extends AppCompatActivity  implements ILoginView{
+public class LoginActivity extends BaseActivity  implements ILoginView{
 
     private LoginController ctrl;
 
@@ -88,22 +87,17 @@ public class LoginActivity extends AppCompatActivity  implements ILoginView{
 
     @Override
     public void showEmptyEmail() {
-        Utils.showAlert(this, R.string.email_empty);
+        AndroidUtils.showAlert(this, R.string.email_empty);
     }
 
     @Override
     public void showEmptyPassword() {
-        Utils.showAlert(this, R.string.pass_empty);
+        AndroidUtils.showAlert(this, R.string.pass_empty);
     }
 
     public void showSuccessfulLogin(){
-        Utils.showAlert(this,R.string.login_message);
+        AndroidUtils.showAlert(this,R.string.login_message);
     }
-
-    public void showAlert(String msg){
-        Utils.showAlert(this, msg);
-    }
-
 
     public void goHome(){
         NavigationManager.Home(this);

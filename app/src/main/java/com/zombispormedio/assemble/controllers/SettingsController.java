@@ -1,8 +1,12 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.handlers.IServiceHandler2;
-import com.zombispormedio.assemble.models.resources.UserResources;
-import com.zombispormedio.assemble.models.builders.ModelBuilder;
+import com.zombispormedio.assemble.handlers.IPromiseHandler;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.models.resources.UserResource;
+import com.zombispormedio.assemble.models.factories.ResourceFactory;
+import com.zombispormedio.assemble.rest.Result;
+import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.views.ISettingsFragmentView;
 import com.zombispormedio.assemble.views.ISettingsView;
 
@@ -12,10 +16,10 @@ import com.zombispormedio.assemble.views.ISettingsView;
 public class SettingsController implements IBaseController {
     private ISettingsView ctx;
     private ISettingsFragmentView fctx;
-    private UserResources user;
+    private UserResource user;
     public SettingsController(ISettingsView ctx) {
         this.ctx = ctx;
-        user= ModelBuilder.createUser();
+        user= ResourceFactory.createUser();
     }
     
     public void setFragmentView(ISettingsFragmentView fctx){
@@ -42,17 +46,26 @@ public class SettingsController implements IBaseController {
 
     }
 
-    private class SignOutDialogEvent implements IServiceHandler2<String, String> {
+    private class SignOutDialogEvent implements ISuccessHandler {
 
 
         @Override
-        public void onError(String... args) {
+        public void onSuccess() {
+
+            user.signOut(new SignOutServiceHandler());
+        }
+    }
+
+    private class SignOutServiceHandler implements IServiceHandler<Result, Error> {
+        @Override
+        public void onError(Error error) {
 
         }
 
         @Override
-        public void onSuccess(String... args) {
-            user.signOut();
+        public void onSuccess(Result result) {
+            ctx.clearAuthToken();
+            ctx.showAlert(result.msg);
             ctx.goToLogin();
         }
     }

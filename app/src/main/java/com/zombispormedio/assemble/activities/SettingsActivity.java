@@ -2,20 +2,20 @@ package com.zombispormedio.assemble.activities;
 
 
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.fragments.SettingsFragment;
 import com.zombispormedio.assemble.controllers.SettingsController;
-import com.zombispormedio.assemble.handlers.IServiceHandler2;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.utils.Utils;
+import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.ISettingsView;
 
 
-public class SettingsActivity extends AppCompatActivity implements ISettingsView {
+public class SettingsActivity extends BaseActivity implements ISettingsView {
     private Toolbar bar;
     private SettingsFragment frag;
     private SettingsController ctrl;
@@ -69,14 +69,14 @@ public class SettingsActivity extends AppCompatActivity implements ISettingsView
         ctrl.onStop();
     }
 
-    public void showConfirmSignOutDialog( IServiceHandler2 listener){
+    public void showConfirmSignOutDialog( ISuccessHandler listener){
         String msg=getResources().getString(R.string.signout_dialog_msg);
 
         String positive=getResources().getString(R.string.yes_title);
 
         String negative=getResources().getString(R.string.no_title);
 
-        Utils.createConfirmDialog(this, msg, positive, negative, Utils.createDialogClickListener(listener))
+        AndroidUtils.createConfirmDialog(this, msg, positive, negative, AndroidUtils.createDialogClickListener(listener))
                 .show();
     }
 
@@ -84,4 +84,5 @@ public class SettingsActivity extends AppCompatActivity implements ISettingsView
     public void goToLogin() {
         NavigationManager.Login(this);
     }
+
 }

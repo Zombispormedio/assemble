@@ -1,13 +1,15 @@
 package com.zombispormedio.assemble.views;
 
-import com.zombispormedio.assemble.handlers.IServiceHandler2;
+
+import com.zombispormedio.assemble.handlers.ISuccessHandler;
 
 /**
  * Created by Master on 16/07/2016.
  */
-public interface ISettingsView {
+public interface ISettingsView extends IBaseView {
 
-    void showConfirmSignOutDialog( IServiceHandler2 listener);
+    void showConfirmSignOutDialog( ISuccessHandler listener);
 
     void goToLogin();
+
 }

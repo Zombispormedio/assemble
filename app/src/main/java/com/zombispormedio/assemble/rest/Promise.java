@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.rest;
 
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
 
 /**
  * Created by Master on 26/07/2016.

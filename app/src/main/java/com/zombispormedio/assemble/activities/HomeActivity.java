@@ -20,7 +20,7 @@ import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.IHomeView;
 
-public class HomeActivity extends AppCompatActivity implements IHomeView {
+public class HomeActivity extends BaseActivity implements IHomeView {
 
     private HomeController ctrl;
 
@@ -166,6 +166,18 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
     }
 
     @Override
+    protected void onRestart() {
+        super.onRestart();
+        ctrl.onRestart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ctrl.onResume();
+    }
+
+    @Override
     public void goToLogin() {
         NavigationManager.Login(this);
         finish();
@@ -182,7 +194,7 @@ public class HomeActivity extends AppCompatActivity implements IHomeView {
     }
 
     @Override
-    public void setNavTitleText(String text) {
+    public void setDrawerTitle(String text) {
         if(nav_title==null)nav_title=(TextView) findViewById(R.id.nav_title);
         if(nav_title!=null)nav_title.setText(text);
     }

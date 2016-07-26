@@ -8,7 +8,9 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ISuccessHandler;
 
 
 /**
@@ -40,7 +42,7 @@ public final class AndroidUtils {
     }
 
 
-    public static DialogInterface.OnClickListener createDialogClickListener(final IServiceHandler listener){
+    public static DialogInterface.OnClickListener createDialogClickListener(final ISuccessHandler listener){
         return new DialogInterface.OnClickListener(){
 
             @Override
@@ -50,9 +52,7 @@ public final class AndroidUtils {
                         listener.onSuccess();
                         break;
 
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        listener.onError();
-                        break;
+
                 }
             }
         };

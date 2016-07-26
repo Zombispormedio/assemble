@@ -20,7 +20,7 @@ public class AsyncRequestUnitTest {
     public void get_isCorrect() throws Exception {
         Request req=new Request.Builder()
                 .url("https://assemble-api.herokuapp.com")
-                .get()
+                .method(METHOD.GET)
                 .handler(new IPromiseHandler() {
                     @Override
                     public void onSuccess(String... args) {

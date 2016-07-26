@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 
 import com.zombispormedio.assemble.models.User;
-import com.zombispormedio.assemble.rest.SpecialError;
+import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.JSONBinder;
 import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.rest.responses.DefaultResponse;
@@ -25,7 +25,7 @@ public class AuthAPIService implements IAuthService {
     }
 
     @Override
-    public void checkAccess(final IServiceHandler<Result, SpecialError> handler) {
+    public void checkAccess(final IServiceHandler<Result, Error> handler) {
 
         api.RestWithAuth("/check_user")
                 .handler(new IPromiseHandler() {
@@ -40,7 +40,7 @@ public class AuthAPIService implements IAuthService {
                             }
 
                         } catch (IOException e) {
-                            handler.onError(new SpecialError(e.getMessage()));
+                            handler.onError(new Error(e.getMessage()));
                         }
 
                     }
@@ -52,7 +52,7 @@ public class AuthAPIService implements IAuthService {
 
 
     @Override
-    public void login(String email, String password, final IServiceHandler<Result, SpecialError> handler) {
+    public void login(String email, String password, final IServiceHandler<Result, Error> handler) {
         User user=new User(email, password);
         api.Rest("/login")
                 .handler(new IPromiseHandler() {
@@ -67,7 +67,7 @@ public class AuthAPIService implements IAuthService {
                             }
 
                         } catch (IOException e) {
-                            handler.onError(new SpecialError(e.getMessage()));
+                            handler.onError(new Error(e.getMessage()));
                         }
 
                     }
@@ -76,7 +76,7 @@ public class AuthAPIService implements IAuthService {
     }
 
     @Override
-    public void register(String email, String password, final IServiceHandler<Result, SpecialError> handler) {
+    public void register(String email, String password, final IServiceHandler<Result, Error> handler) {
         User user=new User(email, password);
         api.Rest("/signup")
                 .handler(new IPromiseHandler() {
@@ -91,7 +91,7 @@ public class AuthAPIService implements IAuthService {
                             }
 
                         } catch (IOException e) {
-                            handler.onError(new SpecialError(e.getMessage()));
+                            handler.onError(new Error(e.getMessage()));
                         }
 
                     }
@@ -100,7 +100,7 @@ public class AuthAPIService implements IAuthService {
     }
 
     @Override
-    public void signOut(final IServiceHandler<Result, SpecialError> handler) {
+    public void signOut(final IServiceHandler<Result, Error> handler) {
         api.RestWithAuth("/signout")
                 .handler(new IPromiseHandler() {
                     @Override
@@ -114,7 +114,7 @@ public class AuthAPIService implements IAuthService {
                             }
 
                         } catch (IOException e) {
-                            handler.onError(new SpecialError(e.getMessage()));
+                            handler.onError(new Error(e.getMessage()));
                         }
 
                     }

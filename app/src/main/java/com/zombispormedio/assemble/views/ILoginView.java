@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.views;
 /**
  * Created by Master on 09/07/2016.
  */
-public interface ILoginView {
+public interface ILoginView extends IBaseView  {
 
     void goHome();
     
@@ -25,7 +25,7 @@ public interface ILoginView {
 
     void showEmptyPassword();
 
-    void showAlert(String msg);
+
     void showSuccessfulLogin();
 
 }

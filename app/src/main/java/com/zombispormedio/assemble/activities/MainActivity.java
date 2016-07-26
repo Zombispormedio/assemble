@@ -6,11 +6,9 @@ import android.view.MotionEvent;
 import android.view.Window;
 
 
-import com.orhanobut.logger.Logger;
+
 import com.zombispormedio.assemble.controllers.MainController;
-import com.zombispormedio.assemble.handlers.IPromiseHandler;
-import com.zombispormedio.assemble.rest.AsyncRequest;
-import com.zombispormedio.assemble.rest.Request;
+
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.IMainView;
@@ -46,7 +44,7 @@ public class MainActivity extends BaseActivity implements IMainView {
             @Override
             public void run() {
                 try{
-                    Thread.sleep(200);
+                    Thread.sleep(2000);
                 }catch(InterruptedException e){}
 
                 timeoutLatch.countDown();
@@ -77,19 +75,7 @@ public class MainActivity extends BaseActivity implements IMainView {
                     e.printStackTrace();
                 }
 
-                Request req=new Request.Builder()
-                        .url("https://assemble-api.herokuapp.com")
-                        .get()
-                        .handler(new IPromiseHandler() {
-                            @Override
-                            public void onSuccess(String... args) {
-                                Logger.d(args[0]);
-
-                            }
-                        })
-                        .build();
-
-                new AsyncRequest().execute(req);
+                ctrl.checkAccess();
 
             }
         });

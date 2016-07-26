@@ -2,7 +2,6 @@ package com.zombispormedio.assemble.activities;
 
 
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,11 +14,11 @@ import com.zombispormedio.assemble.controllers.RegisterController;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 
-import com.zombispormedio.assemble.utils.Utils;
+import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.IRegisterView;
 
 
-public class RegisterActivity extends AppCompatActivity implements IRegisterView{
+public class RegisterActivity extends BaseActivity implements IRegisterView{
     private RegisterController ctrl;
 
     private EditText emailInput;
@@ -59,40 +58,40 @@ public class RegisterActivity extends AppCompatActivity implements IRegisterView
 
 
 
-    public void goMain(){
-        NavigationManager.Main(this);
+    public void goToLogin(){
+        NavigationManager.Login(this);
         finish();
     }
 
     @Override
     public void showEmptyEmail() {
-        Utils.showAlert(this, R.string.email_empty);
+        AndroidUtils.showAlert(this, R.string.email_empty);
     }
 
     @Override
     public void showEmptyPassword() {
-        Utils.showAlert(this, R.string.pass_empty);
+        AndroidUtils.showAlert(this, R.string.pass_empty);
     }
 
     @Override
     public void showEmptyRepPassword() {
-        Utils.showAlert(this, R.string.rep_pass_empty);
+        AndroidUtils.showAlert(this, R.string.rep_pass_empty);
     }
 
     @Override
     public void showNotEqualsBothPassword() {
 
-        Utils.showAlert(this,   R.string.pass_equals);
-    }
-
-    @Override
-    public void showAlert(String msg) {
-        Utils.showAlert(this, msg);
+        AndroidUtils.showAlert(this,   R.string.pass_equals);
     }
 
     @Override
     public void showSuccessfulRegister() {
-        Utils.showAlert(RegisterActivity.this, R.string.success_signing_up);
+        AndroidUtils.showAlert(this, R.string.success_signing_up);
+    }
+
+    @Override
+    public void showUnknowError() {
+        AndroidUtils.showAlert(this,   R.string.unknow_error);
     }
 
 

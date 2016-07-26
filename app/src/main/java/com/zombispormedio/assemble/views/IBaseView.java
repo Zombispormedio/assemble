@@ -5,6 +5,9 @@ package com.zombispormedio.assemble.views;
  */
 public interface IBaseView {
     String getAuthToken();
-    void setAuthToken();
+    void setAuthToken(String token);
+    void clearAuthToken();
+
+    void showAlert(String msg);
 
 }

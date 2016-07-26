@@ -2,9 +2,6 @@ package com.zombispormedio.assemble.rest.responses;
 
 import com.zombispormedio.assemble.rest.Error;
 
-import org.json.JSONObject;
-
-
 
 /**
  * Created by Master on 26/07/2016.

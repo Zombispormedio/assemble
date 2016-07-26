@@ -1,9 +1,11 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.handlers.IServiceHandler2;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
 
-import com.zombispormedio.assemble.models.builders.ModelBuilder;
-import com.zombispormedio.assemble.models.resources.UserResources;
+import com.zombispormedio.assemble.models.factories.ResourceFactory;
+import com.zombispormedio.assemble.models.resources.UserResource;
+import com.zombispormedio.assemble.rest.Error;
+import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.views.IRegisterView;
 
 /**
@@ -12,12 +14,12 @@ import com.zombispormedio.assemble.views.IRegisterView;
 public class RegisterController implements IBaseController {
 
     private IRegisterView ctx;
-    private UserResources user;
+    private UserResource user;
 
     public RegisterController(IRegisterView ctx) {
         this.ctx = ctx;
 
-        user= ModelBuilder.createUser();
+        user= ResourceFactory.createUser();
     }
 
     public void onClickRegisterButton() {
@@ -46,7 +48,7 @@ public class RegisterController implements IBaseController {
                 ctx.showNotEqualsBothPassword();
 
             }else{
-                user.signin(email, pass, new CreateServiceHandler(email));
+                user.signin(email, pass, new RegisterServiceHandler());
 
 
             }
@@ -55,26 +57,45 @@ public class RegisterController implements IBaseController {
         }
     }
 
-    private class CreateServiceHandler implements IServiceHandler2<String, String> {
-        private String email;
-        public CreateServiceHandler(String email) {
-            this.email=email;
-        }
+    private class RegisterServiceHandler implements IServiceHandler<Result, Error> {
 
         @Override
-        public void onError(String... args) {
-            String error=args[0];
-            ctx.showAlert(error);
+        public void onError(Error error) {
+            String alert="";
+            boolean alerted=false;
+
+            if(error.email!=null){
+                if(error.email.length>0){
+                    alert=error.email[0];
+                    alerted=true;
+                }
+            }else{
+                if(error.password!=null){
+                    if(error.password.length>0){
+                        alert=error.password[0];
+                        alerted=true;
+                    }
+                }else{
+                    if(error.msg!=null){
+                        alert=error.msg;
+                        alerted=true;
+                    }
+                }
+            }
+
+            if(!alerted){
+                ctx.showUnknowError();
+            }else{
+                ctx.showAlert(alert);
+            }
+
             afterTryLogin();
         }
 
         @Override
-        public void onSuccess(String... args) {
-            user.create(email, email);
-            user.signOut();
+        public void onSuccess(Result result) {
             ctx.showSuccessfulRegister();
-            ctx.goMain();
-
+            ctx.goToLogin();
         }
     }
 

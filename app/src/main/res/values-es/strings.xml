@@ -48,4 +48,6 @@
     <string name="yes_title">Sí</string>
     <string name="no_title">No</string>
 
+    <string name="unknow_error">Error Desconocido</string>
+
 </resources>

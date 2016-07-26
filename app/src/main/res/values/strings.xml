@@ -44,5 +44,6 @@
     <string name="signout_dialog_msg">Do you want to sign out?</string>
     <string name="yes_title">Yes</string>
     <string name="no_title">No</string>
+    <string name="unknow_error">Unknow Error</string>
 
 </resources>

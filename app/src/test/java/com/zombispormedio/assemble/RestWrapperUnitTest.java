@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble;
 
 import com.zombispormedio.assemble.models.User;
-import com.zombispormedio.assemble.rest.responses.AbstractResponse;
+import com.zombispormedio.assemble.rest.JSONBinder;
 import com.zombispormedio.assemble.rest.responses.DefaultResponse;
 import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.wrappers.moshi.JSONWrapper;
@@ -20,14 +20,14 @@ public class RestWrapperUnitTest {
         JSONWrapper<User> userAdapter=new JSONWrapper<User>(User.class);
         String json =new RestWrapper()
                 .url("https://assemble-api.herokuapp.com/login")
-                .post(userAdapter.toJSON(new User("zombispormedio007@gmail.com", "wantedhex")));
+                .post(userAdapter.toJSON(new User("pepe@gmail.com", "1255284")));
 
 
-        JSONWrapper<DefaultResponse> jsonAdapter=new JSONWrapper<DefaultResponse>(DefaultResponse.class);
 
-        AbstractResponse blackjackHand = jsonAdapter.fromJSON(json);
+
+        DefaultResponse blackjackHand = JSONBinder.toDefaultResponse(json);
         System.out.println(blackjackHand.success);
-        Result result= (Result) blackjackHand.result;
+        Result result= blackjackHand.result;
         System.out.println(result.token);
         System.out.println(blackjackHand.error==null?blackjackHand.error:blackjackHand.error.msg);
 

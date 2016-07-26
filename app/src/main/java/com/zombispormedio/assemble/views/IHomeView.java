@@ -3,12 +3,12 @@ package com.zombispormedio.assemble.views;
 /**
  * Created by Master on 10/07/2016.
  */
-public interface IHomeView {
+public interface IHomeView extends IBaseView  {
     void goToLogin();
 
     void goToProfile();
 
     void goToSettings();
 
-    void setNavTitleText(String hello);
+    void setDrawerTitle(String hello);
 }

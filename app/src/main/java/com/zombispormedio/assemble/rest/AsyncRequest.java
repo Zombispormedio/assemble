@@ -9,6 +9,8 @@ import com.zombispormedio.assemble.wrappers.okhttp.RestWrapper;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Master on 26/07/2016.
@@ -21,10 +23,16 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
         RestWrapper rest= new RestWrapper()
                 .url(req.getUrl());
 
-        if (req.getHeadersKeys() != null)
-            for (String k : req.getHeadersKeys()) {
-                rest = rest.header(k, req.getHeaders(k));
+        HashMap<String, String> headers=req.getHeaders();
+        if (headers != null){
+            for (Map.Entry<String,String> entry : headers.entrySet()) {
+                String value = entry.getValue();
+                String key = entry.getKey();
+
+                rest.header(key, value);
             }
+        }
+
 
 
 

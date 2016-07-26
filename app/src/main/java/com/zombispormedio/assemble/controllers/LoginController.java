@@ -1,9 +1,10 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.handlers.IServiceHandler2;
-
-import com.zombispormedio.assemble.models.builders.ModelBuilder;
-import com.zombispormedio.assemble.models.resources.UserResources;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.rest.Error;
+import com.zombispormedio.assemble.models.factories.ResourceFactory;
+import com.zombispormedio.assemble.models.resources.UserResource;
+import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.views.ILoginView;
 
 /**
@@ -12,12 +13,12 @@ import com.zombispormedio.assemble.views.ILoginView;
 public class LoginController implements IBaseController {
 
     private ILoginView ctx;
-    private UserResources user;
+    private UserResource user;
 
     public LoginController(ILoginView ctx) {
         this.ctx = ctx;
 
-        user= ModelBuilder.createUser();
+        user= ResourceFactory.createUser();
 
 
     }
@@ -46,19 +47,17 @@ public class LoginController implements IBaseController {
 
     }
 
-    public class LoginServiceHandler implements IServiceHandler2<String, String> {
+    public class LoginServiceHandler implements IServiceHandler<Result, Error> {
 
         @Override
-        public void onError(String... args) {
-            String error=args[0];
-
-            ctx.showAlert(error);
+        public void onError(Error error) {
+            ctx.showAlert(error.msg);
             afterTryLogin();
-
         }
 
         @Override
-        public void onSuccess(String... args) {
+        public void onSuccess(Result result) {
+            ctx.setAuthToken(result.token);
 
             ctx.showSuccessfulLogin();
 
