@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 /**
  * Created by Master on 25/07/2016.
  */
-public class API {
+public class APIConfiguration {
 
     public static final String BASE_URL = "https://assemble-api.herokuapp.com/";
 

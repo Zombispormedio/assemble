@@ -1,4 +1,4 @@
-package com.zombispormedio.assemble.adapters;
+package com.zombispormedio.assemble.wrappers.okhttp;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,66 +14,55 @@ import okhttp3.RequestBody;
 /**
  * Created by Master on 25/07/2016.
  */
-public class RestifyAdapter {
+public class RestWrapper {
     private OkHttpClient client;
 
     private Request.Builder builder;
 
-    public RestifyAdapter() {
+    public RestWrapper() {
         client = new OkHttpClient();
         builder=new Request.Builder();
     }
 
-    public RestifyAdapter url(String url){
+    public RestWrapper url(String url){
         builder.url(url);
         return this;
     }
 
-    public RestifyAdapter header(String key, String value){
+    public RestWrapper header(String key, String value){
         builder.addHeader(key, value);
         return this;
     }
 
-    public class Response {
-        private JSONObject body;
 
-        public Response(JSONObject body) {
-            this.body = body;
-        }
-
-        public JSONObject getBody() {
-            return body;
-        }
-    }
-
-    public Response get() throws IOException, JSONException {
+    public String get() throws IOException, JSONException {
         Request req=builder.get()
                 .build();
 
         okhttp3.Response res= client.newCall(req).execute();
 
-        JSONObject body= new JSONObject(res.body().string());
 
-        return new Response(body);
+
+        return res.body().string();
     }
 
-    public Response post(JSONObject obj) throws IOException, JSONException {
+    public String post(String obj) throws IOException, JSONException {
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody reqBody = RequestBody.create(mediaType, obj.toString());
+        RequestBody reqBody = RequestBody.create(mediaType, obj);
 
         Request req=builder.post(reqBody)
                 .build();
 
         okhttp3.Response res= client.newCall(req).execute();
 
-        JSONObject body= new JSONObject(res.body().string());
 
-        return new Response(body);
+
+        return res.body().string();
     }
 
-    public Response put(JSONObject obj) throws IOException, JSONException {
+    public String put(String obj) throws IOException, JSONException {
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody reqBody = RequestBody.create(mediaType, obj.toString());
+        RequestBody reqBody = RequestBody.create(mediaType, obj);
 
         Request req=builder.put(reqBody)
                 .build();
@@ -82,12 +71,12 @@ public class RestifyAdapter {
 
         JSONObject body= new JSONObject(res.body().string());
 
-        return new Response(body);
+        return res.body().string();
     }
 
-    public Response patch(JSONObject obj) throws IOException, JSONException {
+    public String patch(String obj) throws IOException, JSONException {
         MediaType mediaType = MediaType.parse("application/json");
-        RequestBody reqBody = RequestBody.create(mediaType, obj.toString());
+        RequestBody reqBody = RequestBody.create(mediaType, obj);
 
         Request req=builder.patch(reqBody)
                 .build();
@@ -96,10 +85,10 @@ public class RestifyAdapter {
 
         JSONObject body= new JSONObject(res.body().string());
 
-        return new Response(body);
+        return res.body().string();
     }
 
-    public Response delete() throws IOException, JSONException {
+    public String delete() throws IOException, JSONException {
         Request req=builder.delete()
                 .build();
 
@@ -107,7 +96,7 @@ public class RestifyAdapter {
 
         JSONObject body= new JSONObject(res.body().string());
 
-        return new Response(body);
+        return res.body().string();
     }
 
 
