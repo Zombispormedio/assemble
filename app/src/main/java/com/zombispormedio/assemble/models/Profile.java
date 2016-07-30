@@ -31,4 +31,21 @@ public class Profile {
         this.medium_avatar_url = medium_avatar_url;
         this.thumb_avatar_url = thumb_avatar_url;
     }
+
+    public Profile(){
+
+        email = "";
+        username="";
+        birth_date="";
+        location="";
+        bio ="";
+        sign_up_at="";
+        full_avatar_url="";
+        large_avatar_url="";
+        medium_avatar_url="";
+        thumb_avatar_url="";
+
+
+    }
+
 }

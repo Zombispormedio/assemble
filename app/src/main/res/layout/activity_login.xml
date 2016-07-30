@@ -10,7 +10,9 @@
     tools:context=".activities.LoginActivity"
     android:orientation="vertical"
     android:background="@color/colorPrimary"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingStart="@dimen/activity_horizontal_margin">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -53,14 +55,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="0dp">
+        android:layout_marginTop="0dp"
+        android:layout_marginStart="0dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="146dp"
             android:layout_gravity="center_horizontal|bottom"
             android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp">
+            android:layout_marginRight="0dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginStart="0dp">
 
             <EditText
                 android:layout_width="match_parent"
@@ -112,7 +117,8 @@
         android:layout_marginBottom="25dp"
         android:background="@color/colorAccent"
         android:textColor="@color/abc_primary_text_material_dark"
-        />
+        android:paddingStart="75sp"
+        android:paddingEnd="75sp" />
 
     <TextView
         android:layout_width="wrap_content"

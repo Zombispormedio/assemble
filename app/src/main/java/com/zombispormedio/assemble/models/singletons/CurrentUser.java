@@ -15,7 +15,7 @@ public class CurrentUser {
     private UserProfile profile;
 
     private CurrentUser() {
-        profile=null;
+        profile=new UserProfile();
     }
 
     public UserProfile getProfile() {

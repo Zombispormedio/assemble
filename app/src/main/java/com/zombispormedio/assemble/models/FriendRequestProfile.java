@@ -11,4 +11,9 @@ public class FriendRequestProfile  extends Profile {
 
         this.friend_request_id = friend_request_id;
     }
+
+    public FriendRequestProfile() {
+        super();
+        friend_request_id = "";
+    }
 }

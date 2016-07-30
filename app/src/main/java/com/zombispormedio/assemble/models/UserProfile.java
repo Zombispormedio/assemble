@@ -13,5 +13,9 @@ public class UserProfile extends Profile {
         this.id = id;
     }
 
+    public UserProfile() {
+        super();
+        this.id = "";
 
+    }
 }

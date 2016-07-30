@@ -4,6 +4,7 @@ import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
+import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.views.IHomeView;
 
@@ -15,37 +16,36 @@ public class HomeController implements IBaseController {
     private IHomeView ctx;
     private UserResource userResource;
     private ProfileHandler profileHandler;
-    private UserProfile userProfile;
+    private CurrentUser user;
 
 
     public HomeController(IHomeView ctx) {
         this.ctx = ctx;
         userResource = ResourceFactory.createUser();
-        userProfile =null;
-        profileHandler=new ProfileHandler();
+        user = CurrentUser.getInstance();
+        profileHandler = new ProfileHandler();
 
         userResource.getProfile(profileHandler);
     }
 
     public void onDrawerOpened() {
         DrawerTitle();
-
-
     }
 
-    private void DrawerTitle(){
-        String title="";
-        if(userProfile !=null){
-            if(userProfile.username!=null){
-                title= userProfile.username;
-            }else{
-                if(userProfile.email!=null){
-                    title= userProfile.email;
-                }
+    private void DrawerTitle() {
+        UserProfile profile = user.getProfile();
+        String title = "";
+        if (profile.username != "") {
+            title = profile.username;
+
+        } else {
+            if (profile.email != "") {
+                title = profile.email;
             }
         }
-
-        ctx.setDrawerTitle(title);
+        if(ctx!=null){
+            ctx.setDrawerTitle(title);
+        }
     }
 
     public void onSettingsMenuItemClick() {
@@ -55,7 +55,7 @@ public class HomeController implements IBaseController {
 
     @Override
     public void onDestroy() {
-        ctx=null;
+        ctx = null;
     }
 
     @Override
@@ -64,26 +64,23 @@ public class HomeController implements IBaseController {
     }
 
 
-
     @Override
     public void onStop() {
 
     }
 
 
-    public void onProfileMenuItemClick(){
+    public void onProfileMenuItemClick() {
 
         ctx.goToProfile();
     }
 
     public void onRestart() {
-        userResource.getProfile(profileHandler);
+
     }
 
     public void onResume() {
-        userResource.getProfile(profileHandler);
     }
-
 
 
     private class ProfileHandler implements IServiceHandler<UserProfile, Error> {
@@ -94,7 +91,7 @@ public class HomeController implements IBaseController {
 
         @Override
         public void onSuccess(UserProfile result) {
-            userProfile =result;
+            user.setProfile(result);
             DrawerTitle();
         }
     }

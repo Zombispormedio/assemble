@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:clickable="true"
+    android:orientation="vertical"
     tools:context=".activities.ProfileActivity">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
     <android.support.v7.widget.Toolbar
         android:id="@+id/profile_bar"
-        android:layout_height="?attr/actionBarSize"
         android:layout_width="match_parent"
-        android:minHeight="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
+        android:minHeight="?attr/actionBarSize"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -26,22 +33,41 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/imageProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageProfile"
-                android:scaleType="center"
-                android:minWidth="100sp"
-                android:minHeight="100sp"
-
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="33dp"
                 android:contentDescription="@string/profile_image_desc"
                 android:cropToPadding="false"
                 android:longClickable="true"
                 android:maxHeight="100sp"
                 android:maxWidth="100sp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="33dp" />
+                android:minHeight="100sp"
+                android:minWidth="100sp"
+                android:scaleType="center" />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/image_upload_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageProfile"
+                android:layout_alignEnd="@+id/imageProfile"
+                android:clickable="true"
+                android:src="@drawable/camera"
+                app:layout_anchorGravity="bottom|right|end" />
+
+            <ProgressBar
+                android:id="@+id/progress_image"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/imageProfile"
+                android:layout_centerHorizontal="true" />
+
         </RelativeLayout>
     </FrameLayout>
+
 
 </LinearLayout>
