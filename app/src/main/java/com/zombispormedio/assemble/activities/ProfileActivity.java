@@ -12,6 +12,7 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
+import com.zombispormedio.assemble.fragments.ProfileBottomSheetDialogFragment;
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.views.IProfileView;
@@ -42,6 +43,14 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
         imageProgressBar = (ProgressBar) findViewById(R.id.progress_image);
 
+        imageFab.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view) {
+                openImageBottomSheet();
+
+            }
+        });
 
     }
 
@@ -107,6 +116,13 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
                 .load(resourceId)
                 .transform(new ImageUtils.CircleTransform())
                 .into(imageProfile);
+    }
+
+
+    public void openImageBottomSheet(){
+        ProfileBottomSheetDialogFragment bsdFragment = new ProfileBottomSheetDialogFragment();
+        bsdFragment.show(getSupportFragmentManager(), "ImageProfileDialog");
+
     }
 
 
