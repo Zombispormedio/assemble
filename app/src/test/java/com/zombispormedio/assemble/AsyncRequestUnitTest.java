@@ -8,11 +8,9 @@ import com.zombispormedio.assemble.rest.Request;
 
 import org.junit.Test;
 
-import java.util.concurrent.CountDownLatch;
 
-import static org.junit.Assert.*;
 /**
- * Created by Master on 26/07/2016.
+ * Created by Xavier Serrano on 26/07/2016.
  */
 public class AsyncRequestUnitTest {
 

@@ -1,29 +1,30 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.User;
+import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.views.IHomeView;
 
 /**
- * Created by Master on 10/07/2016.
+ * Created by Xavier Serrano on 10/07/2016.
  */
 public class HomeController implements IBaseController {
 
     private IHomeView ctx;
     private UserResource userResource;
     private ProfileHandler profileHandler;
-    private User user;
+    private UserProfile userProfile;
 
 
     public HomeController(IHomeView ctx) {
         this.ctx = ctx;
         userResource = ResourceFactory.createUser();
-        user=null;
+        userProfile =null;
         profileHandler=new ProfileHandler();
+
+        userResource.getProfile(profileHandler);
     }
 
     public void onDrawerOpened() {
@@ -34,12 +35,12 @@ public class HomeController implements IBaseController {
 
     private void DrawerTitle(){
         String title="";
-        if(user!=null){
-            if(user.username!=null){
-                title=user.username;
+        if(userProfile !=null){
+            if(userProfile.username!=null){
+                title= userProfile.username;
             }else{
-                if(user.email!=null){
-                    title=user.email;
+                if(userProfile.email!=null){
+                    title= userProfile.email;
                 }
             }
         }
@@ -59,7 +60,7 @@ public class HomeController implements IBaseController {
 
     @Override
     public void onStart() {
-        userResource.getProfile(profileHandler);
+
     }
 
 
@@ -85,15 +86,15 @@ public class HomeController implements IBaseController {
 
 
 
-    private class ProfileHandler implements IServiceHandler<User, Error> {
+    private class ProfileHandler implements IServiceHandler<UserProfile, Error> {
         @Override
         public void onError(Error error) {
 
         }
 
         @Override
-        public void onSuccess(User result) {
-            user=result;
+        public void onSuccess(UserProfile result) {
+            userProfile =result;
             DrawerTitle();
         }
     }

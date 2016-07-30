@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 import android.view.Window;
 
 
-
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.controllers.MainController;
 
 import com.zombispormedio.assemble.utils.NavigationManager;
@@ -45,7 +45,9 @@ public class MainActivity extends BaseActivity implements IMainView {
             public void run() {
                 try{
                     Thread.sleep(2000);
-                }catch(InterruptedException e){}
+                }catch(InterruptedException e){
+                    Logger.d(e.getMessage());
+                }
 
                 timeoutLatch.countDown();
 

@@ -11,7 +11,7 @@ import java.util.Vector;
 import java.util.regex.Pattern;
 
 /**
- * Created by Master on 26/07/2016.
+ * Created by Xavier Serrano on 26/07/2016.
  */
 public class Request {
 
@@ -78,7 +78,7 @@ public class Request {
         private String body;
 
         public Builder() {
-            paramsMap= new HashMap<String, Object>();
+            paramsMap= new HashMap<>();
             headersMap= null;
             handler=null;
             body=null;
@@ -176,7 +176,7 @@ public class Request {
         }
 
         public Builder headers(String k, String v){
-            if(headersMap==null)headersMap=new HashMap<String, String>();
+            if(headersMap==null)headersMap= new HashMap<>();
 
             headersMap.put(k, v);
             return this;
@@ -189,7 +189,7 @@ public class Request {
 
         private void buildURL(){
             String result=url;
-            Vector<String> query=new Vector<String>();
+            Vector<String> query= new Vector<>();
             for (Map.Entry<String,Object> entry : paramsMap.entrySet()) {
                 Object value = entry.getValue();
                 String key = entry.getKey();

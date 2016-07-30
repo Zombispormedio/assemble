@@ -4,7 +4,7 @@ import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
 
 /**
- * Created by Master on 26/07/2016.
+ * Created by Xavier Serrano on 26/07/2016.
  */
 public class DefaultResponse extends AbstractResponse<Result> {
     public DefaultResponse(boolean success, Error error, Result result) {

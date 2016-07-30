@@ -4,7 +4,7 @@ import com.zombispormedio.assemble.rest.Error;
 
 
 /**
- * Created by Master on 26/07/2016.
+ * Created by Xavier Serrano on 26/07/2016.
  */
 public abstract class AbstractResponse<T> {
 

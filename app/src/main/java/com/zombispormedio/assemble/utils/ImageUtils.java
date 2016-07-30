@@ -4,12 +4,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Shader;
+
 
 import com.squareup.picasso.Transformation;
 
 /**
- * Created by Master on 11/07/2016.
+ * Created by Xavier Serrano on 11/07/2016.
  */
 public class ImageUtils {
 

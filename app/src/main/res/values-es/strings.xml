@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Assemble</string>
-    <string name="login_title">Iniciar Sesión</string>
     <string name="home_title">Inicio</string>
     <string name="app_title">Assemble</string>
     <string name="description_logo">logo</string>
@@ -9,7 +8,6 @@
     <string name="email_input_hint">Correo Electrónico</string>
     <string name="pass_input_hint">Contraseña</string>
     <string name="register_link_text"><u>Regístrate</u></string>
-    <string name="signup_message">Cuenta creada</string>
     <string name="signup_title">Regístrate en Assemble. Es gratis.</string>
     <string name="login_message">Inicio de sesión con éxito</string>
     <string name="repeat_pass_input_hint">Repite contraseña</string>
@@ -18,10 +16,9 @@
     <string name="pass_empty">La constraseña está en blanco</string>
     <string name="rep_pass_empty">El Repite contraseña está en blanco</string>
     <string name="pass_equals">Las contraseñas no son iguales</string>
-    <string name="invalid_email">Correo electrónico inválido</string>
-    <string name="error_sign_up">Error iniciando sesión</string>
     <string name="success_signing_up">Registro con éxito</string>
     <string name="icon_user">Icono de usuario</string>
+
 
 
 

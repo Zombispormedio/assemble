@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.models.resources;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.User;
+import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.services.IAuthService;
@@ -12,14 +12,14 @@ import com.zombispormedio.assemble.services.IPersistenceService;
 
 
 /**
- * Created by Master on 08/07/2016.
+ * Created by Xavier Serrano on 08/07/2016.
  */
 public class UserResource {
 
     private IAuthService auth;
-    private IPersistenceService persistence;
+    private IPersistenceService<UserProfile> persistence;
 
-    public UserResource(IAuthService auth, IPersistenceService persistence) {
+    public UserResource(IAuthService auth, IPersistenceService<UserProfile> persistence) {
         this.auth=auth;
         this.persistence=persistence;
     }
@@ -46,7 +46,7 @@ public class UserResource {
         auth.signOut(handler);
     }
 
-    public void getProfile(final IServiceHandler<User, Error> handler){
+    public void getProfile(final IServiceHandler<UserProfile, Error> handler){
         persistence.retrieve(handler);
     }
 

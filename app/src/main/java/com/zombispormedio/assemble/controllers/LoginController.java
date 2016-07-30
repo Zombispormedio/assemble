@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
@@ -8,12 +9,14 @@ import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.views.ILoginView;
 
 /**
- * Created by Master on 09/07/2016.
+ * Created by Xavier Serrano on 09/07/2016.
  */
 public class LoginController implements IBaseController {
 
     private ILoginView ctx;
     private UserResource user;
+
+
 
     public LoginController(ILoginView ctx) {
         this.ctx = ctx;
@@ -95,4 +98,6 @@ public class LoginController implements IBaseController {
     public void onStop() {
 
     }
+
+
 }

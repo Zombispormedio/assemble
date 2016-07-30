@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 /**
- * Created by Master on 08/07/2016.
+ * Created by Xavier Serrano on 08/07/2016.
  */
 public interface IBaseController {
 

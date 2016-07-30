@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.services.api.UserAPIService;
 
 
 /**
- * Created by Master on 10/07/2016.
+ * Created by Xavier Serrano on 10/07/2016.
  */
 public class ResourceFactory {
 

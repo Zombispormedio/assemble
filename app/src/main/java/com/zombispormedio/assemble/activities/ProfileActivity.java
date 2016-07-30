@@ -1,7 +1,5 @@
 package com.zombispormedio.assemble.activities;
 
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.widget.ImageView;
@@ -18,13 +16,11 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
 
     private ImageView imageProfile;
 
-    private Toolbar bar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        bar=(Toolbar) findViewById(R.id.profile_bar);
+        Toolbar bar = (Toolbar) findViewById(R.id.profile_bar);
         setSupportActionBar(bar);
 
         if(getSupportActionBar() != null) {
@@ -34,21 +30,27 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
         ctrl=new ProfileController(this);
 
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
-
-
-
+        Picasso.with(this).load(R.drawable.profile_image_square).transform(new ImageUtils.CircleTransform()).into(imageProfile);
 
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Picasso.with(this).load(R.drawable.profile_image_square).transform(new ImageUtils.CircleTransform()).into(imageProfile);
+        ctrl.onStart();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ctrl.onDestroy();
+    }
+
+    @Override
+    public void setProfileImage(String url) {
+        Picasso.with(this)
+                .load(url)
+                .transform(new ImageUtils.CircleTransform())
+                .into(imageProfile);
     }
 }

@@ -8,7 +8,7 @@ import android.support.v7.widget.Toolbar;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.fragments.SettingsFragment;
 import com.zombispormedio.assemble.controllers.SettingsController;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
+
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.utils.AndroidUtils;
@@ -16,15 +16,13 @@ import com.zombispormedio.assemble.views.ISettingsView;
 
 
 public class SettingsActivity extends BaseActivity implements ISettingsView {
-    private Toolbar bar;
-    private SettingsFragment frag;
     private SettingsController ctrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        bar=(Toolbar) findViewById(R.id.settings_bar);
+        Toolbar bar = (Toolbar) findViewById(R.id.settings_bar);
         setSupportActionBar(bar);
 
         if(getSupportActionBar() != null) {
@@ -35,10 +33,10 @@ public class SettingsActivity extends BaseActivity implements ISettingsView {
 
         ctrl= new SettingsController(this);
 
-        frag=new SettingsFragment();
+        SettingsFragment frag = new SettingsFragment();
 
         getFragmentManager().beginTransaction()
-                .replace(R.id.content_frame, frag )
+                .replace(R.id.content_frame, frag)
                 .commit();
 
 

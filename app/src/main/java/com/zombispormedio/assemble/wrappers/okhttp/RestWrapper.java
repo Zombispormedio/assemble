@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.wrappers.okhttp;
 
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -76,7 +75,6 @@ public class RestWrapper {
 
         okhttp3.Response res= client.newCall(req).execute();
 
-        JSONObject body= new JSONObject(res.body().string());
 
         return res.body().string();
     }
@@ -90,7 +88,7 @@ public class RestWrapper {
 
         okhttp3.Response res= client.newCall(req).execute();
 
-        JSONObject body= new JSONObject(res.body().string());
+
 
         return res.body().string();
     }
@@ -101,7 +99,6 @@ public class RestWrapper {
 
         okhttp3.Response res= client.newCall(req).execute();
 
-        JSONObject body= new JSONObject(res.body().string());
 
         return res.body().string();
     }

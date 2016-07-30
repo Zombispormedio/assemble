@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.models.resources.UserResource;
@@ -11,7 +10,7 @@ import com.zombispormedio.assemble.views.ISettingsFragmentView;
 import com.zombispormedio.assemble.views.ISettingsView;
 
 /**
- * Created by Master on 16/07/2016.
+ * Created by Xavier Serrano on 16/07/2016.
  */
 public class SettingsController implements IBaseController {
     private ISettingsView ctx;

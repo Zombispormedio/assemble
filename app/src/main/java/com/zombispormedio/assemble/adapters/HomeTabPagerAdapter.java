@@ -9,7 +9,7 @@ import com.zombispormedio.assemble.fragments.MessagesTabFragment;
 import com.zombispormedio.assemble.fragments.TeamsTabFragment;
 
 /**
- * Created by Master on 12/07/2016.
+ * Created by Xavier Serrano on 12/07/2016.
  */
 public class HomeTabPagerAdapter extends FragmentStatePagerAdapter{
 

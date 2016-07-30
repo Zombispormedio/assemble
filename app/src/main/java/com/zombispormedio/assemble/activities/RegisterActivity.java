@@ -36,7 +36,9 @@ public class RegisterActivity extends BaseActivity implements IRegisterView{
         setSupportActionBar(toolbar);
 
         ActionBar ab=getSupportActionBar();
-        ab.setDisplayHomeAsUpEnabled(true);
+        if (ab != null) {
+            ab.setDisplayHomeAsUpEnabled(true);
+        }
 
         ctrl= new RegisterController(this);
 

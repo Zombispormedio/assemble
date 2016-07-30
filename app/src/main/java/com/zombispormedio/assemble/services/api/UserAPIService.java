@@ -2,19 +2,18 @@ package com.zombispormedio.assemble.services.api;
 
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.User;
+import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.JSONBinder;
-import com.zombispormedio.assemble.rest.responses.DefaultResponse;
 import com.zombispormedio.assemble.rest.responses.ProfileResponse;
 import com.zombispormedio.assemble.services.IPersistenceService;
 
 import java.io.IOException;
 
 /**
- * Created by Master on 27/07/2016.
+ * Created by Xavier Serrano on 27/07/2016.
  */
-public class UserAPIService implements IPersistenceService<User> {
+public class UserAPIService implements IPersistenceService<UserProfile> {
     private APIConfiguration api;
 
     public UserAPIService() {
@@ -22,7 +21,7 @@ public class UserAPIService implements IPersistenceService<User> {
     }
 
     @Override
-    public void retrieve(final IServiceHandler<User, Error> handler) {
+    public void retrieve(final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile")
                 .handler(new IPromiseHandler() {
                     @Override

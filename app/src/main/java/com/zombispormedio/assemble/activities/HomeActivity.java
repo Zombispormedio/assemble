@@ -6,7 +6,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
@@ -24,12 +24,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private HomeController ctrl;
 
-    private Toolbar toolbar;
     private DrawerLayout drawer;
-    private NavigationView nav;
     private TextView nav_title;
-    private TabLayout tabLayout;
-
 
 
     @Override
@@ -40,8 +36,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         ctrl=new HomeController(this);
 
         drawer= (DrawerLayout)findViewById(R.id.drawer_layout_home);
-        nav=(NavigationView)findViewById(R.id.navview);
-        toolbar =(Toolbar) findViewById(R.id.home_bar);
+        NavigationView nav = (NavigationView) findViewById(R.id.navview);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.home_bar);
         
         setSupportActionBar(toolbar);
 
@@ -53,7 +49,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         drawer.addDrawerListener(DrawerListener());
 
 
-        tabLayout=(TabLayout)findViewById(R.id.home_tab_layout);
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.home_tab_layout);
 
 
         tabLayout.addTab(tabLayout.newTab().setText(R.string.teams_tab_title));
@@ -71,7 +67,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         viewTabPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         viewTabPager.setCurrentItem(1);
 
-        tabLayout.addOnTabSelectedListener( new TabLayout.OnTabSelectedListener(){
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

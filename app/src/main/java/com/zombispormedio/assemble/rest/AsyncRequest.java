@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.rest;
 
-import android.app.backup.RestoreObserver;
+
 import android.os.AsyncTask;
 
 import com.orhanobut.logger.Logger;
@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by Master on 26/07/2016.
+ * Created by Xavier Serrano on 26/07/2016.
  */
 public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
     @Override
@@ -55,9 +55,7 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
                 break;
         }
 
-        } catch (IOException e) {
-            Logger.d(e);
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             Logger.d(e);
         }
 

@@ -25,7 +25,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         SharedPreferences.Editor editor= settings.edit();
 
         editor.putString("token", token);
-        editor.commit();
+        editor.apply();
 
         APIConfiguration.getInstance().setToken(token);
 
@@ -37,7 +37,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         SharedPreferences.Editor editor= settings.edit();
 
         editor.remove("token");
-        editor.commit();
+        editor.apply();
 
         APIConfiguration.getInstance().clearToken();
     }

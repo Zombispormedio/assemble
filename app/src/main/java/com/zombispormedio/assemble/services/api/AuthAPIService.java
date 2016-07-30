@@ -4,7 +4,7 @@ package com.zombispormedio.assemble.services.api;
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 
-import com.zombispormedio.assemble.models.User;
+import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.JSONBinder;
 import com.zombispormedio.assemble.rest.Result;
@@ -15,7 +15,7 @@ import java.io.IOException;
 
 
 /**
- * Created by Master on 25/07/2016.
+ * Created by Xavier Serrano on 25/07/2016.
  */
 public class AuthAPIService implements IAuthService {
     private APIConfiguration api;
@@ -53,7 +53,7 @@ public class AuthAPIService implements IAuthService {
 
     @Override
     public void login(String email, String password, final IServiceHandler<Result, Error> handler) {
-        User user=new User(email, password);
+        Auth user=new Auth(email, password);
         api.Rest("/login")
                 .handler(new IPromiseHandler() {
                     @Override
@@ -72,12 +72,12 @@ public class AuthAPIService implements IAuthService {
 
                     }
                 })
-                .post(JSONBinder.fromUser(user));
+                .post(JSONBinder.fromAuth(user));
     }
 
     @Override
     public void register(String email, String password, final IServiceHandler<Result, Error> handler) {
-        User user=new User(email, password);
+        Auth user=new Auth(email, password);
         api.Rest("/signup")
                 .handler(new IPromiseHandler() {
                     @Override
@@ -96,7 +96,7 @@ public class AuthAPIService implements IAuthService {
 
                     }
                 })
-                .post(JSONBinder.fromUser(user));
+                .post(JSONBinder.fromAuth(user));
     }
 
     @Override

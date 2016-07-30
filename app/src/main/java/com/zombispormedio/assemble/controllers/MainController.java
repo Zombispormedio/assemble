@@ -10,7 +10,7 @@ import com.zombispormedio.assemble.services.api.APIConfiguration;
 import com.zombispormedio.assemble.views.IMainView;
 
 /**
- * Created by Master on 08/07/2016.
+ * Created by Xavier Serrano on 08/07/2016.
  */
 public class MainController implements IBaseController {
 

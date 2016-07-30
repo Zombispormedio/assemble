@@ -9,7 +9,7 @@ import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.views.IRegisterView;
 
 /**
- * Created by Master on 09/07/2016.
+ * Created by Xavier Serrano on 09/07/2016.
  */
 public class RegisterController implements IBaseController {
 

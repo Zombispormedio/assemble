@@ -8,13 +8,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
-import com.zombispormedio.assemble.handlers.IPromiseHandler;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
+
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 
 
 /**
- * Created by Master on 26/06/2016.
+ * Created by Xavier Serrano on 26/06/2016.
  */
 public final class AndroidUtils {
 

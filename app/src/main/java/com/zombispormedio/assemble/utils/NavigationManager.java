@@ -12,7 +12,7 @@ import com.zombispormedio.assemble.activities.RegisterActivity;
 import com.zombispormedio.assemble.activities.SettingsActivity;
 
 /**
- * Created by Master on 25/06/2016.
+ * Created by Xavier Serrano on 25/06/2016.
  */
 public final class NavigationManager {
     private Context ctx;

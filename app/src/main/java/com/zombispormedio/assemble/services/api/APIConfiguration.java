@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.services.api;
 import com.zombispormedio.assemble.rest.Request;
 
 /**
- * Created by Master on 26/07/2016.
+ * Created by Xavier Serrano on 26/07/2016.
  */
 public class APIConfiguration {
     private static APIConfiguration ourInstance = new APIConfiguration();
