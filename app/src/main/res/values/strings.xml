@@ -41,5 +41,9 @@
     <string name="yes_title">Yes</string>
     <string name="no_title">No</string>
     <string name="unknow_error">Unknow Error</string>
+    <string name="image_profile">Profile Picture</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="select_picture">Select Picture</string>
 
 </resources>

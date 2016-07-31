@@ -7,12 +7,12 @@ import com.zombispormedio.assemble.handlers.IPromiseHandler;
  */
 public interface IProfileView extends IBaseView {
 
-    void setProfileImage(String url);
-    void setProfileImage(int resourceId);
     void setProfileImage(String url, final IPromiseHandler handler);
+    void loadDefaultImage(final IPromiseHandler handler);
 
     void hideImageForm();
     void showImageForm();
     void hideProgressImage();
     void showProgressImage();
+
 }

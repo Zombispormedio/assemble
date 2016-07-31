@@ -8,6 +8,7 @@ import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.rest.Error;
+import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IProfileView;
 
 /**
@@ -21,7 +22,7 @@ public class ProfileController implements IBaseController {
 
     public ProfileController(IProfileView ctx) {
         this.ctx = ctx;
-        user=CurrentUser.getInstance();
+        user = CurrentUser.getInstance();
 
         userResource = ResourceFactory.createUser();
 
@@ -30,36 +31,41 @@ public class ProfileController implements IBaseController {
 
     @Override
     public void onDestroy() {
-        ctx=null;
+        ctx = null;
     }
 
     @Override
     public void onStart() {
-        ctx.hideImageForm();
-        ctx.showProgressImage();
-        changeProfileImage( new IPromiseHandler() {
+        beforeLoadingImage();
+        changeProfileImage(new IPromiseHandler() {
             @Override
             public void onSuccess(String... args) {
-                ctx.showImageForm();
-                ctx.hideProgressImage();
+                afterLoadingImage();
             }
         });
     }
 
-    public void changeProfileImage(IPromiseHandler handler){
-        UserProfile profile=user.getProfile();
-        if(ctx!=null){
+    public void changeProfileImage(IPromiseHandler handler) {
+        UserProfile profile = user.getProfile();
+
+        if (Utils.presenceOf(profile.full_avatar_url)) {
             ctx.setProfileImage(profile.full_avatar_url, handler);
+        } else {
+            ctx.loadDefaultImage(handler);
         }
+
 
     }
 
-    public void changeProfileImage(){
-        UserProfile profile=user.getProfile();
-        if(ctx!=null){
-            ctx.setProfileImage(profile.full_avatar_url);
-        }
 
+    private void beforeLoadingImage() {
+        ctx.hideImageForm();
+        ctx.showProgressImage();
+    }
+
+    private void afterLoadingImage() {
+        ctx.showImageForm();
+        ctx.hideProgressImage();
     }
 
     @Override
