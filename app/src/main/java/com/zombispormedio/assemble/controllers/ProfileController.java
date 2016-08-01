@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.models.UserProfile;
@@ -15,7 +16,7 @@ import com.zombispormedio.assemble.views.IProfileView;
 /**
  * Created by Xavier Serrano on 10/07/2016.
  */
-public class ProfileController implements IAbstractController {
+public class ProfileController extends AbstractController {
 
     private IProfileView ctx;
 
@@ -27,15 +28,6 @@ public class ProfileController implements IAbstractController {
         this.ctx = ctx;
         user = CurrentUser.getInstance();
         userResource = ResourceFactory.createUser();
-    }
-
-    @Override
-    public void onDestroy() {
-        ctx = null;
-    }
-
-    @Override
-    public void onStart() {
         beforeLoadingImage();
         changeProfileImage(new ISuccessHandler() {
             @Override
@@ -46,45 +38,42 @@ public class ProfileController implements IAbstractController {
     }
 
     @Override
-    public void onStop() {
-
+    public void onDestroy() {
+        ctx = null;
     }
 
     public void changeProfileImage(ISuccessHandler handler) {
-        UserProfile profile = user.getProfile();
+        if(ctx!=null) {
+            UserProfile profile = user.getProfile();
 
-        if (Utils.presenceOf(profile.full_avatar_url)) {
-            ctx.setProfileImage(profile.full_avatar_url, handler);
-        } else {
-            ctx.loadDefaultImage(handler);
-        }
-
-    }
-
-    private void changeProfileImage(String link, ISuccessHandler handler) {
-
-        if (Utils.presenceOf(link)) {
-            ctx.setProfileImage(link, handler);
-        } else {
-            handler.onSuccess();
+            if (Utils.presenceOf(profile.full_avatar_url)) {
+                ctx.setProfileImage(profile.full_avatar_url, handler);
+            } else {
+                ctx.loadDefaultImage(handler);
+            }
         }
 
     }
 
 
     private void beforeLoadingImage() {
-        ctx.hideImageForm();
-        ctx.showProgressImage();
+        if(ctx!=null){
+            ctx.hideImageForm();
+            ctx.showProgressImage();
+        }
     }
 
     private void afterLoadingImage() {
-        ctx.showImageForm();
-        ctx.hideProgressImage();
+        if(ctx!=null) {
+            ctx.showImageForm();
+            ctx.hideProgressImage();
+        }
     }
 
     public void uploadAvatar(String path) {
         beforeLoadingImage();
-        userResource.changeAvatar(path, new IServiceHandler<Result, Error>() {
+
+        userResource.changeAvatar(path, new IServiceHandler<UserProfile, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);
@@ -92,8 +81,9 @@ public class ProfileController implements IAbstractController {
             }
 
             @Override
-            public void onSuccess(Result result) {
-                changeProfileImage(result.full_avatar_url, new ISuccessHandler() {
+            public void onSuccess(UserProfile result) {
+                user.setProfile(result);
+                changeProfileImage(new ISuccessHandler() {
                     @Override
                     public void onSuccess() {
                         afterLoadingImage();

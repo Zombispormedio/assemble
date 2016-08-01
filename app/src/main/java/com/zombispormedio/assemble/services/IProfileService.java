@@ -14,6 +14,6 @@ public interface IProfileService {
 
     void retrieve(final IServiceHandler<UserProfile, Error> handler);
 
-    void changeAvatar(File file, final IServiceHandler<Result, Error> handler);
+    void changeAvatar(File file, final IServiceHandler<UserProfile, Error> handler);
 
 }

@@ -12,7 +12,7 @@ import com.zombispormedio.assemble.views.IMainView;
 /**
  * Created by Xavier Serrano on 08/07/2016.
  */
-public class MainController implements IAbstractController {
+public class MainController extends AbstractController {
 
     private IMainView ctx;
     private UserResource user;
@@ -49,16 +49,6 @@ public class MainController implements IAbstractController {
     @Override
     public void onDestroy() {
         ctx=null;
-    }
-
-    @Override
-    public void onStart() {
-
-    }
-
-    @Override
-    public void onStop() {
-
     }
 
 }

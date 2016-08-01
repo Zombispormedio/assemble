@@ -51,7 +51,7 @@ public class UserResource {
         persistence.retrieve(handler);
     }
 
-    public void changeAvatar(String path, final IServiceHandler<Result, Error> handler ){
+    public void changeAvatar(String path, final IServiceHandler<UserProfile, Error> handler ){
         persistence.changeAvatar(new File(path), handler);
     }
 

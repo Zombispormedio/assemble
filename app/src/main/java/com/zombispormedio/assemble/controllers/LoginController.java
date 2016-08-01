@@ -11,7 +11,7 @@ import com.zombispormedio.assemble.views.ILoginView;
 /**
  * Created by Xavier Serrano on 09/07/2016.
  */
-public class LoginController implements IAbstractController {
+public class LoginController extends AbstractController {
 
     private ILoginView ctx;
     private UserResource user;
@@ -77,16 +77,4 @@ public class LoginController implements IAbstractController {
     public void onDestroy() {
         ctx=null;
     }
-
-    @Override
-    public void onStart() {
-
-    }
-
-    @Override
-    public void onStop() {
-
-    }
-
-
 }

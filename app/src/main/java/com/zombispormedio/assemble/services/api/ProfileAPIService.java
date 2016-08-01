@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.services.api;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.models.Profile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.FileBody;
@@ -51,13 +52,13 @@ public class ProfileAPIService implements IProfileService {
     }
 
     @Override
-    public void changeAvatar(File file, final IServiceHandler<Result, Error> handler) {
+    public void changeAvatar(File file, final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile/avatar")
                 .handler(new IPromiseHandler() {
                     @Override
                     public void onSuccess(String... args) {
                         try {
-                            DefaultResponse res= JsonBinder.toDefaultResponse(args[0]);
+                            ProfileResponse res= JsonBinder.toProfileResponse(args[0]);
                             if(res.success){
                                 handler.onSuccess(res.result);
                             }else{

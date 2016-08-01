@@ -11,7 +11,7 @@ import com.zombispormedio.assemble.views.IRegisterView;
 /**
  * Created by Xavier Serrano on 09/07/2016.
  */
-public class RegisterController implements IAbstractController {
+public class RegisterController extends AbstractController {
 
     private IRegisterView ctx;
     private UserResource user;
@@ -107,16 +107,6 @@ public class RegisterController implements IAbstractController {
     @Override
     public void onDestroy() {
         ctx=null;
-    }
-
-    @Override
-    public void onStart() {
-
-    }
-
-    @Override
-    public void onStop() {
-
     }
 
 }

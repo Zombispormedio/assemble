@@ -11,7 +11,7 @@ import com.zombispormedio.assemble.views.IHomeView;
 /**
  * Created by Xavier Serrano on 10/07/2016.
  */
-public class HomeController implements IAbstractController {
+public class HomeController extends AbstractController {
 
     private IHomeView ctx;
 
@@ -59,16 +59,6 @@ public class HomeController implements IAbstractController {
     @Override
     public void onDestroy() {
         ctx = null;
-    }
-
-    @Override
-    public void onStart() {
-
-    }
-
-    @Override
-    public void onStop() {
-
     }
 
 

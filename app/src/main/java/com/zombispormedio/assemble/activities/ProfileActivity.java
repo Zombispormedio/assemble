@@ -54,12 +54,14 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        ctrl = new ProfileController(this);
+
         externalNavigationManager = new ExternalNavigationManager(this);
 
         imageFab = (FloatingActionButton) findViewById(R.id.image_upload_button);
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
         imageProgressBar = (ProgressBar) findViewById(R.id.progress_image);
+
+        ctrl = new ProfileController(this);
 
         imageFab.setOnClickListener(new View.OnClickListener() {
 
