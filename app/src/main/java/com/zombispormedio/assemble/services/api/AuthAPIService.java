@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.handlers.IServiceHandler;
 
 import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.rest.Error;
-import com.zombispormedio.assemble.rest.JSONBinder;
+import com.zombispormedio.assemble.rest.JsonBinder;
 import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.rest.responses.DefaultResponse;
 import com.zombispormedio.assemble.services.IAuthService;
@@ -32,7 +32,7 @@ public class AuthAPIService implements IAuthService {
                     @Override
                     public void onSuccess(String... args) {
                         try {
-                            DefaultResponse res= JSONBinder.toDefaultResponse(args[0]);
+                            DefaultResponse res= JsonBinder.toDefaultResponse(args[0]);
                             if(res.success){
                                 handler.onSuccess(res.result);
                             }else{
@@ -59,7 +59,7 @@ public class AuthAPIService implements IAuthService {
                     @Override
                     public void onSuccess(String... args) {
                         try {
-                            DefaultResponse res= JSONBinder.toDefaultResponse(args[0]);
+                            DefaultResponse res= JsonBinder.toDefaultResponse(args[0]);
                             if(res.success){
                                 handler.onSuccess(res.result);
                             }else{
@@ -72,7 +72,7 @@ public class AuthAPIService implements IAuthService {
 
                     }
                 })
-                .post(JSONBinder.fromAuth(user));
+                .post(JsonBinder.fromAuth(user));
     }
 
     @Override
@@ -83,7 +83,7 @@ public class AuthAPIService implements IAuthService {
                     @Override
                     public void onSuccess(String... args) {
                         try {
-                            DefaultResponse res= JSONBinder.toDefaultResponse(args[0]);
+                            DefaultResponse res= JsonBinder.toDefaultResponse(args[0]);
                             if(res.success){
                                 handler.onSuccess(res.result);
                             }else{
@@ -96,7 +96,7 @@ public class AuthAPIService implements IAuthService {
 
                     }
                 })
-                .post(JSONBinder.fromAuth(user));
+                .post(JsonBinder.fromAuth(user));
     }
 
     @Override
@@ -106,7 +106,7 @@ public class AuthAPIService implements IAuthService {
                     @Override
                     public void onSuccess(String... args) {
                         try {
-                            DefaultResponse res= JSONBinder.toDefaultResponse(args[0]);
+                            DefaultResponse res= JsonBinder.toDefaultResponse(args[0]);
                             if(res.success){
                                 handler.onSuccess(res.result);
                             }else{

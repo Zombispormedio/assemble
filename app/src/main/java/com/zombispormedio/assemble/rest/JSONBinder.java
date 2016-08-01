@@ -11,7 +11,7 @@ import java.io.IOException;
 /**
  * Created by Xavier Serrano on 26/07/2016.
  */
-public class JSONBinder {
+public class JsonBinder {
 
     public static DefaultResponse toDefaultResponse(String raw) throws IOException {
         JSONWrapper<DefaultResponse> jsonAdapter=new JSONWrapper<>(DefaultResponse.class);

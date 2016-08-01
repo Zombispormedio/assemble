@@ -5,7 +5,6 @@ import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.utils.StringUtils;
 
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -226,7 +225,7 @@ public class Request {
             return this;
         }
 
-        private void buildURL(){
+        private void buildUrl(){
             String result=url;
             Vector<String> query= new Vector<>();
             for (Map.Entry<String,Object> entry : paramsMap.entrySet()) {
@@ -262,7 +261,7 @@ public class Request {
 
         public Request build(){
             if(paramsMap.size()>0)
-                buildURL();
+                buildUrl();
 
             Request req=new Request(url, method);
 

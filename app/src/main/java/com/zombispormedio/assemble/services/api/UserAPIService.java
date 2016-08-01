@@ -4,7 +4,7 @@ import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
-import com.zombispormedio.assemble.rest.JSONBinder;
+import com.zombispormedio.assemble.rest.JsonBinder;
 import com.zombispormedio.assemble.rest.responses.ProfileResponse;
 import com.zombispormedio.assemble.services.IPersistenceService;
 
@@ -27,7 +27,7 @@ public class UserAPIService implements IPersistenceService<UserProfile> {
                     @Override
                     public void onSuccess(String... args) {
                         try {
-                            ProfileResponse res= JSONBinder.toProfileResponse(args[0]);
+                            ProfileResponse res= JsonBinder.toProfileResponse(args[0]);
                             if(res.success){
                                 handler.onSuccess(res.result);
                             }else{

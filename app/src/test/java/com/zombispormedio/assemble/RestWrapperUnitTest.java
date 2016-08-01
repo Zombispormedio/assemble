@@ -2,7 +2,7 @@ package com.zombispormedio.assemble;
 
 import com.zombispormedio.assemble.models.Auth;
 
-import com.zombispormedio.assemble.rest.JSONBinder;
+import com.zombispormedio.assemble.rest.JsonBinder;
 import com.zombispormedio.assemble.rest.responses.DefaultResponse;
 import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.wrappers.moshi.JSONWrapper;
@@ -26,7 +26,7 @@ public class RestWrapperUnitTest {
 
 
 
-        DefaultResponse blackjackHand = JSONBinder.toDefaultResponse(json);
+        DefaultResponse blackjackHand = JsonBinder.toDefaultResponse(json);
         System.out.println(blackjackHand.success);
         Result result= blackjackHand.result;
         System.out.println(result.token);
