@@ -6,17 +6,17 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.JsonBinder;
 import com.zombispormedio.assemble.rest.responses.ProfileResponse;
-import com.zombispormedio.assemble.services.IPersistenceService;
+import com.zombispormedio.assemble.services.IProfileService;
 
 import java.io.IOException;
 
 /**
  * Created by Xavier Serrano on 27/07/2016.
  */
-public class UserAPIService implements IPersistenceService<UserProfile> {
+public class ProfileAPIService implements IProfileService {
     private APIConfiguration api;
 
-    public UserAPIService() {
+    public ProfileAPIService() {
         api=APIConfiguration.getInstance();
     }
 
