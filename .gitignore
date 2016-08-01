@@ -40,4 +40,5 @@ captures/
 # Keystore files
 *.jks
 
-app/google-services.json
+.idea/*
+!.idea/codeStyleSettings.xml
