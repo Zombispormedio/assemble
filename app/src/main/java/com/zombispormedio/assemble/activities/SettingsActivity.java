@@ -55,18 +55,6 @@ public class SettingsActivity extends BaseActivity implements ISettingsView {
         ctrl.onDestroy();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        ctrl.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        ctrl.onStop();
-    }
-
     public void showConfirmSignOutDialog( ISuccessHandler listener){
         String msg=getResources().getString(R.string.signout_dialog_msg);
 

@@ -7,7 +7,6 @@ public interface IBaseView {
     String getAuthToken();
     void setAuthToken(String token);
     void clearAuthToken();
-
     void showAlert(String msg);
 
 }

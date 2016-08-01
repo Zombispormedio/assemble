@@ -29,7 +29,6 @@ public interface IRegisterView  extends IBaseView{
 
     void showNotEqualsBothPassword();
 
-
     void showSuccessfulRegister();
 
     void showUnknowError();

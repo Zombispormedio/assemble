@@ -2,7 +2,7 @@ package com.zombispormedio.assemble.models.factories;
 
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.services.api.AuthAPIService;
-import com.zombispormedio.assemble.services.api.UserAPIService;
+import com.zombispormedio.assemble.services.api.ProfileAPIService;
 
 
 /**
@@ -11,6 +11,6 @@ import com.zombispormedio.assemble.services.api.UserAPIService;
 public class ResourceFactory {
 
     public static UserResource createUser(){
-        return new UserResource(new AuthAPIService(), new UserAPIService());
+        return new UserResource(new AuthAPIService(), new ProfileAPIService());
     }
 }

@@ -12,7 +12,7 @@ import com.zombispormedio.assemble.views.ISettingsView;
 /**
  * Created by Xavier Serrano on 16/07/2016.
  */
-public class SettingsController implements IBaseController {
+public class SettingsController implements IAbstractController {
     private ISettingsView ctx;
     private ISettingsFragmentView fctx;
     private UserResource user;
@@ -40,17 +40,14 @@ public class SettingsController implements IBaseController {
 
     }
 
+
     public void signout() {
         ctx.showConfirmSignOutDialog(new SignOutDialogEvent());
-
     }
 
     private class SignOutDialogEvent implements ISuccessHandler {
-
-
         @Override
         public void onSuccess() {
-
             user.signOut(new SignOutServiceHandler());
         }
     }

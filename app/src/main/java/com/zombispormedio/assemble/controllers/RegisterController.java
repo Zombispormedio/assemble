@@ -11,14 +11,13 @@ import com.zombispormedio.assemble.views.IRegisterView;
 /**
  * Created by Xavier Serrano on 09/07/2016.
  */
-public class RegisterController implements IBaseController {
+public class RegisterController implements IAbstractController {
 
     private IRegisterView ctx;
     private UserResource user;
 
     public RegisterController(IRegisterView ctx) {
         this.ctx = ctx;
-
         user= ResourceFactory.createUser();
     }
 
@@ -49,11 +48,7 @@ public class RegisterController implements IBaseController {
 
             }else{
                 user.signin(email, pass, new RegisterServiceHandler());
-
-
             }
-
-
         }
     }
 
@@ -123,6 +118,5 @@ public class RegisterController implements IBaseController {
     public void onStop() {
 
     }
-
 
 }

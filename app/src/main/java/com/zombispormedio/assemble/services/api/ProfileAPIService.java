@@ -1,13 +1,20 @@
 package com.zombispormedio.assemble.services.api;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
+import com.zombispormedio.assemble.rest.FileBody;
 import com.zombispormedio.assemble.rest.JsonBinder;
+import com.zombispormedio.assemble.rest.Result;
+import com.zombispormedio.assemble.rest.responses.DefaultResponse;
 import com.zombispormedio.assemble.rest.responses.ProfileResponse;
 import com.zombispormedio.assemble.services.IProfileService;
 
+import android.support.v7.widget.DefaultItemAnimator;
+
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -41,5 +48,27 @@ public class ProfileAPIService implements IProfileService {
                     }
                 })
                 .get();
+    }
+
+    @Override
+    public void changeAvatar(File file, final IServiceHandler<Result, Error> handler) {
+        api.RestWithAuth("/profile/avatar")
+                .handler(new IPromiseHandler() {
+                    @Override
+                    public void onSuccess(String... args) {
+                        try {
+                            DefaultResponse res= JsonBinder.toDefaultResponse(args[0]);
+                            if(res.success){
+                                handler.onSuccess(res.result);
+                            }else{
+                                handler.onError(res.error);
+                            }
+                        } catch (IOException e) {
+                            handler.onError(new Error(e.getMessage()));
+                        }
+
+                    }
+                })
+                .patch(new FileBody(file, "image/*", "avatar", file.getName()));
     }
 }

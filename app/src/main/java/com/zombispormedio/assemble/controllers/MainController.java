@@ -12,9 +12,7 @@ import com.zombispormedio.assemble.views.IMainView;
 /**
  * Created by Xavier Serrano on 08/07/2016.
  */
-public class MainController implements IBaseController {
-
-
+public class MainController implements IAbstractController {
 
     private IMainView ctx;
     private UserResource user;
@@ -22,7 +20,6 @@ public class MainController implements IBaseController {
     public MainController(IMainView ctx) {
         this.ctx=ctx;
         user= ResourceFactory.createUser();
-
     }
 
     public void checkAccess() {
@@ -46,11 +43,8 @@ public class MainController implements IBaseController {
                     ctx.goHome();
                 }
             });
-
-
         }
     }
-
 
     @Override
     public void onDestroy() {
@@ -66,4 +60,5 @@ public class MainController implements IBaseController {
     public void onStop() {
 
     }
+
 }

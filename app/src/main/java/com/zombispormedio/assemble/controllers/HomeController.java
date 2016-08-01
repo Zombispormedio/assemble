@@ -11,11 +11,14 @@ import com.zombispormedio.assemble.views.IHomeView;
 /**
  * Created by Xavier Serrano on 10/07/2016.
  */
-public class HomeController implements IBaseController {
+public class HomeController implements IAbstractController {
 
     private IHomeView ctx;
+
     private UserResource userResource;
+
     private ProfileHandler profileHandler;
+
     private CurrentUser user;
 
 
@@ -43,7 +46,7 @@ public class HomeController implements IBaseController {
                 title = profile.email;
             }
         }
-        if(ctx!=null){
+        if (ctx != null) {
             ctx.setDrawerTitle(title);
         }
     }
@@ -63,7 +66,6 @@ public class HomeController implements IBaseController {
 
     }
 
-
     @Override
     public void onStop() {
 
@@ -71,19 +73,11 @@ public class HomeController implements IBaseController {
 
 
     public void onProfileMenuItemClick() {
-
         ctx.goToProfile();
     }
 
-    public void onRestart() {
-
-    }
-
-    public void onResume() {
-    }
-
-
     private class ProfileHandler implements IServiceHandler<UserProfile, Error> {
+
         @Override
         public void onError(Error error) {
 
@@ -95,4 +89,5 @@ public class HomeController implements IBaseController {
             DrawerTitle();
         }
     }
+
 }

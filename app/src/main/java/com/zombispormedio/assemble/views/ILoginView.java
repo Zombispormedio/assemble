@@ -25,7 +25,6 @@ public interface ILoginView extends IBaseView  {
 
     void showEmptyPassword();
 
-
     void showSuccessfulLogin();
 
 }

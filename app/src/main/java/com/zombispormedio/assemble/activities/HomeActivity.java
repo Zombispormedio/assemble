@@ -141,37 +141,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         moveTaskToBack(true);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        ctrl.onStart();
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        ctrl.onStop();
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ctrl.onDestroy();
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        ctrl.onRestart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        ctrl.onResume();
-    }
 
     @Override
     public void goToLogin() {

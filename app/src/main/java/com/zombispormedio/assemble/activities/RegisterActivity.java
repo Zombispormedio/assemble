@@ -82,7 +82,6 @@ public class RegisterActivity extends BaseActivity implements IRegisterView{
 
     @Override
     public void showNotEqualsBothPassword() {
-
         AndroidUtils.showAlert(this,   R.string.pass_equals);
     }
 
@@ -95,7 +94,6 @@ public class RegisterActivity extends BaseActivity implements IRegisterView{
     public void showUnknowError() {
         AndroidUtils.showAlert(this,   R.string.unknow_error);
     }
-
 
     @Override
     public void showProgressBar() {

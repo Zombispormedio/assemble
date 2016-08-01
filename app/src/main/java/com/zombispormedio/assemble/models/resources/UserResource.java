@@ -7,8 +7,9 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.services.IAuthService;
-import com.zombispormedio.assemble.services.IPersistenceService;
+import com.zombispormedio.assemble.services.IProfileService;
 
+import java.io.File;
 
 
 /**
@@ -17,9 +18,9 @@ import com.zombispormedio.assemble.services.IPersistenceService;
 public class UserResource {
 
     private IAuthService auth;
-    private IPersistenceService<UserProfile> persistence;
+    private IProfileService persistence;
 
-    public UserResource(IAuthService auth, IPersistenceService<UserProfile> persistence) {
+    public UserResource(IAuthService auth, IProfileService persistence) {
         this.auth=auth;
         this.persistence=persistence;
     }
@@ -50,6 +51,9 @@ public class UserResource {
         persistence.retrieve(handler);
     }
 
+    public void changeAvatar(String path, final IServiceHandler<Result, Error> handler ){
+        persistence.changeAvatar(new File(path), handler);
+    }
 
 
 

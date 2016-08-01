@@ -11,19 +11,14 @@ import com.zombispormedio.assemble.views.ILoginView;
 /**
  * Created by Xavier Serrano on 09/07/2016.
  */
-public class LoginController implements IBaseController {
+public class LoginController implements IAbstractController {
 
     private ILoginView ctx;
     private UserResource user;
 
-
-
     public LoginController(ILoginView ctx) {
         this.ctx = ctx;
-
         user= ResourceFactory.createUser();
-
-
     }
 
     public void onClickLoginButton() {
@@ -41,13 +36,9 @@ public class LoginController implements IBaseController {
                     ctx.showEmptyPassword();
                 }
             }
-
         }else{
             user.login(email, pass, new LoginServiceHandler());
-
         }
-
-
     }
 
     public class LoginServiceHandler implements IServiceHandler<Result, Error> {
@@ -81,8 +72,6 @@ public class LoginController implements IBaseController {
     public void onClickRegisterLink() {
         ctx.goToRegister();
     }
-
-
 
     @Override
     public void onDestroy() {

@@ -109,17 +109,6 @@ public class LoginActivity extends BaseActivity  implements ILoginView{
 
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        ctrl.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-       ctrl.onStop();
-    }
 
     @Override
     protected void onDestroy() {

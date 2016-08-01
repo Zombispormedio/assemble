@@ -20,6 +20,7 @@ import com.squareup.picasso.Picasso;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
+import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.rest.FileBody;
 import com.zombispormedio.assemble.rest.Request;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
@@ -29,7 +30,7 @@ import com.zombispormedio.assemble.views.IProfileView;
 import java.io.File;
 
 
-public class ProfileActivity extends BaseActivity implements IProfileView{
+public class ProfileActivity extends BaseActivity implements IProfileView {
 
 
     private ExternalNavigationManager externalNavigationManager;
@@ -37,7 +38,9 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
     private ProfileController ctrl;
 
     private ImageView imageProfile;
+
     private FloatingActionButton imageFab;
+
     private ProgressBar imageProgressBar;
 
     @Override
@@ -47,19 +50,18 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
         Toolbar bar = (Toolbar) findViewById(R.id.profile_bar);
         setSupportActionBar(bar);
 
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
-        ctrl=new ProfileController(this);
-        externalNavigationManager= new ExternalNavigationManager(this);
-
+        ctrl = new ProfileController(this);
+        externalNavigationManager = new ExternalNavigationManager(this);
 
         imageFab = (FloatingActionButton) findViewById(R.id.image_upload_button);
         imageProfile = (ImageView) findViewById(R.id.imageProfile);
         imageProgressBar = (ProgressBar) findViewById(R.id.progress_image);
 
-        imageFab.setOnClickListener(new View.OnClickListener(){
+        imageFab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -69,22 +71,21 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
         });
 
 
-
     }
 
-    public void hideImageForm(){
+    public void hideImageForm() {
         imageFab.setVisibility(View.GONE);
     }
 
-    public void showImageForm(){
+    public void showImageForm() {
         imageFab.setVisibility(View.VISIBLE);
     }
 
-    public void hideProgressImage(){
+    public void hideProgressImage() {
         imageProgressBar.setVisibility(View.GONE);
     }
 
-    public void showProgressImage(){
+    public void showProgressImage() {
         imageProgressBar.setVisibility(View.VISIBLE);
     }
 
@@ -101,7 +102,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
     }
 
     @Override
-    public void setProfileImage(String url, final IPromiseHandler handler) {
+    public void setProfileImage(String url, final ISuccessHandler handler) {
         Picasso.with(this)
                 .load(url)
                 .transform(new ImageUtils.CircleTransform())
@@ -120,8 +121,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
     }
 
 
-
-    public void loadDefaultImage( final IPromiseHandler handler) {
+    public void loadDefaultImage(final ISuccessHandler handler) {
         Picasso.with(this)
                 .load(R.drawable.profile_image_square)
                 .transform(new ImageUtils.CircleTransform())
@@ -139,16 +139,14 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
     }
 
 
-
-
-    public void openImageBottomSheet(){
+    public void openImageBottomSheet() {
         new BottomSheet.Builder(this, R.style.BottomSheet_Dialog)
                 .title(R.string.image_profile)
                 .sheet(R.menu.menu_bottom_sheet)
                 .listener(new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        switch(which){
+                        switch (which) {
                             case R.id.gallery:
                                 externalNavigationManager.dispatchGalleryToSelectImage(R.string.select_picture);
                                 break;
@@ -163,45 +161,28 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
     }
 
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-      if(resultCode ==RESULT_OK){
-          int type=ExternalNavigationManager.getType(requestCode);
-          switch (type){
+        if (resultCode == RESULT_OK) {
+            int type = ExternalNavigationManager.getType(requestCode);
+            switch (type) {
 
-              case ExternalNavigationManager.REQUEST_CODE.GALLERY:{
-                  Uri uri = externalNavigationManager.resolveGalleryPath(requestCode, data);
-                  String path=externalNavigationManager.getPath(uri);
+                case ExternalNavigationManager.REQUEST_CODE.GALLERY: {
+                    Uri uri = externalNavigationManager.resolveGalleryPath(requestCode, data);
+                    String path = externalNavigationManager.getPath(uri);
+                    ctrl.uploadAvatar(path);
+                    break;
+                }
 
-                  new Request.Builder()
-                          .url("https://assemble-api.herokuapp.com/profile/avatar")
-                          .headers("Authorization", getAuthToken())
-                          .handler(new IPromiseHandler() {
-                              @Override
-                              public void onSuccess(String... args) {
-                                  Logger.d(args[0]);
-                              }
-                          })
-                          .patch(new FileBody(new File(path), "image/*", "avatar", "avatar.png"));
-
-                  break;
-              }
-
-              case ExternalNavigationManager.REQUEST_CODE.CAMERA:{
-                 Uri uri = externalNavigationManager.resolveCameraPath(data);
-                 String path=externalNavigationManager.getRealPathFromCameraUri(uri);
-                  break;
-              }
-
-
-          }
-
-
-      }
+                case ExternalNavigationManager.REQUEST_CODE.CAMERA: {
+                    Uri uri = externalNavigationManager.resolveCameraPath(data);
+                    String path = externalNavigationManager.getRealPathFromCameraUri(uri);
+                    ctrl.uploadAvatar(path);
+                    break;
+                }
+            }
+        }
     }
-
 
 
 }

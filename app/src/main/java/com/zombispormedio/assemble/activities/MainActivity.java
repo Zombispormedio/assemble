@@ -115,29 +115,11 @@ public class MainActivity extends BaseActivity implements IMainView {
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        ctrl.onStart();
-
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-       ctrl.onStop();
-
-    }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ctrl.onDestroy();
-
     }
-
-
-
-
 
 }
