@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.utils.StringUtils;
 
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -19,6 +20,7 @@ public class Request {
     private String url;
     private HashMap<String, String> headers;
     private String body;
+    private FileBody file;
 
     private IPromiseHandler handler;
 
@@ -27,6 +29,7 @@ public class Request {
         this.method = method;
         headers=null;
         body=null;
+        file=null;
     }
 
     public METHOD getMethod() {
@@ -61,6 +64,14 @@ public class Request {
         this.body = body;
     }
 
+    public FileBody getFile() {
+        return file;
+    }
+
+    public void setFile(FileBody file) {
+        this.file = file;
+    }
+
     public IPromiseHandler getHandler() {
         return handler;
     }
@@ -69,6 +80,7 @@ public class Request {
         new AsyncRequest().execute(this);
     }
 
+
     public static class Builder{
         private String url;
         private METHOD method;
@@ -76,6 +88,7 @@ public class Request {
         private HashMap<String, String> headersMap;
         private IPromiseHandler handler;
         private String body;
+        private FileBody file;
 
         public Builder() {
             paramsMap= new HashMap<>();
@@ -115,6 +128,13 @@ public class Request {
             .start();
         }
 
+        public void post(FileBody file){
+            this.method=METHOD.POST;
+            this.file=file;
+            build()
+                    .start();
+        }
+
         public void patch(){
             this.method=METHOD.PATCH;
             build()
@@ -126,6 +146,13 @@ public class Request {
             this.body=body;
             build()
             .start();
+        }
+
+        public void patch(FileBody file){
+            this.method=METHOD.PATCH;
+            this.file=file;
+            build()
+                    .start();
         }
 
         public void put(){
@@ -140,6 +167,13 @@ public class Request {
             this.body=body;
             build()
             .start();
+        }
+
+        public void put(FileBody file){
+            this.method=METHOD.PUT;
+            this.file=file;
+            build()
+                    .start();
         }
 
         public void delete(){
@@ -184,6 +218,11 @@ public class Request {
 
         public Builder body(String body)  {
             this.body=body;
+            return this;
+        }
+
+        public Builder file(FileBody file)  {
+            this.file=file;
             return this;
         }
 
@@ -235,6 +274,9 @@ public class Request {
 
             if(handler!=null)
                 req.setHandler(handler);
+
+            if(file !=null)
+                req.setFile(file);
 
             return req;
         }

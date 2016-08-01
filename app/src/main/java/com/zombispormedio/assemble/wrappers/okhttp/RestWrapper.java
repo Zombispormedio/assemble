@@ -1,11 +1,14 @@
 package com.zombispormedio.assemble.wrappers.okhttp;
 
+import com.zombispormedio.assemble.rest.FileBody;
+
 import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -66,6 +69,22 @@ public class RestWrapper {
         return res.body().string();
     }
 
+    public String post(FileBody file) throws IOException, JSONException {
+        MediaType mediaType = MediaType.parse(file.getMediaType());
+        RequestBody reqBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart(file.getKey(), file.getFilename(),
+                        RequestBody.create(mediaType, file.getFile()))
+                .build();
+
+        Request req=builder.post(reqBody)
+                .build();
+
+        okhttp3.Response res= client.newCall(req).execute();
+
+        return res.body().string();
+    }
+
     public String put(String obj) throws IOException, JSONException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, obj);
@@ -79,6 +98,22 @@ public class RestWrapper {
         return res.body().string();
     }
 
+    public String put(FileBody file) throws IOException, JSONException {
+        MediaType mediaType = MediaType.parse(file.getMediaType());
+        RequestBody reqBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart(file.getKey(), file.getFilename(),
+                        RequestBody.create(mediaType, file.getFile()))
+                .build();
+
+        Request req=builder.put(reqBody)
+                .build();
+
+        okhttp3.Response res= client.newCall(req).execute();
+
+        return res.body().string();
+    }
+
     public String patch(String obj) throws IOException, JSONException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, obj);
@@ -88,7 +123,21 @@ public class RestWrapper {
 
         okhttp3.Response res= client.newCall(req).execute();
 
+        return res.body().string();
+    }
 
+    public String patch(FileBody file) throws IOException, JSONException {
+        MediaType mediaType = MediaType.parse(file.getMediaType());
+        RequestBody reqBody = new MultipartBody.Builder()
+                .setType(MultipartBody.FORM)
+                .addFormDataPart(file.getKey(), file.getFilename(),
+                        RequestBody.create(mediaType, file.getFile()))
+                .build();
+
+        Request req=builder.patch(reqBody)
+                .build();
+
+        okhttp3.Response res= client.newCall(req).execute();
 
         return res.body().string();
     }

@@ -42,14 +42,44 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
             case GET:result=rest.get();
                 break;
 
-            case POST: result= rest.post(req.getBody());
-                break;
+            case POST: {
+                String body = req.getBody();
 
-            case PUT: result= rest.put(req.getBody());
-                break;
+                if (body != null) {
+                    result = rest.post(req.getBody());
+                } else {
+                    FileBody file = req.getFile();
 
-            case PATCH: result=rest.patch(req.getBody());
+                    result = rest.post(file);
+                }
+
                 break;
+            }
+
+            case PUT: {
+                String body = req.getBody();
+
+                if (body != null) {
+                    result = rest.put(req.getBody());
+                } else {
+                    FileBody file = req.getFile();
+
+                    result = rest.put(file);
+                }
+                break;
+            }
+
+            case PATCH: {
+                String body=req.getBody();
+
+                if(body!=null){
+                    result= rest.patch(req.getBody());
+                }else{
+                    FileBody file=req.getFile();
+                    result=rest.patch(file);
+                }
+                break;
+            }
 
             case DELETE: result=rest.delete();
                 break;

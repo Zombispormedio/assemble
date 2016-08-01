@@ -1,14 +1,11 @@
 package com.zombispormedio.assemble.activities;
 
-import android.content.Context;
-import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
+
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
+
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -16,22 +13,27 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.cocosw.bottomsheet.BottomSheet;
+
 import com.orhanobut.logger.Logger;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
+import com.zombispormedio.assemble.rest.FileBody;
+import com.zombispormedio.assemble.rest.Request;
+import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.views.IProfileView;
 
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+
 
 public class ProfileActivity extends BaseActivity implements IProfileView{
 
-    public static final String IMAGE_TYPE = "image/*";
-    private static final int SELECT_SINGLE_PICTURE = 101;
-    private static final int REQUEST_TAKE_PHOTO=102;
+
+    private ExternalNavigationManager externalNavigationManager;
+
     private ProfileController ctrl;
 
     private ImageView imageProfile;
@@ -50,6 +52,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
         }
 
         ctrl=new ProfileController(this);
+        externalNavigationManager= new ExternalNavigationManager(this);
 
 
         imageFab = (FloatingActionButton) findViewById(R.id.image_upload_button);
@@ -64,6 +67,8 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
 
             }
         });
+
+
 
     }
 
@@ -145,10 +150,10 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
                     public void onClick(DialogInterface dialog, int which) {
                         switch(which){
                             case R.id.gallery:
-                                dispatchGalleryToSelectImage();
+                                externalNavigationManager.dispatchGalleryToSelectImage(R.string.select_picture);
                                 break;
                             case R.id.camera:
-                                dispatchTakePicture();
+                                externalNavigationManager.dispatchTakePicture();
                                 break;
                         }
 
@@ -157,40 +162,36 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
 
     }
 
-    private void dispatchGalleryToSelectImage(){
-        String chooserTitle=getString(R.string.select_picture);
-        Intent intent= new Intent();
-        intent.setType(IMAGE_TYPE);
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, chooserTitle), SELECT_SINGLE_PICTURE);
-    }
 
-    private void dispatchTakePicture(){
-        Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-        if(intent.resolveActivity(getPackageManager())!=null){
-            startActivityForResult(intent, REQUEST_TAKE_PHOTO);
-        }
-
-    }
 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
       if(resultCode ==RESULT_OK){
-          switch (requestCode){
+          int type=ExternalNavigationManager.getType(requestCode);
+          switch (type){
 
-              case SELECT_SINGLE_PICTURE:{
-                  Uri uri = data.getData();
-                  Logger.d(uri);
+              case ExternalNavigationManager.REQUEST_CODE.GALLERY:{
+                  Uri uri = externalNavigationManager.resolveGalleryPath(requestCode, data);
+                  String path=externalNavigationManager.getPath(uri);
+
+                  new Request.Builder()
+                          .url("https://assemble-api.herokuapp.com/profile/avatar")
+                          .headers("Authorization", getAuthToken())
+                          .handler(new IPromiseHandler() {
+                              @Override
+                              public void onSuccess(String... args) {
+                                  Logger.d(args[0]);
+                              }
+                          })
+                          .patch(new FileBody(new File(path), "image/*", "avatar", "avatar.png"));
+
                   break;
               }
 
-              case REQUEST_TAKE_PHOTO:{
-                  Bundle extras = data.getExtras();
-                  Bitmap imageBitmap = (Bitmap) extras.get("data");
-                  Uri tempUri=getImageURI(getApplicationContext(), imageBitmap);
-                 Logger.d(getRealPathFromCameraUri(tempUri));
+              case ExternalNavigationManager.REQUEST_CODE.CAMERA:{
+                 Uri uri = externalNavigationManager.resolveCameraPath(data);
+                 String path=externalNavigationManager.getRealPathFromCameraUri(uri);
                   break;
               }
 
@@ -201,23 +202,6 @@ public class ProfileActivity extends BaseActivity implements IProfileView{
       }
     }
 
-    private Uri getImageURI(Context ctx, Bitmap img){
-        ByteArrayOutputStream bytes=new ByteArrayOutputStream();
-        img.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
-        String path = MediaStore.Images.Media.insertImage(ctx.getContentResolver(), img, "Title", null);
-        return Uri.parse(path);
-    }
 
-    private String getRealPathFromCameraUri(Uri uri){
-        String[] fields = {MediaStore.Images.Media.DATA, MediaStore.Images.ImageColumns.ORIENTATION};
-        Cursor cursor=getContentResolver().query(uri, fields, null, null, null);
-
-        if (cursor == null)
-            return "";
-
-        cursor.moveToFirst();
-        int idx=cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-        return cursor.getString(idx);
-    }
 
 }
