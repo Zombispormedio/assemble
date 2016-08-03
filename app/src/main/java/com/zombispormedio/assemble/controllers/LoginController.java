@@ -22,21 +22,16 @@ public class LoginController extends AbstractController {
     }
 
     public void onClickLoginButton() {
-        whileLogin();
 
-        String email=ctx.getEmail();
-        String pass=ctx.getPassword();
+        if(!ctx.validate()){
+            ctx.showFailValidation();
 
-        if(email.isEmpty() || pass.isEmpty()){
-            afterTryLogin();
-            if(email.isEmpty()){
-                ctx.showEmptyEmail();
-            }else{
-                if(pass.isEmpty()){
-                    ctx.showEmptyPassword();
-                }
-            }
         }else{
+            String email=ctx.getEmail();
+            String pass=ctx.getPassword();
+
+            whileLogin();
+
             user.login(email, pass, new LoginServiceHandler());
         }
     }

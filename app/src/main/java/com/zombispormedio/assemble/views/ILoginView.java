@@ -21,10 +21,9 @@ public interface ILoginView extends IBaseView  {
 
     String getPassword();
 
-    void showEmptyEmail();
-
-    void showEmptyPassword();
-
     void showSuccessfulLogin();
 
+    boolean validate();
+
+    void showFailValidation();
 }

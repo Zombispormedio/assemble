@@ -45,5 +45,9 @@
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
     <string name="select_picture">Select Picture</string>
+    <string name="invalid_email">Enter a valid email address</string>
+    <string name="fail_login"> Fail Login!</string>
+    <string name="invalid_password">Password between 6 and 50 alphanumeric characters</string>
+    <string name="start_login">Starting login...</string>
 
 </resources>

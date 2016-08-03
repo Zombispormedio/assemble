@@ -5,5 +5,5 @@
     <dimen name="login_title">72dp</dimen>
     <dimen name="max_logo">100sp</dimen>
     <dimen name="min_logo">50sp</dimen>
-    <dimen name="button_text_size">25sp</dimen>
+    <dimen name="button_text_size">20sp</dimen>
 </resources>

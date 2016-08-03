@@ -20,8 +20,6 @@
     <string name="icon_user">Icono de usuario</string>
 
 
-
-
     <string name="settings_title">Configuración</string>
     <string name="signout">Cerrar Sesión</string>
     <string name="open_drawer_desc">Drawer Opened</string>
@@ -38,8 +36,6 @@
     <string name="help_title">Ayuda</string>
 
 
-
-
     <string name="account_title">Cuenta</string>
     <string name="signout_dialog_msg">¿Quieres cerrar sesión?</string>
     <string name="yes_title">Sí</string>
@@ -51,5 +47,8 @@
     <string name="gallery">Gallería</string>
     <string name="camera">Cámara</string>
     <string name="select_picture">Selecciona una imagen</string>
+
+    <string name="invalid_email">Introducir un correo electrónico válido</string>
+    <string name="fail_login"> Inicio de sesión fallido</string>
 
 </resources>
