@@ -20,7 +20,7 @@ public class LoginActivity extends BaseActivity  implements ILoginView{
     private EditText emailInput;
     private EditText passwordInput;
     private Button loginButton;
-    private ProgressBar progressBar;
+   // private ProgressBar progressBar;
     private TextView linkToRegister;
 
     @Override
@@ -33,7 +33,7 @@ public class LoginActivity extends BaseActivity  implements ILoginView{
         emailInput=(EditText) findViewById(R.id.email_input);
         passwordInput = (EditText) findViewById(R.id.pass_input);
         loginButton = (Button) findViewById(R.id.login_button);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+       // progressBar = (ProgressBar) findViewById(R.id.progressBar);
         linkToRegister=(TextView) findViewById(R.id.register_link);
 
         loginButton.setOnClickListener(new View.OnClickListener(){
@@ -54,11 +54,11 @@ public class LoginActivity extends BaseActivity  implements ILoginView{
     }
 
     public void showProgressBar(){
-        progressBar.setVisibility(View.VISIBLE);
+        //progressBar.setVisibility(View.VISIBLE);
     }
 
     public void hideProgressBar(){
-        progressBar.setVisibility(View.GONE);
+        ///progressBar.setVisibility(View.GONE);
     }
 
     public void showForm(){

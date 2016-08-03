@@ -30,7 +30,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="210dp">
 
             <ImageView
                 android:id="@+id/imageProfile"
@@ -39,6 +39,7 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_marginTop="33dp"
+                    android:src="@drawable/profile_image_square"
                 android:contentDescription="@string/profile_image_desc"
                 android:cropToPadding="false"
                 android:longClickable="true"
@@ -64,7 +65,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/imageProfile"
-                android:layout_centerHorizontal="true" />
+                android:layout_centerHorizontal="true"
+                    android:visibility="gone"/>
 
         </RelativeLayout>
     </FrameLayout>

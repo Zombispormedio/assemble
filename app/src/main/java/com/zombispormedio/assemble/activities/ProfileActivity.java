@@ -14,20 +14,16 @@ import android.widget.ProgressBar;
 
 import com.cocosw.bottomsheet.BottomSheet;
 
-import com.orhanobut.logger.Logger;
+
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
-import com.zombispormedio.assemble.handlers.IPromiseHandler;
+
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
-import com.zombispormedio.assemble.rest.FileBody;
-import com.zombispormedio.assemble.rest.Request;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.views.IProfileView;
-
-import java.io.File;
 
 
 public class ProfileActivity extends BaseActivity implements IProfileView {
@@ -89,12 +85,6 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     public void showProgressImage() {
         imageProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        ctrl.onStart();
     }
 
     @Override

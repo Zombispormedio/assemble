@@ -16,7 +16,7 @@
     <string name="rep_pass_empty">Repeat password is empty</string>
     <string name="pass_equals">Repeat password is not equal.</string>
     <string name="success_signing_up">Sign up successfully</string>
-    <string name="icon_user">icon userProfile</string>
+    <string name="icon_user">Profile Icon</string>
 
 
 
