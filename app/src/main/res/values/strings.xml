@@ -49,5 +49,11 @@
     <string name="fail_login"> Fail Login!</string>
     <string name="invalid_password">Password between 6 and 50 alphanumeric characters</string>
     <string name="start_login">Starting login...</string>
+    <string name="update_profile_title">Update Profile</string>
+    <string name="username_example">Zombispormedio</string>
+    <string name="location_example">Elche</string>
+    <string name="biografy_title">Bio</string>
+    <string name="lorem_impsum">Lorem ipsum</string>
+    <string name="birth_date_example">11/09/1994</string>
 
 </resources>

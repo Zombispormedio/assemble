@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
+import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IProfileView;
 
@@ -28,6 +29,11 @@ public class ProfileController extends AbstractController {
         this.ctx = ctx;
         user = CurrentUser.getInstance();
         userResource = ResourceFactory.createUser();
+
+    }
+
+    @Override
+    public void onCreate() {
         beforeLoadingImage();
         changeProfileImage(new ISuccessHandler() {
             @Override
@@ -35,6 +41,9 @@ public class ProfileController extends AbstractController {
                 afterLoadingImage();
             }
         });
+
+        fillProfile();
+
     }
 
     @Override
@@ -91,5 +100,36 @@ public class ProfileController extends AbstractController {
                 });
             }
         });
+    }
+
+
+    private void fillProfile(){
+        if(ctx!=null){
+            UserProfile profile = user.getProfile();
+
+            if(Utils.presenceOf(profile.username)){
+                ctx.setUsername(StringUtils.capitalize(profile.username));
+            }else{
+                ctx.setUsername("");
+            }
+
+            if(Utils.presenceOf(profile.location)){
+                ctx.setLocation(profile.location);
+            }else{
+                ctx.setLocation("");
+            }
+
+            if(Utils.presenceOf(profile.bio)){
+                ctx.setBio(profile.bio);
+            }else{
+                ctx.setBio("");
+            }
+
+            if(Utils.presenceOf(profile.birth_date)){
+                ctx.setBirthDate(profile.birth_date);
+            }else{
+                ctx.setBirthDate("");
+            }
+        }
     }
 }

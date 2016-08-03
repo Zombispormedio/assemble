@@ -11,4 +11,6 @@ public interface IAbstractController {
 
     void onStop();
 
+    void onCreate();
+
 }

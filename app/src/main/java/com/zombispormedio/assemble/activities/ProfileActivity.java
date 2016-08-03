@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.cocosw.bottomsheet.BottomSheet;
 
@@ -28,16 +30,21 @@ import com.zombispormedio.assemble.views.IProfileView;
 
 public class ProfileActivity extends BaseActivity implements IProfileView {
 
-
     private ExternalNavigationManager externalNavigationManager;
 
     private ProfileController ctrl;
 
-    private ImageView imageProfile;
+    private ImageView _imageProfile;
 
-    private FloatingActionButton imageFab;
+    private FloatingActionButton _imageFab;
 
-    private ProgressBar imageProgressBar;
+    private ProgressBar _imageProgressBar;
+
+    private TextView _usernameText;
+    private TextView _locationText;
+    private TextView _bioText;
+    private TextView _birthDateText;
+    private Button _updateProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +60,19 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
         externalNavigationManager = new ExternalNavigationManager(this);
 
-        imageFab = (FloatingActionButton) findViewById(R.id.image_upload_button);
-        imageProfile = (ImageView) findViewById(R.id.imageProfile);
-        imageProgressBar = (ProgressBar) findViewById(R.id.progress_image);
+        _imageFab = (FloatingActionButton) findViewById(R.id.image_upload_button);
+        _imageProfile = (ImageView) findViewById(R.id.imageProfile);
+        _imageProgressBar = (ProgressBar) findViewById(R.id.progress_image);
+
+        _usernameText = (TextView) findViewById(R.id.profile_username_text);
+        _locationText = (TextView) findViewById(R.id.profile_location_text);
+        _bioText = (TextView) findViewById(R.id.profile_bio_text);
+        _birthDateText = (TextView) findViewById(R.id.profile_bith_date_text);
+        _updateProfileButton = (Button) findViewById(R.id.update_profile_button);
 
         ctrl = new ProfileController(this);
 
-        imageFab.setOnClickListener(new View.OnClickListener() {
+        _imageFab.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -68,23 +81,43 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
             }
         });
 
-
+        ctrl.onCreate();
     }
 
     public void hideImageForm() {
-        imageFab.setVisibility(View.GONE);
+        _imageFab.setVisibility(View.GONE);
     }
 
     public void showImageForm() {
-        imageFab.setVisibility(View.VISIBLE);
+        _imageFab.setVisibility(View.VISIBLE);
     }
 
     public void hideProgressImage() {
-        imageProgressBar.setVisibility(View.GONE);
+        _imageProgressBar.setVisibility(View.GONE);
     }
 
     public void showProgressImage() {
-        imageProgressBar.setVisibility(View.VISIBLE);
+        _imageProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void setUsername(String name) {
+        _usernameText.setText(name);
+    }
+
+    @Override
+    public void setLocation(String location) {
+        _locationText.setText(location);
+    }
+
+    @Override
+    public void setBio(String bio) {
+        _bioText.setText(bio);
+    }
+
+    @Override
+    public void setBirthDate(String birth) {
+       // _birthDateText.setText(birth);
     }
 
     @Override
@@ -98,7 +131,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
         Picasso.with(this)
                 .load(url)
                 .transform(new ImageUtils.CircleTransform())
-                .into(imageProfile, new Callback() {
+                .into(_imageProfile, new Callback() {
                     @Override
                     public void onSuccess() {
                         handler.onSuccess();
@@ -117,7 +150,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
         Picasso.with(this)
                 .load(R.drawable.profile_image_square)
                 .transform(new ImageUtils.CircleTransform())
-                .into(imageProfile, new Callback() {
+                .into(_imageProfile, new Callback() {
                     @Override
                     public void onSuccess() {
                         handler.onSuccess();

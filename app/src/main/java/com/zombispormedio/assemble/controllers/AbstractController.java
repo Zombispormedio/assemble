@@ -19,4 +19,9 @@ public abstract class AbstractController implements IAbstractController {
     public void onStop() {
 
     }
+
+    @Override
+    public void onCreate() {
+
+    }
 }
