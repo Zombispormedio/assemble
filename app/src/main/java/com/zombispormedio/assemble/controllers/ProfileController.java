@@ -14,6 +14,12 @@ import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IProfileView;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 /**
  * Created by Xavier Serrano on 10/07/2016.
  */
@@ -126,10 +132,25 @@ public class ProfileController extends AbstractController {
             }
 
             if(Utils.presenceOf(profile.birth_date)){
-                ctx.setBirthDate(profile.birth_date);
+                try {
+                    DateFormat inFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+                    Date birth=inFormat.parse(profile.birth_date);
+
+                    DateFormat outFormat=new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+
+                    ctx.setBirthDate(outFormat.format(birth));
+                } catch (Exception e) {
+                    Logger.d(e.getMessage());
+                    ctx.setBirthDate("");
+                }
+
             }else{
                 ctx.setBirthDate("");
             }
         }
+    }
+
+    public void updateProfile() {
+        ctx.goToUpdateProfile();
     }
 }

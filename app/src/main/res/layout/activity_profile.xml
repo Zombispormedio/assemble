@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -28,121 +29,138 @@
                 />
     </android.support.design.widget.AppBarLayout>
 
-    <RelativeLayout
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="198dp"
             android:background="@color/colorWhite"
             android:elevation="2dp"
+            android:orientation="horizontal"
             >
 
-        <ImageView
-                android:id="@+id/imageProfile"
+        <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="15sp"
-                android:layout_toStartOf="@+id/progress_image"
-                android:contentDescription="@string/profile_image_desc"
-                android:cropToPadding="false"
-                android:longClickable="true"
-                android:maxHeight="100sp"
-                android:maxWidth="100sp"
-                android:minHeight="100sp"
-                android:minWidth="100sp"
-                android:scaleType="center"
-                android:src="@drawable/profile_image_square"
-                />
+                android:layout_height="match_parent"
+                >
 
-        <android.support.design.widget.FloatingActionButton
-                android:id="@+id/image_upload_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/imageProfile"
-                android:layout_alignEnd="@+id/imageProfile"
-                android:clickable="true"
-                android:src="@drawable/camera"
-                app:layout_anchorGravity="bottom|right|end"
-                />
+            <ProgressBar
+                    android:id="@+id/progress_image"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
 
-        <ProgressBar
-                android:id="@+id/progress_image"
-                style="?android:attr/progressBarStyleLarge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:layout_below="@+id/profile_username_text"
-                />
+                    />
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/username_example"
-                android:id="@+id/profile_username_text"
+            <ImageView
+                    android:id="@+id/imageProfile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toEndOf="@+id/progress_image"
+                    android:contentDescription="@string/profile_image_desc"
+                    android:cropToPadding="false"
+                    android:longClickable="true"
+                    android:maxHeight="100sp"
+                    android:maxWidth="100sp"
+                    android:minHeight="100sp"
+                    android:minWidth="100sp"
+                    android:scaleType="center"
+                    android:src="@drawable/profile_image_square"
+                    />
 
-                android:layout_marginLeft="15sp"
-                android:layout_marginTop="37dp"
-                android:layout_alignTop="@+id/imageProfile"
-                android:layout_toEndOf="@+id/imageProfile"
-                />
+            <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/image_upload_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/imageProfile"
+                    android:layout_alignEnd="@+id/imageProfile"
+                    android:layout_marginLeft="0dp"
+                    android:clickable="true"
+                    android:src="@drawable/camera"
+                    app:layout_anchorGravity="bottom|right|end"
+                    />
+        </RelativeLayout>
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/location_example"
-                android:id="@+id/profile_location_text"
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
 
-                android:layout_centerVertical="true"
-                android:layout_alignStart="@+id/profile_username_text"
-                />
+            <TextView
+                    android:id="@+id/profile_username_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/profile_text_left"
+                    android:layout_marginTop="45sp"
+                    android:text="@string/username_example"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    />
 
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/birth_date_example"
-                android:id="@+id/profile_bith_date_text"
-                android:layout_above="@+id/image_upload_button"
-                android:layout_alignStart="@+id/profile_location_text"
-                />
+            <TextView
+                    android:id="@+id/profile_birth_date_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/profile_text_left"
+                    android:layout_marginTop="25sp"
+                    android:text="@string/birth_date_example"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    />
+
+            <TextView
+                    android:id="@+id/profile_location_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/profile_text_left"
+                    android:layout_marginTop="25sp"
+                    android:text="@string/location_example"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    />
+        </LinearLayout>
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
-    <RelativeLayout
+
+    <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="180dp"
             android:layout_marginTop="25sp"
             android:background="@color/colorWhite"
+            android:orientation="vertical"
             android:elevation="2dp"
             >
 
         <TextView
+                android:id="@+id/bio_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/lorem_impsum"
-                android:layout_alignParentTop="true"
-                android:layout_marginTop="40dp"
+
                 android:layout_marginLeft="15sp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentStart="true"
-                android:id="@+id/profile_bio_text"
+                android:layout_marginTop="15dp"
+                android:text="@string/biografy_title"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 />
 
         <TextView
+                android:id="@+id/profile_bio_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:layout_marginTop="15sp"
+                android:text="@string/lorem_impsum"
+                android:gravity="fill_vertical"
+                android:textAlignment="gravity"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="@string/biografy_title"
-                android:id="@+id/bio_title"
-                android:layout_marginLeft="15sp"
-                android:layout_marginTop="15dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
                 />
-    </RelativeLayout>
+
+
+    </LinearLayout>
+
     <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -153,15 +171,16 @@
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="155dp"
                 android:layout_height="wrap_content"
-                android:text="@string/update_profile_title"
-                android:layout_gravity="center"
-                android:background="@color/colorAccent"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
                 android:layout_marginBottom="33dp"
+                android:background="@color/colorAccent"
+                android:text="@string/update_profile_title"
                 />
 
     </RelativeLayout>
 
 
 </LinearLayout>
+

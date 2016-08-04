@@ -21,4 +21,6 @@ public interface IProfileView extends IBaseView {
     void setBio(String bio);
     void setBirthDate(String birth);
 
+    void goToUpdateProfile();
+
 }

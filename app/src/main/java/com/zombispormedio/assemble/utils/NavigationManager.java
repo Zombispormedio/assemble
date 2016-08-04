@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.activities.MainActivity;
 import com.zombispormedio.assemble.activities.ProfileActivity;
 import com.zombispormedio.assemble.activities.RegisterActivity;
 import com.zombispormedio.assemble.activities.SettingsActivity;
+import com.zombispormedio.assemble.activities.UpdateProfileActivity;
 
 /**
  * Created by Xavier Serrano on 25/06/2016.
@@ -52,6 +53,10 @@ public final class NavigationManager {
 
     public  static void Settings(Context ctx){
         goTo(ctx, SettingsActivity.class);
+    }
+
+    public  static void UpdateProfile(Context ctx){
+        goTo(ctx, UpdateProfileActivity.class);
     }
 
 

@@ -19,7 +19,6 @@
     <string name="icon_user">Profile Icon</string>
 
 
-
     <string name="settings_title">Settings</string>
     <string name="signout">Sign out</string>
     <string name="open_drawer_desc">Drawer Opened</string>
@@ -52,8 +51,9 @@
     <string name="update_profile_title">Update Profile</string>
     <string name="username_example">Zombispormedio</string>
     <string name="location_example">Elche</string>
-    <string name="biografy_title">Bio</string>
-    <string name="lorem_impsum">Lorem ipsum</string>
+    <string name="biografy_title">Biography</string>
     <string name="birth_date_example">11/09/1994</string>
+    <string name="born_at">Born at</string>
+    <string name="lorem_impsum">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</string>
 
 </resources>

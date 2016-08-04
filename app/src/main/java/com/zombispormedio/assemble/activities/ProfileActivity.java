@@ -25,6 +25,7 @@ import com.zombispormedio.assemble.controllers.ProfileController;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
+import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.IProfileView;
 
 
@@ -67,7 +68,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
         _usernameText = (TextView) findViewById(R.id.profile_username_text);
         _locationText = (TextView) findViewById(R.id.profile_location_text);
         _bioText = (TextView) findViewById(R.id.profile_bio_text);
-        _birthDateText = (TextView) findViewById(R.id.profile_bith_date_text);
+        _birthDateText = (TextView) findViewById(R.id.profile_birth_date_text);
         _updateProfileButton = (Button) findViewById(R.id.update_profile_button);
 
         ctrl = new ProfileController(this);
@@ -78,6 +79,13 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
             public void onClick(View view) {
                 openImageBottomSheet();
 
+            }
+        });
+
+        _updateProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ctrl.updateProfile();
             }
         });
 
@@ -117,7 +125,13 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     @Override
     public void setBirthDate(String birth) {
-       // _birthDateText.setText(birth);
+        String prefix=getString(R.string.born_at);
+        _birthDateText.setText(prefix+" "+birth);
+    }
+
+    @Override
+    public void goToUpdateProfile() {
+        NavigationManager.UpdateProfile(this);
     }
 
     @Override

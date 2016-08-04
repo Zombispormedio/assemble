@@ -47,8 +47,10 @@
     <string name="gallery">Gallería</string>
     <string name="camera">Cámara</string>
     <string name="select_picture">Selecciona una imagen</string>
-
+    <string name="update_profile_title">Editar Perfil</string>
     <string name="invalid_email">Introducir un correo electrónico válido</string>
     <string name="fail_login"> Inicio de sesión fallido</string>
+    <string name="born_at">Nacido el</string>
+    <string name="biografy_title">Biografía</string>
 
 </resources>
