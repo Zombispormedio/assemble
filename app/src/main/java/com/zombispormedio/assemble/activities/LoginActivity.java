@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.activities;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -20,9 +20,9 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     private LoginController ctrl;
 
-    private EditText _emailInput;
+    private AndroidUtils.InputLayoutHelper _emailInput;
 
-    private EditText _passwordInput;
+    private AndroidUtils.InputLayoutHelper _passwordInput;
 
     private Button _loginButton;
 
@@ -36,9 +36,10 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         setContentView(R.layout.activity_login);
 
         ctrl = new LoginController(this);
+        
+        _emailInput = new AndroidUtils.InputLayoutHelper((EditText) findViewById(R.id.email_input), (TextInputLayout)findViewById( R.id.email_input_layout));
+        _passwordInput = new AndroidUtils.InputLayoutHelper((EditText) findViewById(R.id.pass_input), (TextInputLayout)findViewById( R.id.pass_input_layout));
 
-        _emailInput = (EditText) findViewById(R.id.email_input);
-        _passwordInput = (EditText) findViewById(R.id.pass_input);
         _loginButton = (Button) findViewById(R.id.login_button);
         _progressBar = (ProgressBar) findViewById(R.id.progressBar);
         _linkToRegister = (TextView) findViewById(R.id.register_link);
@@ -69,27 +70,28 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     }
 
     public void showForm() {
-        _emailInput.setVisibility(View.VISIBLE);
-        _passwordInput.setVisibility(View.VISIBLE);
+        _emailInput.show();
+        _passwordInput.show();
         _loginButton.setVisibility(View.VISIBLE);
         _linkToRegister.setVisibility(View.VISIBLE);
     }
 
     public void hideForm() {
-        _emailInput.setVisibility(View.GONE);
-        _passwordInput.setVisibility(View.GONE);
+        _emailInput.hide();
+        _passwordInput.hide();
         _loginButton.setVisibility(View.GONE);
         _linkToRegister.setVisibility(View.GONE);
     }
 
     @Override
     public String getEmail() {
-        return _emailInput.getText().toString();
+        return _emailInput.getValue();
+
     }
 
     @Override
     public String getPassword() {
-        return _passwordInput.getText().toString();
+        return _passwordInput.getValue();
     }
 
 
