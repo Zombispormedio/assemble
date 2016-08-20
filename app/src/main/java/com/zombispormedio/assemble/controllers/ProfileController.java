@@ -87,12 +87,14 @@ public class ProfileController extends AbstractController {
 
     public void uploadAvatar(String path) {
         beforeLoadingImage();
+        ctx.hideImageProfile();
 
         userResource.changeAvatar(path, new IServiceHandler<UserProfile, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);
                 afterLoadingImage();
+                ctx.showImageProfile();
             }
 
             @Override
@@ -101,6 +103,7 @@ public class ProfileController extends AbstractController {
                 changeProfileImage(new ISuccessHandler() {
                     @Override
                     public void onSuccess() {
+                        ctx.showImageProfile();
                         afterLoadingImage();
                     }
                 });

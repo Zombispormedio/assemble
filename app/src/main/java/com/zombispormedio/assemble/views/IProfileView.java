@@ -16,6 +16,9 @@ public interface IProfileView extends IBaseView {
     void hideProgressImage();
     void showProgressImage();
 
+    void hideImageProfile();
+    void showImageProfile();
+
     void setUsername(String name);
     void setLocation(String location);
     void setBio(String bio);

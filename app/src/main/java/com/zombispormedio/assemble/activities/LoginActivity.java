@@ -36,7 +36,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         setContentView(R.layout.activity_login);
 
         ctrl = new LoginController(this);
-        
+
         _emailInput = new AndroidUtils.InputLayoutHelper((EditText) findViewById(R.id.email_input), (TextInputLayout)findViewById( R.id.email_input_layout));
         _passwordInput = new AndroidUtils.InputLayoutHelper((EditText) findViewById(R.id.pass_input), (TextInputLayout)findViewById( R.id.pass_input_layout));
 

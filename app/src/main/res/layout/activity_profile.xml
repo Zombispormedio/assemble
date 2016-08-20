@@ -42,14 +42,7 @@
                 android:layout_height="match_parent"
                 >
 
-            <ProgressBar
-                    android:id="@+id/progress_image"
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
 
-                    />
 
             <ImageView
                     android:id="@+id/imageProfile"
@@ -59,7 +52,7 @@
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_toEndOf="@+id/progress_image"
+
                     android:contentDescription="@string/profile_image_desc"
                     android:cropToPadding="false"
                     android:longClickable="true"
@@ -81,6 +74,18 @@
                     android:clickable="true"
                     android:src="@drawable/camera"
                     app:layout_anchorGravity="bottom|right|end"
+                    />
+            <ProgressBar
+                    android:id="@+id/progress_image"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+
+                    android:layout_alignTop="@+id/imageProfile"
+                    android:layout_alignEnd="@+id/image_upload_button"
+                    android:layout_alignBottom="@+id/imageProfile"
+                    android:layout_alignStart="@+id/imageProfile"
                     />
         </RelativeLayout>
 

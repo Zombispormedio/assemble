@@ -45,7 +45,6 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     private TextView _locationText;
     private TextView _bioText;
     private TextView _birthDateText;
-    private Button _updateProfileButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +68,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
         _locationText = (TextView) findViewById(R.id.profile_location_text);
         _bioText = (TextView) findViewById(R.id.profile_bio_text);
         _birthDateText = (TextView) findViewById(R.id.profile_birth_date_text);
-        _updateProfileButton = (Button) findViewById(R.id.update_profile_button);
+        Button _updateProfileButton = (Button) findViewById(R.id.update_profile_button);
 
         ctrl = new ProfileController(this);
 
@@ -93,7 +92,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     public void hideImageForm() {
-        _imageFab.setVisibility(View.GONE);
+        _imageFab.setVisibility(View.INVISIBLE);
     }
 
     public void showImageForm() {
@@ -101,11 +100,21 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     public void hideProgressImage() {
-        _imageProgressBar.setVisibility(View.GONE);
+        _imageProgressBar.setVisibility(View.INVISIBLE);
     }
 
     public void showProgressImage() {
         _imageProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideImageProfile() {
+        _imageProfile.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showImageProfile() {
+        _imageProfile.setVisibility(View.VISIBLE);
     }
 
     @Override
