@@ -19,8 +19,6 @@ public class Utils {
                 it_is=false;
             }
         }
-
-
         return it_is;
     }
 

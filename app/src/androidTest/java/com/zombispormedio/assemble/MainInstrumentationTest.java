@@ -3,13 +3,14 @@ package com.zombispormedio.assemble;
 
 import com.zombispormedio.assemble.activities.MainActivity;
 
-import android.app.Application;
-import android.test.ActivityInstrumentationTestCase2;
 
-/**
- * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
- */
-public class MainInstrumentationTest extends ActivityInstrumentationTestCase2<MainActivity> {
+import org.junit.runner.RunWith;
+
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
+@RunWith(AndroidJUnit4.class)
+public class MainInstrumentationTest extends ActivityTestRule<MainActivity> {
     public MainInstrumentationTest() {
         super(MainActivity.class);
     }
