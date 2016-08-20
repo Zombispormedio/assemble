@@ -125,8 +125,8 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     @Override
     public void setBirthDate(String birth) {
-        String prefix=getString(R.string.born_at);
-        _birthDateText.setText(prefix+" "+birth);
+        String birthDate=String.format(getString(R.string.born_at), birth);
+        _birthDateText.setText(birthDate);
     }
 
     @Override

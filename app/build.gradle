@@ -24,6 +24,11 @@ android {
             jvmArgs '-XX:MaxPermSize=256m'
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {

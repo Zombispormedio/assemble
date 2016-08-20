@@ -18,19 +18,6 @@ public class RestWrapperUnitTest {
     @Test
     public void check__user_isCorrect() throws Exception {
 
-        JSONWrapper<Auth> userAdapter= new JSONWrapper<>(Auth.class);
-        String json =new RestWrapper()
-                .url("https://assemble-api.herokuapp.com/login")
-                .post(userAdapter.toJSON(new Auth("pepe@gmail.com", "1255284")));
-
-
-
-
-        DefaultResponse blackjackHand = JsonBinder.toDefaultResponse(json);
-        System.out.println(blackjackHand.success);
-        Result result= blackjackHand.result;
-        System.out.println(result.token);
-        System.out.println(blackjackHand.error==null? null :blackjackHand.error.msg);
 
     }
 }

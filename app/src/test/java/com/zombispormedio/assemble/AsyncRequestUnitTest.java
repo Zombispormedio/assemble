@@ -16,26 +16,6 @@ public class AsyncRequestUnitTest {
 
     @Test
     public void get_isCorrect() throws Exception {
-        Request req=new Request.Builder()
-                .url("https://assemble-api.herokuapp.com")
-                .method(METHOD.GET)
-                .handler(new IPromiseHandler() {
-                    @Override
-                    public void onSuccess(String... args) {
-                        System.out.print(args[0]);
-
-                    }
-                })
-                .build();
-        Logger.d(req);
-
-        new AsyncRequest().execute(req);
-
-
-
-
-
-
 
     }
 }

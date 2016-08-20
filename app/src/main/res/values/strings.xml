@@ -53,7 +53,7 @@
     <string name="location_example">Elche</string>
     <string name="biografy_title">Biography</string>
     <string name="birth_date_example">11/09/1994</string>
-    <string name="born_at">Born at</string>
+    <string name="born_at">Born at %1$s</string>
     <string name="lorem_impsum">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</string>
 
 </resources>
