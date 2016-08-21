@@ -71,6 +71,7 @@
         <activity android:name=".activities.BaseActivity" />
         <activity android:name=".activities.UpdateProfileActivity"
                 android:label="@string/update_profile_title"
+                android:windowSoftInputMode="adjustPan"
                 android:parentActivityName=".activities.UpdateProfileActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"

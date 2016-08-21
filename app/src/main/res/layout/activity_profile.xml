@@ -37,57 +37,60 @@
             android:orientation="horizontal"
             >
 
-        <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                >
 
 
-
-            <ImageView
-                    android:id="@+id/imageProfile"
+            <RelativeLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-
-                    android:contentDescription="@string/profile_image_desc"
-                    android:cropToPadding="false"
-                    android:longClickable="true"
-                    android:maxHeight="100sp"
-                    android:maxWidth="100sp"
-                    android:minHeight="100sp"
-                    android:minWidth="100sp"
-                    android:scaleType="center"
-                    android:src="@drawable/profile_image_square"
-                    />
-
-            <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/image_upload_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/imageProfile"
-                    android:layout_alignEnd="@+id/imageProfile"
-                    android:layout_marginLeft="0dp"
-                    android:clickable="true"
-                    android:src="@drawable/camera"
-                    app:layout_anchorGravity="bottom|right|end"
-                    />
-            <ProgressBar
-                    android:id="@+id/progress_image"
-                    style="?android:attr/progressBarStyleLarge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
+                    >
 
 
-                    android:layout_alignTop="@+id/imageProfile"
-                    android:layout_alignEnd="@+id/image_upload_button"
-                    android:layout_alignBottom="@+id/imageProfile"
-                    android:layout_alignStart="@+id/imageProfile"
-                    />
-        </RelativeLayout>
+                <ImageView
+                        android:id="@+id/imageProfile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+
+                        android:contentDescription="@string/profile_image_desc"
+                        android:cropToPadding="false"
+                        android:longClickable="true"
+                        android:maxHeight="100sp"
+                        android:maxWidth="100sp"
+                        android:minHeight="100sp"
+                        android:minWidth="100sp"
+                        android:scaleType="center"
+                        android:src="@drawable/profile_image_square"
+                        />
+
+                <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/image_upload_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/imageProfile"
+                        android:layout_alignEnd="@+id/imageProfile"
+                        android:layout_marginLeft="0dp"
+                        android:clickable="true"
+                        android:src="@drawable/camera"
+                        app:layout_anchorGravity="bottom|right|end"
+                        />
+
+                <ProgressBar
+                        android:id="@+id/progress_image"
+                        style="?android:attr/progressBarStyleLarge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+
+
+                        android:layout_alignBottom="@+id/imageProfile"
+                        android:layout_alignEnd="@+id/image_upload_button"
+                        android:layout_alignStart="@+id/imageProfile"
+                        android:layout_alignTop="@+id/imageProfile"
+                        />
+            </RelativeLayout>
+
 
         <LinearLayout
                 android:layout_width="match_parent"
@@ -135,8 +138,8 @@
             android:layout_height="180dp"
             android:layout_marginTop="25sp"
             android:background="@color/colorWhite"
-            android:orientation="vertical"
             android:elevation="2dp"
+            android:orientation="vertical"
             >
 
         <TextView
@@ -157,8 +160,8 @@
                 android:layout_marginLeft="10sp"
                 android:layout_marginRight="10sp"
                 android:layout_marginTop="15sp"
-                android:text="@string/lorem_impsum"
                 android:gravity="fill_vertical"
+                android:text="@string/lorem_impsum"
                 android:textAlignment="gravity"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 />
