@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.activities.MainActivity;
 import com.zombispormedio.assemble.activities.ProfileActivity;
 import com.zombispormedio.assemble.activities.RegisterActivity;
 import com.zombispormedio.assemble.activities.SettingsActivity;
+import com.zombispormedio.assemble.activities.UpdateBirthdateActivity;
 import com.zombispormedio.assemble.activities.UpdateProfileActivity;
 
 /**
@@ -59,6 +60,9 @@ public final class NavigationManager {
         goTo(ctx, UpdateProfileActivity.class);
     }
 
+    public  static void UpdateBirthdate(Context ctx){
+        goTo(ctx, UpdateBirthdateActivity.class);
+    }
 
 
     public void Home(){

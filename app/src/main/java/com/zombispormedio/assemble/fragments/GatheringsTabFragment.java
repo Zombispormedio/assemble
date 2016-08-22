@@ -17,8 +17,6 @@ import java.util.ArrayList;
 
 public class GatheringsTabFragment extends Fragment {
 
-    private RecyclerView _gatheringsListView;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

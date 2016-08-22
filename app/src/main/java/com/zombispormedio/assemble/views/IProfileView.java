@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.handlers.ISuccessHandler;
 /**
  * Created by Xavier Serrano on 10/07/2016.
  */
-public interface IProfileView extends IBaseView {
+public interface IProfileView extends IBaseProfileView{
 
     void setProfileImage(String url, final ISuccessHandler handler);
     void loadDefaultImage(final ISuccessHandler handler);
@@ -18,11 +18,6 @@ public interface IProfileView extends IBaseView {
 
     void hideImageProfile();
     void showImageProfile();
-
-    void setUsername(String name);
-    void setLocation(String location);
-    void setBio(String bio);
-    void setBirthDate(String birth);
 
     void goToUpdateProfile();
 

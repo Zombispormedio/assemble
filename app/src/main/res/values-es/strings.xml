@@ -58,8 +58,11 @@
     <string name="lorem_impsum">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</string>
     <string name="start_login">Iniciando sesión....</string>
     <string name="username_example">Zombispormedio</string>
-    <string name="hint_username">Tu nombre de usuario</string>
+    <string name="hint_username">Nombre de usuario</string>
     <string name="hint_bio">Biografía</string>
     <string name="hint_location">Ubicación</string>
+    <string name="hint_birthdate">Cumpleaños</string>
+    <string name="save_title">Guardar</string>
+    <string name="update_birthdate_title">Editar Cumpleaños</string>
 
 </resources>

@@ -12,7 +12,17 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.views.IBaseProfileView;
+import com.zombispormedio.assemble.views.IBaseView;
+import com.zombispormedio.assemble.views.IProfileView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 /**
@@ -102,6 +112,46 @@ public final class AndroidUtils {
 
         public void setError(String message){
             input.setError(message);
+        }
+    }
+
+    public static void fillProfile(IBaseProfileView ctx, UserProfile profile){
+        if(ctx!=null && profile !=null){
+
+            if(Utils.presenceOf(profile.username)){
+                ctx.setUsername(StringUtils.capitalize(profile.username));
+            }else{
+                ctx.setUsername("");
+            }
+
+            if(Utils.presenceOf(profile.location)){
+                ctx.setLocation(profile.location);
+            }else{
+                ctx.setLocation("");
+            }
+
+            if(Utils.presenceOf(profile.bio)){
+                ctx.setBio(profile.bio);
+            }else{
+                ctx.setBio("");
+            }
+
+            if(Utils.presenceOf(profile.birth_date)){
+                try {
+                    DateFormat inFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
+                    Date birth=inFormat.parse(profile.birth_date);
+
+                    DateFormat outFormat=new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+
+                    ctx.setBirthDate(outFormat.format(birth));
+                } catch (Exception e) {
+                    Logger.d(e.getMessage());
+                    ctx.setBirthDate("");
+                }
+
+            }else{
+                ctx.setBirthDate("");
+            }
         }
     }
 

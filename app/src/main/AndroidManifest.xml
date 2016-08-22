@@ -24,6 +24,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             >
+        <activity android:name=".activities.BaseActivity" />
         <activity
                 android:name=".activities.MainActivity"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
@@ -59,6 +60,26 @@
                     />
         </activity>
         <activity
+                android:name=".activities.UpdateProfileActivity"
+                android:label="@string/update_profile_title"
+                android:parentActivityName=".activities.ProfileActivity"
+                android:windowSoftInputMode="adjustResize"
+                >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".activities.ProfileActivity"
+                    />
+        </activity>
+        <activity android:name=".activities.UpdateBirthdateActivity"
+                android:label="@string/update_birthdate_title"
+                android:parentActivityName=".activities.UpdateProfileActivity">
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value=".activities.UpdateProfileActivity"
+                    />
+        </activity>
+
+        <activity
                 android:name=".activities.SettingsActivity"
                 android:label="@string/settings_title"
                 android:parentActivityName=".activities.HomeActivity"
@@ -67,17 +88,6 @@
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".activities.HomeActivity"
                     />
-        </activity>
-        <activity android:name=".activities.BaseActivity" />
-        <activity android:name=".activities.UpdateProfileActivity"
-                android:label="@string/update_profile_title"
-                android:windowSoftInputMode="adjustPan"
-                android:parentActivityName=".activities.UpdateProfileActivity">
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activities.UpdateProfileActivity"
-                    />
-
         </activity>
     </application>
 

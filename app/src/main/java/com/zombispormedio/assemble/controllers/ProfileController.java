@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
+import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IProfileView;
@@ -113,44 +114,7 @@ public class ProfileController extends AbstractController {
 
 
     private void fillProfile(){
-        if(ctx!=null){
-            UserProfile profile = user.getProfile();
-
-            if(Utils.presenceOf(profile.username)){
-                ctx.setUsername(StringUtils.capitalize(profile.username));
-            }else{
-                ctx.setUsername("");
-            }
-
-            if(Utils.presenceOf(profile.location)){
-                ctx.setLocation(profile.location);
-            }else{
-                ctx.setLocation("");
-            }
-
-            if(Utils.presenceOf(profile.bio)){
-                ctx.setBio(profile.bio);
-            }else{
-                ctx.setBio("");
-            }
-
-            if(Utils.presenceOf(profile.birth_date)){
-                try {
-                    DateFormat inFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
-                    Date birth=inFormat.parse(profile.birth_date);
-
-                    DateFormat outFormat=new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-
-                    ctx.setBirthDate(outFormat.format(birth));
-                } catch (Exception e) {
-                    Logger.d(e.getMessage());
-                    ctx.setBirthDate("");
-                }
-
-            }else{
-                ctx.setBirthDate("");
-            }
-        }
+        AndroidUtils.fillProfile(ctx,  user.getProfile());
     }
 
     public void updateProfile() {
