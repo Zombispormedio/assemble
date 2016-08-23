@@ -7,8 +7,10 @@ import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.IUpdateProfileView;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -135,5 +137,11 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
                 return false;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Logger.d(requestCode);
     }
 }

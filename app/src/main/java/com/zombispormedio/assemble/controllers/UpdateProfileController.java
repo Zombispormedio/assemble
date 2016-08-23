@@ -49,6 +49,4 @@ public class UpdateProfileController extends AbstractController {
         ctx.goToUpdateBirthdate();
     }
 
-
-
 }

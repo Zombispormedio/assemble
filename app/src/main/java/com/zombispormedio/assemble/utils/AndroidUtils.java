@@ -138,12 +138,7 @@ public final class AndroidUtils {
 
             if(Utils.presenceOf(profile.birth_date)){
                 try {
-                    DateFormat inFormat=new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH);
-                    Date birth=inFormat.parse(profile.birth_date);
-
-                    DateFormat outFormat=new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
-
-                    ctx.setBirthDate(outFormat.format(birth));
+                    ctx.setBirthDate(DateUtils.format(DateUtils.SIMPLE_SLASH_FORMAT, profile.birth_date));
                 } catch (Exception e) {
                     Logger.d(e.getMessage());
                     ctx.setBirthDate("");

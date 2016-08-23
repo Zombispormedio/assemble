@@ -61,5 +61,6 @@
     <string name="hint_birthdate">Birthdate</string>
     <string name="save_title">Save</string>
     <string name="update_birthdate_title">Update Birthdate</string>
+    <string name="min_birthdate">01/01/1900</string>
 
 </resources>
