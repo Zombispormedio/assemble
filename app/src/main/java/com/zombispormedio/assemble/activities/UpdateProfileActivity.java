@@ -104,15 +104,12 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
         return _bioInput.getText().toString();
     }
 
+
     @Override
-    public String setLocation() {
+    public String getLocation() {
         return _locationInput.getText().toString();
     }
 
-    @Override
-    public String getBirthdate() {
-        return _birthdateInput.getText().toString();
-    }
 
     @Override
     public void goToUpdateBirthdate(String...args) {

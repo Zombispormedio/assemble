@@ -9,9 +9,7 @@ public interface IUpdateProfileView extends IBaseProfileView {
 
     String getBio();
 
-    String setLocation();
-
-    String getBirthdate();
+    String getLocation();
 
     void goToUpdateBirthdate(String... args);
 

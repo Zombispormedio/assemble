@@ -20,14 +20,14 @@ public class UpdateProfileController extends AbstractController {
 
     private CurrentUser user;
     private UserResource userResource;
-    private EditProfile.Builder edit;
+    private EditProfile.Builder editor;
 
 
     public UpdateProfileController(IUpdateProfileView ctx) {
         this.ctx = ctx;
         user = CurrentUser.getInstance();
         userResource = ResourceFactory.createUser();
-        edit =new EditProfile.Builder(user.getProfile());
+        editor =new EditProfile.Builder(user.getProfile());
     }
 
     @Override
@@ -43,16 +43,24 @@ public class UpdateProfileController extends AbstractController {
     }
 
     public void onSave() {
-        Logger.d(ctx.getUsername()==null);
+
+        editor.setUsername(ctx.getUsername());
+        editor.setBio(ctx.getBio());
+        editor.setLocation(ctx.getLocation());
+
+        EditProfile editProfile= editor.build();
+
+
+
     }
 
     public void onClickBirthDateInput() {
-        ctx.goToUpdateBirthdate(edit.getBirthdate());
+        ctx.goToUpdateBirthdate(editor.getBirthdate());
     }
 
     public void updateBirthdate(String birthdate) {
         try {
-            edit.setBirthDate(birthdate);
+            editor.setBirthDate(birthdate);
             ctx.setBirthDate(DateUtils.format(DateUtils.SIMPLE_SLASH_FORMAT, birthdate));
         } catch (ParseException e) {
            Logger.d(e.getMessage());

@@ -74,7 +74,7 @@ public class ExternalNavigationManager {
 
 
     public static int getType(int requestCode) {
-        int result = -1;
+        int result;
 
         if (requestCode < INTERNAL_REQUEST_CODE.CAMERA) {
             result = REQUEST_CODE.GALLERY;
@@ -88,7 +88,6 @@ public class ExternalNavigationManager {
 
     public Uri resolveGalleryPath(int requestCode, Intent data) {
         Uri originalUri = data.getData();
-        String result="";
 
             if(requestCode== INTERNAL_REQUEST_CODE.GALLERY_MORE_THAN_19){
                 originalUri=data.getData();

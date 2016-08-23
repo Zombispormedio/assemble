@@ -38,11 +38,11 @@ public class HomeController extends AbstractController {
     private void DrawerTitle() {
         UserProfile profile = user.getProfile();
         String title = "";
-        if (profile.username != "") {
+        if (!profile.username.isEmpty()) {
             title = profile.username;
 
         } else {
-            if (profile.email != "") {
+            if (!profile.email.isEmpty()) {
                 title = profile.email;
             }
         }
