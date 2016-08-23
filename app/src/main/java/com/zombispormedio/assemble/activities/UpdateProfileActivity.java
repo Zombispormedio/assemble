@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.activities;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.UpdateProfileController;
 import com.zombispormedio.assemble.utils.NavigationManager;
@@ -10,13 +9,10 @@ import com.zombispormedio.assemble.views.IUpdateProfileView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
-import javax.security.auth.login.LoginException;
 
 public class UpdateProfileActivity extends BaseActivity implements IUpdateProfileView {
 
@@ -57,7 +53,7 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
         _saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ctrl.onClickSaveButton();
+                ctrl.onSave();
             }
         });
 
@@ -119,8 +115,8 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
-    public void goToUpdateBirthdate() {
-        NavigationManager.UpdateBirthdate(this);
+    public void goToUpdateBirthdate(String...args) {
+        NavigationManager.UpdateBirthdate(this, args);
     }
 
     @Override
@@ -131,9 +127,7 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-
             case android.R.id.home:
-                Logger.d("home");
                 return false;
         }
         return super.onOptionsItemSelected(item);
@@ -142,6 +136,18 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Logger.d(requestCode);
+
+        if(requestCode==NavigationManager.UPDATE_BIRTHDATE_CODE){
+            if(resultCode==RESULT_OK){
+                int countArgs=data.getIntExtra(NavigationManager.SIZE, 0);
+                if(countArgs>0){
+                    String birthdate=data.getStringExtra(NavigationManager.ARGS +0);
+                    ctrl.updateBirthdate(birthdate);
+                }
+
+            }
+        }
+
+
     }
 }

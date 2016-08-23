@@ -37,8 +37,6 @@ public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirt
 
         _datePicker= (DatePicker) findViewById(R.id.birthdate_picker);
 
-
-
         ((Button) findViewById(R.id.save_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,6 +76,11 @@ public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirt
     @Override
     public void setDatepickerValue(int year, int month, int day) {
         _datePicker.updateDate(year, month, day);
+    }
+
+    @Override
+    public String getInitBirthdate() {
+        return getIntent().getStringExtra(NavigationManager.ARGS+0);
     }
 
 

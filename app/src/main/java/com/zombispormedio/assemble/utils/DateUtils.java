@@ -37,7 +37,20 @@ public class DateUtils {
     }
 
     public static String toString(int year, int month, int day) {
-        return "";
+        Calendar cal= Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+
+        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.MINUTE,0);
+        cal.set(Calendar.SECOND,0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+
+        DateFormat formatUtility = new SimpleDateFormat(DEFAULT_INPUT_FORMAT, Locale.ENGLISH);
+
+        return formatUtility.format(cal.getTime());
     }
 
     public static Date parse(String format, String inDate) throws ParseException {

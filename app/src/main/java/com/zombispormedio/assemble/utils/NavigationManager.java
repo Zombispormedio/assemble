@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.activities.LoginActivity;
 import com.zombispormedio.assemble.activities.MainActivity;
@@ -23,9 +22,9 @@ public final class NavigationManager {
 
     public static final int UPDATE_BIRTHDATE_CODE=5956;
 
-    public static final String RESULT_PREFIX="result";
+    public static final String ARGS ="args";
 
-    public static final String RESULT_SIZE="size";
+    public static final String SIZE ="size";
 
     public NavigationManager(Context ctx){
         this.ctx=ctx;
@@ -41,6 +40,17 @@ public final class NavigationManager {
 
     public static void goToWithResult(Activity ctx, Class<?> cls){
         Intent dst=new Intent(ctx, cls);
+        ctx.startActivityForResult(dst, UPDATE_BIRTHDATE_CODE);
+
+    }
+
+    public static void goToWithResult(Activity ctx, Class<?> cls, String...extras){
+        Intent dst=new Intent(ctx, cls);
+        dst.putExtra(SIZE,extras.length);
+
+        for(int i=0; i<extras.length; i++){
+            dst.putExtra(ARGS +i,extras[i]);
+        }
         ctx.startActivityForResult(dst, UPDATE_BIRTHDATE_CODE);
 
     }
@@ -78,6 +88,9 @@ public final class NavigationManager {
         goToWithResult(ctx, UpdateBirthdateActivity.class);
     }
 
+    public  static void UpdateBirthdate(Activity ctx, String... extras){
+        goToWithResult(ctx, UpdateBirthdateActivity.class, extras);
+    }
 
     public void Home(){
         NavigationManager.Home(ctx);
@@ -99,10 +112,10 @@ public final class NavigationManager {
 
     public static void finishWithResult(Activity ctx, String... args){
         Intent intent = new Intent();
-        intent.putExtra(RESULT_SIZE,args.length);
+        intent.putExtra(SIZE,args.length);
 
         for(int i=0; i<args.length; i++){
-            intent.putExtra(RESULT_PREFIX+i,args[i]);
+            intent.putExtra(ARGS +i,args[i]);
         }
         ctx.setResult(ctx.RESULT_OK, intent);
         ctx.finish();

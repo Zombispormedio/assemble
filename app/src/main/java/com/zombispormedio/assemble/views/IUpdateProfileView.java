@@ -13,6 +13,6 @@ public interface IUpdateProfileView extends IBaseProfileView {
 
     String getBirthdate();
 
-    void goToUpdateBirthdate();
+    void goToUpdateBirthdate(String... args);
 
 }

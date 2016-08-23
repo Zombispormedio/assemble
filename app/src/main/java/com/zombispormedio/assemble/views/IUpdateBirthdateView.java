@@ -17,4 +17,6 @@ public interface IUpdateBirthdateView extends IBaseView {
 
     void setDatepickerValue(int year, int month, int day);
 
+    String getInitBirthdate();
+
 }

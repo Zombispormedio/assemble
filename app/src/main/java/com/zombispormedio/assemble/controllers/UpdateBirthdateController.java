@@ -16,14 +16,10 @@ import java.util.Date;
  */
 public class UpdateBirthdateController extends AbstractController {
     private IUpdateBirthdateView ctx;
-    private CurrentUser user;
 
     public UpdateBirthdateController(IUpdateBirthdateView ctx) {
         this.ctx = ctx;
-        user = CurrentUser.getInstance();
     }
-
-
 
     @Override
     public void onCreate() {
@@ -33,15 +29,14 @@ public class UpdateBirthdateController extends AbstractController {
     }
 
     private void initBirthdate() {
-        Profile profile=user.getProfile();
-        if(ctx!=null && profile !=null){
-            if(Utils.presenceOf(profile.birth_date)){
+        if(ctx!=null ){
+            String birth=ctx.getInitBirthdate();
+            if(Utils.presenceOf(birth)){
                 try {
-                    Calendar parsedDate=DateUtils.parse(profile.birth_date);
+                    Calendar parsedDate=DateUtils.parse(birth);
 
                     int year=parsedDate.get(Calendar.YEAR);
                     int month=parsedDate.get(Calendar.MONTH);
-
                     int day=parsedDate.get(Calendar.DAY_OF_MONTH);
 
                     ctx.setDatepickerValue(year, month, day);
@@ -59,7 +54,11 @@ public class UpdateBirthdateController extends AbstractController {
     }
 
     public void onSave(){
-
+        int year=ctx.getYearOfBirthdate();
+        int month=ctx.getMonthOfBirthdate();
+        int day=ctx.getDayOfBirthdate();
+        String date=DateUtils.toString(year, month, day);
+        ctx.finishWithResult(date);
     }
 
     @Override
