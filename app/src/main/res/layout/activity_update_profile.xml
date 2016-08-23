@@ -5,6 +5,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activities.UpdateProfileActivity"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
+        android:focusable="true"
         >
 
     <android.support.v4.widget.NestedScrollView
@@ -20,8 +23,7 @@
                 android:layout_marginLeft="@dimen/form_margin"
                 android:layout_marginRight="@dimen/form_margin"
                 android:layout_marginTop="@dimen/form_margin"
-                android:descendantFocusability="beforeDescendants"
-                android:focusableInTouchMode="true"
+
                 android:orientation="vertical"
                 >
 
