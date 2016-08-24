@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 
 
+import com.zombispormedio.assemble.activities.FriendsActivity;
+import com.zombispormedio.assemble.activities.HelpActivity;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.activities.LoginActivity;
 import com.zombispormedio.assemble.activities.MainActivity;
@@ -83,6 +85,13 @@ public final class NavigationManager {
         goTo(ctx, UpdateProfileActivity.class);
     }
 
+    public  static void Friends(Context ctx){
+        goTo(ctx, FriendsActivity.class);
+    }
+
+    public  static void Help(Context ctx){
+        goTo(ctx, HelpActivity.class);
+    }
 
     public  static void UpdateBirthdate(Activity ctx){
         goToWithResult(ctx, UpdateBirthdateActivity.class);
@@ -108,7 +117,17 @@ public final class NavigationManager {
         NavigationManager.Register(ctx);
     }
 
+    public void Settings(){
+        NavigationManager.Settings(ctx);
+    }
 
+    public void Friends(){
+        NavigationManager.Friends(ctx);
+    }
+
+    public void Help(){
+        NavigationManager.Help(ctx);
+    }
 
     public static void finishWithResult(Activity ctx, String... args){
         Intent intent = new Intent();

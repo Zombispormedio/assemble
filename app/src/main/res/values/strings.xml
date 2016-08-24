@@ -67,5 +67,7 @@
     <string name="reject_changes_title">Reject changes?</string>
     <string name="cancel_title">Cancel</string>
     <string name="delete_title">Delete</string>
+    <string name="title_activity_help">Help</string>
+    <string name="title_activity_friends">Friends</string>
 
 </resources>

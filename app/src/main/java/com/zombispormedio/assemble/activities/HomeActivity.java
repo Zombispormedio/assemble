@@ -23,7 +23,7 @@ import com.zombispormedio.assemble.views.IHomeView;
 public class HomeActivity extends BaseActivity implements IHomeView {
 
     private HomeController ctrl;
-
+    private NavigationManager navigation;
     private DrawerLayout drawer;
     private TextView nav_title;
 
@@ -34,6 +34,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         setContentView(R.layout.activity_home);
 
         ctrl=new HomeController(this);
+        navigation=new NavigationManager(this);
 
         drawer= (DrawerLayout)findViewById(R.id.drawer_layout_home);
         NavigationView nav = (NavigationView) findViewById(R.id.navview);
@@ -109,11 +110,19 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
                 switch(item.getItemId()){
                     case R.id.settings_menu:
-                        ctrl.onSettingsMenuItemClick();
+                        ctrl.onSettingsMenuItem();
                         break;
 
                     case R.id.profile_menu:
-                        ctrl.onProfileMenuItemClick();
+                        ctrl.onProfileMenuItem();
+                        break;
+
+                    case R.id.help_menu:
+                        ctrl.onHelpMenuItem();
+                        break;
+
+                    case R.id.friends_menu:
+                        ctrl.onFriendsMenuItem();
                         break;
 
                 }
@@ -129,9 +138,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-
                 ctrl.onDrawerOpened();
-
             }
         };
     }
@@ -144,24 +151,38 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     @Override
     public void goToLogin() {
-        NavigationManager.Login(this);
+        navigation.Login();
         finish();
     }
 
     @Override
     public void goToProfile() {
-        NavigationManager.Profile(this);
+        navigation.Profile();
     }
 
     @Override
     public void goToSettings() {
-        NavigationManager.Settings(this);
+        navigation.Settings();
+    }
+
+    @Override
+    public void goToFriends() {
+       navigation.Friends();
+    }
+
+    @Override
+    public void goToHelp() {
+        navigation.Help();
     }
 
     @Override
     public void setDrawerTitle(String text) {
-        if(nav_title==null)nav_title=(TextView) findViewById(R.id.nav_title);
-        if(nav_title!=null)nav_title.setText(text);
+        if(nav_title==null){
+            nav_title=(TextView) findViewById(R.id.nav_title);
+        }
+        if(nav_title!=null){
+            nav_title.setText(text);
+        }
     }
 
 

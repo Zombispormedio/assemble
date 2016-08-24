@@ -70,5 +70,7 @@
     <string name="reject_changes_title">¿Descartar cambios?</string>
     <string name="cancel_title">Cancelar</string>
     <string name="delete_title">Borrar</string>
+    <string name="title_activity_friends">Amigos</string>
+    <string name="title_activity_help">Ayuda</string>
 
 </resources>

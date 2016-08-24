@@ -17,8 +17,6 @@ public class HomeController extends AbstractController {
 
     private UserResource userResource;
 
-    private ProfileHandler profileHandler;
-
     private CurrentUser user;
 
 
@@ -26,7 +24,7 @@ public class HomeController extends AbstractController {
         this.ctx = ctx;
         userResource = ResourceFactory.createUser();
         user = CurrentUser.getInstance();
-        profileHandler = new ProfileHandler();
+        ProfileHandler profileHandler = new ProfileHandler();
 
         userResource.getProfile(profileHandler);
     }
@@ -51,7 +49,7 @@ public class HomeController extends AbstractController {
         }
     }
 
-    public void onSettingsMenuItemClick() {
+    public void onSettingsMenuItem() {
         ctx.goToSettings();
     }
 
@@ -62,15 +60,23 @@ public class HomeController extends AbstractController {
     }
 
 
-    public void onProfileMenuItemClick() {
+    public void onProfileMenuItem() {
         ctx.goToProfile();
+    }
+
+    public void onHelpMenuItem() {
+        ctx.goToHelp();
+    }
+
+    public void onFriendsMenuItem() {
+        ctx.goToFriends();
     }
 
     private class ProfileHandler implements IServiceHandler<UserProfile, Error> {
 
         @Override
         public void onError(Error error) {
-
+            ctx.showAlert(error.msg);
         }
 
         @Override

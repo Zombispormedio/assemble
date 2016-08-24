@@ -10,5 +10,9 @@ public interface IHomeView extends IBaseView  {
 
     void goToSettings();
 
+    void goToFriends();
+
+    void goToHelp();
+
     void setDrawerTitle(String hello);
 }

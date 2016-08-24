@@ -12,4 +12,5 @@
     <dimen name="input_margin_bottom">25sp</dimen>
     <dimen name="error">13sp</dimen>
     <dimen name="floating_label">13sp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
 </resources>

@@ -24,7 +24,6 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             >
-        <activity android:name=".activities.BaseActivity" />
         <activity
                 android:name=".activities.MainActivity"
                 android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
@@ -70,15 +69,16 @@
                     android:value=".activities.ProfileActivity"
                     />
         </activity>
-        <activity android:name=".activities.UpdateBirthdateActivity"
+        <activity
+                android:name=".activities.UpdateBirthdateActivity"
                 android:label="@string/update_birthdate_title"
-                android:parentActivityName=".activities.UpdateProfileActivity">
+                android:parentActivityName=".activities.UpdateProfileActivity"
+                >
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".activities.UpdateProfileActivity"
                     />
         </activity>
-
         <activity
                 android:name=".activities.SettingsActivity"
                 android:label="@string/settings_title"
@@ -87,6 +87,28 @@
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value=".activities.HomeActivity"
+                    />
+        </activity>
+        <activity
+                android:name=".activities.HelpActivity"
+                android:label="@string/title_activity_help"
+                android:parentActivityName=".activities.HomeActivity"
+                android:theme="@style/AppTheme"
+                >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zombispormedio.assemble.activities.HomeActivity"
+                    />
+        </activity>
+        <activity
+                android:name=".activities.FriendsActivity"
+                android:label="@string/title_activity_friends"
+                android:parentActivityName=".activities.HomeActivity"
+                android:theme="@style/AppTheme"
+                >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zombispormedio.assemble.activities.HomeActivity"
                     />
         </activity>
     </application>
