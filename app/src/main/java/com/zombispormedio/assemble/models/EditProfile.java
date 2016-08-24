@@ -8,8 +8,11 @@ import com.zombispormedio.assemble.utils.Utils;
 public class EditProfile {
 
     public final String username;
+
     public final String bio;
+
     public final String location;
+
     public final String birth_date;
 
     public EditProfile(String username, String bio, String location, String birth_date) {
@@ -19,11 +22,16 @@ public class EditProfile {
         this.birth_date = birth_date;
     }
 
-    public static class Builder{
+    public static class Builder {
+
         private Profile profile;
+
         private String username;
+
         private String bio;
+
         private String location;
+
         private String birth_date;
 
         public Builder(Profile profile) {
@@ -31,19 +39,19 @@ public class EditProfile {
             fields();
         }
 
-        private void fields(){
-            username=profile.username;
-            bio=profile.bio;
-            location=profile.location;
-            birth_date=profile.birth_date;
+        private void fields() {
+            username = profile.username;
+            bio = profile.bio;
+            location = profile.location;
+            birth_date = profile.birth_date;
         }
 
         public Builder() {
-            profile=null;
-            username=null;
-            bio=null;
-            location=null;
-            birth_date=null;
+            profile = null;
+            username = null;
+            bio = null;
+            location = null;
+            birth_date = null;
         }
 
         public void setProfile(Profile profile) {
@@ -71,6 +79,20 @@ public class EditProfile {
             return birth_date;
         }
 
+        public boolean hasChanged() {
+            boolean changed = false;
+
+            if (!username.equals(profile.username) ||
+                    !bio.equals(profile.bio) ||
+                    !location.equals(profile.location) ||
+                    !birth_date.equals(profile.birth_date)
+                    ) {
+                changed = true;
+            }
+
+            return changed;
+        }
+
         public String getLocation() {
             return location;
         }
@@ -83,21 +105,21 @@ public class EditProfile {
             return username;
         }
 
-        public EditProfile build(){
-            if(username==null){
-                username=profile.username;
+        public EditProfile build() {
+            if (username == null) {
+                username = profile.username;
             }
 
-            if(bio==null){
-                bio=profile.bio;
+            if (bio == null) {
+                bio = profile.bio;
             }
 
-            if(location==null){
-                location=profile.location;
+            if (location == null) {
+                location = profile.location;
             }
 
-            if(birth_date==null){
-                birth_date=profile.birth_date;
+            if (birth_date == null) {
+                birth_date = profile.birth_date;
             }
 
             return new EditProfile(username, bio, location, birth_date);

@@ -62,5 +62,10 @@
     <string name="save_title">Save</string>
     <string name="update_birthdate_title">Update Birthdate</string>
     <string name="min_birthdate">01/01/1900</string>
+    <string name="updating_profile_message">Updating your profile</string>
+    <string name="updating_profile_image">Updating profile image</string>
+    <string name="reject_changes_title">Reject changes?</string>
+    <string name="cancel_title">Cancel</string>
+    <string name="delete_title">Delete</string>
 
 </resources>

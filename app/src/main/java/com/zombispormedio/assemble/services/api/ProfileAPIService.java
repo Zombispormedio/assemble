@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.services.api;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.Profile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
@@ -71,5 +72,26 @@ public class ProfileAPIService implements IProfileService {
                     }
                 })
                 .patch(new FileBody(file, "image/*", "avatar", file.getName()));
+    }
+
+    @Override
+    public void update(EditProfile profile, final IServiceHandler<UserProfile, Error> handler) {
+            api.RestWithAuth("/profile")
+                    .handler(new IPromiseHandler() {
+                        @Override
+                        public void onSuccess(String... args) {
+                            try {
+                                ProfileResponse res= JsonBinder.toProfileResponse(args[0]);
+                                if(res.success){
+                                    handler.onSuccess(res.result);
+                                }else{
+                                    handler.onError(res.error);
+                                }
+                            } catch (IOException e) {
+                                handler.onError(new Error(e.getMessage()));
+                            }
+                        }
+                    })
+                    .put(JsonBinder.fromEditProfile(profile));
     }
 }

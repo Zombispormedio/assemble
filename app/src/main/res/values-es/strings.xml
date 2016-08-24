@@ -65,5 +65,10 @@
     <string name="save_title">Guardar</string>
     <string name="update_birthdate_title">Editar Cumpleaños</string>
     <string name="min_birthdate">01/01/1900</string>
+    <string name="updating_profile_message">Actualizando tu perfil</string>
+    <string name="updating_profile_image">Perdona, estamos actualizando tu imagen de perfil.</string>
+    <string name="reject_changes_title">¿Descartar cambios?</string>
+    <string name="cancel_title">Cancelar</string>
+    <string name="delete_title">Borrar</string>
 
 </resources>

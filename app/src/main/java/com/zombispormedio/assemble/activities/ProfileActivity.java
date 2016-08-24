@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.activities;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
@@ -39,7 +40,10 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     private FloatingActionButton _imageFab;
 
-    private ProgressBar _imageProgressBar;
+    private ProgressDialog _imageProgressDialog;
+
+
+    private ProgressBar _imageProgress;
 
     private TextView _usernameText;
     private TextView _locationText;
@@ -62,7 +66,13 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
         _imageFab = (FloatingActionButton) findViewById(R.id.image_upload_button);
         _imageProfile = (ImageView) findViewById(R.id.imageProfile);
-        _imageProgressBar = (ProgressBar) findViewById(R.id.progress_image);
+
+        _imageProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        _imageProgressDialog.setMessage(getString(R.string.updating_profile_image));
+        _imageProgressDialog.setIndeterminate(true);
+        _imageProgressDialog.setCancelable(false);
+
+        _imageProgress=(ProgressBar) findViewById(R.id.progress_image);
 
         _usernameText = (TextView) findViewById(R.id.profile_username_text);
         _locationText = (TextView) findViewById(R.id.profile_location_text);
@@ -99,22 +109,22 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
         _imageFab.setVisibility(View.VISIBLE);
     }
 
-    public void hideProgressImage() {
-        _imageProgressBar.setVisibility(View.INVISIBLE);
+    public void hideImageProgressDialog() {
+        _imageProgressDialog.dismiss();
     }
 
-    public void showProgressImage() {
-        _imageProgressBar.setVisibility(View.VISIBLE);
-    }
-
-    @Override
-    public void hideImageProfile() {
-        _imageProfile.setVisibility(View.INVISIBLE);
+    public void showImageProgressDialog() {
+        _imageProgressDialog.show();
     }
 
     @Override
-    public void showImageProfile() {
-        _imageProfile.setVisibility(View.VISIBLE);
+    public void hideImageProgressBar() {
+        _imageProgress.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showImageProgressBar() {
+        _imageProgress.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -147,6 +157,12 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     protected void onDestroy() {
         super.onDestroy();
         ctrl.onDestroy();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ctrl.onStart();
     }
 
     @Override

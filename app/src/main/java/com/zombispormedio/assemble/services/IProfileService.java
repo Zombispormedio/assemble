@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.services;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
@@ -15,5 +16,7 @@ public interface IProfileService {
     void retrieve(final IServiceHandler<UserProfile, Error> handler);
 
     void changeAvatar(File file, final IServiceHandler<UserProfile, Error> handler);
+
+    void update(EditProfile profile,final IServiceHandler<UserProfile, Error> handler );
 
 }

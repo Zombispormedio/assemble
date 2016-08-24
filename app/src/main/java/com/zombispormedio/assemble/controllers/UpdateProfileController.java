@@ -1,10 +1,14 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.orhanobut.logger.Logger;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.models.EditProfile;
+import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.views.IUpdateProfileView;
@@ -43,14 +47,32 @@ public class UpdateProfileController extends AbstractController {
     }
 
     public void onSave() {
+        ctx.openProgressDialog();
 
-        editor.setUsername(ctx.getUsername());
-        editor.setBio(ctx.getBio());
-        editor.setLocation(ctx.getLocation());
+        bindEditor();
 
         EditProfile editProfile= editor.build();
 
+        if(!editor.hasChanged()){
+            ctx.close();
+        }else {
 
+            userResource.updateProfile(editProfile, new IServiceHandler<UserProfile, Error>() {
+                @Override
+                public void onError(Error error) {
+                    ctx.closeProgressDialog();
+                    ctx.showAlert(error.msg);
+                }
+
+                @Override
+                public void onSuccess(UserProfile result) {
+                    user.setProfile(result);
+                    ctx.closeProgressDialog();
+                    ctx.close();
+                }
+            });
+
+        }
 
     }
 
@@ -66,5 +88,26 @@ public class UpdateProfileController extends AbstractController {
            Logger.d(e.getMessage());
         }
 
+    }
+
+    public void bindEditor(){
+        editor.setUsername(ctx.getUsername());
+        editor.setBio(ctx.getBio());
+        editor.setLocation(ctx.getLocation());
+    }
+
+
+    public void checkChanges(){
+        bindEditor();
+        if(editor.hasChanged()){
+            ctx.showRejectChangesDialog(new ISuccessHandler() {
+                @Override
+                public void onSuccess() {
+                    ctx.close();
+                }
+            });
+        }else{
+            ctx.close();
+        }
     }
 }

@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.rest;
 
 import com.zombispormedio.assemble.models.Auth;
+import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.responses.DefaultResponse;
 import com.zombispormedio.assemble.rest.responses.ProfileResponse;
@@ -32,5 +33,10 @@ public class JsonBinder {
     public static String fromAuth(Auth user) {
         JSONWrapper<Auth> userAdapter= new JSONWrapper<>(Auth.class);
         return userAdapter.toJSON(user);
+    }
+
+    public static String fromEditProfile(EditProfile profile) {
+        JSONWrapper<EditProfile> editProfileAdapter= new JSONWrapper<>(EditProfile.class);
+        return editProfileAdapter.toJSON(profile);
     }
 }

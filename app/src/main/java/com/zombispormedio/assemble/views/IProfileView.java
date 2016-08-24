@@ -13,11 +13,11 @@ public interface IProfileView extends IBaseProfileView{
 
     void hideImageForm();
     void showImageForm();
-    void hideProgressImage();
-    void showProgressImage();
+    void hideImageProgressDialog();
+    void showImageProgressDialog();
 
-    void hideImageProfile();
-    void showImageProfile();
+    void hideImageProgressBar();
+    void showImageProgressBar();
 
     void goToUpdateProfile();
 

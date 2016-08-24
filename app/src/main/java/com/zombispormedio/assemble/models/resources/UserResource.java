@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.models.resources;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
@@ -53,6 +54,11 @@ public class UserResource {
 
     public void changeAvatar(String path, final IServiceHandler<UserProfile, Error> handler ){
         persistence.changeAvatar(new File(path), handler);
+    }
+
+
+    public void updateProfile(EditProfile profile,final IServiceHandler<UserProfile, Error> handler ){
+        persistence.update(profile, handler);
     }
 
 

@@ -53,7 +53,6 @@
                         android:layout_gravity="center"
                         android:layout_marginLeft="10dp"
                         android:layout_marginRight="10dp"
-
                         android:contentDescription="@string/profile_image_desc"
                         android:cropToPadding="false"
                         android:longClickable="true"
@@ -161,6 +160,7 @@
                 android:layout_marginRight="10sp"
                 android:layout_marginTop="15sp"
                 android:gravity="fill_vertical"
+                android:textSize="15sp"
                 android:text="@string/lorem_impsum"
                 android:textAlignment="gravity"
                 android:textAppearance="?android:attr/textAppearanceSmall"
@@ -184,6 +184,7 @@
                 android:layout_gravity="center"
                 android:layout_marginBottom="33dp"
                 android:background="@color/colorAccent"
+                android:textColor="@color/colorWhite"
                 android:text="@string/update_profile_title"
                 />
 

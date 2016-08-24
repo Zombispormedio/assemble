@@ -1,11 +1,15 @@
 package com.zombispormedio.assemble.activities;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.UpdateProfileController;
+import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.IUpdateProfileView;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -25,6 +29,8 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     private EditText _locationInput;
 
     private EditText _birthdateInput;
+
+    private ProgressDialog _progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +53,11 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
         _birthdateInput=(EditText) findViewById(R.id.birthdate_input);
 
         Button _saveButton=(Button) findViewById(R.id.save_button);
+
+        _progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        _progressDialog.setMessage(getString(R.string.updating_profile_message));
+        _progressDialog.setIndeterminate(true);
+        _progressDialog.setCancelable(false);
 
         ctrl= new UpdateProfileController(this);
 
@@ -117,15 +128,43 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
+    public void close() {
+        finish();
+    }
+
+    @Override
+    public void openProgressDialog() {
+        _progressDialog.show();
+    }
+
+    @Override
+    public void closeProgressDialog() {
+        _progressDialog.dismiss();
+    }
+
+    @Override
+    public void showRejectChangesDialog(ISuccessHandler listener) {
+        String msg=getResources().getString(R.string.reject_changes_title);
+
+        String positive=getResources().getString(R.string.delete_title);
+
+        String negative=getResources().getString(R.string.cancel_title);
+
+        AndroidUtils.createConfirmDialog(this, msg, positive, negative, AndroidUtils.createDialogClickListener(listener))
+                .show();
+    }
+
+    @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        ctrl.checkChanges();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
-                return false;
+                ctrl.checkChanges();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
