@@ -67,6 +67,8 @@
     <string name="delete_title">Borrar</string>
     <string name="friends_title">Amigos</string>
     <string name="new_friend_title">Encontrar amigos</string>
+    <string name="example_string">Lorem impsum</string>
+    <string name="searching_your_friends">Buscando a tus amiguetes....</string>
 
 
 </resources>

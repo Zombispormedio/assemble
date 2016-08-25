@@ -12,8 +12,4 @@ public class FriendProfile extends Profile {
         this.friend_id = friend_id;
     }
 
-    public FriendProfile() {
-        super();
-        friend_id = "";
-    }
 }

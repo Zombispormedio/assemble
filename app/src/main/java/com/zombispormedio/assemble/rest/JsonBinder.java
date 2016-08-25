@@ -2,12 +2,15 @@ package com.zombispormedio.assemble.rest;
 
 import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.models.EditProfile;
+import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.responses.DefaultResponse;
+import com.zombispormedio.assemble.rest.responses.FriendsResponse;
 import com.zombispormedio.assemble.rest.responses.ProfileResponse;
 import com.zombispormedio.assemble.wrappers.moshi.JSONWrapper;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 26/07/2016.
@@ -39,4 +42,13 @@ public class JsonBinder {
         JSONWrapper<EditProfile> editProfileAdapter= new JSONWrapper<>(EditProfile.class);
         return editProfileAdapter.toJSON(profile);
     }
+
+    public static FriendsResponse toFriendsResponse(String arg) throws IOException {
+        JSONWrapper<FriendsResponse> jsonAdapter= new JSONWrapper<>(FriendsResponse.class);
+        return jsonAdapter.fromJSON(arg);
+    }
+
+    /*public static ArrayList<FriendProfile> toFriendProfileArray(String args){
+
+    }*/
 }

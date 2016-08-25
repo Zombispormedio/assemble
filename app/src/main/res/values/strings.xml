@@ -69,5 +69,7 @@
     <string name="delete_title">Delete</string>
     <string name="friends_title">Friends</string>
     <string name="new_friend_title">Find friends</string>
+    <string name="example_string">Lorem impsum</string>
+    <string name="searching_your_friends">Searching your friends...</string>
 
 </resources>

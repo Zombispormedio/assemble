@@ -7,6 +7,9 @@ import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -148,6 +151,13 @@ public final class AndroidUtils {
                 ctx.setBirthDate("");
             }
         }
+    }
+
+    public static void setupDefaultList(Context ctx,RecyclerView list){
+        list.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false));
+        list.setItemAnimator(new DefaultItemAnimator());
+
+        list.addItemDecoration(new DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL_LIST));
     }
 
 

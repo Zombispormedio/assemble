@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -15,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.cocosw.bottomsheet.BottomSheet;
 
 
@@ -41,7 +44,6 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     private FloatingActionButton _imageFab;
 
     private ProgressDialog _imageProgressDialog;
-
 
     private ProgressBar _imageProgress;
 
@@ -138,8 +140,13 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     @Override
     public void setBirthDate(String birth) {
-        String birthDate=String.format(getString(R.string.born_at), birth);
-        _birthDateText.setText(birthDate);
+        if(!birth.isEmpty()){
+            String birthDate=String.format(getString(R.string.born_at), birth);
+            _birthDateText.setText(birthDate);
+        }else{
+            _birthDateText.setText("");
+        }
+
     }
 
     @Override
@@ -176,6 +183,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
                     }
                 });
 
+
     }
 
 
@@ -195,6 +203,20 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
                     }
                 });
     }
+
+    public void loadLetterImage(String letter, final ISuccessHandler handler) {
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+
+        TextDrawable drawable=TextDrawable.builder()
+                .buildRound(letter.toUpperCase(),generator.getRandomColor());
+
+        _imageProfile.setImageDrawable(drawable);
+
+        handler.onSuccess();
+
+    }
+
+
 
 
     public void openImageBottomSheet() {

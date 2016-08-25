@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.activities;
 
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -8,7 +9,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -37,7 +37,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         navigation=new NavigationManager(this);
 
         drawer= (DrawerLayout)findViewById(R.id.drawer_layout_home);
-        NavigationView nav = (NavigationView) findViewById(R.id.navview);
+        NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
 
         setupToolbar();
 
@@ -104,7 +104,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     private NavigationView.OnNavigationItemSelectedListener NavListener(){
         return new NavigationView.OnNavigationItemSelectedListener(){
             @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 switch(item.getItemId()){
                     case R.id.settings_menu:

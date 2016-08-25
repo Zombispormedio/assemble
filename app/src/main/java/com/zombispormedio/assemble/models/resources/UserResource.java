@@ -4,6 +4,7 @@ package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
+import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
@@ -11,6 +12,7 @@ import com.zombispormedio.assemble.services.IAuthService;
 import com.zombispormedio.assemble.services.IProfileService;
 
 import java.io.File;
+import java.util.ArrayList;
 
 
 /**
@@ -29,8 +31,6 @@ public class UserResource {
     public void checkAccess(IServiceHandler<Result,Error> listener){
         auth.checkAccess(listener);
     }
-
-
 
 
     public void login(String email, String password, IServiceHandler<Result, Error> listener){
@@ -61,6 +61,10 @@ public class UserResource {
         persistence.update(profile, handler);
     }
 
+
+    public void getFriends(final IServiceHandler<ArrayList<FriendProfile>, Error> handler){
+        persistence.getFriends(handler);
+    }
 
 
 }

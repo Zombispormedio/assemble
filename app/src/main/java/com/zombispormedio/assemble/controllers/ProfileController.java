@@ -61,7 +61,8 @@ public class ProfileController extends AbstractController {
             if (Utils.presenceOf(profile.full_avatar_url)) {
                 ctx.setProfileImage(profile.full_avatar_url, handler);
             } else {
-                ctx.loadDefaultImage(handler);
+                String letter = String.valueOf(profile.username.charAt(0));
+                ctx.loadLetterImage(letter, handler);
             }
         }
 
