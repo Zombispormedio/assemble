@@ -39,7 +39,7 @@ public class FriendsController extends AbstractController {
 
 
 
-        if(user.getFriends()!=null){
+        if(user.getFriendsCount()>0){
             ctx.bindFriends(user.getFriends());
         }else{
             ctx.loading();

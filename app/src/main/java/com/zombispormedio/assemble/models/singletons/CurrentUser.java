@@ -21,7 +21,7 @@ public class CurrentUser {
 
     private CurrentUser() {
         profile=new UserProfile();
-        friends=null;
+        friends=new ArrayList<>();
     }
 
     public UserProfile getProfile() {
@@ -42,5 +42,9 @@ public class CurrentUser {
 
     public int getFriendsCount(){
         return friends.size();
+    }
+
+    public static void reset(){
+        ourInstance=new CurrentUser();
     }
 }

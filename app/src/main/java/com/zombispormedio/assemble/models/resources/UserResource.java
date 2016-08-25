@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.services.IAuthService;
@@ -46,6 +47,7 @@ public class UserResource {
 
     public void signOut(final IServiceHandler<Result, Error> handler){
         auth.signOut(handler);
+        CurrentUser.reset();
     }
 
     public void getProfile(final IServiceHandler<UserProfile, Error> handler){
