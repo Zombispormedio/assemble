@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="com.zombispormedio.assemble"
-        android:installLocation="auto"
-        >
+    package="com.zombispormedio.assemble"
+    android:installLocation="auto" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <uses-feature
-            android:name="android.hardware.camera"
-            android:required="true"
-            />
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
-            android:allowBackup="true"
-            android:fullBackupContent="@xml/assemble_backup_scheme"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:logo="@drawable/logo"
-            android:supportsRtl="true"
-            android:theme="@style/AppTheme"
-            >
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/assemble_backup_scheme"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:logo="@drawable/logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
         <activity
-                android:name=".activities.MainActivity"
-                android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
-                >
+            android:name=".activities.MainActivity"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,81 +31,75 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".activities.HomeActivity"
-                android:label="@string/home_title"
-                />
+            android:name=".activities.HomeActivity"
+            android:label="@string/home_title" />
         <activity android:name=".activities.LoginActivity" />
         <activity
-                android:name=".activities.RegisterActivity"
-                android:parentActivityName=".activities.LoginActivity"
-                >
+            android:name=".activities.RegisterActivity"
+            android:parentActivityName=".activities.LoginActivity" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activities.LoginActivity"
-                    />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.LoginActivity" />
         </activity>
         <activity
-                android:name=".activities.ProfileActivity"
-                android:label="@string/profile_title"
-                android:parentActivityName=".activities.HomeActivity"
-                >
+            android:name=".activities.ProfileActivity"
+            android:label="@string/profile_title"
+            android:parentActivityName=".activities.HomeActivity" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activities.HomeActivity"
-                    />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.HomeActivity" />
         </activity>
         <activity
-                android:name=".activities.UpdateProfileActivity"
-                android:label="@string/update_profile_title"
-                android:parentActivityName=".activities.ProfileActivity"
-                android:windowSoftInputMode="adjustResize"
-                >
+            android:name=".activities.UpdateProfileActivity"
+            android:label="@string/update_profile_title"
+            android:parentActivityName=".activities.ProfileActivity"
+            android:windowSoftInputMode="adjustResize" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activities.ProfileActivity"
-                    />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.ProfileActivity" />
         </activity>
         <activity
-                android:name=".activities.UpdateBirthdateActivity"
-                android:label="@string/update_birthdate_title"
-                android:parentActivityName=".activities.UpdateProfileActivity"
-                >
+            android:name=".activities.UpdateBirthdateActivity"
+            android:label="@string/update_birthdate_title"
+            android:parentActivityName=".activities.UpdateProfileActivity" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activities.UpdateProfileActivity"
-                    />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.UpdateProfileActivity" />
         </activity>
         <activity
-                android:name=".activities.SettingsActivity"
-                android:label="@string/settings_title"
-                android:parentActivityName=".activities.HomeActivity"
-                >
+            android:name=".activities.SettingsActivity"
+            android:label="@string/settings_title"
+            android:parentActivityName=".activities.HomeActivity" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activities.HomeActivity"
-                    />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.HomeActivity" />
         </activity>
         <activity
-                android:name=".activities.HelpActivity"
-                android:label="@string/title_activity_help"
-                android:parentActivityName=".activities.HomeActivity"
-                android:theme="@style/AppTheme"
-                >
+            android:name=".activities.HelpActivity"
+            android:label="@string/help_title"
+            android:parentActivityName=".activities.HomeActivity"
+            android:theme="@style/AppTheme" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.zombispormedio.assemble.activities.HomeActivity"
-                    />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.zombispormedio.assemble.activities.HomeActivity" />
         </activity>
         <activity
-                android:name=".activities.FriendsActivity"
-                android:label="@string/title_activity_friends"
-                android:parentActivityName=".activities.HomeActivity"
-                android:theme="@style/AppTheme"
-                >
+            android:name=".activities.FriendsActivity"
+            android:label="@string/friends_title"
+            android:parentActivityName=".activities.HomeActivity"
+            android:theme="@style/AppTheme" >
             <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.zombispormedio.assemble.activities.HomeActivity"
-                    />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.zombispormedio.assemble.activities.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activities.NewFriendActivity"
+            android:label="@string/new_friend_title"
+            android:parentActivityName=".activities.FriendsActivity"
+            android:theme="@style/AppTheme" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.zombispormedio.assemble.activities.FriendsActivity" />
         </activity>
     </application>
 

@@ -12,4 +12,8 @@ public class FriendsController extends AbstractController {
     public FriendsController(IFriendsView ctx) {
         this.ctx = ctx;
     }
+
+    public void onNewFriend() {
+        ctx.goToNewFriend();
+    }
 }

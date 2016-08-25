@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.activities.HelpActivity;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.activities.LoginActivity;
 import com.zombispormedio.assemble.activities.MainActivity;
+import com.zombispormedio.assemble.activities.NewFriendActivity;
 import com.zombispormedio.assemble.activities.ProfileActivity;
 import com.zombispormedio.assemble.activities.RegisterActivity;
 import com.zombispormedio.assemble.activities.SettingsActivity;
@@ -85,6 +86,14 @@ public final class NavigationManager {
         goTo(ctx, UpdateProfileActivity.class);
     }
 
+    public  static void UpdateBirthdate(Activity ctx){
+        goToWithResult(ctx, UpdateBirthdateActivity.class);
+    }
+
+    public  static void UpdateBirthdate(Activity ctx, String... extras){
+        goToWithResult(ctx, UpdateBirthdateActivity.class, extras);
+    }
+
     public  static void Friends(Context ctx){
         goTo(ctx, FriendsActivity.class);
     }
@@ -93,12 +102,8 @@ public final class NavigationManager {
         goTo(ctx, HelpActivity.class);
     }
 
-    public  static void UpdateBirthdate(Activity ctx){
-        goToWithResult(ctx, UpdateBirthdateActivity.class);
-    }
-
-    public  static void UpdateBirthdate(Activity ctx, String... extras){
-        goToWithResult(ctx, UpdateBirthdateActivity.class, extras);
+    public  static void NewFriend(Context ctx){
+        goTo(ctx, NewFriendActivity.class);
     }
 
     public void Home(){
@@ -123,6 +128,10 @@ public final class NavigationManager {
 
     public void Friends(){
         NavigationManager.Friends(ctx);
+    }
+
+    public void NewFriend(){
+        NavigationManager.NewFriend(ctx);
     }
 
     public void Help(){

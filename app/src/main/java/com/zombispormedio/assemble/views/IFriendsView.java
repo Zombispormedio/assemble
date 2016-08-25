@@ -5,4 +5,6 @@ package com.zombispormedio.assemble.views;
  */
 public interface IFriendsView extends IBaseView {
 
+    public void goToNewFriend();
+
 }

@@ -3,7 +3,9 @@ package com.zombispormedio.assemble.activities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
+import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.services.api.APIConfiguration;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.IBaseView;
@@ -44,6 +46,23 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     public void showAlert(String msg){
         AndroidUtils.showAlert(this, msg);
+    }
+
+
+    protected void setupToolbar(){
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+    }
+
+    protected void setHomeUpIcon(int id){
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setHomeAsUpIndicator(id);
+
+        }
     }
 
 

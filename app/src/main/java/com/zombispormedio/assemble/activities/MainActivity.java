@@ -1,10 +1,10 @@
 package com.zombispormedio.assemble.activities;
+
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 
 
 import android.view.Window;
-
 
 
 import com.zombispormedio.assemble.controllers.MainController;
@@ -14,14 +14,11 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.IMainView;
 
 
-
-
-
-
 public class MainActivity extends BaseActivity implements IMainView {
 
 
     private NavigationManager navigation;
+
     private MainController ctrl;
 
     @Override
@@ -32,11 +29,9 @@ public class MainActivity extends BaseActivity implements IMainView {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
 
+        ctrl = new MainController(this);
 
-        ctrl=new MainController(this);
-
-        navigation= new NavigationManager(this);
-
+        navigation = new NavigationManager(this);
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -47,17 +42,15 @@ public class MainActivity extends BaseActivity implements IMainView {
                 }, 2000);
 
 
-
     }
 
 
-
-    private void Login(){
+    private void Login() {
         navigation.Login();
         finish();
     }
 
-    private void Home(){
+    private void Home() {
         navigation.Home();
         finish();
     }

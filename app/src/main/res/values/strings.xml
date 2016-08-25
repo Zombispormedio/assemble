@@ -31,7 +31,7 @@
     <string name="gatherings_tab_title">Gatherings</string>
     <string name="messages_tab_title">Messages</string>
     <string name="teams_tab_title">Teams</string>
-    <string name="f_menu">Friends</string>
+
     <string name="help_title">Help</string>
 
 
@@ -67,7 +67,7 @@
     <string name="reject_changes_title">Reject changes?</string>
     <string name="cancel_title">Cancel</string>
     <string name="delete_title">Delete</string>
-    <string name="title_activity_help">Help</string>
-    <string name="title_activity_friends">Friends</string>
+    <string name="friends_title">Friends</string>
+    <string name="new_friend_title">Find friends</string>
 
 </resources>

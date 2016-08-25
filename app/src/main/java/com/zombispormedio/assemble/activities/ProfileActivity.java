@@ -54,13 +54,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        Toolbar bar = (Toolbar) findViewById(R.id.profile_bar);
-        setSupportActionBar(bar);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
+        setupToolbar();
 
         externalNavigationManager = new ExternalNavigationManager(this);
 

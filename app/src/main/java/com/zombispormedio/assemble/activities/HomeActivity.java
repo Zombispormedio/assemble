@@ -38,14 +38,12 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         drawer= (DrawerLayout)findViewById(R.id.drawer_layout_home);
         NavigationView nav = (NavigationView) findViewById(R.id.navview);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.home_bar);
-        
-        setSupportActionBar(toolbar);
 
-        if(getSupportActionBar() != null) {
-            getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu_bar);
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        setupToolbar();
+
+        setHomeUpIcon(R.drawable.menu_bar);
+
+
         nav.setNavigationItemSelectedListener(NavListener());
         drawer.addDrawerListener(DrawerListener());
 

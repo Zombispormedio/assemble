@@ -37,12 +37,7 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
 
-        Toolbar bar = (Toolbar) findViewById(R.id.update_profile_bar);
-        setSupportActionBar(bar);
-
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        setupToolbar();
 
         _usernameInput=(EditText) findViewById(R.id.username_input);
 

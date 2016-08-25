@@ -15,10 +15,10 @@ import android.widget.Button;
 import android.widget.DatePicker;
 
 
-
 public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirthdateView {
 
     private UpdateBirthdateController ctrl;
+
     private DatePicker _datePicker;
 
     @Override
@@ -26,18 +26,13 @@ public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_birthdate);
 
-        Toolbar bar = (Toolbar) findViewById(R.id.update_birthdate_bar);
-        setSupportActionBar(bar);
+        setupToolbar();
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        ctrl = new UpdateBirthdateController(this);
 
-        ctrl=new UpdateBirthdateController(this);
+        _datePicker = (DatePicker) findViewById(R.id.birthdate_picker);
 
-        _datePicker= (DatePicker) findViewById(R.id.birthdate_picker);
-
-        ((Button) findViewById(R.id.save_button)).setOnClickListener(new View.OnClickListener() {
+        (findViewById(R.id.save_button)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ctrl.onSave();
@@ -80,7 +75,7 @@ public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirt
 
     @Override
     public String getInitBirthdate() {
-        return getIntent().getStringExtra(NavigationManager.ARGS+0);
+        return getIntent().getStringExtra(NavigationManager.ARGS + 0);
     }
 
 

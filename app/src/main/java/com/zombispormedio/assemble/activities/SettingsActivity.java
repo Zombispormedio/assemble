@@ -22,14 +22,8 @@ public class SettingsActivity extends BaseActivity implements ISettingsView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-        Toolbar bar = (Toolbar) findViewById(R.id.settings_bar);
-        setSupportActionBar(bar);
 
-        if(getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
-
+        setupToolbar();
 
         ctrl= new SettingsController(this);
 

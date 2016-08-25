@@ -6,22 +6,16 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.controllers.HelpController;
-import com.zombispormedio.assemble.views.IHelpView;
 
-public class HelpActivity extends BaseActivity implements IHelpView {
-
-    private HelpController ctrl;
+public class NewFriendActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help);
-        setupToolbar();
+        setContentView(R.layout.activity_new_friend);
 
-        ctrl = new HelpController(this);
+        setupToolbar();
     }
 
 }
