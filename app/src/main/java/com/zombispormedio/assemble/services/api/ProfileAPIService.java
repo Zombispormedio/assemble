@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.Profile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
@@ -118,5 +119,10 @@ public class ProfileAPIService implements IProfileService {
                     }
                 })
                 .get();
+    }
+
+    @Override
+    public void getFriendRequests(IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler) {
+
     }
 }

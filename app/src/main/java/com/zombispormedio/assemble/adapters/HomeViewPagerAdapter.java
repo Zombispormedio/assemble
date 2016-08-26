@@ -11,11 +11,11 @@ import com.zombispormedio.assemble.fragments.TeamsTabFragment;
 /**
  * Created by Xavier Serrano on 12/07/2016.
  */
-public class HomeTabPagerAdapter extends FragmentStatePagerAdapter{
+public class HomeViewPagerAdapter extends FragmentStatePagerAdapter{
 
     private int numTabs;
 
-    public HomeTabPagerAdapter(FragmentManager fm, int numTabs) {
+    public HomeViewPagerAdapter(FragmentManager fm, int numTabs) {
         super(fm);
 
         this.numTabs=numTabs;

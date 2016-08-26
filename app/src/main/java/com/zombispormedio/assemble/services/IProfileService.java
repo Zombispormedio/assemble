@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.services;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.Error;
 import com.zombispormedio.assemble.rest.Result;
@@ -22,5 +23,7 @@ public interface IProfileService {
     void update(EditProfile profile,final IServiceHandler<UserProfile, Error> handler );
 
     void getFriends(final IServiceHandler<ArrayList<FriendProfile>, Error> handler);
+
+    void getFriendRequests(final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler);
 
 }

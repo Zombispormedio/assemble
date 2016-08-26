@@ -2,19 +2,16 @@ package com.zombispormedio.assemble.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.adapters.FriendsAdapter;
+import com.zombispormedio.assemble.adapters.FriendsRecyclerViewAdapter;
 import com.zombispormedio.assemble.controllers.FriendsController;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.utils.DividerItemDecoration;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.IFriendsView;
 
@@ -72,12 +69,12 @@ public class FriendsActivity extends BaseActivity implements IFriendsView{
 
 
     public void bindFriends(ArrayList<FriendProfile> data){
-        _listFriends.setAdapter(new FriendsAdapter(data));
+        _listFriends.setAdapter(new FriendsRecyclerViewAdapter(data));
     }
 
     @Override
     public void bindRequestFriends(ArrayList<FriendProfile> data) {
-        _listRequestFriends.setAdapter(new FriendsAdapter(data));
+        _listRequestFriends.setAdapter(new FriendsRecyclerViewAdapter(data));
     }
 
     @Override

@@ -36,9 +36,6 @@ public class FriendsController extends AbstractController {
     }
 
     private void fillFriends() {
-
-
-
         if(user.getFriendsCount()>0){
             ctx.bindFriends(user.getFriends());
         }else{
@@ -59,9 +56,6 @@ public class FriendsController extends AbstractController {
                 ctx.bindFriends(result);
             }
         });
-
-
-
 
     }
 

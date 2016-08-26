@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.TextView;
 
 
-import com.zombispormedio.assemble.adapters.HomeTabPagerAdapter;
+import com.zombispormedio.assemble.adapters.HomeViewPagerAdapter;
 import com.zombispormedio.assemble.controllers.HomeController;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
@@ -59,7 +59,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         final ViewPager viewTabPager= (ViewPager) findViewById(R.id.home_pager);
 
-        final HomeTabPagerAdapter adapterTabPager = new HomeTabPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        final HomeViewPagerAdapter adapterTabPager = new HomeViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
 
         viewTabPager.setAdapter(adapterTabPager);
 
