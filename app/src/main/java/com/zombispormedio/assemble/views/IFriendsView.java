@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.views;
 
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.FriendRequestProfile;
 
 import java.util.ArrayList;
 
@@ -12,10 +13,18 @@ public interface IFriendsView extends IBaseView {
    void goToNewFriend();
 
     void bindFriends(ArrayList<FriendProfile> data);
-    void bindRequestFriends(ArrayList<FriendProfile> data);
+    void bindFriendRequests(ArrayList<FriendRequestProfile> data);
 
     void loading();
 
     void unloading();
+
+    void showFriendsList();
+    void hideFriendsList();
+
+
+    void showRequestsList();
+    void hideRequestsList();
+
 
 }

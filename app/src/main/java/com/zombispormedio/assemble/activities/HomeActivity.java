@@ -47,9 +47,14 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         nav.setNavigationItemSelectedListener(NavListener());
         drawer.addDrawerListener(DrawerListener());
 
+        setupTabs();
 
+        ctrl.onCreate();
+
+    }
+
+    private void setupTabs() {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.home_tab_layout);
-
 
         tabLayout.addTab(tabLayout.newTab().setText(R.string.teams_tab_title));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.gatherings_tab_title));
@@ -83,9 +88,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
             }
         });
-
     }
-
 
 
     public boolean onOptionsItemSelected(MenuItem item){

@@ -5,6 +5,7 @@ package com.zombispormedio.assemble.models.resources;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.rest.Error;
@@ -68,5 +69,7 @@ public class UserResource {
         persistence.getFriends(handler);
     }
 
-
+    public void getFriendRequests(final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler){
+        persistence.getFriendRequests(handler);
+    }
 }

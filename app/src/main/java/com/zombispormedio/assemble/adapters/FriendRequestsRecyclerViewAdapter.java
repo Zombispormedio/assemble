@@ -1,6 +1,8 @@
 package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
+import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 
 import android.view.LayoutInflater;
@@ -24,8 +26,30 @@ public class FriendRequestsRecyclerViewAdapter extends BaseRecyclerViewAdapter<F
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_friend_requests, parent, false);
 
-        itemView.setOnClickListener(this);
+        FriendRequestsViewHolder holder=new FriendRequestsViewHolder(itemView);
 
-        return new FriendRequestsViewHolder(itemView);
+        if(listener!=null){
+            holder.setOnClickListener(listener);
+        }
+
+        return holder;
+    }
+
+    public static class Factory {
+
+        private IOnClickItemListHandler<FriendRequestProfile> listener;
+
+        public void setOnClickListener(IOnClickItemListHandler<FriendRequestProfile> listener){
+            this.listener=listener;
+
+        }
+
+        public FriendRequestsRecyclerViewAdapter make(ArrayList<FriendRequestProfile> data) {
+            FriendRequestsRecyclerViewAdapter adapter=new FriendRequestsRecyclerViewAdapter(data);
+            if(listener!=null){
+                adapter.setOnClickListener(listener);
+            }
+            return adapter;
+        }
     }
 }

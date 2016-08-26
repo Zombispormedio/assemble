@@ -1,13 +1,12 @@
 package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -23,15 +22,34 @@ public class FriendsRecyclerViewAdapter
     }
 
 
-
     @Override
     public FriendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_friends, parent, false);
 
-        itemView.setOnClickListener(this);
+        FriendViewHolder holder=new FriendViewHolder(itemView);
+        if(listener!=null){
+            holder.setOnClickListener(listener);
+        }
+        return holder ;
+    }
 
-        return new FriendViewHolder(itemView);
+    public static class Factory {
+
+        private IOnClickItemListHandler<FriendProfile> listener;
+
+        public void setOnClickListener(IOnClickItemListHandler<FriendProfile> listener){
+            this.listener=listener;
+
+        }
+
+        public FriendsRecyclerViewAdapter make(ArrayList<FriendProfile> data) {
+            FriendsRecyclerViewAdapter adapter=new FriendsRecyclerViewAdapter(data);
+            if(listener!=null){
+                adapter.setOnClickListener(listener);
+            }
+            return adapter;
+        }
     }
 
 

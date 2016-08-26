@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
@@ -24,18 +25,23 @@ public class HomeController extends AbstractController {
         this.ctx = ctx;
         userResource = ResourceFactory.createUser();
         user = CurrentUser.getInstance();
-        ProfileHandler profileHandler = new ProfileHandler();
-
-        userResource.getProfile(profileHandler);
     }
+
+    @Override
+    public void onCreate() {
+        loadData();
+        setDrawerTitle();
+    }
+
 
     public void onDrawerOpened() {
-        DrawerTitle();
+
     }
 
-    private void DrawerTitle() {
+    private void setDrawerTitle() {
         UserProfile profile = user.getProfile();
         String title = "";
+
         if (!profile.username.isEmpty()) {
             title = profile.username;
 
@@ -53,13 +59,6 @@ public class HomeController extends AbstractController {
         ctx.goToSettings();
     }
 
-
-    @Override
-    public void onDestroy() {
-        ctx = null;
-    }
-
-
     public void onProfileMenuItem() {
         ctx.goToProfile();
     }
@@ -72,18 +71,32 @@ public class HomeController extends AbstractController {
         ctx.goToFriends();
     }
 
-    private class ProfileHandler implements IServiceHandler<UserProfile, Error> {
 
-        @Override
-        public void onError(Error error) {
-            ctx.showAlert(error.msg);
-        }
-
-        @Override
-        public void onSuccess(UserProfile result) {
-            user.setProfile(result);
-            DrawerTitle();
-        }
+    private void loadData(){
+        getProfile();
     }
+
+    private void getProfile() {
+
+        userResource.getProfile(new IServiceHandler<UserProfile, Error>() {
+            @Override
+            public void onError(Error error) {
+                ctx.showAlert(error.msg);
+            }
+
+            @Override
+            public void onSuccess(UserProfile result) {
+                user.setProfile(result);
+                setDrawerTitle();
+            }
+        });
+    }
+
+
+    @Override
+    public void onDestroy() {
+        ctx = null;
+    }
+
 
 }

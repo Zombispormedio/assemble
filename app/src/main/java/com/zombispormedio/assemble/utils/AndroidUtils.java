@@ -153,8 +153,13 @@ public final class AndroidUtils {
         }
     }
 
-    public static void setupDefaultList(Context ctx,RecyclerView list){
-        list.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false));
+    public static void setupNoScrollList(Context ctx,RecyclerView list){
+        list.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        });
         list.setItemAnimator(new DefaultItemAnimator());
 
         list.addItemDecoration(new DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL_LIST));

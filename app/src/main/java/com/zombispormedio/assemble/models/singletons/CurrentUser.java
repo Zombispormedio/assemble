@@ -1,6 +1,8 @@
 package com.zombispormedio.assemble.models.singletons;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 
 import java.util.ArrayList;
@@ -19,9 +21,12 @@ public class CurrentUser {
 
     private ArrayList<FriendProfile> friends;
 
+    private ArrayList<FriendRequestProfile> friendRequests;
+
     private CurrentUser() {
         profile=new UserProfile();
         friends=new ArrayList<>();
+        friendRequests=new ArrayList<>();
     }
 
     public UserProfile getProfile() {
@@ -42,6 +47,18 @@ public class CurrentUser {
 
     public int getFriendsCount(){
         return friends.size();
+    }
+
+    public int getFriendRequestsCount(){
+        return friendRequests.size();
+    }
+
+    public ArrayList<FriendRequestProfile> getFriendRequests() {
+        return friendRequests;
+    }
+
+    public void setFriendRequests(ArrayList<FriendRequestProfile> friendRequests) {
+        this.friendRequests = friendRequests;
     }
 
     public static void reset(){

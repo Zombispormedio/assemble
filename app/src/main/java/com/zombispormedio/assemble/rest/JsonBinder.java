@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.rest.responses.DefaultResponse;
+import com.zombispormedio.assemble.rest.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.rest.responses.FriendsResponse;
 import com.zombispormedio.assemble.rest.responses.ProfileResponse;
 import com.zombispormedio.assemble.wrappers.moshi.JSONWrapper;
@@ -48,7 +49,9 @@ public class JsonBinder {
         return jsonAdapter.fromJSON(arg);
     }
 
-    /*public static ArrayList<FriendProfile> toFriendProfileArray(String args){
+    public static FriendRequestsResponse toFriendRequestsResponse(String arg) throws IOException {
+        JSONWrapper<FriendRequestsResponse> jsonAdapter= new JSONWrapper<>(FriendRequestsResponse.class);
+        return jsonAdapter.fromJSON(arg);
+    }
 
-    }*/
 }

@@ -8,51 +8,59 @@
         tools:context="com.zombispormedio.assemble.activities.FriendsActivity"
         tools:showIn="@layout/activity_friends"
         >
-    <LinearLayout
+
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             >
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/req_friends_list"
+
+        <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
 
-                />
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/friends_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/req_friends_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
 
-                />
-    </LinearLayout>
+                    />
 
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/friends_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    />
+        </LinearLayout>
+    </ScrollView>
 
     <ProgressBar
+            android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/progress_bar"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="82dp"
             android:indeterminate="true"
 
+            android:maxHeight="800sp"
             android:maxWidth="800sp"
             android:visibility="gone"
-            android:maxHeight="800sp"
             />
 
     <TextView
+            android:id="@+id/loading_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="@string/searching_your_friends"
-            android:id="@+id/loading_label"
-            android:layout_marginTop="30dp"
-            android:visibility="gone"
             android:layout_below="@+id/progressBar"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:text="@string/searching_your_friends"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone"
             />
 
 </RelativeLayout>

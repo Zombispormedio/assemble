@@ -7,10 +7,15 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.adapters.FriendRequestsRecyclerViewAdapter;
 import com.zombispormedio.assemble.adapters.FriendsRecyclerViewAdapter;
 import com.zombispormedio.assemble.controllers.FriendsController;
+
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.IFriendsView;
@@ -24,6 +29,10 @@ public class FriendsActivity extends BaseActivity implements IFriendsView{
     private RecyclerView _listFriends;
     private RecyclerView _listRequestFriends;
 
+    private FriendsRecyclerViewAdapter.Factory _listFriendsFactory;
+
+    private FriendRequestsRecyclerViewAdapter.Factory _listFriendRequestsFactory;
+
 
     private TextView _progressLabel;
     private ProgressBar _progressBar;
@@ -32,10 +41,12 @@ public class FriendsActivity extends BaseActivity implements IFriendsView{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
-
         setupToolbar();
 
         ctrl= new FriendsController(this);
+
+        _listFriendsFactory =new FriendsRecyclerViewAdapter.Factory();
+        _listFriendRequestsFactory=new FriendRequestsRecyclerViewAdapter.Factory();
 
         _listFriends =(RecyclerView) findViewById(R.id.friends_list);
         _listRequestFriends =(RecyclerView) findViewById(R.id.req_friends_list);
@@ -51,6 +62,7 @@ public class FriendsActivity extends BaseActivity implements IFriendsView{
             }
         });
 
+
         setupFriends();
 
         setupRequestFriends();
@@ -59,22 +71,25 @@ public class FriendsActivity extends BaseActivity implements IFriendsView{
     }
 
     private void setupRequestFriends() {
-        AndroidUtils.setupDefaultList(this, _listRequestFriends);
+        AndroidUtils.setupNoScrollList(this, _listRequestFriends);
+        _listFriendRequestsFactory.setOnClickListener(ctrl.getOnClickOneRequest());
+
     }
 
     private void setupFriends() {
-        AndroidUtils.setupDefaultList(this, _listFriends);
+        AndroidUtils.setupNoScrollList(this, _listFriends);
+        _listFriendsFactory.setOnClickListener(ctrl.getOnClickOneFriend());
     }
 
 
 
     public void bindFriends(ArrayList<FriendProfile> data){
-        _listFriends.setAdapter(new FriendsRecyclerViewAdapter(data));
+        _listFriends.setAdapter(_listFriendsFactory.make(data));
     }
 
     @Override
-    public void bindRequestFriends(ArrayList<FriendProfile> data) {
-        _listRequestFriends.setAdapter(new FriendsRecyclerViewAdapter(data));
+    public void bindFriendRequests(ArrayList<FriendRequestProfile> data) {
+        _listRequestFriends.setAdapter(_listFriendRequestsFactory.make(data));
     }
 
     @Override
@@ -87,6 +102,26 @@ public class FriendsActivity extends BaseActivity implements IFriendsView{
     public void unloading() {
         _progressBar.setVisibility(View.GONE);
         _progressLabel.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showFriendsList() {
+        _listFriends.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideFriendsList() {
+        _listFriends.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showRequestsList() {
+        _listRequestFriends.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideRequestsList() {
+        _listRequestFriends.setVisibility(View.GONE);
     }
 
 

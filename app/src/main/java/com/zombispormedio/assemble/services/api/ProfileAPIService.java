@@ -13,6 +13,7 @@ import com.zombispormedio.assemble.rest.FileBody;
 import com.zombispormedio.assemble.rest.JsonBinder;
 import com.zombispormedio.assemble.rest.Result;
 import com.zombispormedio.assemble.rest.responses.DefaultResponse;
+import com.zombispormedio.assemble.rest.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.rest.responses.FriendsResponse;
 import com.zombispormedio.assemble.rest.responses.ProfileResponse;
 import com.zombispormedio.assemble.services.IProfileService;
@@ -122,7 +123,24 @@ public class ProfileAPIService implements IProfileService {
     }
 
     @Override
-    public void getFriendRequests(IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler) {
+    public void getFriendRequests(final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler) {
+        api.RestWithAuth("/friend_requests")
+                .handler(new IPromiseHandler() {
+                    @Override
+                    public void onSuccess(String... args) {
+                        try {
+                            FriendRequestsResponse res =JsonBinder.toFriendRequestsResponse(args[0]);
 
+                            if(res.success){
+                                handler.onSuccess(res.getResult());
+                            }else{
+                                handler.onError(res.error);
+                            }
+                        } catch (IOException e) {
+                            handler.onError(new Error(e.getMessage()));
+                        }
+                    }
+                })
+                .get();
     }
 }

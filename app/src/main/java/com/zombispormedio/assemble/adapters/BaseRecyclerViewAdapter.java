@@ -1,9 +1,9 @@
 package com.zombispormedio.assemble.adapters;
 
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -11,14 +11,15 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends RecyclerView.Adapter<E>
-        implements View.OnClickListener {
+public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends RecyclerView.Adapter<E> {
 
-    protected View.OnClickListener listener;
+    protected IOnClickItemListHandler<T> listener;
+
     protected ArrayList<T> data;
 
     public BaseRecyclerViewAdapter(ArrayList<T> data) {
         this.data = data;
+        this.listener = null;
     }
 
     @Override
@@ -28,8 +29,8 @@ public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends
 
     @Override
     public void onBindViewHolder(E holder, int position) {
-        T item=data.get(position);
-        holder.bind(item);
+        T item = data.get(position);
+        holder.bind(position, item);
     }
 
     @Override
@@ -37,19 +38,9 @@ public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends
         return data.size();
     }
 
-    public void setOnClickListener(View.OnClickListener listener){
+    public void setOnClickListener(IOnClickItemListHandler listener){
         this.listener=listener;
     }
-
-    @Override
-    public void onClick(View view) {
-        if(listener!=null){
-            listener.onClick(view);
-        }
-    }
-
-
-
 
 
 }
