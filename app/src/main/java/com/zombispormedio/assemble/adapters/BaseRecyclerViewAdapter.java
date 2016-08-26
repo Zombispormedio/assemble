@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.models.FriendProfile;
+
 
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewGroup;
@@ -38,8 +38,8 @@ public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends
         return data.size();
     }
 
-    public void setOnClickListener(IOnClickItemListHandler listener){
-        this.listener=listener;
+    public void setOnClickListener(IOnClickItemListHandler<T> listener) {
+        this.listener = listener;
     }
 
 

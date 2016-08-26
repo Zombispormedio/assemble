@@ -13,21 +13,25 @@ import com.zombispormedio.assemble.views.ISettingsView;
  * Created by Xavier Serrano on 16/07/2016.
  */
 public class SettingsController extends AbstractController {
+
     private ISettingsView ctx;
+
     private ISettingsFragmentView fctx;
+
     private UserResource user;
+
     public SettingsController(ISettingsView ctx) {
         this.ctx = ctx;
-        user= ResourceFactory.createUser();
+        user = ResourceFactory.createUser();
     }
-    
-    public void setFragmentView(ISettingsFragmentView fctx){
-        this.fctx=fctx;
+
+    public void setFragmentView(ISettingsFragmentView fctx) {
+        this.fctx = fctx;
     }
 
     @Override
     public void onDestroy() {
-        ctx=null;
+        ctx = null;
     }
 
     public void signout() {
@@ -35,6 +39,7 @@ public class SettingsController extends AbstractController {
     }
 
     private class SignOutDialogEvent implements ISuccessHandler {
+
         @Override
         public void onSuccess() {
             user.signOut(new SignOutServiceHandler());
@@ -42,6 +47,7 @@ public class SettingsController extends AbstractController {
     }
 
     private class SignOutServiceHandler implements IServiceHandler<Result, Error> {
+
         @Override
         public void onError(Error error) {
 

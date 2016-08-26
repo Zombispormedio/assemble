@@ -55,7 +55,7 @@ public class ProfileController extends AbstractController {
     }
 
     public void changeProfileImage(ISuccessHandler handler) {
-        if(ctx!=null) {
+        if (ctx != null) {
             UserProfile profile = user.getProfile();
 
             if (Utils.presenceOf(profile.full_avatar_url)) {
@@ -70,14 +70,14 @@ public class ProfileController extends AbstractController {
 
 
     private void beforeLoadingImage() {
-        if(ctx!=null){
+        if (ctx != null) {
             ctx.hideImageForm();
             ctx.showImageProgressBar();
         }
     }
 
     private void afterLoadingImage() {
-        if(ctx!=null) {
+        if (ctx != null) {
             ctx.showImageForm();
             ctx.hideImageProgressBar();
         }
@@ -108,8 +108,8 @@ public class ProfileController extends AbstractController {
     }
 
 
-    private void fillProfile(){
-        AndroidUtils.fillProfile(ctx,  user.getProfile());
+    private void fillProfile() {
+        AndroidUtils.fillProfile(ctx, user.getProfile());
     }
 
     public void updateProfile() {

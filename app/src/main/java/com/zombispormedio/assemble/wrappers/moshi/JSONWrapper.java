@@ -9,11 +9,12 @@ import java.io.IOException;
  * Created by Xavier Serrano on 26/07/2016.
  */
 public class JSONWrapper<T> {
-   private JsonAdapter<T> adapter;
+
+    private JsonAdapter<T> adapter;
 
     public JSONWrapper(Class<T> klass) {
         Moshi moshi = new Moshi.Builder().build();
-        adapter= moshi.adapter(klass);
+        adapter = moshi.adapter(klass);
 
     }
 
@@ -21,7 +22,7 @@ public class JSONWrapper<T> {
         return adapter.fromJson(json);
     }
 
-    public String toJSON(T obj){
+    public String toJSON(T obj) {
         return adapter.toJson(obj);
     }
 }

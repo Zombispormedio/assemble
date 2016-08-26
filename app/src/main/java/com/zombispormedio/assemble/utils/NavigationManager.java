@@ -21,131 +21,132 @@ import com.zombispormedio.assemble.activities.UpdateProfileActivity;
  * Created by Xavier Serrano on 25/06/2016.
  */
 public final class NavigationManager {
+
     private Context ctx;
 
-    public static final int UPDATE_BIRTHDATE_CODE=5956;
+    public static final int UPDATE_BIRTHDATE_CODE = 5956;
 
-    public static final String ARGS ="args";
+    public static final String ARGS = "args";
 
-    public static final String SIZE ="size";
+    public static final String SIZE = "size";
 
-    public NavigationManager(Context ctx){
-        this.ctx=ctx;
+    public NavigationManager(Context ctx) {
+        this.ctx = ctx;
 
     }
 
 
-    public static void goTo(Context ctx, Class<?> cls){
-        Intent dst=new Intent(ctx, cls);
+    public static void goTo(Context ctx, Class<?> cls) {
+        Intent dst = new Intent(ctx, cls);
         ctx.startActivity(dst);
 
     }
 
-    public static void goToWithResult(Activity ctx, Class<?> cls){
-        Intent dst=new Intent(ctx, cls);
+    public static void goToWithResult(Activity ctx, Class<?> cls) {
+        Intent dst = new Intent(ctx, cls);
         ctx.startActivityForResult(dst, UPDATE_BIRTHDATE_CODE);
 
     }
 
-    public static void goToWithResult(Activity ctx, Class<?> cls, String...extras){
-        Intent dst=new Intent(ctx, cls);
-        dst.putExtra(SIZE,extras.length);
+    public static void goToWithResult(Activity ctx, Class<?> cls, String... extras) {
+        Intent dst = new Intent(ctx, cls);
+        dst.putExtra(SIZE, extras.length);
 
-        for(int i=0; i<extras.length; i++){
-            dst.putExtra(ARGS +i,extras[i]);
+        for (int i = 0; i < extras.length; i++) {
+            dst.putExtra(ARGS + i, extras[i]);
         }
         ctx.startActivityForResult(dst, UPDATE_BIRTHDATE_CODE);
 
     }
 
-    public  static void Login(Context ctx){
+    public static void Login(Context ctx) {
         goTo(ctx, LoginActivity.class);
     }
 
-    public  static void Home(Context ctx){
+    public static void Home(Context ctx) {
         goTo(ctx, HomeActivity.class);
     }
 
-    public  static void Register(Context ctx){
+    public static void Register(Context ctx) {
         goTo(ctx, RegisterActivity.class);
     }
 
-    public  static void Main(Context ctx){
+    public static void Main(Context ctx) {
         goTo(ctx, MainActivity.class);
     }
 
-    public  static void Profile(Context ctx){
+    public static void Profile(Context ctx) {
         goTo(ctx, ProfileActivity.class);
     }
 
-    public  static void Settings(Context ctx){
+    public static void Settings(Context ctx) {
         goTo(ctx, SettingsActivity.class);
     }
 
-    public  static void UpdateProfile(Context ctx){
+    public static void UpdateProfile(Context ctx) {
         goTo(ctx, UpdateProfileActivity.class);
     }
 
-    public  static void UpdateBirthdate(Activity ctx){
+    public static void UpdateBirthdate(Activity ctx) {
         goToWithResult(ctx, UpdateBirthdateActivity.class);
     }
 
-    public  static void UpdateBirthdate(Activity ctx, String... extras){
+    public static void UpdateBirthdate(Activity ctx, String... extras) {
         goToWithResult(ctx, UpdateBirthdateActivity.class, extras);
     }
 
-    public  static void Friends(Context ctx){
+    public static void Friends(Context ctx) {
         goTo(ctx, FriendsActivity.class);
     }
 
-    public  static void Help(Context ctx){
+    public static void Help(Context ctx) {
         goTo(ctx, HelpActivity.class);
     }
 
-    public  static void NewFriend(Context ctx){
+    public static void NewFriend(Context ctx) {
         goTo(ctx, NewFriendActivity.class);
     }
 
-    public void Home(){
+    public void Home() {
         NavigationManager.Home(ctx);
     }
 
-    public void Login(){
+    public void Login() {
         NavigationManager.Login(ctx);
     }
 
-    public void Profile(){
+    public void Profile() {
         NavigationManager.Profile(ctx);
     }
 
-    public void Register(){
+    public void Register() {
         NavigationManager.Register(ctx);
     }
 
-    public void Settings(){
+    public void Settings() {
         NavigationManager.Settings(ctx);
     }
 
-    public void Friends(){
+    public void Friends() {
         NavigationManager.Friends(ctx);
     }
 
-    public void NewFriend(){
+    public void NewFriend() {
         NavigationManager.NewFriend(ctx);
     }
 
-    public void Help(){
+    public void Help() {
         NavigationManager.Help(ctx);
     }
 
-    public static void finishWithResult(Activity ctx, String... args){
+    public static void finishWithResult(Activity ctx, String... args) {
         Intent intent = new Intent();
-        intent.putExtra(SIZE,args.length);
+        intent.putExtra(SIZE, args.length);
 
-        for(int i=0; i<args.length; i++){
-            intent.putExtra(ARGS +i,args[i]);
+        for (int i = 0; i < args.length; i++) {
+            intent.putExtra(ARGS + i, args[i]);
         }
-        ctx.setResult(ctx.RESULT_OK, intent);
+        ctx.setResult(Activity.RESULT_OK, intent);
         ctx.finish();
 
     }

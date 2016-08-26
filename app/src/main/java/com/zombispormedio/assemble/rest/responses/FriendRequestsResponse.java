@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.rest.responses;
 
-import com.zombispormedio.assemble.models.FriendProfile;
+
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.rest.Error;
 
@@ -17,7 +17,7 @@ public class FriendRequestsResponse extends AbstractResponse<FriendRequestProfil
         super(success, error, result);
     }
 
-    public ArrayList<FriendRequestProfile> getResult(){
+    public ArrayList<FriendRequestProfile> getResult() {
         return new ArrayList<>(Arrays.asList(result));
     }
 }

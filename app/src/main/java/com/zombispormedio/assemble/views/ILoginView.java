@@ -3,13 +3,13 @@ package com.zombispormedio.assemble.views;
 /**
  * Created by Xavier Serrano on 09/07/2016.
  */
-public interface ILoginView extends IBaseView  {
+public interface ILoginView extends IBaseView {
 
     void goHome();
-    
+
     void goToRegister();
 
-     void showProgressBar();
+    void showProgressBar();
 
     void hideProgressBar();
 

@@ -14,39 +14,40 @@ import com.zombispormedio.assemble.views.IRegisterView;
 public class RegisterController extends AbstractController {
 
     private IRegisterView ctx;
+
     private UserResource user;
 
     public RegisterController(IRegisterView ctx) {
         this.ctx = ctx;
-        user= ResourceFactory.createUser();
+        user = ResourceFactory.createUser();
     }
 
     public void onClickRegisterButton() {
         whileLogin();
 
-        String email=ctx.getEmail();
-        String pass=ctx.getPassword();
-        String rep_pass=ctx.getRepPassword();
+        String email = ctx.getEmail();
+        String pass = ctx.getPassword();
+        String rep_pass = ctx.getRepPassword();
 
-        if(email.isEmpty() || pass.isEmpty() || rep_pass.isEmpty()){
+        if (email.isEmpty() || pass.isEmpty() || rep_pass.isEmpty()) {
             afterTryLogin();
-            if(email.isEmpty()){
+            if (email.isEmpty()) {
                 ctx.showEmptyEmail();
-            }else{
-                if(pass.isEmpty()){
+            } else {
+                if (pass.isEmpty()) {
                     ctx.showEmptyPassword();
-                }else{
-                    if(rep_pass.isEmpty()){
+                } else {
+                    if (rep_pass.isEmpty()) {
                         ctx.showEmptyRepPassword();
                     }
                 }
             }
-        }else{
-            if(!pass.equals(rep_pass)){
+        } else {
+            if (!pass.equals(rep_pass)) {
                 afterTryLogin();
                 ctx.showNotEqualsBothPassword();
 
-            }else{
+            } else {
                 user.signin(email, pass, new RegisterServiceHandler());
             }
         }
@@ -56,31 +57,31 @@ public class RegisterController extends AbstractController {
 
         @Override
         public void onError(Error error) {
-            String alert="";
-            boolean alerted=false;
+            String alert = "";
+            boolean alerted = false;
 
-            if(error.email!=null){
-                if(error.email.length>0){
-                    alert=error.email[0];
-                    alerted=true;
+            if (error.email != null) {
+                if (error.email.length > 0) {
+                    alert = error.email[0];
+                    alerted = true;
                 }
-            }else{
-                if(error.password!=null){
-                    if(error.password.length>0){
-                        alert=error.password[0];
-                        alerted=true;
+            } else {
+                if (error.password != null) {
+                    if (error.password.length > 0) {
+                        alert = error.password[0];
+                        alerted = true;
                     }
-                }else{
-                    if(error.msg!=null){
-                        alert=error.msg;
-                        alerted=true;
+                } else {
+                    if (error.msg != null) {
+                        alert = error.msg;
+                        alerted = true;
                     }
                 }
             }
 
-            if(!alerted){
+            if (!alerted) {
                 ctx.showUnknowError();
-            }else{
+            } else {
                 ctx.showAlert(alert);
             }
 
@@ -94,19 +95,19 @@ public class RegisterController extends AbstractController {
         }
     }
 
-    private void whileLogin(){
+    private void whileLogin() {
         ctx.hideForm();
         ctx.showProgressBar();
     }
 
-    private void afterTryLogin(){
+    private void afterTryLogin() {
         ctx.hideProgressBar();
         ctx.showForm();
     }
 
     @Override
     public void onDestroy() {
-        ctx=null;
+        ctx = null;
     }
 
 }

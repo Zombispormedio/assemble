@@ -27,25 +27,25 @@ public class FriendsRecyclerViewAdapter
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_friends, parent, false);
 
-        FriendViewHolder holder=new FriendViewHolder(itemView);
-        if(listener!=null){
+        FriendViewHolder holder = new FriendViewHolder(itemView);
+        if (listener != null) {
             holder.setOnClickListener(listener);
         }
-        return holder ;
+        return holder;
     }
 
     public static class Factory {
 
         private IOnClickItemListHandler<FriendProfile> listener;
 
-        public void setOnClickListener(IOnClickItemListHandler<FriendProfile> listener){
-            this.listener=listener;
+        public void setOnClickListener(IOnClickItemListHandler<FriendProfile> listener) {
+            this.listener = listener;
 
         }
 
         public FriendsRecyclerViewAdapter make(ArrayList<FriendProfile> data) {
-            FriendsRecyclerViewAdapter adapter=new FriendsRecyclerViewAdapter(data);
-            if(listener!=null){
+            FriendsRecyclerViewAdapter adapter = new FriendsRecyclerViewAdapter(data);
+            if (listener != null) {
                 adapter.setOnClickListener(listener);
             }
             return adapter;

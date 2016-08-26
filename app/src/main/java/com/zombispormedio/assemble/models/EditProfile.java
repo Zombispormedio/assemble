@@ -1,7 +1,5 @@
 package com.zombispormedio.assemble.models;
 
-import com.zombispormedio.assemble.utils.Utils;
-
 /**
  * Created by Xavier Serrano on 23/08/2016.
  */

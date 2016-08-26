@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 
+
 import android.view.View;
 import android.widget.TextView;
 
@@ -14,18 +15,21 @@ import android.widget.TextView;
 public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
 
     private View ctx;
-    private IOnClickItemListHandler listener;
+
+    private IOnClickItemListHandler<FriendProfile> listener;
 
     private TextView usernameLabel;
+
     private TextView emailLabel;
 
     public FriendViewHolder(View ctx) {
         super(ctx);
-        this.ctx=ctx;
-        this.listener=null;
+        this.ctx = ctx;
+        this.listener = null;
         setup();
 
     }
+
     private void setup() {
         usernameLabel = (TextView) ctx.findViewById(R.id.username_label);
         emailLabel = (TextView) ctx.findViewById(R.id.email_label);
@@ -41,7 +45,7 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
         ctx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(listener!=null){
+                if (listener != null) {
                     listener.onClick(position, itemData);
                 }
 
@@ -50,7 +54,7 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
     }
 
 
-    private void bindData(FriendProfile itemData){
+    private void bindData(FriendProfile itemData) {
         usernameLabel.setText(itemData.username);
         emailLabel.setText(itemData.email);
     }

@@ -2,7 +2,7 @@ package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.models.FriendProfile;
+
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 
 import android.view.LayoutInflater;
@@ -14,7 +14,8 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public class FriendRequestsRecyclerViewAdapter extends BaseRecyclerViewAdapter<FriendRequestProfile, FriendRequestsViewHolder> {
+public class FriendRequestsRecyclerViewAdapter
+        extends BaseRecyclerViewAdapter<FriendRequestProfile, FriendRequestsViewHolder> {
 
 
     public FriendRequestsRecyclerViewAdapter(ArrayList<FriendRequestProfile> data) {
@@ -26,9 +27,9 @@ public class FriendRequestsRecyclerViewAdapter extends BaseRecyclerViewAdapter<F
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_friend_requests, parent, false);
 
-        FriendRequestsViewHolder holder=new FriendRequestsViewHolder(itemView);
+        FriendRequestsViewHolder holder = new FriendRequestsViewHolder(itemView);
 
-        if(listener!=null){
+        if (listener != null) {
             holder.setOnClickListener(listener);
         }
 
@@ -39,14 +40,14 @@ public class FriendRequestsRecyclerViewAdapter extends BaseRecyclerViewAdapter<F
 
         private IOnClickItemListHandler<FriendRequestProfile> listener;
 
-        public void setOnClickListener(IOnClickItemListHandler<FriendRequestProfile> listener){
-            this.listener=listener;
+        public void setOnClickListener(IOnClickItemListHandler<FriendRequestProfile> listener) {
+            this.listener = listener;
 
         }
 
         public FriendRequestsRecyclerViewAdapter make(ArrayList<FriendRequestProfile> data) {
-            FriendRequestsRecyclerViewAdapter adapter=new FriendRequestsRecyclerViewAdapter(data);
-            if(listener!=null){
+            FriendRequestsRecyclerViewAdapter adapter = new FriendRequestsRecyclerViewAdapter(data);
+            if (listener != null) {
                 adapter.setOnClickListener(listener);
             }
             return adapter;

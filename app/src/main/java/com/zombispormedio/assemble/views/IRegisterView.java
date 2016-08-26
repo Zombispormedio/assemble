@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.views;
 /**
  * Created by Xavier Serrano on 09/07/2016.
  */
-public interface IRegisterView  extends IBaseView{
+public interface IRegisterView extends IBaseView {
 
     void showProgressBar();
 

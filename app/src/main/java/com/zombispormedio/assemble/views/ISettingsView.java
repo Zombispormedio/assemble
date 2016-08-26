@@ -8,7 +8,7 @@ import com.zombispormedio.assemble.handlers.ISuccessHandler;
  */
 public interface ISettingsView extends IBaseView {
 
-    void showConfirmSignOutDialog( ISuccessHandler listener);
+    void showConfirmSignOutDialog(ISuccessHandler listener);
 
     void goToLogin();
 

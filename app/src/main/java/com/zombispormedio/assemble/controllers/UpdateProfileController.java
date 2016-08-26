@@ -23,7 +23,9 @@ public class UpdateProfileController extends AbstractController {
     private IUpdateProfileView ctx;
 
     private CurrentUser user;
+
     private UserResource userResource;
+
     private EditProfile.Builder editor;
 
 
@@ -31,7 +33,7 @@ public class UpdateProfileController extends AbstractController {
         this.ctx = ctx;
         user = CurrentUser.getInstance();
         userResource = ResourceFactory.createUser();
-        editor =new EditProfile.Builder(user.getProfile());
+        editor = new EditProfile.Builder(user.getProfile());
     }
 
     @Override
@@ -42,8 +44,8 @@ public class UpdateProfileController extends AbstractController {
 
     }
 
-    private void fillProfile(){
-        AndroidUtils.fillProfile(ctx,  user.getProfile());
+    private void fillProfile() {
+        AndroidUtils.fillProfile(ctx, user.getProfile());
     }
 
     public void onSave() {
@@ -51,11 +53,11 @@ public class UpdateProfileController extends AbstractController {
 
         bindEditor();
 
-        EditProfile editProfile= editor.build();
+        EditProfile editProfile = editor.build();
 
-        if(!editor.hasChanged()){
+        if (!editor.hasChanged()) {
             ctx.close();
-        }else {
+        } else {
 
             userResource.updateProfile(editProfile, new IServiceHandler<UserProfile, Error>() {
                 @Override
@@ -85,28 +87,28 @@ public class UpdateProfileController extends AbstractController {
             editor.setBirthDate(birthdate);
             ctx.setBirthDate(DateUtils.format(DateUtils.SIMPLE_SLASH_FORMAT, birthdate));
         } catch (ParseException e) {
-           Logger.d(e.getMessage());
+            Logger.d(e.getMessage());
         }
 
     }
 
-    public void bindEditor(){
+    public void bindEditor() {
         editor.setUsername(ctx.getUsername());
         editor.setBio(ctx.getBio());
         editor.setLocation(ctx.getLocation());
     }
 
 
-    public void checkChanges(){
+    public void checkChanges() {
         bindEditor();
-        if(editor.hasChanged()){
+        if (editor.hasChanged()) {
             ctx.showRejectChangesDialog(new ISuccessHandler() {
                 @Override
                 public void onSuccess() {
                     ctx.close();
                 }
             });
-        }else{
+        } else {
             ctx.close();
         }
     }

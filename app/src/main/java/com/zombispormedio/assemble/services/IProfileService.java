@@ -20,7 +20,7 @@ public interface IProfileService {
 
     void changeAvatar(File file, final IServiceHandler<UserProfile, Error> handler);
 
-    void update(EditProfile profile,final IServiceHandler<UserProfile, Error> handler );
+    void update(EditProfile profile, final IServiceHandler<UserProfile, Error> handler);
 
     void getFriends(final IServiceHandler<ArrayList<FriendProfile>, Error> handler);
 

@@ -18,10 +18,11 @@ import java.io.IOException;
  * Created by Xavier Serrano on 25/07/2016.
  */
 public class AuthAPIService implements IAuthService {
+
     private APIConfiguration api;
 
     public AuthAPIService() {
-        api=APIConfiguration.getInstance();
+        api = APIConfiguration.getInstance();
     }
 
     @Override
@@ -32,10 +33,10 @@ public class AuthAPIService implements IAuthService {
                     @Override
                     public void onSuccess(String... args) {
                         try {
-                            DefaultResponse res= JsonBinder.toDefaultResponse(args[0]);
-                            if(res.success){
+                            DefaultResponse res = JsonBinder.toDefaultResponse(args[0]);
+                            if (res.success) {
                                 handler.onSuccess(res.result);
-                            }else{
+                            } else {
                                 handler.onError(res.error);
                             }
 
@@ -50,19 +51,18 @@ public class AuthAPIService implements IAuthService {
     }
 
 
-
     @Override
     public void login(String email, String password, final IServiceHandler<Result, Error> handler) {
-        Auth user=new Auth(email, password);
+        Auth user = new Auth(email, password);
         api.Rest("/login")
                 .handler(new IPromiseHandler() {
                     @Override
                     public void onSuccess(String... args) {
                         try {
-                            DefaultResponse res= JsonBinder.toDefaultResponse(args[0]);
-                            if(res.success){
+                            DefaultResponse res = JsonBinder.toDefaultResponse(args[0]);
+                            if (res.success) {
                                 handler.onSuccess(res.result);
-                            }else{
+                            } else {
                                 handler.onError(res.error);
                             }
 
@@ -77,16 +77,16 @@ public class AuthAPIService implements IAuthService {
 
     @Override
     public void register(String email, String password, final IServiceHandler<Result, Error> handler) {
-        Auth user=new Auth(email, password);
+        Auth user = new Auth(email, password);
         api.Rest("/signup")
                 .handler(new IPromiseHandler() {
                     @Override
                     public void onSuccess(String... args) {
                         try {
-                            DefaultResponse res= JsonBinder.toDefaultResponse(args[0]);
-                            if(res.success){
+                            DefaultResponse res = JsonBinder.toDefaultResponse(args[0]);
+                            if (res.success) {
                                 handler.onSuccess(res.result);
-                            }else{
+                            } else {
                                 handler.onError(res.error);
                             }
 
@@ -106,10 +106,10 @@ public class AuthAPIService implements IAuthService {
                     @Override
                     public void onSuccess(String... args) {
                         try {
-                            DefaultResponse res= JsonBinder.toDefaultResponse(args[0]);
-                            if(res.success){
+                            DefaultResponse res = JsonBinder.toDefaultResponse(args[0]);
+                            if (res.success) {
                                 handler.onSuccess(res.result);
-                            }else{
+                            } else {
                                 handler.onError(res.error);
                             }
 
@@ -121,7 +121,6 @@ public class AuthAPIService implements IAuthService {
                 })
                 .get();
     }
-
 
 
 }

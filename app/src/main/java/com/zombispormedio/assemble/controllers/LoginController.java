@@ -14,21 +14,22 @@ import com.zombispormedio.assemble.views.ILoginView;
 public class LoginController extends AbstractController {
 
     private ILoginView ctx;
+
     private UserResource user;
 
     public LoginController(ILoginView ctx) {
         this.ctx = ctx;
-        user= ResourceFactory.createUser();
+        user = ResourceFactory.createUser();
     }
 
     public void onClickLoginButton() {
 
-        if(!ctx.validate()){
+        if (!ctx.validate()) {
             ctx.showFailValidation();
 
-        }else{
-            String email=ctx.getEmail();
-            String pass=ctx.getPassword();
+        } else {
+            String email = ctx.getEmail();
+            String pass = ctx.getPassword();
 
             whileLogin();
 
@@ -54,12 +55,12 @@ public class LoginController extends AbstractController {
         }
     }
 
-    private void whileLogin(){
+    private void whileLogin() {
         ctx.hideForm();
         ctx.showProgressBar();
     }
 
-    private void afterTryLogin(){
+    private void afterTryLogin() {
         ctx.hideProgressBar();
         ctx.showForm();
     }
@@ -70,6 +71,6 @@ public class LoginController extends AbstractController {
 
     @Override
     public void onDestroy() {
-        ctx=null;
+        ctx = null;
     }
 }

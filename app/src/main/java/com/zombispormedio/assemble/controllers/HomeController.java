@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
+
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
@@ -72,7 +72,7 @@ public class HomeController extends AbstractController {
     }
 
 
-    private void loadData(){
+    private void loadData() {
         getProfile();
     }
 

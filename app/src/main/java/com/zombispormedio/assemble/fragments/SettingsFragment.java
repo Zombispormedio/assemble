@@ -11,7 +11,8 @@ import com.zombispormedio.assemble.controllers.SettingsController;
 import com.zombispormedio.assemble.views.ISettingsFragmentView;
 
 
-public class SettingsFragment extends PreferenceFragment implements ISettingsFragmentView{
+public class SettingsFragment extends PreferenceFragment implements ISettingsFragmentView {
+
     private SettingsController ctrl;
 
 
@@ -22,13 +23,12 @@ public class SettingsFragment extends PreferenceFragment implements ISettingsFra
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.fragment_settings);
 
         Preference signoutPref = findPreference("settings_signout");
 
         SettingsActivity activity = (SettingsActivity) getActivity();
-        ctrl= activity.getController();
+        ctrl = activity.getController();
 
         ctrl.setFragmentView(this);
 

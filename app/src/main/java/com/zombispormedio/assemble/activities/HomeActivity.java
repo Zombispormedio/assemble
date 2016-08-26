@@ -23,8 +23,11 @@ import com.zombispormedio.assemble.views.IHomeView;
 public class HomeActivity extends BaseActivity implements IHomeView {
 
     private HomeController ctrl;
+
     private NavigationManager navigation;
+
     private DrawerLayout drawer;
+
     private TextView nav_title;
 
 
@@ -33,16 +36,15 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        ctrl=new HomeController(this);
-        navigation=new NavigationManager(this);
+        ctrl = new HomeController(this);
+        navigation = new NavigationManager(this);
 
-        drawer= (DrawerLayout)findViewById(R.id.drawer_layout_home);
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout_home);
         NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
 
         setupToolbar();
 
         setHomeUpIcon(R.drawable.menu_bar);
-
 
         nav.setNavigationItemSelectedListener(NavListener());
         drawer.addDrawerListener(DrawerListener());
@@ -62,16 +64,17 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewTabPager= (ViewPager) findViewById(R.id.home_pager);
+        final ViewPager viewTabPager = (ViewPager) findViewById(R.id.home_pager);
 
-        final HomeViewPagerAdapter adapterTabPager = new HomeViewPagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());
+        final HomeViewPagerAdapter adapterTabPager = new HomeViewPagerAdapter(getSupportFragmentManager(),
+                tabLayout.getTabCount());
 
         viewTabPager.setAdapter(adapterTabPager);
 
         viewTabPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         viewTabPager.setCurrentItem(1);
 
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener(){
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -91,9 +94,9 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     }
 
 
-    public boolean onOptionsItemSelected(MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
 
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);
                 return true;
@@ -103,13 +106,12 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     }
 
 
-
-    private NavigationView.OnNavigationItemSelectedListener NavListener(){
-        return new NavigationView.OnNavigationItemSelectedListener(){
+    private NavigationView.OnNavigationItemSelectedListener NavListener() {
+        return new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-                switch(item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.settings_menu:
                         ctrl.onSettingsMenuItem();
                         break;
@@ -134,8 +136,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         };
     }
 
-    private ActionBarDrawerToggle DrawerListener(){
-        return new ActionBarDrawerToggle(this, drawer, R.string.open_drawer_desc, R.string.close_drawer_desc){
+    private ActionBarDrawerToggle DrawerListener() {
+        return new ActionBarDrawerToggle(this, drawer, R.string.open_drawer_desc, R.string.close_drawer_desc) {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
@@ -168,7 +170,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     @Override
     public void goToFriends() {
-       navigation.Friends();
+        navigation.Friends();
     }
 
     @Override
@@ -178,10 +180,10 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     @Override
     public void setDrawerTitle(String text) {
-        if(nav_title==null){
-            nav_title=(TextView) findViewById(R.id.nav_title);
+        if (nav_title == null) {
+            nav_title = (TextView) findViewById(R.id.nav_title);
         }
-        if(nav_title!=null){
+        if (nav_title != null) {
             nav_title.setText(text);
         }
     }

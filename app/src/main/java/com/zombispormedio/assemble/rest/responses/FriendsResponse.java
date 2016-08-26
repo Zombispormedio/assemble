@@ -17,7 +17,7 @@ public class FriendsResponse extends AbstractResponse<FriendProfile[]> {
         super(success, error, result);
     }
 
-    public ArrayList<FriendProfile> getResult(){
+    public ArrayList<FriendProfile> getResult() {
         return new ArrayList<>(Arrays.asList(result));
     }
 }

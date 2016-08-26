@@ -10,9 +10,10 @@ import java.util.ArrayList;
  */
 public interface IFriendsView extends IBaseView {
 
-   void goToNewFriend();
+    void goToNewFriend();
 
     void bindFriends(ArrayList<FriendProfile> data);
+
     void bindFriendRequests(ArrayList<FriendRequestProfile> data);
 
     void loading();
@@ -20,10 +21,11 @@ public interface IFriendsView extends IBaseView {
     void unloading();
 
     void showFriendsList();
+
     void hideFriendsList();
 
-
     void showRequestsList();
+
     void hideRequestsList();
 
 

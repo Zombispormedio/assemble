@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.activities;
 
-import com.orhanobut.logger.Logger;
+
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.UpdateProfileController;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
@@ -12,7 +12,7 @@ import com.zombispormedio.assemble.views.IUpdateProfileView;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -39,22 +39,22 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
 
         setupToolbar();
 
-        _usernameInput=(EditText) findViewById(R.id.username_input);
+        _usernameInput = (EditText) findViewById(R.id.username_input);
 
-        _bioInput=(EditText) findViewById(R.id.bio_input);
+        _bioInput = (EditText) findViewById(R.id.bio_input);
 
-        _locationInput=(EditText) findViewById(R.id.location_input);
+        _locationInput = (EditText) findViewById(R.id.location_input);
 
-        _birthdateInput=(EditText) findViewById(R.id.birthdate_input);
+        _birthdateInput = (EditText) findViewById(R.id.birthdate_input);
 
-        Button _saveButton=(Button) findViewById(R.id.save_button);
+        Button _saveButton = (Button) findViewById(R.id.save_button);
 
         _progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
         _progressDialog.setMessage(getString(R.string.updating_profile_message));
         _progressDialog.setIndeterminate(true);
         _progressDialog.setCancelable(false);
 
-        ctrl= new UpdateProfileController(this);
+        ctrl = new UpdateProfileController(this);
 
         _saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,7 +118,7 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
 
 
     @Override
-    public void goToUpdateBirthdate(String...args) {
+    public void goToUpdateBirthdate(String... args) {
         NavigationManager.UpdateBirthdate(this, args);
     }
 
@@ -139,11 +139,11 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
 
     @Override
     public void showRejectChangesDialog(ISuccessHandler listener) {
-        String msg=getResources().getString(R.string.reject_changes_title);
+        String msg = getResources().getString(R.string.reject_changes_title);
 
-        String positive=getResources().getString(R.string.delete_title);
+        String positive = getResources().getString(R.string.delete_title);
 
-        String negative=getResources().getString(R.string.cancel_title);
+        String negative = getResources().getString(R.string.cancel_title);
 
         AndroidUtils.createConfirmDialog(this, msg, positive, negative, AndroidUtils.createDialogClickListener(listener))
                 .show();
@@ -168,11 +168,11 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode==NavigationManager.UPDATE_BIRTHDATE_CODE){
-            if(resultCode==RESULT_OK){
-                int countArgs=data.getIntExtra(NavigationManager.SIZE, 0);
-                if(countArgs>0){
-                    String birthdate=data.getStringExtra(NavigationManager.ARGS +0);
+        if (requestCode == NavigationManager.UPDATE_BIRTHDATE_CODE) {
+            if (resultCode == RESULT_OK) {
+                int countArgs = data.getIntExtra(NavigationManager.SIZE, 0);
+                if (countArgs > 0) {
+                    String birthdate = data.getStringExtra(NavigationManager.ARGS + 0);
                     ctrl.updateBirthdate(birthdate);
                 }
 

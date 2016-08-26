@@ -21,7 +21,4 @@ public abstract class AbstractResponse<T> {
     }
 
 
-
-
-
 }

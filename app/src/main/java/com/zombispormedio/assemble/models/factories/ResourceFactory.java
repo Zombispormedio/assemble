@@ -10,7 +10,7 @@ import com.zombispormedio.assemble.services.api.ProfileAPIService;
  */
 public class ResourceFactory {
 
-    public static UserResource createUser(){
+    public static UserResource createUser() {
         return new UserResource(new AuthAPIService(), new ProfileAPIService());
     }
 }

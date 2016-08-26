@@ -11,23 +11,22 @@ import java.util.Locale;
  */
 public class Utils {
 
-    public static boolean presenceOf(Object obj){
-        return obj!=null;
+    public static boolean presenceOf(Object obj) {
+        return obj != null;
     }
 
-    public static boolean presenceOf(String obj){
-        boolean it_is=true;
+    public static boolean presenceOf(String obj) {
+        boolean it_is = true;
 
-        if(obj==null){
-            it_is=false;
-        }else{
-            if(obj.isEmpty()){
-                it_is=false;
+        if (obj == null) {
+            it_is = false;
+        } else {
+            if (obj.isEmpty()) {
+                it_is = false;
             }
         }
         return it_is;
     }
-
 
 
 }

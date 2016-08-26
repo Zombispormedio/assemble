@@ -21,5 +21,5 @@ public interface IUpdateProfileView extends IBaseProfileView {
 
     void closeProgressDialog();
 
-    void showRejectChangesDialog( ISuccessHandler listener);
+    void showRejectChangesDialog(ISuccessHandler listener);
 }

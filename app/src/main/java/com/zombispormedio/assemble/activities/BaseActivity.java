@@ -11,20 +11,22 @@ import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.IBaseView;
 
 public class BaseActivity extends AppCompatActivity implements IBaseView {
+
     public static final String AUTH_PREFERENCES = "AuthPrefs";
 
-    public SharedPreferences getAuthPreferences(){
-        return getSharedPreferences(AUTH_PREFERENCES,Context.MODE_PRIVATE );
+    public SharedPreferences getAuthPreferences() {
+        return getSharedPreferences(AUTH_PREFERENCES, Context.MODE_PRIVATE);
     }
-    public String getAuthToken(){
-        return  getAuthPreferences().getString("token", "");
+
+    public String getAuthToken() {
+        return getAuthPreferences().getString("token", "");
     }
 
     @Override
     public void setAuthToken(String token) {
 
         SharedPreferences settings = getAuthPreferences();
-        SharedPreferences.Editor editor= settings.edit();
+        SharedPreferences.Editor editor = settings.edit();
 
         editor.putString("token", token);
         editor.apply();
@@ -36,7 +38,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     @Override
     public void clearAuthToken() {
         SharedPreferences settings = getAuthPreferences();
-        SharedPreferences.Editor editor= settings.edit();
+        SharedPreferences.Editor editor = settings.edit();
 
         editor.remove("token");
         editor.apply();
@@ -44,22 +46,22 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         APIConfiguration.getInstance().clearToken();
     }
 
-    public void showAlert(String msg){
+    public void showAlert(String msg) {
         AndroidUtils.showAlert(this, msg);
     }
 
 
-    protected void setupToolbar(){
+    protected void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        if(getSupportActionBar() != null) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
-    protected void setHomeUpIcon(int id){
-        if(getSupportActionBar() != null) {
+    protected void setHomeUpIcon(int id) {
+        if (getSupportActionBar() != null) {
             getSupportActionBar().setHomeAsUpIndicator(id);
 
         }

@@ -8,7 +8,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.FriendRequestsRecyclerViewAdapter;
 import com.zombispormedio.assemble.adapters.FriendsRecyclerViewAdapter;
@@ -22,11 +21,12 @@ import com.zombispormedio.assemble.views.IFriendsView;
 
 import java.util.ArrayList;
 
-public class FriendsActivity extends BaseActivity implements IFriendsView{
+public class FriendsActivity extends BaseActivity implements IFriendsView {
 
     private FriendsController ctrl;
 
     private RecyclerView _listFriends;
+
     private RecyclerView _listRequestFriends;
 
     private FriendsRecyclerViewAdapter.Factory _listFriendsFactory;
@@ -35,6 +35,7 @@ public class FriendsActivity extends BaseActivity implements IFriendsView{
 
 
     private TextView _progressLabel;
+
     private ProgressBar _progressBar;
 
     @Override
@@ -43,16 +44,15 @@ public class FriendsActivity extends BaseActivity implements IFriendsView{
         setContentView(R.layout.activity_friends);
         setupToolbar();
 
-        ctrl= new FriendsController(this);
+        ctrl = new FriendsController(this);
 
-        _listFriendsFactory =new FriendsRecyclerViewAdapter.Factory();
-        _listFriendRequestsFactory=new FriendRequestsRecyclerViewAdapter.Factory();
+        _listFriendsFactory = new FriendsRecyclerViewAdapter.Factory();
+        _listFriendRequestsFactory = new FriendRequestsRecyclerViewAdapter.Factory();
 
-        _listFriends =(RecyclerView) findViewById(R.id.friends_list);
-        _listRequestFriends =(RecyclerView) findViewById(R.id.req_friends_list);
-        _progressBar =(ProgressBar)findViewById(R.id.progress_bar);
-        _progressLabel =(TextView)findViewById(R.id.loading_label);
-
+        _listFriends = (RecyclerView) findViewById(R.id.friends_list);
+        _listRequestFriends = (RecyclerView) findViewById(R.id.req_friends_list);
+        _progressBar = (ProgressBar) findViewById(R.id.progress_bar);
+        _progressLabel = (TextView) findViewById(R.id.loading_label);
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +61,6 @@ public class FriendsActivity extends BaseActivity implements IFriendsView{
                 ctrl.onNewFriend();
             }
         });
-
 
         setupFriends();
 
@@ -82,8 +81,7 @@ public class FriendsActivity extends BaseActivity implements IFriendsView{
     }
 
 
-
-    public void bindFriends(ArrayList<FriendProfile> data){
+    public void bindFriends(ArrayList<FriendProfile> data) {
         _listFriends.setAdapter(_listFriendsFactory.make(data));
     }
 

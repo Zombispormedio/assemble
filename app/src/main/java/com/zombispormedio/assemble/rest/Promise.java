@@ -24,7 +24,7 @@ public class Promise {
         return handler;
     }
 
-    public void handle(){
+    public void handle() {
         handler.onSuccess(result);
     }
 }

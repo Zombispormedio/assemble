@@ -1,9 +1,8 @@
 package com.zombispormedio.assemble.activities;
 
 
-
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.fragments.SettingsFragment;
@@ -16,6 +15,7 @@ import com.zombispormedio.assemble.views.ISettingsView;
 
 
 public class SettingsActivity extends BaseActivity implements ISettingsView {
+
     private SettingsController ctrl;
 
     @Override
@@ -25,7 +25,7 @@ public class SettingsActivity extends BaseActivity implements ISettingsView {
 
         setupToolbar();
 
-        ctrl= new SettingsController(this);
+        ctrl = new SettingsController(this);
 
         SettingsFragment frag = new SettingsFragment();
 
@@ -34,10 +34,9 @@ public class SettingsActivity extends BaseActivity implements ISettingsView {
                 .commit();
 
 
-
     }
 
-    public SettingsController getController(){
+    public SettingsController getController() {
         return ctrl;
     }
 
@@ -49,12 +48,12 @@ public class SettingsActivity extends BaseActivity implements ISettingsView {
         ctrl.onDestroy();
     }
 
-    public void showConfirmSignOutDialog( ISuccessHandler listener){
-        String msg=getResources().getString(R.string.signout_dialog_msg);
+    public void showConfirmSignOutDialog(ISuccessHandler listener) {
+        String msg = getResources().getString(R.string.signout_dialog_msg);
 
-        String positive=getResources().getString(R.string.yes_title);
+        String positive = getResources().getString(R.string.yes_title);
 
-        String negative=getResources().getString(R.string.no_title);
+        String negative = getResources().getString(R.string.no_title);
 
         AndroidUtils.createConfirmDialog(this, msg, positive, negative, AndroidUtils.createDialogClickListener(listener))
                 .show();

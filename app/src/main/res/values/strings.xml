@@ -47,7 +47,7 @@
     <string name="invalid_email">Enter a valid email address</string>
     <string name="fail_login"> Fail Login!</string>
     <string name="invalid_password">Password between 6 and 50 alphanumeric characters</string>
-    <string name="start_login">Starting login...</string>
+    <string name="start_login">Starting login&#8230;</string>
     <string name="update_profile_title">Update Profile</string>
     <string name="username_example">Zombispormedio</string>
     <string name="location_example">Elche</string>
@@ -70,6 +70,6 @@
     <string name="friends_title">Friends</string>
     <string name="new_friend_title">Find friends</string>
     <string name="example_string">Lorem impsum</string>
-    <string name="searching_your_friends">Searching your friends...</string>
+    <string name="searching_your_friends">Searching your friends&#8230;</string>
 
 </resources>

@@ -16,16 +16,17 @@ import java.util.Map;
  * Created by Xavier Serrano on 26/07/2016.
  */
 public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
+
     @Override
     protected Promise doInBackground(Request... requests) {
-        Request req=requests[0];
-        String result="";
-        RestWrapper rest= new RestWrapper()
+        Request req = requests[0];
+        String result = "";
+        RestWrapper rest = new RestWrapper()
                 .url(req.getUrl());
 
-        HashMap<String, String> headers=req.getHeaders();
-        if (headers != null){
-            for (Map.Entry<String,String> entry : headers.entrySet()) {
+        HashMap<String, String> headers = req.getHeaders();
+        if (headers != null) {
+            for (Map.Entry<String, String> entry : headers.entrySet()) {
                 String value = entry.getValue();
                 String key = entry.getKey();
 
@@ -33,62 +34,60 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
             }
         }
 
-
-
-
         try {
 
-            switch (req.getMethod()){
-            case GET:result=rest.get();
-                break;
+            switch (req.getMethod()) {
+                case GET:
+                    result = rest.get();
+                    break;
 
-            case POST: {
-                String body = req.getBody();
+                case POST: {
+                    String body = req.getBody();
 
-                if (body != null) {
-                    result = rest.post(req.getBody());
-                } else {
-                    FileBody file = req.getFile();
+                    if (body != null) {
+                        result = rest.post(req.getBody());
+                    } else {
+                        FileBody file = req.getFile();
 
-                    result = rest.post(file);
+                        result = rest.post(file);
+                    }
+
+                    break;
                 }
 
-                break;
-            }
+                case PUT: {
+                    String body = req.getBody();
 
-            case PUT: {
-                String body = req.getBody();
+                    if (body != null) {
+                        result = rest.put(req.getBody());
+                    } else {
+                        FileBody file = req.getFile();
 
-                if (body != null) {
-                    result = rest.put(req.getBody());
-                } else {
-                    FileBody file = req.getFile();
-
-                    result = rest.put(file);
+                        result = rest.put(file);
+                    }
+                    break;
                 }
-                break;
-            }
 
-            case PATCH: {
-                String body=req.getBody();
+                case PATCH: {
+                    String body = req.getBody();
 
-                if(body!=null){
-                    result= rest.patch(req.getBody());
-                }else{
-                    FileBody file=req.getFile();
-                    result=rest.patch(file);
+                    if (body != null) {
+                        result = rest.patch(req.getBody());
+                    } else {
+                        FileBody file = req.getFile();
+                        result = rest.patch(file);
+                    }
+                    break;
                 }
-                break;
-            }
 
-            case DELETE: result=rest.delete();
-                break;
-        }
+                case DELETE:
+                    result = rest.delete();
+                    break;
+            }
 
         } catch (IOException | JSONException e) {
             Logger.d(e);
         }
-
 
         return new Promise(result, req.getHandler());
     }
@@ -97,7 +96,6 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
         super.onPostExecute(promise);
         promise.handle();
     }
-
 
 
 }

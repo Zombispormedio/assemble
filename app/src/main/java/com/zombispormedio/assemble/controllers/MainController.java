@@ -15,18 +15,19 @@ import com.zombispormedio.assemble.views.IMainView;
 public class MainController extends AbstractController {
 
     private IMainView ctx;
+
     private UserResource user;
 
     public MainController(IMainView ctx) {
-        this.ctx=ctx;
-        user= ResourceFactory.createUser();
+        this.ctx = ctx;
+        user = ResourceFactory.createUser();
     }
 
     public void checkAccess() {
-        String token=ctx.getAuthToken();
-        if(token.isEmpty()){
+        String token = ctx.getAuthToken();
+        if (token.isEmpty()) {
             ctx.goToLogin();
-        }else{
+        } else {
 
             APIConfiguration.getInstance().setToken(token);
 
@@ -48,7 +49,7 @@ public class MainController extends AbstractController {
 
     @Override
     public void onDestroy() {
-        ctx=null;
+        ctx = null;
     }
 
 }

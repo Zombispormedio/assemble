@@ -10,12 +10,11 @@ import android.view.ViewGroup;
 import com.zombispormedio.assemble.R;
 
 
-
 public class MessagesTabFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
 
         return inflater.inflate(R.layout.fragment_messages_tab, container, false);
     }

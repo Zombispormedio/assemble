@@ -1,15 +1,16 @@
 package com.zombispormedio.assemble.activities;
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
+
 import android.content.Intent;
 
-import android.graphics.Color;
+
 import android.net.Uri;
 import android.os.Bundle;
 
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.widget.Toolbar;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,9 +19,11 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
-import com.cocosw.bottomsheet.BottomSheet;
 
 
+import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
+import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
+import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 import com.zombispormedio.assemble.R;
@@ -48,9 +51,14 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     private ProgressBar _imageProgress;
 
     private TextView _usernameText;
+
     private TextView _locationText;
+
     private TextView _bioText;
+
     private TextView _birthDateText;
+
+    private BottomSheetDialog _imageUploaderBottomSheet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +76,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
         _imageProgressDialog.setIndeterminate(true);
         _imageProgressDialog.setCancelable(false);
 
-        _imageProgress=(ProgressBar) findViewById(R.id.progress_image);
+        _imageProgress = (ProgressBar) findViewById(R.id.progress_image);
 
         _usernameText = (TextView) findViewById(R.id.profile_username_text);
         _locationText = (TextView) findViewById(R.id.profile_location_text);
@@ -94,8 +102,11 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
             }
         });
 
+        setupImageUploaderBottomSheet();
+
         ctrl.onCreate();
     }
+
 
     public void hideImageForm() {
         _imageFab.setVisibility(View.INVISIBLE);
@@ -140,10 +151,10 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     @Override
     public void setBirthDate(String birth) {
-        if(!birth.isEmpty()){
-            String birthDate=String.format(getString(R.string.born_at), birth);
+        if (!birth.isEmpty()) {
+            String birthDate = String.format(getString(R.string.born_at), birth);
             _birthDateText.setText(birthDate);
-        }else{
+        } else {
             _birthDateText.setText("");
         }
 
@@ -207,8 +218,8 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     public void loadLetterImage(String letter, final ISuccessHandler handler) {
         ColorGenerator generator = ColorGenerator.MATERIAL;
 
-        TextDrawable drawable=TextDrawable.builder()
-                .buildRound(letter.toUpperCase(),generator.getRandomColor());
+        TextDrawable drawable = TextDrawable.builder()
+                .buildRound(letter.toUpperCase(), generator.getRandomColor());
 
         _imageProfile.setImageDrawable(drawable);
 
@@ -217,16 +228,15 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
 
-
-
-    public void openImageBottomSheet() {
-        new BottomSheet.Builder(this, R.style.BottomSheet_Dialog)
-                .title(R.string.image_profile)
-                .sheet(R.menu.menu_bottom_sheet)
-                .listener(new DialogInterface.OnClickListener() {
+    private void setupImageUploaderBottomSheet() {
+        _imageUploaderBottomSheet = new BottomSheetBuilder(this, R.style.AppTheme_BottomSheetDialog)
+                .setMode(BottomSheetBuilder.MODE_LIST)
+                .setBackground(R.color.colorWhite)
+                .setMenu(R.menu.menu_bottom_sheet)
+                .setItemClickListener(new BottomSheetItemClickListener() {
                     @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        switch (which) {
+                    public void onBottomSheetItemClick(BottomSheetMenuItem item) {
+                        switch (item.getId()) {
                             case R.id.gallery:
                                 externalNavigationManager.dispatchGalleryToSelectImage(R.string.select_picture);
                                 break;
@@ -234,10 +244,14 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
                                 externalNavigationManager.dispatchTakePicture();
                                 break;
                         }
-
                     }
-                }).show();
+                })
+                .createDialog();
+    }
 
+
+    public void openImageBottomSheet() {
+        _imageUploaderBottomSheet.show();
     }
 
 

@@ -5,6 +5,6 @@ package com.zombispormedio.assemble.handlers;
  */
 public interface IOnClickItemListHandler<T> {
 
-    public void onClick(int position, T data);
+    void onClick(int position, T data);
 
 }
