@@ -6,7 +6,9 @@
     <dimen name="max_logo">100sp</dimen>
     <dimen name="min_logo">50sp</dimen>
     <dimen name="button_text_size">20sp</dimen>
-    <dimen name="profile_text_left">10sp</dimen>
+    <dimen name="profile_main_text">15sp</dimen>
+    <dimen name="profile_margin_top">5sp</dimen>
+    <dimen name="profile_text">10sp</dimen>
     <dimen name="input_margin_top">20sp</dimen>
     <dimen name="form_margin">20sp</dimen>
     <dimen name="input_margin_bottom">25sp</dimen>
