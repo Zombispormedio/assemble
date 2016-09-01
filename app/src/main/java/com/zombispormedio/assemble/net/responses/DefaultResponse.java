@@ -1,7 +1,7 @@
-package com.zombispormedio.assemble.rest.responses;
+package com.zombispormedio.assemble.net.responses;
 
-import com.zombispormedio.assemble.rest.Error;
-import com.zombispormedio.assemble.rest.Result;
+import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.Result;
 
 /**
  * Created by Xavier Serrano on 26/07/2016.

@@ -5,8 +5,7 @@ import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.rest.Error;
-import com.zombispormedio.assemble.rest.Result;
+import com.zombispormedio.assemble.net.Error;
 
 import java.io.File;
 import java.util.ArrayList;

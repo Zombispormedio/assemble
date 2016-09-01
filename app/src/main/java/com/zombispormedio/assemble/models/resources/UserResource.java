@@ -7,8 +7,8 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
-import com.zombispormedio.assemble.rest.Error;
-import com.zombispormedio.assemble.rest.Result;
+import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.services.IAuthService;
 import com.zombispormedio.assemble.services.IProfileService;
 

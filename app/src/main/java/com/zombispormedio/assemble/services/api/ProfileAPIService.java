@@ -8,13 +8,13 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.rest.Error;
-import com.zombispormedio.assemble.rest.FileBody;
-import com.zombispormedio.assemble.rest.JsonBinder;
+import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.FileBody;
+import com.zombispormedio.assemble.net.JsonBinder;
 
-import com.zombispormedio.assemble.rest.responses.FriendRequestsResponse;
-import com.zombispormedio.assemble.rest.responses.FriendsResponse;
-import com.zombispormedio.assemble.rest.responses.ProfileResponse;
+import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
+import com.zombispormedio.assemble.net.responses.FriendsResponse;
+import com.zombispormedio.assemble.net.responses.ProfileResponse;
 import com.zombispormedio.assemble.services.IProfileService;
 
 

@@ -4,8 +4,8 @@ package com.zombispormedio.assemble.controllers;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
-import com.zombispormedio.assemble.rest.Error;
-import com.zombispormedio.assemble.rest.Result;
+import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.services.api.APIConfiguration;
 import com.zombispormedio.assemble.views.IMainView;
 

@@ -1,16 +1,15 @@
-package com.zombispormedio.assemble.rest;
+package com.zombispormedio.assemble.net;
 
 import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.rest.responses.DefaultResponse;
-import com.zombispormedio.assemble.rest.responses.FriendRequestsResponse;
-import com.zombispormedio.assemble.rest.responses.FriendsResponse;
-import com.zombispormedio.assemble.rest.responses.ProfileResponse;
+import com.zombispormedio.assemble.net.responses.DefaultResponse;
+import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
+import com.zombispormedio.assemble.net.responses.FriendsResponse;
+import com.zombispormedio.assemble.net.responses.ProfileResponse;
 import com.zombispormedio.assemble.wrappers.moshi.JSONWrapper;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 26/07/2016.

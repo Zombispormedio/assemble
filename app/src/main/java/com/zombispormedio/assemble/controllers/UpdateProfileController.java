@@ -8,7 +8,7 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
-import com.zombispormedio.assemble.rest.Error;
+import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.views.IUpdateProfileView;

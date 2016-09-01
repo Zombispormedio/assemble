@@ -1,8 +1,8 @@
 package com.zombispormedio.assemble.services;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.rest.Error;
-import com.zombispormedio.assemble.rest.Result;
+import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.Result;
 
 
 /**

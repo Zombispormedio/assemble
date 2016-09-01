@@ -1,11 +1,5 @@
 package com.zombispormedio.assemble;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IPromiseHandler;
-import com.zombispormedio.assemble.rest.AsyncRequest;
-import com.zombispormedio.assemble.rest.METHOD;
-import com.zombispormedio.assemble.rest.Request;
-
 import org.junit.Test;
 
 

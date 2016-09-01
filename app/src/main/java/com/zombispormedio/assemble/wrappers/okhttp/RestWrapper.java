@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.wrappers.okhttp;
 
-import com.zombispormedio.assemble.rest.FileBody;
+import com.zombispormedio.assemble.net.FileBody;
 
 import org.json.JSONException;
 

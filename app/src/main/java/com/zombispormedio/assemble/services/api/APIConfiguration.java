@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.services.api;
 
-import com.zombispormedio.assemble.rest.Request;
+import com.zombispormedio.assemble.net.Request;
 
 /**
  * Created by Xavier Serrano on 26/07/2016.

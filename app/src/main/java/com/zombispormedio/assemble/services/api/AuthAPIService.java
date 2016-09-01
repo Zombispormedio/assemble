@@ -5,10 +5,10 @@ import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 
 import com.zombispormedio.assemble.models.Auth;
-import com.zombispormedio.assemble.rest.Error;
-import com.zombispormedio.assemble.rest.JsonBinder;
-import com.zombispormedio.assemble.rest.Result;
-import com.zombispormedio.assemble.rest.responses.DefaultResponse;
+import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.JsonBinder;
+import com.zombispormedio.assemble.net.Result;
+import com.zombispormedio.assemble.net.responses.DefaultResponse;
 import com.zombispormedio.assemble.services.IAuthService;
 
 import java.io.IOException;

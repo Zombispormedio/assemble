@@ -1,4 +1,4 @@
-package com.zombispormedio.assemble.rest;
+package com.zombispormedio.assemble.net;
 
 import java.io.File;
 
