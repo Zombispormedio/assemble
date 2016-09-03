@@ -33,7 +33,6 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
     private FriendRequestsRecyclerViewAdapter.Factory _listFriendRequestsFactory;
 
-
     private TextView _progressLabel;
 
     private ProgressBar _progressBar;

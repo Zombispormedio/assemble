@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.zombispormedio.assemble.fragments.GatheringsTabFragment;
-import com.zombispormedio.assemble.fragments.MessagesTabFragment;
-import com.zombispormedio.assemble.fragments.TeamsTabFragment;
+import com.zombispormedio.assemble.fragments.MeetingsFragment;
+import com.zombispormedio.assemble.fragments.MessagesFragment;
+import com.zombispormedio.assemble.fragments.TeamsFragment;
 
 /**
  * Created by Xavier Serrano on 12/07/2016.
@@ -29,14 +29,14 @@ public class HomeViewPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                item = new TeamsTabFragment();
+                item = new TeamsFragment();
                 break;
             case 1:
-                item = new GatheringsTabFragment();
+                item = new MeetingsFragment();
                 break;
 
             case 2:
-                item = new MessagesTabFragment();
+                item = new MessagesFragment();
                 break;
         }
 

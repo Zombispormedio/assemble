@@ -25,14 +25,14 @@ public class SettingsFragment extends PreferenceFragment implements ISettingsFra
 
         addPreferencesFromResource(R.xml.fragment_settings);
 
-        Preference signoutPref = findPreference("settings_signout");
+        Preference signOutPref = findPreference("settings_signout");
 
         SettingsActivity activity = (SettingsActivity) getActivity();
         ctrl = activity.getController();
 
         ctrl.setFragmentView(this);
 
-        signoutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+        signOutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
                 ctrl.signout();
