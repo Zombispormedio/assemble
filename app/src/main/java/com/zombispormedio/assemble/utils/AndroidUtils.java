@@ -159,5 +159,12 @@ public final class AndroidUtils {
         list.addItemDecoration(new DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL_LIST));
     }
 
+    public static void setupScrollList(Context ctx, RecyclerView list) {
+        list.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false));
+        list.setItemAnimator(new DefaultItemAnimator());
+
+        list.addItemDecoration(new DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL_LIST));
+    }
+
 
 }

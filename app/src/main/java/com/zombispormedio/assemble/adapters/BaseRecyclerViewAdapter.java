@@ -42,5 +42,7 @@ public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends
         this.listener = listener;
     }
 
-
+    public void setData(ArrayList<T> data) {
+        this.data = data;
+    }
 }

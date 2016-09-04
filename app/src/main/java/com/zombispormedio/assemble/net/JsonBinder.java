@@ -7,6 +7,7 @@ import com.zombispormedio.assemble.net.responses.DefaultResponse;
 import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.net.responses.FriendsResponse;
 import com.zombispormedio.assemble.net.responses.ProfileResponse;
+import com.zombispormedio.assemble.net.responses.TeamsResponse;
 import com.zombispormedio.assemble.wrappers.moshi.JSONWrapper;
 
 import java.io.IOException;
@@ -49,6 +50,11 @@ public class JsonBinder {
 
     public static FriendRequestsResponse toFriendRequestsResponse(String arg) throws IOException {
         JSONWrapper<FriendRequestsResponse> jsonAdapter = new JSONWrapper<>(FriendRequestsResponse.class);
+        return jsonAdapter.fromJSON(arg);
+    }
+
+    public static TeamsResponse toTeamsResponse(String arg) throws  IOException{
+        JSONWrapper<TeamsResponse> jsonAdapter=new JSONWrapper<>(TeamsResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
 

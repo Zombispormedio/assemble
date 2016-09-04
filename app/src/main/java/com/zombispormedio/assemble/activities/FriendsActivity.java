@@ -27,11 +27,15 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
     private RecyclerView _listFriends;
 
-    private RecyclerView _listRequestFriends;
+    private RecyclerView _listFriendRequests;
 
     private FriendsRecyclerViewAdapter.Factory _listFriendsFactory;
 
+    private  FriendsRecyclerViewAdapter _listFriendsAdapter;
+
     private FriendRequestsRecyclerViewAdapter.Factory _listFriendRequestsFactory;
+
+    private FriendRequestsRecyclerViewAdapter _listFriendRequestsAdapter;
 
     private TextView _progressLabel;
 
@@ -46,10 +50,13 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
         ctrl = new FriendsController(this);
 
         _listFriendsFactory = new FriendsRecyclerViewAdapter.Factory();
+        _listFriendsAdapter=null;
+
         _listFriendRequestsFactory = new FriendRequestsRecyclerViewAdapter.Factory();
+        _listFriendRequestsAdapter=null;
 
         _listFriends = (RecyclerView) findViewById(R.id.friends_list);
-        _listRequestFriends = (RecyclerView) findViewById(R.id.req_friends_list);
+        _listFriendRequests = (RecyclerView) findViewById(R.id.req_friends_list);
         _progressBar = (ProgressBar) findViewById(R.id.progress_bar);
         _progressLabel = (TextView) findViewById(R.id.loading_label);
 
@@ -69,7 +76,7 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     }
 
     private void setupRequestFriends() {
-        AndroidUtils.setupNoScrollList(this, _listRequestFriends);
+        AndroidUtils.setupNoScrollList(this, _listFriendRequests);
         _listFriendRequestsFactory.setOnClickListener(ctrl.getOnClickOneRequest());
 
     }
@@ -81,12 +88,26 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
 
     public void bindFriends(ArrayList<FriendProfile> data) {
-        _listFriends.setAdapter(_listFriendsFactory.make(data));
+        if(_listFriendsAdapter==null){
+            _listFriendsAdapter=_listFriendsFactory.make(data);
+            _listFriends.setAdapter(_listFriendsAdapter);
+        }else{
+            _listFriendsAdapter.setData(data);
+            _listFriendsAdapter.notifyDataSetChanged();
+        }
+
+
     }
 
     @Override
     public void bindFriendRequests(ArrayList<FriendRequestProfile> data) {
-        _listRequestFriends.setAdapter(_listFriendRequestsFactory.make(data));
+        if(_listFriendRequestsAdapter==null){
+            _listFriendRequestsAdapter=_listFriendRequestsFactory.make(data);
+            _listFriendRequests.setAdapter(_listFriendRequestsAdapter);
+        }else{
+            _listFriendRequestsAdapter.setData(data);
+            _listFriendRequestsAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -113,12 +134,12 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
     @Override
     public void showRequestsList() {
-        _listRequestFriends.setVisibility(View.VISIBLE);
+        _listFriendRequests.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideRequestsList() {
-        _listRequestFriends.setVisibility(View.GONE);
+        _listFriendRequests.setVisibility(View.GONE);
     }
 
 

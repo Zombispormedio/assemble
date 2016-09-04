@@ -19,6 +19,4 @@ public abstract class AbstractResponse<T> {
         this.error = error;
         this.result = result;
     }
-
-
 }

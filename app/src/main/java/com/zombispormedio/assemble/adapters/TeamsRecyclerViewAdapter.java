@@ -33,6 +33,8 @@ public class TeamsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Team, Team
     }
 
 
+
+
     public static class Factory {
 
         private IOnClickItemListHandler<Team> listener;
