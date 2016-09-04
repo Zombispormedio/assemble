@@ -1,8 +1,10 @@
 package com.zombispormedio.assemble.models.factories;
 
+import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.services.api.AuthAPIService;
 import com.zombispormedio.assemble.services.api.ProfileAPIService;
+import com.zombispormedio.assemble.services.api.TeamAPIService;
 
 
 /**
@@ -10,7 +12,11 @@ import com.zombispormedio.assemble.services.api.ProfileAPIService;
  */
 public class ResourceFactory {
 
-    public static UserResource createUser() {
+    public static UserResource createUserResource() {
         return new UserResource(new AuthAPIService(), new ProfileAPIService());
+    }
+
+    public static TeamResource createTeamResource(){
+        return new TeamResource(new TeamAPIService());
     }
 }

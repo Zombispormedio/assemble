@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.models.singletons;
 
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
+import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.UserProfile;
 
 import java.util.ArrayList;
@@ -23,15 +24,21 @@ public class CurrentUser {
 
     private ArrayList<FriendRequestProfile> friendRequests;
 
+    private ArrayList<Team> teams;
+
+
     private CurrentUser() {
         profile = new UserProfile();
         friends = new ArrayList<>();
         friendRequests = new ArrayList<>();
+        teams=new ArrayList<>();
     }
 
     public UserProfile getProfile() {
         return profile;
     }
+
+    public boolean isProfileEmpty(){return profile.email.isEmpty();}
 
     public void setProfile(UserProfile profile) {
         this.profile = profile;
@@ -59,6 +66,18 @@ public class CurrentUser {
 
     public void setFriendRequests(ArrayList<FriendRequestProfile> friendRequests) {
         this.friendRequests = friendRequests;
+    }
+
+    public ArrayList<Team> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(ArrayList<Team> teams) {
+        this.teams = teams;
+    }
+
+    public int getTeamsCount(){
+        return teams.size();
     }
 
     public static void reset() {

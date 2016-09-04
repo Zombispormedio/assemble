@@ -32,7 +32,7 @@ public class UpdateProfileController extends AbstractController {
     public UpdateProfileController(IUpdateProfileView ctx) {
         this.ctx = ctx;
         user = CurrentUser.getInstance();
-        userResource = ResourceFactory.createUser();
+        userResource = ResourceFactory.createUserResource();
         editor = new EditProfile.Builder(user.getProfile());
     }
 

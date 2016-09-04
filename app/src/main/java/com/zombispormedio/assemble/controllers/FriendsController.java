@@ -33,7 +33,7 @@ public class FriendsController extends AbstractController {
     public FriendsController(IFriendsView ctx) {
         this.ctx = ctx;
         user = CurrentUser.getInstance();
-        userResource = ResourceFactory.createUser();
+        userResource = ResourceFactory.createUserResource();
         isFriendsReady = isRequestsReady = false;
         isLoading = false;
 

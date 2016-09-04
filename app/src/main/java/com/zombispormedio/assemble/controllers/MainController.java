@@ -20,7 +20,7 @@ public class MainController extends AbstractController {
 
     public MainController(IMainView ctx) {
         this.ctx = ctx;
-        user = ResourceFactory.createUser();
+        user = ResourceFactory.createUserResource();
     }
 
     public void checkAccess() {

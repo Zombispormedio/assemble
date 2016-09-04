@@ -26,7 +26,7 @@ public class ProfileController extends AbstractController {
     public ProfileController(IProfileView ctx) {
         this.ctx = ctx;
         user = CurrentUser.getInstance();
-        userResource = ResourceFactory.createUser();
+        userResource = ResourceFactory.createUserResource();
 
     }
 

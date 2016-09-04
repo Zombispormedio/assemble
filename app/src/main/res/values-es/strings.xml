@@ -69,6 +69,7 @@
     <string name="new_friend_title">Encontrar amigos</string>
     <string name="example_string">Lorem impsum</string>
     <string name="searching_your_friends">Buscando a tus amiguetes....</string>
+    <string name="loading_app_data">En un momento todo estará listo...</string>
 
 
 </resources>

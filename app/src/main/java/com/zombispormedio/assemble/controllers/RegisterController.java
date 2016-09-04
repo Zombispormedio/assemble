@@ -19,7 +19,7 @@ public class RegisterController extends AbstractController {
 
     public RegisterController(IRegisterView ctx) {
         this.ctx = ctx;
-        user = ResourceFactory.createUser();
+        user = ResourceFactory.createUserResource();
     }
 
     public void onClickRegisterButton() {

@@ -19,7 +19,7 @@ public class LoginController extends AbstractController {
 
     public LoginController(ILoginView ctx) {
         this.ctx = ctx;
-        user = ResourceFactory.createUser();
+        user = ResourceFactory.createUserResource();
     }
 
     public void onClickLoginButton() {

@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.activities;
 
+import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -30,11 +31,16 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private TextView nav_title;
 
+    private ProgressDialog _progressDialog;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        setupToolbar();
+        setHomeUpIcon(R.drawable.menu_bar);
 
         ctrl = new HomeController(this);
         navigation = new NavigationManager(this);
@@ -42,9 +48,10 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout_home);
         NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
 
-        setupToolbar();
-
-        setHomeUpIcon(R.drawable.menu_bar);
+        _progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        _progressDialog.setMessage(getString(R.string.loading_app_data));
+        _progressDialog.setIndeterminate(true);
+        _progressDialog.setCancelable(false);
 
         nav.setNavigationItemSelectedListener(NavListener());
         drawer.addDrawerListener(DrawerListener());
@@ -186,6 +193,16 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         if (nav_title != null) {
             nav_title.setText(text);
         }
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        _progressDialog.dismiss();
+    }
+
+    @Override
+    public void showProgressDialog() {
+        _progressDialog.show();
     }
 
 

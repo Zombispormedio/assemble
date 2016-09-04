@@ -40,9 +40,8 @@ public class TeamsFragment extends Fragment implements ITeamsView {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         ctrl = new TeamsController(this);
 
         view = (HomeActivity) getActivity();
@@ -65,6 +64,7 @@ public class TeamsFragment extends Fragment implements ITeamsView {
         ctrl.onCreate();
     }
 
+
     private void setupTeams() {
         AndroidUtils.setupScrollList(view, _listTeams);
         _listTeamsFactory.setOnClickListener(ctrl.getOnClickOneTeam());
@@ -81,5 +81,10 @@ public class TeamsFragment extends Fragment implements ITeamsView {
             _listsTeamsAdapter.setData(data);
             _listsTeamsAdapter.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public void showAlert(String msg) {
+        view.showAlert(msg);
     }
 }

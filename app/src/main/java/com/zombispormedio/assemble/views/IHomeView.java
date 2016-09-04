@@ -16,4 +16,8 @@ public interface IHomeView extends IBaseView {
     void goToHelp();
 
     void setDrawerTitle(String hello);
+
+    void hideProgressDialog();
+
+    void showProgressDialog();
 }

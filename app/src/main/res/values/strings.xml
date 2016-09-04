@@ -71,5 +71,6 @@
     <string name="new_friend_title">Find friends</string>
     <string name="example_string">Lorem impsum</string>
     <string name="searching_your_friends">Searching your friends&#8230;</string>
+    <string name="loading_app_data">Just a moment...</string>
 
 </resources>

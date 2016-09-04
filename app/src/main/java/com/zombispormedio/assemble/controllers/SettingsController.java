@@ -22,7 +22,7 @@ public class SettingsController extends AbstractController {
 
     public SettingsController(ISettingsView ctx) {
         this.ctx = ctx;
-        user = ResourceFactory.createUser();
+        user = ResourceFactory.createUserResource();
     }
 
     public void setFragmentView(ISettingsFragmentView fctx) {

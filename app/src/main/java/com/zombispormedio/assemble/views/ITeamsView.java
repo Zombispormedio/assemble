@@ -11,4 +11,5 @@ public interface ITeamsView {
 
      void bindTeams(ArrayList<Team> data );
 
+     void showAlert(String msg);
 }
