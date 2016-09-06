@@ -76,13 +76,21 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     }
 
     private void setupRequestFriends() {
-        AndroidUtils.setupNoScrollList(this, _listFriendRequests);
+       AndroidUtils.createListConfiguration(this, _listFriendRequests)
+               .divider(true)
+               .itemAnimation(true)
+               .scrolling(false)
+               .configure();
         _listFriendRequestsFactory.setOnClickListener(ctrl.getOnClickOneRequest());
 
     }
 
     private void setupFriends() {
-        AndroidUtils.setupNoScrollList(this, _listFriends);
+        AndroidUtils.createListConfiguration(this, _listFriends)
+                .divider(true)
+                .itemAnimation(true)
+                .scrolling(false)
+                .configure();
         _listFriendsFactory.setOnClickListener(ctrl.getOnClickOneFriend());
     }
 

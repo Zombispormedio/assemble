@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.models.singletons;
 
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
+import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.UserProfile;
 
@@ -26,12 +27,15 @@ public class CurrentUser {
 
     private ArrayList<Team> teams;
 
+    private ArrayList<Meeting> meetings;
+
 
     private CurrentUser() {
         profile = new UserProfile();
         friends = new ArrayList<>();
         friendRequests = new ArrayList<>();
         teams=new ArrayList<>();
+        meetings=new ArrayList<>();
     }
 
     public UserProfile getProfile() {
@@ -78,6 +82,18 @@ public class CurrentUser {
 
     public int getTeamsCount(){
         return teams.size();
+    }
+
+    public ArrayList<Meeting> getMeetings() {
+        return meetings;
+    }
+
+    public void setMeetings(ArrayList<Meeting> meetings) {
+        this.meetings = meetings;
+    }
+
+    public int getMeetingsCount(){
+        return meetings.size();
     }
 
     public static void reset() {

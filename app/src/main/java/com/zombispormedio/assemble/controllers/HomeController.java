@@ -2,9 +2,11 @@ package com.zombispormedio.assemble.controllers;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
+import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
@@ -18,11 +20,14 @@ import java.util.ArrayList;
  */
 public class HomeController extends AbstractController {
 
-    private final TeamResource teamResource;
 
     private IHomeView ctx;
 
     private final UserResource userResource;
+
+    private final TeamResource teamResource;
+
+    private final MeetingResource meetingResource;
 
     private CurrentUser user;
 
@@ -30,14 +35,21 @@ public class HomeController extends AbstractController {
 
     private boolean isProfileReady;
 
+    private boolean isMeetingsReady;
+
 
     public HomeController(IHomeView ctx) {
         this.ctx = ctx;
+
         userResource = ResourceFactory.createUserResource();
+        teamResource = ResourceFactory.createTeamResource();
+        meetingResource = ResourceFactory.createMeetingResource();
+
         user = CurrentUser.getInstance();
-        teamResource= ResourceFactory.createTeamResource();
-        isTeamsReady=false;
-        isProfileReady=false;
+
+        isProfileReady = false;
+        isTeamsReady = false;
+        isMeetingsReady = false;
     }
 
     @Override
@@ -87,14 +99,15 @@ public class HomeController extends AbstractController {
 
     private void loadData() {
 
-        if(user.isProfileEmpty()){
+        if (user.isProfileEmpty()) {
             loading();
         }
 
         getProfile();
         getTeams();
-    }
+        getMeetings();
 
+    }
 
 
     private void getProfile() {
@@ -132,35 +145,59 @@ public class HomeController extends AbstractController {
         });
     }
 
-    private boolean isReady() {
-        return isProfileReady && isTeamsReady;
+    private void getMeetings() {
+        meetingResource.getAll(new IServiceHandler<ArrayList<Meeting>, Error>() {
+            @Override
+            public void onError(Error error) {
+                readyMeetings();
+                ctx.showAlert(error.msg);
+            }
+
+            @Override
+            public void onSuccess(ArrayList<Meeting> result) {
+                user.setMeetings(result);
+                readyMeetings();
+            }
+        });
     }
 
-    private void loading(){
+
+    private boolean isReady() {
+        return isProfileReady && isTeamsReady && isMeetingsReady;
+    }
+
+    private void loading() {
         uncheckAll();
         ctx.showProgressDialog();
     }
 
 
-    private void ready(){
-        if(isReady()){
+    private void ready() {
+        if (isReady()) {
             ctx.hideProgressDialog();
             uncheckAll();
         }
     }
 
-    private void uncheckAll(){
-        isProfileReady=false;
-        isTeamsReady=false;
+    private void uncheckAll() {
+        isProfileReady = false;
+        isTeamsReady = false;
+        isMeetingsReady = false;
     }
 
-    private void readyProfile(){
-        isProfileReady=true;
+    private void readyProfile() {
+        isProfileReady = true;
         ready();
     }
 
-    private void readyTeams(){
-        isTeamsReady=true;
+    private void readyTeams() {
+        isTeamsReady = true;
+        ready();
+    }
+
+
+    private void readyMeetings() {
+        isMeetingsReady = true;
         ready();
     }
 
@@ -169,7 +206,6 @@ public class HomeController extends AbstractController {
     public void onDestroy() {
         ctx = null;
     }
-
 
 
 }

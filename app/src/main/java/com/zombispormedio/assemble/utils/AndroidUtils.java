@@ -162,8 +162,118 @@ public final class AndroidUtils {
     public static void setupScrollList(Context ctx, RecyclerView list) {
         list.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false));
         list.setItemAnimator(new DefaultItemAnimator());
-
         list.addItemDecoration(new DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL_LIST));
+    }
+
+    public static ListConfiguration createListConfiguration(Context ctx, RecyclerView list){
+        return new ListConfiguration(ctx, list);
+    }
+
+    public static class ListConfiguration {
+
+        private Context ctx;
+
+        private RecyclerView list;
+
+        private int orientation;
+
+        private boolean haveDivider;
+
+        private int dividerOrientation;
+
+        private boolean haveItemAnimation;
+
+        private boolean haveScroll;
+
+        private RecyclerView.ItemDecoration dividerItemDecoration;
+
+        private RecyclerView.ItemAnimator itemAnimator;
+
+
+        public ListConfiguration(Context ctx, RecyclerView list) {
+            this.list = list;
+            this.ctx = ctx;
+            orientation=LinearLayoutManager.VERTICAL;
+            haveDivider=false;
+            dividerOrientation=LinearLayoutManager.VERTICAL;
+            haveItemAnimation=false;
+            haveScroll=true;
+            dividerItemDecoration=null;
+            itemAnimator=null;
+        }
+
+        public ListConfiguration orientation(int orientation) {
+            this.orientation = orientation;
+            return this;
+        }
+
+        public ListConfiguration divider(boolean haveDivider) {
+            this.haveDivider = haveDivider;
+            return this;
+        }
+
+        public ListConfiguration setDividerOrientation(int dividerOrientation) {
+            this.dividerOrientation = dividerOrientation;
+            return this;
+        }
+
+        public ListConfiguration itemAnimation(boolean haveItemAnimation) {
+            this.haveItemAnimation = haveItemAnimation;
+            return this;
+        }
+
+        public ListConfiguration scrolling(boolean haveScroll) {
+            this.haveScroll = haveScroll;
+            return this;
+        }
+
+        public ListConfiguration setItemAnimator(RecyclerView.ItemAnimator itemAnimator) {
+            haveItemAnimation=true;
+            this.itemAnimator = itemAnimator;
+            return this;
+        }
+
+        public ListConfiguration setDividerItemDecoration(RecyclerView.ItemDecoration dividerItemDecoration) {
+            haveDivider=true;
+            this.dividerItemDecoration = dividerItemDecoration;
+            return this;
+        }
+
+        public void configure() {
+            LinearLayoutManager layout=null;
+
+            if(haveScroll){
+               layout= new LinearLayoutManager(ctx, orientation, false);
+            }else{
+                layout= new LinearLayoutManager(ctx, orientation, false) {
+                    @Override
+                    public boolean canScrollVertically() {
+                        return false;
+                    }
+                };
+            }
+
+            list.setLayoutManager(layout);
+
+            if(haveItemAnimation){
+                if(itemAnimator!=null){
+                    list.setItemAnimator(itemAnimator);
+                }else{
+                    list.setItemAnimator(new DefaultItemAnimator());
+                }
+            }
+
+            if(haveDivider){
+                if(dividerItemDecoration!=null){
+                    list.addItemDecoration(dividerItemDecoration);
+                }else{
+                    list.addItemDecoration(new DividerItemDecoration(ctx, dividerOrientation));
+                }
+            }
+
+
+
+        }
     }
 
 

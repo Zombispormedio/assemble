@@ -2,10 +2,12 @@ package com.zombispormedio.assemble.net;
 
 import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.models.EditProfile;
+import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.responses.DefaultResponse;
 import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.net.responses.FriendsResponse;
+import com.zombispormedio.assemble.net.responses.MeetingsResponse;
 import com.zombispormedio.assemble.net.responses.ProfileResponse;
 import com.zombispormedio.assemble.net.responses.TeamsResponse;
 import com.zombispormedio.assemble.wrappers.moshi.JSONWrapper;
@@ -58,4 +60,8 @@ public class JsonBinder {
         return jsonAdapter.fromJSON(arg);
     }
 
+    public static MeetingsResponse toMeetingsResponse(String arg) throws IOException {
+        JSONWrapper<MeetingsResponse> jsonAdapter=new JSONWrapper<>(MeetingsResponse.class);
+        return jsonAdapter.fromJSON(arg);
+    }
 }

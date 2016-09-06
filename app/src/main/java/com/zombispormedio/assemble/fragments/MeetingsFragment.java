@@ -3,22 +3,36 @@ package com.zombispormedio.assemble.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.activities.HomeActivity;
+import com.zombispormedio.assemble.adapters.MeetingsRecyclerViewAdapter;
+import com.zombispormedio.assemble.controllers.MeetingsController;
+import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.views.IMeetingsView;
+
+import java.util.ArrayList;
 
 
-public class MeetingsFragment extends Fragment {
+public class MeetingsFragment extends Fragment implements IMeetingsView {
+
+    private HomeActivity view;
+    private MeetingsController ctrl;
+
+    private RecyclerView _listMeetings;
 
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
+    private MeetingsRecyclerViewAdapter.Factory _listMeetingsFactory;
+
+    private MeetingsRecyclerViewAdapter _listMeetingsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -27,8 +41,52 @@ public class MeetingsFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
 
+        ctrl= new MeetingsController(this);
+
+        view= (HomeActivity) getActivity();
+
+        _listMeetings = (RecyclerView) view.findViewById(R.id.meetings_list);
+
+        _listMeetingsFactory = new MeetingsRecyclerViewAdapter.Factory();
+        _listMeetingsAdapter =null;
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
+        setupMeetings();
+
+        ctrl.onCreate();
+    }
+
+    private void setupMeetings() {
+        AndroidUtils.createListConfiguration(view, _listMeetings)
+                .divider(true)
+                .itemAnimation(true)
+                .configure();
+        _listMeetingsFactory.setOnClickListener(ctrl.getOnClickOneTeam());
+    }
+
+    @Override
+    public void bindMeetings(ArrayList<Meeting> data) {
+        if(_listMeetingsAdapter ==null){
+            _listMeetingsAdapter =_listMeetingsFactory.make(data);
+            _listMeetings.setAdapter(_listMeetingsAdapter);
+        }else{
+            _listMeetingsAdapter.setData(data);
+            _listMeetingsAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void showAlert(String msg) {
+        view.showAlert(msg);
     }
 }

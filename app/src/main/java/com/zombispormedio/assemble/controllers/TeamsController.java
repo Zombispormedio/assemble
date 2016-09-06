@@ -50,6 +50,7 @@ public class TeamsController extends AbstractController {
 
             @Override
             public void onSuccess(ArrayList<Team> result) {
+                user.setTeams(result);
                 ctx.bindTeams(result);
             }
         });

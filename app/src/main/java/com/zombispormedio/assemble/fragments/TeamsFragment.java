@@ -31,7 +31,7 @@ public class TeamsFragment extends Fragment implements ITeamsView {
 
     private TeamsRecyclerViewAdapter.Factory _listTeamsFactory;
 
-    private TeamsRecyclerViewAdapter _listsTeamsAdapter;
+    private TeamsRecyclerViewAdapter _listTeamsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -49,7 +49,7 @@ public class TeamsFragment extends Fragment implements ITeamsView {
         _listTeams = (RecyclerView) view.findViewById(R.id.teams_list);
 
         _listTeamsFactory = new TeamsRecyclerViewAdapter.Factory();
-        _listsTeamsAdapter=null;
+        _listTeamsAdapter =null;
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -66,7 +66,10 @@ public class TeamsFragment extends Fragment implements ITeamsView {
 
 
     private void setupTeams() {
-        AndroidUtils.setupScrollList(view, _listTeams);
+        AndroidUtils.createListConfiguration(view, _listTeams)
+                .divider(true)
+                .itemAnimation(true)
+                .configure();
         _listTeamsFactory.setOnClickListener(ctrl.getOnClickOneTeam());
 
     }
@@ -74,12 +77,12 @@ public class TeamsFragment extends Fragment implements ITeamsView {
 
     @Override
     public void bindTeams(ArrayList<Team> data) {
-        if(_listsTeamsAdapter==null){
-            _listsTeamsAdapter=_listTeamsFactory.make(data);
-            _listTeams.setAdapter(_listsTeamsAdapter);
+        if(_listTeamsAdapter ==null){
+            _listTeamsAdapter =_listTeamsFactory.make(data);
+            _listTeams.setAdapter(_listTeamsAdapter);
         }else{
-            _listsTeamsAdapter.setData(data);
-            _listsTeamsAdapter.notifyDataSetChanged();
+            _listTeamsAdapter.setData(data);
+            _listTeamsAdapter.notifyDataSetChanged();
         }
     }
 
