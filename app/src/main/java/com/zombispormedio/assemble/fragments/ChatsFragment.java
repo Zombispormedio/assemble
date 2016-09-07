@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,45 +12,47 @@ import android.view.ViewGroup;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.HomeActivity;
-import com.zombispormedio.assemble.adapters.MeetingsRecyclerViewAdapter;
-import com.zombispormedio.assemble.controllers.MeetingsController;
-import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.adapters.ChatsRecyclerViewAdapter;
+import com.zombispormedio.assemble.controllers.ChatsController;
+import com.zombispormedio.assemble.models.Chat;
+import com.zombispormedio.assemble.services.IChatService;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.IMeetingsView;
+import com.zombispormedio.assemble.views.IChatsView;
 
 import java.util.ArrayList;
 
 
-public class MeetingsFragment extends Fragment implements IMeetingsView {
+public class ChatsFragment extends Fragment implements IChatsView{
 
     private HomeActivity view;
 
-    private MeetingsController ctrl;
+    private ChatsController ctrl;
 
-    private RecyclerView _listMeetings;
+    private RecyclerView _listChats;
 
-    private MeetingsRecyclerViewAdapter.Factory _listMeetingsFactory;
+    private ChatsRecyclerViewAdapter.Factory _listChatsFactory;
 
-    private MeetingsRecyclerViewAdapter _listMeetingsAdapter;
+    private ChatsRecyclerViewAdapter _listChatsAdapter;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_meetings, container, false);
+        return inflater.inflate(R.layout.fragment_chats, container, false);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ctrl = new MeetingsController(this);
+        ctrl = new ChatsController(this);
 
         view = (HomeActivity) getActivity();
 
-        _listMeetings = (RecyclerView) view.findViewById(R.id.meetings_list);
+        _listChats = (RecyclerView) view.findViewById(R.id.chats_list);
 
-        _listMeetingsFactory = new MeetingsRecyclerViewAdapter.Factory();
-        _listMeetingsAdapter = null;
+        _listChatsFactory = new ChatsRecyclerViewAdapter.Factory();
+        _listChatsAdapter = null;
 
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -61,27 +62,27 @@ public class MeetingsFragment extends Fragment implements IMeetingsView {
             }
         });
 
-        setupMeetings();
+        setupChats();
 
         ctrl.onCreate();
     }
 
-    private void setupMeetings() {
-        AndroidUtils.createListConfiguration(view, _listMeetings)
+    private void setupChats() {
+        AndroidUtils.createListConfiguration(view, _listChats)
                 .divider(true)
                 .itemAnimation(true)
                 .configure();
-        _listMeetingsFactory.setOnClickListener(ctrl.getOnClickOneTeam());
+        _listChatsFactory.setOnClickListener(ctrl.getOnClickOneTeam());
     }
 
     @Override
-    public void bindMeetings(ArrayList<Meeting> data) {
-        if (_listMeetingsAdapter == null) {
-            _listMeetingsAdapter = _listMeetingsFactory.make(data);
-            _listMeetings.setAdapter(_listMeetingsAdapter);
+    public void bindChats(ArrayList<Chat> data) {
+        if (_listChatsAdapter == null) {
+            _listChatsAdapter = _listChatsFactory.make(data);
+            _listChats.setAdapter(_listChatsAdapter);
         } else {
-            _listMeetingsAdapter.setData(data);
-            _listMeetingsAdapter.notifyDataSetChanged();
+            _listChatsAdapter.setData(data);
+            _listChatsAdapter.notifyDataSetChanged();
         }
     }
 

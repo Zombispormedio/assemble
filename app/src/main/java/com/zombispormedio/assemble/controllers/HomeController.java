@@ -2,10 +2,12 @@ package com.zombispormedio.assemble.controllers;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
+import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
@@ -29,6 +31,8 @@ public class HomeController extends AbstractController {
 
     private final MeetingResource meetingResource;
 
+    private final ChatResource chatResource;
+
     private CurrentUser user;
 
     private boolean isTeamsReady;
@@ -37,6 +41,7 @@ public class HomeController extends AbstractController {
 
     private boolean isMeetingsReady;
 
+    private boolean isChatsReady;
 
     public HomeController(IHomeView ctx) {
         this.ctx = ctx;
@@ -44,12 +49,14 @@ public class HomeController extends AbstractController {
         userResource = ResourceFactory.createUserResource();
         teamResource = ResourceFactory.createTeamResource();
         meetingResource = ResourceFactory.createMeetingResource();
+        chatResource=ResourceFactory.createChatResource();
 
         user = CurrentUser.getInstance();
 
         isProfileReady = false;
         isTeamsReady = false;
         isMeetingsReady = false;
+        isChatsReady=false;
     }
 
     @Override
@@ -106,8 +113,10 @@ public class HomeController extends AbstractController {
         getProfile();
         getTeams();
         getMeetings();
+        getChats();
 
     }
+
 
 
     private void getProfile() {
@@ -161,9 +170,26 @@ public class HomeController extends AbstractController {
         });
     }
 
+    private void getChats() {
+        chatResource.getAll(new IServiceHandler<ArrayList<Chat>, Error>() {
+            @Override
+            public void onError(Error error) {
+                readyChats();
+                ctx.showAlert(error.msg);
+            }
+
+            @Override
+            public void onSuccess(ArrayList<Chat> result) {
+                user.setChats(result);
+                readyChats();
+            }
+        });
+    }
+
+
 
     private boolean isReady() {
-        return isProfileReady && isTeamsReady && isMeetingsReady;
+        return isProfileReady && isTeamsReady && isMeetingsReady && isChatsReady;
     }
 
     private void loading() {
@@ -183,6 +209,7 @@ public class HomeController extends AbstractController {
         isProfileReady = false;
         isTeamsReady = false;
         isMeetingsReady = false;
+        isChatsReady=false;
     }
 
     private void readyProfile() {
@@ -200,6 +227,12 @@ public class HomeController extends AbstractController {
         isMeetingsReady = true;
         ready();
     }
+
+    private void readyChats() {
+        isChatsReady = true;
+        ready();
+    }
+
 
 
     @Override

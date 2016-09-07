@@ -6,11 +6,11 @@ package com.zombispormedio.assemble.models;
 public class Recipient extends Avatar {
 
 
-    private final String id;
+    public final String id;
 
-    private final String email;
+    public final String email;
 
-    private final String username;
+    public final String username;
 
     public Recipient(String id, String email, String username,
             String full_avatar_url, String large_avatar_url, String medium_avatar_url, String thumb_avatar_url) {

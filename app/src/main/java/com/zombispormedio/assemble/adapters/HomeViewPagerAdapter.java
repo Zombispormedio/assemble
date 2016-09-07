@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.zombispormedio.assemble.fragments.MeetingsFragment;
-import com.zombispormedio.assemble.fragments.MessagesFragment;
+import com.zombispormedio.assemble.fragments.ChatsFragment;
 import com.zombispormedio.assemble.fragments.TeamsFragment;
 
 /**
@@ -36,7 +36,7 @@ public class HomeViewPagerAdapter extends FragmentStatePagerAdapter {
                 break;
 
             case 2:
-                item = new MessagesFragment();
+                item = new ChatsFragment();
                 break;
         }
 

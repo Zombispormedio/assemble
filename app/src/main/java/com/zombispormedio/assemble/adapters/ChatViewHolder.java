@@ -2,24 +2,23 @@ package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.models.Meeting;
-
+import com.zombispormedio.assemble.models.Chat;
 
 import android.view.View;
 import android.widget.TextView;
 
 /**
- * Created by Xavier Serrano on 06/09/2016.
+ * Created by Xavier Serrano on 07/09/2016.
  */
-public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
+public class ChatViewHolder extends AbstractViewHolder<Chat> {
 
     private View ctx;
 
     private TextView nameLabel;
 
-    private IOnClickItemListHandler<Meeting> listener;
+    private IOnClickItemListHandler<Chat> listener;
 
-    public MeetingViewHolder(View ctx) {
+    public ChatViewHolder(View ctx) {
         super(ctx);
         this.ctx = ctx;
         this.listener = null;
@@ -30,14 +29,13 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
         nameLabel = (TextView) ctx.findViewById(R.id.name_label);
     }
 
-
     @Override
-    public void bind(int position, Meeting itemData) {
+    public void bind(int position, Chat itemData) {
         bindData(itemData);
         setupOnClickListener(position, itemData);
     }
 
-    private void setupOnClickListener(final int position, final Meeting itemData) {
+    private void setupOnClickListener(final int position, final Chat itemData) {
         ctx.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,8 +46,7 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
         });
     }
 
-    private void bindData(Meeting itemData) {
-        nameLabel.setText(itemData.name);
+    private void bindData(Chat itemData) {
+        nameLabel.setText(itemData.recipient.username);
     }
-
 }
