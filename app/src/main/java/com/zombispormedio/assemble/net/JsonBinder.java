@@ -4,6 +4,7 @@ import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.net.responses.ChatsResponse;
 import com.zombispormedio.assemble.net.responses.DefaultResponse;
 import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.net.responses.FriendsResponse;
@@ -34,7 +35,6 @@ public class JsonBinder {
         return jsonAdapter.fromJSON(raw);
     }
 
-
     public static String fromAuth(Auth user) {
         JSONWrapper<Auth> userAdapter = new JSONWrapper<>(Auth.class);
         return userAdapter.toJSON(user);
@@ -55,13 +55,18 @@ public class JsonBinder {
         return jsonAdapter.fromJSON(arg);
     }
 
-    public static TeamsResponse toTeamsResponse(String arg) throws  IOException{
-        JSONWrapper<TeamsResponse> jsonAdapter=new JSONWrapper<>(TeamsResponse.class);
+    public static TeamsResponse toTeamsResponse(String arg) throws IOException {
+        JSONWrapper<TeamsResponse> jsonAdapter = new JSONWrapper<>(TeamsResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
 
     public static MeetingsResponse toMeetingsResponse(String arg) throws IOException {
-        JSONWrapper<MeetingsResponse> jsonAdapter=new JSONWrapper<>(MeetingsResponse.class);
+        JSONWrapper<MeetingsResponse> jsonAdapter = new JSONWrapper<>(MeetingsResponse.class);
+        return jsonAdapter.fromJSON(arg);
+    }
+
+    public static ChatsResponse toChatsResponse(String arg) throws IOException {
+        JSONWrapper<ChatsResponse> jsonAdapter=new JSONWrapper<>(ChatsResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
 }

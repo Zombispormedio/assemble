@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.models;
 /**
  * Created by Xavier Serrano on 03/09/2016.
  */
-public class Team extends Imageable{
+public class Team extends Image {
     public final String id;
     public final String name;
     public final String description;
