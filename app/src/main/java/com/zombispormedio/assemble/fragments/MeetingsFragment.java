@@ -4,7 +4,6 @@ package com.zombispormedio.assemble.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -21,14 +20,17 @@ import com.zombispormedio.assemble.views.IMeetingsView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 
-public class MeetingsFragment extends Fragment implements IMeetingsView {
+
+public class MeetingsFragment extends BaseFragment implements IMeetingsView {
 
     private HomeActivity view;
 
     private MeetingsController ctrl;
 
-    private RecyclerView _listMeetings;
+    @BindView(R.id.meetings_list)
+    RecyclerView _listMeetings;
 
     private MeetingsRecyclerViewAdapter.Factory _listMeetingsFactory;
 
@@ -44,22 +46,14 @@ public class MeetingsFragment extends Fragment implements IMeetingsView {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ctrl = new MeetingsController(this);
-
         view = (HomeActivity) getActivity();
 
-        _listMeetings = (RecyclerView) view.findViewById(R.id.meetings_list);
+        super.bind(this, view);
+
+        ctrl = new MeetingsController(this);
 
         _listMeetingsFactory = new MeetingsRecyclerViewAdapter.Factory();
         _listMeetingsAdapter = null;
-
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         setupMeetings();
 

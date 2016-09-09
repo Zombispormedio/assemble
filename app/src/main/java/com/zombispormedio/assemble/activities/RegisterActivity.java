@@ -16,46 +16,46 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.IRegisterView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     private RegisterController ctrl;
 
-    private EditText emailInput;
+    @BindView(R.id.email_input)
+    EditText emailInput;
 
-    private EditText passwordInput;
+    @BindView(R.id.pass_input)
+    EditText passwordInput;
 
-    private EditText repPasswordInput;
+    @BindView(R.id.repeat_pass_input)
+    EditText repPasswordInput;
 
-    private Button registerButton;
+    @BindView(R.id.register_button)
+    Button registerButton;
 
-    private ProgressBar progressBar;
+    @BindView(R.id.register_progress_bar)
+    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
         setupToolbar();
+        ButterKnife.bind(this);
 
         ((Toolbar) findViewById(R.id.toolbar)).setTitle("");
 
         ctrl = new RegisterController(this);
 
-        emailInput = (EditText) findViewById(R.id.email_input);
-        passwordInput = (EditText) findViewById(R.id.pass_input);
-        repPasswordInput = (EditText) findViewById(R.id.repeat_pass_input);
-        registerButton = (Button) findViewById(R.id.register_button);
-        progressBar = (ProgressBar) findViewById(R.id.registerProgressBar);
+    }
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                ctrl.onClickRegisterButton();
-            }
-        });
-
+    @OnClick(R.id.register_button)
+    public void onRegister(View view) {
+        ctrl.register();
     }
 
 

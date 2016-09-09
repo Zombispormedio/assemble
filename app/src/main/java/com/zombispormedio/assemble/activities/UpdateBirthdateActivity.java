@@ -14,32 +14,33 @@ import android.view.View;
 
 import android.widget.DatePicker;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirthdateView {
 
     private UpdateBirthdateController ctrl;
 
-    private DatePicker _datePicker;
+    @BindView(R.id.birthdate_picker)
+    DatePicker _datePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_birthdate);
-
         setupToolbar();
+        ButterKnife.bind(this);
 
         ctrl = new UpdateBirthdateController(this);
 
-        _datePicker = (DatePicker) findViewById(R.id.birthdate_picker);
-
-        (findViewById(R.id.save_button)).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ctrl.onSave();
-            }
-        });
-
         ctrl.onCreate();
+    }
+
+    @OnClick(R.id.save_button)
+    public void OnSave(View view) {
+        ctrl.save();
     }
 
 

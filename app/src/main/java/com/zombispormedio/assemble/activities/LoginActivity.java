@@ -16,52 +16,71 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.ILoginView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class LoginActivity extends BaseActivity implements ILoginView {
+
+
+    @BindView(R.id.login_button)
+    Button _loginButton;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar _progressBar;
+
+    @BindView(R.id.register_link)
+    TextView _linkToRegister;
+
+    @BindView(R.id.email_input)
+    EditText _emailInput;
+
+    @BindView(R.id.pass_input)
+    EditText _passwordInput;
+
+    @BindView(R.id.email_input_layout)
+    TextInputLayout _emailInputLayout;
+
+    @BindView(R.id.pass_input_layout)
+    TextInputLayout _passwordInputLayout;
 
     private LoginController ctrl;
 
-    private AndroidUtils.InputLayoutHelper _emailInput;
+    private AndroidUtils.InputLayoutHelper _emailInputHelper;
 
-    private AndroidUtils.InputLayoutHelper _passwordInput;
-
-    private Button _loginButton;
-
-    private ProgressBar _progressBar;
-
-    private TextView _linkToRegister;
+    private AndroidUtils.InputLayoutHelper _passwordInputHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        ButterKnife.bind(this);
+
         ctrl = new LoginController(this);
 
-        _emailInput = new AndroidUtils.InputLayoutHelper((EditText) findViewById(R.id.email_input),
-                (TextInputLayout) findViewById(R.id.email_input_layout));
-        _passwordInput = new AndroidUtils.InputLayoutHelper((EditText) findViewById(R.id.pass_input),
-                (TextInputLayout) findViewById(R.id.pass_input_layout));
-
-        _loginButton = (Button) findViewById(R.id.login_button);
-        _progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        _linkToRegister = (TextView) findViewById(R.id.register_link);
-
-        _loginButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                ctrl.onClickLoginButton();
-            }
-        });
+        _emailInputHelper = new AndroidUtils.InputLayoutHelper(_emailInput, _emailInputLayout);
+        _passwordInputHelper = new AndroidUtils.InputLayoutHelper(_passwordInput, _passwordInputLayout);
 
         _linkToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ctrl.onClickRegisterLink();
+                ctrl.linkToRegister();
             }
         });
 
     }
+
+    @OnClick(R.id.login_button)
+    public void onClickLoginButton(View view) {
+        ctrl.login();
+    }
+
+    @OnClick(R.id.register_link)
+    public void onClickRegisterLink(View view) {
+        ctrl.linkToRegister();
+    }
+
 
     public void showProgressBar() {
         _progressBar.setVisibility(View.VISIBLE);
@@ -72,28 +91,28 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     }
 
     public void showForm() {
-        _emailInput.show();
-        _passwordInput.show();
+        _emailInputHelper.show();
+        _passwordInputHelper.show();
         _loginButton.setVisibility(View.VISIBLE);
         _linkToRegister.setVisibility(View.VISIBLE);
     }
 
     public void hideForm() {
-        _emailInput.hide();
-        _passwordInput.hide();
+        _emailInputHelper.hide();
+        _passwordInputHelper.hide();
         _loginButton.setVisibility(View.GONE);
         _linkToRegister.setVisibility(View.GONE);
     }
 
     @Override
     public String getEmail() {
-        return _emailInput.getValue();
+        return _emailInputHelper.getValue();
 
     }
 
     @Override
     public String getPassword() {
-        return _passwordInput.getValue();
+        return _passwordInputHelper.getValue();
     }
 
 
@@ -110,26 +129,26 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             if (email.isEmpty()) {
-                _emailInput.setError(getString(R.string.email_empty));
+                _emailInputHelper.setError(getString(R.string.email_empty));
             } else {
-                _emailInput.setError(getString(R.string.invalid_email));
+                _emailInputHelper.setError(getString(R.string.invalid_email));
             }
 
             valid = false;
         } else {
-            _emailInput.setError(null);
+            _emailInputHelper.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 6 || password.length() > 50) {
             if (password.isEmpty()) {
-                _passwordInput.setError(getString(R.string.pass_empty));
+                _passwordInputHelper.setError(getString(R.string.pass_empty));
             } else {
-                _passwordInput.setError(getString(R.string.invalid_password));
+                _passwordInputHelper.setError(getString(R.string.invalid_password));
             }
 
             valid = false;
         } else {
-            _passwordInput.setError(null);
+            _passwordInputHelper.setError(null);
         }
 
         return valid;

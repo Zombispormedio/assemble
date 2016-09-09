@@ -8,26 +8,30 @@ import com.zombispormedio.assemble.models.Meeting;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Xavier Serrano on 06/09/2016.
  */
 public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
 
-    private View ctx;
+    private View view;
 
-    private TextView nameLabel;
+    @BindView(R.id.name_label)
+    TextView nameLabel;
 
     private IOnClickItemListHandler<Meeting> listener;
 
-    public MeetingViewHolder(View ctx) {
-        super(ctx);
-        this.ctx = ctx;
+    public MeetingViewHolder(View view) {
+        super(view);
+        this.view = view;
         this.listener = null;
         setup();
     }
 
     private void setup() {
-        nameLabel = (TextView) ctx.findViewById(R.id.name_label);
+        ButterKnife.bind(this, view);
     }
 
 
@@ -38,7 +42,7 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
     }
 
     private void setupOnClickListener(final int position, final Meeting itemData) {
-        ctx.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {

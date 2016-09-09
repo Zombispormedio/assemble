@@ -35,6 +35,10 @@ import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.IProfileView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 
 public class ProfileActivity extends BaseActivity implements IProfileView {
 
@@ -42,21 +46,28 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     private ProfileController ctrl;
 
-    private ImageView _imageProfile;
+    @BindView(R.id.image_profile)
+    ImageView _imageProfile;
 
-    private FloatingActionButton _imageFab;
+    @BindView(R.id.image_upload_button)
+    FloatingActionButton _imageFab;
+
+    @BindView(R.id.progress_image)
+    ProgressBar _imageProgress;
+
+    @BindView(R.id.profile_username_text)
+    TextView _usernameText;
+
+    @BindView(R.id.profile_location_text)
+    TextView _locationText;
+
+    @BindView(R.id.profile_bio_text)
+    TextView _bioText;
+
+    @BindView(R.id.profile_birth_date_text)
+    TextView _birthDateText;
 
     private ProgressDialog _imageProgressDialog;
-
-    private ProgressBar _imageProgress;
-
-    private TextView _usernameText;
-
-    private TextView _locationText;
-
-    private TextView _bioText;
-
-    private TextView _birthDateText;
 
     private BottomSheetDialog _imageUploaderBottomSheet;
 
@@ -65,48 +76,31 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         setupToolbar();
+        ButterKnife.bind(this);
 
         externalNavigationManager = new ExternalNavigationManager(this);
-
-        _imageFab = (FloatingActionButton) findViewById(R.id.image_upload_button);
-        _imageProfile = (ImageView) findViewById(R.id.imageProfile);
 
         _imageProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
         _imageProgressDialog.setMessage(getString(R.string.updating_profile_image));
         _imageProgressDialog.setIndeterminate(true);
         _imageProgressDialog.setCancelable(false);
 
-        _imageProgress = (ProgressBar) findViewById(R.id.progress_image);
-
-        _usernameText = (TextView) findViewById(R.id.profile_username_text);
-        _locationText = (TextView) findViewById(R.id.profile_location_text);
-        _bioText = (TextView) findViewById(R.id.profile_bio_text);
-        _birthDateText = (TextView) findViewById(R.id.profile_birth_date_text);
-        Button _updateProfileButton = (Button) findViewById(R.id.update_profile_button);
-
         ctrl = new ProfileController(this);
-
-        _imageFab.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                openImageBottomSheet();
-
-            }
-        });
-
-        _updateProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ctrl.updateProfile();
-            }
-        });
 
         setupImageUploaderBottomSheet();
 
         ctrl.onCreate();
     }
 
+    @OnClick(R.id.update_profile_button)
+    public void onUpdateProfileButton(View view) {
+        ctrl.updateProfile();
+    }
+
+    @OnClick(R.id.image_upload_button)
+    public void onImageFab(View view) {
+        openImageBottomSheet();
+    }
 
     public void hideImageForm() {
         _imageFab.setVisibility(View.INVISIBLE);
@@ -193,10 +187,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
                     }
                 });
-
-
     }
-
 
     public void loadDefaultImage(final ISuccessHandler handler) {
         Picasso.with(this)
@@ -277,6 +268,5 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
             }
         }
     }
-
 
 }

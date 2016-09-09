@@ -22,7 +22,7 @@ public class LoginController extends AbstractController {
         user = ResourceFactory.createUserResource();
     }
 
-    public void onClickLoginButton() {
+    public void login() {
 
         if (!ctx.validate()) {
             ctx.showFailValidation();
@@ -65,7 +65,7 @@ public class LoginController extends AbstractController {
         ctx.showForm();
     }
 
-    public void onClickRegisterLink() {
+    public void linkToRegister() {
         ctx.goToRegister();
     }
 

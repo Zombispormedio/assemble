@@ -8,27 +8,31 @@ import com.zombispormedio.assemble.models.Team;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Xavier Serrano on 03/09/2016.
  */
 public class TeamViewHolder extends AbstractViewHolder<Team> {
 
-    private View ctx;
+    private View view;
 
-    private TextView nameLabel;
+    @BindView(R.id.name_label)
+    TextView nameLabel;
 
     private IOnClickItemListHandler<Team> listener;
 
-    public TeamViewHolder(View ctx) {
-        super(ctx);
-        this.ctx = ctx;
+    public TeamViewHolder(View view) {
+        super(view);
+        this.view = view;
         this.listener = null;
         setup();
 
     }
 
     private void setup() {
-        nameLabel = (TextView) ctx.findViewById(R.id.name_label);
+        ButterKnife.bind(this, view);
     }
 
     @Override
@@ -38,7 +42,7 @@ public class TeamViewHolder extends AbstractViewHolder<Team> {
     }
 
     private void setupOnClickListener(final int position, final Team itemData) {
-        ctx.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {

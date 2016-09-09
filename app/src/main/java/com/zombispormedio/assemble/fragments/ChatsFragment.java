@@ -23,15 +23,17 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
 
-public class ChatsFragment extends Fragment implements IChatsView{
+public class ChatsFragment extends BaseFragment implements IChatsView {
 
     private HomeActivity view;
 
     private ChatsController ctrl;
 
-    @BindView(R.id.chats_list) RecyclerView _listChats;
+    @BindView(R.id.chats_list)
+    RecyclerView _listChats;
 
     private ChatsRecyclerViewAdapter.Factory _listChatsFactory;
 
@@ -48,24 +50,14 @@ public class ChatsFragment extends Fragment implements IChatsView{
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ctrl = new ChatsController(this);
-
         view = (HomeActivity) getActivity();
 
-        ButterKnife.bind(this, view);
+        super.bind(this, view);
 
-        //_listChats = (RecyclerView) view.findViewById(R.id.chats_list);
+        ctrl = new ChatsController(this);
 
         _listChatsFactory = new ChatsRecyclerViewAdapter.Factory();
         _listChatsAdapter = null;
-
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         setupChats();
 
@@ -95,4 +87,5 @@ public class ChatsFragment extends Fragment implements IChatsView{
     public void showAlert(String msg) {
         view.showAlert(msg);
     }
+
 }

@@ -21,18 +21,24 @@ import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.IHomeView;
 
-public class HomeActivity extends BaseActivity implements IHomeView {
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    private HomeController ctrl;
+public class HomeActivity extends BaseActivity implements IHomeView {
 
     private NavigationManager navigation;
 
-    private DrawerLayout drawer;
+    @BindView(R.id.drawer_layout_home)
+    DrawerLayout drawer;
 
-    private TextView nav_title;
+    private TextView navTitle;
+
+    @BindView(R.id.nav_view)
+    NavigationView nav;
 
     private ProgressDialog _progressDialog;
 
+    private HomeController ctrl;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +48,12 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         setupToolbar();
         setHomeUpIcon(R.drawable.menu_bar);
 
+        ButterKnife.bind(this);
+
         ctrl = new HomeController(this);
         navigation = new NavigationManager(this);
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout_home);
-        NavigationView nav = (NavigationView) findViewById(R.id.nav_view);
 
         _progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
         _progressDialog.setMessage(getString(R.string.loading_app_data));
@@ -187,11 +194,11 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     @Override
     public void setDrawerTitle(String text) {
-        if (nav_title == null) {
-            nav_title = (TextView) findViewById(R.id.nav_title);
+        if (navTitle == null) {
+            navTitle = (TextView) findViewById(R.id.nav_title);
         }
-        if (nav_title != null) {
-            nav_title.setText(text);
+        if (navTitle != null) {
+            navTitle.setText(text);
         }
     }
 

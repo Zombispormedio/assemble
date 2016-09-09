@@ -52,7 +52,7 @@ public class UpdateBirthdateController extends AbstractController {
         ctx.setMaxDate(DateUtils.appendYearsToNow(-8));
     }
 
-    public void onSave() {
+    public void save() {
         int year = ctx.getYearOfBirthdate();
         int month = ctx.getMonthOfBirthdate();
         int day = ctx.getDayOfBirthdate();

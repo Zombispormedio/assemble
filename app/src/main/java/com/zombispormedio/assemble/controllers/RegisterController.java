@@ -22,7 +22,7 @@ public class RegisterController extends AbstractController {
         user = ResourceFactory.createUserResource();
     }
 
-    public void onClickRegisterButton() {
+    public void register() {
         whileLogin();
 
         String email = ctx.getEmail();

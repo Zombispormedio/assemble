@@ -18,7 +18,7 @@ public class APIConfiguration {
     }
 
     private APIConfiguration() {
-        baseUrl = "https://assemble-api.herokuapp.com";
+        baseUrl = "https://us-assemble-api.herokuapp.com";
         token = null;
     }
 

@@ -15,20 +15,27 @@ import android.os.Bundle;
 
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class UpdateProfileActivity extends BaseActivity implements IUpdateProfileView {
 
     private UpdateProfileController ctrl;
 
-    private EditText _usernameInput;
+    @BindView(R.id.username_input)
+    EditText _usernameInput;
 
-    private EditText _bioInput;
+    @BindView(R.id.bio_input)
+    EditText _bioInput;
 
-    private EditText _locationInput;
+    @BindView(R.id.location_input)
+    EditText _locationInput;
 
-    private EditText _birthdateInput;
+    @BindView(R.id.birthdate_input)
+    EditText _birthdateInput;
 
     private ProgressDialog _progressDialog;
 
@@ -36,18 +43,8 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
-
         setupToolbar();
-
-        _usernameInput = (EditText) findViewById(R.id.username_input);
-
-        _bioInput = (EditText) findViewById(R.id.bio_input);
-
-        _locationInput = (EditText) findViewById(R.id.location_input);
-
-        _birthdateInput = (EditText) findViewById(R.id.birthdate_input);
-
-        Button _saveButton = (Button) findViewById(R.id.save_button);
+        ButterKnife.bind(this);
 
         _progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
         _progressDialog.setMessage(getString(R.string.updating_profile_message));
@@ -56,21 +53,17 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
 
         ctrl = new UpdateProfileController(this);
 
-        _saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ctrl.onSave();
-            }
-        });
-
-        _birthdateInput.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ctrl.onClickBirthDateInput();
-            }
-        });
-
         ctrl.onCreate();
+    }
+
+    @OnClick(R.id.save_button)
+    public void onSave(View view){
+        ctrl.save();
+    }
+
+    @OnClick(R.id.birthdate_input)
+    public void onClickBirthDateInput(View view){
+        ctrl.editBirthDate();
     }
 
     @Override

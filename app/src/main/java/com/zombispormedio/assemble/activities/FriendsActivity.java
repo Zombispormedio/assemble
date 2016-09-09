@@ -21,25 +21,33 @@ import com.zombispormedio.assemble.views.IFriendsView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 public class FriendsActivity extends BaseActivity implements IFriendsView {
+
+    @BindView(R.id.friends_list)
+    RecyclerView _listFriends;
+
+    @BindView(R.id.req_friends_list)
+    RecyclerView _listFriendRequests;
 
     private FriendsController ctrl;
 
-    private RecyclerView _listFriends;
-
-    private RecyclerView _listFriendRequests;
-
     private FriendsRecyclerViewAdapter.Factory _listFriendsFactory;
 
-    private  FriendsRecyclerViewAdapter _listFriendsAdapter;
+    private FriendsRecyclerViewAdapter _listFriendsAdapter;
 
     private FriendRequestsRecyclerViewAdapter.Factory _listFriendRequestsFactory;
 
     private FriendRequestsRecyclerViewAdapter _listFriendRequestsAdapter;
 
-    private TextView _progressLabel;
+    @BindView(R.id.loading_label)
+    TextView _progressLabel;
 
-    private ProgressBar _progressBar;
+    @BindView(R.id.progress_bar)
+    ProgressBar _progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,26 +55,15 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
         setContentView(R.layout.activity_friends);
         setupToolbar();
 
+        ButterKnife.bind(this);
+
         ctrl = new FriendsController(this);
 
         _listFriendsFactory = new FriendsRecyclerViewAdapter.Factory();
-        _listFriendsAdapter=null;
+        _listFriendsAdapter = null;
 
         _listFriendRequestsFactory = new FriendRequestsRecyclerViewAdapter.Factory();
-        _listFriendRequestsAdapter=null;
-
-        _listFriends = (RecyclerView) findViewById(R.id.friends_list);
-        _listFriendRequests = (RecyclerView) findViewById(R.id.req_friends_list);
-        _progressBar = (ProgressBar) findViewById(R.id.progress_bar);
-        _progressLabel = (TextView) findViewById(R.id.loading_label);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ctrl.onNewFriend();
-            }
-        });
+        _listFriendRequestsAdapter = null;
 
         setupFriends();
 
@@ -75,12 +72,17 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
         ctrl.onCreate();
     }
 
+    @OnClick(R.id.fab)
+    public void onNewFriendButtonClick(View view) {
+        ctrl.onNewFriend();
+    }
+
     private void setupRequestFriends() {
-       AndroidUtils.createListConfiguration(this, _listFriendRequests)
-               .divider(true)
-               .itemAnimation(true)
-               .scrolling(false)
-               .configure();
+        AndroidUtils.createListConfiguration(this, _listFriendRequests)
+                .divider(true)
+                .itemAnimation(true)
+                .scrolling(false)
+                .configure();
         _listFriendRequestsFactory.setOnClickListener(ctrl.getOnClickOneRequest());
 
     }
@@ -96,10 +98,10 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
 
     public void bindFriends(ArrayList<FriendProfile> data) {
-        if(_listFriendsAdapter==null){
-            _listFriendsAdapter=_listFriendsFactory.make(data);
+        if (_listFriendsAdapter == null) {
+            _listFriendsAdapter = _listFriendsFactory.make(data);
             _listFriends.setAdapter(_listFriendsAdapter);
-        }else{
+        } else {
             _listFriendsAdapter.setData(data);
             _listFriendsAdapter.notifyDataSetChanged();
         }
@@ -109,10 +111,10 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
     @Override
     public void bindFriendRequests(ArrayList<FriendRequestProfile> data) {
-        if(_listFriendRequestsAdapter==null){
-            _listFriendRequestsAdapter=_listFriendRequestsFactory.make(data);
+        if (_listFriendRequestsAdapter == null) {
+            _listFriendRequestsAdapter = _listFriendRequestsFactory.make(data);
             _listFriendRequests.setAdapter(_listFriendRequestsAdapter);
-        }else{
+        } else {
             _listFriendRequestsAdapter.setData(data);
             _listFriendRequestsAdapter.notifyDataSetChanged();
         }

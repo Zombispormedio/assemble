@@ -20,14 +20,17 @@ import com.zombispormedio.assemble.views.ITeamsView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
 
-public class TeamsFragment extends Fragment implements ITeamsView {
+
+public class TeamsFragment extends BaseFragment implements ITeamsView {
 
     private HomeActivity view;
 
     private TeamsController ctrl;
 
-    private RecyclerView _listTeams;
+    @BindView(R.id.teams_list)
+    RecyclerView _listTeams;
 
     private TeamsRecyclerViewAdapter.Factory _listTeamsFactory;
 
@@ -46,18 +49,10 @@ public class TeamsFragment extends Fragment implements ITeamsView {
 
         view = (HomeActivity) getActivity();
 
-        _listTeams = (RecyclerView) view.findViewById(R.id.teams_list);
+        super.bind(this, view);
 
         _listTeamsFactory = new TeamsRecyclerViewAdapter.Factory();
         _listTeamsAdapter =null;
-
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         setupTeams();
 

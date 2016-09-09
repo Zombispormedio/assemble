@@ -8,29 +8,33 @@ import com.zombispormedio.assemble.models.FriendRequestProfile;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
 public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestProfile> {
 
-    private View ctx;
+    private View view;
 
     private IOnClickItemListHandler<FriendRequestProfile> listener;
 
-    private TextView usernameLabel;
+    @BindView(R.id.username_label)
+    TextView usernameLabel;
 
-    private TextView emailLabel;
+    @BindView(R.id.email_label)
+    TextView emailLabel;
 
-    public FriendRequestsViewHolder(View ctx) {
-        super(ctx);
-        this.ctx = ctx;
+    public FriendRequestsViewHolder(View view) {
+        super(view);
+        this.view = view;
         this.listener = null;
         setup();
     }
 
     private void setup() {
-        usernameLabel = (TextView) itemView.findViewById(R.id.username_label);
-        emailLabel = (TextView) itemView.findViewById(R.id.email_label);
+        ButterKnife.bind(this, view);
     }
 
     @Override
@@ -40,7 +44,7 @@ public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestPr
     }
 
     private void setupOnClickListener(final int position, final FriendRequestProfile itemData) {
-        ctx.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {

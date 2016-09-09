@@ -48,7 +48,7 @@ public class UpdateProfileController extends AbstractController {
         AndroidUtils.fillProfile(ctx, user.getProfile());
     }
 
-    public void onSave() {
+    public void save() {
         ctx.openProgressDialog();
 
         bindEditor();
@@ -56,6 +56,7 @@ public class UpdateProfileController extends AbstractController {
         EditProfile editProfile = editor.build();
 
         if (!editor.hasChanged()) {
+            ctx.closeProgressDialog();
             ctx.close();
         } else {
 
@@ -78,7 +79,7 @@ public class UpdateProfileController extends AbstractController {
 
     }
 
-    public void onClickBirthDateInput() {
+    public void editBirthDate() {
         ctx.goToUpdateBirthdate(editor.getBirthdate());
     }
 

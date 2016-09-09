@@ -7,26 +7,30 @@ import com.zombispormedio.assemble.models.Chat;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
 public class ChatViewHolder extends AbstractViewHolder<Chat> {
 
-    private View ctx;
+    private View view;
 
-    private TextView nameLabel;
+    @BindView(R.id.name_label)
+    TextView nameLabel;
 
     private IOnClickItemListHandler<Chat> listener;
 
-    public ChatViewHolder(View ctx) {
-        super(ctx);
-        this.ctx = ctx;
+    public ChatViewHolder(View view) {
+        super(view);
+        this.view = view;
         this.listener = null;
         setup();
     }
 
     private void setup() {
-        nameLabel = (TextView) ctx.findViewById(R.id.name_label);
+        ButterKnife.bind(this, view);
     }
 
     @Override
@@ -36,7 +40,7 @@ public class ChatViewHolder extends AbstractViewHolder<Chat> {
     }
 
     private void setupOnClickListener(final int position, final Chat itemData) {
-        ctx.setOnClickListener(new View.OnClickListener() {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
