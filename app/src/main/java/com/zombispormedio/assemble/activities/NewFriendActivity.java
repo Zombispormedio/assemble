@@ -11,8 +11,8 @@ public class NewFriendActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_friend);
-
         setupToolbar();
+        bindActivity(this);
     }
 
 }

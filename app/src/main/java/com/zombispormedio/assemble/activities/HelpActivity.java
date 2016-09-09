@@ -15,6 +15,7 @@ public class HelpActivity extends BaseActivity implements IHelpView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
         setupToolbar();
+        bindActivity(this);
 
         ctrl = new HelpController(this);
     }

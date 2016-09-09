@@ -20,4 +20,7 @@ public interface IHomeView extends IBaseView {
     void hideProgressDialog();
 
     void showProgressDialog();
+
+    void showOverlay();
+    void hideOverlay();
 }

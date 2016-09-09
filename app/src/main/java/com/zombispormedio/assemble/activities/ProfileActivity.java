@@ -12,7 +12,6 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.FloatingActionButton;
 
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -76,20 +75,24 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         setupToolbar();
-        ButterKnife.bind(this);
+        bindActivity(this);
 
         externalNavigationManager = new ExternalNavigationManager(this);
 
-        _imageProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
-        _imageProgressDialog.setMessage(getString(R.string.updating_profile_image));
-        _imageProgressDialog.setIndeterminate(true);
-        _imageProgressDialog.setCancelable(false);
+        setupImageProgressDialog();
 
         ctrl = new ProfileController(this);
 
         setupImageUploaderBottomSheet();
 
         ctrl.onCreate();
+    }
+
+    private void setupImageProgressDialog() {
+        _imageProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        _imageProgressDialog.setMessage(getString(R.string.updating_profile_image));
+        _imageProgressDialog.setIndeterminate(true);
+        _imageProgressDialog.setCancelable(false);
     }
 
     @OnClick(R.id.update_profile_button)

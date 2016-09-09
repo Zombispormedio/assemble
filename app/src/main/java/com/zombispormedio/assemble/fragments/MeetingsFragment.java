@@ -3,7 +3,6 @@ package com.zombispormedio.assemble.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -48,7 +47,7 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
 
         view = (HomeActivity) getActivity();
 
-        super.bind(this, view);
+        bindView(this, view);
 
         ctrl = new MeetingsController(this);
 

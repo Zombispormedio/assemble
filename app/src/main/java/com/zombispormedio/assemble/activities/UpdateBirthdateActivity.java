@@ -31,7 +31,7 @@ public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirt
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_birthdate);
         setupToolbar();
-        ButterKnife.bind(this);
+        bindActivity(this);
 
         ctrl = new UpdateBirthdateController(this);
 

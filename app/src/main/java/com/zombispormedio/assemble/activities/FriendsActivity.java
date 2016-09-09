@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.activities;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -54,16 +53,9 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
         setupToolbar();
-
-        ButterKnife.bind(this);
+        bindActivity(this);
 
         ctrl = new FriendsController(this);
-
-        _listFriendsFactory = new FriendsRecyclerViewAdapter.Factory();
-        _listFriendsAdapter = null;
-
-        _listFriendRequestsFactory = new FriendRequestsRecyclerViewAdapter.Factory();
-        _listFriendRequestsAdapter = null;
 
         setupFriends();
 
@@ -78,16 +70,19 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     }
 
     private void setupRequestFriends() {
+        _listFriendRequestsFactory = new FriendRequestsRecyclerViewAdapter.Factory();
+        _listFriendRequestsAdapter = null;
         AndroidUtils.createListConfiguration(this, _listFriendRequests)
                 .divider(true)
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
         _listFriendRequestsFactory.setOnClickListener(ctrl.getOnClickOneRequest());
-
     }
 
     private void setupFriends() {
+        _listFriendsFactory = new FriendsRecyclerViewAdapter.Factory();
+        _listFriendsAdapter = null;
         AndroidUtils.createListConfiguration(this, _listFriends)
                 .divider(true)
                 .itemAnimation(true)

@@ -16,10 +16,6 @@ public class SettingsFragment extends PreferenceFragment implements ISettingsFra
     private SettingsController ctrl;
 
 
-    public SettingsFragment() {
-
-    }
-
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 

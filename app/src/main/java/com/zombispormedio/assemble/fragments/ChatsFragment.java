@@ -3,8 +3,6 @@ package com.zombispormedio.assemble.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,15 +13,12 @@ import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.adapters.ChatsRecyclerViewAdapter;
 import com.zombispormedio.assemble.controllers.ChatsController;
 import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.services.IChatService;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.IChatsView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 
 public class ChatsFragment extends BaseFragment implements IChatsView {
@@ -52,7 +47,7 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
 
         view = (HomeActivity) getActivity();
 
-        super.bind(this, view);
+        bindView(this, view);
 
         ctrl = new ChatsController(this);
 
@@ -74,7 +69,7 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
 
     @Override
     public void bindChats(ArrayList<Chat> data) {
-        if (_listChatsAdapter == null) {
+        if (_listChatsAdapter == null ) {
             _listChatsAdapter = _listChatsFactory.make(data);
             _listChats.setAdapter(_listChatsAdapter);
         } else {

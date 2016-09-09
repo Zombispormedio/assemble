@@ -39,7 +39,7 @@ public class MainActivity extends BaseActivity implements IMainView {
                     public void run() {
                         ctrl.checkAccess();
                     }
-                }, 2000);
+                }, 1000);
 
 
     }

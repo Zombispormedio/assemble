@@ -70,6 +70,9 @@
     <string name="example_string">Lorem impsum</string>
     <string name="searching_your_friends">Buscando a tus amiguetes....</string>
     <string name="loading_app_data">En un momento todo estará listo...</string>
+    <string name="create_chat_title">Crear conversación</string>
+    <string name="create_meeting_title">Crear reunión</string>
+    <string name="create_team_title">Crear equipo</string>
 
 
 </resources>

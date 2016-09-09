@@ -44,16 +44,20 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_profile);
         setupToolbar();
-        ButterKnife.bind(this);
+        bindActivity(this);
 
+        ctrl = new UpdateProfileController(this);
+
+        setupProgressDialog();
+
+        ctrl.onCreate();
+    }
+
+    private void setupProgressDialog() {
         _progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
         _progressDialog.setMessage(getString(R.string.updating_profile_message));
         _progressDialog.setIndeterminate(true);
         _progressDialog.setCancelable(false);
-
-        ctrl = new UpdateProfileController(this);
-
-        ctrl.onCreate();
     }
 
     @OnClick(R.id.save_button)

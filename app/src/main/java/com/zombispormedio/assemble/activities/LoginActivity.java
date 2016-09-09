@@ -55,19 +55,12 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        ButterKnife.bind(this);
+        bindActivity(this);
 
         ctrl = new LoginController(this);
 
         _emailInputHelper = new AndroidUtils.InputLayoutHelper(_emailInput, _emailInputLayout);
         _passwordInputHelper = new AndroidUtils.InputLayoutHelper(_passwordInput, _passwordInputLayout);
-
-        _linkToRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ctrl.linkToRegister();
-            }
-        });
 
     }
 

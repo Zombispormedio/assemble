@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.services.api.APIConfiguration;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.IBaseView;
+
+import butterknife.ButterKnife;
 
 public class BaseActivity extends AppCompatActivity implements IBaseView {
 
@@ -66,6 +69,12 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
         }
     }
+
+    protected void bindActivity(Activity target){
+        ButterKnife.bind(target);
+    }
+
+
 
 
 }

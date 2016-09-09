@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/overlay_home_layout"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context=".activities.HomeActivity"
+        tools:showIn="@layout/activity_home"
+        >
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:id="@+id/alpha_layer"
+            android:alpha="0.8"
+           />
+
+
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200sp"
+            android:layout_gravity="bottom|end"
+
+            >
+
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/chat_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/message_text"
+                app:fabSize="mini"
+                android:layout_marginRight="25sp"
+                android:layout_gravity="right|top"
+                app:backgroundTint="@color/colorPrimaryDark"
+                app:borderWidth="0dp"
+                app:elevation="6dp"
+                />
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/team_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shield_outline"
+                app:fabSize="mini"
+                app:backgroundTint="@color/colorPrimaryDark"
+                app:borderWidth="0dp"
+                app:elevation="6dp"
+                android:layout_marginRight="25sp"
+                android:layout_marginBottom="15sp"
+                android:layout_gravity="right|center_vertical"
+                />
+
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/meeting_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/calendar_today"
+                app:fabSize="normal"
+                android:layout_margin="@dimen/fab_margin"
+                android:layout_gravity="right|bottom"
+                />
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/overlay_label_shape"
+                android:layout_gravity="center_horizontal|top"
+                android:elevation="2sp"
+                android:layout_marginLeft="60sp"
+                android:layout_marginTop="5sp"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/messages_tab_title"
+                    android:layout_gravity="center_horizontal|top"
+                    />
+        </FrameLayout>
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/overlay_label_shape"
+                android:layout_gravity="center_horizontal|bottom"
+                android:elevation="2sp"
+                android:layout_marginLeft="55sp"
+                android:layout_marginBottom="30sp"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/gatherings_tab_title"
+                    android:layout_gravity="center_horizontal|top"
+                    />
+        </FrameLayout>
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/overlay_label_shape"
+                android:layout_gravity="center"
+                android:elevation="2sp"
+                android:layout_marginLeft="60sp"
+                android:layout_marginBottom="15sp"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/teams_tab_title"
+                    android:layout_gravity="center_horizontal|top"
+                    />
+        </FrameLayout>
+
+
+    </FrameLayout>
+
+
+</FrameLayout>

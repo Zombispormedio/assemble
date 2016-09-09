@@ -82,7 +82,7 @@ public class HomeController extends AbstractController {
                 title = profile.email;
             }
         }
-        if (ctx != null) {
+        if (ctx != null && !title.isEmpty()) {
             ctx.setDrawerTitle(title);
         }
     }

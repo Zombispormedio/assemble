@@ -45,7 +45,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         setupToolbar();
-        ButterKnife.bind(this);
+        bindActivity(this);
 
         ((Toolbar) findViewById(R.id.toolbar)).setTitle("");
 

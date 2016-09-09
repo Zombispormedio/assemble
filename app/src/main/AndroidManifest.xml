@@ -123,6 +123,39 @@
                     android:value="com.zombispormedio.assemble.activities.FriendsActivity"
                     />
         </activity>
+        <activity
+                android:name=".activities.CreateMeetingActivity"
+                android:label="@string/create_meeting_title"
+                android:parentActivityName=".activities.HomeActivity"
+                android:theme="@style/AppTheme"
+                >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zombispormedio.assemble.activities.HomeActivity"
+                    />
+        </activity>
+        <activity
+                android:name=".activities.CreateTeamActivity"
+                android:label="@string/create_team_title"
+                android:parentActivityName=".activities.HomeActivity"
+                android:theme="@style/AppTheme"
+                >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zombispormedio.assemble.activities.HomeActivity"
+                    />
+        </activity>
+        <activity
+                android:name=".activities.CreateChatActivity"
+                android:label="@string/create_chat_title"
+                android:parentActivityName=".activities.HomeActivity"
+                android:theme="@style/AppTheme"
+                >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zombispormedio.assemble.activities.HomeActivity"
+                    />
+        </activity>
     </application>
 
 </manifest>

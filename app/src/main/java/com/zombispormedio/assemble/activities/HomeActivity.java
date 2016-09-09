@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.activities;
 
 import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.GravityCompat;
@@ -11,7 +12,9 @@ import android.support.v7.app.ActionBarDrawerToggle;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
@@ -23,6 +26,8 @@ import com.zombispormedio.assemble.views.IHomeView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnTouch;
 
 public class HomeActivity extends BaseActivity implements IHomeView {
 
@@ -36,6 +41,12 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     @BindView(R.id.nav_view)
     NavigationView nav;
 
+    @BindView(R.id.overlay_home_layout)
+    FrameLayout overlay;
+
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+
     private ProgressDialog _progressDialog;
 
     private HomeController ctrl;
@@ -44,29 +55,31 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
         setupToolbar();
         setHomeUpIcon(R.drawable.menu_bar);
-
-        ButterKnife.bind(this);
+        bindActivity(this);
 
         ctrl = new HomeController(this);
         navigation = new NavigationManager(this);
 
-        drawer = (DrawerLayout) findViewById(R.id.drawer_layout_home);
-
-        _progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
-        _progressDialog.setMessage(getString(R.string.loading_app_data));
-        _progressDialog.setIndeterminate(true);
-        _progressDialog.setCancelable(false);
+        setupProgressDialog();
 
         nav.setNavigationItemSelectedListener(NavListener());
         drawer.addDrawerListener(DrawerListener());
+
+        overlay.setVisibility(View.GONE);
 
         setupTabs();
 
         ctrl.onCreate();
 
+    }
+
+    private void setupProgressDialog() {
+        _progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        _progressDialog.setMessage(getString(R.string.loading_app_data));
+        _progressDialog.setIndeterminate(true);
+        _progressDialog.setCancelable(false);
     }
 
     private void setupTabs() {
@@ -212,5 +225,46 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         _progressDialog.show();
     }
 
+    @Override
+    public void showOverlay() {
+        fab.setVisibility(View.GONE);
+        overlay.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideOverlay() {
+        overlay.setVisibility(View.GONE);
+        fab.setVisibility(View.VISIBLE);
+    }
+
+
+    @OnTouch(R.id.alpha_layer)
+    public boolean onAlphaLayerClick(View view, MotionEvent motionEvent) {
+        hideOverlay();
+        return false;
+    }
+
+    @OnClick(R.id.fab)
+    public void onFabClick(View view) {
+        showOverlay();
+    }
+
+    @OnClick(R.id.meeting_fab)
+    public void onMeetingFabClick(View view) {
+        hideOverlay();
+        navigation.CreateMeeting();
+    }
+
+    @OnClick(R.id.chat_fab)
+    public void onChatFabClick(View view) {
+        hideOverlay();
+        navigation.CreateChat();
+    }
+
+    @OnClick(R.id.team_fab)
+    public void onTeamFabClick(View view) {
+        hideOverlay();
+        navigation.CreateTeam();
+    }
 
 }

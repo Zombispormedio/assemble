@@ -5,6 +5,9 @@ import android.content.Context;
 import android.content.Intent;
 
 
+import com.zombispormedio.assemble.activities.CreateChatActivity;
+import com.zombispormedio.assemble.activities.CreateMeetingActivity;
+import com.zombispormedio.assemble.activities.CreateTeamActivity;
 import com.zombispormedio.assemble.activities.FriendsActivity;
 import com.zombispormedio.assemble.activities.HelpActivity;
 import com.zombispormedio.assemble.activities.HomeActivity;
@@ -107,6 +110,12 @@ public final class NavigationManager {
         goTo(ctx, NewFriendActivity.class);
     }
 
+    public static void CreateChat(Context ctx){goTo(ctx, CreateChatActivity.class);}
+
+    public static void CreateTeam(Context ctx){goTo(ctx, CreateTeamActivity.class);}
+
+    public static void CreateMeeting(Context ctx){goTo(ctx, CreateMeetingActivity.class);}
+
     public void Home() {
         NavigationManager.Home(ctx);
     }
@@ -134,6 +143,12 @@ public final class NavigationManager {
     public void NewFriend() {
         NavigationManager.NewFriend(ctx);
     }
+
+    public void CreateChat(){NavigationManager.CreateChat(ctx);}
+
+    public void CreateMeeting(){NavigationManager.CreateMeeting(ctx);}
+
+    public void CreateTeam(){NavigationManager.CreateTeam(ctx);}
 
     public void Help() {
         NavigationManager.Help(ctx);

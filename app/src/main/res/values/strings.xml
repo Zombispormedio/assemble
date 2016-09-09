@@ -72,5 +72,8 @@
     <string name="example_string">Lorem impsum</string>
     <string name="searching_your_friends">Searching your friends&#8230;</string>
     <string name="loading_app_data">Just a moment...</string>
+    <string name="create_meeting_title">Create meeting</string>
+    <string name="create_team_title">Create team</string>
+    <string name="create_chat_title">Create chat</string>
 
 </resources>
