@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'realm-android'
 
 android {
     compileSdkVersion 24
@@ -54,6 +56,9 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
 
     compile 'com.squareup.moshi:moshi:1.2.0'
+
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
 
 
     androidTestCompile 'com.android.support:support-annotations:24.2.0'

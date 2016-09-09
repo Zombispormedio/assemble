@@ -21,6 +21,9 @@ import com.zombispormedio.assemble.views.IChatsView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 
 public class ChatsFragment extends Fragment implements IChatsView{
 
@@ -28,7 +31,7 @@ public class ChatsFragment extends Fragment implements IChatsView{
 
     private ChatsController ctrl;
 
-    private RecyclerView _listChats;
+    @BindView(R.id.chats_list) RecyclerView _listChats;
 
     private ChatsRecyclerViewAdapter.Factory _listChatsFactory;
 
@@ -49,7 +52,9 @@ public class ChatsFragment extends Fragment implements IChatsView{
 
         view = (HomeActivity) getActivity();
 
-        _listChats = (RecyclerView) view.findViewById(R.id.chats_list);
+        ButterKnife.bind(this, view);
+
+        //_listChats = (RecyclerView) view.findViewById(R.id.chats_list);
 
         _listChatsFactory = new ChatsRecyclerViewAdapter.Factory();
         _listChatsAdapter = null;
