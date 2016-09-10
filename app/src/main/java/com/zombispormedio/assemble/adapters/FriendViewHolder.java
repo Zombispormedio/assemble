@@ -1,11 +1,15 @@
 package com.zombispormedio.assemble.adapters;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.utils.ImageUtils;
+import com.zombispormedio.assemble.utils.Utils;
 
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -24,7 +28,10 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
     TextView usernameLabel;
 
     @BindView(R.id.email_label)
-   TextView emailLabel;
+    TextView emailLabel;
+
+    @BindView(R.id.image_view)
+    ImageView imageView;
 
     public FriendViewHolder(View view) {
         super(view);
@@ -60,6 +67,14 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
     private void bindData(FriendProfile itemData) {
         usernameLabel.setText(itemData.username);
         emailLabel.setText(itemData.email);
+
+        if(Utils.presenceOf(itemData.medium_avatar_url)){
+            ImageUtils.applyRoundImage(view.getContext(), itemData.large_avatar_url, imageView);
+        }else{
+
+            String letter=String.valueOf(itemData.username.charAt(0));
+            ImageUtils.applyRoundLetterImage(letter, imageView);
+        }
     }
 
 

@@ -73,6 +73,7 @@
     <string name="create_chat_title">Crear conversación</string>
     <string name="create_meeting_title">Crear reunión</string>
     <string name="create_team_title">Crear equipo</string>
+    <string name="no_more_results">No tienes más amigos</string>
 
 
 </resources>

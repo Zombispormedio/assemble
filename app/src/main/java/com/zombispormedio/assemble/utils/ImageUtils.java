@@ -1,11 +1,18 @@
 package com.zombispormedio.assemble.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.widget.ImageView;
 
 
+import com.amulyakhare.textdrawable.TextDrawable;
+import com.amulyakhare.textdrawable.util.ColorGenerator;
+import com.orhanobut.logger.Logger;
+import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 /**
@@ -50,5 +57,22 @@ public class ImageUtils {
             return "circle";
         }
     }
+
+    public static void applyRoundLetterImage(String letter, ImageView imageView){
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+
+        TextDrawable drawable = TextDrawable.builder()
+                .buildRound(letter.toUpperCase(),generator.getRandomColor());
+        imageView.setImageDrawable(drawable);
+    }
+
+    public static void applyRoundImage(Context ctx,String url, ImageView imageView){
+        Picasso.with(ctx)
+                .load(url)
+                .transform(new ImageUtils.CircleTransform())
+                .into(imageView);
+    }
+
+
 
 }
