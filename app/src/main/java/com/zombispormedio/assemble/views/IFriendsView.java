@@ -28,5 +28,8 @@ public interface IFriendsView extends IBaseView {
 
     void hideRequestsList();
 
+    void showEndOfLists();
+
+    void hideEndOfLists();
 
 }

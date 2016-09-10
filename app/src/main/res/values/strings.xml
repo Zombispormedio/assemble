@@ -76,5 +76,7 @@
     <string name="create_team_title">Create team</string>
     <string name="create_chat_title">Create chat</string>
     <string name="no_more_results">No more results</string>
+    <string name="no_more_friends">No more friends</string>
+    <string name="new_title">New</string>
 
 </resources>

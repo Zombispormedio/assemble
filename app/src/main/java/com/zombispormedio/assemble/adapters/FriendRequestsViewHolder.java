@@ -4,8 +4,11 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 
 import com.zombispormedio.assemble.models.FriendRequestProfile;
+import com.zombispormedio.assemble.utils.ImageUtils;
+import com.zombispormedio.assemble.utils.Utils;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -25,6 +28,9 @@ public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestPr
 
     @BindView(R.id.email_label)
     TextView emailLabel;
+
+    @BindView(R.id.image_view)
+    ImageView imageView;
 
     public FriendRequestsViewHolder(View view) {
         super(view);
@@ -58,6 +64,13 @@ public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestPr
     private void bindData(FriendRequestProfile itemData) {
         usernameLabel.setText(itemData.username);
         emailLabel.setText(itemData.email);
+        if(Utils.presenceOf(itemData.medium_avatar_url)){
+            ImageUtils.applyRoundImage(view.getContext(), itemData.large_avatar_url, imageView);
+        }else{
+
+            String letter=String.valueOf(itemData.username.charAt(0));
+            ImageUtils.applyRoundLetterImage(letter, imageView);
+        }
     }
 
     public void setOnClickListener(IOnClickItemListHandler<FriendRequestProfile> listener) {

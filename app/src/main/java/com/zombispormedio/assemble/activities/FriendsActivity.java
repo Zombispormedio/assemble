@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.activities;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -32,6 +33,7 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     @BindView(R.id.req_friends_list)
     RecyclerView _listFriendRequests;
 
+
     private FriendsController ctrl;
 
     private FriendsRecyclerViewAdapter.Factory _listFriendsFactory;
@@ -47,6 +49,9 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
     @BindView(R.id.progress_bar)
     ProgressBar _progressBar;
+
+    @BindView(R.id.no_more_friends_layout)
+    FrameLayout noMoreFriendsLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -145,6 +150,16 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     @Override
     public void hideRequestsList() {
         _listFriendRequests.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showEndOfLists() {
+        noMoreFriendsLayout.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideEndOfLists() {
+        noMoreFriendsLayout.setVisibility(View.GONE);
     }
 
 
