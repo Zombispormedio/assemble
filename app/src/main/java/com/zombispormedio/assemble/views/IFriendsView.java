@@ -20,4 +20,12 @@ public interface IFriendsView extends IBaseView {
 
     void hideLists();
 
+    void goToFriendsList();
+
+    void goToFriendRequestsList();
+
+    void onFriendsTab();
+
+    void onFriendRequestsTab();
+
 }

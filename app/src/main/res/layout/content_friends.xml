@@ -64,7 +64,7 @@
             android:id="@+id/toolbar_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
+            android:background="@color/colorWhite"
             android:minHeight="?attr/actionBarSize"
 
             android:layout_alignParentBottom="true"
@@ -82,15 +82,15 @@
                     android:background="@android:color/transparent"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="20dp"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/toolbar_bottom_color"
                     android:text="@string/friends_title"
                     />
 
             <Button
-                    android:id="@+id/request_friend_button_tab"
+                    android:id="@+id/friend_requests_button_tab"
                     android:layout_width="wrap_content"
                     android:background="@android:color/transparent"
-                    android:textColor="@color/colorWhite"
+                    android:textColor="@color/toolbar_bottom_color"
                     android:layout_height="match_parent"
                     android:text="@string/request_friend_title"
                     />

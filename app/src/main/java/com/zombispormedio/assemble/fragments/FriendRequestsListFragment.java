@@ -37,7 +37,7 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_friend_requests, container, false);
+        return inflater.inflate(R.layout.fragment_friend_requests_list, container, false);
     }
 
     @Override

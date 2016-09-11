@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,20 +31,23 @@ import butterknife.OnClick;
 
 public class FriendsActivity extends BaseActivity implements IFriendsView {
 
-
-
-
     private FriendsController ctrl;
-
 
     @BindView(R.id.loading_label)
     TextView _progressLabel;
 
     @BindView(R.id.progress_bar)
     ProgressBar _progressBar;
-    
+
     @BindView(R.id.friends_pager)
     ViewPager friendsPager;
+
+    @BindView(R.id.friends_button_tab)
+    Button friendsTab;
+
+    @BindView(R.id.friend_requests_button_tab)
+    Button friendRequestsTab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,12 +59,12 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
         ctrl = new FriendsController(this);
 
         setupPager();
-        
+
         ctrl.onCreate();
     }
 
     private void setupPager() {
-        FriendsViewPagerAdapter adapter= new FriendsViewPagerAdapter(getSupportFragmentManager(), 2);
+        FriendsViewPagerAdapter adapter = new FriendsViewPagerAdapter(getSupportFragmentManager(), 2);
         friendsPager.setAdapter(adapter);
         friendsPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -70,7 +74,13 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
             @Override
             public void onPageSelected(int position) {
-                Logger.d(position);
+                switch (position) {
+                    case 0:
+                        onFriendsTab();
+                        break;
+                    case 1:
+                        onFriendRequestsTab();
+                }
             }
 
             @Override
@@ -78,12 +88,23 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
             }
         });
-        friendsPager.setCurrentItem(0);
+        goToFriendsList();
+        onFriendsTab();
     }
 
     @OnClick(R.id.fab)
     public void onNewFriendButtonClick(View view) {
         ctrl.onNewFriend();
+    }
+
+    @OnClick(R.id.friends_button_tab)
+    public void onFriendsTab(View view) {
+        goToFriendsList();
+    }
+
+    @OnClick(R.id.friend_requests_button_tab)
+    public void onFriendRequestsTab(View view) {
+        goToFriendRequestsList();
     }
 
 
@@ -108,7 +129,30 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     public void hideLists() {
         friendsPager.setVisibility(View.GONE);
     }
-    
+
+    @Override
+    public void goToFriendsList() {
+        friendsPager.setCurrentItem(0);
+
+    }
+
+    @Override
+    public void goToFriendRequestsList() {
+        friendsPager.setCurrentItem(1);
+    }
+
+    @Override
+    public void onFriendsTab() {
+        friendsTab.setEnabled(false);
+        friendRequestsTab.setEnabled(true);
+    }
+
+
+    @Override
+    public void onFriendRequestsTab() {
+        friendRequestsTab.setEnabled(false);
+        friendsTab.setEnabled(true);
+    }
 
 
     @Override
