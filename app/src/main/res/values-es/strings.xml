@@ -76,6 +76,7 @@
     <string name="no_more_results">No tienes más resultados</string>
     <string name="no_more_friends">No tienes más amigos</string>
     <string name="new_title">Nuevo</string>
+    <string name="request_friend_title">Peticiones</string>
 
 
 </resources>

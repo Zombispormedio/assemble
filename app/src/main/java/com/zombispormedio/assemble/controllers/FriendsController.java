@@ -50,22 +50,16 @@ public class FriendsController extends AbstractController {
 
     private void setupFriendsAndRequests() {
 
-        boolean haveFriends = user.getFriendsCount() > 0;
-        boolean haveRequests = user.getFriendRequestsCount() > 0;
+        boolean haveFriends = user.getFriendsCount() == 0;
+        boolean haveRequests = user.getFriendRequestsCount() == 0;
 
         if (haveFriends || haveRequests) {
-            if (haveFriends) {
-                ctx.bindFriends(user.getFriends());
-            }
-            if (haveRequests) {
-                ctx.bindFriendRequests(user.getFriendRequests());
-            }
-        } else {
             loadingTime();
+            getFriends();
+            getRequests();
         }
 
-        getFriends();
-        getRequests();
+
     }
 
     private void getFriends() {
@@ -81,7 +75,6 @@ public class FriendsController extends AbstractController {
             @Override
             public void onSuccess(ArrayList<FriendProfile> result) {
                 user.setFriends(result);
-                ctx.bindFriends(result);
                 readyFriends();
             }
         });
@@ -100,7 +93,6 @@ public class FriendsController extends AbstractController {
             @Override
             public void onSuccess(ArrayList<FriendRequestProfile> result) {
                 user.setFriendRequests(result);
-                ctx.bindFriendRequests(result);
                 readyRequests();
             }
         });
@@ -110,17 +102,10 @@ public class FriendsController extends AbstractController {
     private void loadingTime() {
         if (!isLoading) {
             ctx.loading();
-            hideLists();
-
             isLoading = true;
         }
     }
 
-    private void hideLists() {
-        ctx.hideFriendsList();
-        ctx.hideRequestsList();
-        ctx.hideEndOfLists();
-    }
 
     private void noLoadTime() {
         if (isLoading && isReady()) {
@@ -151,24 +136,6 @@ public class FriendsController extends AbstractController {
     }
 
 
-    public IOnClickItemListHandler<FriendProfile> getOnClickOneFriend() {
-        return new IOnClickItemListHandler<FriendProfile>() {
-            @Override
-            public void onClick(int position, FriendProfile data) {
-                Logger.d(position);
-                Logger.d(data);
-            }
-        };
-    }
 
-    public IOnClickItemListHandler<FriendRequestProfile> getOnClickOneRequest() {
-        return new IOnClickItemListHandler<FriendRequestProfile>() {
-            @Override
-            public void onClick(int position, FriendRequestProfile data) {
-                Logger.d(position);
-                Logger.d(data);
-            }
-        };
-    }
 
 }

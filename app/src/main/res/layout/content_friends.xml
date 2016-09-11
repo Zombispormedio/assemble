@@ -9,50 +9,23 @@
         tools:showIn="@layout/activity_friends"
         >
 
-    <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+    <!-- <FrameLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:id="@+id/no_more_friends_layout"
+             >
 
-        <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
+         <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:textAppearance="?android:attr/textAppearanceLarge"
+                 android:text="@string/no_more_friends"
+                 android:layout_marginTop="25sp"
+                 android:layout_marginBottom="80sp"
+                 android:layout_gravity="center_horizontal|bottom"
+                 />
+     </FrameLayout>-->
 
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/req_friends_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    />
-
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/friends_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
-                    />
-            <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/no_more_friends_layout"
-                    >
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        android:text="@string/no_more_friends"
-                        android:layout_marginTop="25sp"
-                        android:layout_marginBottom="80sp"
-                        android:layout_gravity="center_horizontal|bottom"
-                        />
-            </FrameLayout>
-        </LinearLayout>
-
-
-    </ScrollView>
 
     <ProgressBar
             android:id="@+id/progress_bar"
@@ -63,7 +36,6 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="82dp"
             android:indeterminate="true"
-
             android:maxHeight="800sp"
             android:maxWidth="800sp"
             android:visibility="gone"
@@ -80,5 +52,54 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:visibility="gone"
             />
+
+    <android.support.v4.view.ViewPager
+            android:id="@+id/friends_pager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/toolbar_bottom"
+            android:layout_gravity="center_horizontal|bottom"
+            android:elevation="2dp"
+            />
+
+    <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+
+            android:layout_alignParentBottom="true"
+            >
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                >
+
+            <Button
+                    android:id="@+id/friends_button_tab"
+                    android:layout_width="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="20dp"
+                    android:textColor="@color/colorWhite"
+                    android:text="@string/friends_title"
+                    />
+
+            <Button
+                    android:id="@+id/request_friend_button_tab"
+                    android:layout_width="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/colorWhite"
+                    android:layout_height="match_parent"
+                    android:text="@string/request_friend_title"
+                    />
+        </LinearLayout>
+
+
+    </android.support.v7.widget.Toolbar>
+
 
 </RelativeLayout>

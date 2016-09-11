@@ -12,24 +12,12 @@ public interface IFriendsView extends IBaseView {
 
     void goToNewFriend();
 
-    void bindFriends(ArrayList<FriendProfile> data);
-
-    void bindFriendRequests(ArrayList<FriendRequestProfile> data);
-
     void loading();
 
     void unloading();
 
-    void showFriendsList();
+    void showLists();
 
-    void hideFriendsList();
-
-    void showRequestsList();
-
-    void hideRequestsList();
-
-    void showEndOfLists();
-
-    void hideEndOfLists();
+    void hideLists();
 
 }
