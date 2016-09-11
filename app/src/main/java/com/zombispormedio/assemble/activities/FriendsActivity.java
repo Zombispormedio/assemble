@@ -9,9 +9,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.FriendRequestsRecyclerViewAdapter;
 import com.zombispormedio.assemble.adapters.FriendsRecyclerViewAdapter;
+import com.zombispormedio.assemble.adapters.FriendsViewPagerAdapter;
 import com.zombispormedio.assemble.controllers.FriendsController;
 
 import com.zombispormedio.assemble.models.FriendProfile;
@@ -58,6 +60,25 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     }
 
     private void setupPager() {
+        FriendsViewPagerAdapter adapter= new FriendsViewPagerAdapter(getSupportFragmentManager(), 2);
+        friendsPager.setAdapter(adapter);
+        friendsPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                Logger.d(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+        friendsPager.setCurrentItem(0);
     }
 
     @OnClick(R.id.fab)

@@ -63,6 +63,7 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
         AndroidUtils.createListConfiguration(view, _listFriends)
                 .divider(true)
                 .itemAnimation(true)
+                .scrolling(false)
                 .configure();
         _listFriendsFactory.setOnClickListener(ctrl.getOnClickOneFriend());
     }

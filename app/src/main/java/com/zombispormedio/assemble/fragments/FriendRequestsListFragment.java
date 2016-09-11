@@ -60,6 +60,7 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
         AndroidUtils.createListConfiguration(view, _listFriendRequests)
                 .divider(true)
                 .itemAnimation(true)
+                .scrolling(false)
                 .configure();
         _listFriendRequestsFactory.setOnClickListener(ctrl.getOnClickOneRequest());
     }

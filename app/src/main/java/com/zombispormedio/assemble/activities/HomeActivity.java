@@ -47,6 +47,12 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
+    @BindView(R.id.home_tab_layout)
+    TabLayout tabLayout;
+
+    @BindView(R.id.home_pager)
+    ViewPager viewTabPager;
+
     private ProgressDialog _progressDialog;
 
     private HomeController ctrl;
@@ -83,15 +89,12 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     }
 
     private void setupTabs() {
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.home_tab_layout);
 
         tabLayout.addTab(tabLayout.newTab().setText(R.string.teams_tab_title));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.gatherings_tab_title));
         tabLayout.addTab(tabLayout.newTab().setText(R.string.messages_tab_title));
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-
-        final ViewPager viewTabPager = (ViewPager) findViewById(R.id.home_pager);
 
         final HomeViewPagerAdapter adapterTabPager = new HomeViewPagerAdapter(getSupportFragmentManager(),
                 tabLayout.getTabCount());

@@ -23,7 +23,7 @@
     <string name="settings_title">Configuración</string>
     <string name="signout">Cerrar Sesión</string>
     <string name="open_drawer_desc">Menu lateral abierto</string>
-    <string name="close_drawer_desc">Drawer Closed</string>
+    <string name="close_drawer_desc">Menú lateral cerrado</string>
     <string name="p_menu">Perfil</string>
     <string name="profile_title">Perfil</string>
     <string name="profile_image_desc">Imagen de perfil</string>
@@ -77,6 +77,7 @@
     <string name="no_more_friends">No tienes más amigos</string>
     <string name="new_title">Nuevo</string>
     <string name="request_friend_title">Peticiones</string>
+    <string name="no_more_req_friends">No tienes más peticiones</string>
 
 
 </resources>

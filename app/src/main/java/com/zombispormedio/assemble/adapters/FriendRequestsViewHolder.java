@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.adapters;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Xavier Serrano on 26/08/2016.
@@ -75,5 +77,15 @@ public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestPr
 
     public void setOnClickListener(IOnClickItemListHandler<FriendRequestProfile> listener) {
         this.listener = listener;
+    }
+
+    @OnClick(R.id.accept_fab)
+    public void onAcceptFriend(View view){
+        Logger.d("Hello accept");
+    }
+
+    @OnClick(R.id.reject_fab)
+    public void onRejectFriend(View view){
+        Logger.d("Hello reject");
     }
 }

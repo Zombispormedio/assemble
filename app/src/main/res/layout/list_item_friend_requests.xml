@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/selectableItemBackground"
@@ -10,83 +9,91 @@
 
     <FrameLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|top"
-            android:layout_marginLeft="35sp"
-            android:background="@drawable/new_friend_shape"
-            android:elevation="2sp"
-            >
-
-        <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|top"
-                android:text="@string/new_title"
-                android:textColor="@color/colorWhite"
-                android:textSize="10sp"
-                />
-    </FrameLayout>
-
-    <LinearLayout
-            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="left|bottom"
-            android:layout_marginTop="12sp"
-            android:orientation="horizontal"
             >
 
         <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="left|top"
+                android:layout_marginLeft="35sp"
+                android:background="@drawable/new_friend_shape"
+                android:elevation="2sp"
                 >
 
-            <ImageView
-                    android:id="@+id/image_view"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:layout_gravity="left|center_vertical"
-                    android:layout_marginLeft="15dp"
-                    android:src="@drawable/profile_image_square"
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|top"
+                    android:text="@string/new_title"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="10sp"
                     />
         </FrameLayout>
 
-
         <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:orientation="vertical"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|bottom"
+                android:layout_marginTop="12sp"
+                android:orientation="horizontal"
                 >
 
-            <TextView
-                    android:id="@+id/username_label"
-                    android:layout_width="match_parent"
+            <FrameLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/example_string"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    />
+                    >
 
-            <TextView
-                    android:id="@+id/email_label"
-                    android:layout_width="match_parent"
+                <ImageView
+                        android:id="@+id/image_view"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_marginLeft="15dp"
+                        android:src="@drawable/profile_image_square"
+                        />
+            </FrameLayout>
+
+
+            <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/example_string"
-                    android:textSize="12sp"
-                    android:textStyle="normal"
-                    />
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="15dp"
+                    android:orientation="vertical"
+                    >
+
+                <TextView
+                        android:id="@+id/username_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/example_string"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        />
+
+                <TextView
+                        android:id="@+id/email_label"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/example_string"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        />
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+    </FrameLayout>
+
 
     <ImageView
             android:id="@+id/accept_fab"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="80dp"
-            android:background="@drawable/background_check_friend_shape"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/transparent"
             android:elevation="2dp"
             android:src="@drawable/check_friend_list_icon"
             />
@@ -94,10 +101,10 @@
     <ImageView
             android:id="@+id/reject_fab"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="20sp"
-            android:background="@drawable/background_close_friend_shape"
+            android:layout_marginRight="75sp"
+            android:background="@android:color/transparent"
             android:elevation="2dp"
             android:src="@drawable/close_friend_list_icon"
             />

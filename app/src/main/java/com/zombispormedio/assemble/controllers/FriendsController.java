@@ -102,6 +102,7 @@ public class FriendsController extends AbstractController {
     private void loadingTime() {
         if (!isLoading) {
             ctx.loading();
+            ctx.hideLists();
             isLoading = true;
         }
     }
@@ -110,16 +111,11 @@ public class FriendsController extends AbstractController {
     private void noLoadTime() {
         if (isLoading && isReady()) {
             ctx.unloading();
-            showLists();
+            ctx.showLists();
             isLoading = false;
         }
     }
 
-    private void showLists() {
-        ctx.showFriendsList();
-        ctx.showRequestsList();
-        ctx.showEndOfLists();
-    }
 
     private void readyFriends() {
         isFriendsReady = true;
