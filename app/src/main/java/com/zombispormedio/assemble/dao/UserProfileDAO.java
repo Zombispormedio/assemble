@@ -40,11 +40,9 @@ public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile>
 
     @Override
     public UserProfile toModel() {
-        return (UserProfile) new Utils.MergeBuilder<UserProfileDAO, UserProfile>()
-                .emite(this)
-                .receive(new UserProfile())
-                .merge();
-
+        return new UserProfile(id, email, username,
+                full_avatar_url, large_avatar_url, medium_avatar_url, thumb_avatar_url,
+                birth_date, location, bio, sign_up_at);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.dao;
 
 import com.zombispormedio.assemble.models.Chat;
+import com.zombispormedio.assemble.models.Sender;
 import com.zombispormedio.assemble.utils.Utils;
 
 import io.realm.RealmObject;
@@ -23,11 +24,7 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
     @Override
     public Chat toModel() {
-
-        return (Chat) new Utils.MergeBuilder<ChatDAO, Chat>()
-                .emite(this)
-                .receive(new Chat())
-                .merge();
+        return new Chat(id, created_at, sender.toModel(), recipient.toModel());
     }
 
     @Override

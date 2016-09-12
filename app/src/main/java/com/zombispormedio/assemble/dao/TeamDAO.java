@@ -33,10 +33,8 @@ public class TeamDAO extends RealmObject implements IBaseDAO<Team>{
 
     @Override
     public Team toModel() {
-        return (Team) new Utils.MergeBuilder<TeamDAO, Team>()
-                .emite(this)
-                .receive(new Team())
-                .merge();
+        return new Team(id, name, description, created_at,
+                full_image_url, large_image_url, medium_image_url, thumb_image_url);
     }
 
     @Override

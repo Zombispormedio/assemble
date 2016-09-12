@@ -1,5 +1,8 @@
 package com.zombispormedio.assemble.wrappers.realm;
 
+
+import java.util.ArrayList;
+
 import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.RealmQuery;
@@ -16,49 +19,68 @@ public class LocalStorage<T extends RealmObject> {
 
     public LocalStorage(Class<T> opClass) {
         this.opClass = opClass;
-        database = Realm.getDefaultInstance();
+        database = Configuration.getInstance().getDatabase();
     }
 
-    public void create(Operator<T> operator) {
+    public void create(T object) {
         database.beginTransaction();
-        T object=database.createObject(opClass);
-        operator.proceed(object);
+        database.copyToRealm(object);
         database.commitTransaction();
     }
 
-    public void update(int id, Operator<T> operator){
-        database.beginTransaction();
-        T object=getById(id);
-        operator.proceed(object);
-        database.copyToRealmOrUpdate(object);
-        database.commitTransaction();
-    }
-
-    public void update(T object){
+    public void update(T object) {
         database.beginTransaction();
         database.copyToRealmOrUpdate(object);
         database.commitTransaction();
     }
 
-    public static interface Operator<T>{
-        void proceed(T object);
-    }
-
-    public T getById(int id){
-        RealmQuery<T> query= getQuery();
+    public T getById(int id) {
+        RealmQuery<T> query = getQuery();
 
         query.equalTo("id", id);
 
         return query.findFirst();
     }
 
-    public T getFirst(){
-        RealmQuery<T> query= getQuery();
+    public T getFirst() {
+        RealmQuery<T> query = getQuery();
 
         return query.findFirst();
     }
 
-    private RealmQuery<T> getQuery(){
+    public ArrayList<T> getAll() {
+        RealmQuery<T> query = getQuery();
+
+        RealmResults<T> realmResults = query.findAll();
+
+        ArrayList<T> results = new ArrayList<>();
+
+        for (int i = 0; i < realmResults.size(); i++) {
+            results.add(realmResults.get(i));
+        }
+        return results;
+    }
+
+    private RealmQuery<T> getQuery() {
         return (RealmQuery<T>) database.where(opClass);
+    }
+
+    public static class Configuration {
+
+        private static Configuration ourInstance = new Configuration();
+
+        private Realm database;
+
+        public static Configuration getInstance() {
+            return ourInstance;
+        }
+
+        public Realm getDatabase() {
+            return database;
+        }
+
+        public void setDatabase(Realm database) {
+            this.database = database;
+        }
     }
 }

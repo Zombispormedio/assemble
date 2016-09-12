@@ -10,8 +10,11 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.services.api.APIConfiguration;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.IBaseView;
+import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import butterknife.ButterKnife;
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class BaseActivity extends AppCompatActivity implements IBaseView {
 
@@ -72,6 +75,14 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     protected void bindActivity(Activity target){
         ButterKnife.bind(target);
+        RealmConfiguration realmConfiguration= new RealmConfiguration.Builder(target).build();
+
+        Realm.setDefaultConfiguration(realmConfiguration);
+
+        LocalStorage.Configuration
+                .getInstance()
+                .setDatabase(Realm.getDefaultInstance());
+
     }
 
 

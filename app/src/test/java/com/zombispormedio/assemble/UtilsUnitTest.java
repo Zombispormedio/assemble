@@ -1,4 +1,5 @@
 package com.zombispormedio.assemble;
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.dao.UserProfileDAO;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.utils.Utils;
@@ -29,20 +30,21 @@ public class UtilsUnitTest {
     public void test_merge_builder() throws Exception {
 
         UserProfile profile1=new UserProfile();
-        profile1.id=1;
-        profile1.username="hello";
+
 
         UserProfileDAO profile2=new UserProfileDAO();
+        profile2.id=1;
+        profile2.username="hello";
 
-        new Utils.MergeBuilder<UserProfile, UserProfileDAO>()
-                .emite(profile1)
-                .receive(profile2)
+        new Utils.MergeBuilder<UserProfileDAO, UserProfile >()
+                .emite(profile2)
+                .receive(profile1)
                 .merge();
+        System.out.println(profile1.id);
 
+        assertSame("Field id must be the same", profile2.id, profile1.id);
 
-        assertSame("Field id must be the same", profile1.id, profile2.id);
-
-        assertSame("Field username must be the same", profile1.username, profile2.username);
+        assertSame("Field username must be the same", profile2.username, profile1.username);
 
     }
 

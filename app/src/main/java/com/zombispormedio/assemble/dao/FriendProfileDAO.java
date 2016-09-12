@@ -40,10 +40,9 @@ public class FriendProfileDAO extends RealmObject implements IBaseDAO<FriendProf
 
     @Override
     public FriendProfile toModel() {
-        return (FriendProfile) new Utils.MergeBuilder<FriendProfileDAO, FriendProfile>()
-                .emite(this)
-                .receive(new FriendProfile())
-                .merge();
+        return  new FriendProfile(friend_id, email, username,
+                full_avatar_url, large_avatar_url, medium_avatar_url, thumb_avatar_url,
+                birth_date, location, bio, sign_up_at);
     }
 
     @Override

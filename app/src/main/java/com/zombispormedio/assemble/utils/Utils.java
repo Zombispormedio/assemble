@@ -10,6 +10,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import io.realm.RealmObject;
+
 /**
  * Created by Xavier Serrano on 31/07/2016.
  */
@@ -82,12 +84,14 @@ public class Utils {
         public R merge() {
 
             if (emissor != null && recipient != null) {
+
                 for (Field field : recipientClass.getFields()) {
                     String name = field.getName();
                     Field thisField = null;
                     try {
                         thisField = emissorClass.getField(name);
-                        field.set(recipient, thisField.get(emissor));
+                        Object value=thisField.get(emissor);
+                        field.set(recipient, value);
                     } catch (Exception e) {
                         Logger.d(e.getMessage());
                     }

@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.models.singletons;
 
-import com.orhanobut.logger.Logger;
+
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
@@ -34,33 +34,27 @@ public class CurrentUser {
 
     private ArrayList<Chat> chats;
 
-    private OfflineProfileService offlineProfile;
 
 
     private CurrentUser() {
         profile = new UserProfile();
         friends = new ArrayList<>();
         friendRequests = new ArrayList<>();
-        teams=new ArrayList<>();
-        meetings=new ArrayList<>();
-        chats= new ArrayList<>();
-        offlineProfile=new OfflineProfileService();
+        teams = new ArrayList<>();
+        meetings = new ArrayList<>();
+        chats = new ArrayList<>();
     }
 
     public UserProfile getProfile() {
-        UserProfile off=offlineProfile.getFirst();
-        if(off!=null){
-            Logger.d(off.username);
-        }
-
         return profile;
     }
 
-    public boolean isProfileEmpty(){return profile.email.isEmpty();}
+    public boolean isProfileEmpty() {
+        return profile.email.isEmpty();
+    }
 
     public void setProfile(UserProfile profile) {
         this.profile = profile;
-        offlineProfile.createOrUpdate(profile);
     }
 
     public ArrayList<FriendProfile> getFriends() {
@@ -95,7 +89,7 @@ public class CurrentUser {
         this.teams = teams;
     }
 
-    public int getTeamsCount(){
+    public int getTeamsCount() {
         return teams.size();
     }
 
@@ -107,7 +101,7 @@ public class CurrentUser {
         this.meetings = meetings;
     }
 
-    public int getMeetingsCount(){
+    public int getMeetingsCount() {
         return meetings.size();
     }
 
@@ -119,7 +113,7 @@ public class CurrentUser {
         this.chats = chats;
     }
 
-    public int getChatsCount(){
+    public int getChatsCount() {
         return chats.size();
     }
 
