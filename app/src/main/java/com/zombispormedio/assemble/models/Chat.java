@@ -3,12 +3,19 @@ package com.zombispormedio.assemble.models;
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
-public class Chat {
+public class Chat extends BaseModel{
 
-    public final String id;
-    public final String created_at;
-    public final Sender sender;
-    public final Recipient recipient;
+    public String id;
+
+    public String created_at;
+
+    public Sender sender;
+
+    public Recipient recipient;
+
+    public Chat() {
+        created_at="";
+    }
 
     public Chat(String id, String created_at, Sender sender, Recipient recipient) {
         this.id = id;
@@ -16,5 +23,4 @@ public class Chat {
         this.sender = sender;
         this.recipient = recipient;
     }
-
 }

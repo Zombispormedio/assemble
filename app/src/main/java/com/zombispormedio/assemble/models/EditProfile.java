@@ -5,13 +5,17 @@ package com.zombispormedio.assemble.models;
  */
 public class EditProfile {
 
-    public final String username;
+    public String username;
 
-    public final String bio;
+    public String bio;
 
-    public final String location;
+    public String location;
 
-    public final String birth_date;
+    public String birth_date;
+
+    public EditProfile(){
+
+    }
 
     public EditProfile(String username, String bio, String location, String birth_date) {
         this.username = username;
@@ -19,6 +23,7 @@ public class EditProfile {
         this.location = location;
         this.birth_date = birth_date;
     }
+
 
     public static class Builder {
 

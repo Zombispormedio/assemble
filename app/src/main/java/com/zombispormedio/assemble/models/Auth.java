@@ -5,9 +5,9 @@ package com.zombispormedio.assemble.models;
  */
 public class Auth {
 
-    public final String email;
+    public String email;
 
-    public final String password;
+    public String password;
 
     public Auth(String email, String password) {
         this.email = email;
