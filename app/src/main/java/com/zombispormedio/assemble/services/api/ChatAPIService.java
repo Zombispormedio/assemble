@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.responses.ChatsResponse;
-import com.zombispormedio.assemble.services.IChatService;
+import com.zombispormedio.assemble.services.interfaces.IChatService;
 
 import java.io.IOException;
 import java.util.ArrayList;

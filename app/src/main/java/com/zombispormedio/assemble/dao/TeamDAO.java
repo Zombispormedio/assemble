@@ -1,17 +1,21 @@
-package com.zombispormedio.assemble.dao.models;
+package com.zombispormedio.assemble.dao;
 
-import com.zombispormedio.assemble.dao.IBaseDAO;
 import com.zombispormedio.assemble.models.Team;
+import com.zombispormedio.assemble.utils.Utils;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Index;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
 public class TeamDAO extends RealmObject implements IBaseDAO<Team>{
 
-    public String id;
+    @PrimaryKey
+    public int id;
 
+    @Index
     public String name;
 
     public String description;
@@ -29,7 +33,10 @@ public class TeamDAO extends RealmObject implements IBaseDAO<Team>{
 
     @Override
     public Team toModel() {
-        return null;
+        return (Team) new Utils.MergeBuilder<TeamDAO, Team>()
+                .emite(this)
+                .receive(new Team())
+                .merge();
     }
 
     @Override

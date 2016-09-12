@@ -9,7 +9,7 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.net.responses.DefaultResponse;
-import com.zombispormedio.assemble.services.IAuthService;
+import com.zombispormedio.assemble.services.interfaces.IAuthService;
 
 import java.io.IOException;
 

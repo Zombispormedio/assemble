@@ -15,7 +15,7 @@ import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.net.responses.FriendsResponse;
 import com.zombispormedio.assemble.net.responses.ProfileResponse;
-import com.zombispormedio.assemble.services.IProfileService;
+import com.zombispormedio.assemble.services.interfaces.IProfileService;
 
 
 import java.io.File;
@@ -76,6 +76,11 @@ public class ProfileAPIService implements IProfileService {
                     }
                 })
                 .patch(new FileBody(file, "image/*", "avatar", file.getName()));
+    }
+
+    @Override
+    public void changeAvatar(String url, IServiceHandler<UserProfile, Error> handler) {
+        changeAvatar(new File(url), handler);
     }
 
     @Override

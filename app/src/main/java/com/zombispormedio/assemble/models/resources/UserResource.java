@@ -9,8 +9,8 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
-import com.zombispormedio.assemble.services.IAuthService;
-import com.zombispormedio.assemble.services.IProfileService;
+import com.zombispormedio.assemble.services.interfaces.IAuthService;
+import com.zombispormedio.assemble.services.interfaces.IProfileService;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,16 +1,21 @@
-package com.zombispormedio.assemble.dao.models;
+package com.zombispormedio.assemble.dao;
 
-import com.zombispormedio.assemble.dao.IBaseDAO;
 import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.utils.Utils;
 
 import io.realm.RealmObject;
+import io.realm.annotations.Index;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
 public class MeetingDAO extends RealmObject implements IBaseDAO<Meeting> {
-    public String id;
 
+    @PrimaryKey
+    public int id;
+
+    @Index
     public String name;
 
     public String description;
@@ -30,12 +35,18 @@ public class MeetingDAO extends RealmObject implements IBaseDAO<Meeting> {
     public String end_at;
 
     @Override
-    public Meeting toModel() {
-        return null;
+    public Meeting toModel(){
+        return (Meeting) new Utils.MergeBuilder<MeetingDAO, Meeting>()
+                .emite(this)
+                .receive(new Meeting())
+                .merge();
     }
 
     @Override
     public MeetingDAO fromModel(Meeting model) {
-        return null;
+        return (MeetingDAO) new Utils.MergeBuilder<Meeting, MeetingDAO>()
+                .emite(model)
+                .receive(this)
+                .merge();
     }
 }

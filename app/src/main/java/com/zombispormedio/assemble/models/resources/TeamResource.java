@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.models.resources;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.services.ITeamService;
+import com.zombispormedio.assemble.services.interfaces.ITeamService;
 
 import java.util.ArrayList;
 

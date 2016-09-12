@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.responses.MeetingsResponse;
-import com.zombispormedio.assemble.services.IMeetingService;
+import com.zombispormedio.assemble.services.interfaces.IMeetingService;
 
 import java.io.IOException;
 import java.util.ArrayList;

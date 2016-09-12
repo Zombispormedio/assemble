@@ -1,11 +1,13 @@
 package com.zombispormedio.assemble.models.singletons;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.services.offline.OfflineProfileService;
 
 import java.util.ArrayList;
 
@@ -32,6 +34,8 @@ public class CurrentUser {
 
     private ArrayList<Chat> chats;
 
+    private OfflineProfileService offlineProfile;
+
 
     private CurrentUser() {
         profile = new UserProfile();
@@ -40,9 +44,15 @@ public class CurrentUser {
         teams=new ArrayList<>();
         meetings=new ArrayList<>();
         chats= new ArrayList<>();
+        offlineProfile=new OfflineProfileService();
     }
 
     public UserProfile getProfile() {
+        UserProfile off=offlineProfile.getFirst();
+        if(off!=null){
+            Logger.d(off.username);
+        }
+
         return profile;
     }
 
@@ -50,6 +60,7 @@ public class CurrentUser {
 
     public void setProfile(UserProfile profile) {
         this.profile = profile;
+        offlineProfile.createOrUpdate(profile);
     }
 
     public ArrayList<FriendProfile> getFriends() {

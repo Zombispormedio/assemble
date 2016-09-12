@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.responses.TeamsResponse;
-import com.zombispormedio.assemble.services.ITeamService;
+import com.zombispormedio.assemble.services.interfaces.ITeamService;
 
 import java.io.IOException;
 import java.util.ArrayList;

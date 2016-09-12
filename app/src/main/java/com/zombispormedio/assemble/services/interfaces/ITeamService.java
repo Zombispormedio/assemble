@@ -1,4 +1,4 @@
-package com.zombispormedio.assemble.services;
+package com.zombispormedio.assemble.services.interfaces;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 

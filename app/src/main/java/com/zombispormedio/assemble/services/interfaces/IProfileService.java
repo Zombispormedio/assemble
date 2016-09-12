@@ -1,4 +1,4 @@
-package com.zombispormedio.assemble.services;
+package com.zombispormedio.assemble.services.interfaces;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
@@ -18,6 +18,8 @@ public interface IProfileService {
     void retrieve(final IServiceHandler<UserProfile, Error> handler);
 
     void changeAvatar(File file, final IServiceHandler<UserProfile, Error> handler);
+
+    void changeAvatar(String url, final IServiceHandler<UserProfile, Error> handler);
 
     void update(EditProfile profile, final IServiceHandler<UserProfile, Error> handler);
 

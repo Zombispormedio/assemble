@@ -1,7 +1,7 @@
-package com.zombispormedio.assemble.dao.models;
+package com.zombispormedio.assemble.dao;
 
-import com.zombispormedio.assemble.dao.IBaseDAO;
 import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.utils.Utils;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
@@ -10,10 +10,10 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
-public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile>{
+public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile> {
 
     @PrimaryKey
-    public String id;
+    public int id;
 
     @Index
     public String email;
@@ -38,14 +38,20 @@ public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile>
     public String sign_up_at;
 
 
-
     @Override
     public UserProfile toModel() {
-        return null;
+        return (UserProfile) new Utils.MergeBuilder<UserProfileDAO, UserProfile>()
+                .emite(this)
+                .receive(new UserProfile())
+                .merge();
+
     }
 
     @Override
     public UserProfileDAO fromModel(UserProfile model) {
-        return null;
+        return (UserProfileDAO) new Utils.MergeBuilder<UserProfile, UserProfileDAO>()
+                .emite(model)
+                .receive(this)
+                .merge();
     }
 }

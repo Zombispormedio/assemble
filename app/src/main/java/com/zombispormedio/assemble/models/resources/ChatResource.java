@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.models.resources;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.services.IChatService;
+import com.zombispormedio.assemble.services.interfaces.IChatService;
 
 import java.util.ArrayList;
 
