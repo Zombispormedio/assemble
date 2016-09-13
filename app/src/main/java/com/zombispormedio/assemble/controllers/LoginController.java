@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
@@ -37,7 +38,7 @@ public class LoginController extends AbstractController {
         }
     }
 
-    public class LoginServiceHandler implements IServiceHandler<Result, Error> {
+    public class LoginServiceHandler extends ServiceHandler<Result, Error> {
 
         @Override
         public void onError(Error error) {
@@ -52,6 +53,11 @@ public class LoginController extends AbstractController {
             ctx.showSuccessfulLogin();
 
             ctx.goHome();
+        }
+
+        @Override
+        public void onNotConnected() {
+            ctx.showAlert("No internet connection");
         }
     }
 

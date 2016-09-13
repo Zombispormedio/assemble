@@ -6,4 +6,6 @@ package com.zombispormedio.assemble.handlers;
 public interface IPromiseHandler {
 
     void onSuccess(String... args);
+
+    void onNotConnected();
 }

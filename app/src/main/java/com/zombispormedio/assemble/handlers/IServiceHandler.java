@@ -8,4 +8,6 @@ public interface IServiceHandler<T, E> {
     void onError(E error);
 
     void onSuccess(T result);
+
+    void onNotConnected();
 }

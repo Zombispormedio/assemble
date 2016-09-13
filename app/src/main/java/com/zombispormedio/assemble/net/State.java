@@ -30,7 +30,9 @@ public class State {
         if(ctx!=null){
             ConnectivityManager cm=(ConnectivityManager)ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo activeNetwork= cm.getActiveNetworkInfo();
-            haveConnection=activeNetwork.isConnectedOrConnecting();
+            if(activeNetwork!=null){
+                haveConnection=activeNetwork.isConnectedOrConnecting();
+            }
         }
 
         return haveConnection;

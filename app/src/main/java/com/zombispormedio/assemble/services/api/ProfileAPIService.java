@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.services.api;
 
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.PromiseHandler;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
@@ -36,7 +37,7 @@ public class ProfileAPIService implements IProfileService {
     @Override
     public void retrieve(final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
                         try {
@@ -59,7 +60,7 @@ public class ProfileAPIService implements IProfileService {
     @Override
     public void changeAvatar(File file, final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile/avatar")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
                         try {
@@ -86,7 +87,7 @@ public class ProfileAPIService implements IProfileService {
     @Override
     public void update(EditProfile profile, final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
                         try {
@@ -107,7 +108,7 @@ public class ProfileAPIService implements IProfileService {
     @Override
     public void getFriends(final IServiceHandler<ArrayList<FriendProfile>, Error> handler) {
         api.RestWithAuth("/friends")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
                         try {
@@ -129,7 +130,7 @@ public class ProfileAPIService implements IProfileService {
     @Override
     public void getFriendRequests(final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler) {
         api.RestWithAuth("/friend_requests")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
                         try {

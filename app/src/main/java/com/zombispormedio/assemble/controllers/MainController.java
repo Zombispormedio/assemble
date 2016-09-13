@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.controllers;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
@@ -31,16 +32,20 @@ public class MainController extends AbstractController {
 
             APIConfiguration.getInstance().setToken(token);
 
-            user.checkAccess(new IServiceHandler<Result, Error>() {
+            user.checkAccess(new ServiceHandler<Result, Error>() {
                 @Override
                 public void onError(Error error) {
-
                     ctx.clearAuthToken();
                     ctx.goToLogin();
                 }
 
                 @Override
                 public void onSuccess(Result result) {
+                    ctx.goHome();
+                }
+
+                @Override
+                public void onNotConnected() {
                     ctx.goHome();
                 }
             });

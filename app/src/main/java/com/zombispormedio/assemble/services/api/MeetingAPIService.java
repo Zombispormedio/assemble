@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.services.api;
 
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.PromiseHandler;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
@@ -24,7 +25,7 @@ public class MeetingAPIService implements IMeetingService {
     @Override
     public void getAll(final IServiceHandler<ArrayList<Meeting>, Error> handler) {
         api.RestWithAuth("/meetings")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
                         try {

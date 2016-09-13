@@ -45,6 +45,7 @@ public class MeetingsController extends AbstractController {
     }
 
     private void setupMeetings() {
+        bindMeetings();
 
        meetingSubscription.load();
 

@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.net.Result;
@@ -46,7 +47,7 @@ public class SettingsController extends AbstractController {
         }
     }
 
-    private class SignOutServiceHandler implements IServiceHandler<Result, Error> {
+    private class SignOutServiceHandler extends ServiceHandler<Result, Error> {
 
         @Override
         public void onError(Error error) {

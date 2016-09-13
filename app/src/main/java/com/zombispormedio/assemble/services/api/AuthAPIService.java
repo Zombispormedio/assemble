@@ -4,6 +4,7 @@ package com.zombispormedio.assemble.services.api;
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 
+import com.zombispormedio.assemble.handlers.PromiseHandler;
 import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
@@ -29,7 +30,7 @@ public class AuthAPIService implements IAuthService {
     public void checkAccess(final IServiceHandler<Result, Error> handler) {
 
         api.RestWithAuth("/check_user")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
                         try {
@@ -45,6 +46,7 @@ public class AuthAPIService implements IAuthService {
                         }
 
                     }
+
                 })
                 .get();
 
@@ -55,7 +57,7 @@ public class AuthAPIService implements IAuthService {
     public void login(String email, String password, final IServiceHandler<Result, Error> handler) {
         Auth user = new Auth(email, password);
         api.Rest("/login")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
                         try {
@@ -71,6 +73,7 @@ public class AuthAPIService implements IAuthService {
                         }
 
                     }
+
                 })
                 .post(JsonBinder.fromAuth(user));
     }
@@ -79,7 +82,7 @@ public class AuthAPIService implements IAuthService {
     public void register(String email, String password, final IServiceHandler<Result, Error> handler) {
         Auth user = new Auth(email, password);
         api.Rest("/signup")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
                         try {
@@ -95,6 +98,7 @@ public class AuthAPIService implements IAuthService {
                         }
 
                     }
+
                 })
                 .post(JsonBinder.fromAuth(user));
     }
@@ -102,7 +106,7 @@ public class AuthAPIService implements IAuthService {
     @Override
     public void signOut(final IServiceHandler<Result, Error> handler) {
         api.RestWithAuth("/signout")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
                         try {
@@ -118,6 +122,7 @@ public class AuthAPIService implements IAuthService {
                         }
 
                     }
+
                 })
                 .get();
     }

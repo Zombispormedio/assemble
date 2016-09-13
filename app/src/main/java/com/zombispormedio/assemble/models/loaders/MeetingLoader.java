@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.models.loaders;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IMeetingService;
@@ -26,12 +27,7 @@ public class MeetingLoader implements ILoader {
 
     @Override
     public void retrieve(final ISuccessHandler handler) {
-        apiService.getAll(new IServiceHandler<ArrayList<Meeting>, Error>() {
-            @Override
-            public void onError(Error error) {
-
-            }
-
+        apiService.getAll(new ServiceHandler<ArrayList<Meeting>, Error>() {
             @Override
             public void onSuccess(ArrayList<Meeting> result) {
                 storageService.createOrUpdateOrDeleteAll(result);

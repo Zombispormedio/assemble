@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
@@ -87,7 +88,7 @@ public class ProfileController extends AbstractController {
 
         ctx.showImageProgressDialog();
 
-        userResource.changeAvatar(path, new IServiceHandler<UserProfile, Error>() {
+        userResource.changeAvatar(path, new ServiceHandler<UserProfile, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.hideImageProgressDialog();

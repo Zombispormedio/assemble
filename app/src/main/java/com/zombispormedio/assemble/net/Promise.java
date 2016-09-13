@@ -9,11 +9,18 @@ public class Promise {
 
     private String result;
 
+    private boolean online;
+
     private IPromiseHandler handler;
 
     public Promise(String result, IPromiseHandler handler) {
         this.result = result;
         this.handler = handler;
+        online=State.getInstance().isConnected();
+    }
+
+    public Promise() {
+        online=State.getInstance().isConnected();
     }
 
     public String getResult() {
@@ -25,6 +32,11 @@ public class Promise {
     }
 
     public void handle() {
-        handler.onSuccess(result);
+        if(online){
+            handler.onSuccess(result);
+        }else{
+            handler.onNotConnected();
+        }
+
     }
 }

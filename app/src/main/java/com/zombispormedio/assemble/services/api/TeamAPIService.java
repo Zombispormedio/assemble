@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.services.api;
 
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.PromiseHandler;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
@@ -25,7 +26,7 @@ public class TeamAPIService implements ITeamService {
     @Override
     public void getAll(final IServiceHandler<ArrayList<Team>, Error> handler) {
         api.RestWithAuth("/teams")
-                .handler(new IPromiseHandler() {
+                .handler(new PromiseHandler(handler) {
                     @Override
                     public void onSuccess(String... args) {
 

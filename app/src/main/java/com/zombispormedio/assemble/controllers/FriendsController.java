@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.controllers;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
@@ -65,7 +66,7 @@ public class FriendsController extends AbstractController {
     private void getFriends() {
         isFriendsReady = false;
 
-        userResource.getFriends(new IServiceHandler<ArrayList<FriendProfile>, Error>() {
+        userResource.getFriends(new ServiceHandler<ArrayList<FriendProfile>, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);
@@ -77,13 +78,14 @@ public class FriendsController extends AbstractController {
                 user.setFriends(result);
                 readyFriends();
             }
+
         });
     }
 
 
     private void getRequests() {
         isRequestsReady = false;
-        userResource.getFriendRequests(new IServiceHandler<ArrayList<FriendRequestProfile>, Error>() {
+        userResource.getFriendRequests(new ServiceHandler<ArrayList<FriendRequestProfile>, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);

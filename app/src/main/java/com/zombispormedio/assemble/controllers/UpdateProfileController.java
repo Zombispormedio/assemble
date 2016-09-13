@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.controllers;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
@@ -60,7 +61,7 @@ public class UpdateProfileController extends AbstractController {
             ctx.close();
         } else {
 
-            userResource.updateProfile(editProfile, new IServiceHandler<UserProfile, Error>() {
+            userResource.updateProfile(editProfile, new ServiceHandler<UserProfile, Error>() {
                 @Override
                 public void onError(Error error) {
                     ctx.closeProgressDialog();

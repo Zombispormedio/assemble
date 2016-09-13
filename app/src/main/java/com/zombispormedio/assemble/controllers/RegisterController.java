@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
@@ -53,7 +54,7 @@ public class RegisterController extends AbstractController {
         }
     }
 
-    private class RegisterServiceHandler implements IServiceHandler<Result, Error> {
+    private class RegisterServiceHandler extends ServiceHandler<Result, Error> {
 
         @Override
         public void onError(Error error) {
