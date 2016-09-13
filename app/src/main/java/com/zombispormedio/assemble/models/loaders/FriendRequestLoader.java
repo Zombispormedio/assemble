@@ -2,7 +2,6 @@ package com.zombispormedio.assemble.models.loaders;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
-import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IProfileService;
@@ -35,7 +34,7 @@ public class FriendRequestLoader implements ILoader {
 
             @Override
             public void onSuccess(ArrayList<FriendRequestProfile> result) {
-                storageService.createOrUpdateAll(result);
+                storageService.createOrUpdateOrDeleteAll(result);
                 handler.onSuccess();
             }
         });

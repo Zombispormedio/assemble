@@ -53,6 +53,11 @@ public class FriendProfileDAO extends RealmObject implements IBaseDAO<FriendProf
                 .merge();
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
     public static class Factory implements IDAOFactory<FriendProfileDAO>{
 
         @Override

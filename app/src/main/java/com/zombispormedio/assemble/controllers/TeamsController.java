@@ -8,6 +8,8 @@ import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.ITeamsView;
 
@@ -19,13 +21,22 @@ import java.util.ArrayList;
 public class TeamsController extends AbstractController {
 
     private ITeamsView ctx;
+
     private TeamResource teamResource;
+
+    private TeamSubscription teamSubscription;
+
+    private TeamSubscriber teamSubscriber;
+
     private CurrentUser user;
 
     public TeamsController(ITeamsView ctx) {
         this.ctx = ctx;
-        user=CurrentUser.getInstance();
-        teamResource= ResourceFactory.createTeamResource();
+        user = CurrentUser.getInstance();
+        teamResource = ResourceFactory.createTeamResource();
+        teamSubscription = user.getTeamSubscription();
+        teamSubscriber = new TeamSubscriber();
+        teamSubscription.addSubscriber(teamSubscriber);
     }
 
     @Override
@@ -34,28 +45,18 @@ public class TeamsController extends AbstractController {
     }
 
     private void setupTeams() {
-        if(user.getTeamsCount()>0){
-            ctx.bindTeams(user.getTeams());
+        bindTeams();
+        teamSubscription.load();
+    }
+
+
+    private void bindTeams() {
+        ArrayList<Team> teams = teamResource.getAll();
+
+        if (teams.size() > 0) {
+            ctx.bindTeams(teams);
         }
-
-        getTeams();
     }
-
-    private void getTeams(){
-        teamResource.getAll(new IServiceHandler<ArrayList<Team>, Error>() {
-            @Override
-            public void onError(Error error) {
-                ctx.showAlert(error.msg);
-            }
-
-            @Override
-            public void onSuccess(ArrayList<Team> result) {
-                user.setTeams(result);
-                ctx.bindTeams(result);
-            }
-        });
-    }
-
 
 
     public IOnClickItemListHandler<Team> getOnClickOneTeam() {
@@ -66,5 +67,18 @@ public class TeamsController extends AbstractController {
                 Logger.d(data);
             }
         };
+    }
+
+    private class TeamSubscriber extends Subscriber {
+
+        @Override
+        public void notifyChange() {
+            bindTeams();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        teamSubscription.removeSubscriber(teamSubscriber);
     }
 }

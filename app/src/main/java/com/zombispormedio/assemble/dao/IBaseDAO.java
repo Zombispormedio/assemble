@@ -12,4 +12,6 @@ public interface IBaseDAO<M extends BaseModel> {
 
     IBaseDAO fromModel(M model);
 
+    int getId();
+
 }

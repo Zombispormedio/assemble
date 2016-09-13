@@ -7,6 +7,8 @@ import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
+import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.IMeetingsView;
 
@@ -21,12 +23,20 @@ public class MeetingsController extends AbstractController {
 
     private MeetingResource meetingResource;
 
+    private MeetingSubscription meetingSubscription;
+
+    private MeetingSubscriber meetingSubscriber;
+
+
     private CurrentUser user;
 
     public MeetingsController(IMeetingsView ctx) {
         this.ctx = ctx;
         user=CurrentUser.getInstance();
         meetingResource= ResourceFactory.createMeetingResource();
+        meetingSubscription= user.getMeetingSubscription();
+        meetingSubscriber=new MeetingSubscriber();
+        meetingSubscription.addSubscriber(meetingSubscriber);
     }
 
     @Override
@@ -35,28 +45,19 @@ public class MeetingsController extends AbstractController {
     }
 
     private void setupMeetings() {
-        if(user.getMeetingsCount()>0){
-            ctx.bindMeetings(user.getMeetings());
+
+       meetingSubscription.load();
+
+    }
+
+    public void bindMeetings(){
+        ArrayList<Meeting> meetings = meetingResource.getAll();
+
+        if (meetings.size() > 0) {
+            ctx.bindMeetings(meetings);
         }
-
-        getMeetings();
-
     }
 
-    private void getMeetings() {
-        meetingResource.getAll(new IServiceHandler<ArrayList<Meeting>, Error>() {
-            @Override
-            public void onError(Error error) {
-                ctx.showAlert(error.msg);
-            }
-
-            @Override
-            public void onSuccess(ArrayList<Meeting> result) {
-                user.setMeetings(result);
-                ctx.bindMeetings(result);
-            }
-        });
-    }
 
     public IOnClickItemListHandler<Meeting> getOnClickOneTeam() {
         return new IOnClickItemListHandler<Meeting>() {
@@ -66,6 +67,14 @@ public class MeetingsController extends AbstractController {
                 Logger.d(data);
             }
         };
+    }
+
+    private class MeetingSubscriber extends Subscriber {
+
+        @Override
+        public void notifyChange() {
+          bindMeetings();
+        }
     }
 
 

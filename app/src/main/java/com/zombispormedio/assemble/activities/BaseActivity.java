@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.net.State;
 import com.zombispormedio.assemble.services.api.APIConfiguration;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.IBaseView;
@@ -84,6 +85,8 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         LocalStorage.Configuration
                 .getInstance()
                 .setDatabase(Realm.getDefaultInstance());
+
+        State.getInstance().setContext(this);
 
     }
 

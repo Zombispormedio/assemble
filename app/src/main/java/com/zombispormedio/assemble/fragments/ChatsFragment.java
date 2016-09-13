@@ -83,4 +83,9 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
         view.showAlert(msg);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

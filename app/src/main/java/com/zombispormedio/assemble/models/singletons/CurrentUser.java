@@ -38,11 +38,6 @@ public class CurrentUser {
 
     private ArrayList<FriendRequestProfile> friendRequests;
 
-    private ArrayList<Team> teams;
-
-    private ArrayList<Meeting> meetings;
-
-    private ArrayList<Chat> chats;
 
     /********************/
 
@@ -65,9 +60,6 @@ public class CurrentUser {
         profile = new UserProfile();
         friends = new ArrayList<>();
         friendRequests = new ArrayList<>();
-        teams = new ArrayList<>();
-        meetings = new ArrayList<>();
-        chats = new ArrayList<>();
         /********************/
 
         profileSubscription = new ProfileSubscription();
@@ -116,46 +108,13 @@ public class CurrentUser {
         this.friendRequests = friendRequests;
     }
 
-    public ArrayList<Team> getTeams() {
-        return teams;
-    }
 
-    public void setTeams(ArrayList<Team> teams) {
-        this.teams = teams;
-    }
 
-    public int getTeamsCount() {
-        return teams.size();
-    }
-
-    public ArrayList<Meeting> getMeetings() {
-        return meetings;
-    }
-
-    public void setMeetings(ArrayList<Meeting> meetings) {
-        this.meetings = meetings;
-    }
-
-    public int getMeetingsCount() {
-        return meetings.size();
-    }
-
-    public ArrayList<Chat> getChats() {
-        return chats;
-    }
-
-    public void setChats(ArrayList<Chat> chats) {
-        this.chats = chats;
-    }
-
-    public int getChatsCount() {
-        return chats.size();
-    }
+    /********************/
 
     public static void reset() {
         ourInstance = new CurrentUser();
     }
-    /********************/
 
     public ProfileSubscription getProfileSubscription() {
         return profileSubscription;

@@ -5,6 +5,7 @@ import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.models.Profile;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
@@ -14,8 +15,13 @@ import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
+import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
+import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
+import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.IHomeView;
 
@@ -29,12 +35,11 @@ public class HomeController extends AbstractController {
 
     private IHomeView ctx;
 
+    private CurrentUser user;
 
     private final ProfileResource profileResource;
 
     private ProfileSubscription profileSubscription;
-
-    private CurrentUser user;
 
     private boolean isTeamsReady;
 
@@ -44,20 +49,23 @@ public class HomeController extends AbstractController {
 
     private boolean isChatsReady;
 
+    private ProfileSubscriber profileSubscriber;
+
     public HomeController(IHomeView ctx) {
         this.ctx = ctx;
 
-
-        profileResource= ResourceFactory.createProfileResource();
+        profileResource = ResourceFactory.createProfileResource();
 
         user = CurrentUser.getInstance();
 
-        profileSubscription= user.getProfileSubscription();
+        profileSubscription = user.getProfileSubscription();
+
+        profileSubscriber=new ProfileSubscriber();
 
         isProfileReady = false;
         isTeamsReady = false;
         isMeetingsReady = false;
-        isChatsReady=false;
+        isChatsReady = false;
     }
 
     @Override
@@ -72,7 +80,6 @@ public class HomeController extends AbstractController {
 
     private void setDrawerTitle() {
         UserProfile profile = profileResource.getProfile();
-       Logger.d(profile.username);
 
         String title = "";
 
@@ -108,12 +115,17 @@ public class HomeController extends AbstractController {
 
     private void loadData() {
 
-        profileSubscription.addSubscriber(new ProfileSubscriber());
-        profileSubscription.load();
+        profileSubscription.addSubscriber(profileSubscriber);
+
+        if (profileResource.getProfile() == null) {
+            loading();
+            addSubscriptions();
+        }
+
+        user.loadAll();
+
 
     }
-
-
 
 
     private boolean isReady() {
@@ -126,6 +138,60 @@ public class HomeController extends AbstractController {
     }
 
 
+    private void addSubscriptions() {
+
+        final FriendSubscription friendSubscription = user.getFriendSubscription();
+
+        friendSubscription.addSubscriber(new Subscriber() {
+            @Override
+            public void notifyChange() {
+                friendSubscription.removeSubscriber(this.getID());
+            }
+        });
+
+        final FriendRequestSubscription friendRequestSubscription = user.getFriendRequestSubscription();
+
+        friendRequestSubscription.addSubscriber(new Subscriber() {
+            @Override
+            public void notifyChange() {
+                friendRequestSubscription.removeSubscriber(this.getID());
+            }
+        });
+
+        final TeamSubscription teamSubscription = user.getTeamSubscription();
+
+        teamSubscription.addSubscriber(new Subscriber() {
+            @Override
+            public void notifyChange() {
+                teamSubscription.removeSubscriber(this.getID());
+                readyTeams();
+            }
+        });
+
+        final MeetingSubscription meetingSubscription = user.getMeetingSubscription();
+
+        meetingSubscription.addSubscriber(new Subscriber() {
+            @Override
+            public void notifyChange() {
+                meetingSubscription.removeSubscriber(this.getID());
+                readyMeetings();
+            }
+        });
+
+        final ChatSubscription chatSubscription = user.getChatSubscription();
+
+        chatSubscription.addSubscriber(new Subscriber() {
+            @Override
+            public void notifyChange() {
+                chatSubscription.removeSubscriber(this.getID());
+                readyChats();
+            }
+        });
+
+
+    }
+
+
     private void ready() {
         if (isReady()) {
             ctx.hideProgressDialog();
@@ -133,11 +199,12 @@ public class HomeController extends AbstractController {
         }
     }
 
+
     private void uncheckAll() {
         isProfileReady = false;
         isTeamsReady = false;
         isMeetingsReady = false;
-        isChatsReady=false;
+        isChatsReady = false;
     }
 
     private void readyProfile() {
@@ -162,18 +229,17 @@ public class HomeController extends AbstractController {
     }
 
 
-
     @Override
     public void onDestroy() {
         ctx = null;
+        profileSubscription.removeSubscriber(profileSubscriber);
     }
 
-    private class ProfileSubscriber extends Subscriber{
+    private class ProfileSubscriber extends Subscriber {
 
         @Override
         public void notifyChange() {
-            ctx.showAlert("Profile loaded");
-            Logger.d("Yes, profile loaded. You are subscribe");
+            readyProfile();
         }
     }
 

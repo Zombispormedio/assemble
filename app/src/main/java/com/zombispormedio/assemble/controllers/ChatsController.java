@@ -7,6 +7,8 @@ import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
+import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.IChatsView;
 
@@ -18,15 +20,24 @@ import java.util.ArrayList;
 public class ChatsController extends AbstractController {
 
     private IChatsView ctx;
-    
+
     private ChatResource chatResource;
+
+    private ChatSubscription chatSubscription;
+
+    private ChatSubscriber chatSubscriber;
 
     private CurrentUser user;
 
     public ChatsController(IChatsView ctx) {
         this.ctx = ctx;
-        user=CurrentUser.getInstance();
-        chatResource= ResourceFactory.createChatResource();
+        user = CurrentUser.getInstance();
+        chatResource = ResourceFactory.createChatResource();
+
+        chatSubscription=user.getChatSubscription();
+        chatSubscriber= new ChatSubscriber();
+
+        chatSubscription.addSubscriber(chatSubscriber);
     }
 
     @Override
@@ -36,27 +47,20 @@ public class ChatsController extends AbstractController {
 
     private void setupChats() {
 
-        if(user.getChatsCount()>0){
-            ctx.bindChats(user.getChats());
+        bindChats();
+        chatSubscription.load();
+    }
+
+    public void bindChats(){
+        ArrayList<Chat> chats = chatResource.getAll();
+
+        if (chats.size() > 0) {
+            ctx.bindChats(chats);
         }
-
-        getChats();
     }
 
-    private void getChats() {
-        chatResource.getAll(new IServiceHandler<ArrayList<Chat>, Error>() {
-            @Override
-            public void onError(Error error) {
-                ctx.showAlert(error.msg);
-            }
 
-            @Override
-            public void onSuccess(ArrayList<Chat> result) {
-                user.setChats(result);
-                ctx.bindChats(result);
-            }
-        });
-    }
+
 
     public IOnClickItemListHandler<Chat> getOnClickOneTeam() {
         return new IOnClickItemListHandler<Chat>() {
@@ -66,5 +70,18 @@ public class ChatsController extends AbstractController {
                 Logger.d(data);
             }
         };
+    }
+
+    private class ChatSubscriber extends Subscriber {
+
+        @Override
+        public void notifyChange() {
+            bindChats();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        chatSubscription.removeSubscriber(chatSubscriber);
     }
 }

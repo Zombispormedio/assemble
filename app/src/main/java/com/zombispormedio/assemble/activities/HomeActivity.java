@@ -270,4 +270,9 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         navigation.CreateTeam();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

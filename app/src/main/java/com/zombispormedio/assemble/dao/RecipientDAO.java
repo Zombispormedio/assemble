@@ -44,6 +44,11 @@ public class RecipientDAO extends RealmObject implements IBaseDAO<Recipient> {
                 .merge();
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
     public static class Factory implements IDAOFactory<MeetingDAO>{
 
         @Override

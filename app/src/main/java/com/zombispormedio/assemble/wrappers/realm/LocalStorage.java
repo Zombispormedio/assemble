@@ -67,6 +67,29 @@ public class LocalStorage<T extends RealmObject> {
         return results;
     }
 
+    public void deleteByID(int id){
+        RealmQuery<T> query = getQuery();
+
+        query.equalTo("id", id);
+
+        T object =query.findFirst();
+
+
+        if(object!=null){
+            database.beginTransaction();
+            object.deleteFromRealm();
+            database.commitTransaction();
+        }
+    }
+
+    public void delete(T object){
+        if(object!=null){
+            database.beginTransaction();
+            object.deleteFromRealm();
+            database.commitTransaction();
+        }
+    }
+
     private RealmQuery<T> getQuery() {
         return (RealmQuery<T>) database.where(opClass);
     }

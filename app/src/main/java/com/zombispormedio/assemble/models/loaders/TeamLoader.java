@@ -34,7 +34,7 @@ public class TeamLoader implements ILoader {
 
             @Override
             public void onSuccess(ArrayList<Team> result) {
-                storageService.createOrUpdateAll(result);
+                storageService.createOrUpdateOrDeleteAll(result);
                 handler.onSuccess();
             }
         });

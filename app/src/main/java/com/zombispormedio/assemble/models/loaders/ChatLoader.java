@@ -3,7 +3,6 @@ package com.zombispormedio.assemble.models.loaders;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.loaders.ILoader;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IChatService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
@@ -35,7 +34,7 @@ public class ChatLoader implements ILoader {
 
             @Override
             public void onSuccess(ArrayList<Chat> result) {
-                storageService.createOrUpdateAll(result);
+                storageService.createOrUpdateOrDeleteAll(result);
                 handler.onSuccess();
             }
         });

@@ -34,6 +34,11 @@ public class Utils {
         return it_is;
     }
 
+    public static interface IConversion{
+        Object doIt(Object object);
+
+    }
+
 
     public static class MergeBuilder<E, R> {
 
@@ -42,6 +47,8 @@ public class Utils {
         private E emissor;
 
         private Class<? extends R> recipientClass;
+
+        private IConversion conversion;
 
         private R recipient;
 
@@ -57,9 +64,15 @@ public class Utils {
             return this;
         }
 
+        public MergeBuilder convert(IConversion conversion){
+            this.conversion=conversion;
+            return this;
+        }
+
         public MergeBuilder() {
             this.recipient = null;
             this.emissor = null;
+            this.conversion=null;
         }
 
         private void setEmissorClass() {
@@ -91,6 +104,14 @@ public class Utils {
                     try {
                         thisField = emissorClass.getField(name);
                         Object value = thisField.get(emissor);
+
+                        if(conversion!=null){
+                            Object preValue=conversion.doIt(value);
+                            if(preValue!=null){
+                                value=preValue;
+                            }
+                        }
+
                         field.set(recipient, value);
                     } catch (Exception e) {
                         Logger.d(e.getMessage());

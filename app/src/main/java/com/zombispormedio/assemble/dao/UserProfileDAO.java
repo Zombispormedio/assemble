@@ -53,6 +53,11 @@ public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile>
                 .merge();
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
     public static class Factory implements IDAOFactory<UserProfileDAO>{
 
         @Override

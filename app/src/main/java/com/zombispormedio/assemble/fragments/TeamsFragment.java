@@ -83,4 +83,10 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     public void showAlert(String msg) {
         view.showAlert(msg);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

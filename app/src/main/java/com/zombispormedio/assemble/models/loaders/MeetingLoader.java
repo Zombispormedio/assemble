@@ -34,7 +34,7 @@ public class MeetingLoader implements ILoader {
 
             @Override
             public void onSuccess(ArrayList<Meeting> result) {
-                storageService.createOrUpdateAll(result);
+                storageService.createOrUpdateOrDeleteAll(result);
                 handler.onSuccess();
             }
         });

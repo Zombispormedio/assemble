@@ -70,6 +70,29 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
     }
 
     @Override
+    public void createOrUpdateOrDeleteAll(ArrayList<M> params) {
+        ArrayList<D> objects= storage.getAll();
+        ArrayList<Integer> updIds=new ArrayList<>();
+
+        createOrUpdateAll(params);
+
+        for(M param : params){
+            updIds.add(param.id);
+        }
+
+        for(D object : objects){
+            int id= ((IBaseDAO<M>)object).getId();
+
+            if(!updIds.contains(id)){
+                storage.delete(object);
+            }
+        }
+
+
+
+    }
+
+    @Override
     public M getFirst() {
         M result=null;
         D object=storage.getFirst();

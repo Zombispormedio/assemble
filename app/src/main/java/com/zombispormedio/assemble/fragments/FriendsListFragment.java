@@ -78,4 +78,10 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
             _listFriendsAdapter.notifyDataSetChanged();
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

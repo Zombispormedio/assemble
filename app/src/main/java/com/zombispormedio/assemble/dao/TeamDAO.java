@@ -45,6 +45,11 @@ public class TeamDAO extends RealmObject implements IBaseDAO<Team>{
                 .merge();
     }
 
+    @Override
+    public int getId() {
+        return id;
+    }
+
 
     public static class Factory implements IDAOFactory<TeamDAO>{
 

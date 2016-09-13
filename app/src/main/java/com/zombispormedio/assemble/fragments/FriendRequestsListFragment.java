@@ -75,4 +75,10 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
             _listFriendRequestsAdapter.notifyDataSetChanged();
         }
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

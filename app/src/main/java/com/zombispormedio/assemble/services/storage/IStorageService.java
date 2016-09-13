@@ -15,6 +15,8 @@ public interface IStorageService<T> {
 
     void createOrUpdateAll(ArrayList<T> params);
 
+    void createOrUpdateOrDeleteAll(ArrayList<T> params);
+
     T getFirst();
 
     ArrayList<T> getAll();

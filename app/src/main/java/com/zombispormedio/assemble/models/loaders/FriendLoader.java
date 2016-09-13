@@ -34,7 +34,7 @@ public class FriendLoader implements ILoader {
 
             @Override
             public void onSuccess(ArrayList<FriendProfile> result) {
-                storageService.createOrUpdateAll(result);
+                storageService.createOrUpdateOrDeleteAll(result);
                 handler.onSuccess();
             }
         });
