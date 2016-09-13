@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.Meeting;
@@ -13,6 +14,8 @@ import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
+import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.IHomeView;
 
@@ -26,15 +29,10 @@ public class HomeController extends AbstractController {
 
     private IHomeView ctx;
 
-    private final UserResource userResource;
-
-    private final TeamResource teamResource;
-
-    private final MeetingResource meetingResource;
-
-    private final ChatResource chatResource;
 
     private final ProfileResource profileResource;
+
+    private ProfileSubscription profileSubscription;
 
     private CurrentUser user;
 
@@ -49,14 +47,12 @@ public class HomeController extends AbstractController {
     public HomeController(IHomeView ctx) {
         this.ctx = ctx;
 
-        userResource = ResourceFactory.createUserResource();
-        teamResource = ResourceFactory.createTeamResource();
-        meetingResource = ResourceFactory.createMeetingResource();
-        chatResource=ResourceFactory.createChatResource();
 
         profileResource= ResourceFactory.createProfileResource();
 
         user = CurrentUser.getInstance();
+
+        profileSubscription= user.getProfileSubscription();
 
         isProfileReady = false;
         isTeamsReady = false;
@@ -67,16 +63,17 @@ public class HomeController extends AbstractController {
     @Override
     public void onCreate() {
         loadData();
-        setDrawerTitle();
     }
 
 
     public void onDrawerOpened() {
-
+        setDrawerTitle();
     }
 
     private void setDrawerTitle() {
-        UserProfile profile = user.getProfile();
+        UserProfile profile = profileResource.getProfile();
+       Logger.d(profile.username);
+
         String title = "";
 
         if (!profile.username.isEmpty()) {
@@ -111,87 +108,11 @@ public class HomeController extends AbstractController {
 
     private void loadData() {
 
-        if (user.isProfileEmpty()) {
-            loading();
-        }
-
-        getProfile();
-        getTeams();
-        getMeetings();
-        getChats();
-
-        user.getProfileSubscription().load();
+        profileSubscription.addSubscriber(new ProfileSubscriber());
+        profileSubscription.load();
 
     }
 
-
-
-    private void getProfile() {
-
-        userResource.getProfile(new IServiceHandler<UserProfile, Error>() {
-            @Override
-            public void onError(Error error) {
-                readyProfile();
-                ctx.showAlert(error.msg);
-            }
-
-            @Override
-            public void onSuccess(UserProfile result) {
-                user.setProfile(result);
-                readyProfile();
-                setDrawerTitle();
-            }
-        });
-    }
-
-    private void getTeams() {
-
-        teamResource.getAll(new IServiceHandler<ArrayList<Team>, Error>() {
-            @Override
-            public void onError(Error error) {
-                readyTeams();
-                ctx.showAlert(error.msg);
-            }
-
-            @Override
-            public void onSuccess(ArrayList<Team> result) {
-                user.setTeams(result);
-                readyTeams();
-            }
-        });
-    }
-
-    private void getMeetings() {
-        meetingResource.getAll(new IServiceHandler<ArrayList<Meeting>, Error>() {
-            @Override
-            public void onError(Error error) {
-                readyMeetings();
-                ctx.showAlert(error.msg);
-            }
-
-            @Override
-            public void onSuccess(ArrayList<Meeting> result) {
-                user.setMeetings(result);
-                readyMeetings();
-            }
-        });
-    }
-
-    private void getChats() {
-        chatResource.getAll(new IServiceHandler<ArrayList<Chat>, Error>() {
-            @Override
-            public void onError(Error error) {
-                readyChats();
-                ctx.showAlert(error.msg);
-            }
-
-            @Override
-            public void onSuccess(ArrayList<Chat> result) {
-                user.setChats(result);
-                readyChats();
-            }
-        });
-    }
 
 
 
@@ -245,6 +166,15 @@ public class HomeController extends AbstractController {
     @Override
     public void onDestroy() {
         ctx = null;
+    }
+
+    private class ProfileSubscriber extends Subscriber{
+
+        @Override
+        public void notifyChange() {
+            ctx.showAlert("Profile loaded");
+            Logger.d("Yes, profile loaded. You are subscribe");
+        }
     }
 
 

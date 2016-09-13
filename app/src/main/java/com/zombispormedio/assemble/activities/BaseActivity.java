@@ -75,7 +75,9 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     protected void bindActivity(Activity target){
         ButterKnife.bind(target);
-        RealmConfiguration realmConfiguration= new RealmConfiguration.Builder(target).build();
+        RealmConfiguration realmConfiguration= new RealmConfiguration.Builder(target)
+                .deleteRealmIfMigrationNeeded()
+                .build();
 
         Realm.setDefaultConfiguration(realmConfiguration);
 
