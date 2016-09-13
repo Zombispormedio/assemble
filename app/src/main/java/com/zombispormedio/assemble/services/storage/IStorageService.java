@@ -1,6 +1,4 @@
-package com.zombispormedio.assemble.services.interfaces;
-
-import com.zombispormedio.assemble.models.UserProfile;
+package com.zombispormedio.assemble.services.storage;
 
 import java.util.ArrayList;
 
@@ -14,6 +12,8 @@ public interface IStorageService<T> {
     void update(T params);
 
     void createOrUpdate(T params);
+
+    void createOrUpdateAll(ArrayList<T> params);
 
     T getFirst();
 

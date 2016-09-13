@@ -8,13 +8,17 @@ import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
+import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
+import com.zombispormedio.assemble.models.subscriptions.IDataSubscription;
 import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.models.subscriptions.Subscription;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by Xavier Serrano on 30/07/2016.
@@ -47,6 +51,8 @@ public class CurrentUser {
 
     private FriendSubscription friendSubscription;
 
+    private FriendRequestSubscription friendRequestSubscription;
+
     private MeetingSubscription meetingSubscription;
 
     private TeamSubscription teamSubscription;
@@ -66,6 +72,7 @@ public class CurrentUser {
 
         profileSubscription = new ProfileSubscription();
         friendSubscription = new FriendSubscription();
+        friendRequestSubscription= new FriendRequestSubscription();
         meetingSubscription = new MeetingSubscription();
         teamSubscription = new TeamSubscription();
         chatSubscription = new ChatSubscription();
@@ -158,6 +165,10 @@ public class CurrentUser {
         return friendSubscription;
     }
 
+    public FriendRequestSubscription getFriendRequestSubscription() {
+        return friendRequestSubscription;
+    }
+
     public MeetingSubscription getMeetingSubscription() {
         return meetingSubscription;
     }
@@ -168,5 +179,18 @@ public class CurrentUser {
 
     public ChatSubscription getChatSubscription() {
         return chatSubscription;
+    }
+
+
+    public void loadAll(){
+        ArrayList<IDataSubscription> subscriptions= new ArrayList<IDataSubscription>(
+                Arrays.asList(profileSubscription,
+                friendSubscription, friendRequestSubscription,
+                meetingSubscription, teamSubscription, chatSubscription));
+
+        for(IDataSubscription subscription : subscriptions){
+            subscription.load();
+        }
+
     }
 }

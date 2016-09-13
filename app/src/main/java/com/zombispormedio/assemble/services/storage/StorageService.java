@@ -3,9 +3,7 @@ package com.zombispormedio.assemble.services.storage;
 
 import com.zombispormedio.assemble.dao.IBaseDAO;
 import com.zombispormedio.assemble.dao.IDAOFactory;
-import com.zombispormedio.assemble.dao.UserProfileDAO;
 import com.zombispormedio.assemble.models.BaseModel;
-import com.zombispormedio.assemble.services.interfaces.IStorageService;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import java.util.ArrayList;
@@ -60,6 +58,18 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
     }
 
     @Override
+    public void createOrUpdateAll(ArrayList<M> params) {
+        ArrayList<D> objects=new ArrayList<>();
+        for(int i=0; i<params.size();i++){
+            D object= factory.create();
+            ((IBaseDAO<M>) object).fromModel(params.get(i));
+            objects.add(object);
+        }
+
+        storage.updateAll(objects);
+    }
+
+    @Override
     public M getFirst() {
         M result=null;
         D object=storage.getFirst();
@@ -93,4 +103,6 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
 
         return result;
     }
+
+
 }

@@ -7,7 +7,7 @@ import com.zombispormedio.assemble.models.loaders.ProfileLoader;
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
-public class ProfileSubscription extends Subscription {
+public class ProfileSubscription extends Subscription implements IDataSubscription{
 
     private ProfileLoader loader;
 
@@ -15,6 +15,7 @@ public class ProfileSubscription extends Subscription {
         loader= LoaderFactory.createProfileLoader();
     }
 
+    @Override
     public void load(){
         loader.retrieve(new ISuccessHandler() {
             @Override

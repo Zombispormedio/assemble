@@ -2,41 +2,41 @@ package com.zombispormedio.assemble.models.loaders;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
-import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.services.interfaces.IProfileService;
+import com.zombispormedio.assemble.services.interfaces.ITeamService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
+
+import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 13/09/2016.
  */
-public class ProfileLoader implements ILoader {
+public class TeamLoader implements ILoader {
 
-    private IProfileService apiService;
+    private ITeamService apiService;
 
-    private IStorageService<UserProfile> storageService;
+    private IStorageService<Team> storageService;
 
-    public ProfileLoader(IProfileService apiService,
-            IStorageService<UserProfile> storageService) {
+    public TeamLoader(ITeamService apiService,
+            IStorageService<Team> storageService) {
         this.apiService = apiService;
         this.storageService = storageService;
     }
 
     @Override
     public void retrieve(final ISuccessHandler handler) {
-
-        apiService.retrieve(new IServiceHandler<UserProfile, Error>() {
+        apiService.getAll(new IServiceHandler<ArrayList<Team>, Error>() {
             @Override
             public void onError(Error error) {
+
             }
 
             @Override
-            public void onSuccess(UserProfile result) {
-
-                storageService.createOrUpdate(result);
+            public void onSuccess(ArrayList<Team> result) {
+                storageService.createOrUpdateAll(result);
                 handler.onSuccess();
             }
         });
-
     }
 }

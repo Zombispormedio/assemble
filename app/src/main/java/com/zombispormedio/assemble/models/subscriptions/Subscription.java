@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by Xavier Serrano on 13/09/2016.
  */
-public class Subscription {
+public class Subscription{
 
     private HashMap<String, Subscriber> subscribers;
 
@@ -33,4 +33,5 @@ public class Subscription {
             subscriber.notifyChange();
         }
     }
+
 }

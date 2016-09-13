@@ -34,6 +34,12 @@ public class LocalStorage<T extends RealmObject> {
         database.commitTransaction();
     }
 
+    public void updateAll(ArrayList<T> objects){
+        database.beginTransaction();
+        database.copyToRealmOrUpdate(objects);
+        database.commitTransaction();
+    }
+
     public T getById(int id) {
         RealmQuery<T> query = getQuery();
 
