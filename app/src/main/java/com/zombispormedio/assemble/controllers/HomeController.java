@@ -9,6 +9,7 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.MeetingResource;
+import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
@@ -33,6 +34,8 @@ public class HomeController extends AbstractController {
 
     private final ChatResource chatResource;
 
+    private final ProfileResource profileResource;
+
     private CurrentUser user;
 
     private boolean isTeamsReady;
@@ -50,6 +53,8 @@ public class HomeController extends AbstractController {
         teamResource = ResourceFactory.createTeamResource();
         meetingResource = ResourceFactory.createMeetingResource();
         chatResource=ResourceFactory.createChatResource();
+
+        profileResource= ResourceFactory.createProfileResource();
 
         user = CurrentUser.getInstance();
 
@@ -114,6 +119,8 @@ public class HomeController extends AbstractController {
         getTeams();
         getMeetings();
         getChats();
+
+        user.getProfileSubscription().load();
 
     }
 

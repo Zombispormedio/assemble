@@ -11,5 +11,6 @@ public class Team extends Concept {
     }
 
     public Team() {
+        super();
     }
 }

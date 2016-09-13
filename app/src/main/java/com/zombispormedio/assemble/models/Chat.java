@@ -5,8 +5,6 @@ package com.zombispormedio.assemble.models;
  */
 public class Chat extends BaseModel{
 
-    public int id;
-
     public String created_at;
 
     public Sender sender;
@@ -14,11 +12,12 @@ public class Chat extends BaseModel{
     public Recipient recipient;
 
     public Chat() {
+        super(0);
         created_at="";
     }
 
     public Chat(int id, String created_at, Sender sender, Recipient recipient) {
-        this.id = id;
+        super(id);
         this.created_at = created_at;
         this.sender = sender;
         this.recipient = recipient;

@@ -8,8 +8,8 @@ import com.zombispormedio.assemble.models.BaseModel;
 public interface IBaseDAO<M extends BaseModel> {
 
 
-    M toModel() throws NoSuchFieldException, IllegalAccessException;
+    M toModel();
 
-    IBaseDAO fromModel(M model) throws NoSuchFieldException, IllegalAccessException;
+    IBaseDAO fromModel(M model);
 
 }

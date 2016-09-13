@@ -13,7 +13,7 @@ import io.realm.annotations.PrimaryKey;
 public class FriendRequestProfileDAO extends RealmObject implements IBaseDAO<FriendRequestProfile> {
 
     @PrimaryKey
-    public int friend_request_id;
+    public int id;
 
     @Index
     public String email;
@@ -40,7 +40,7 @@ public class FriendRequestProfileDAO extends RealmObject implements IBaseDAO<Fri
 
     @Override
     public FriendRequestProfile toModel() {
-        return  new FriendRequestProfile(friend_request_id, email, username,
+        return  new FriendRequestProfile(id, email, username,
                 full_avatar_url, large_avatar_url, medium_avatar_url, thumb_avatar_url,
                 birth_date, location, bio, sign_up_at);
     }

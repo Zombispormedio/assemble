@@ -5,7 +5,6 @@ package com.zombispormedio.assemble.models;
  */
 public abstract class Concept extends BaseModel {
 
-    public int id;
 
     public String name;
 
@@ -23,7 +22,7 @@ public abstract class Concept extends BaseModel {
 
     public Concept(int id, String name, String description, String created_at, String full_image_url,
             String large_image_url, String medium_image_url, String thumb_image_url) {
-        this.id = id;
+        super(id);
         this.name = name;
         this.description = description;
         this.created_at = created_at;
@@ -34,7 +33,7 @@ public abstract class Concept extends BaseModel {
     }
 
     public Concept() {
-        this.id = 0;
+        super(0);
         this.name = "";
     }
 }

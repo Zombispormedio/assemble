@@ -19,8 +19,9 @@ public class People extends BaseModel{
 
     public String thumb_avatar_url;
 
-    public People(String email, String username, String full_avatar_url, String large_avatar_url,
+    public People(int id, String email, String username, String full_avatar_url, String large_avatar_url,
             String medium_avatar_url, String thumb_avatar_url) {
+        super(id);
         this.email = email;
         this.username = username;
         this.full_avatar_url = full_avatar_url;
@@ -30,6 +31,7 @@ public class People extends BaseModel{
     }
 
     public People() {
+        super(0);
         this.email = "";
         this.username = "";
     }

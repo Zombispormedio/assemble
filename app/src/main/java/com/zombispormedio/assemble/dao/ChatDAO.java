@@ -12,7 +12,6 @@ import io.realm.annotations.PrimaryKey;
  */
 public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
-    @PrimaryKey
     public int id;
 
     public String created_at;
