@@ -39,6 +39,18 @@ public class TeamDAO extends RealmObject implements IBaseDAO<Team>{
 
     @Override
     public TeamDAO fromModel(Team model) {
-        return null;
+        return (TeamDAO) new Utils.MergeBuilder<Team, TeamDAO>()
+                .emite(model)
+                .receive(this)
+                .merge();
+    }
+
+
+    public static class Factory implements IDAOFactory<TeamDAO>{
+
+        @Override
+        public TeamDAO create() {
+            return new TeamDAO();
+        }
     }
 }

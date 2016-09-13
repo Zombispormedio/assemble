@@ -1,9 +1,8 @@
-package com.zombispormedio.assemble.services.offline;
+package com.zombispormedio.assemble.services.storage;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.dao.UserProfileDAO;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.services.interfaces.IEmbeddedService;
+import com.zombispormedio.assemble.services.interfaces.IStorageService;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import java.util.ArrayList;
@@ -11,11 +10,11 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
-public class OfflineProfileService implements IEmbeddedService<UserProfile> {
+public class ProfileStorageService implements IStorageService<UserProfile> {
 
     private LocalStorage<UserProfileDAO> storage;
 
-    public OfflineProfileService() {
+    public ProfileStorageService() {
         this.storage = new LocalStorage<>(UserProfileDAO.class);
     }
 
@@ -63,6 +62,31 @@ public class OfflineProfileService implements IEmbeddedService<UserProfile> {
         if(object!=null){
            result=object.toModel();
         }
+        return result;
+    }
+
+    @Override
+    public ArrayList<UserProfile> getAll() {
+        ArrayList<UserProfile> result= new ArrayList<>();
+
+        ArrayList<UserProfileDAO> objects= storage.getAll();
+
+        for (UserProfileDAO object: objects) {
+            result.add(object.toModel());
+        }
+
+        return result;
+    }
+
+    @Override
+    public UserProfile getByID(int id) {
+        UserProfile result=null;
+        UserProfileDAO object=storage.getById(id);
+
+        if(result!=null){
+            result=object.toModel();
+        }
+
         return result;
     }
 

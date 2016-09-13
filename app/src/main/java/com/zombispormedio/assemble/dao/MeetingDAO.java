@@ -47,4 +47,12 @@ public class MeetingDAO extends RealmObject implements IBaseDAO<Meeting> {
                 .receive(this)
                 .merge();
     }
+
+    public static class Factory implements IDAOFactory<MeetingDAO>{
+
+        @Override
+        public MeetingDAO create() {
+            return new MeetingDAO();
+        }
+    }
 }

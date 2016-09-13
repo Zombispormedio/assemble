@@ -90,7 +90,7 @@ public class Utils {
                     Field thisField = null;
                     try {
                         thisField = emissorClass.getField(name);
-                        Object value=thisField.get(emissor);
+                        Object value = thisField.get(emissor);
                         field.set(recipient, value);
                     } catch (Exception e) {
                         Logger.d(e.getMessage());
@@ -103,6 +103,8 @@ public class Utils {
             return recipient;
         }
     }
+
+
 
 
 }

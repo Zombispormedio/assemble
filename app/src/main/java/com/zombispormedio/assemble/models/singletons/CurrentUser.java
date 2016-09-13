@@ -7,7 +7,12 @@ import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.services.offline.OfflineProfileService;
+import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
+import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
+import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
+import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
+import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 
 import java.util.ArrayList;
 
@@ -22,6 +27,7 @@ public class CurrentUser {
         return ourInstance;
     }
 
+    /***** Deprecated ***/
     private UserProfile profile;
 
     private ArrayList<FriendProfile> friends;
@@ -34,17 +40,39 @@ public class CurrentUser {
 
     private ArrayList<Chat> chats;
 
+    /********************/
+
+
+    private ProfileSubscription profileSubscription;
+
+    private FriendSubscription friendSubscription;
+
+    private MeetingSubscription meetingSubscription;
+
+    private TeamSubscription teamSubscription;
+
+    private ChatSubscription chatSubscription;
 
 
     private CurrentUser() {
+        /***** Deprecated***/
         profile = new UserProfile();
         friends = new ArrayList<>();
         friendRequests = new ArrayList<>();
         teams = new ArrayList<>();
         meetings = new ArrayList<>();
         chats = new ArrayList<>();
+        /********************/
+
+        profileSubscription = new ProfileSubscription();
+        friendSubscription = new FriendSubscription();
+        meetingSubscription = new MeetingSubscription();
+        teamSubscription = new TeamSubscription();
+        chatSubscription = new ChatSubscription();
+
     }
 
+    /***** Deprecated ***/
     public UserProfile getProfile() {
         return profile;
     }
@@ -119,5 +147,26 @@ public class CurrentUser {
 
     public static void reset() {
         ourInstance = new CurrentUser();
+    }
+    /********************/
+
+    public ProfileSubscription getProfileSubscription() {
+        return profileSubscription;
+    }
+
+    public FriendSubscription getFriendSubscription() {
+        return friendSubscription;
+    }
+
+    public MeetingSubscription getMeetingSubscription() {
+        return meetingSubscription;
+    }
+
+    public TeamSubscription getTeamSubscription() {
+        return teamSubscription;
+    }
+
+    public ChatSubscription getChatSubscription() {
+        return chatSubscription;
     }
 }

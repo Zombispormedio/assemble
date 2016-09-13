@@ -35,4 +35,12 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
                 .receive(this)
                 .merge();
     }
+
+    public static class Factory implements IDAOFactory<ChatDAO>{
+
+        @Override
+        public ChatDAO create() {
+            return new ChatDAO();
+        }
+    }
 }

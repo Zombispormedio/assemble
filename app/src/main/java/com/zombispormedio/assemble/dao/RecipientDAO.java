@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.dao;
 
+import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Recipient;
 import com.zombispormedio.assemble.utils.Utils;
 
@@ -41,5 +42,13 @@ public class RecipientDAO extends RealmObject implements IBaseDAO<Recipient> {
                 .emite(model)
                 .receive(this)
                 .merge();
+    }
+
+    public static class Factory implements IDAOFactory<MeetingDAO>{
+
+        @Override
+        public MeetingDAO create() {
+            return new MeetingDAO();
+        }
     }
 }

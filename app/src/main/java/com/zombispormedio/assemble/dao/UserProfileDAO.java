@@ -52,4 +52,12 @@ public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile>
                 .receive(this)
                 .merge();
     }
+
+    public static class Factory implements IDAOFactory<UserProfileDAO>{
+
+        @Override
+        public UserProfileDAO create() {
+            return new UserProfileDAO();
+        }
+    }
 }
