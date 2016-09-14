@@ -7,8 +7,13 @@ import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
+import com.zombispormedio.assemble.models.resources.FriendRequestResource;
+import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
+import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
+import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.IFriendsView;
 
@@ -23,7 +28,13 @@ public class FriendsController extends AbstractController {
 
     private CurrentUser user;
 
-    private UserResource userResource;
+    private FriendResource friendResource;
+
+    private FriendRequestResource friendRequestResource;
+
+    private FriendSubscription friendSubscription;
+
+    private FriendRequestSubscription friendRequestSubscription;
 
     private boolean isLoading;
 
@@ -34,7 +45,13 @@ public class FriendsController extends AbstractController {
     public FriendsController(IFriendsView ctx) {
         this.ctx = ctx;
         user = CurrentUser.getInstance();
-        userResource = ResourceFactory.createUserResource();
+
+        friendResource = ResourceFactory.createFriendResource();
+        friendRequestResource = ResourceFactory.createFriendRequestResource();
+
+        friendSubscription = user.getFriendSubscription();
+        friendRequestSubscription = user.getFriendRequestSubscription();
+
         isFriendsReady = isRequestsReady = false;
         isLoading = false;
 
@@ -51,58 +68,47 @@ public class FriendsController extends AbstractController {
 
     private void setupFriendsAndRequests() {
 
-        boolean haveFriends = user.getFriendsCount() == 0;
-        boolean haveRequests = user.getFriendRequestsCount() == 0;
+        ArrayList<FriendProfile> friends = friendResource.getAll();
+        ArrayList<FriendRequestProfile> friendsRequests = friendRequestResource.getAll();
 
-        if (haveFriends || haveRequests) {
+        if (friends.size() < 0 || friendsRequests.size() < 0) {
             loadingTime();
-            getFriends();
-            getRequests();
+            addSubscriptions();
         }
 
+        friendSubscription.load();
+        friendRequestSubscription.load();
 
     }
 
-    private void getFriends() {
-        isFriendsReady = false;
 
-        userResource.getFriends(new ServiceHandler<ArrayList<FriendProfile>, Error>() {
+    private void addSubscriptions() {
+        friendSubscription.addSubscriber(new Subscriber() {
             @Override
-            public void onError(Error error) {
-                ctx.showAlert(error.msg);
+            public void notifyChange() {
+                friendSubscription.removeSubscriber(this.getID());
                 readyFriends();
             }
+        });
 
+        friendRequestSubscription.addSubscriber(new Subscriber() {
             @Override
-            public void onSuccess(ArrayList<FriendProfile> result) {
-                user.setFriends(result);
-                readyFriends();
+            public void notifyChange() {
+                friendRequestSubscription.removeSubscriber(this.getID());
+                readyRequests();
             }
-
         });
     }
 
 
-    private void getRequests() {
-        isRequestsReady = false;
-        userResource.getFriendRequests(new ServiceHandler<ArrayList<FriendRequestProfile>, Error>() {
-            @Override
-            public void onError(Error error) {
-                ctx.showAlert(error.msg);
-                readyRequests();
-            }
-
-            @Override
-            public void onSuccess(ArrayList<FriendRequestProfile> result) {
-                user.setFriendRequests(result);
-                readyRequests();
-            }
-        });
+    private void noCheckAll() {
+        isFriendsReady = isRequestsReady = false;
     }
 
 
     private void loadingTime() {
         if (!isLoading) {
+            noCheckAll();
             ctx.loading();
             ctx.hideLists();
             isLoading = true;
@@ -133,7 +139,8 @@ public class FriendsController extends AbstractController {
         return isFriendsReady && isRequestsReady;
     }
 
-
-
-
+    @Override
+    public void onDestroy() {
+        ctx=null;
+    }
 }

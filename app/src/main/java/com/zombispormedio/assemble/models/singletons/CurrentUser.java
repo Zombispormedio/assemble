@@ -34,10 +34,6 @@ public class CurrentUser {
     /***** Deprecated ***/
     private UserProfile profile;
 
-    private ArrayList<FriendProfile> friends;
-
-    private ArrayList<FriendRequestProfile> friendRequests;
-
 
     /********************/
 
@@ -58,8 +54,6 @@ public class CurrentUser {
     private CurrentUser() {
         /***** Deprecated***/
         profile = new UserProfile();
-        friends = new ArrayList<>();
-        friendRequests = new ArrayList<>();
         /********************/
 
         profileSubscription = new ProfileSubscription();
@@ -84,29 +78,6 @@ public class CurrentUser {
         this.profile = profile;
     }
 
-    public ArrayList<FriendProfile> getFriends() {
-        return friends;
-    }
-
-    public void setFriends(ArrayList<FriendProfile> friends) {
-        this.friends = friends;
-    }
-
-    public int getFriendsCount() {
-        return friends.size();
-    }
-
-    public int getFriendRequestsCount() {
-        return friendRequests.size();
-    }
-
-    public ArrayList<FriendRequestProfile> getFriendRequests() {
-        return friendRequests;
-    }
-
-    public void setFriendRequests(ArrayList<FriendRequestProfile> friendRequests) {
-        this.friendRequests = friendRequests;
-    }
 
 
 

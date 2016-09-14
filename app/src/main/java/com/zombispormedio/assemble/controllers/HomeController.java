@@ -62,10 +62,7 @@ public class HomeController extends AbstractController {
 
         profileSubscriber=new ProfileSubscriber();
 
-        isProfileReady = false;
-        isTeamsReady = false;
-        isMeetingsReady = false;
-        isChatsReady = false;
+        isProfileReady =  isTeamsReady = isMeetingsReady = isChatsReady =false;
     }
 
     @Override

@@ -32,10 +32,10 @@ public class MeetingsController extends AbstractController {
 
     public MeetingsController(IMeetingsView ctx) {
         this.ctx = ctx;
-        user=CurrentUser.getInstance();
-        meetingResource= ResourceFactory.createMeetingResource();
-        meetingSubscription= user.getMeetingSubscription();
-        meetingSubscriber=new MeetingSubscriber();
+        user = CurrentUser.getInstance();
+        meetingResource = ResourceFactory.createMeetingResource();
+        meetingSubscription = user.getMeetingSubscription();
+        meetingSubscriber = new MeetingSubscriber();
         meetingSubscription.addSubscriber(meetingSubscriber);
     }
 
@@ -47,11 +47,11 @@ public class MeetingsController extends AbstractController {
     private void setupMeetings() {
         bindMeetings();
 
-       meetingSubscription.load();
+        meetingSubscription.load();
 
     }
 
-    public void bindMeetings(){
+    public void bindMeetings() {
         ArrayList<Meeting> meetings = meetingResource.getAll();
 
         if (meetings.size() > 0) {
@@ -71,12 +71,14 @@ public class MeetingsController extends AbstractController {
     }
 
     private class MeetingSubscriber extends Subscriber {
-
         @Override
         public void notifyChange() {
-          bindMeetings();
+            bindMeetings();
         }
     }
 
-
+    @Override
+    public void onDestroy() {
+        meetingSubscription.removeSubscriber(meetingSubscriber);
+    }
 }

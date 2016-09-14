@@ -3,25 +3,47 @@ package com.zombispormedio.assemble.controllers;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.factories.ResourceFactory;
+import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
+import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.views.IFriendsListView;
+
+import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 11/09/2016.
  */
-public class FriendsListController extends  AbstractController {
+public class FriendsListController extends AbstractController {
 
     private IFriendsListView ctx;
-    private CurrentUser user;
+
+    private FriendResource friendResource;
+
+    private FriendSubscription friendSubscription;
+
+    private FriendSubscriber friendSubscriber;
 
     public FriendsListController(IFriendsListView ctx) {
         this.ctx = ctx;
-        user=CurrentUser.getInstance();
+        friendResource = ResourceFactory.createFriendResource();
+        friendSubscription = CurrentUser.getInstance().getFriendSubscription();
+        friendSubscriber = new FriendSubscriber();
+        friendSubscription.addSubscriber(friendSubscriber);
     }
 
     @Override
     public void onCreate() {
-        ctx.bindFriends(user.getFriends());
+        bindFriends();
+    }
+
+    private void bindFriends() {
+        ArrayList<FriendProfile> friends = friendResource.getAll();
+
+        if (friends.size() > 0) {
+            ctx.bindFriends(friends);
+        }
     }
 
     public IOnClickItemListHandler<FriendProfile> getOnClickOneFriend() {
@@ -32,5 +54,19 @@ public class FriendsListController extends  AbstractController {
                 Logger.d(data);
             }
         };
+    }
+
+    private class FriendSubscriber extends Subscriber {
+
+        @Override
+        public void notifyChange() {
+            bindFriends();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        ctx = null;
+        friendSubscription.removeSubscriber(friendSubscriber);
     }
 }
