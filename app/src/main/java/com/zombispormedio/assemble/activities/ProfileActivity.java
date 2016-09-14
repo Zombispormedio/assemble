@@ -25,10 +25,12 @@ import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
 import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.RequestCreator;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
 
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.net.State;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
@@ -176,38 +178,29 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     @Override
     public void setProfileImage(String url, final ISuccessHandler handler) {
-        Picasso.with(this)
+      RequestCreator config=  Picasso.with(this)
                 .load(url)
-                .transform(new ImageUtils.CircleTransform())
-                .into(_imageProfile, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        handler.onSuccess();
-                    }
+                .transform(new ImageUtils.CircleTransform());
 
-                    @Override
-                    public void onError() {
+        if(State.getInstance().isConnected()){
+            config.into(_imageProfile, new Callback() {
+                @Override
+                public void onSuccess() {
+                    handler.onSuccess();
+                }
 
-                    }
-                });
+                @Override
+                public void onError() {
+                    handler.onSuccess();
+                }
+            });
+        }else{
+            config.into(_imageProfile);
+            handler.onSuccess();
+        }
+
     }
 
-    public void loadDefaultImage(final ISuccessHandler handler) {
-        Picasso.with(this)
-                .load(R.drawable.profile_image_square)
-                .transform(new ImageUtils.CircleTransform())
-                .into(_imageProfile, new Callback() {
-                    @Override
-                    public void onSuccess() {
-                        handler.onSuccess();
-                    }
-
-                    @Override
-                    public void onError() {
-
-                    }
-                });
-    }
 
     public void loadLetterImage(String letter, final ISuccessHandler handler) {
         ColorGenerator generator = ColorGenerator.MATERIAL;

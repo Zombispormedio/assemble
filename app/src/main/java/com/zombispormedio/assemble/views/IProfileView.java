@@ -12,7 +12,6 @@ public interface IProfileView extends IBaseProfileView {
 
     void loadLetterImage(String letter, final ISuccessHandler handler);
 
-    void loadDefaultImage(final ISuccessHandler handler);
 
     void hideImageForm();
 

@@ -49,8 +49,8 @@ public class ProfileController extends AbstractController {
 
     public void changeProfileImage(UserProfile profile, ISuccessHandler handler) {
         if (ctx != null) {
-            if (Utils.presenceOf(profile.full_avatar_url) && State.getInstance().isConnected()) {
-                ctx.setProfileImage(profile.full_avatar_url, handler);
+            if (Utils.presenceOf(profile.large_avatar_url)) {
+                ctx.setProfileImage(profile.large_avatar_url, handler);
             } else {
                 String letter = "X";
                 if (!profile.username.isEmpty()) {
