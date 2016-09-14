@@ -32,7 +32,6 @@ public class ProfileLoader implements ILoader {
         apiService.retrieve(new ServiceHandler<UserProfile, Error>() {
             @Override
             public void onSuccess(UserProfile result) {
-                Logger.d(result.full_avatar_url);
                 storageService.createOrUpdate(result);
                 handler.onSuccess();
             }

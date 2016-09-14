@@ -23,11 +23,8 @@ public class UserResource {
 
     private IAuthService auth;
 
-    private IProfileService persistence;
-
-    public UserResource(IAuthService auth, IProfileService persistence) {
+    public UserResource(IAuthService auth) {
         this.auth = auth;
-        this.persistence = persistence;
     }
 
     public void checkAccess(IServiceHandler<Result, Error> listener) {
@@ -50,18 +47,6 @@ public class UserResource {
         CurrentUser.reset();
     }
 
-    public void getProfile(final IServiceHandler<UserProfile, Error> handler) {
-        persistence.retrieve(handler);
-    }
-
-    public void changeAvatar(String path, final IServiceHandler<UserProfile, Error> handler) {
-        persistence.changeAvatar(new File(path), handler);
-    }
-
-
-    public void updateProfile(EditProfile profile, final IServiceHandler<UserProfile, Error> handler) {
-        persistence.update(profile, handler);
-    }
 
 
 }

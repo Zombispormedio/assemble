@@ -1,14 +1,16 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
+import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
+import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.DateUtils;
@@ -23,30 +25,39 @@ public class UpdateProfileController extends AbstractController {
 
     private IUpdateProfileView ctx;
 
-    private CurrentUser user;
 
-    private UserResource userResource;
+    private ProfileResource profileResource;
+
+    private ProfileSubscription profileSubscription;
+
+    private ProfileSubscriber profileSubscriber;
 
     private EditProfile.Builder editor;
 
 
     public UpdateProfileController(IUpdateProfileView ctx) {
         this.ctx = ctx;
-        user = CurrentUser.getInstance();
-        userResource = ResourceFactory.createUserResource();
-        editor = new EditProfile.Builder(user.getProfile());
+
+        profileResource = ResourceFactory.createProfileResource();
+        profileSubscription = CurrentUser.getInstance().getProfileSubscription();
+        profileSubscriber = new ProfileSubscriber();
+        profileSubscription.addSubscriber(profileSubscriber);
+
+        editor = new EditProfile.Builder();
     }
 
     @Override
     public void onCreate() {
-        super.onCreate();
-
-        fillProfile();
-
+        bindProfile();
     }
 
-    private void fillProfile() {
-        AndroidUtils.fillProfile(ctx, user.getProfile());
+    private void bindProfile() {
+        UserProfile profile = profileResource.getProfile();
+        if(profile!=null){
+            editor.setProfile(profile);
+            AndroidUtils.fillProfile(ctx, profile);
+        }
+
     }
 
     public void save() {
@@ -61,7 +72,7 @@ public class UpdateProfileController extends AbstractController {
             ctx.close();
         } else {
 
-            userResource.updateProfile(editProfile, new ServiceHandler<UserProfile, Error>() {
+            profileResource.updateProfile(editProfile, new ServiceHandler<UserProfile, Error>() {
                 @Override
                 public void onError(Error error) {
                     ctx.closeProgressDialog();
@@ -70,7 +81,6 @@ public class UpdateProfileController extends AbstractController {
 
                 @Override
                 public void onSuccess(UserProfile result) {
-                    user.setProfile(result);
                     ctx.closeProgressDialog();
                     ctx.close();
                 }
@@ -113,5 +123,19 @@ public class UpdateProfileController extends AbstractController {
         } else {
             ctx.close();
         }
+    }
+
+    private class ProfileSubscriber extends Subscriber {
+
+        @Override
+        public void notifyChange() {
+            bindProfile();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        ctx = null;
+        profileSubscription.removeSubscriber(profileSubscriber);
     }
 }

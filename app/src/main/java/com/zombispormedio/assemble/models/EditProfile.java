@@ -42,6 +42,8 @@ public class EditProfile {
             fields();
         }
 
+
+
         private void fields() {
             username = profile.username;
             bio = profile.bio;

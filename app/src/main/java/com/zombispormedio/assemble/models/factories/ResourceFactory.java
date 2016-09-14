@@ -27,7 +27,7 @@ import com.zombispormedio.assemble.services.storage.TeamStorageService;
 public class ResourceFactory {
 
     public static UserResource createUserResource() {
-        return new UserResource(new AuthAPIService(), new ProfileAPIService());
+        return new UserResource(new AuthAPIService());
     }
 
     public static TeamResource createTeamResource(){

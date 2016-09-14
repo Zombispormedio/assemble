@@ -49,7 +49,6 @@ public class ProfileController extends AbstractController {
 
     public void changeProfileImage(UserProfile profile, ISuccessHandler handler) {
         if (ctx != null) {
-            Logger.d(profile.full_avatar_url);
             if (Utils.presenceOf(profile.full_avatar_url) && State.getInstance().isConnected()) {
                 ctx.setProfileImage(profile.full_avatar_url, handler);
             } else {
@@ -126,7 +125,6 @@ public class ProfileController extends AbstractController {
 
         @Override
         public void notifyChange() {
-            Logger.d("notified");
             bindProfile();
         }
     }
