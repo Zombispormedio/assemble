@@ -1,6 +1,10 @@
 package com.zombispormedio.assemble.wrappers.realm;
 
 
+import com.zombispormedio.assemble.dao.IBaseDAO;
+import com.zombispormedio.assemble.dao.IDAOFactory;
+import com.zombispormedio.assemble.models.BaseModel;
+
 import java.util.ArrayList;
 
 import io.realm.Realm;
@@ -11,55 +15,70 @@ import io.realm.RealmResults;
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
-public class LocalStorage<T extends RealmObject> {
+public class LocalStorage<D extends RealmObject, M extends BaseModel> {
 
-    private Class<? extends T> opClass;
+    private Class<? extends D> opClass;
+
+    protected IDAOFactory<D> factory;
 
     private Realm database;
 
-    public LocalStorage(Class<T> opClass) {
+    public LocalStorage(Class<D> opClass, IDAOFactory<D> factory) {
         this.opClass = opClass;
+        this.factory=factory;
         database = Configuration.getInstance().getDatabase();
     }
 
-    public void create(T object) {
+    public void create(M params) {
+        D object = factory.create();
+
         database.beginTransaction();
+
+        ((IBaseDAO<M>) object).fromModel(params);
         database.copyToRealm(object);
+
         database.commitTransaction();
     }
 
-    public void update(T object) {
+    public void update(D object, M params) {
         database.beginTransaction();
+        ((IBaseDAO<M>) object).fromModel(params);
         database.copyToRealmOrUpdate(object);
         database.commitTransaction();
     }
 
-    public void updateAll(ArrayList<T> objects){
+    public void updateAll(ArrayList<M> params){
         database.beginTransaction();
+        ArrayList<D> objects=new ArrayList<>();
+        for(int i=0; i<params.size();i++){
+            D object= factory.create();
+            ((IBaseDAO<M>) object).fromModel(params.get(i));
+            objects.add(object);
+        }
         database.copyToRealmOrUpdate(objects);
         database.commitTransaction();
     }
 
-    public T getById(int id) {
-        RealmQuery<T> query = getQuery();
+    public D getById(int id) {
+        RealmQuery<D> query = getQuery();
 
         query.equalTo("id", id);
 
         return query.findFirst();
     }
 
-    public T getFirst() {
-        RealmQuery<T> query = getQuery();
+    public D getFirst() {
+        RealmQuery<D> query = getQuery();
 
         return query.findFirst();
     }
 
-    public ArrayList<T> getAll() {
-        RealmQuery<T> query = getQuery();
+    public ArrayList<D> getAll() {
+        RealmQuery<D> query = getQuery();
 
-        RealmResults<T> realmResults = query.findAll();
+        RealmResults<D> realmResults = query.findAll();
 
-        ArrayList<T> results = new ArrayList<>();
+        ArrayList<D> results = new ArrayList<>();
 
         for (int i = 0; i < realmResults.size(); i++) {
             results.add(realmResults.get(i));
@@ -68,11 +87,11 @@ public class LocalStorage<T extends RealmObject> {
     }
 
     public void deleteByID(int id){
-        RealmQuery<T> query = getQuery();
+        RealmQuery<D> query = getQuery();
 
         query.equalTo("id", id);
 
-        T object =query.findFirst();
+        D object =query.findFirst();
 
 
         if(object!=null){
@@ -82,7 +101,7 @@ public class LocalStorage<T extends RealmObject> {
         }
     }
 
-    public void delete(T object){
+    public void delete(D object){
         if(object!=null){
             database.beginTransaction();
             object.deleteFromRealm();
@@ -90,8 +109,8 @@ public class LocalStorage<T extends RealmObject> {
         }
     }
 
-    private RealmQuery<T> getQuery() {
-        return (RealmQuery<T>) database.where(opClass);
+    private RealmQuery<D> getQuery() {
+        return (RealmQuery<D>) database.where(opClass);
     }
 
     public static class Configuration {

@@ -7,7 +7,7 @@ import com.zombispormedio.assemble.models.loaders.ChatLoader;
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
-public class ChatSubscription extends Subscription implements IDataSubscription {
+public class ChatSubscription extends DataSubscription {
 
     private ChatLoader loader;
 

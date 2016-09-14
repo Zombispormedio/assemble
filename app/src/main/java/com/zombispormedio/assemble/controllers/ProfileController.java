@@ -1,13 +1,16 @@
 package com.zombispormedio.assemble.controllers;
 
 
-import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.factories.ResourceFactory;
-import com.zombispormedio.assemble.models.resources.UserResource;
+import com.zombispormedio.assemble.models.resources.ProfileResource;
+import com.zombispormedio.assemble.net.State;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
+import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.Utils;
@@ -20,49 +23,41 @@ public class ProfileController extends AbstractController {
 
     private IProfileView ctx;
 
-    private CurrentUser user;
+    private ProfileResource profileResource;
 
-    private UserResource userResource;
+    private ProfileSubscription profileSubscription;
+
+    private ProfileSubscriber profileSubscriber;
+
 
     public ProfileController(IProfileView ctx) {
         this.ctx = ctx;
-        user = CurrentUser.getInstance();
-        userResource = ResourceFactory.createUserResource();
+        profileResource = ResourceFactory.createProfileResource();
+        profileSubscription = CurrentUser.getInstance().getProfileSubscription();
+        profileSubscriber = new ProfileSubscriber();
+        profileSubscription.addSubscriber(profileSubscriber);
 
     }
 
     @Override
     public void onCreate() {
-        beforeLoadingImage();
-        changeProfileImage(new ISuccessHandler() {
-            @Override
-            public void onSuccess() {
-                afterLoadingImage();
-            }
-        });
-        fillProfile();
+        bindProfile();
+        profileSubscription.load();
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        fillProfile();
-    }
 
-    @Override
-    public void onDestroy() {
-        ctx = null;
-    }
-
-    public void changeProfileImage(ISuccessHandler handler) {
+    public void changeProfileImage(UserProfile profile, ISuccessHandler handler) {
         if (ctx != null) {
-            UserProfile profile = user.getProfile();
-
-            if (Utils.presenceOf(profile.full_avatar_url)) {
+            Logger.d(profile.full_avatar_url);
+            if (Utils.presenceOf(profile.full_avatar_url) && State.getInstance().isConnected()) {
                 ctx.setProfileImage(profile.full_avatar_url, handler);
             } else {
-                String letter = String.valueOf(profile.username.charAt(0));
+                String letter = "X";
+                if (!profile.username.isEmpty()) {
+                    letter = String.valueOf(profile.username.charAt(0));
+                }
+
                 ctx.loadLetterImage(letter, handler);
             }
         }
@@ -88,7 +83,7 @@ public class ProfileController extends AbstractController {
 
         ctx.showImageProgressDialog();
 
-        userResource.changeAvatar(path, new ServiceHandler<UserProfile, Error>() {
+        profileResource.changeAvatar(path, new ServiceHandler<UserProfile, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.hideImageProgressDialog();
@@ -97,23 +92,48 @@ public class ProfileController extends AbstractController {
 
             @Override
             public void onSuccess(UserProfile result) {
-                user.setProfile(result);
-                changeProfileImage(new ISuccessHandler() {
-                    @Override
-                    public void onSuccess() {
-                        ctx.hideImageProgressDialog();
-                    }
-                });
+                ctx.hideImageProgressDialog();
             }
         });
     }
 
 
-    private void fillProfile() {
-        AndroidUtils.fillProfile(ctx, user.getProfile());
+    private void bindProfile() {
+
+        UserProfile profile = profileResource.getProfile();
+
+        if(profile!=null){
+            AndroidUtils.fillProfile(ctx, profile);
+
+            beforeLoadingImage();
+            changeProfileImage(profile, new ISuccessHandler() {
+                @Override
+                public void onSuccess() {
+                    afterLoadingImage();
+                }
+            });
+        }
+
+
     }
 
     public void updateProfile() {
         ctx.goToUpdateProfile();
+    }
+
+
+    private class ProfileSubscriber extends Subscriber {
+
+        @Override
+        public void notifyChange() {
+            Logger.d("notified");
+            bindProfile();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        ctx = null;
+        profileSubscription.removeSubscriber(profileSubscriber);
     }
 }

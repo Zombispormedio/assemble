@@ -43,4 +43,8 @@ public class Subscription{
         }
     }
 
+    public void haveChanged() {
+        notifySubscribers();
+    }
+
 }

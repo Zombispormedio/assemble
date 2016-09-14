@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.dao;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.utils.Utils;
 
@@ -47,10 +48,18 @@ public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile>
 
     @Override
     public UserProfileDAO fromModel(UserProfile model) {
-        return (UserProfileDAO) new Utils.MergeBuilder<UserProfile, UserProfileDAO>()
-                .emite(model)
-                .receive(this)
-                .merge();
+        this.id = model.id;
+        this.email = model.email;
+        this.username = model.username;
+        this.large_avatar_url = model.large_avatar_url;
+        this.medium_avatar_url = model.medium_avatar_url;
+        this.full_avatar_url = model.full_avatar_url;
+        this.thumb_avatar_url = model.thumb_avatar_url;
+        this.birth_date = model.birth_date;
+        this.location = model.location;
+        this.bio = model.bio;
+        this.sign_up_at = model.sign_up_at;
+        return this;
     }
 
     @Override
@@ -58,7 +67,7 @@ public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile>
         return id;
     }
 
-    public static class Factory implements IDAOFactory<UserProfileDAO>{
+    public static class Factory implements IDAOFactory<UserProfileDAO> {
 
         @Override
         public UserProfileDAO create() {

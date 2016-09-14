@@ -31,29 +31,12 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
     @Override
     public ChatDAO fromModel(Chat model) {
 
-        return (ChatDAO) new Utils.MergeBuilder<Chat, ChatDAO>()
-                .emite(model)
-                .receive(this)
-                .convert(new Utils.IConversion(){
+        this.id=model.id;
+        this.created_at=model.created_at;
+        this.sender=(new SenderDAO()).fromModel(model.sender);
+        this.recipient=(new RecipientDAO()).fromModel(model.recipient);
 
-                    @Override
-                    public Object doIt(Object object) {
-                        Object result=null;
-
-                        if(object instanceof Sender){
-                            result=new SenderDAO();
-                            ((SenderDAO)result).fromModel((Sender) object);
-                        }
-
-                        if(object instanceof Recipient){
-                            result=new RecipientDAO();
-                            ((RecipientDAO)result).fromModel((Recipient) object);
-                        }
-
-                        return result;
-                    }
-                })
-                .merge();
+        return this;
     }
 
     @Override

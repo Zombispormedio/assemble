@@ -8,7 +8,7 @@ import com.zombispormedio.assemble.models.loaders.MeetingLoader;
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
-public class MeetingSubscription extends Subscription implements IDataSubscription{
+public class MeetingSubscription extends DataSubscription{
 
     private MeetingLoader loader;
 

@@ -10,7 +10,7 @@ import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 public class ProfileStorageService extends StorageService<UserProfileDAO, UserProfile>  {
 
     public ProfileStorageService() {
-        super(new LocalStorage<>(UserProfileDAO.class), new UserProfileDAO.Factory());
+        super(new LocalStorage<UserProfileDAO, UserProfile>(UserProfileDAO.class, new UserProfileDAO.Factory()));
     }
 
 

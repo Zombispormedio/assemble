@@ -42,10 +42,17 @@ public class MeetingDAO extends RealmObject implements IBaseDAO<Meeting> {
 
     @Override
     public MeetingDAO fromModel(Meeting model) {
-        return (MeetingDAO) new Utils.MergeBuilder<Meeting, MeetingDAO>()
-                .emite(model)
-                .receive(this)
-                .merge();
+        this.id = model.id;
+        this.name = model.name;
+        this.description=model.description;
+        this.created_at=model.created_at;
+        this.large_image_url = model.large_image_url;
+        this.medium_image_url = model.medium_image_url;
+        this.full_image_url = model.full_image_url;
+        this.thumb_image_url = model.thumb_image_url;
+        this.start_at = model.start_at;
+        this.end_at=model.end_at;
+        return this;
     }
 
     @Override

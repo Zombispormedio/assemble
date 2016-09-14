@@ -38,10 +38,15 @@ public class SenderDAO extends RealmObject implements IBaseDAO<Sender> {
 
     @Override
     public SenderDAO fromModel(Sender model) {
-        return (SenderDAO) new Utils.MergeBuilder<Sender, SenderDAO>()
-                .emite(model)
-                .receive(this)
-                .merge();
+        this.id = model.id;
+        this.email = model.email;
+        this.username = model.email;
+        this.large_avatar_url = model.large_avatar_url;
+        this.medium_avatar_url = model.medium_avatar_url;
+        this.full_avatar_url = model.full_avatar_url;
+        this.thumb_avatar_url = model.thumb_avatar_url;
+
+        return this;
     }
 
     @Override

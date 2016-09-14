@@ -7,7 +7,7 @@ import com.zombispormedio.assemble.models.loaders.TeamLoader;
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
-public class TeamSubscription extends Subscription implements IDataSubscription {
+public class TeamSubscription extends DataSubscription {
 
     private TeamLoader loader;
 

@@ -64,11 +64,4 @@ public class UserResource {
     }
 
 
-    public void getFriends(final IServiceHandler<ArrayList<FriendProfile>, Error> handler) {
-        persistence.getFriends(handler);
-    }
-
-    public void getFriendRequests(final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler) {
-        persistence.getFriendRequests(handler);
-    }
 }

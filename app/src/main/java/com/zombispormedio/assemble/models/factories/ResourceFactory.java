@@ -43,7 +43,7 @@ public class ResourceFactory {
     }
 
     public static ProfileResource createProfileResource(){
-        return new ProfileResource(new ProfileStorageService());
+        return new ProfileResource(new ProfileAPIService(), new ProfileStorageService());
     }
 
     public static FriendResource createFriendResource(){

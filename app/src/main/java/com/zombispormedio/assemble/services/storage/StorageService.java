@@ -2,7 +2,6 @@ package com.zombispormedio.assemble.services.storage;
 
 
 import com.zombispormedio.assemble.dao.IBaseDAO;
-import com.zombispormedio.assemble.dao.IDAOFactory;
 import com.zombispormedio.assemble.models.BaseModel;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
@@ -16,23 +15,17 @@ import io.realm.RealmObject;
 public class StorageService<D extends RealmObject, M extends BaseModel> implements IStorageService<M> {
 
 
-    protected LocalStorage<D> storage;
-
-    protected IDAOFactory<D> factory;
+    protected LocalStorage<D, M> storage;
 
 
-    public StorageService(LocalStorage<D> storage, IDAOFactory<D> factory) {
+    public StorageService(LocalStorage<D, M> storage) {
         this.storage = storage;
-        this.factory = factory;
     }
 
     @Override
     public void create(M params) {
-        D object = factory.create();
 
-        ((IBaseDAO<M>) object).fromModel(params);
-
-        storage.create(object);
+        storage.create(params);
     }
 
     @Override
@@ -40,18 +33,15 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
         D object = storage.getById(params.id);
 
         if (object != null) {
-            ((IBaseDAO<M>) object).fromModel(params);
-            storage.update(object);
+            storage.update(object, params);
         }
     }
 
     @Override
     public void createOrUpdate(M params) {
         D object = storage.getById(params.id);
-
         if (object != null) {
-            ((IBaseDAO<M>) object).fromModel(params);
-            storage.update(object);
+            storage.update(object, params);
         } else {
             create(params);
         }
@@ -59,14 +49,8 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
 
     @Override
     public void createOrUpdateAll(ArrayList<M> params) {
-        ArrayList<D> objects=new ArrayList<>();
-        for(int i=0; i<params.size();i++){
-            D object= factory.create();
-            ((IBaseDAO<M>) object).fromModel(params.get(i));
-            objects.add(object);
-        }
 
-        storage.updateAll(objects);
+        storage.updateAll(params);
     }
 
     @Override

@@ -7,7 +7,7 @@ import com.zombispormedio.assemble.models.loaders.FriendRequestLoader;
 /**
  * Created by Xavier Serrano on 13/09/2016.
  */
-public class FriendRequestSubscription extends Subscription implements IDataSubscription {
+public class FriendRequestSubscription extends DataSubscription {
 
     private FriendRequestLoader loader;
 

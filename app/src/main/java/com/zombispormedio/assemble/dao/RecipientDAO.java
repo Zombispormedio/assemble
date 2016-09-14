@@ -38,10 +38,14 @@ public class RecipientDAO extends RealmObject implements IBaseDAO<Recipient> {
 
     @Override
     public RecipientDAO fromModel(Recipient model) {
-        return (RecipientDAO) new Utils.MergeBuilder<Recipient, RecipientDAO>()
-                .emite(model)
-                .receive(this)
-                .merge();
+        this.id = model.id;
+        this.email = model.email;
+        this.username = model.email;
+        this.large_avatar_url = model.large_avatar_url;
+        this.medium_avatar_url = model.medium_avatar_url;
+        this.full_avatar_url = model.full_avatar_url;
+        this.thumb_avatar_url = model.thumb_avatar_url;
+        return this;
     }
 
     @Override
