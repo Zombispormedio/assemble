@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.adapters;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
@@ -67,14 +66,18 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
     private void bindData(FriendProfile itemData) {
         usernameLabel.setText(itemData.username);
         emailLabel.setText(itemData.email);
+        setupImage(itemData.large_avatar_url, String.valueOf(itemData.username.charAt(0)));
+    }
 
-        if(Utils.presenceOf(itemData.medium_avatar_url)){
-            ImageUtils.applyRoundImage(view.getContext(), itemData.large_avatar_url, imageView);
-        }else{
-
-            String letter=String.valueOf(itemData.username.charAt(0));
-            ImageUtils.applyRoundLetterImage(letter, imageView);
+    private void setupImage(String url, String letter){
+        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(view.getContext(), imageView)
+                .letter(letter)
+                .circle(true);
+        if(Utils.presenceOf(url)){
+            builder=builder.url(url);
         }
+
+        builder.build();
     }
 
 

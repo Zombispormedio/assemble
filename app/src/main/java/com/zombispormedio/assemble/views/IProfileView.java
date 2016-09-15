@@ -8,7 +8,7 @@ import com.zombispormedio.assemble.handlers.ISuccessHandler;
  */
 public interface IProfileView extends IBaseProfileView {
 
-    void setProfileImage(String url, final ISuccessHandler handler);
+    void setProfileImage(String url, String letter, final ISuccessHandler handler);
 
     void loadLetterImage(String letter, final ISuccessHandler handler);
 

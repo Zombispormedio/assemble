@@ -46,16 +46,23 @@ public class ProfileController extends AbstractController {
 
     }
 
+    private String getFirstLetterProfile(UserProfile profile){
+        String letter = "X";
+        if (!profile.username.isEmpty()) {
+            letter = String.valueOf(profile.username.charAt(0));
+        }
+
+        return letter;
+    }
+
 
     public void changeProfileImage(UserProfile profile, ISuccessHandler handler) {
         if (ctx != null) {
+            String letter=getFirstLetterProfile(profile);
+
             if (Utils.presenceOf(profile.large_avatar_url)) {
-                ctx.setProfileImage(profile.large_avatar_url, handler);
+                ctx.setProfileImage(profile.large_avatar_url, letter, handler);
             } else {
-                String letter = "X";
-                if (!profile.username.isEmpty()) {
-                    letter = String.valueOf(profile.username.charAt(0));
-                }
 
                 ctx.loadLetterImage(letter, handler);
             }

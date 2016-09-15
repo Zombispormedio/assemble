@@ -66,13 +66,17 @@ public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestPr
     private void bindData(FriendRequestProfile itemData) {
         usernameLabel.setText(itemData.username);
         emailLabel.setText(itemData.email);
-        if(Utils.presenceOf(itemData.medium_avatar_url)){
-            ImageUtils.applyRoundImage(view.getContext(), itemData.large_avatar_url, imageView);
-        }else{
+        setupImage(itemData.large_avatar_url, String.valueOf(itemData.username.charAt(0)));
+    }
 
-            String letter=String.valueOf(itemData.username.charAt(0));
-            ImageUtils.applyRoundLetterImage(letter, imageView);
+    private void setupImage(String url, String letter){
+        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(view.getContext(), imageView)
+                .letter(letter)
+                .circle(true);
+        if(Utils.presenceOf(url)){
+            builder=builder.url(url);
         }
+        builder.build();
     }
 
     public void setOnClickListener(IOnClickItemListHandler<FriendRequestProfile> listener) {

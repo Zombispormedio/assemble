@@ -16,28 +16,20 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.amulyakhare.textdrawable.TextDrawable;
-import com.amulyakhare.textdrawable.util.ColorGenerator;
-
 
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
 import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
-import com.squareup.picasso.Callback;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.RequestCreator;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
 
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
-import com.zombispormedio.assemble.net.State;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.IProfileView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -177,41 +169,22 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     @Override
-    public void setProfileImage(String url, final ISuccessHandler handler) {
-      RequestCreator config=  Picasso.with(this)
-                .load(url)
-                .transform(new ImageUtils.CircleTransform());
-
-        if(State.getInstance().isConnected()){
-            config.into(_imageProfile, new Callback() {
-                @Override
-                public void onSuccess() {
-                    handler.onSuccess();
-                }
-
-                @Override
-                public void onError() {
-                    handler.onSuccess();
-                }
-            });
-        }else{
-            config.into(_imageProfile);
-            handler.onSuccess();
-        }
-
+    public void setProfileImage(String url, String letter, final ISuccessHandler handler) {
+        new ImageUtils.ImageBuilder(this, _imageProfile)
+                .circle(true)
+                .url(url)
+                .handle(handler)
+                .letter(letter)
+                .build();
     }
 
 
     public void loadLetterImage(String letter, final ISuccessHandler handler) {
-        ColorGenerator generator = ColorGenerator.MATERIAL;
-
-        TextDrawable drawable = TextDrawable.builder()
-                .buildRound(letter.toUpperCase(), generator.getRandomColor());
-
-        _imageProfile.setImageDrawable(drawable);
-
-        handler.onSuccess();
-
+        new ImageUtils.ImageBuilder(this, _imageProfile)
+                .circle(true)
+                .handle(handler)
+                .letter(letter)
+                .build();
     }
 
 
