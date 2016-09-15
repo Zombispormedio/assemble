@@ -131,6 +131,12 @@ public class Utils {
         return generator.getRandomColor();
     }
 
+    public static int getColorByString(String str){
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+        return generator.getColor(str.hashCode());
+
+    }
+
 
 
 

@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.utils.Utils;
 
 
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,8 +29,8 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
     @BindView(R.id.name_label)
     TextView nameLabel;
 
-    @BindView(R.id.image_view)
-    ImageView imageView;
+    @BindView(R.id.frame_view)
+    FrameLayout frameView;
 
     @BindView(R.id.date_label)
     TextView dateLabel;
@@ -68,7 +69,7 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
     private void bindData(Meeting itemData) {
         nameLabel.setText(itemData.name);
 
-        imageView.setBackgroundColor(Utils.getRandomColor());
+        frameView.setBackgroundColor(Utils.getColorByString(itemData.name));
 
         try {
             String date= DateUtils.format(DateUtils.SIMPLE_SLASH_FORMAT_WITH_HOUR, itemData.start_at);
