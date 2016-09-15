@@ -16,6 +16,8 @@ public class DateUtils {
 
     public final static String SIMPLE_SLASH_FORMAT = "dd/MM/yyyy";
 
+    public final static String SIMPLE_SLASH_FORMAT_WITH_HOUR = "dd/MM/yyyy HH:mm";
+
     public static String format(String format, String inDate) throws ParseException {
         DateFormat inFormat = new SimpleDateFormat(DEFAULT_INPUT_FORMAT, Locale.ENGLISH);
         Date outDate = inFormat.parse(inDate);

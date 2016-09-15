@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.utils;
 
+import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.UserProfile;
 
@@ -123,6 +124,11 @@ public class Utils {
 
             return recipient;
         }
+    }
+
+    public static int getRandomColor(){
+        ColorGenerator generator = ColorGenerator.MATERIAL;
+        return generator.getRandomColor();
     }
 
 

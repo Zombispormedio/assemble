@@ -78,6 +78,8 @@
     <string name="new_title">Nuevo</string>
     <string name="request_friend_title">Peticiones</string>
     <string name="no_more_req_friends">No tienes más peticiones</string>
+    <string name="no_more_meetings">No tienes más reuniones</string>
+    <string name="date_example_with_hour">20/09/2016 15:00</string>
 
 
 </resources>

@@ -61,8 +61,8 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
 
     private void setupMeetings() {
         AndroidUtils.createListConfiguration(view, _listMeetings)
-                .divider(true)
                 .itemAnimation(true)
+                .scrolling(false)
                 .configure();
         _listMeetingsFactory.setOnClickListener(ctrl.getOnClickOneTeam());
     }

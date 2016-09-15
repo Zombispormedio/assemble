@@ -73,5 +73,7 @@
     <string name="new_title">New</string>
     <string name="request_friend_title">Requests</string>
     <string name="no_more_req_friends">No more requests</string>
+    <string name="no_more_meetings">No more meetings</string>
+    <string name="date_example_with_hour">20/09/2016 15:00</string>
 
 </resources>
