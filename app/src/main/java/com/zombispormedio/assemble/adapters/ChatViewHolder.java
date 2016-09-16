@@ -3,8 +3,12 @@ package com.zombispormedio.assemble.adapters;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
+import com.zombispormedio.assemble.models.Recipient;
+import com.zombispormedio.assemble.utils.ImageUtils;
+import com.zombispormedio.assemble.utils.StringUtils;
 
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -17,8 +21,11 @@ public class ChatViewHolder extends AbstractViewHolder<Chat> {
 
     private View view;
 
-    @BindView(R.id.name_label)
+    @BindView(R.id.username_label)
     TextView nameLabel;
+
+    @BindView(R.id.image_view)
+    ImageView imageView;
 
     private IOnClickItemListHandler<Chat> listener;
 
@@ -51,6 +58,18 @@ public class ChatViewHolder extends AbstractViewHolder<Chat> {
     }
 
     private void bindData(Chat itemData) {
-        nameLabel.setText(itemData.recipient.username);
+        Recipient recipient=itemData.recipient;
+        String recipientName=recipient.username;
+        nameLabel.setText(recipientName);
+
+        new ImageUtils.ImageBuilder(view.getContext(), imageView)
+                .url(recipient.large_avatar_url)
+                .letter(StringUtils.firstLetter(recipientName))
+                .circle(true)
+                .build();
+    }
+
+    public void setOnClickListener(IOnClickItemListHandler<Chat> listener) {
+        this.listener = listener;
     }
 }

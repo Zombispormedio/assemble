@@ -11,6 +11,7 @@ import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 
 
+import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -118,6 +119,10 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
 
 
 
+    }
+
+    public void setOnClickListener(IOnClickItemListHandler<Meeting> listener) {
+        this.listener = listener;
     }
 
 }

@@ -80,6 +80,8 @@
     <string name="no_more_req_friends">No tienes más peticiones</string>
     <string name="no_more_meetings">No tienes más reuniones</string>
     <string name="date_example_with_hour">20/09/2016 15:00</string>
+    <string name="no_more_teams">No tienes más equipos</string>
+    <string name="no_more_chats">No tienes más conversaciones</string>
 
 
 </resources>

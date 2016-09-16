@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="15sp"
+        android:background="?android:attr/selectableItemBackground"
         android:paddingBottom="15sp"
-        android:background="?android:attr/selectableItemBackground">
+        android:paddingTop="15sp"
+        >
 
     <LinearLayout
             android:layout_width="wrap_content"
@@ -14,53 +14,59 @@
             android:orientation="horizontal"
             >
 
-    <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
-        <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:id="@+id/image_view"
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                >
+
+            <ImageView
+                    android:id="@+id/image_view"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/profile_image_square"
+                    />
+        </FrameLayout>
+
+
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
-                android:src="@drawable/profile_image_square"
-                android:layout_gravity="left|center_vertical"
-                />
-    </FrameLayout>
+                android:orientation="vertical"
+                >
 
+            <TextView
+                    android:id="@+id/username_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/example_string"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
 
-    <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_gravity="center"
-            android:layout_marginLeft="15dp"
-            >
-        <TextView android:id="@+id/username_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="@string/example_string"
-                android:textSize="20sp" />
-
-        <TextView android:id="@+id/email_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="normal"
-                android:text="@string/example_string"
-                android:textSize="12sp" />
-    </LinearLayout>
+            <TextView
+                    android:id="@+id/email_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/example_string"
+                    android:textSize="12sp"
+                    android:textStyle="normal"
+                    />
+        </LinearLayout>
 
     </LinearLayout>
 
     <ImageButton
+            android:id="@+id/remove_friend_button"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginRight="15sp"
-            android:id="@+id/remove_friend_button"
-            android:src="@drawable/close"
-            android:background="@android:color/transparent"
             android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="15sp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/close"
             />
 
 

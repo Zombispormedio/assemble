@@ -60,8 +60,8 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
 
     private void setupTeams() {
         AndroidUtils.createListConfiguration(view, _listTeams)
-                .divider(true)
                 .itemAnimation(true)
+                .scrolling(false)
                 .configure();
         _listTeamsFactory.setOnClickListener(ctrl.getOnClickOneTeam());
 
