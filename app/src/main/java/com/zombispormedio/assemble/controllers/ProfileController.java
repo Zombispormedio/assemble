@@ -13,6 +13,7 @@ import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IProfileView;
 
@@ -46,19 +47,10 @@ public class ProfileController extends AbstractController {
 
     }
 
-    private String getFirstLetterProfile(UserProfile profile){
-        String letter = "X";
-        if (!profile.username.isEmpty()) {
-            letter = String.valueOf(profile.username.charAt(0));
-        }
-
-        return letter;
-    }
-
 
     public void changeProfileImage(UserProfile profile, ISuccessHandler handler) {
         if (ctx != null) {
-            String letter=getFirstLetterProfile(profile);
+            String letter=StringUtils.firstLetter(profile.username);
 
             if (Utils.presenceOf(profile.large_avatar_url)) {
                 ctx.setProfileImage(profile.large_avatar_url, letter, handler);

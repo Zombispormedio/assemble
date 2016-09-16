@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
+import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 
 import android.view.View;
@@ -66,7 +67,7 @@ public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestPr
     private void bindData(FriendRequestProfile itemData) {
         usernameLabel.setText(itemData.username);
         emailLabel.setText(itemData.email);
-        setupImage(itemData.large_avatar_url, String.valueOf(itemData.username.charAt(0)));
+        setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
     }
 
     private void setupImage(String url, String letter){

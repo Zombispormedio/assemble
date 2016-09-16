@@ -6,6 +6,8 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.utils.DateUtils;
+import com.zombispormedio.assemble.utils.ImageUtils;
+import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 
 
@@ -34,6 +36,15 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
 
     @BindView(R.id.date_label)
     TextView dateLabel;
+
+    @BindView(R.id.team_image)
+    ImageView teamImage;
+
+    @BindView(R.id.team_label)
+    TextView teamLabel;
+
+    @BindView(R.id.meeting_image)
+    ImageView meetingImage;
 
     private IOnClickItemListHandler<Meeting> listener;
 
@@ -67,9 +78,11 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
     }
 
     private void bindData(Meeting itemData) {
-        nameLabel.setText(itemData.name);
 
-        frameView.setBackgroundColor(Utils.getColorByString(itemData.name));
+        String meetingName=itemData.name;
+
+        nameLabel.setText(meetingName);
+        frameView.setBackgroundColor(Utils.getColorByString(meetingName));
 
         try {
             String date= DateUtils.format(DateUtils.SIMPLE_SLASH_FORMAT_WITH_HOUR, itemData.start_at);
@@ -77,6 +90,33 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
         } catch (ParseException e) {
             Logger.d(e.getMessage());
         }
+
+
+        if(Utils.presenceOf(itemData.large_image_url)){
+            new ImageUtils.ImageBuilder(view.getContext(), meetingImage)
+                    .url(itemData.large_image_url)
+                    .build();
+        }else{
+            meetingImage.setVisibility(View.INVISIBLE);
+        }
+
+        String teamName=itemData.team.name;
+
+        teamLabel.setText(teamName);
+
+        ImageUtils.ImageBuilder teamImageBuilder= new ImageUtils.ImageBuilder(view.getContext(), teamImage)
+                .letter(StringUtils.firstLetter(teamName))
+                .circle(true);
+
+        String teamImageUrl=itemData.team.medium_image_url;
+
+        if(Utils.presenceOf(teamImageUrl)){
+            teamImageBuilder.url(teamImageUrl);
+        }
+
+        teamImageBuilder.build();
+
+
 
     }
 

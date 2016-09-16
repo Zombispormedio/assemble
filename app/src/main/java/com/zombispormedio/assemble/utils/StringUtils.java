@@ -27,4 +27,8 @@ public class StringUtils {
     public static String capitalize(final String line) {
         return Character.toUpperCase(line.charAt(0)) + line.substring(1).toLowerCase();
     }
+
+    public static String firstLetter(String word){
+        return !word.isEmpty()?String.valueOf(word.charAt(0)): "X";
+    }
 }
