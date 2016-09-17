@@ -34,21 +34,16 @@ public class FriendsRecyclerViewAdapter
         return holder;
     }
 
-    public static class Factory {
+    public static class Factory extends BaseRecyclerViewAdapter.Factory<FriendsRecyclerViewAdapter, FriendProfile>{
 
-        private IOnClickItemListHandler<FriendProfile> listener;
 
-        public void setOnClickListener(IOnClickItemListHandler<FriendProfile> listener) {
-            this.listener = listener;
-
+        public FriendsRecyclerViewAdapter make(){
+            return  make(new ArrayList<FriendProfile>());
         }
 
         public FriendsRecyclerViewAdapter make(ArrayList<FriendProfile> data) {
             FriendsRecyclerViewAdapter adapter = new FriendsRecyclerViewAdapter(data);
-            if (listener != null) {
-                adapter.setOnClickListener(listener);
-            }
-            return adapter;
+            return super.make(adapter);
         }
     }
 

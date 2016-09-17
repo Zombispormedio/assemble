@@ -1,10 +1,7 @@
 package com.zombispormedio.assemble.fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +10,6 @@ import android.view.ViewGroup;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.FriendsActivity;
 import com.zombispormedio.assemble.adapters.FriendsRecyclerViewAdapter;
-import com.zombispormedio.assemble.controllers.FriendsController;
 import com.zombispormedio.assemble.controllers.FriendsListController;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
@@ -28,13 +24,13 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     private FriendsActivity view;
 
     @BindView(R.id.friends_list)
-    RecyclerView _listFriends;
+    RecyclerView friendsList;
 
     private FriendsListController ctrl;
 
-    private FriendsRecyclerViewAdapter.Factory _listFriendsFactory;
+    private FriendsRecyclerViewAdapter.Factory friendsListFactory;
 
-    private FriendsRecyclerViewAdapter _listFriendsAdapter;
+    private FriendsRecyclerViewAdapter friendsListAdapter;
 
 
     @Override
@@ -58,25 +54,21 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     }
 
     private void setupFriends() {
-        _listFriendsFactory = new FriendsRecyclerViewAdapter.Factory();
-        _listFriendsAdapter = null;
-        AndroidUtils.createListConfiguration(view, _listFriends)
+        friendsListFactory = new FriendsRecyclerViewAdapter.Factory();;
+        AndroidUtils.createListConfiguration(view, friendsList)
                 .divider(true)
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        _listFriendsFactory.setOnClickListener(ctrl.getOnClickOneFriend());
+        friendsListFactory.setOnClickListener(ctrl.getOnClickOneFriend());
+        friendsListAdapter=friendsListFactory.make();
+        friendsList.setAdapter(friendsListAdapter);
     }
 
     @Override
     public void bindFriends(ArrayList<FriendProfile> data) {
-        if (_listFriendsAdapter == null) {
-            _listFriendsAdapter = _listFriendsFactory.make(data);
-            _listFriends.setAdapter(_listFriendsAdapter);
-        } else {
-            _listFriendsAdapter.setData(data);
-            _listFriendsAdapter.notifyDataSetChanged();
-        }
+        friendsListAdapter.setData(data);
+        friendsListAdapter.notifyDataSetChanged();
     }
 
     @Override

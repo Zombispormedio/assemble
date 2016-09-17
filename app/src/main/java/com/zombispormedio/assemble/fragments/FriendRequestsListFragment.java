@@ -26,13 +26,13 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
     private FriendsActivity view;
 
     @BindView(R.id.req_friends_list)
-    RecyclerView _listFriendRequests;
+    RecyclerView friendRequestsList;
 
     private FriendRequestsListController ctrl;
 
-    private FriendRequestsRecyclerViewAdapter.Factory _listFriendRequestsFactory;
+    private FriendRequestsRecyclerViewAdapter.Factory friendRequestsListFactory;
 
-    private FriendRequestsRecyclerViewAdapter _listFriendRequestsAdapter;
+    private FriendRequestsRecyclerViewAdapter friendRequestsListAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,25 +55,21 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
     }
 
     private void setupRequestFriends() {
-        _listFriendRequestsFactory = new FriendRequestsRecyclerViewAdapter.Factory();
-        _listFriendRequestsAdapter = null;
-        AndroidUtils.createListConfiguration(view, _listFriendRequests)
+        friendRequestsListFactory = new FriendRequestsRecyclerViewAdapter.Factory();
+        AndroidUtils.createListConfiguration(view, friendRequestsList)
                 .divider(true)
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        _listFriendRequestsFactory.setOnClickListener(ctrl.getOnClickOneRequest());
+        friendRequestsListFactory.setOnClickListener(ctrl.getOnClickOneRequest());
+        friendRequestsListAdapter=friendRequestsListFactory.make();
+        friendRequestsList.setAdapter(friendRequestsListAdapter);
     }
 
     @Override
     public void bindFriendRequests(ArrayList<FriendRequestProfile> data) {
-        if (_listFriendRequestsAdapter == null) {
-            _listFriendRequestsAdapter = _listFriendRequestsFactory.make(data);
-            _listFriendRequests.setAdapter(_listFriendRequestsAdapter);
-        } else {
-            _listFriendRequestsAdapter.setData(data);
-            _listFriendRequestsAdapter.notifyDataSetChanged();
-        }
+        friendRequestsListAdapter.setData(data);
+        friendRequestsListAdapter.notifyDataSetChanged();
     }
 
     @Override

@@ -41,7 +41,7 @@
             android:layout_marginTop="34dp"
             android:ems="10"
             android:hint="@string/email_input_hint"
-            android:inputType="textEmailAddress"
+            android:inputType="textEmailAddress|textAutoComplete"
             android:textColorHighlight="@color/colorPrimary"
             android:textSize="25sp"
             />

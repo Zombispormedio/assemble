@@ -31,21 +31,15 @@ public class ChatsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Chat, Chat
         return holder;
     }
 
-    public static class Factory {
+    public static class Factory extends BaseRecyclerViewAdapter.Factory<ChatsRecyclerViewAdapter, Chat>{
 
-        private IOnClickItemListHandler<Chat> listener;
-
-        public void setOnClickListener(IOnClickItemListHandler<Chat> listener) {
-            this.listener = listener;
-
+        public ChatsRecyclerViewAdapter make(){
+            return make(new ArrayList<Chat>());
         }
 
         public ChatsRecyclerViewAdapter make(ArrayList<Chat> data) {
             ChatsRecyclerViewAdapter adapter = new ChatsRecyclerViewAdapter(data);
-            if (listener != null) {
-                adapter.setOnClickListener(listener);
-            }
-            return adapter;
+            return super.make(adapter);
         }
     }
 }

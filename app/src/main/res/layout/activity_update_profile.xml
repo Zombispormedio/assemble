@@ -39,7 +39,7 @@
                         android:id="@+id/username_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:inputType="text|textAutoComplete|textAutoCorrect"
                         android:singleLine="true"
                         android:theme="@style/AppTheme.EditText"
                         />
@@ -62,7 +62,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="top"
-                        android:inputType="text|textMultiLine"
+                        android:inputType="text|textMultiLine|textAutoComplete|textAutoCorrect"
                         android:lines="20"
                         android:maxLength="140"
                         android:minLines="5"
@@ -84,7 +84,7 @@
                         android:id="@+id/location_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:inputType="text|textAutoComplete|textAutoCorrect"
                         android:singleLine="true"
                         android:theme="@style/AppTheme.EditText"
                         />

@@ -77,5 +77,6 @@
     <string name="date_example_with_hour">20/09/2016 15:00</string>
     <string name="no_more_teams">No more teams</string>
     <string name="no_more_chats">No more chats</string>
+    <string name="new_friend_search_hint">Search by email or name</string>
 
 </resources>

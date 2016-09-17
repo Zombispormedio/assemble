@@ -31,21 +31,15 @@ public class MeetingsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Meeting
         return holder;
     }
 
-    public static class Factory {
+    public static class Factory extends BaseRecyclerViewAdapter.Factory<MeetingsRecyclerViewAdapter, Meeting> {
 
-        private IOnClickItemListHandler<Meeting> listener;
-
-        public void setOnClickListener(IOnClickItemListHandler<Meeting> listener) {
-            this.listener = listener;
-
+        public MeetingsRecyclerViewAdapter make(){
+            return make(new ArrayList<Meeting>());
         }
 
         public MeetingsRecyclerViewAdapter make(ArrayList<Meeting> data) {
             MeetingsRecyclerViewAdapter adapter = new MeetingsRecyclerViewAdapter(data);
-            if (listener != null) {
-                adapter.setOnClickListener(listener);
-            }
-            return adapter;
+            return super.make(adapter);
         }
     }
 }

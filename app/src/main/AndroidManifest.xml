@@ -118,6 +118,15 @@
                 android:parentActivityName=".activities.FriendsActivity"
                 android:theme="@style/AppTheme"
                 >
+
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.app.searchable"
+                    android:resource="@xml/new_friend_search"
+                    />
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.zombispormedio.assemble.activities.FriendsActivity"

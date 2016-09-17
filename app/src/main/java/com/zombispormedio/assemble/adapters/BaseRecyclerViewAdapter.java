@@ -45,4 +45,21 @@ public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends
     public void setData(ArrayList<T> data) {
         this.data = data;
     }
+
+    public static class Factory<C extends BaseRecyclerViewAdapter, M>{
+
+        private IOnClickItemListHandler<M> listener;
+
+        public void setOnClickListener(IOnClickItemListHandler<M> listener) {
+            this.listener = listener;
+
+        }
+        public C make(C adapter) {
+            if (listener != null) {
+                adapter.setOnClickListener(listener);
+            }
+            return adapter;
+        }
+
+    }
 }

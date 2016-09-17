@@ -40,7 +40,7 @@ public class RecipientDAO extends RealmObject implements IBaseDAO<Recipient> {
     public RecipientDAO fromModel(Recipient model) {
         this.id = model.id;
         this.email = model.email;
-        this.username = model.email;
+        this.username = model.username;
         this.large_avatar_url = model.large_avatar_url;
         this.medium_avatar_url = model.medium_avatar_url;
         this.full_avatar_url = model.full_avatar_url;

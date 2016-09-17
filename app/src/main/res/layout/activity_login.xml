@@ -95,7 +95,7 @@
                             android:layout_height="wrap_content"
                             android:ems="10"
                             android:hint="@string/email_input_hint"
-                            android:inputType="textEmailAddress"
+                            android:inputType="textEmailAddress|textAutoComplete|textAutoCorrect"
                             android:textColor="@android:color/white"
                             android:textColorHighlight="@color/colorPrimary"
                             />

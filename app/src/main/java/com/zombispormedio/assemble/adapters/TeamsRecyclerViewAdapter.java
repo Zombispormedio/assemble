@@ -35,21 +35,15 @@ public class TeamsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Team, Team
 
 
 
-    public static class Factory {
+    public static class Factory extends BaseRecyclerViewAdapter.Factory<TeamsRecyclerViewAdapter, Team>{
 
-        private IOnClickItemListHandler<Team> listener;
-
-        public void setOnClickListener(IOnClickItemListHandler<Team> listener) {
-            this.listener = listener;
-
+        public TeamsRecyclerViewAdapter make(){
+            return make(new ArrayList<Team>());
         }
 
         public TeamsRecyclerViewAdapter make(ArrayList<Team> data) {
             TeamsRecyclerViewAdapter adapter = new TeamsRecyclerViewAdapter(data);
-            if (listener != null) {
-                adapter.setOnClickListener(listener);
-            }
-            return adapter;
+            return super.make(adapter);
         }
     }
 }

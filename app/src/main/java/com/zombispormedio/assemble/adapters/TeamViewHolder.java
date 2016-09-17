@@ -68,6 +68,7 @@ public class TeamViewHolder extends AbstractViewHolder<Team> {
 
         new ImageUtils.ImageBuilder(view.getContext(), imageView)
                 .letter(StringUtils.firstLetter(teamName))
+                .circle(true)
                 .url(itemData.large_image_url)
                 .build();
 

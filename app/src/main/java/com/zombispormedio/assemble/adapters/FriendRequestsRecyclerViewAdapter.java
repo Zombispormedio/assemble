@@ -36,21 +36,16 @@ public class FriendRequestsRecyclerViewAdapter
         return holder;
     }
 
-    public static class Factory {
+    public static class Factory extends BaseRecyclerViewAdapter.Factory<FriendRequestsRecyclerViewAdapter, FriendRequestProfile>{
 
-        private IOnClickItemListHandler<FriendRequestProfile> listener;
-
-        public void setOnClickListener(IOnClickItemListHandler<FriendRequestProfile> listener) {
-            this.listener = listener;
-
+        public FriendRequestsRecyclerViewAdapter make(){
+            return make(new ArrayList<FriendRequestProfile>());
         }
+
 
         public FriendRequestsRecyclerViewAdapter make(ArrayList<FriendRequestProfile> data) {
             FriendRequestsRecyclerViewAdapter adapter = new FriendRequestsRecyclerViewAdapter(data);
-            if (listener != null) {
-                adapter.setOnClickListener(listener);
-            }
-            return adapter;
+            return super.make(adapter);
         }
     }
 }

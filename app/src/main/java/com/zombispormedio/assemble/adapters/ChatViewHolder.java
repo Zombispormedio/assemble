@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.adapters;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
@@ -59,6 +60,7 @@ public class ChatViewHolder extends AbstractViewHolder<Chat> {
 
     private void bindData(Chat itemData) {
         Recipient recipient=itemData.recipient;
+
         String recipientName=recipient.username;
         nameLabel.setText(recipientName);
 
