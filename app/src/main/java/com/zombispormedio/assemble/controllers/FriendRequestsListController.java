@@ -4,7 +4,6 @@ import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.resources.FriendRequestResource;
-import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.views.IFriendRequestsListView;
@@ -29,7 +28,7 @@ public class FriendRequestsListController extends Controller {
         this.ctx = ctx;
 
         friendRequestResource = getResourceComponent().provideFriendRequestResource();
-        friendRequestSubscription = CurrentUser.getInstance().getFriendRequestSubscription();
+        friendRequestSubscription = getResourceComponent().provideFriendRequestSubscription();
         friendRequestSubscriber = new FriendRequestSubscriber();
         friendRequestSubscription.addSubscriber(friendRequestSubscriber);
     }

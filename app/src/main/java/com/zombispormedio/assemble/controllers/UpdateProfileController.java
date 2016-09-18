@@ -6,7 +6,6 @@ import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
-import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
@@ -37,7 +36,8 @@ public class UpdateProfileController extends Controller {
         this.ctx = ctx;
 
         profileResource = getResourceComponent().provideProfileResource();
-        profileSubscription = CurrentUser.getInstance().getProfileSubscription();
+        profileSubscription = getResourceComponent().provideProfileSubscription();
+        profileResource.setSubscription(profileSubscription);
         profileSubscriber = new ProfileSubscriber();
         profileSubscription.addSubscriber(profileSubscriber);
 

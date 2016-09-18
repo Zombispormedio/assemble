@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.models.subscriptions;
 
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
-import com.zombispormedio.assemble.models.factories.LoaderFactory;
 import com.zombispormedio.assemble.models.loaders.ChatLoader;
 
 import javax.inject.Inject;
@@ -12,10 +11,6 @@ import javax.inject.Inject;
 public class ChatSubscription extends DataSubscription {
 
     private ChatLoader loader;
-
-    public ChatSubscription() {
-        this.loader = LoaderFactory.createChatLoader();
-    }
 
     @Inject
     public ChatSubscription(ChatLoader loader) {

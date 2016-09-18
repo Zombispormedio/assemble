@@ -5,7 +5,8 @@ import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.models.singletons.CurrentUser;
+import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
+import com.zombispormedio.assemble.models.subscriptions.Subscription;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IProfileService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
@@ -23,6 +24,9 @@ public class ProfileResource {
 
     private IProfileService persistence;
 
+    private Subscription subscription;
+
+
     @Inject
     public ProfileResource(IProfileService persistence,
             IStorageService<UserProfile> storage) {
@@ -35,7 +39,7 @@ public class ProfileResource {
     }
 
     public void changeAvatar(String path, final IServiceHandler<UserProfile, Error> handler) {
-        persistence.changeAvatar(new File(path), new ServiceHandler<UserProfile, Error>(){
+        persistence.changeAvatar(new File(path), new ServiceHandler<UserProfile, Error>() {
             @Override
             public void onError(Error error) {
                 handler.onError(error);
@@ -44,14 +48,14 @@ public class ProfileResource {
             @Override
             public void onSuccess(UserProfile result) {
                 storage.update(result);
-                CurrentUser.getInstance().getProfileSubscription().haveChanged();
+                haveChanged();
                 handler.onSuccess(result);
             }
         });
     }
 
     public void updateProfile(EditProfile profile, final IServiceHandler<UserProfile, Error> handler) {
-        persistence.update(profile, new ServiceHandler<UserProfile, Error>(){
+        persistence.update(profile, new ServiceHandler<UserProfile, Error>() {
             @Override
             public void onError(Error error) {
                 handler.onError(error);
@@ -60,10 +64,19 @@ public class ProfileResource {
             @Override
             public void onSuccess(UserProfile result) {
                 storage.update(result);
-                CurrentUser.getInstance().getProfileSubscription().haveChanged();
+                haveChanged();
                 handler.onSuccess(result);
             }
         });
     }
 
+    private void haveChanged() {
+        if (subscription != null) {
+            subscription.haveChanged();
+        }
+    }
+
+    public void setSubscription(Subscription subscription) {
+        this.subscription = subscription;
+    }
 }

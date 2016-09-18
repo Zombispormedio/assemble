@@ -3,7 +3,6 @@ package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
-import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
@@ -21,8 +20,6 @@ public class HomeController extends Controller {
 
 
     private IHomeView ctx;
-
-    private CurrentUser user;
 
     private final ProfileResource profileResource;
 
@@ -44,9 +41,9 @@ public class HomeController extends Controller {
 
         profileResource = getResourceComponent().provideProfileResource();
 
-        user = CurrentUser.getInstance();
+        profileSubscription = getResourceComponent().provideProfileSubscription();
 
-        profileSubscription = user.getProfileSubscription();
+        profileResource.setSubscription(profileSubscription);
 
         profileSubscriber=new ProfileSubscriber();
 
@@ -107,9 +104,7 @@ public class HomeController extends Controller {
             addSubscriptions();
         }
 
-        user.loadAll();
-
-
+        loadAll();
     }
 
 
@@ -125,7 +120,7 @@ public class HomeController extends Controller {
 
     private void addSubscriptions() {
 
-        final FriendSubscription friendSubscription = user.getFriendSubscription();
+        final FriendSubscription friendSubscription = getResourceComponent().provideFriendSubscription();
 
         friendSubscription.addSubscriber(new Subscriber() {
             @Override
@@ -134,7 +129,7 @@ public class HomeController extends Controller {
             }
         });
 
-        final FriendRequestSubscription friendRequestSubscription = user.getFriendRequestSubscription();
+        final FriendRequestSubscription friendRequestSubscription = getResourceComponent().provideFriendRequestSubscription();
 
         friendRequestSubscription.addSubscriber(new Subscriber() {
             @Override
@@ -143,7 +138,7 @@ public class HomeController extends Controller {
             }
         });
 
-        final TeamSubscription teamSubscription = user.getTeamSubscription();
+        final TeamSubscription teamSubscription = getResourceComponent().provideTeamSubscription();
 
         teamSubscription.addSubscriber(new Subscriber() {
             @Override
@@ -153,7 +148,7 @@ public class HomeController extends Controller {
             }
         });
 
-        final MeetingSubscription meetingSubscription = user.getMeetingSubscription();
+        final MeetingSubscription meetingSubscription = getResourceComponent().provideMeetingSubscription();
 
         meetingSubscription.addSubscriber(new Subscriber() {
             @Override
@@ -163,7 +158,7 @@ public class HomeController extends Controller {
             }
         });
 
-        final ChatSubscription chatSubscription = user.getChatSubscription();
+        final ChatSubscription chatSubscription = getResourceComponent().provideChatSubscription();
 
         chatSubscription.addSubscriber(new Subscriber() {
             @Override

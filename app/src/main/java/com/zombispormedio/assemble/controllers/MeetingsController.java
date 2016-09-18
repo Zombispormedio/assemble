@@ -4,7 +4,6 @@ import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.resources.MeetingResource;
-import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.views.IMeetingsView;
@@ -28,7 +27,7 @@ public class MeetingsController extends Controller {
         super(ctx.getParent());
         this.ctx = ctx;
         meetingResource = getResourceComponent().provideMeetingResource();
-        meetingSubscription = CurrentUser.getInstance().getMeetingSubscription();
+        meetingSubscription = getResourceComponent().provideMeetingSubscription();
         meetingSubscriber = new MeetingSubscriber();
         meetingSubscription.addSubscriber(meetingSubscriber);
     }

@@ -1,8 +1,9 @@
 package com.zombispormedio.assemble.models.subscriptions;
 
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
-import com.zombispormedio.assemble.models.factories.LoaderFactory;
 import com.zombispormedio.assemble.models.loaders.TeamLoader;
+
+import javax.inject.Inject;
 
 /**
  * Created by Xavier Serrano on 12/09/2016.
@@ -11,9 +12,9 @@ public class TeamSubscription extends DataSubscription {
 
     private TeamLoader loader;
 
-
-    public TeamSubscription() {
-        this.loader = LoaderFactory.createTeamLoader();
+    @Inject
+    public TeamSubscription(TeamLoader loader) {
+        this.loader = loader;
     }
 
     @Override

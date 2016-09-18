@@ -6,8 +6,5 @@ package com.zombispormedio.assemble.models.subscriptions;
 public abstract class DataSubscription extends Subscription implements IDataSubscription {
 
     @Override
-    public void load() {
-
-    }
-
+    public void load() {}
 }

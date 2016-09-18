@@ -5,7 +5,6 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.resources.FriendRequestResource;
 import com.zombispormedio.assemble.models.resources.FriendResource;
-import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
@@ -19,8 +18,6 @@ import java.util.ArrayList;
 public class FriendsController extends Controller {
 
     private IFriendsView ctx;
-
-    private CurrentUser user;
 
     private FriendResource friendResource;
 
@@ -39,13 +36,12 @@ public class FriendsController extends Controller {
     public FriendsController(IFriendsView ctx) {
         super(ctx);
         this.ctx = ctx;
-        user = CurrentUser.getInstance();
 
         friendResource = getResourceComponent().provideFriendResource();
         friendRequestResource = getResourceComponent().provideFriendRequestResource();
 
-        friendSubscription = user.getFriendSubscription();
-        friendRequestSubscription = user.getFriendRequestSubscription();
+        friendSubscription = getResourceComponent().provideFriendSubscription();
+        friendRequestSubscription = getResourceComponent().provideFriendRequestSubscription();
 
         isFriendsReady = isRequestsReady = false;
         isLoading = false;

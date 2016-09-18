@@ -4,7 +4,6 @@ import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.TeamResource;
-import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 import com.zombispormedio.assemble.views.ITeamsView;
@@ -29,7 +28,7 @@ public class TeamsController extends Controller {
         super(ctx.getParent());
         this.ctx = ctx;
         teamResource = getResourceComponent().provideTeamResource();
-        teamSubscription = CurrentUser.getInstance().getTeamSubscription();
+        teamSubscription = getResourceComponent().provideTeamSubscription();
         teamSubscriber = new TeamSubscriber();
         teamSubscription.addSubscriber(teamSubscriber);
     }

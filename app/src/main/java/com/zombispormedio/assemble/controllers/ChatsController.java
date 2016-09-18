@@ -4,7 +4,6 @@ import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.resources.ChatResource;
-import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 
@@ -31,7 +30,7 @@ public class ChatsController extends Controller {
         this.ctx = ctx;
         chatResource = getResourceComponent().provideChatResource();
 
-        chatSubscription = CurrentUser.getInstance().getChatSubscription();
+        chatSubscription = getResourceComponent().provideChatSubscription();
         chatSubscriber = new ChatSubscriber();
 
         chatSubscription.addSubscriber(chatSubscriber);

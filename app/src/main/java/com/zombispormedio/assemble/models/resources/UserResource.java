@@ -2,20 +2,13 @@ package com.zombispormedio.assemble.models.resources;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.EditProfile;
-import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.models.FriendRequestProfile;
-import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.services.interfaces.IAuthService;
-import com.zombispormedio.assemble.services.interfaces.IProfileService;
-
-import java.io.File;
-import java.util.ArrayList;
 
 import javax.inject.Inject;
+
+import io.realm.Realm;
 
 
 /**
@@ -47,7 +40,7 @@ public class UserResource {
 
     public void signOut(final IServiceHandler<Result, Error> handler) {
         auth.signOut(handler);
-        CurrentUser.reset();
+        Realm.getDefaultInstance().deleteAll();
     }
 
 
