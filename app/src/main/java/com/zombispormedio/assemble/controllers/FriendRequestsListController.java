@@ -3,7 +3,6 @@ package com.zombispormedio.assemble.controllers;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.FriendRequestResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
@@ -15,19 +14,23 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 11/09/2016.
  */
-public class FriendRequestsListController extends AbstractController{
+public class FriendRequestsListController extends Controller {
 
     private IFriendRequestsListView ctx;
+
     private FriendRequestResource friendRequestResource;
+
     private FriendRequestSubscription friendRequestSubscription;
+
     private FriendRequestSubscriber friendRequestSubscriber;
 
     public FriendRequestsListController(IFriendRequestsListView ctx) {
+        super(ctx.getParent());
         this.ctx = ctx;
 
-        friendRequestResource= ResourceFactory.createFriendRequestResource();
-        friendRequestSubscription=CurrentUser.getInstance().getFriendRequestSubscription();
-        friendRequestSubscriber=new FriendRequestSubscriber();
+        friendRequestResource = getResourceComponent().provideFriendRequestResource();
+        friendRequestSubscription = CurrentUser.getInstance().getFriendRequestSubscription();
+        friendRequestSubscriber = new FriendRequestSubscriber();
         friendRequestSubscription.addSubscriber(friendRequestSubscriber);
     }
 
@@ -36,7 +39,7 @@ public class FriendRequestsListController extends AbstractController{
         bindRequests();
     }
 
-    private void bindRequests(){
+    private void bindRequests() {
         ArrayList<FriendRequestProfile> friendRequests = friendRequestResource.getAll();
 
         if (friendRequests.size() > 0) {
@@ -54,7 +57,7 @@ public class FriendRequestsListController extends AbstractController{
         };
     }
 
-    private class FriendRequestSubscriber extends Subscriber{
+    private class FriendRequestSubscriber extends Subscriber {
 
         @Override
         public void notifyChange() {
@@ -64,7 +67,7 @@ public class FriendRequestsListController extends AbstractController{
 
     @Override
     public void onDestroy() {
-        ctx=null;
+        ctx = null;
         friendRequestSubscription.removeSubscriber(friendRequestSubscriber);
     }
 }

@@ -15,7 +15,6 @@ import android.view.View;
 import android.widget.DatePicker;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
@@ -24,7 +23,7 @@ public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirt
     private UpdateBirthdateController ctrl;
 
     @BindView(R.id.birthdate_picker)
-    DatePicker _datePicker;
+    DatePicker datePicker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,27 +50,27 @@ public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirt
 
     @Override
     public void setMaxDate(long time) {
-        _datePicker.setMaxDate(time);
+        datePicker.setMaxDate(time);
     }
 
     @Override
     public int getDayOfBirthdate() {
-        return _datePicker.getDayOfMonth();
+        return datePicker.getDayOfMonth();
     }
 
     @Override
     public int getMonthOfBirthdate() {
-        return _datePicker.getMonth();
+        return datePicker.getMonth();
     }
 
     @Override
     public int getYearOfBirthdate() {
-        return _datePicker.getYear();
+        return datePicker.getYear();
     }
 
     @Override
     public void setDatepickerValue(int year, int month, int day) {
-        _datePicker.updateDate(year, month, day);
+        datePicker.updateDate(year, month, day);
     }
 
     @Override

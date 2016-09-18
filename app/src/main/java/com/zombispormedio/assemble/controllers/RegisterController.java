@@ -1,9 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.handlers.IServiceHandler;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
@@ -12,15 +10,16 @@ import com.zombispormedio.assemble.views.IRegisterView;
 /**
  * Created by Xavier Serrano on 09/07/2016.
  */
-public class RegisterController extends AbstractController {
+public class RegisterController extends Controller {
 
     private IRegisterView ctx;
 
     private UserResource user;
 
     public RegisterController(IRegisterView ctx) {
+        super(ctx);
         this.ctx = ctx;
-        user = ResourceFactory.createUserResource();
+        user = getResourceComponent().provideUserResource();
     }
 
     public void register() {

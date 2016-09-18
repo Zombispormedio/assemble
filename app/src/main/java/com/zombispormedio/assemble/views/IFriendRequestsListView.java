@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 11/09/2016.
  */
-public interface IFriendRequestsListView {
+public interface IFriendRequestsListView extends IFragmentView {
 
     void bindFriendRequests(ArrayList<FriendRequestProfile> data);
 

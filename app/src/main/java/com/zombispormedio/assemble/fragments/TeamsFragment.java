@@ -28,11 +28,11 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     private TeamsController ctrl;
 
     @BindView(R.id.teams_list)
-    RecyclerView _listTeams;
+    RecyclerView teamsList;
 
-    private TeamsRecyclerViewAdapter.Factory _listTeamsFactory;
+    private TeamsRecyclerViewAdapter.Factory teamsListFactory;
 
-    private TeamsRecyclerViewAdapter _listTeamsAdapter;
+    private TeamsRecyclerViewAdapter teamsListAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,14 +43,9 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ctrl = new TeamsController(this);
-
         view = (HomeActivity) getActivity();
-
         bindView(this, view);
-
-        _listTeamsFactory = new TeamsRecyclerViewAdapter.Factory();
-        _listTeamsAdapter =null;
+        ctrl = new TeamsController(this);
 
         setupTeams();
 
@@ -59,30 +54,23 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
 
 
     private void setupTeams() {
-        AndroidUtils.createListConfiguration(view, _listTeams)
+        teamsListFactory = new TeamsRecyclerViewAdapter.Factory();
+        AndroidUtils.createListConfiguration(view, teamsList)
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        _listTeamsFactory.setOnClickListener(ctrl.getOnClickOneTeam());
-
+        teamsListFactory.setOnClickListener(ctrl.getOnClickOneTeam());
+        teamsListAdapter=teamsListFactory.make();
+        teamsList.setAdapter(teamsListAdapter);
     }
 
 
     @Override
     public void bindTeams(ArrayList<Team> data) {
-        if(_listTeamsAdapter ==null){
-            _listTeamsAdapter =_listTeamsFactory.make(data);
-            _listTeams.setAdapter(_listTeamsAdapter);
-        }else{
-            _listTeamsAdapter.setData(data);
-            _listTeamsAdapter.notifyDataSetChanged();
-        }
+            teamsListAdapter.setData(data);
+            teamsListAdapter.notifyDataSetChanged();
     }
-
-    @Override
-    public void showAlert(String msg) {
-        view.showAlert(msg);
-    }
+    
 
     @Override
     public void onDestroy() {

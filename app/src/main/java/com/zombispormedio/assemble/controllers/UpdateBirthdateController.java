@@ -12,11 +12,12 @@ import java.util.Calendar;
 /**
  * Created by Xavier Serrano on 23/08/2016.
  */
-public class UpdateBirthdateController extends AbstractController {
+public class UpdateBirthdateController extends Controller {
 
     private IUpdateBirthdateView ctx;
 
     public UpdateBirthdateController(IUpdateBirthdateView ctx) {
+        super(ctx);
         this.ctx = ctx;
     }
 

@@ -9,6 +9,8 @@ import com.zombispormedio.assemble.services.storage.IStorageService;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
@@ -16,7 +18,7 @@ public class ChatResource extends ConceptResource<Chat> {
 
     private IChatService persistence;
 
-
+    @Inject
     public ChatResource(IChatService persistence, IStorageService<Chat> storage) {
         super(storage);
         this.persistence = persistence;

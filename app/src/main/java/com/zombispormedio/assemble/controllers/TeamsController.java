@@ -2,15 +2,11 @@ package com.zombispormedio.assemble.controllers;
 
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.Team;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
-import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.ITeamsView;
 
 import java.util.ArrayList;
@@ -18,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 03/09/2016.
  */
-public class TeamsController extends AbstractController {
+public class TeamsController extends Controller {
 
     private ITeamsView ctx;
 
@@ -28,13 +24,12 @@ public class TeamsController extends AbstractController {
 
     private TeamSubscriber teamSubscriber;
 
-    private CurrentUser user;
 
     public TeamsController(ITeamsView ctx) {
+        super(ctx.getParent());
         this.ctx = ctx;
-        user = CurrentUser.getInstance();
-        teamResource = ResourceFactory.createTeamResource();
-        teamSubscription = user.getTeamSubscription();
+        teamResource = getResourceComponent().provideTeamResource();
+        teamSubscription = CurrentUser.getInstance().getTeamSubscription();
         teamSubscriber = new TeamSubscriber();
         teamSubscription.addSubscriber(teamSubscriber);
     }

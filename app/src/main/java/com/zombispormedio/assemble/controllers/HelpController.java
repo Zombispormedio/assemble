@@ -5,11 +5,12 @@ import com.zombispormedio.assemble.views.IHelpView;
 /**
  * Created by Xavier Serrano on 24/08/2016.
  */
-public class HelpController extends AbstractController {
+public class HelpController extends Controller {
 
     private IHelpView ctx;
 
     public HelpController(IHelpView ctx) {
+        super(ctx);
         this.ctx = ctx;
     }
 }

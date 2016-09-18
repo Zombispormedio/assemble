@@ -5,9 +5,7 @@ import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
-import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
@@ -21,10 +19,9 @@ import java.text.ParseException;
 /**
  * Created by Xavier Serrano on 04/08/2016.
  */
-public class UpdateProfileController extends AbstractController {
+public class UpdateProfileController extends Controller {
 
     private IUpdateProfileView ctx;
-
 
     private ProfileResource profileResource;
 
@@ -36,9 +33,10 @@ public class UpdateProfileController extends AbstractController {
 
 
     public UpdateProfileController(IUpdateProfileView ctx) {
+        super(ctx);
         this.ctx = ctx;
 
-        profileResource = ResourceFactory.createProfileResource();
+        profileResource = getResourceComponent().provideProfileResource();
         profileSubscription = CurrentUser.getInstance().getProfileSubscription();
         profileSubscriber = new ProfileSubscriber();
         profileSubscription.addSubscriber(profileSubscriber);

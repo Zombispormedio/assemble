@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 
-public class FriendsListFragment extends BaseFragment implements IFriendsListView{
+public class FriendsListFragment extends BaseFragment implements IFriendsListView {
 
     private FriendsActivity view;
 
@@ -42,11 +42,9 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ctrl= new FriendsListController(this);
-
-        view=(FriendsActivity)getActivity();
-
+        view = (FriendsActivity) getActivity();
         bindView(this, view);
+        ctrl = new FriendsListController(this);
 
         setupFriends();
 
@@ -54,14 +52,15 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     }
 
     private void setupFriends() {
-        friendsListFactory = new FriendsRecyclerViewAdapter.Factory();;
+        friendsListFactory = new FriendsRecyclerViewAdapter.Factory();
+        ;
         AndroidUtils.createListConfiguration(view, friendsList)
                 .divider(true)
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
         friendsListFactory.setOnClickListener(ctrl.getOnClickOneFriend());
-        friendsListAdapter=friendsListFactory.make();
+        friendsListAdapter = friendsListFactory.make();
         friendsList.setAdapter(friendsListAdapter);
     }
 

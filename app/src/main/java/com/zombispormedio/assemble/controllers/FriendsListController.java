@@ -3,7 +3,6 @@ package com.zombispormedio.assemble.controllers;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 11/09/2016.
  */
-public class FriendsListController extends AbstractController {
+public class FriendsListController extends Controller {
 
     private IFriendsListView ctx;
 
@@ -26,8 +25,9 @@ public class FriendsListController extends AbstractController {
     private FriendSubscriber friendSubscriber;
 
     public FriendsListController(IFriendsListView ctx) {
+        super(ctx.getParent());
         this.ctx = ctx;
-        friendResource = ResourceFactory.createFriendResource();
+        friendResource = getResourceComponent().provideFriendResource();
         friendSubscription = CurrentUser.getInstance().getFriendSubscription();
         friendSubscriber = new FriendSubscriber();
         friendSubscription.addSubscriber(friendSubscriber);

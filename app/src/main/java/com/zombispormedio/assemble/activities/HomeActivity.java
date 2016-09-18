@@ -25,7 +25,6 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.IHomeView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnTouch;
 
@@ -53,7 +52,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     @BindView(R.id.home_pager)
     ViewPager viewTabPager;
 
-    private ProgressDialog _progressDialog;
+    private ProgressDialog progressDialog;
 
     private HomeController ctrl;
 
@@ -82,10 +81,10 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     }
 
     private void setupProgressDialog() {
-        _progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
-        _progressDialog.setMessage(getString(R.string.loading_app_data));
-        _progressDialog.setIndeterminate(true);
-        _progressDialog.setCancelable(false);
+        progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage(getString(R.string.loading_app_data));
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
     }
 
     private void setupTabs() {
@@ -220,12 +219,12 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     @Override
     public void hideProgressDialog() {
-        _progressDialog.dismiss();
+        progressDialog.dismiss();
     }
 
     @Override
     public void showProgressDialog() {
-        _progressDialog.show();
+        progressDialog.show();
     }
 
     @Override

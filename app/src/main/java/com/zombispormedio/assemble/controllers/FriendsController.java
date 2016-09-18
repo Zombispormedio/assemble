@@ -1,20 +1,14 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.handlers.ServiceHandler;
+
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.FriendRequestResource;
 import com.zombispormedio.assemble.models.resources.FriendResource;
-import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
-import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.IFriendsView;
 
 import java.util.ArrayList;
@@ -22,7 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 24/08/2016.
  */
-public class FriendsController extends AbstractController {
+public class FriendsController extends Controller {
 
     private IFriendsView ctx;
 
@@ -43,11 +37,12 @@ public class FriendsController extends AbstractController {
     private boolean isRequestsReady;
 
     public FriendsController(IFriendsView ctx) {
+        super(ctx);
         this.ctx = ctx;
         user = CurrentUser.getInstance();
 
-        friendResource = ResourceFactory.createFriendResource();
-        friendRequestResource = ResourceFactory.createFriendRequestResource();
+        friendResource = getResourceComponent().provideFriendResource();
+        friendRequestResource = getResourceComponent().provideFriendRequestResource();
 
         friendSubscription = user.getFriendSubscription();
         friendRequestSubscription = user.getFriendRequestSubscription();

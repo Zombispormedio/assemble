@@ -8,11 +8,12 @@ import com.zombispormedio.assemble.views.INewFriendView;
 /**
  * Created by Xavier Serrano on 17/09/2016.
  */
-public class NewFriendController extends AbstractController {
+public class NewFriendController extends Controller {
 
     private INewFriendView ctx;
 
     public NewFriendController(INewFriendView ctx) {
+        super(ctx);
         this.ctx = ctx;
     }
 

@@ -29,11 +29,11 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     private MeetingsController ctrl;
 
     @BindView(R.id.meetings_list)
-    RecyclerView _listMeetings;
+    RecyclerView meetingsList;
 
-    private MeetingsRecyclerViewAdapter.Factory _listMeetingsFactory;
+    private MeetingsRecyclerViewAdapter.Factory meetingsListFactory;
 
-    private MeetingsRecyclerViewAdapter _listMeetingsAdapter;
+    private MeetingsRecyclerViewAdapter meetingsListAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,15 +44,9 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         view = (HomeActivity) getActivity();
-
         bindView(this, view);
-
         ctrl = new MeetingsController(this);
-
-        _listMeetingsFactory = new MeetingsRecyclerViewAdapter.Factory();
-        _listMeetingsAdapter = null;
 
         setupMeetings();
 
@@ -60,28 +54,22 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     }
 
     private void setupMeetings() {
-        AndroidUtils.createListConfiguration(view, _listMeetings)
+        meetingsListFactory = new MeetingsRecyclerViewAdapter.Factory();
+        AndroidUtils.createListConfiguration(view, meetingsList)
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        _listMeetingsFactory.setOnClickListener(ctrl.getOnClickOneTeam());
+        meetingsListFactory.setOnClickListener(ctrl.getOnClickOneTeam());
+        meetingsListAdapter = meetingsListFactory.make();
+        meetingsList.setAdapter(meetingsListAdapter);
     }
 
     @Override
     public void bindMeetings(ArrayList<Meeting> data) {
-        if (_listMeetingsAdapter == null) {
-            _listMeetingsAdapter = _listMeetingsFactory.make(data);
-            _listMeetings.setAdapter(_listMeetingsAdapter);
-        } else {
-            _listMeetingsAdapter.setData(data);
-            _listMeetingsAdapter.notifyDataSetChanged();
-        }
+            meetingsListAdapter.setData(data);
+            meetingsListAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void showAlert(String msg) {
-        view.showAlert(msg);
-    }
 
     @Override
     public void onDestroy() {

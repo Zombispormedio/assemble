@@ -2,14 +2,12 @@ package com.zombispormedio.assemble.controllers;
 
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
-import com.zombispormedio.assemble.net.Error;
+
 import com.zombispormedio.assemble.views.IChatsView;
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
-public class ChatsController extends BaseController {
+public class ChatsController extends Controller {
 
     private IChatsView ctx;
 
@@ -33,8 +31,8 @@ public class ChatsController extends BaseController {
         this.ctx = ctx;
         chatResource = getResourceComponent().provideChatResource();
 
-        chatSubscription=CurrentUser.getInstance().getChatSubscription();
-        chatSubscriber= new ChatSubscriber();
+        chatSubscription = CurrentUser.getInstance().getChatSubscription();
+        chatSubscriber = new ChatSubscriber();
 
         chatSubscription.addSubscriber(chatSubscriber);
     }
@@ -50,15 +48,13 @@ public class ChatsController extends BaseController {
         chatSubscription.load();
     }
 
-    public void bindChats(){
+    public void bindChats() {
         ArrayList<Chat> chats = chatResource.getAll();
 
         if (chats.size() > 0) {
             ctx.bindChats(chats);
         }
     }
-
-
 
 
     public IOnClickItemListHandler<Chat> getOnClickOneTeam() {

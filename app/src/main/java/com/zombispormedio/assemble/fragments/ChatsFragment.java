@@ -14,7 +14,6 @@ import com.zombispormedio.assemble.adapters.ChatsRecyclerViewAdapter;
 import com.zombispormedio.assemble.controllers.ChatsController;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.IApplicationView;
 import com.zombispormedio.assemble.views.IChatsView;
 
 import java.util.ArrayList;
@@ -29,11 +28,11 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     private ChatsController ctrl;
 
     @BindView(R.id.chats_list)
-    RecyclerView _listChats;
+    RecyclerView chatsList;
 
-    private ChatsRecyclerViewAdapter.Factory _listChatsFactory;
+    private ChatsRecyclerViewAdapter.Factory chatsListFactory;
 
-    private ChatsRecyclerViewAdapter _listChatsAdapter;
+    private ChatsRecyclerViewAdapter chatsListAdapter;
 
 
     @Override
@@ -45,15 +44,9 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         view = (HomeActivity) getActivity();
-
         bindView(this, view);
-
         ctrl = new ChatsController(this);
-
-        _listChatsFactory = new ChatsRecyclerViewAdapter.Factory();
-        _listChatsAdapter = null;
 
         setupChats();
 
@@ -61,24 +54,21 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     }
 
     private void setupChats() {
-        AndroidUtils.createListConfiguration(view, _listChats)
+        chatsListFactory = new ChatsRecyclerViewAdapter.Factory();
+        AndroidUtils.createListConfiguration(view, chatsList)
                 .divider(true)
                 .itemAnimation(true)
                 .configure();
-        _listChatsFactory.setOnClickListener(ctrl.getOnClickOneTeam());
+        chatsListFactory.setOnClickListener(ctrl.getOnClickOneTeam());
+        chatsListAdapter = chatsListFactory.make();
+        chatsList.setAdapter(chatsListAdapter);
     }
 
     @Override
     public void bindChats(ArrayList<Chat> data) {
-        if (_listChatsAdapter == null ) {
-            _listChatsAdapter = _listChatsFactory.make(data);
-            _listChats.setAdapter(_listChatsAdapter);
-        } else {
-            _listChatsAdapter.setData(data);
-            _listChatsAdapter.notifyDataSetChanged();
-        }
+        chatsListAdapter.setData(data);
+        chatsListAdapter.notifyDataSetChanged();
     }
-
 
 
     @Override

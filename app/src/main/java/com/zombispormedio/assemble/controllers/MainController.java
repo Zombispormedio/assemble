@@ -1,9 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 
-import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
@@ -13,15 +11,16 @@ import com.zombispormedio.assemble.views.IMainView;
 /**
  * Created by Xavier Serrano on 08/07/2016.
  */
-public class MainController extends AbstractController {
+public class MainController extends Controller {
 
     private IMainView ctx;
 
     private UserResource user;
 
     public MainController(IMainView ctx) {
+        super(ctx);
         this.ctx = ctx;
-        user = ResourceFactory.createUserResource();
+        user = getResourceComponent().provideUserResource();
     }
 
     public void checkAccess() {

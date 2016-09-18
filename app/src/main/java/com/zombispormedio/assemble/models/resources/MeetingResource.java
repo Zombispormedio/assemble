@@ -8,6 +8,8 @@ import com.zombispormedio.assemble.services.storage.IStorageService;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 /**
  * Created by Xavier Serrano on 06/09/2016.
  */
@@ -15,7 +17,7 @@ public class MeetingResource extends ConceptResource<Meeting>{
 
     private IMeetingService persistence;
 
-
+    @Inject
     public MeetingResource(IMeetingService persistence,
             IStorageService<Meeting> storage) {
         super(storage);

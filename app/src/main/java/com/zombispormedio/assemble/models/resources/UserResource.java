@@ -15,6 +15,8 @@ import com.zombispormedio.assemble.services.interfaces.IProfileService;
 import java.io.File;
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 
 /**
  * Created by Xavier Serrano on 08/07/2016.
@@ -23,6 +25,7 @@ public class UserResource {
 
     private IAuthService auth;
 
+    @Inject
     public UserResource(IAuthService auth) {
         this.auth = auth;
     }

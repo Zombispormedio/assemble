@@ -8,6 +8,8 @@ import com.zombispormedio.assemble.services.storage.IStorageService;
 
 import java.util.ArrayList;
 
+import javax.inject.Inject;
+
 /**
  * Created by Xavier Serrano on 04/09/2016.
  */
@@ -15,6 +17,7 @@ public class TeamResource extends ConceptResource<Team> {
 
     private ITeamService persistence;
 
+    @Inject
     public TeamResource(ITeamService persistence,
             IStorageService<Team> storage) {
         super(storage);

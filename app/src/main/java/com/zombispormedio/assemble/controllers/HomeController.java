@@ -1,19 +1,8 @@
 package com.zombispormedio.assemble.controllers;
 
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.Meeting;
-import com.zombispormedio.assemble.models.Profile;
-import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
-import com.zombispormedio.assemble.models.resources.ChatResource;
-import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
-import com.zombispormedio.assemble.models.resources.TeamResource;
-import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
@@ -22,15 +11,13 @@ import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
-import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.IHomeView;
 
-import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 10/07/2016.
  */
-public class HomeController extends AbstractController {
+public class HomeController extends Controller {
 
 
     private IHomeView ctx;
@@ -52,9 +39,10 @@ public class HomeController extends AbstractController {
     private ProfileSubscriber profileSubscriber;
 
     public HomeController(IHomeView ctx) {
+        super(ctx);
         this.ctx = ctx;
 
-        profileResource = ResourceFactory.createProfileResource();
+        profileResource = getResourceComponent().provideProfileResource();
 
         user = CurrentUser.getInstance();
 

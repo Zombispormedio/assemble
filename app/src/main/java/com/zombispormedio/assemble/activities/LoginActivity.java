@@ -17,50 +17,48 @@ import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.ILoginView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class LoginActivity extends BaseActivity implements ILoginView {
 
 
     @BindView(R.id.login_button)
-    Button _loginButton;
+    Button loginButton;
 
     @BindView(R.id.progress_bar)
-    ProgressBar _progressBar;
+    ProgressBar progressBar;
 
     @BindView(R.id.register_link)
-    TextView _linkToRegister;
+    TextView linkToRegister;
 
     @BindView(R.id.email_input)
-    EditText _emailInput;
+    EditText emailInput;
 
     @BindView(R.id.pass_input)
-    EditText _passwordInput;
+    EditText passwordInput;
 
     @BindView(R.id.email_input_layout)
-    TextInputLayout _emailInputLayout;
+    TextInputLayout emailInputLayout;
 
     @BindView(R.id.pass_input_layout)
-    TextInputLayout _passwordInputLayout;
+    TextInputLayout passwordInputLayout;
 
     private LoginController ctrl;
 
-    private AndroidUtils.InputLayoutHelper _emailInputHelper;
+    private AndroidUtils.InputLayoutHelper emailInputHelper;
 
-    private AndroidUtils.InputLayoutHelper _passwordInputHelper;
+    private AndroidUtils.InputLayoutHelper passwordInputHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         bindActivity(this);
 
         ctrl = new LoginController(this);
 
-        _emailInputHelper = new AndroidUtils.InputLayoutHelper(_emailInput, _emailInputLayout);
-        _passwordInputHelper = new AndroidUtils.InputLayoutHelper(_passwordInput, _passwordInputLayout);
+        emailInputHelper = new AndroidUtils.InputLayoutHelper(emailInput, emailInputLayout);
+        passwordInputHelper = new AndroidUtils.InputLayoutHelper(passwordInput, passwordInputLayout);
 
     }
 
@@ -76,36 +74,36 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
 
     public void showProgressBar() {
-        _progressBar.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     public void hideProgressBar() {
-        _progressBar.setVisibility(View.GONE);
+        progressBar.setVisibility(View.GONE);
     }
 
     public void showForm() {
-        _emailInputHelper.show();
-        _passwordInputHelper.show();
-        _loginButton.setVisibility(View.VISIBLE);
-        _linkToRegister.setVisibility(View.VISIBLE);
+        emailInputHelper.show();
+        passwordInputHelper.show();
+        loginButton.setVisibility(View.VISIBLE);
+        linkToRegister.setVisibility(View.VISIBLE);
     }
 
     public void hideForm() {
-        _emailInputHelper.hide();
-        _passwordInputHelper.hide();
-        _loginButton.setVisibility(View.GONE);
-        _linkToRegister.setVisibility(View.GONE);
+        emailInputHelper.hide();
+        passwordInputHelper.hide();
+        loginButton.setVisibility(View.GONE);
+        linkToRegister.setVisibility(View.GONE);
     }
 
     @Override
     public String getEmail() {
-        return _emailInputHelper.getValue();
+        return emailInputHelper.getValue();
 
     }
 
     @Override
     public String getPassword() {
-        return _passwordInputHelper.getValue();
+        return passwordInputHelper.getValue();
     }
 
 
@@ -122,26 +120,26 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             if (email.isEmpty()) {
-                _emailInputHelper.setError(getString(R.string.email_empty));
+                emailInputHelper.setError(getString(R.string.email_empty));
             } else {
-                _emailInputHelper.setError(getString(R.string.invalid_email));
+                emailInputHelper.setError(getString(R.string.invalid_email));
             }
 
             valid = false;
         } else {
-            _emailInputHelper.setError(null);
+            emailInputHelper.setError(null);
         }
 
         if (password.isEmpty() || password.length() < 6 || password.length() > 50) {
             if (password.isEmpty()) {
-                _passwordInputHelper.setError(getString(R.string.pass_empty));
+                passwordInputHelper.setError(getString(R.string.pass_empty));
             } else {
-                _passwordInputHelper.setError(getString(R.string.invalid_password));
+                passwordInputHelper.setError(getString(R.string.invalid_password));
             }
 
             valid = false;
         } else {
-            _passwordInputHelper.setError(null);
+            passwordInputHelper.setError(null);
         }
 
         return valid;

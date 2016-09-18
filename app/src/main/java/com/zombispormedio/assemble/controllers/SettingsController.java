@@ -1,10 +1,9 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.handlers.IServiceHandler;
+
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.resources.UserResource;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.ISettingsFragmentView;
@@ -13,7 +12,7 @@ import com.zombispormedio.assemble.views.ISettingsView;
 /**
  * Created by Xavier Serrano on 16/07/2016.
  */
-public class SettingsController extends AbstractController {
+public class SettingsController extends Controller {
 
     private ISettingsView ctx;
 
@@ -22,8 +21,9 @@ public class SettingsController extends AbstractController {
     private UserResource user;
 
     public SettingsController(ISettingsView ctx) {
+        super(ctx);
         this.ctx = ctx;
-        user = ResourceFactory.createUserResource();
+        user = getResourceComponent().provideUserResource();
     }
 
     public void setFragmentView(ISettingsFragmentView fctx) {

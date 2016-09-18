@@ -40,29 +40,29 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     private ProfileController ctrl;
 
     @BindView(R.id.image_profile)
-    ImageView _imageProfile;
+    ImageView imageProfile;
 
     @BindView(R.id.image_upload_button)
-    FloatingActionButton _imageFab;
+    FloatingActionButton imageFab;
 
     @BindView(R.id.progress_image)
-    ProgressBar _imageProgress;
+    ProgressBar imageProgress;
 
     @BindView(R.id.profile_username_text)
-    TextView _usernameText;
+    TextView usernameText;
 
     @BindView(R.id.profile_location_text)
-    TextView _locationText;
+    TextView locationText;
 
     @BindView(R.id.profile_bio_text)
-    TextView _bioText;
+    TextView bioText;
 
     @BindView(R.id.profile_birth_date_text)
-    TextView _birthDateText;
+    TextView birthDateText;
 
-    private ProgressDialog _imageProgressDialog;
+    private ProgressDialog imageProgressDialog;
 
-    private BottomSheetDialog _imageUploaderBottomSheet;
+    private BottomSheetDialog imageUploaderBottomSheet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,11 +71,11 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
         setupToolbar();
         bindActivity(this);
 
+        ctrl = new ProfileController(this);
+
         externalNavigationManager = new ExternalNavigationManager(this);
 
         setupImageProgressDialog();
-
-        ctrl = new ProfileController(this);
 
         setupImageUploaderBottomSheet();
 
@@ -83,10 +83,10 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     private void setupImageProgressDialog() {
-        _imageProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
-        _imageProgressDialog.setMessage(getString(R.string.updating_profile_image));
-        _imageProgressDialog.setIndeterminate(true);
-        _imageProgressDialog.setCancelable(false);
+        imageProgressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        imageProgressDialog.setMessage(getString(R.string.updating_profile_image));
+        imageProgressDialog.setIndeterminate(true);
+        imageProgressDialog.setCancelable(false);
     }
 
     @OnClick(R.id.update_profile_button)
@@ -100,53 +100,53 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     public void hideImageForm() {
-        _imageFab.setVisibility(View.INVISIBLE);
+        imageFab.setVisibility(View.INVISIBLE);
     }
 
     public void showImageForm() {
-        _imageFab.setVisibility(View.VISIBLE);
+        imageFab.setVisibility(View.VISIBLE);
     }
 
     public void hideImageProgressDialog() {
-        _imageProgressDialog.dismiss();
+        imageProgressDialog.dismiss();
     }
 
     public void showImageProgressDialog() {
-        _imageProgressDialog.show();
+        imageProgressDialog.show();
     }
 
     @Override
     public void hideImageProgressBar() {
-        _imageProgress.setVisibility(View.INVISIBLE);
+        imageProgress.setVisibility(View.INVISIBLE);
     }
 
     @Override
     public void showImageProgressBar() {
-        _imageProgress.setVisibility(View.VISIBLE);
+        imageProgress.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void setUsername(String name) {
-        _usernameText.setText(name);
+        usernameText.setText(name);
     }
 
     @Override
     public void setLocation(String location) {
-        _locationText.setText(location);
+        locationText.setText(location);
     }
 
     @Override
     public void setBio(String bio) {
-        _bioText.setText(bio);
+        bioText.setText(bio);
     }
 
     @Override
     public void setBirthDate(String birth) {
         if (!birth.isEmpty()) {
             String birthDate = String.format(getString(R.string.born_at), birth);
-            _birthDateText.setText(birthDate);
+            birthDateText.setText(birthDate);
         } else {
-            _birthDateText.setText("");
+            birthDateText.setText("");
         }
 
     }
@@ -170,7 +170,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     @Override
     public void setProfileImage(String url, String letter, final ISuccessHandler handler) {
-        new ImageUtils.ImageBuilder(this, _imageProfile)
+        new ImageUtils.ImageBuilder(this, imageProfile)
                 .circle(true)
                 .url(url)
                 .handle(handler)
@@ -180,7 +180,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
 
     public void loadLetterImage(String letter, final ISuccessHandler handler) {
-        new ImageUtils.ImageBuilder(this, _imageProfile)
+        new ImageUtils.ImageBuilder(this, imageProfile)
                 .circle(true)
                 .handle(handler)
                 .letter(letter)
@@ -189,7 +189,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
 
     private void setupImageUploaderBottomSheet() {
-        _imageUploaderBottomSheet = new BottomSheetBuilder(this, R.style.AppTheme_BottomSheetDialog)
+        imageUploaderBottomSheet = new BottomSheetBuilder(this, R.style.AppTheme_BottomSheetDialog)
                 .setMode(BottomSheetBuilder.MODE_LIST)
                 .setBackground(R.color.colorWhite)
                 .setMenu(R.menu.menu_bottom_sheet)
@@ -211,7 +211,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
 
     public void openImageBottomSheet() {
-        _imageUploaderBottomSheet.show();
+        imageUploaderBottomSheet.show();
     }
 
 

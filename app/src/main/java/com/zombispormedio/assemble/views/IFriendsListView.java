@@ -7,7 +7,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 11/09/2016.
  */
-public interface IFriendsListView {
+public interface IFriendsListView extends IFragmentView{
 
     void bindFriends(ArrayList<FriendProfile> data);
 

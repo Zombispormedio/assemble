@@ -46,7 +46,6 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         setContentView(R.layout.activity_register);
         setupToolbar();
         bindActivity(this);
-
         ((Toolbar) findViewById(R.id.toolbar)).setTitle("");
 
         ctrl = new RegisterController(this);

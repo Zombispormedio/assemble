@@ -7,9 +7,8 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 03/09/2016.
  */
-public interface ITeamsView {
+public interface ITeamsView extends IFragmentView{
 
      void bindTeams(ArrayList<Team> data );
 
-     void showAlert(String msg);
 }

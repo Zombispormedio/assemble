@@ -18,7 +18,6 @@ import android.view.View;
 import android.widget.EditText;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class UpdateProfileActivity extends BaseActivity implements IUpdateProfileView {
@@ -26,18 +25,18 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     private UpdateProfileController ctrl;
 
     @BindView(R.id.username_input)
-    EditText _usernameInput;
+    EditText usernameInput;
 
     @BindView(R.id.bio_input)
-    EditText _bioInput;
+    EditText bioInput;
 
     @BindView(R.id.location_input)
-    EditText _locationInput;
+    EditText locationInput;
 
     @BindView(R.id.birthdate_input)
-    EditText _birthdateInput;
+    EditText birthdateInput;
 
-    private ProgressDialog _progressDialog;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +53,10 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     private void setupProgressDialog() {
-        _progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
-        _progressDialog.setMessage(getString(R.string.updating_profile_message));
-        _progressDialog.setIndeterminate(true);
-        _progressDialog.setCancelable(false);
+        progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage(getString(R.string.updating_profile_message));
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
     }
 
     @OnClick(R.id.save_button)
@@ -78,39 +77,39 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
 
     @Override
     public void setUsername(String username) {
-        _usernameInput.setText(username);
+        usernameInput.setText(username);
     }
 
     @Override
     public void setBio(String bio) {
-        _bioInput.setText(bio);
+        bioInput.setText(bio);
     }
 
     @Override
     public void setBirthDate(String birth) {
-        _birthdateInput.setText(birth);
+        birthdateInput.setText(birth);
     }
 
     @Override
     public void setLocation(String location) {
-        _locationInput.setText(location);
+        locationInput.setText(location);
     }
 
 
     @Override
     public String getUsername() {
-        return _usernameInput.getText().toString();
+        return usernameInput.getText().toString();
     }
 
     @Override
     public String getBio() {
-        return _bioInput.getText().toString();
+        return bioInput.getText().toString();
     }
 
 
     @Override
     public String getLocation() {
-        return _locationInput.getText().toString();
+        return locationInput.getText().toString();
     }
 
 
@@ -126,12 +125,12 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
 
     @Override
     public void openProgressDialog() {
-        _progressDialog.show();
+        progressDialog.show();
     }
 
     @Override
     public void closeProgressDialog() {
-        _progressDialog.dismiss();
+        progressDialog.dismiss();
     }
 
     @Override

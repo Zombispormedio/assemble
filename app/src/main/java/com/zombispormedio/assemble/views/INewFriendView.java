@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 17/09/2016.
  */
-public interface INewFriendView {
+public interface INewFriendView extends IBaseView{
 
     void bindSearchResults(ArrayList<FriendProfile> results);
 }

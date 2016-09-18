@@ -43,11 +43,9 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ctrl= new FriendRequestsListController(this);
-
         view=(FriendsActivity)getActivity();
-
         bindView(this, view);
+        ctrl= new FriendRequestsListController(this);
 
         setupRequestFriends();
 

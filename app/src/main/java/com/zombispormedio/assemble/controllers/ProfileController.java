@@ -17,7 +17,7 @@ import com.zombispormedio.assemble.views.IProfileView;
 /**
  * Created by Xavier Serrano on 10/07/2016.
  */
-public class ProfileController extends BaseController {
+public class ProfileController extends Controller {
 
     private IProfileView ctx;
 
