@@ -24,10 +24,8 @@ public class FriendsRecyclerViewAdapter
 
     @Override
     public FriendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_friends, parent, false);
 
-        FriendViewHolder holder = new FriendViewHolder(itemView);
+        FriendViewHolder holder = new FriendViewHolder(getView(parent, R.layout.list_item_friends));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }

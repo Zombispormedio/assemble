@@ -22,10 +22,8 @@ public class TeamsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Team, Team
 
     @Override
     public TeamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_teams, parent, false);
 
-        TeamViewHolder holder = new   TeamViewHolder(itemView);
+        TeamViewHolder holder = new TeamViewHolder(getView(parent, R.layout.list_item_teams));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }
@@ -33,11 +31,9 @@ public class TeamsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Team, Team
     }
 
 
+    public static class Factory extends BaseRecyclerViewAdapter.Factory<TeamsRecyclerViewAdapter, Team> {
 
-
-    public static class Factory extends BaseRecyclerViewAdapter.Factory<TeamsRecyclerViewAdapter, Team>{
-
-        public TeamsRecyclerViewAdapter make(){
+        public TeamsRecyclerViewAdapter make() {
             return make(new ArrayList<Team>());
         }
 

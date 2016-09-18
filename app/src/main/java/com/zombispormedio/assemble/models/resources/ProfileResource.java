@@ -12,6 +12,8 @@ import com.zombispormedio.assemble.services.storage.IStorageService;
 
 import java.io.File;
 
+import javax.inject.Inject;
+
 /**
  * Created by Xavier Serrano on 13/09/2016.
  */
@@ -21,7 +23,7 @@ public class ProfileResource {
 
     private IProfileService persistence;
 
-
+    @Inject
     public ProfileResource(IProfileService persistence,
             IStorageService<UserProfile> storage) {
         this.persistence = persistence;

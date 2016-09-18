@@ -1,13 +1,10 @@
 package com.zombispormedio.assemble.controllers;
 
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.models.factories.ResourceFactory;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
-import com.zombispormedio.assemble.net.State;
 import com.zombispormedio.assemble.models.singletons.CurrentUser;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
@@ -20,7 +17,7 @@ import com.zombispormedio.assemble.views.IProfileView;
 /**
  * Created by Xavier Serrano on 10/07/2016.
  */
-public class ProfileController extends AbstractController {
+public class ProfileController extends BaseController {
 
     private IProfileView ctx;
 
@@ -32,13 +29,17 @@ public class ProfileController extends AbstractController {
 
 
     public ProfileController(IProfileView ctx) {
+        super(ctx);
         this.ctx = ctx;
-        profileResource = ResourceFactory.createProfileResource();
+
+        profileResource=getResourceComponent().provideProfileResource();
         profileSubscription = CurrentUser.getInstance().getProfileSubscription();
         profileSubscriber = new ProfileSubscriber();
         profileSubscription.addSubscriber(profileSubscriber);
 
     }
+
+
 
     @Override
     public void onCreate() {
@@ -133,4 +134,6 @@ public class ProfileController extends AbstractController {
         ctx = null;
         profileSubscription.removeSubscriber(profileSubscriber);
     }
+
+
 }

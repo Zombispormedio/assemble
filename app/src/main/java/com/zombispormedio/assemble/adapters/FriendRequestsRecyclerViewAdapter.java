@@ -24,15 +24,10 @@ public class FriendRequestsRecyclerViewAdapter
 
     @Override
     public FriendRequestsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_friend_requests, parent, false);
-
-        FriendRequestsViewHolder holder = new FriendRequestsViewHolder(itemView);
-
+        FriendRequestsViewHolder holder = new FriendRequestsViewHolder(getView(parent, R.layout.list_item_friend_requests));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }
-
         return holder;
     }
 

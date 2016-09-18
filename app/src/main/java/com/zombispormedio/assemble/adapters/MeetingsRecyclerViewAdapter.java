@@ -21,10 +21,8 @@ public class MeetingsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Meeting
 
     @Override
     public MeetingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_meetings, parent, false);
 
-        MeetingViewHolder holder = new MeetingViewHolder(itemView);
+        MeetingViewHolder holder = new MeetingViewHolder(getView(parent,R.layout.list_item_meetings));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }

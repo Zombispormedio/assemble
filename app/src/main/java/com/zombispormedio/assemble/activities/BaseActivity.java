@@ -6,10 +6,13 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.net.State;
 import com.zombispormedio.assemble.services.api.APIConfiguration;
 import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.views.IApplicationView;
 import com.zombispormedio.assemble.views.IBaseView;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
@@ -17,7 +20,7 @@ import butterknife.ButterKnife;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
-public class BaseActivity extends AppCompatActivity implements IBaseView {
+public class BaseActivity extends AppCompatActivity implements IBaseView{
 
     public static final String AUTH_PREFERENCES = "AuthPrefs";
 
@@ -58,6 +61,8 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     }
 
 
+
+
     protected void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -88,6 +93,11 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
         State.getInstance().setContext(this);
 
+    }
+
+    @Override
+    public ResourceComponent getResourceComponent() {
+        return ((AssembleApplication)getApplication()).getResourceComponent();
     }
 
 

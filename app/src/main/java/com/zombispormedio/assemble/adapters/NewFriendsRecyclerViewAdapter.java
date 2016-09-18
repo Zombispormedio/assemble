@@ -22,10 +22,7 @@ public class NewFriendsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Frien
 
     @Override
     public NewFriendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.list_item_new_friends, parent, false);
-
-        NewFriendViewHolder holder = new NewFriendViewHolder(itemView);
+        NewFriendViewHolder holder = new NewFriendViewHolder(getView(parent,R.layout.list_item_new_friends));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }

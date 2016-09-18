@@ -14,6 +14,7 @@ import com.zombispormedio.assemble.adapters.ChatsRecyclerViewAdapter;
 import com.zombispormedio.assemble.controllers.ChatsController;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.views.IApplicationView;
 import com.zombispormedio.assemble.views.IChatsView;
 
 import java.util.ArrayList;
@@ -78,10 +79,7 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
         }
     }
 
-    @Override
-    public void showAlert(String msg) {
-        view.showAlert(msg);
-    }
+
 
     @Override
     public void onDestroy() {

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
-public class ChatsController extends AbstractController {
+public class ChatsController extends BaseController {
 
     private IChatsView ctx;
 
@@ -27,14 +27,13 @@ public class ChatsController extends AbstractController {
 
     private ChatSubscriber chatSubscriber;
 
-    private CurrentUser user;
 
     public ChatsController(IChatsView ctx) {
+        super(ctx.getParent());
         this.ctx = ctx;
-        user = CurrentUser.getInstance();
-        chatResource = ResourceFactory.createChatResource();
+        chatResource = getResourceComponent().provideChatResource();
 
-        chatSubscription=user.getChatSubscription();
+        chatSubscription=CurrentUser.getInstance().getChatSubscription();
         chatSubscriber= new ChatSubscriber();
 
         chatSubscription.addSubscriber(chatSubscriber);
