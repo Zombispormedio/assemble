@@ -47,6 +47,9 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
     @BindView(R.id.meeting_image)
     ImageView meetingImage;
 
+    @BindView(R.id.card_view)
+    CardView cardView;
+
     private IOnClickItemListHandler<Meeting> listener;
 
     public MeetingViewHolder(View view) {
@@ -68,7 +71,7 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
     }
 
     private void setupOnClickListener(final int position, final Meeting itemData) {
-        view.setOnClickListener(new View.OnClickListener() {
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {

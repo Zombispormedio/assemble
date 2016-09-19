@@ -6,7 +6,11 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         tools:context="com.zombispormedio.assemble.activities.NewFriendActivity"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true"
         >
+
+    <include layout="@layout/content_new_friend" />
 
     <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -48,8 +52,6 @@
 
 
     </android.support.design.widget.AppBarLayout>
-
-    <include layout="@layout/content_new_friend" />
 
 
 </android.support.design.widget.CoordinatorLayout>

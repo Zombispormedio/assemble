@@ -4,10 +4,10 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activities.UpdateProfileActivity"
         android:descendantFocusability="beforeDescendants"
-        android:focusableInTouchMode="true"
         android:focusable="true"
+        android:focusableInTouchMode="true"
+        tools:context=".activities.UpdateProfileActivity"
         >
 
     <android.support.v4.widget.NestedScrollView
@@ -40,8 +40,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text|textAutoComplete|textAutoCorrect"
-                        android:singleLine="true"
                         android:theme="@style/AppTheme.EditText"
+                        android:maxLines="1"
                         />
             </android.support.design.widget.TextInputLayout>
 
@@ -85,8 +85,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="text|textAutoComplete|textAutoCorrect"
-                        android:singleLine="true"
                         android:theme="@style/AppTheme.EditText"
+                        android:maxLines="1"
                         />
             </android.support.design.widget.TextInputLayout>
 
@@ -108,8 +108,8 @@
                         android:cursorVisible="false"
                         android:focusable="false"
                         android:inputType="date"
-                        android:singleLine="true"
                         android:theme="@style/AppTheme.EditText"
+                        android:maxLines="1"
                         />
             </android.support.design.widget.TextInputLayout>
         </LinearLayout>
@@ -129,17 +129,21 @@
                 android:elevation="4dp"
                 android:minHeight="?attr/actionBarSize"
                 android:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+                >
+
             <Button
+                    android:id="@+id/save_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:id="@+id/save_button"
-                    android:background="@null"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_gravity="right"
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:text="@string/save_title"
                     android:textColor="#FFF"
-                    android:text="@string/save_title"/>
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    />
         </android.support.v7.widget.Toolbar>
 
 

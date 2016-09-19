@@ -78,5 +78,6 @@
     <string name="no_more_teams">No more teams</string>
     <string name="no_more_chats">No more chats</string>
     <string name="new_friend_search_hint">Search by email or name</string>
+    <string name="searching_new_friends">One moment. We are searching interesting people...</string>
 
 </resources>

@@ -1,11 +1,15 @@
 package com.zombispormedio.assemble.activities;
 
-import android.app.SearchManager;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
+import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-
+import android.widget.TextView;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.NewFriendsRecyclerViewAdapter;
@@ -32,6 +36,8 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
 
     private NewFriendsRecyclerViewAdapter friendsListAdapter;
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,16 +45,56 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
         setupToolbar();
         bindActivity(this);
 
-        ctrl=new NewFriendController(this);
+        ctrl = new NewFriendController(this);
+
+        setupProgressDialog();
 
         setupList();
+
+        setupSearch();
 
         ctrl.onCreate();
 
     }
 
+
+    private void setupProgressDialog() {
+        progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage(getString(R.string.searching_new_friends));
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+    }
+
+
+    private void setupSearch() {
+
+        searchView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
+                boolean handled = false;
+
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    ctrl.onSearch();
+                    hideKeyboard();
+                    handled = true;
+                }
+
+                return handled;
+            }
+        });
+
+    }
+
+    private void hideKeyboard() {
+        searchView.clearFocus();
+        InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        im.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
+
+    }
+
+
     private void setupList() {
-        friendsListFactory=new NewFriendsRecyclerViewAdapter.Factory();
+        friendsListFactory = new NewFriendsRecyclerViewAdapter.Factory();
 
         AndroidUtils.createListConfiguration(this, friendsList)
                 .divider(true)
@@ -56,7 +102,7 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
                 .configure();
         friendsListFactory.setOnClickListener(ctrl.getOnClickOneFriend());
 
-        friendsListAdapter=friendsListFactory.make();
+        friendsListAdapter = friendsListFactory.make();
         friendsList.setAdapter(friendsListAdapter);
     }
 
@@ -64,6 +110,21 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
     public void bindSearchResults(ArrayList<FriendProfile> results) {
         friendsListAdapter.setData(results);
         friendsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public String getSearchText() {
+        return searchView.getText().toString();
+    }
+
+    @Override
+    public void showProgress() {
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        progressDialog.dismiss();
     }
 
     @Override

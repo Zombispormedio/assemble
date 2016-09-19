@@ -40,7 +40,7 @@ public class UserResource {
 
     public void signOut(final IServiceHandler<Result, Error> handler) {
         auth.signOut(handler);
-        Realm.getDefaultInstance().deleteAll();
+        //Realm.getDefaultInstance().deleteAll();
     }
 
 

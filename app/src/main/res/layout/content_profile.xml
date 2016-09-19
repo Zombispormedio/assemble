@@ -97,12 +97,11 @@
 
                             <Button
                                     android:id="@+id/update_profile_button"
-                                    style="?android:attr/buttonStyleSmall"
+                                    style="@style/Widget.AppCompat.Button.Colored"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:background="@color/colorAccent"
                                     android:text="@string/update_profile_title"
-                                    android:textColor="@color/colorWhite"
+                                    android:foreground="?attr/selectableItemBackground"
                                     android:textSize="15sp"
                                     android:paddingLeft="15sp"
                                     android:paddingRight="15sp"
