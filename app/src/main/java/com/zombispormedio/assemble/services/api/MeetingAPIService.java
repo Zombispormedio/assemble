@@ -25,23 +25,22 @@ public class MeetingAPIService implements IMeetingService {
     @Override
     public void getAll(final IServiceHandler<ArrayList<Meeting>, Error> handler) {
         api.RestWithAuth("/meetings")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            MeetingsResponse res= JsonBinder.toMeetingsResponse(args[0]);
-
-                            if(res.success){
-                                handler.onSuccess(res.getResult());
-                            }else{
-                                handler.onError(res.error);
-                            }
-
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-                    }
-                })
+                .handler(deferMeeting(handler))
                 .get();
+    }
+
+
+    private PromiseHandler deferMeeting(IServiceHandler<ArrayList<Meeting>, Error> handler){
+        return new PromiseHandler<MeetingsResponse, ArrayList<Meeting>>(handler){
+            @Override
+            protected MeetingsResponse getResponse(String arg) throws IOException {
+                return JsonBinder.toMeetingsResponse(arg);
+            }
+
+            @Override
+            protected ArrayList<Meeting> getResult(MeetingsResponse res) {
+                return res.getResult();
+            }
+        };
     }
 }

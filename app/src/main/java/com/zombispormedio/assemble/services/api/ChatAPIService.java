@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.services.api;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.PromiseHandler;
@@ -26,21 +27,22 @@ public class ChatAPIService implements IChatService {
     @Override
     public void getAll(final IServiceHandler<ArrayList<Chat>, Error> handler) {
         api.RestWithAuth("/chats")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            ChatsResponse res= JsonBinder.toChatsResponse(args[0]);
-                            if(res.success){
-                                handler.onSuccess(res.getResult());
-                            }else{
-                                handler.onError(res.error);
-                            }
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-                    }
-                })
+                .handler(deferChats(handler))
                 .get();
+    }
+
+
+    private PromiseHandler deferChats(IServiceHandler<ArrayList<Chat>, Error> handler){
+        return new PromiseHandler<ChatsResponse, ArrayList<Chat>>(handler){
+            @Override
+            protected ChatsResponse getResponse(String arg) throws IOException {
+                return JsonBinder.toChatsResponse(arg);
+            }
+
+            @Override
+            protected ArrayList<Chat> getResult(ChatsResponse res) {
+                return res.getResult();
+            }
+        };
     }
 }

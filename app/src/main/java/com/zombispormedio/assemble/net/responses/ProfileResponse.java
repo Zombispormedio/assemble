@@ -11,4 +11,9 @@ public class ProfileResponse extends AbstractResponse<UserProfile> {
     public ProfileResponse(boolean success, Error error, UserProfile result) {
         super(success, error, result);
     }
+
+
+    public UserProfile getResult(){
+        return result;
+    }
 }

@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.services.interfaces.IFriendService;
 import com.zombispormedio.assemble.services.interfaces.IProfileService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
 
@@ -15,11 +16,11 @@ import java.util.ArrayList;
  */
 public class FriendRequestLoader implements ILoader {
 
-    private IProfileService apiService;
+    private IFriendService apiService;
 
     private IStorageService<FriendRequestProfile> storageService;
 
-    public FriendRequestLoader(IProfileService apiService,
+    public FriendRequestLoader(IFriendService apiService,
             IStorageService<FriendRequestProfile> storageService) {
         this.apiService = apiService;
         this.storageService = storageService;

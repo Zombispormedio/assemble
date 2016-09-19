@@ -15,6 +15,7 @@ import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 import com.zombispormedio.assemble.services.api.ChatAPIService;
+import com.zombispormedio.assemble.services.api.FriendAPIService;
 import com.zombispormedio.assemble.services.api.MeetingAPIService;
 import com.zombispormedio.assemble.services.api.ProfileAPIService;
 import com.zombispormedio.assemble.services.api.TeamAPIService;
@@ -45,13 +46,13 @@ public class SubscriptionModule {
     @Provides
     @Singleton
     FriendLoader provideFriendLoader() {
-        return new FriendLoader(new ProfileAPIService(), new FriendStorageService());
+        return new FriendLoader(new FriendAPIService(), new FriendStorageService());
     }
 
     @Provides
     @Singleton
     FriendRequestLoader provideFriendRequestLoader() {
-        return new FriendRequestLoader(new ProfileAPIService(), new FriendRequestStorageService());
+        return new FriendRequestLoader(new FriendAPIService(), new FriendRequestStorageService());
     }
 
     @Provides

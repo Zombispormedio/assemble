@@ -4,6 +4,7 @@ import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.net.responses.AbstractResponse;
 import com.zombispormedio.assemble.net.responses.ChatsResponse;
 import com.zombispormedio.assemble.net.responses.DefaultResponse;
 import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
@@ -18,7 +19,8 @@ import java.io.IOException;
 /**
  * Created by Xavier Serrano on 26/07/2016.
  */
-public class JsonBinder {
+public class JsonBinder<R extends AbstractResponse> {
+
 
     public static DefaultResponse toDefaultResponse(String raw) throws IOException {
         JSONWrapper<DefaultResponse> jsonAdapter = new JSONWrapper<>(DefaultResponse.class);

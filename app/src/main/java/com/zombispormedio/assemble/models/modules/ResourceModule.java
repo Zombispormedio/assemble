@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.services.api.AuthAPIService;
 import com.zombispormedio.assemble.services.api.ChatAPIService;
+import com.zombispormedio.assemble.services.api.FriendAPIService;
 import com.zombispormedio.assemble.services.api.MeetingAPIService;
 import com.zombispormedio.assemble.services.api.ProfileAPIService;
 import com.zombispormedio.assemble.services.api.TeamAPIService;
@@ -41,6 +42,12 @@ public class ResourceModule {
     @Singleton
     ProfileAPIService provideProfileAPIService() {
         return new ProfileAPIService();
+    }
+
+    @Provides
+    @Singleton
+    FriendAPIService provideFriendAPIService() {
+        return new FriendAPIService();
     }
 
     @Provides
@@ -114,13 +121,13 @@ public class ResourceModule {
     @Provides
     @Singleton
     FriendResource provideFriendResource() {
-        return new FriendResource(new FriendStorageService());
+        return new FriendResource(provideFriendAPIService(), new FriendStorageService());
     }
 
     @Provides
     @Singleton
     FriendRequestResource provideFriendRequestResource() {
-        return new FriendRequestResource(new FriendRequestStorageService());
+        return new FriendRequestResource(provideFriendAPIService(),new FriendRequestStorageService());
     }
 
     @Provides

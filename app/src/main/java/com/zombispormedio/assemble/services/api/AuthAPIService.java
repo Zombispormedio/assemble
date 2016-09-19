@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.services.api;
 
 
-import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 
 import com.zombispormedio.assemble.handlers.PromiseHandler;
@@ -11,8 +10,6 @@ import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.net.responses.DefaultResponse;
 import com.zombispormedio.assemble.services.interfaces.IAuthService;
-
-import java.io.IOException;
 
 
 /**
@@ -30,51 +27,16 @@ public class AuthAPIService implements IAuthService {
     public void checkAccess(final IServiceHandler<Result, Error> handler) {
 
         api.RestWithAuth("/check_user")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            DefaultResponse res = JsonBinder.toDefaultResponse(args[0]);
-                            if (res.success) {
-                                handler.onSuccess(res.result);
-                            } else {
-                                handler.onError(res.error);
-                            }
-
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-
-                    }
-
-                })
+                .handler(defer(handler))
                 .get();
 
     }
-
 
     @Override
     public void login(String email, String password, final IServiceHandler<Result, Error> handler) {
         Auth user = new Auth(email, password);
         api.Rest("/login")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            DefaultResponse res = JsonBinder.toDefaultResponse(args[0]);
-                            if (res.success) {
-                                handler.onSuccess(res.result);
-                            } else {
-                                handler.onError(res.error);
-                            }
-
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-
-                    }
-
-                })
+                .handler(defer(handler))
                 .post(JsonBinder.fromAuth(user));
     }
 
@@ -82,49 +44,21 @@ public class AuthAPIService implements IAuthService {
     public void register(String email, String password, final IServiceHandler<Result, Error> handler) {
         Auth user = new Auth(email, password);
         api.Rest("/signup")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            DefaultResponse res = JsonBinder.toDefaultResponse(args[0]);
-                            if (res.success) {
-                                handler.onSuccess(res.result);
-                            } else {
-                                handler.onError(res.error);
-                            }
-
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-
-                    }
-
-                })
+                .handler(defer(handler))
                 .post(JsonBinder.fromAuth(user));
     }
 
     @Override
     public void signOut(final IServiceHandler<Result, Error> handler) {
         api.RestWithAuth("/signout")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            DefaultResponse res = JsonBinder.toDefaultResponse(args[0]);
-                            if (res.success) {
-                                handler.onSuccess(res.result);
-                            } else {
-                                handler.onError(res.error);
-                            }
-
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-
-                    }
-
-                })
+                .handler(defer(handler))
                 .get();
+    }
+
+
+
+    private PromiseHandler defer(IServiceHandler<Result, Error>  handler){
+       return  new PromiseHandler<DefaultResponse, Result>(handler);
     }
 
 

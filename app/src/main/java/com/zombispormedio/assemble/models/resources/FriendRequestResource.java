@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.models.FriendRequestProfile;
+import com.zombispormedio.assemble.services.interfaces.IFriendService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
 
 import javax.inject.Inject;
@@ -10,9 +11,15 @@ import javax.inject.Inject;
  */
 public class FriendRequestResource extends ConceptResource<FriendRequestProfile> {
 
+    private IFriendService apiService;
+
     @Inject
-    public FriendRequestResource(
+    public FriendRequestResource(IFriendService apiService,
             IStorageService<FriendRequestProfile> storage) {
         super(storage);
+        this.apiService = apiService;
     }
+
+
+
 }

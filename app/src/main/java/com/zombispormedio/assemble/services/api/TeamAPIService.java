@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.services.api;
 
-import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.PromiseHandler;
 import com.zombispormedio.assemble.models.Team;
@@ -26,25 +25,22 @@ public class TeamAPIService implements ITeamService {
     @Override
     public void getAll(final IServiceHandler<ArrayList<Team>, Error> handler) {
         api.RestWithAuth("/teams")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-
-                        try {
-                            TeamsResponse res= JsonBinder.toTeamsResponse(args[0]);
-
-                            if(res.success){
-                                handler.onSuccess(res.getResult());
-                            }else{
-                                handler.onError(res.error);
-                            }
-
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-
-                    }
-                })
+                .handler(deferTeams(handler))
                 .get();
+    }
+
+    private PromiseHandler deferTeams(IServiceHandler<ArrayList<Team>, Error> handler){
+        return new PromiseHandler<TeamsResponse,  ArrayList<Team>>(handler){
+
+            @Override
+            protected TeamsResponse getResponse(String arg) throws IOException {
+                return JsonBinder.toTeamsResponse(arg);
+            }
+
+            @Override
+            protected ArrayList<Team> getResult(TeamsResponse res) {
+                return res.getResult();
+            }
+        };
     }
 }

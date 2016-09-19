@@ -1,27 +1,23 @@
 package com.zombispormedio.assemble.services.api;
 
 
-import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.PromiseHandler;
 import com.zombispormedio.assemble.models.EditProfile;
-import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.models.FriendRequestProfile;
+
 
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.FileBody;
 import com.zombispormedio.assemble.net.JsonBinder;
 
-import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
-import com.zombispormedio.assemble.net.responses.FriendsResponse;
+
 import com.zombispormedio.assemble.net.responses.ProfileResponse;
 import com.zombispormedio.assemble.services.interfaces.IProfileService;
 
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 27/07/2016.
@@ -37,115 +33,33 @@ public class ProfileAPIService implements IProfileService {
     @Override
     public void retrieve(final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            ProfileResponse res = JsonBinder.toProfileResponse(args[0]);
-                            if (res.success) {
-                                handler.onSuccess(res.result);
-                            } else {
-                                handler.onError(res.error);
-                            }
-
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-
-                    }
-                })
+                .handler(createProfilePromise(handler))
                 .get();
     }
 
     @Override
     public void changeAvatar(File file, final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile/avatar")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            ProfileResponse res = JsonBinder.toProfileResponse(args[0]);
-                            if (res.success) {
-                                handler.onSuccess(res.result);
-                            } else {
-                                handler.onError(res.error);
-                            }
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-
-                    }
-                })
+                .handler(createProfilePromise(handler))
                 .patch(new FileBody(file, "image/*", "avatar", file.getName()));
     }
 
-    @Override
-    public void changeAvatar(String url, IServiceHandler<UserProfile, Error> handler) {
-        changeAvatar(new File(url), handler);
-    }
 
     @Override
     public void update(EditProfile profile, final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            ProfileResponse res = JsonBinder.toProfileResponse(args[0]);
-                            if (res.success) {
-                                handler.onSuccess(res.result);
-                            } else {
-                                handler.onError(res.error);
-                            }
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-                    }
-                })
+                .handler(createProfilePromise(handler))
                 .put(JsonBinder.fromEditProfile(profile));
     }
 
-    @Override
-    public void getFriends(final IServiceHandler<ArrayList<FriendProfile>, Error> handler) {
-        api.RestWithAuth("/friends")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            FriendsResponse res = JsonBinder.toFriendsResponse(args[0]);
-
-                            if (res.success) {
-                                handler.onSuccess(res.getResult());
-                            } else {
-                                handler.onError(res.error);
-                            }
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-                    }
-                })
-                .get();
+    private PromiseHandler createProfilePromise(IServiceHandler<UserProfile, Error> handler){
+        return new PromiseHandler<ProfileResponse, UserProfile>(handler){
+            @Override
+            protected ProfileResponse getResponse(String arg) throws IOException {
+                return JsonBinder.toProfileResponse(arg);
+            }
+        };
     }
 
-    @Override
-    public void getFriendRequests(final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler) {
-        api.RestWithAuth("/friend_requests")
-                .handler(new PromiseHandler(handler) {
-                    @Override
-                    public void onSuccess(String... args) {
-                        try {
-                            FriendRequestsResponse res = JsonBinder.toFriendRequestsResponse(args[0]);
 
-                            if (res.success) {
-                                handler.onSuccess(res.getResult());
-                            } else {
-                                handler.onError(res.error);
-                            }
-                        } catch (IOException e) {
-                            handler.onError(new Error(e.getMessage()));
-                        }
-                    }
-                })
-                .get();
-    }
 }
