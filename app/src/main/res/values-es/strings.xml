@@ -83,6 +83,7 @@
     <string name="friend_request_sent">Enviada petición de amistad</string>
     <string name="friend_accepted">Petición de amistad aceptada</string>
     <string name="friend_rejected">Petición de amistad rechazada</string>
+    <string name="removed_friend">Amigo eliminado</string>
 
 
 </resources>

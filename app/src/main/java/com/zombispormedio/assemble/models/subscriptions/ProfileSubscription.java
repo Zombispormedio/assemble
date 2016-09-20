@@ -16,12 +16,7 @@ public class ProfileSubscription extends DataSubscription{
 
     @Override
     public void load(){
-        loader.retrieve(new ISuccessHandler() {
-            @Override
-            public void onSuccess() {
-                notifySubscribers();
-            }
-        });
+        loader.retrieve(deferSubscribers());
     }
 
 

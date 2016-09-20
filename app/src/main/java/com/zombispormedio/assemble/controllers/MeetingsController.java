@@ -32,7 +32,7 @@ public class MeetingsController extends Controller {
         meetingSubscription = getResourceComponent().provideMeetingSubscription();
         meetingSubscriber = new MeetingSubscriber();
         meetingSubscription.addSubscriber(meetingSubscriber);
-        refreshing=false;
+        refreshing = false;
     }
 
     @Override
@@ -50,9 +50,8 @@ public class MeetingsController extends Controller {
     public void bindMeetings() {
         ArrayList<Meeting> meetings = meetingResource.getAll();
 
-        if (meetings.size() > 0) {
-            ctx.bindMeetings(meetings);
-        }
+        ctx.bindMeetings(meetings);
+
     }
 
 
@@ -67,21 +66,27 @@ public class MeetingsController extends Controller {
     }
 
     public void onRefresh() {
-        refreshing=true;
+        refreshing = true;
         meetingSubscription.load();
     }
 
     private class MeetingSubscriber extends Subscriber {
+
         @Override
         public void notifyChange() {
             bindMeetings();
             finishRefresh();
         }
+
+        @Override
+        public void notifyFail() {
+            finishRefresh();
+        }
     }
 
-    private void finishRefresh(){
-        if(refreshing){
-            refreshing=false;
+    private void finishRefresh() {
+        if (refreshing) {
+            refreshing = false;
             ctx.finishRefresh();
         }
     }

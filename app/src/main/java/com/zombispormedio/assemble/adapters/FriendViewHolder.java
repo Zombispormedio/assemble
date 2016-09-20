@@ -13,6 +13,7 @@ import com.zombispormedio.assemble.views.IFriendHolder;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -40,6 +41,9 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> implemen
 
     @BindView(R.id.remove_friend_button)
     ImageButton removeButton;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
 
     public FriendViewHolder(View view) {
         super(view);
@@ -116,11 +120,13 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> implemen
 
     @Override
     public void hideProgress() {
-
+        progressBar.setVisibility(View.GONE);
+        removeButton.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void showProgress() {
-
+        progressBar.setVisibility(View.VISIBLE);
+        removeButton.setVisibility(View.GONE);
     }
 }

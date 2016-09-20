@@ -32,7 +32,7 @@ public class TeamsController extends Controller {
         teamSubscription = getResourceComponent().provideTeamSubscription();
         teamSubscriber = new TeamSubscriber();
         teamSubscription.addSubscriber(teamSubscriber);
-        refreshing=false;
+        refreshing = false;
     }
 
     @Override
@@ -48,10 +48,8 @@ public class TeamsController extends Controller {
 
     private void bindTeams() {
         ArrayList<Team> teams = teamResource.getAll();
+        ctx.bindTeams(teams);
 
-        if (teams.size() > 0) {
-            ctx.bindTeams(teams);
-        }
     }
 
 
@@ -66,7 +64,7 @@ public class TeamsController extends Controller {
     }
 
     public void onRefresh() {
-        refreshing=true;
+        refreshing = true;
         teamSubscription.load();
     }
 
@@ -77,11 +75,16 @@ public class TeamsController extends Controller {
             bindTeams();
             finishRefresh();
         }
+
+        @Override
+        public void notifyFail() {
+            finishRefresh();
+        }
     }
 
-    private void finishRefresh(){
-        if(refreshing){
-            refreshing=false;
+    private void finishRefresh() {
+        if (refreshing) {
+            refreshing = false;
             ctx.finishRefresh();
         }
     }

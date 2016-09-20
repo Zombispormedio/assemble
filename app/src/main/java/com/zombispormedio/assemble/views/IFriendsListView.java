@@ -13,4 +13,5 @@ public interface IFriendsListView extends IFragmentView{
 
     void finishRefresh();
 
+    void showRemovedFriend();
 }

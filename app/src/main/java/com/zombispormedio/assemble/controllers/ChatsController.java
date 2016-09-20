@@ -34,7 +34,7 @@ public class ChatsController extends Controller {
         chatSubscription = getResourceComponent().provideChatSubscription();
         chatSubscriber = new ChatSubscriber();
         chatSubscription.addSubscriber(chatSubscriber);
-        refreshing=false;
+        refreshing = false;
     }
 
     @Override
@@ -50,10 +50,8 @@ public class ChatsController extends Controller {
 
     public void bindChats() {
         ArrayList<Chat> chats = chatResource.getAll();
+        ctx.bindChats(chats);
 
-        if (chats.size() > 0) {
-            ctx.bindChats(chats);
-        }
     }
 
 
@@ -68,22 +66,26 @@ public class ChatsController extends Controller {
     }
 
     public void onRefresh() {
-        refreshing=true;
+        refreshing = true;
         chatSubscription.load();
     }
 
     private class ChatSubscriber extends Subscriber {
-
         @Override
         public void notifyChange() {
             bindChats();
             finishRefresh();
         }
+
+        @Override
+        public void notifyFail() {
+            finishRefresh();
+        }
     }
 
-    private void finishRefresh(){
-        if(refreshing){
-            refreshing=false;
+    private void finishRefresh() {
+        if (refreshing) {
+            refreshing = false;
             ctx.finishRefresh();
         }
     }

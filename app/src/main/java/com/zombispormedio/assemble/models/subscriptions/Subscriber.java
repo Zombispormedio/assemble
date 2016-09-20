@@ -21,4 +21,8 @@ public class Subscriber {
     public void notifyChange(){
 
     }
+
+    public void notifyFail(){
+
+    }
 }

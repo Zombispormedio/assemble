@@ -6,4 +6,5 @@ package com.zombispormedio.assemble.handlers;
 public interface ISuccessHandler {
 
     void onSuccess();
+
 }

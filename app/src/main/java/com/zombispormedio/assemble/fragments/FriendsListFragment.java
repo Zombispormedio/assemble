@@ -105,6 +105,11 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     }
 
     @Override
+    public void showRemovedFriend() {
+        showAlert(view.getString(R.string.removed_friend));
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
         ctrl.onDestroy();

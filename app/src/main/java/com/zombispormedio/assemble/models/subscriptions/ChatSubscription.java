@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.models.subscriptions;
 
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.handlers.SuccessHandler;
 import com.zombispormedio.assemble.models.loaders.ChatLoader;
 
 import javax.inject.Inject;
@@ -19,11 +20,6 @@ public class ChatSubscription extends DataSubscription {
 
     @Override
     public void load() {
-        loader.retrieve(new ISuccessHandler() {
-            @Override
-            public void onSuccess() {
-                notifySubscribers();
-            }
-        });
+        loader.retrieve(deferSubscribers());
     }
 }

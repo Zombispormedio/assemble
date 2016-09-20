@@ -1,9 +1,7 @@
 package com.zombispormedio.assemble.models.loaders;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
+import com.zombispormedio.assemble.handlers.SuccessHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IProfileService;
@@ -27,13 +25,22 @@ public class ProfileLoader implements ILoader {
     }
 
     @Override
-    public void retrieve(final ISuccessHandler handler) {
+    public void retrieve(final SuccessHandler handler) {
 
         apiService.retrieve(new ServiceHandler<UserProfile, Error>() {
             @Override
             public void onSuccess(UserProfile result) {
                 storageService.createOrUpdate(result);
                 handler.onSuccess();
+            }
+            @Override
+            public void onError(Error error) {
+                handler.onError();
+            }
+
+            @Override
+            public void onNotConnected() {
+                handler.onError();
             }
         });
 

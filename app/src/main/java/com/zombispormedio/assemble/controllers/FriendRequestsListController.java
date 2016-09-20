@@ -40,7 +40,7 @@ public class FriendRequestsListController extends Controller {
 
         friendRequestResource.setFriendRequestSubscription(friendRequestSubscription);
 
-        refreshing=false;
+        refreshing = false;
     }
 
     @Override
@@ -51,18 +51,17 @@ public class FriendRequestsListController extends Controller {
     private void bindRequests() {
         ArrayList<FriendRequestProfile> friendRequests = friendRequestResource.getAll();
 
-        if (friendRequests.size() > 0) {
-            ctx.bindFriendRequests(friendRequests);
-        }
+        ctx.bindFriendRequests(friendRequests);
+
     }
 
-    public void  onClickRequestItem(int position, FriendRequestProfile data) {
+    public void onClickRequestItem(int position, FriendRequestProfile data) {
 
     }
 
     public void onAcceptRequest(int position, FriendRequestProfile data, final IFriendRequestHolder holder) {
         holder.showProgress();
-        friendRequestResource.acceptRequest(data.id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>(){
+        friendRequestResource.acceptRequest(data.id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>() {
             @Override
             public void onError(Error error) {
                 holder.hideProgress();
@@ -80,7 +79,7 @@ public class FriendRequestsListController extends Controller {
 
     public void onRejectRequest(int position, FriendRequestProfile data, final IFriendRequestHolder holder) {
         holder.showProgress();
-        friendRequestResource.rejectRequest(data.id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>(){
+        friendRequestResource.rejectRequest(data.id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>() {
             @Override
             public void onError(Error error) {
                 holder.hideProgress();
@@ -97,7 +96,7 @@ public class FriendRequestsListController extends Controller {
     }
 
     public void onRefresh() {
-        refreshing=true;
+        refreshing = true;
         friendRequestSubscription.load();
     }
 
@@ -108,11 +107,16 @@ public class FriendRequestsListController extends Controller {
             bindRequests();
             finishRefresh();
         }
+
+        @Override
+        public void notifyFail() {
+            finishRefresh();
+        }
     }
 
-    private void finishRefresh(){
-        if(refreshing){
-            refreshing=false;
+    private void finishRefresh() {
+        if (refreshing) {
+            refreshing = false;
             ctx.finishRefresh();
         }
     }

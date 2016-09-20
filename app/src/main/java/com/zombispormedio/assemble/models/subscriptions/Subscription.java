@@ -43,8 +43,25 @@ public class Subscription{
         }
     }
 
+    protected void notifyFailToSubscribers(){
+        HashMap<String, Subscriber> copy=new HashMap<>(subscribers);
+        for(Map.Entry<String, Subscriber> entry : copy.entrySet()){
+            if(entry!=null){
+                Subscriber subscriber=entry.getValue();
+                if(subscriber!=null){
+                    subscriber.notifyFail();
+                }
+            }
+
+        }
+    }
+
     public void haveChanged() {
         notifySubscribers();
+    }
+
+    public void haveFailed(){
+        notifyFailToSubscribers();
     }
 
 }

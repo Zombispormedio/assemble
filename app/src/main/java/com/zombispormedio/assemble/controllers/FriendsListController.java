@@ -2,10 +2,12 @@ package com.zombispormedio.assemble.controllers;
 
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.IFriendHolder;
 import com.zombispormedio.assemble.views.IFriendsListView;
 
@@ -33,7 +35,7 @@ public class FriendsListController extends Controller {
         friendSubscription = getResourceComponent().provideFriendSubscription();
         friendSubscriber = new FriendSubscriber();
         friendSubscription.addSubscriber(friendSubscriber);
-        refreshing=false;
+        refreshing = false;
     }
 
     @Override
@@ -43,22 +45,33 @@ public class FriendsListController extends Controller {
 
     private void bindFriends() {
         ArrayList<FriendProfile> friends = friendResource.getAll();
-
-        if (friends.size() > 0) {
-            ctx.bindFriends(friends);
-        }
+        ctx.bindFriends(friends);
     }
 
     public void onClickFriend(int position, FriendProfile data) {
     }
 
     public void onRefresh() {
-        refreshing=true;
+        refreshing = true;
         friendSubscription.load();
     }
 
-    public void onRemoveFriend(int position, FriendProfile data, IFriendHolder holder) {
+    public void onRemoveFriend(int position, FriendProfile data, final IFriendHolder holder) {
+        holder.showProgress();
+        friendResource.deleteFriend(data.id, new ServiceHandler<ArrayList<FriendProfile>, Error>(){
+            @Override
+            public void onError(Error error) {
+                holder.hideProgress();
+                ctx.showAlert(error.msg);
+            }
 
+            @Override
+            public void onSuccess(ArrayList<FriendProfile> result) {
+                holder.hideProgress();
+                bindFriends();
+                ctx.showRemovedFriend();
+            }
+        });
     }
 
     private class FriendSubscriber extends Subscriber {
@@ -68,11 +81,16 @@ public class FriendsListController extends Controller {
             bindFriends();
             finishRefresh();
         }
+
+        @Override
+        public void notifyFail() {
+            finishRefresh();
+        }
     }
 
-    private void finishRefresh(){
-        if(refreshing){
-            refreshing=false;
+    private void finishRefresh() {
+        if (refreshing) {
+            refreshing = false;
             ctx.finishRefresh();
         }
     }

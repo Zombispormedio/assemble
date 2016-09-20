@@ -82,5 +82,6 @@
     <string name="friend_request_sent">Friend request sent</string>
     <string name="friend_accepted">Friend request accepted</string>
     <string name="friend_rejected">Friend request rejected</string>
+    <string name="removed_friend">Removed friend</string>
 
 </resources>
