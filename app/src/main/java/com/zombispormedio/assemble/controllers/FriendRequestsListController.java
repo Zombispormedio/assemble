@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.resources.FriendRequestResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.views.IFriendRequestHolder;
 import com.zombispormedio.assemble.views.IFriendRequestsListView;
 
 import java.util.ArrayList;
@@ -31,6 +32,10 @@ public class FriendRequestsListController extends Controller {
         friendRequestSubscription = getResourceComponent().provideFriendRequestSubscription();
         friendRequestSubscriber = new FriendRequestSubscriber();
         friendRequestSubscription.addSubscriber(friendRequestSubscriber);
+
+        friendRequestResource.setFriendRequestSubscription(friendRequestSubscription);
+
+        friendRequestResource.setFriendSubscription(getResourceComponent().provideFriendSubscription());
     }
 
     @Override
@@ -46,14 +51,16 @@ public class FriendRequestsListController extends Controller {
         }
     }
 
-    public IOnClickItemListHandler<FriendRequestProfile> getOnClickOneRequest() {
-        return new IOnClickItemListHandler<FriendRequestProfile>() {
-            @Override
-            public void onClick(int position, FriendRequestProfile data) {
-                Logger.d(position);
-                Logger.d(data);
-            }
-        };
+    public void  onClickRequestItem(int position, FriendRequestProfile data) {
+
+    }
+
+    public void onAcceptRequest(int position, FriendRequestProfile data, IFriendRequestHolder holder) {
+
+    }
+
+    public void onRejectRequest(int position, FriendRequestProfile data, IFriendRequestHolder holder) {
+
     }
 
     private class FriendRequestSubscriber extends Subscriber {

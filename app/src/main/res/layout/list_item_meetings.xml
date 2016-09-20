@@ -52,7 +52,7 @@
                 <FrameLayout
                         android:id="@+id/frame_view"
                         android:layout_width="match_parent"
-                        android:layout_height="100dp"
+                        android:layout_height="80dp"
                         android:background="@color/colorAccent"
                         />
 
@@ -60,7 +60,6 @@
                 <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="80sp"
-                        android:layout_marginTop="20dp"
                         android:alpha="0.2"
                         android:background="@android:color/black"
                         android:layout_gravity="center_horizontal|top"
@@ -70,7 +69,7 @@
                 <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="35dp"
+                        android:layout_marginTop="15dp"
                         >
                     <LinearLayout
                             android:layout_width="wrap_content"
@@ -124,7 +123,7 @@
             <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+
                     >
 
                 <LinearLayout
@@ -134,35 +133,27 @@
                         >
 
                     <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="10dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:foreground="?attr/selectableItemBackgroundBorderless"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
                             android:src="@drawable/bookmark"
                             />
 
                     <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginRight="10dp"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:foreground="?attr/selectableItemBackgroundBorderless"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
                             android:src="@drawable/share_variant"
                             />
 
                     <ImageButton
                             android:id="@+id/button"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
                             style="@style/Widget.AppCompat.Button.Borderless"
                             android:foreground="?attr/selectableItemBackgroundBorderless"
-                            android:paddingEnd="10dp"
-                            android:paddingStart="10dp"
                             android:src="@drawable/comment_multiple_outline"
                             />
                 </LinearLayout>

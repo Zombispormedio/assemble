@@ -13,8 +13,11 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.FriendsActivity;
 import com.zombispormedio.assemble.adapters.FriendRequestsRecyclerViewAdapter;
 import com.zombispormedio.assemble.controllers.FriendRequestsListController;
+import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.views.IFriendRequestHolder;
 import com.zombispormedio.assemble.views.IFriendRequestsListView;
 
 import java.util.ArrayList;
@@ -67,7 +70,29 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        friendRequestsListFactory.setOnClickListener(ctrl.getOnClickOneRequest());
+        friendRequestsListFactory.setOnClickListener(new IOnClickItemListHandler<FriendRequestProfile>() {
+            @Override
+            public void onClick(int position, FriendRequestProfile data) {
+                ctrl.onClickRequestItem(position, data);
+            }
+        });
+
+        friendRequestsListFactory.setAcceptListener(
+                new IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder>() {
+                    @Override
+                    public void onClick(int position, FriendRequestProfile data, IFriendRequestHolder holder) {
+                        ctrl.onAcceptRequest(position, data, holder);
+                    }
+                });
+
+        friendRequestsListFactory.setRejectListener(
+                new IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder>() {
+                    @Override
+                    public void onClick(int position, FriendRequestProfile data, IFriendRequestHolder holder) {
+                        ctrl.onRejectRequest(position, data, holder);
+                    }
+                });
+
         friendRequestsListAdapter = friendRequestsListFactory.make();
         friendRequestsList.setAdapter(friendRequestsListAdapter);
     }
