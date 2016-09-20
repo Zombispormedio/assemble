@@ -59,16 +59,33 @@
 
     </LinearLayout>
 
-    <ImageButton
-            android:id="@+id/remove_friend_button"
+    <FrameLayout
             android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_height="match_parent"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="15sp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:foreground="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/close"
-            />
+            >
+
+        <ImageButton
+                android:id="@+id/remove_friend_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                android:src="@drawable/close"
+                />
+
+        <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progressBar"
+                android:visibility="gone"
+                />
+
+    </FrameLayout>
+
+
 
 
 </FrameLayout>

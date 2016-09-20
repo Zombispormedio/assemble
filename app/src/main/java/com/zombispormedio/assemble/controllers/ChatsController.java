@@ -24,6 +24,7 @@ public class ChatsController extends Controller {
 
     private ChatSubscriber chatSubscriber;
 
+    private boolean refreshing;
 
     public ChatsController(IChatsView ctx) {
         super(ctx.getParent());
@@ -32,8 +33,8 @@ public class ChatsController extends Controller {
 
         chatSubscription = getResourceComponent().provideChatSubscription();
         chatSubscriber = new ChatSubscriber();
-
         chatSubscription.addSubscriber(chatSubscriber);
+        refreshing=false;
     }
 
     @Override
@@ -66,11 +67,24 @@ public class ChatsController extends Controller {
         };
     }
 
+    public void onRefresh() {
+        refreshing=true;
+        chatSubscription.load();
+    }
+
     private class ChatSubscriber extends Subscriber {
 
         @Override
         public void notifyChange() {
             bindChats();
+            finishRefresh();
+        }
+    }
+
+    private void finishRefresh(){
+        if(refreshing){
+            refreshing=false;
+            ctx.finishRefresh();
         }
     }
 

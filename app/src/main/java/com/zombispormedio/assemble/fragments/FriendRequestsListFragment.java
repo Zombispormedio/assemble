@@ -104,7 +104,7 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                finishRefresh();
+                ctrl.onRefresh();
             }
         });
     }

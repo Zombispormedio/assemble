@@ -74,7 +74,7 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                finishRefresh();
+                ctrl.onRefresh();
             }
         });
     }

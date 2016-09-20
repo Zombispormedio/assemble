@@ -71,5 +71,13 @@ public class FriendAPIService implements IFriendService {
                 .post();
     }
 
+    @Override
+    public void deleteFriend(int friendId, IServiceHandler<ArrayList<FriendProfile>, Error> handler) {
+        api.RestWithAuth("/delete_friend//:id")
+                .params("id", friendId)
+                .handler(DeferUtils.deferFriends(handler))
+                .delete();
+    }
+
 
 }

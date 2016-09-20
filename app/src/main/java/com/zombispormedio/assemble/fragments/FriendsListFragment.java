@@ -12,8 +12,11 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.FriendsActivity;
 import com.zombispormedio.assemble.adapters.FriendsRecyclerViewAdapter;
 import com.zombispormedio.assemble.controllers.FriendsListController;
+import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.views.IFriendHolder;
 import com.zombispormedio.assemble.views.IFriendsListView;
 
 import java.util.ArrayList;
@@ -59,13 +62,24 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
 
     private void setupFriends() {
         friendsListFactory = new FriendsRecyclerViewAdapter.Factory();
-        ;
         AndroidUtils.createListConfiguration(view, friendsList)
                 .divider(true)
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        friendsListFactory.setOnClickListener(ctrl.getOnClickOneFriend());
+        friendsListFactory.setOnClickListener(new IOnClickItemListHandler<FriendProfile>() {
+            @Override
+            public void onClick(int position, FriendProfile data) {
+                ctrl.onClickFriend(position, data);
+            }
+        });
+
+        friendsListFactory.setRemoveButtonListener(new IOnClickComponentItemHandler<FriendProfile, IFriendHolder>() {
+            @Override
+            public void onClick(int position, FriendProfile data, IFriendHolder holder) {
+                ctrl.onRemoveFriend(position, data, holder);
+            }
+        });
         friendsListAdapter = friendsListFactory.make();
         friendsList.setAdapter(friendsListAdapter);
     }
@@ -74,7 +88,7 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                finishRefresh();
+                ctrl.onRefresh();
             }
         });
     }

@@ -1,8 +1,10 @@
 package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.views.IFriendHolder;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class FriendsRecyclerViewAdapter
         extends BaseRecyclerViewAdapter<FriendProfile, FriendViewHolder> {
 
+    private IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener;
 
     public FriendsRecyclerViewAdapter(ArrayList<FriendProfile> data) {
         super(data);
@@ -29,11 +32,19 @@ public class FriendsRecyclerViewAdapter
         if (listener != null) {
             holder.setOnClickListener(listener);
         }
+
+        holder.setRemoveButtonListener(removeButtonListener);
         return holder;
+    }
+
+    public void setRemoveButtonListener(
+            IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener) {
+        this.removeButtonListener = removeButtonListener;
     }
 
     public static class Factory extends BaseRecyclerViewAdapter.Factory<FriendsRecyclerViewAdapter, FriendProfile>{
 
+        private IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener;
 
         public FriendsRecyclerViewAdapter make(){
             return  make(new ArrayList<FriendProfile>());
@@ -41,7 +52,13 @@ public class FriendsRecyclerViewAdapter
 
         public FriendsRecyclerViewAdapter make(ArrayList<FriendProfile> data) {
             FriendsRecyclerViewAdapter adapter = new FriendsRecyclerViewAdapter(data);
+            adapter.setRemoveButtonListener(removeButtonListener);
             return super.make(adapter);
+        }
+
+        public void setRemoveButtonListener(
+                IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener) {
+            this.removeButtonListener = removeButtonListener;
         }
     }
 

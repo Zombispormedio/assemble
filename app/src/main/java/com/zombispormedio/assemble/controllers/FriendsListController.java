@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.views.IFriendHolder;
 import com.zombispormedio.assemble.views.IFriendsListView;
 
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class FriendsListController extends Controller {
 
     private FriendSubscriber friendSubscriber;
 
+    private boolean refreshing;
+
     public FriendsListController(IFriendsListView ctx) {
         super(ctx.getParent());
         this.ctx = ctx;
@@ -30,6 +33,7 @@ public class FriendsListController extends Controller {
         friendSubscription = getResourceComponent().provideFriendSubscription();
         friendSubscriber = new FriendSubscriber();
         friendSubscription.addSubscriber(friendSubscriber);
+        refreshing=false;
     }
 
     @Override
@@ -45,14 +49,16 @@ public class FriendsListController extends Controller {
         }
     }
 
-    public IOnClickItemListHandler<FriendProfile> getOnClickOneFriend() {
-        return new IOnClickItemListHandler<FriendProfile>() {
-            @Override
-            public void onClick(int position, FriendProfile data) {
-                Logger.d(position);
-                Logger.d(data);
-            }
-        };
+    public void onClickFriend(int position, FriendProfile data) {
+    }
+
+    public void onRefresh() {
+        refreshing=true;
+        friendSubscription.load();
+    }
+
+    public void onRemoveFriend(int position, FriendProfile data, IFriendHolder holder) {
+
     }
 
     private class FriendSubscriber extends Subscriber {
@@ -60,6 +66,14 @@ public class FriendsListController extends Controller {
         @Override
         public void notifyChange() {
             bindFriends();
+            finishRefresh();
+        }
+    }
+
+    private void finishRefresh(){
+        if(refreshing){
+            refreshing=false;
+            ctx.finishRefresh();
         }
     }
 
@@ -68,4 +82,6 @@ public class FriendsListController extends Controller {
         ctx = null;
         friendSubscription.removeSubscriber(friendSubscriber);
     }
+
+
 }

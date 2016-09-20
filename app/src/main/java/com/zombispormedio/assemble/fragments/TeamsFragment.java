@@ -62,7 +62,7 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                finishRefresh();
+                ctrl.onRefresh();
             }
         });
     }

@@ -1,14 +1,17 @@
 package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
+import com.zombispormedio.assemble.views.IFriendHolder;
 
 
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,11 +21,13 @@ import butterknife.ButterKnife;
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
+public class FriendViewHolder extends AbstractViewHolder<FriendProfile> implements IFriendHolder{
 
     private View view;
 
     private IOnClickItemListHandler<FriendProfile> listener;
+
+    private IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener;
 
     @BindView(R.id.username_label)
     TextView usernameLabel;
@@ -32,6 +37,9 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
 
     @BindView(R.id.image_view)
     ImageView imageView;
+
+    @BindView(R.id.remove_friend_button)
+    ImageButton removeButton;
 
     public FriendViewHolder(View view) {
         super(view);
@@ -49,7 +57,10 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
     public void bind(int position, FriendProfile itemData) {
         bindData(itemData);
         setupOnClickListener(position, itemData);
+        setupOnClickRemoveButton(position, itemData);
     }
+
+
 
     private void setupOnClickListener(final int position, final FriendProfile itemData) {
         view.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +70,18 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
                     listener.onClick(position, itemData);
                 }
 
+            }
+        });
+    }
+
+    private void setupOnClickRemoveButton(final int position, final FriendProfile itemData) {
+        final IFriendHolder holder=this;
+        removeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(removeButtonListener!=null){
+                    removeButtonListener.onClick(position, itemData, holder);
+                }
             }
         });
     }
@@ -86,4 +109,18 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> {
         this.listener = listener;
     }
 
+    public void setRemoveButtonListener(
+            IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener) {
+        this.removeButtonListener = removeButtonListener;
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
 }

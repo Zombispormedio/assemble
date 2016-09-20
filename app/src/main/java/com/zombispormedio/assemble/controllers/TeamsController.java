@@ -23,6 +23,7 @@ public class TeamsController extends Controller {
 
     private TeamSubscriber teamSubscriber;
 
+    private boolean refreshing;
 
     public TeamsController(ITeamsView ctx) {
         super(ctx.getParent());
@@ -31,6 +32,7 @@ public class TeamsController extends Controller {
         teamSubscription = getResourceComponent().provideTeamSubscription();
         teamSubscriber = new TeamSubscriber();
         teamSubscription.addSubscriber(teamSubscriber);
+        refreshing=false;
     }
 
     @Override
@@ -63,13 +65,27 @@ public class TeamsController extends Controller {
         };
     }
 
+    public void onRefresh() {
+        refreshing=true;
+        teamSubscription.load();
+    }
+
     private class TeamSubscriber extends Subscriber {
 
         @Override
         public void notifyChange() {
             bindTeams();
+            finishRefresh();
         }
     }
+
+    private void finishRefresh(){
+        if(refreshing){
+            refreshing=false;
+            ctx.finishRefresh();
+        }
+    }
+
 
     @Override
     public void onDestroy() {

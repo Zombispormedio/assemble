@@ -23,6 +23,8 @@ public class MeetingsController extends Controller {
 
     private MeetingSubscriber meetingSubscriber;
 
+    private boolean refreshing;
+
     public MeetingsController(IMeetingsView ctx) {
         super(ctx.getParent());
         this.ctx = ctx;
@@ -30,6 +32,7 @@ public class MeetingsController extends Controller {
         meetingSubscription = getResourceComponent().provideMeetingSubscription();
         meetingSubscriber = new MeetingSubscriber();
         meetingSubscription.addSubscriber(meetingSubscriber);
+        refreshing=false;
     }
 
     @Override
@@ -63,10 +66,23 @@ public class MeetingsController extends Controller {
         };
     }
 
+    public void onRefresh() {
+        refreshing=true;
+        meetingSubscription.load();
+    }
+
     private class MeetingSubscriber extends Subscriber {
         @Override
         public void notifyChange() {
             bindMeetings();
+            finishRefresh();
+        }
+    }
+
+    private void finishRefresh(){
+        if(refreshing){
+            refreshing=false;
+            ctx.finishRefresh();
         }
     }
 

@@ -26,6 +26,9 @@ public class FriendRequestsListController extends Controller {
 
     private FriendRequestSubscriber friendRequestSubscriber;
 
+    private boolean refreshing;
+
+
     public FriendRequestsListController(IFriendRequestsListView ctx) {
         super(ctx.getParent());
         this.ctx = ctx;
@@ -37,6 +40,7 @@ public class FriendRequestsListController extends Controller {
 
         friendRequestResource.setFriendRequestSubscription(friendRequestSubscription);
 
+        refreshing=false;
     }
 
     @Override
@@ -68,6 +72,7 @@ public class FriendRequestsListController extends Controller {
             @Override
             public void onSuccess(ArrayList<FriendRequestProfile> result) {
                 holder.hideProgress();
+                bindRequests();
                 ctx.showFriendAccepted();
             }
         });
@@ -85,9 +90,15 @@ public class FriendRequestsListController extends Controller {
             @Override
             public void onSuccess(ArrayList<FriendRequestProfile> result) {
                 holder.hideProgress();
+                bindRequests();
                 ctx.showFriendAccepted();
             }
         });
+    }
+
+    public void onRefresh() {
+        refreshing=true;
+        friendRequestSubscription.load();
     }
 
     private class FriendRequestSubscriber extends Subscriber {
@@ -95,6 +106,14 @@ public class FriendRequestsListController extends Controller {
         @Override
         public void notifyChange() {
             bindRequests();
+            finishRefresh();
+        }
+    }
+
+    private void finishRefresh(){
+        if(refreshing){
+            refreshing=false;
+            ctx.finishRefresh();
         }
     }
 

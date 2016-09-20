@@ -24,4 +24,6 @@ public interface IFriendService {
 
     void rejectRequest(int friendId, final  IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler);
 
+    void deleteFriend(int friendId,  final IServiceHandler<ArrayList<FriendProfile>, Error> handler);
+
 }

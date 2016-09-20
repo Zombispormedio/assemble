@@ -1,7 +1,9 @@
 package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.services.interfaces.IFriendService;
@@ -17,6 +19,9 @@ import javax.inject.Inject;
 public class FriendResource extends ConceptResource<FriendProfile> {
 
     private IFriendService apiService;
+
+    private FriendSubscription friendSubscription;
+
     @Inject
     public FriendResource(IFriendService apiService,
             IStorageService<FriendProfile> storage) {
@@ -31,4 +36,31 @@ public class FriendResource extends ConceptResource<FriendProfile> {
     public void requestNewFriend(int id, final IServiceHandler<Result, Error> handler){
         apiService.requestNewFriend(id, handler);
     }
+
+    public void deleteFriend(int id, final IServiceHandler<ArrayList<FriendProfile>, Error> handler){
+        apiService.deleteFriend(id, new ServiceHandler<ArrayList<FriendProfile>, Error>(){
+            @Override
+            public void onError(Error error) {
+                handler.onError(error);
+            }
+
+            @Override
+            public void onSuccess(ArrayList<FriendProfile> result) {
+                storage.createOrUpdateOrDeleteAll(result);
+                haveChanged();
+                handler.onSuccess(result);
+            }
+        });
+    }
+
+    public void setFriendSubscription(FriendSubscription friendSubscription) {
+        this.friendSubscription = friendSubscription;
+    }
+
+    private void haveChanged(){
+        if (friendSubscription!=null){
+            friendSubscription.haveChanged();
+        }
+    }
+
 }

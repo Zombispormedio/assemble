@@ -76,7 +76,7 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                finishRefresh();
+                ctrl.onRefresh();
             }
         });
     }
