@@ -55,6 +55,21 @@ public class FriendAPIService implements IFriendService {
                 .post();
     }
 
+    @Override
+    public void acceptRequest(int friendId, IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler) {
+        api.RestWithAuth("/accept_friend/:id")
+                .params("id", friendId)
+                .handler(DeferUtils.deferFriendRequests(handler))
+                .post();
+    }
+
+    @Override
+    public void rejectRequest(int friendId, IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler) {
+        api.RestWithAuth("/reject_friend/:id")
+                .params("id", friendId)
+                .handler(DeferUtils.deferFriendRequests(handler))
+                .post();
+    }
 
 
 }

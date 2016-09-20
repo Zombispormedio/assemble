@@ -13,4 +13,8 @@ public interface IFriendRequestsListView extends IFragmentView {
 
     void finishRefresh();
 
+    void showFriendAccepted();
+
+    void showFriendRejected();
+
 }

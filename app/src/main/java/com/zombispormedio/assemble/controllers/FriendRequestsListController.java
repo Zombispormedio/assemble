@@ -2,10 +2,12 @@ package com.zombispormedio.assemble.controllers;
 
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.resources.FriendRequestResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.IFriendRequestHolder;
 import com.zombispormedio.assemble.views.IFriendRequestsListView;
 
@@ -35,7 +37,6 @@ public class FriendRequestsListController extends Controller {
 
         friendRequestResource.setFriendRequestSubscription(friendRequestSubscription);
 
-        friendRequestResource.setFriendSubscription(getResourceComponent().provideFriendSubscription());
     }
 
     @Override
@@ -55,12 +56,38 @@ public class FriendRequestsListController extends Controller {
 
     }
 
-    public void onAcceptRequest(int position, FriendRequestProfile data, IFriendRequestHolder holder) {
+    public void onAcceptRequest(int position, FriendRequestProfile data, final IFriendRequestHolder holder) {
+        holder.showProgress();
+        friendRequestResource.acceptRequest(data.id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>(){
+            @Override
+            public void onError(Error error) {
+                holder.hideProgress();
+                ctx.showAlert(error.msg);
+            }
 
+            @Override
+            public void onSuccess(ArrayList<FriendRequestProfile> result) {
+                holder.hideProgress();
+                ctx.showFriendAccepted();
+            }
+        });
     }
 
-    public void onRejectRequest(int position, FriendRequestProfile data, IFriendRequestHolder holder) {
+    public void onRejectRequest(int position, FriendRequestProfile data, final IFriendRequestHolder holder) {
+        holder.showProgress();
+        friendRequestResource.rejectRequest(data.id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>(){
+            @Override
+            public void onError(Error error) {
+                holder.hideProgress();
+                ctx.showAlert(error.msg);
+            }
 
+            @Override
+            public void onSuccess(ArrayList<FriendRequestProfile> result) {
+                holder.hideProgress();
+                ctx.showFriendAccepted();
+            }
+        });
     }
 
     private class FriendRequestSubscriber extends Subscriber {

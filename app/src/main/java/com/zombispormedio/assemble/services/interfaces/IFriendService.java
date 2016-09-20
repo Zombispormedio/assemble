@@ -19,4 +19,9 @@ public interface IFriendService {
     void searchNewFriends(String paramSearch, final IServiceHandler<ArrayList<FriendProfile>, Error> handler);
 
     void requestNewFriend(int friendId, final IServiceHandler<Result, Error> handler);
+
+    void acceptRequest(int friendId, final  IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler);
+
+    void rejectRequest(int friendId, final  IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler);
+
 }

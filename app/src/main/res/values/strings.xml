@@ -64,7 +64,7 @@
     <string name="new_friend_title">Find friends</string>
     <string name="example_string">Lorem impsum</string>
     <string name="searching_your_friends">Searching your friends&#8230;</string>
-    <string name="loading_app_data">Just a moment...</string>
+    <string name="loading_app_data">Just a moment…</string>
     <string name="create_meeting_title">Create meeting</string>
     <string name="create_team_title">Create team</string>
     <string name="create_chat_title">Create chat</string>
@@ -78,7 +78,9 @@
     <string name="no_more_teams">No more teams</string>
     <string name="no_more_chats">No more chats</string>
     <string name="new_friend_search_hint">Search by email or name</string>
-    <string name="searching_new_friends">One moment. We are searching interesting people...</string>
+    <string name="searching_new_friends">One moment. We are searching interesting people…</string>
     <string name="friend_request_sent">Friend request sent</string>
+    <string name="friend_accepted">Friend request accepted</string>
+    <string name="friend_rejected">Friend request rejected</string>
 
 </resources>

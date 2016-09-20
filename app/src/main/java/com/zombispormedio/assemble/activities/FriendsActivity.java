@@ -145,6 +145,7 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     public void onFriendsTab() {
         friendsTab.setEnabled(false);
         friendRequestsTab.setEnabled(true);
+        ctrl.onFriendTabEnter();
     }
 
 
@@ -152,6 +153,7 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     public void onFriendRequestsTab() {
         friendRequestsTab.setEnabled(false);
         friendsTab.setEnabled(true);
+        ctrl.onFriendRequestTab();
     }
 
 

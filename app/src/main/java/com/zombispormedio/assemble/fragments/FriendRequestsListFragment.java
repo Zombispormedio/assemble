@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.fragments;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.FriendsActivity;
 import com.zombispormedio.assemble.adapters.FriendRequestsRecyclerViewAdapter;
@@ -63,6 +65,7 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
         ctrl.onCreate();
     }
 
+
     private void setupRequestFriends() {
         friendRequestsListFactory = new FriendRequestsRecyclerViewAdapter.Factory();
         AndroidUtils.createListConfiguration(view, friendRequestsList)
@@ -115,6 +118,16 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
     @Override
     public void finishRefresh() {
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void showFriendAccepted() {
+        showAlert(view.getString(R.string.friend_accepted));
+    }
+
+    @Override
+    public void showFriendRejected() {
+        showAlert(view.getString(R.string.friend_rejected));
     }
 
     @Override

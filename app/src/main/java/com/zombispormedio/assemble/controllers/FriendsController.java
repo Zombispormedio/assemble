@@ -134,4 +134,12 @@ public class FriendsController extends Controller {
     public void onDestroy() {
         ctx=null;
     }
+
+    public void onFriendTabEnter() {
+        friendSubscription.load();
+    }
+
+    public void onFriendRequestTab() {
+        friendRequestSubscription.load();
+    }
 }
