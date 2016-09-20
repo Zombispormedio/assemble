@@ -27,10 +27,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:id="@+id/save_button"
-                    android:background="@null"
+                    style="@style/Widget.AppCompat.Button.Borderless"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
-                    android:textColor="#FFF"
+                    android:background="?attr/selectableItemBackgroundBorderless"
                     android:text="@string/save_title"/>
         </android.support.v7.widget.Toolbar>
 

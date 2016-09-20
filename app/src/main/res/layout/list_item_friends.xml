@@ -65,7 +65,8 @@
             android:layout_height="50dp"
             android:layout_gravity="right|center_vertical"
             android:layout_marginRight="15sp"
-            android:background="@android:color/transparent"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/close"
             />
 

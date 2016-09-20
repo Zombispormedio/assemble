@@ -4,6 +4,7 @@ package com.zombispormedio.assemble.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,9 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     @BindView(R.id.meetings_list)
     RecyclerView meetingsList;
 
+    @BindView(R.id.meetings_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private MeetingsRecyclerViewAdapter.Factory meetingsListFactory;
 
     private MeetingsRecyclerViewAdapter meetingsListAdapter;
@@ -50,6 +54,8 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
 
         setupMeetings();
 
+        setupRefresh();
+
         ctrl.onCreate();
     }
 
@@ -64,10 +70,24 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
         meetingsList.setAdapter(meetingsListAdapter);
     }
 
+    private void setupRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finishRefresh();
+            }
+        });
+    }
+
     @Override
     public void bindMeetings(ArrayList<Meeting> data) {
-            meetingsListAdapter.setData(data);
-            meetingsListAdapter.notifyDataSetChanged();
+        meetingsListAdapter.setData(data);
+        meetingsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void finishRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 

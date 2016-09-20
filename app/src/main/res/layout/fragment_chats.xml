@@ -5,41 +5,47 @@
         tools:context=".fragments.ChatsFragment"
         >
 
-    <ScrollView
+    <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/chats_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >
 
-        <LinearLayout
+        <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
+                android:layout_height="match_parent"
                 >
 
-            <android.support.v7.widget.RecyclerView
-                    android:id="@+id/chats_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    />
-
-            <FrameLayout
-                    android:id="@+id/no_more_chats_layout"
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal|bottom"
+                    android:orientation="vertical"
                     >
 
-                <TextView
-                        android:layout_width="wrap_content"
+                <android.support.v7.widget.RecyclerView
+                        android:id="@+id/chats_list"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        />
+
+                <FrameLayout
+                        android:id="@+id/no_more_chats_layout"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal|bottom"
-                        android:layout_marginBottom="100sp"
-                        android:layout_marginTop="25sp"
-                        android:text="@string/no_more_chats"
-                        android:textAppearance="?android:attr/textAppearanceLarge"
-                        />
-            </FrameLayout>
-        </LinearLayout>
-    </ScrollView>
+                        >
 
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal|bottom"
+                            android:layout_marginBottom="100sp"
+                            android:layout_marginTop="25sp"
+                            android:text="@string/no_more_chats"
+                            android:textAppearance="?android:attr/textAppearanceLarge"
+                            />
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </FrameLayout>

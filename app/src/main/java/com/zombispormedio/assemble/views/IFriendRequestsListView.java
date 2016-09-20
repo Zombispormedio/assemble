@@ -11,4 +11,6 @@ public interface IFriendRequestsListView extends IFragmentView {
 
     void bindFriendRequests(ArrayList<FriendRequestProfile> data);
 
+    void finishRefresh();
+
 }

@@ -28,6 +28,7 @@
 
 
         <android.support.design.widget.FloatingActionButton
+                android:foreground="?attr/selectableItemBackground"
                 android:id="@+id/chat_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,6 +42,7 @@
                 />
 
         <android.support.design.widget.FloatingActionButton
+                android:foreground="?attr/selectableItemBackground"
                 android:id="@+id/team_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -55,6 +57,7 @@
                 />
 
         <android.support.design.widget.FloatingActionButton
+                android:foreground="?attr/selectableItemBackground"
                 android:id="@+id/meeting_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

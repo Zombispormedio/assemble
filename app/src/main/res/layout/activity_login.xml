@@ -163,13 +163,15 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:clickable="true"
-                android:paddingTop="10sp"
+                android:layout_marginTop="10sp"
+                android:padding="5sp"
                 android:text="@string/register_link_text"
                 android:textColor="@android:color/white"
                 android:textColorHighlight="@color/colorPrimary"
                 android:textColorLink="@color/colorPrimary"
                 android:textIsSelectable="false"
                 android:textSize="25sp"
+                android:background="?attr/selectableItemBackground"
                 />
 
 

@@ -2,9 +2,11 @@ package com.zombispormedio.assemble.models.resources;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.services.interfaces.IAuthService;
+import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import javax.inject.Inject;
 
@@ -39,8 +41,20 @@ public class UserResource {
 
 
     public void signOut(final IServiceHandler<Result, Error> handler) {
-        auth.signOut(handler);
-        //Realm.getDefaultInstance().deleteAll();
+        auth.signOut(new ServiceHandler<Result, Error>() {
+            @Override
+            public void onError(Error error) {
+                handler.onError(error);
+            }
+
+            @Override
+            public void onSuccess(Result result) {
+                LocalStorage.Configuration.deleteAll();
+                handler.onSuccess(result);
+            }
+
+        });
+
     }
 
 

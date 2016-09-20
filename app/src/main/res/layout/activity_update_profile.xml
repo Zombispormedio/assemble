@@ -141,7 +141,6 @@
                     android:layout_gravity="right"
                     style="@style/Widget.AppCompat.Button.Borderless"
                     android:text="@string/save_title"
-                    android:textColor="#FFF"
                     android:background="?attr/selectableItemBackgroundBorderless"
                     />
         </android.support.v7.widget.Toolbar>

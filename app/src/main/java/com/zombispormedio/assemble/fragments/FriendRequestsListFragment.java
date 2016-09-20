@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,9 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
     @BindView(R.id.req_friends_list)
     RecyclerView friendRequestsList;
 
+    @BindView(R.id.friend_requests_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private FriendRequestsListController ctrl;
 
     private FriendRequestsRecyclerViewAdapter.Factory friendRequestsListFactory;
@@ -43,11 +47,15 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        view=(FriendsActivity)getActivity();
+        view = (FriendsActivity) getActivity();
         bindView(this, view);
-        ctrl= new FriendRequestsListController(this);
+        ctrl = new FriendRequestsListController(this);
 
         setupRequestFriends();
+
+        setupRefresh();
+
+        setupRefresh();
 
         ctrl.onCreate();
     }
@@ -60,14 +68,28 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
                 .scrolling(false)
                 .configure();
         friendRequestsListFactory.setOnClickListener(ctrl.getOnClickOneRequest());
-        friendRequestsListAdapter=friendRequestsListFactory.make();
+        friendRequestsListAdapter = friendRequestsListFactory.make();
         friendRequestsList.setAdapter(friendRequestsListAdapter);
+    }
+
+    private void setupRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finishRefresh();
+            }
+        });
     }
 
     @Override
     public void bindFriendRequests(ArrayList<FriendRequestProfile> data) {
         friendRequestsListAdapter.setData(data);
         friendRequestsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void finishRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

@@ -11,5 +11,6 @@ public interface IChatsView extends IFragmentView{
 
     void bindChats(ArrayList<Chat> data);
 
+    void finishRefresh();
 
 }

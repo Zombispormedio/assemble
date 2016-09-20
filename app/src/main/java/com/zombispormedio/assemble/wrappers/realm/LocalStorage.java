@@ -130,5 +130,14 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         public void setDatabase(Realm database) {
             this.database = database;
         }
+
+        public static void deleteAll(){
+            Realm realm=ourInstance.database;
+
+            realm.beginTransaction();
+            realm.deleteAll();
+            realm.commitTransaction();
+
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +27,9 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     @BindView(R.id.friends_list)
     RecyclerView friendsList;
 
+    @BindView(R.id.friends_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private FriendsListController ctrl;
 
     private FriendsRecyclerViewAdapter.Factory friendsListFactory;
@@ -48,6 +52,8 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
 
         setupFriends();
 
+        setupRefresh();
+
         ctrl.onCreate();
     }
 
@@ -64,10 +70,24 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
         friendsList.setAdapter(friendsListAdapter);
     }
 
+    private void setupRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finishRefresh();
+            }
+        });
+    }
+
     @Override
     public void bindFriends(ArrayList<FriendProfile> data) {
         friendsListAdapter.setData(data);
         friendsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void finishRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override

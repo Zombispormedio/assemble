@@ -11,4 +11,6 @@ public interface IFriendsListView extends IFragmentView{
 
     void bindFriends(ArrayList<FriendProfile> data);
 
+    void finishRefresh();
+
 }

@@ -11,4 +11,5 @@ public interface ITeamsView extends IFragmentView{
 
      void bindTeams(ArrayList<Team> data );
 
+     void finishRefresh();
 }

@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,9 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     @BindView(R.id.chats_list)
     RecyclerView chatsList;
 
+    @BindView(R.id.chats_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private ChatsRecyclerViewAdapter.Factory chatsListFactory;
 
     private ChatsRecyclerViewAdapter chatsListAdapter;
@@ -50,8 +54,12 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
 
         setupChats();
 
+        setupRefresh();
+
         ctrl.onCreate();
     }
+
+
 
     private void setupChats() {
         chatsListFactory = new ChatsRecyclerViewAdapter.Factory();
@@ -64,10 +72,24 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
         chatsList.setAdapter(chatsListAdapter);
     }
 
+    private void setupRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finishRefresh();
+            }
+        });
+    }
+
     @Override
     public void bindChats(ArrayList<Chat> data) {
         chatsListAdapter.setData(data);
         chatsListAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void finishRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
     }
 
 

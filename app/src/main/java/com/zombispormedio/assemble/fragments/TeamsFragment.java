@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -30,6 +31,9 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     @BindView(R.id.teams_list)
     RecyclerView teamsList;
 
+    @BindView(R.id.teams_refresh)
+    SwipeRefreshLayout swipeRefreshLayout;
+
     private TeamsRecyclerViewAdapter.Factory teamsListFactory;
 
     private TeamsRecyclerViewAdapter teamsListAdapter;
@@ -49,7 +53,18 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
 
         setupTeams();
 
+        setupRefresh();
+
         ctrl.onCreate();
+    }
+
+    private void setupRefresh() {
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                finishRefresh();
+            }
+        });
     }
 
 
@@ -60,17 +75,22 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
                 .scrolling(false)
                 .configure();
         teamsListFactory.setOnClickListener(ctrl.getOnClickOneTeam());
-        teamsListAdapter=teamsListFactory.make();
+        teamsListAdapter = teamsListFactory.make();
         teamsList.setAdapter(teamsListAdapter);
     }
 
 
     @Override
     public void bindTeams(ArrayList<Team> data) {
-            teamsListAdapter.setData(data);
-            teamsListAdapter.notifyDataSetChanged();
+        teamsListAdapter.setData(data);
+        teamsListAdapter.notifyDataSetChanged();
     }
-    
+
+    @Override
+    public void finishRefresh() {
+        swipeRefreshLayout.setRefreshing(false);
+    }
+
 
     @Override
     public void onDestroy() {

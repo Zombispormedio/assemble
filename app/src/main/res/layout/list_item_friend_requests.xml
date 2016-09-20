@@ -87,26 +87,27 @@
     </FrameLayout>
 
 
-    <ImageView
+    <ImageButton
             android:id="@+id/accept_fab"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="15dp"
-            android:background="@android:color/transparent"
-            android:elevation="2dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/check_friend_list_icon"
+            android:padding="5dp"
             />
 
-    <ImageView
+    <ImageButton
             android:id="@+id/reject_fab"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="75sp"
-            android:background="@android:color/transparent"
-            android:elevation="2dp"
+            android:layout_marginRight="70sp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/close_friend_list_icon"
+            android:padding="5dp"
             />
 
 

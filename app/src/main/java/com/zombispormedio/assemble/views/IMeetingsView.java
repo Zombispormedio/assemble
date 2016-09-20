@@ -11,4 +11,6 @@ public interface IMeetingsView extends IFragmentView{
 
     void bindMeetings(ArrayList<Meeting> data );
 
+    void finishRefresh();
+
 }
