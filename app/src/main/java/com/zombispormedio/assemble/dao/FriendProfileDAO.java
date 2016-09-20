@@ -37,12 +37,14 @@ public class FriendProfileDAO extends RealmObject implements IBaseDAO<FriendProf
 
     public String sign_up_at;
 
+    public boolean in_request;
+
 
     @Override
     public FriendProfile toModel() {
         return  new FriendProfile(id, email, username,
                 full_avatar_url, large_avatar_url, medium_avatar_url, thumb_avatar_url,
-                birth_date, location, bio, sign_up_at);
+                birth_date, location, bio, sign_up_at, in_request);
     }
 
     @Override
@@ -58,6 +60,7 @@ public class FriendProfileDAO extends RealmObject implements IBaseDAO<FriendProf
         this.location = model.location;
         this.bio = model.bio;
         this.sign_up_at = model.sign_up_at;
+        this.in_request=model.in_request;
         return this;
     }
 

@@ -6,12 +6,16 @@ package com.zombispormedio.assemble.models;
 public class FriendProfile extends Profile {
 
 
+    public boolean in_request;
+
     public FriendProfile(int id, String email, String username, String full_avatar_url, String large_avatar_url,
             String medium_avatar_url, String thumb_avatar_url, String birth_date, String location, String bio,
-            String sign_up_at) {
+            String sign_up_at, boolean in_request) {
         super(id, email, username, full_avatar_url, large_avatar_url, medium_avatar_url, thumb_avatar_url, birth_date, location,
                 bio,
                 sign_up_at);
+
+        this.in_request=in_request;
     }
 
     public FriendProfile() {

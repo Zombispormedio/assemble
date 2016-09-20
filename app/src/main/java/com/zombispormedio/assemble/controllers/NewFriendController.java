@@ -2,10 +2,13 @@ package com.zombispormedio.assemble.controllers;
 
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.Result;
+import com.zombispormedio.assemble.views.INewFriendHolder;
 import com.zombispormedio.assemble.views.INewFriendView;
 
 import java.util.ArrayList;
@@ -26,15 +29,6 @@ public class NewFriendController extends Controller {
         friendResource=getResourceComponent().provideFriendResource();
     }
 
-    public IOnClickItemListHandler<FriendProfile> getOnClickOneFriend() {
-        return  new IOnClickItemListHandler<FriendProfile>() {
-            @Override
-            public void onClick(int position, FriendProfile data) {
-                Logger.d(position);
-                Logger.d(data);
-            }
-        };
-    }
 
     public void onSearch() {
         String searchText=ctx.getSearchText();
@@ -57,5 +51,31 @@ public class NewFriendController extends Controller {
                 ctx.hideProgress();
             }
         });
+    }
+
+    public void onItemClick(int position, FriendProfile data) {
+        Logger.d(position);
+        Logger.d(data);
+    }
+
+    public void onAddFriendClick(int position, FriendProfile data, final INewFriendHolder holder) {
+        holder.showProgress();
+
+        friendResource.requestNewFriend(data.id, new ServiceHandler<Result, Error>() {
+            @Override
+            public void onError(Error error) {
+                ctx.showAlert(error.msg);
+            }
+
+            @Override
+            public void onSuccess(Result result) {
+                ctx.showFriendRequestSent();
+                holder.hideProgress();
+                holder.setFriendChecked(true);
+            }
+
+        });
+
+
     }
 }

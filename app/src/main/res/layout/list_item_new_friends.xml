@@ -59,4 +59,29 @@
 
     </LinearLayout>
 
+    <FrameLayout
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="20sp"
+            android:layout_gravity="right|center_vertical"
+            >
+        <ImageButton
+                android:id="@+id/add_friend_button"
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/account_plus"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:foreground="?attr/selectableItemBackgroundBorderless"
+                />
+
+        <ProgressBar
+                style="?android:attr/progressBarStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/progress_bar"
+                />
+    </FrameLayout>
+
+
+
 </FrameLayout>

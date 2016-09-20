@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.models.resources;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.services.interfaces.IFriendService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
 
@@ -25,5 +26,9 @@ public class FriendResource extends ConceptResource<FriendProfile> {
 
     public void searchNewFriends(String param, final IServiceHandler<ArrayList<FriendProfile>, Error> handler){
         apiService.searchNewFriends(param, handler);
+    }
+
+    public void requestNewFriend(int id, final IServiceHandler<Result, Error> handler){
+        apiService.requestNewFriend(id, handler);
     }
 }

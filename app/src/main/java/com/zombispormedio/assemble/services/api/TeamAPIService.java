@@ -25,22 +25,9 @@ public class TeamAPIService implements ITeamService {
     @Override
     public void getAll(final IServiceHandler<ArrayList<Team>, Error> handler) {
         api.RestWithAuth("/teams")
-                .handler(deferTeams(handler))
+                .handler(DeferUtils.deferTeams(handler))
                 .get();
     }
 
-    private PromiseHandler deferTeams(IServiceHandler<ArrayList<Team>, Error> handler){
-        return new PromiseHandler<TeamsResponse,  ArrayList<Team>>(handler){
 
-            @Override
-            protected TeamsResponse getResponse(String arg) throws IOException {
-                return JsonBinder.toTeamsResponse(arg);
-            }
-
-            @Override
-            protected ArrayList<Team> getResult(TeamsResponse res) {
-                return res.getResult();
-            }
-        };
-    }
 }

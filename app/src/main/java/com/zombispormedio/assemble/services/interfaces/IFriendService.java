@@ -4,6 +4,7 @@ import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.Result;
 
 import java.util.ArrayList;
 
@@ -15,6 +16,7 @@ public interface IFriendService {
 
     void getFriendRequests(final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler);
 
-
     void searchNewFriends(String paramSearch, final IServiceHandler<ArrayList<FriendProfile>, Error> handler);
+
+    void requestNewFriend(int friendId, final IServiceHandler<Result, Error> handler);
 }

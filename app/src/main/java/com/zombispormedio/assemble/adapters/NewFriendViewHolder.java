@@ -1,28 +1,40 @@
 package com.zombispormedio.assemble.adapters;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
+import com.zombispormedio.assemble.views.INewFriendHolder;
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Xavier Serrano on 17/09/2016.
  */
-public class NewFriendViewHolder extends AbstractViewHolder<FriendProfile> {
+public class NewFriendViewHolder extends AbstractViewHolder<FriendProfile> implements INewFriendHolder {
 
 
     private View view;
 
     private IOnClickItemListHandler<FriendProfile> listener;
+
+    private IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener;
 
     @BindView(R.id.username_label)
     TextView usernameLabel;
@@ -33,22 +45,38 @@ public class NewFriendViewHolder extends AbstractViewHolder<FriendProfile> {
     @BindView(R.id.image_view)
     ImageView imageView;
 
+    @BindView(R.id.add_friend_button)
+    ImageButton addFriendButton;
+
+    @BindDrawable(R.drawable.account_check)
+    Drawable accountCheckDrawable;
+
+    @BindDrawable(R.drawable.account_plus)
+    Drawable accountPlusDrawable;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
     public NewFriendViewHolder(View view) {
         super(view);
         this.view = view;
         this.listener = null;
+        this.addFriendListener = null;
         setup();
 
     }
 
     private void setup() {
         ButterKnife.bind(this, view);
+        hideProgress();
     }
 
     @Override
     public void bind(int position, FriendProfile itemData) {
         bindData(itemData);
         setupOnClickListener(position, itemData);
+        setupAddFriendButton(position, itemData);
+
     }
 
     private void setupOnClickListener(final int position, final FriendProfile itemData) {
@@ -63,19 +91,34 @@ public class NewFriendViewHolder extends AbstractViewHolder<FriendProfile> {
         });
     }
 
+    private void setupAddFriendButton(final int position, final FriendProfile itemData) {
+        final INewFriendHolder holder = this;
+        addFriendButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (addFriendListener != null) {
+                    addFriendListener.onClick(position, itemData, holder);
+                }
+            }
+        });
+    }
+
 
     private void bindData(FriendProfile itemData) {
         usernameLabel.setText(itemData.username);
         emailLabel.setText(itemData.email);
         setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
+
+        setFriendChecked(itemData.in_request);
+
     }
 
-    private void setupImage(String url, String letter){
-        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(view.getContext(), imageView)
+    private void setupImage(String url, String letter) {
+        ImageUtils.ImageBuilder builder = new ImageUtils.ImageBuilder(view.getContext(), imageView)
                 .letter(letter)
                 .circle(true);
-        if(Utils.presenceOf(url)){
-            builder=builder.url(url);
+        if (Utils.presenceOf(url)) {
+            builder = builder.url(url);
         }
 
         builder.build();
@@ -84,5 +127,35 @@ public class NewFriendViewHolder extends AbstractViewHolder<FriendProfile> {
 
     public void setOnClickListener(IOnClickItemListHandler<FriendProfile> listener) {
         this.listener = listener;
+    }
+
+    public void setAddFriendListener(
+            IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener) {
+        this.addFriendListener = addFriendListener;
+    }
+
+    @Override
+    public void setFriendChecked(boolean checked) {
+
+        if (checked) {
+            addFriendButton.setEnabled(false);
+            addFriendButton.setImageDrawable(accountCheckDrawable);
+        } else {
+            addFriendButton.setEnabled(true);
+            addFriendButton.setImageDrawable(accountPlusDrawable);
+        }
+
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.VISIBLE);
+        addFriendButton.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void hideProgress() {
+        progressBar.setVisibility(View.GONE);
+        addFriendButton.setVisibility(View.VISIBLE);
     }
 }

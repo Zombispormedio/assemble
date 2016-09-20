@@ -10,14 +10,10 @@ import java.util.Arrays;
 /**
  * Created by Xavier Serrano on 25/08/2016.
  */
-public class FriendsResponse extends AbstractResponse<FriendProfile[]> {
+public class FriendsResponse extends ArrayResponse<FriendProfile> {
 
     public FriendsResponse(boolean success, Error error,
             FriendProfile[] result) {
         super(success, error, result);
-    }
-
-    public ArrayList<FriendProfile> getResult() {
-        return new ArrayList<>(Arrays.asList(result));
     }
 }

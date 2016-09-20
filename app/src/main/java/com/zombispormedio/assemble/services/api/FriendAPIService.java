@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
+import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.net.responses.FriendsResponse;
 import com.zombispormedio.assemble.services.interfaces.IFriendService;
@@ -27,14 +28,14 @@ public class FriendAPIService implements IFriendService {
     @Override
     public void getFriends(final IServiceHandler<ArrayList<FriendProfile>, Error> handler) {
         api.RestWithAuth("/friends")
-                .handler(deferFriends(handler))
+                .handler(DeferUtils.deferFriends(handler))
                 .get();
     }
 
     @Override
     public void getFriendRequests(final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler) {
         api.RestWithAuth("/friend_requests")
-                .handler(deferFriendRequests(handler))
+                .handler(DeferUtils.deferFriendRequests(handler))
                 .get();
     }
 
@@ -42,37 +43,18 @@ public class FriendAPIService implements IFriendService {
     public void searchNewFriends(String paramSearch, final IServiceHandler<ArrayList<FriendProfile>, Error> handler) {
         api.RestWithAuth("/new_friends/:search_text")
                 .params("search_text", paramSearch)
-                .handler(deferFriends(handler))
+                .handler(DeferUtils.deferFriends(handler))
                 .get();
     }
 
-
-    private PromiseHandler deferFriends(IServiceHandler<ArrayList<FriendProfile>, Error> handler){
-        return new PromiseHandler<FriendsResponse,ArrayList<FriendProfile>>(handler) {
-            @Override
-            protected FriendsResponse getResponse(String arg) throws IOException {
-                return JsonBinder.toFriendsResponse(arg);
-            }
-
-            @Override
-            protected ArrayList<FriendProfile> getResult(FriendsResponse res) {
-                return res.getResult();
-            }
-        };
+    @Override
+    public void requestNewFriend(int friendId, IServiceHandler<Result, Error> handler) {
+        api.RestWithAuth("/new_friend/:id")
+                .params("id", friendId)
+                .handler(DeferUtils.defer(handler))
+                .post();
     }
 
-    private PromiseHandler deferFriendRequests(IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler){
 
-        return new PromiseHandler<FriendRequestsResponse, ArrayList<FriendRequestProfile>>(handler) {
-            @Override
-            protected FriendRequestsResponse getResponse(String arg) throws IOException {
-                return JsonBinder.toFriendRequestsResponse(arg);
-            }
 
-            @Override
-            protected ArrayList<FriendRequestProfile> getResult(FriendRequestsResponse res) {
-                return res.getResult();
-            }
-        };
-    }
 }

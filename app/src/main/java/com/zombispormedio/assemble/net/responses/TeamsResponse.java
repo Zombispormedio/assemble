@@ -10,13 +10,10 @@ import java.util.Arrays;
 /**
  * Created by Xavier Serrano on 04/09/2016.
  */
-public class TeamsResponse extends AbstractResponse<Team[]>  {
+public class TeamsResponse extends ArrayResponse<Team>  {
 
     public TeamsResponse(boolean success, Error error,
             Team[] result) {
         super(success, error, result);
-    }
-    public ArrayList<Team> getResult() {
-        return new ArrayList<>(Arrays.asList(result));
     }
 }

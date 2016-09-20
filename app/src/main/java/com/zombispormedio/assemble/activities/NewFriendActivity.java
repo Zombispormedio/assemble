@@ -14,8 +14,11 @@ import android.widget.TextView;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.NewFriendsRecyclerViewAdapter;
 import com.zombispormedio.assemble.controllers.NewFriendController;
+import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.views.INewFriendHolder;
 import com.zombispormedio.assemble.views.INewFriendView;
 
 import java.util.ArrayList;
@@ -100,7 +103,19 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
                 .divider(true)
                 .itemAnimation(true)
                 .configure();
-        friendsListFactory.setOnClickListener(ctrl.getOnClickOneFriend());
+        friendsListFactory.setOnClickListener(new IOnClickItemListHandler<FriendProfile>() {
+            @Override
+            public void onClick(int position, FriendProfile data) {
+                ctrl.onItemClick(position, data);
+            }
+        });
+
+        friendsListFactory.setAddFriendListener(new IOnClickComponentItemHandler<FriendProfile, INewFriendHolder>() {
+            @Override
+            public void onClick(int position, FriendProfile data, INewFriendHolder holder) {
+                ctrl.onAddFriendClick(position, data, holder);
+            }
+        });
 
         friendsListAdapter = friendsListFactory.make();
         friendsList.setAdapter(friendsListAdapter);
@@ -125,6 +140,11 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
     @Override
     public void hideProgress() {
         progressDialog.dismiss();
+    }
+
+    @Override
+    public void showFriendRequestSent() {
+        showAlert(getString(R.string.friend_request_sent));
     }
 
     @Override

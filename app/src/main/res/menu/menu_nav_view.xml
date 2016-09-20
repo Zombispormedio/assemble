@@ -5,7 +5,7 @@
         android:icon="@drawable/account_card_details"
         android:title="@string/p_menu"/>
     <item android:id="@+id/friends_menu"
-        android:icon="@drawable/account_multiple_plus"
+        android:icon="@drawable/account_multiple"
         android:title="@string/friends_title"/>
 </group>
     <group android:checkableBehavior="single" android:id="@+id/options_group_menu">

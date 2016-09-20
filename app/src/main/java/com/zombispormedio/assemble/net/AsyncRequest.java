@@ -48,8 +48,11 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
                         result = rest.post(req.getBody());
                     } else {
                         FileBody file = req.getFile();
-
-                        result = rest.post(file);
+                        if(file!=null){
+                            result = rest.post(file);
+                        }else{
+                            result=rest.post();
+                        }
                     }
 
                     break;

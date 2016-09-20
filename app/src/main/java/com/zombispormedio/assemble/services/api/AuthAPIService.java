@@ -27,7 +27,7 @@ public class AuthAPIService implements IAuthService {
     public void checkAccess(final IServiceHandler<Result, Error> handler) {
 
         api.RestWithAuth("/check_user")
-                .handler(defer(handler))
+                .handler(DeferUtils.defer(handler))
                 .get();
 
     }
@@ -36,7 +36,7 @@ public class AuthAPIService implements IAuthService {
     public void login(String email, String password, final IServiceHandler<Result, Error> handler) {
         Auth user = new Auth(email, password);
         api.Rest("/login")
-                .handler(defer(handler))
+                .handler(DeferUtils.defer(handler))
                 .post(JsonBinder.fromAuth(user));
     }
 
@@ -44,22 +44,20 @@ public class AuthAPIService implements IAuthService {
     public void register(String email, String password, final IServiceHandler<Result, Error> handler) {
         Auth user = new Auth(email, password);
         api.Rest("/signup")
-                .handler(defer(handler))
+                .handler(DeferUtils.defer(handler))
                 .post(JsonBinder.fromAuth(user));
     }
 
     @Override
     public void signOut(final IServiceHandler<Result, Error> handler) {
         api.RestWithAuth("/signout")
-                .handler(defer(handler))
+                .handler(DeferUtils.defer(handler))
                 .get();
     }
 
 
 
-    private PromiseHandler defer(IServiceHandler<Result, Error>  handler){
-       return  new PromiseHandler<DefaultResponse, Result>(handler);
-    }
+
 
 
 }

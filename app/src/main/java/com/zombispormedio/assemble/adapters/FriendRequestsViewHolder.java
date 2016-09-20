@@ -29,9 +29,6 @@ public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestPr
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
-    @BindView(R.id.email_label)
-    TextView emailLabel;
-
     @BindView(R.id.image_view)
     ImageView imageView;
 
@@ -66,7 +63,6 @@ public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestPr
 
     private void bindData(FriendRequestProfile itemData) {
         usernameLabel.setText(itemData.username);
-        emailLabel.setText(itemData.email);
         setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
     }
 

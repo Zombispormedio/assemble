@@ -33,14 +33,14 @@ public class ProfileAPIService implements IProfileService {
     @Override
     public void retrieve(final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile")
-                .handler(createProfilePromise(handler))
+                .handler(DeferUtils.deferProfile(handler))
                 .get();
     }
 
     @Override
     public void changeAvatar(File file, final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile/avatar")
-                .handler(createProfilePromise(handler))
+                .handler(DeferUtils.deferProfile(handler))
                 .patch(new FileBody(file, "image/*", "avatar", file.getName()));
     }
 
@@ -48,18 +48,11 @@ public class ProfileAPIService implements IProfileService {
     @Override
     public void update(EditProfile profile, final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile")
-                .handler(createProfilePromise(handler))
+                .handler(DeferUtils.deferProfile(handler))
                 .put(JsonBinder.fromEditProfile(profile));
     }
 
-    private PromiseHandler createProfilePromise(IServiceHandler<UserProfile, Error> handler){
-        return new PromiseHandler<ProfileResponse, UserProfile>(handler){
-            @Override
-            protected ProfileResponse getResponse(String arg) throws IOException {
-                return JsonBinder.toProfileResponse(arg);
-            }
-        };
-    }
+
 
 
 }

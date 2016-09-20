@@ -9,14 +9,11 @@ import java.util.Arrays;
 /**
  * Created by Xavier Serrano on 06/09/2016.
  */
-public class MeetingsResponse extends  AbstractResponse<Meeting[]>{
+public class MeetingsResponse extends  ArrayResponse<Meeting>{
 
     public MeetingsResponse(boolean success, Error error,
             Meeting[] result) {
         super(success, error, result);
     }
 
-    public ArrayList<Meeting> getResult() {
-        return new ArrayList<>(Arrays.asList(result));
-    }
 }

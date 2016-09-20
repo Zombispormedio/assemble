@@ -65,6 +65,19 @@ public class RestWrapper {
         return res.body().string();
     }
 
+
+    public String post() throws IOException, JSONException {
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody reqBody = RequestBody.create(mediaType, "{}");
+
+        Request req = builder.post(reqBody)
+                .build();
+
+        okhttp3.Response res = client.newCall(req).execute();
+
+        return res.body().string();
+    }
+
     public String post(FileBody file) throws IOException, JSONException {
         MediaType mediaType = MediaType.parse(file.getMediaType());
         RequestBody reqBody = new MultipartBody.Builder()

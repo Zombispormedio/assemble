@@ -18,5 +18,7 @@ public interface INewFriendView extends IBaseView {
 
     void hideProgress();
 
+    void showFriendRequestSent();
+
 
 }

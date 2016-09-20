@@ -27,22 +27,10 @@ public class ChatAPIService implements IChatService {
     @Override
     public void getAll(final IServiceHandler<ArrayList<Chat>, Error> handler) {
         api.RestWithAuth("/chats")
-                .handler(deferChats(handler))
+                .handler(DeferUtils.deferChats(handler))
                 .get();
     }
 
 
-    private PromiseHandler deferChats(IServiceHandler<ArrayList<Chat>, Error> handler){
-        return new PromiseHandler<ChatsResponse, ArrayList<Chat>>(handler){
-            @Override
-            protected ChatsResponse getResponse(String arg) throws IOException {
-                return JsonBinder.toChatsResponse(arg);
-            }
 
-            @Override
-            protected ArrayList<Chat> getResult(ChatsResponse res) {
-                return res.getResult();
-            }
-        };
-    }
 }
