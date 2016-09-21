@@ -61,8 +61,6 @@ public class BaseActivity extends AppCompatActivity implements IBaseView{
     }
 
 
-
-
     protected void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

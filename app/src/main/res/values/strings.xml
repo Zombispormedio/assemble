@@ -83,5 +83,8 @@
     <string name="friend_accepted">Friend request accepted</string>
     <string name="friend_rejected">Friend request rejected</string>
     <string name="removed_friend">Removed friend</string>
+    <string name="add_participants">Add participants</string>
+    <string name="selected_participants">%1$d of %2$d selected</string>
+    <string name="title_activity_second_step_team">SecondStepTeamActivity</string>
 
 </resources>

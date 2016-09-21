@@ -84,6 +84,8 @@
     <string name="friend_accepted">Petición de amistad aceptada</string>
     <string name="friend_rejected">Petición de amistad rechazada</string>
     <string name="removed_friend">Amigo eliminado</string>
+    <string name="add_participants">Añadir participantes</string>
+    <string name="selected_participants">%1$d de %2$d seleccionado</string>
 
 
 </resources>

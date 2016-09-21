@@ -7,7 +7,7 @@ import android.content.Intent;
 
 import com.zombispormedio.assemble.activities.CreateChatActivity;
 import com.zombispormedio.assemble.activities.CreateMeetingActivity;
-import com.zombispormedio.assemble.activities.CreateTeamActivity;
+import com.zombispormedio.assemble.activities.FirstStepTeamActivity;
 import com.zombispormedio.assemble.activities.FriendsActivity;
 import com.zombispormedio.assemble.activities.HelpActivity;
 import com.zombispormedio.assemble.activities.HomeActivity;
@@ -112,7 +112,7 @@ public final class NavigationManager {
 
     public static void CreateChat(Context ctx){goTo(ctx, CreateChatActivity.class);}
 
-    public static void CreateTeam(Context ctx){goTo(ctx, CreateTeamActivity.class);}
+    public static void CreateTeam(Context ctx){goTo(ctx, FirstStepTeamActivity.class);}
 
     public static void CreateMeeting(Context ctx){goTo(ctx, CreateMeetingActivity.class);}
 

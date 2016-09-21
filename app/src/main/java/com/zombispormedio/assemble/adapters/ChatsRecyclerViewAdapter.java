@@ -15,6 +15,8 @@ import java.util.ArrayList;
  */
 public class ChatsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Chat, ChatViewHolder> {
 
+    private IOnClickItemListHandler<Chat> listener;
+
     public ChatsRecyclerViewAdapter(ArrayList<Chat> data) {
         super(data);
     }
@@ -28,7 +30,14 @@ public class ChatsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Chat, Chat
         return holder;
     }
 
-    public static class Factory extends BaseRecyclerViewAdapter.Factory<ChatsRecyclerViewAdapter, Chat>{
+    public void setOnClickListener(
+            IOnClickItemListHandler<Chat> listener) {
+        this.listener = listener;
+    }
+
+    public static class Factory{
+
+        private IOnClickItemListHandler<Chat> listener;
 
         public ChatsRecyclerViewAdapter make(){
             return make(new ArrayList<Chat>());
@@ -36,7 +45,13 @@ public class ChatsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Chat, Chat
 
         public ChatsRecyclerViewAdapter make(ArrayList<Chat> data) {
             ChatsRecyclerViewAdapter adapter = new ChatsRecyclerViewAdapter(data);
-            return super.make(adapter);
+            adapter.setOnClickListener(listener);
+            return adapter;
+        }
+
+        public void setOnClickListener(
+                IOnClickItemListHandler<Chat> listener) {
+            this.listener = listener;
         }
     }
 }

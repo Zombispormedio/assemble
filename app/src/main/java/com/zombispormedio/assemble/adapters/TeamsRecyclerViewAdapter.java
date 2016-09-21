@@ -16,6 +16,8 @@ import java.util.ArrayList;
  */
 public class TeamsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Team, TeamViewHolder> {
 
+    private IOnClickItemListHandler<Team> listener;
+
     public TeamsRecyclerViewAdapter(ArrayList<Team> data) {
         super(data);
     }
@@ -30,8 +32,14 @@ public class TeamsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Team, Team
         return holder;
     }
 
+    public void setOnClickListener(
+            IOnClickItemListHandler<Team> listener) {
+        this.listener = listener;
+    }
 
-    public static class Factory extends BaseRecyclerViewAdapter.Factory<TeamsRecyclerViewAdapter, Team> {
+    public static class Factory{
+
+        private IOnClickItemListHandler<Team> listener;
 
         public TeamsRecyclerViewAdapter make() {
             return make(new ArrayList<Team>());
@@ -39,7 +47,13 @@ public class TeamsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Team, Team
 
         public TeamsRecyclerViewAdapter make(ArrayList<Team> data) {
             TeamsRecyclerViewAdapter adapter = new TeamsRecyclerViewAdapter(data);
-            return super.make(adapter);
+            adapter.setOnClickListener(listener);
+            return adapter;
+        }
+
+        public void setOnClickListener(
+                IOnClickItemListHandler<Team> listener) {
+            this.listener = listener;
         }
     }
 }

@@ -19,6 +19,8 @@ public class NewFriendsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Frien
 
     private IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener;
 
+    private IOnClickItemListHandler<FriendProfile> listener;
+
     public NewFriendsRecyclerViewAdapter(ArrayList<FriendProfile> data) {
         super(data);
     }
@@ -41,9 +43,16 @@ public class NewFriendsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Frien
         this.addFriendListener = addFriendListener;
     }
 
-    public static class Factory extends BaseRecyclerViewAdapter.Factory<NewFriendsRecyclerViewAdapter, FriendProfile> {
+    public void setOnClickListener(
+            IOnClickItemListHandler<FriendProfile> listener) {
+        this.listener = listener;
+    }
+
+    public static class Factory  {
 
         private IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener;
+
+        private IOnClickItemListHandler<FriendProfile> listener;
 
         public Factory() {
             addFriendListener=null;
@@ -64,7 +73,14 @@ public class NewFriendsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Frien
 
             adapter.setAddFriendListener(addFriendListener);
 
-            return super.make(adapter);
+            adapter.setOnClickListener(listener);
+
+            return adapter;
+        }
+
+        public void setOnClickListener(
+                IOnClickItemListHandler<FriendProfile> listener) {
+            this.listener = listener;
         }
     }
 }

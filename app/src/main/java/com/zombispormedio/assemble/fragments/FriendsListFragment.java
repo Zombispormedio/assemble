@@ -10,13 +10,13 @@ import android.view.ViewGroup;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.FriendsActivity;
-import com.zombispormedio.assemble.adapters.FriendsRecyclerViewAdapter;
+import com.zombispormedio.assemble.adapters.MainFriendsRecyclerViewAdapter;
 import com.zombispormedio.assemble.controllers.FriendsListController;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.IFriendHolder;
+import com.zombispormedio.assemble.views.IMainFriendHolder;
 import com.zombispormedio.assemble.views.IFriendsListView;
 
 import java.util.ArrayList;
@@ -35,9 +35,9 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
 
     private FriendsListController ctrl;
 
-    private FriendsRecyclerViewAdapter.Factory friendsListFactory;
+    private MainFriendsRecyclerViewAdapter.Factory friendsListFactory;
 
-    private FriendsRecyclerViewAdapter friendsListAdapter;
+    private MainFriendsRecyclerViewAdapter friendsListAdapter;
 
 
     @Override
@@ -61,7 +61,7 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     }
 
     private void setupFriends() {
-        friendsListFactory = new FriendsRecyclerViewAdapter.Factory();
+        friendsListFactory = new MainFriendsRecyclerViewAdapter.Factory();
         AndroidUtils.createListConfiguration(view, friendsList)
                 .divider(true)
                 .itemAnimation(true)
@@ -74,9 +74,9 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
             }
         });
 
-        friendsListFactory.setRemoveButtonListener(new IOnClickComponentItemHandler<FriendProfile, IFriendHolder>() {
+        friendsListFactory.setRemoveButtonListener(new IOnClickComponentItemHandler<FriendProfile, IMainFriendHolder>() {
             @Override
-            public void onClick(int position, FriendProfile data, IFriendHolder holder) {
+            public void onClick(int position, FriendProfile data, IMainFriendHolder holder) {
                 ctrl.onRemoveFriend(position, data, holder);
             }
         });

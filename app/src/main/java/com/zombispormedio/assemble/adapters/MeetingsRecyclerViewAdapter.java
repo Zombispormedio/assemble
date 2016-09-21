@@ -15,6 +15,8 @@ import java.util.ArrayList;
  */
 public class MeetingsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Meeting, MeetingViewHolder> {
 
+    private IOnClickItemListHandler<Meeting> listener;
+
     public MeetingsRecyclerViewAdapter(ArrayList<Meeting> data) {
         super(data);
     }
@@ -29,7 +31,14 @@ public class MeetingsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Meeting
         return holder;
     }
 
-    public static class Factory extends BaseRecyclerViewAdapter.Factory<MeetingsRecyclerViewAdapter, Meeting> {
+    public void setOnClickListener(
+            IOnClickItemListHandler<Meeting> listener) {
+        this.listener = listener;
+    }
+
+    public static class Factory  {
+
+        private IOnClickItemListHandler<Meeting> listener;
 
         public MeetingsRecyclerViewAdapter make(){
             return make(new ArrayList<Meeting>());
@@ -37,7 +46,13 @@ public class MeetingsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Meeting
 
         public MeetingsRecyclerViewAdapter make(ArrayList<Meeting> data) {
             MeetingsRecyclerViewAdapter adapter = new MeetingsRecyclerViewAdapter(data);
-            return super.make(adapter);
+            adapter.setOnClickListener(listener);
+            return adapter;
+        }
+
+        public void setOnClickListener(
+                IOnClickItemListHandler<Meeting> listener) {
+            this.listener = listener;
         }
     }
 }

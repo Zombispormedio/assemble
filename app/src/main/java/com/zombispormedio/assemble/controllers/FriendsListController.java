@@ -1,14 +1,12 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.views.IFriendHolder;
+import com.zombispormedio.assemble.views.IMainFriendHolder;
 import com.zombispormedio.assemble.views.IFriendsListView;
 
 import java.util.ArrayList;
@@ -56,7 +54,7 @@ public class FriendsListController extends Controller {
         friendSubscription.load();
     }
 
-    public void onRemoveFriend(int position, FriendProfile data, final IFriendHolder holder) {
+    public void onRemoveFriend(int position, FriendProfile data, final IMainFriendHolder holder) {
         holder.showProgress();
         friendResource.deleteFriend(data.id, new ServiceHandler<ArrayList<FriendProfile>, Error>(){
             @Override

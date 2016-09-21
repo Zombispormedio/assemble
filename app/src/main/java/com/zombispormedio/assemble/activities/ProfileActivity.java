@@ -27,6 +27,7 @@ import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
+import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.views.IProfileView;
 
 import butterknife.BindView;

@@ -122,7 +122,6 @@
                 android:parentActivityName=".activities.FriendsActivity"
                 android:theme="@style/AppTheme"
                 >
-
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -148,7 +147,7 @@
                     />
         </activity>
         <activity
-                android:name=".activities.CreateTeamActivity"
+                android:name=".activities.FirstStepTeamActivity"
                 android:label="@string/create_team_title"
                 android:parentActivityName=".activities.HomeActivity"
                 android:theme="@style/AppTheme"
@@ -167,6 +166,17 @@
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.zombispormedio.assemble.activities.HomeActivity"
+                    />
+        </activity>
+        <activity
+                android:name=".activities.SecondStepTeamActivity"
+                android:label="@string/title_activity_second_step_team"
+                android:parentActivityName=".activities.FirstStepTeamActivity"
+                android:theme="@style/AppTheme"
+                >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zombispormedio.assemble.activities.FirstStepTeamActivity"
                     />
         </activity>
     </application>

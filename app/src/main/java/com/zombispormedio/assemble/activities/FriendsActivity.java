@@ -2,31 +2,20 @@ package com.zombispormedio.assemble.activities;
 
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.adapters.FriendRequestsRecyclerViewAdapter;
-import com.zombispormedio.assemble.adapters.FriendsRecyclerViewAdapter;
 import com.zombispormedio.assemble.adapters.FriendsViewPagerAdapter;
 import com.zombispormedio.assemble.controllers.FriendsController;
 
-import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.models.FriendRequestProfile;
-import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.IFriendsView;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class FriendsActivity extends BaseActivity implements IFriendsView {

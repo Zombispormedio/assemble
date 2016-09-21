@@ -23,6 +23,8 @@ public class FriendRequestsRecyclerViewAdapter
 
     private IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder> rejectListener;
 
+    private IOnClickItemListHandler<FriendRequestProfile> listener;
+
 
     public FriendRequestsRecyclerViewAdapter(ArrayList<FriendRequestProfile> data) {
         super(data);
@@ -51,11 +53,18 @@ public class FriendRequestsRecyclerViewAdapter
         this.rejectListener = rejectListener;
     }
 
-    public static class Factory extends BaseRecyclerViewAdapter.Factory<FriendRequestsRecyclerViewAdapter, FriendRequestProfile>{
+    public void setOnClickListener(
+            IOnClickItemListHandler<FriendRequestProfile> listener) {
+        this.listener = listener;
+    }
+
+    public static class Factory {
 
         private IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder> acceptListener;
 
         private IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder> rejectListener;
+
+        private IOnClickItemListHandler<FriendRequestProfile> listener;
 
         public FriendRequestsRecyclerViewAdapter make(){
             return make(new ArrayList<FriendRequestProfile>());
@@ -65,7 +74,8 @@ public class FriendRequestsRecyclerViewAdapter
             FriendRequestsRecyclerViewAdapter adapter = new FriendRequestsRecyclerViewAdapter(data);
             adapter.setRejectListener(rejectListener);
             adapter.setAcceptListener(acceptListener);
-            return super.make(adapter);
+            adapter.setOnClickListener(listener);
+            return adapter;
         }
 
 
@@ -77,6 +87,11 @@ public class FriendRequestsRecyclerViewAdapter
         public void setRejectListener(
                 IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder> rejectListener) {
             this.rejectListener = rejectListener;
+        }
+
+        public void setOnClickListener(
+                IOnClickItemListHandler<FriendRequestProfile> listener) {
+            this.listener = listener;
         }
     }
 }

@@ -15,13 +15,11 @@ import java.util.ArrayList;
  */
 public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends RecyclerView.Adapter<E> {
 
-    protected IOnClickItemListHandler<T> listener;
 
     protected ArrayList<T> data;
 
     public BaseRecyclerViewAdapter(ArrayList<T> data) {
         this.data = data;
-        this.listener = null;
     }
 
     @Override
@@ -45,28 +43,18 @@ public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends
         return data.size();
     }
 
-    public void setOnClickListener(IOnClickItemListHandler<T> listener) {
-        this.listener = listener;
-    }
-
     public void setData(ArrayList<T> data) {
         this.data = data;
     }
 
-    public static class Factory<C extends BaseRecyclerViewAdapter, M>{
-
-        private IOnClickItemListHandler<M> listener;
-
-        public void setOnClickListener(IOnClickItemListHandler<M> listener) {
-            this.listener = listener;
-
-        }
-        public C make(C adapter) {
-            if (listener != null) {
-                adapter.setOnClickListener(listener);
-            }
-            return adapter;
-        }
-
+    public void addElement(T elem){
+        data.add(elem);
+        notifyItemInserted(data.size()-1);
     }
+
+    public void removeElement(int index){
+        data.remove(index);
+        notifyItemRemoved(index);
+    }
+
 }

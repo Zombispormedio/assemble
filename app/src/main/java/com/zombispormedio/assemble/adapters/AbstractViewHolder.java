@@ -11,17 +11,14 @@ import android.view.View;
  */
 public abstract class AbstractViewHolder<T> extends RecyclerView.ViewHolder {
 
-    public AbstractViewHolder(View itemView) {
-        super(itemView);
+    public AbstractViewHolder(View view) {
+        super(view);
     }
 
     public void bind(int position, T itemData) {
 
     }
 
-    public void setOnClickListener(IOnClickItemListHandler<T> listener) {
-
-    }
 
 
 }
