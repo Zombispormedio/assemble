@@ -2,7 +2,6 @@ package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
@@ -20,11 +19,12 @@ import butterknife.ButterKnife;
  * Created by Xavier Serrano on 21/09/2016.
  */
 
-public class FriendViewHolder extends AbstractViewHolder<FriendProfile> implements ISelectedFriend {
+public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedContainer>
+        implements ISelectedFriend {
 
     private View view;
 
-    private IOnClickComponentItemHandler<FriendProfile, ISelectedFriend> listener;
+    private IOnClickComponentItemHandler<SelectedContainer, ISelectedFriend> listener;
 
     @BindView(R.id.username_label)
     TextView usernameLabel;
@@ -32,8 +32,8 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> implemen
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    public FriendViewHolder(View View) {
-        super(View);
+    public TeamFriendHolder(View view) {
+        super(view);
         this.view = view;
         this.listener = null;
         setup();
@@ -46,12 +46,12 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> implemen
 
 
     @Override
-    public void bind(int position, FriendProfile itemData) {
+    public void bind(int position, SelectedContainer itemData) {
         bindData(itemData);
         setupOnClickListener(position, itemData);
     }
 
-    private void setupOnClickListener(final int position, final FriendProfile itemData) {
+    private void setupOnClickListener(final int position, final SelectedContainer itemData) {
         final ISelectedFriend holder=this;
 
         view.setOnClickListener(new View.OnClickListener() {
@@ -64,7 +64,8 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> implemen
         });
     }
 
-    private void bindData(FriendProfile itemData) {
+    private void bindData(SelectedContainer data) {
+        FriendProfile itemData=data.getContent();
         usernameLabel.setText(itemData.username);
         setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
     }
@@ -82,7 +83,24 @@ public class FriendViewHolder extends AbstractViewHolder<FriendProfile> implemen
 
 
     public void setOnClickListener(
-            IOnClickComponentItemHandler<FriendProfile, ISelectedFriend> listener) {
+            IOnClickComponentItemHandler<SelectedContainer, ISelectedFriend> listener) {
         this.listener = listener;
+    }
+
+
+    public static class SelectedContainer{
+        private FriendProfile content;
+        private boolean selected;
+
+        public SelectedContainer(FriendProfile content) {
+            this.content = content;
+            this.selected=false;
+        }
+
+        public FriendProfile getContent() {
+            return content;
+        }
+
+
     }
 }

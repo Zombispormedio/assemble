@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.fragments;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -10,10 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.FriendsActivity;
-import com.zombispormedio.assemble.adapters.FriendRequestsRecyclerViewAdapter;
+import com.zombispormedio.assemble.adapters.lists.FriendRequestsListAdapter;
 import com.zombispormedio.assemble.controllers.FriendRequestsListController;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
@@ -39,9 +37,9 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
 
     private FriendRequestsListController ctrl;
 
-    private FriendRequestsRecyclerViewAdapter.Factory friendRequestsListFactory;
+    private FriendRequestsListAdapter.Factory friendRequestsListFactory;
 
-    private FriendRequestsRecyclerViewAdapter friendRequestsListAdapter;
+    private FriendRequestsListAdapter friendRequestsListAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -67,7 +65,7 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
 
 
     private void setupRequestFriends() {
-        friendRequestsListFactory = new FriendRequestsRecyclerViewAdapter.Factory();
+        friendRequestsListFactory = new FriendRequestsListAdapter.Factory();
         AndroidUtils.createListConfiguration(view, friendRequestsList)
                 .divider(true)
                 .itemAnimation(true)
@@ -112,7 +110,6 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
     @Override
     public void bindFriendRequests(ArrayList<FriendRequestProfile> data) {
         friendRequestsListAdapter.setData(data);
-        friendRequestsListAdapter.notifyDataSetChanged();
     }
 
     @Override

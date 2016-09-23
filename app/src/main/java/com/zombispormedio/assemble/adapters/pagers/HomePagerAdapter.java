@@ -1,4 +1,4 @@
-package com.zombispormedio.assemble.adapters;
+package com.zombispormedio.assemble.adapters.pagers;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -11,11 +11,11 @@ import com.zombispormedio.assemble.fragments.TeamsFragment;
 /**
  * Created by Xavier Serrano on 12/07/2016.
  */
-public class HomeViewPagerAdapter extends FragmentStatePagerAdapter {
+public class HomePagerAdapter extends FragmentStatePagerAdapter {
 
     private int numTabs;
 
-    public HomeViewPagerAdapter(FragmentManager fm, int numTabs) {
+    public HomePagerAdapter(FragmentManager fm, int numTabs) {
         super(fm);
 
         this.numTabs = numTabs;

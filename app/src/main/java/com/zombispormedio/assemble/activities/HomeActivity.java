@@ -18,7 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 
-import com.zombispormedio.assemble.adapters.HomeViewPagerAdapter;
+import com.zombispormedio.assemble.adapters.pagers.HomePagerAdapter;
 import com.zombispormedio.assemble.controllers.HomeController;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
@@ -95,7 +95,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final HomeViewPagerAdapter adapterTabPager = new HomeViewPagerAdapter(getSupportFragmentManager(),
+        final HomePagerAdapter adapterTabPager = new HomePagerAdapter(getSupportFragmentManager(),
                 tabLayout.getTabCount());
 
         viewTabPager.setAdapter(adapterTabPager);

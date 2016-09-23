@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.HomeActivity;
-import com.zombispormedio.assemble.adapters.TeamsRecyclerViewAdapter;
+import com.zombispormedio.assemble.adapters.lists.TeamsListAdapter;
 import com.zombispormedio.assemble.controllers.TeamsController;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.utils.AndroidUtils;
@@ -34,9 +34,9 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     @BindView(R.id.teams_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    private TeamsRecyclerViewAdapter.Factory teamsListFactory;
+    private TeamsListAdapter.Factory teamsListFactory;
 
-    private TeamsRecyclerViewAdapter teamsListAdapter;
+    private TeamsListAdapter teamsListAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,7 +69,7 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
 
 
     private void setupTeams() {
-        teamsListFactory = new TeamsRecyclerViewAdapter.Factory();
+        teamsListFactory = new TeamsListAdapter.Factory();
         AndroidUtils.createListConfiguration(view, teamsList)
                 .itemAnimation(true)
                 .scrolling(false)
@@ -83,7 +83,6 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     @Override
     public void bindTeams(ArrayList<Team> data) {
         teamsListAdapter.setData(data);
-        teamsListAdapter.notifyDataSetChanged();
     }
 
     @Override

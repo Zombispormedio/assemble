@@ -1,14 +1,13 @@
-package com.zombispormedio.assemble.adapters;
+package com.zombispormedio.assemble.adapters.lists;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.adapters.FriendRequestsHolder;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.views.IFriendRequestHolder;
 
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -16,8 +15,8 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public class FriendRequestsRecyclerViewAdapter
-        extends BaseRecyclerViewAdapter<FriendRequestProfile, FriendRequestsViewHolder> {
+public class FriendRequestsListAdapter
+        extends BaseListAdapter<FriendRequestProfile, FriendRequestsHolder> {
 
     private IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder> acceptListener;
 
@@ -26,13 +25,13 @@ public class FriendRequestsRecyclerViewAdapter
     private IOnClickItemListHandler<FriendRequestProfile> listener;
 
 
-    public FriendRequestsRecyclerViewAdapter(ArrayList<FriendRequestProfile> data) {
+    public FriendRequestsListAdapter(ArrayList<FriendRequestProfile> data) {
         super(data);
     }
 
     @Override
-    public FriendRequestsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        FriendRequestsViewHolder holder = new FriendRequestsViewHolder(getView(parent, R.layout.list_item_friend_requests));
+    public FriendRequestsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        FriendRequestsHolder holder = new FriendRequestsHolder(getView(parent, R.layout.list_item_friend_requests));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }
@@ -66,12 +65,12 @@ public class FriendRequestsRecyclerViewAdapter
 
         private IOnClickItemListHandler<FriendRequestProfile> listener;
 
-        public FriendRequestsRecyclerViewAdapter make(){
+        public FriendRequestsListAdapter make(){
             return make(new ArrayList<FriendRequestProfile>());
         }
 
-        public FriendRequestsRecyclerViewAdapter make(ArrayList<FriendRequestProfile> data) {
-            FriendRequestsRecyclerViewAdapter adapter = new FriendRequestsRecyclerViewAdapter(data);
+        public FriendRequestsListAdapter make(ArrayList<FriendRequestProfile> data) {
+            FriendRequestsListAdapter adapter = new FriendRequestsListAdapter(data);
             adapter.setRejectListener(rejectListener);
             adapter.setAcceptListener(acceptListener);
             adapter.setOnClickListener(listener);

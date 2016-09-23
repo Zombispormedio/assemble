@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.adapters;
 
-import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
@@ -25,7 +24,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Xavier Serrano on 06/09/2016.
  */
-public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
+public class MeetingHolder extends AbstractHolder<Meeting> {
 
     private View view;
 
@@ -52,7 +51,7 @@ public class MeetingViewHolder extends AbstractViewHolder<Meeting> {
 
     private IOnClickItemListHandler<Meeting> listener;
 
-    public MeetingViewHolder(View view) {
+    public MeetingHolder(View view) {
         super(view);
         this.view = view;
         this.listener = null;

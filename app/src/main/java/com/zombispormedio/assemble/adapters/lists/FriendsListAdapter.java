@@ -1,6 +1,7 @@
-package com.zombispormedio.assemble.adapters;
+package com.zombispormedio.assemble.adapters.lists;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.adapters.FriendHolder;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
@@ -13,22 +14,22 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 25/08/2016.
  */
-public class MainFriendsRecyclerViewAdapter
-        extends BaseRecyclerViewAdapter<FriendProfile, MainFriendViewHolder> {
+public class FriendsListAdapter
+        extends BaseListAdapter<FriendProfile, FriendHolder> {
 
     private IOnClickComponentItemHandler<FriendProfile, IMainFriendHolder> removeButtonListener;
 
     private IOnClickItemListHandler<FriendProfile> listener;
 
-    public MainFriendsRecyclerViewAdapter(ArrayList<FriendProfile> data) {
+    public FriendsListAdapter(ArrayList<FriendProfile> data) {
         super(data);
     }
 
 
     @Override
-    public MainFriendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FriendHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        MainFriendViewHolder holder = new MainFriendViewHolder(getView(parent, R.layout.list_item_main_friends));
+        FriendHolder holder = new FriendHolder(getView(parent, R.layout.list_item_friends));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }
@@ -53,12 +54,12 @@ public class MainFriendsRecyclerViewAdapter
 
         private IOnClickItemListHandler<FriendProfile> listener;
 
-        public MainFriendsRecyclerViewAdapter make(){
+        public FriendsListAdapter make(){
             return  make(new ArrayList<FriendProfile>());
         }
 
-        public MainFriendsRecyclerViewAdapter make(ArrayList<FriendProfile> data) {
-            MainFriendsRecyclerViewAdapter adapter = new MainFriendsRecyclerViewAdapter(data);
+        public FriendsListAdapter make(ArrayList<FriendProfile> data) {
+            FriendsListAdapter adapter = new FriendsListAdapter(data);
             adapter.setRemoveButtonListener(removeButtonListener);
             adapter.setOnClickListener(listener);
             return adapter;

@@ -1,18 +1,15 @@
 package com.zombispormedio.assemble.adapters;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 
-import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IFriendRequestHolder;
 
-import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,12 +18,11 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestProfile> implements IFriendRequestHolder{
+public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> implements IFriendRequestHolder{
 
     private View view;
 
@@ -51,7 +47,7 @@ public class FriendRequestsViewHolder extends AbstractViewHolder<FriendRequestPr
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
-    public FriendRequestsViewHolder(View view) {
+    public FriendRequestsHolder(View view) {
         super(view);
         this.view = view;
         this.listener = null;

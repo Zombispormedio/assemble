@@ -1,12 +1,10 @@
-package com.zombispormedio.assemble.adapters;
+package com.zombispormedio.assemble.adapters.lists;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.adapters.TeamHolder;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.Team;
 
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -14,18 +12,18 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 03/09/2016.
  */
-public class TeamsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Team, TeamViewHolder> {
+public class TeamsListAdapter extends BaseListAdapter<Team, TeamHolder> {
 
     private IOnClickItemListHandler<Team> listener;
 
-    public TeamsRecyclerViewAdapter(ArrayList<Team> data) {
+    public TeamsListAdapter(ArrayList<Team> data) {
         super(data);
     }
 
     @Override
-    public TeamViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TeamHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        TeamViewHolder holder = new TeamViewHolder(getView(parent, R.layout.list_item_teams));
+        TeamHolder holder = new TeamHolder(getView(parent, R.layout.list_item_teams));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }
@@ -41,12 +39,12 @@ public class TeamsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Team, Team
 
         private IOnClickItemListHandler<Team> listener;
 
-        public TeamsRecyclerViewAdapter make() {
+        public TeamsListAdapter make() {
             return make(new ArrayList<Team>());
         }
 
-        public TeamsRecyclerViewAdapter make(ArrayList<Team> data) {
-            TeamsRecyclerViewAdapter adapter = new TeamsRecyclerViewAdapter(data);
+        public TeamsListAdapter make(ArrayList<Team> data) {
+            TeamsListAdapter adapter = new TeamsListAdapter(data);
             adapter.setOnClickListener(listener);
             return adapter;
         }

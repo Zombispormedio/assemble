@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public class MainFriendViewHolder extends AbstractViewHolder<FriendProfile> implements IMainFriendHolder {
+public class FriendHolder extends AbstractHolder<FriendProfile> implements IMainFriendHolder {
 
     private View view;
 
@@ -45,7 +45,7 @@ public class MainFriendViewHolder extends AbstractViewHolder<FriendProfile> impl
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
-    public MainFriendViewHolder(View view) {
+    public FriendHolder(View view) {
         super(view);
         this.view = view;
         this.listener = null;

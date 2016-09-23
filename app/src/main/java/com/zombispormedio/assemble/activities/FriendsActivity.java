@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.adapters.FriendsViewPagerAdapter;
+import com.zombispormedio.assemble.adapters.pagers.FriendsPagerAdapter;
 import com.zombispormedio.assemble.controllers.FriendsController;
 
 import com.zombispormedio.assemble.utils.NavigationManager;
@@ -53,7 +53,7 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     }
 
     private void setupPager() {
-        FriendsViewPagerAdapter adapter = new FriendsViewPagerAdapter(getSupportFragmentManager(), 2);
+        FriendsPagerAdapter adapter = new FriendsPagerAdapter(getSupportFragmentManager(), 2);
         friendsPager.setAdapter(adapter);
         friendsPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override

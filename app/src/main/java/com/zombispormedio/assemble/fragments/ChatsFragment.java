@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.HomeActivity;
-import com.zombispormedio.assemble.adapters.ChatsRecyclerViewAdapter;
+import com.zombispormedio.assemble.adapters.lists.ChatsListAdapter;
 import com.zombispormedio.assemble.controllers.ChatsController;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.utils.AndroidUtils;
@@ -34,9 +34,9 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     @BindView(R.id.chats_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    private ChatsRecyclerViewAdapter.Factory chatsListFactory;
+    private ChatsListAdapter.Factory chatsListFactory;
 
-    private ChatsRecyclerViewAdapter chatsListAdapter;
+    private ChatsListAdapter chatsListAdapter;
 
 
     @Override
@@ -62,7 +62,7 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
 
 
     private void setupChats() {
-        chatsListFactory = new ChatsRecyclerViewAdapter.Factory();
+        chatsListFactory = new ChatsListAdapter.Factory();
         AndroidUtils.createListConfiguration(view, chatsList)
                 .divider(true)
                 .itemAnimation(true)
@@ -84,7 +84,6 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     @Override
     public void bindChats(ArrayList<Chat> data) {
         chatsListAdapter.setData(data);
-        chatsListAdapter.notifyDataSetChanged();
     }
 
     @Override

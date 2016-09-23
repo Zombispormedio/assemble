@@ -9,9 +9,9 @@ import android.view.View;
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public abstract class AbstractViewHolder<T> extends RecyclerView.ViewHolder {
+public abstract class AbstractHolder<T> extends RecyclerView.ViewHolder {
 
-    public AbstractViewHolder(View view) {
+    public AbstractHolder(View view) {
         super(view);
     }
 

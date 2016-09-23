@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.adapters;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
@@ -10,10 +9,8 @@ import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.INewFriendHolder;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -22,12 +19,11 @@ import android.widget.TextView;
 import butterknife.BindDrawable;
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by Xavier Serrano on 17/09/2016.
  */
-public class NewFriendViewHolder extends AbstractViewHolder<FriendProfile> implements INewFriendHolder {
+public class NewFriendHolder extends AbstractHolder<FriendProfile> implements INewFriendHolder {
 
 
     private View view;
@@ -57,7 +53,7 @@ public class NewFriendViewHolder extends AbstractViewHolder<FriendProfile> imple
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
-    public NewFriendViewHolder(View view) {
+    public NewFriendHolder(View view) {
         super(view);
         this.view = view;
         this.listener = null;

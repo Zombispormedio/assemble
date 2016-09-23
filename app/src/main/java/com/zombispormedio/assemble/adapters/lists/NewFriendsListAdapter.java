@@ -1,13 +1,12 @@
-package com.zombispormedio.assemble.adapters;
+package com.zombispormedio.assemble.adapters.lists;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.adapters.NewFriendHolder;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.views.INewFriendHolder;
 
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -15,20 +14,20 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 17/09/2016.
  */
-public class NewFriendsRecyclerViewAdapter extends BaseRecyclerViewAdapter<FriendProfile, NewFriendViewHolder> {
+public class NewFriendsListAdapter extends BaseListAdapter<FriendProfile, NewFriendHolder> {
 
     private IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener;
 
     private IOnClickItemListHandler<FriendProfile> listener;
 
-    public NewFriendsRecyclerViewAdapter(ArrayList<FriendProfile> data) {
+    public NewFriendsListAdapter(ArrayList<FriendProfile> data) {
         super(data);
     }
 
 
     @Override
-    public NewFriendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        NewFriendViewHolder holder = new NewFriendViewHolder(getView(parent,R.layout.list_item_new_friends));
+    public NewFriendHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        NewFriendHolder holder = new NewFriendHolder(getView(parent,R.layout.list_item_new_friends));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }
@@ -64,12 +63,12 @@ public class NewFriendsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Frien
             return this;
         }
 
-        public NewFriendsRecyclerViewAdapter make() {
+        public NewFriendsListAdapter make() {
             return make(new ArrayList<FriendProfile>());
         }
 
-        public NewFriendsRecyclerViewAdapter make(ArrayList<FriendProfile> data) {
-            NewFriendsRecyclerViewAdapter adapter = new NewFriendsRecyclerViewAdapter(data);
+        public NewFriendsListAdapter make(ArrayList<FriendProfile> data) {
+            NewFriendsListAdapter adapter = new NewFriendsListAdapter(data);
 
             adapter.setAddFriendListener(addFriendListener);
 

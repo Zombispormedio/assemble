@@ -1,11 +1,10 @@
-package com.zombispormedio.assemble.adapters;
+package com.zombispormedio.assemble.adapters.lists;
 
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.adapters.ChatHolder;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
 
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -13,17 +12,17 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
-public class ChatsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Chat, ChatViewHolder> {
+public class ChatsListAdapter extends BaseListAdapter<Chat, ChatHolder> {
 
     private IOnClickItemListHandler<Chat> listener;
 
-    public ChatsRecyclerViewAdapter(ArrayList<Chat> data) {
+    public ChatsListAdapter(ArrayList<Chat> data) {
         super(data);
     }
 
     @Override
-    public ChatViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ChatViewHolder holder = new ChatViewHolder(getView(parent, R.layout.list_item_chats));
+    public ChatHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        ChatHolder holder = new ChatHolder(getView(parent, R.layout.list_item_chats));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }
@@ -39,12 +38,12 @@ public class ChatsRecyclerViewAdapter extends BaseRecyclerViewAdapter<Chat, Chat
 
         private IOnClickItemListHandler<Chat> listener;
 
-        public ChatsRecyclerViewAdapter make(){
+        public ChatsListAdapter make(){
             return make(new ArrayList<Chat>());
         }
 
-        public ChatsRecyclerViewAdapter make(ArrayList<Chat> data) {
-            ChatsRecyclerViewAdapter adapter = new ChatsRecyclerViewAdapter(data);
+        public ChatsListAdapter make(ArrayList<Chat> data) {
+            ChatsListAdapter adapter = new ChatsListAdapter(data);
             adapter.setOnClickListener(listener);
             return adapter;
         }

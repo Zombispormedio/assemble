@@ -1,14 +1,12 @@
 package com.zombispormedio.assemble.adapters;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-
-import com.zombispormedio.assemble.models.Team;
+import com.zombispormedio.assemble.models.Chat;
+import com.zombispormedio.assemble.models.Recipient;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 
-import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,24 +15,21 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Xavier Serrano on 03/09/2016.
+ * Created by Xavier Serrano on 07/09/2016.
  */
-public class TeamViewHolder extends AbstractViewHolder<Team> {
+public class ChatHolder extends AbstractHolder<Chat> {
 
     private View view;
 
-    @BindView(R.id.name_label)
+    @BindView(R.id.username_label)
     TextView nameLabel;
 
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @BindView(R.id.card_view)
-    CardView cardView;
+    private IOnClickItemListHandler<Chat> listener;
 
-    private IOnClickItemListHandler<Team> listener;
-
-    public TeamViewHolder(View view) {
+    public ChatHolder(View view) {
         super(view);
         this.view = view;
         this.listener = null;
@@ -46,13 +41,13 @@ public class TeamViewHolder extends AbstractViewHolder<Team> {
     }
 
     @Override
-    public void bind(int position, Team itemData) {
+    public void bind(int position, Chat itemData) {
         bindData(itemData);
         setupOnClickListener(position, itemData);
     }
 
-    private void setupOnClickListener(final int position, final Team itemData) {
-        cardView.setOnClickListener(new View.OnClickListener() {
+    private void setupOnClickListener(final int position, final Chat itemData) {
+        view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
@@ -62,20 +57,20 @@ public class TeamViewHolder extends AbstractViewHolder<Team> {
         });
     }
 
-    private void bindData(Team itemData) {
-        String teamName=itemData.name;
-        nameLabel.setText(teamName);
+    private void bindData(Chat itemData) {
+        Recipient recipient=itemData.recipient;
+
+        String recipientName=recipient.username;
+        nameLabel.setText(recipientName);
 
         new ImageUtils.ImageBuilder(view.getContext(), imageView)
-                .letter(StringUtils.firstLetter(teamName))
+                .url(recipient.large_avatar_url)
+                .letter(StringUtils.firstLetter(recipientName))
                 .circle(true)
-                .url(itemData.large_image_url)
                 .build();
-
-
     }
 
-    public void setOnClickListener(IOnClickItemListHandler<Team> listener) {
+    public void setOnClickListener(IOnClickItemListHandler<Chat> listener) {
         this.listener = listener;
     }
 }

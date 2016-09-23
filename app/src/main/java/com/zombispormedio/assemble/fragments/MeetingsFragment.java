@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.HomeActivity;
-import com.zombispormedio.assemble.adapters.MeetingsRecyclerViewAdapter;
+import com.zombispormedio.assemble.adapters.lists.MeetingsListAdapter;
 import com.zombispormedio.assemble.controllers.MeetingsController;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.utils.AndroidUtils;
@@ -35,9 +35,9 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     @BindView(R.id.meetings_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    private MeetingsRecyclerViewAdapter.Factory meetingsListFactory;
+    private MeetingsListAdapter.Factory meetingsListFactory;
 
-    private MeetingsRecyclerViewAdapter meetingsListAdapter;
+    private MeetingsListAdapter meetingsListAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,7 +60,7 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     }
 
     private void setupMeetings() {
-        meetingsListFactory = new MeetingsRecyclerViewAdapter.Factory();
+        meetingsListFactory = new MeetingsListAdapter.Factory();
         AndroidUtils.createListConfiguration(view, meetingsList)
                 .itemAnimation(true)
                 .scrolling(false)
@@ -82,7 +82,6 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     @Override
     public void bindMeetings(ArrayList<Meeting> data) {
         meetingsListAdapter.setData(data);
-        meetingsListAdapter.notifyDataSetChanged();
     }
 
     @Override

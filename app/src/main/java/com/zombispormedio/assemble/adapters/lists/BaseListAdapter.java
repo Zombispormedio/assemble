@@ -1,7 +1,7 @@
-package com.zombispormedio.assemble.adapters;
+package com.zombispormedio.assemble.adapters.lists;
 
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 
+import com.zombispormedio.assemble.adapters.AbstractHolder;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,13 +13,16 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends RecyclerView.Adapter<E> {
+public class BaseListAdapter<T, E extends AbstractHolder<T>> extends RecyclerView.Adapter<E> {
 
 
     protected ArrayList<T> data;
 
-    public BaseRecyclerViewAdapter(ArrayList<T> data) {
+    public BaseListAdapter(ArrayList<T> data) {
         this.data = data;
+    }
+
+    public BaseListAdapter() {
     }
 
     @Override
@@ -45,6 +48,7 @@ public class BaseRecyclerViewAdapter<T, E extends AbstractViewHolder<T>> extends
 
     public void setData(ArrayList<T> data) {
         this.data = data;
+        notifyDataSetChanged();
     }
 
     public void addElement(T elem){

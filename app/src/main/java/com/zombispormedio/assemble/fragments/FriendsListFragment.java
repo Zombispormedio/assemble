@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.FriendsActivity;
-import com.zombispormedio.assemble.adapters.MainFriendsRecyclerViewAdapter;
+import com.zombispormedio.assemble.adapters.lists.FriendsListAdapter;
 import com.zombispormedio.assemble.controllers.FriendsListController;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
@@ -35,9 +35,9 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
 
     private FriendsListController ctrl;
 
-    private MainFriendsRecyclerViewAdapter.Factory friendsListFactory;
+    private FriendsListAdapter.Factory friendsListFactory;
 
-    private MainFriendsRecyclerViewAdapter friendsListAdapter;
+    private FriendsListAdapter friendsListAdapter;
 
 
     @Override
@@ -61,7 +61,7 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     }
 
     private void setupFriends() {
-        friendsListFactory = new MainFriendsRecyclerViewAdapter.Factory();
+        friendsListFactory = new FriendsListAdapter.Factory();
         AndroidUtils.createListConfiguration(view, friendsList)
                 .divider(true)
                 .itemAnimation(true)
@@ -96,7 +96,6 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     @Override
     public void bindFriends(ArrayList<FriendProfile> data) {
         friendsListAdapter.setData(data);
-        friendsListAdapter.notifyDataSetChanged();
     }
 
     @Override
