@@ -11,8 +11,8 @@ import android.view.View;
  */
 public abstract class AbstractHolder<T> extends RecyclerView.ViewHolder {
 
-    public AbstractHolder(View view) {
-        super(view);
+    public AbstractHolder(View itemView) {
+        super(itemView);
     }
 
     public void bind(int position, T itemData) {

@@ -25,9 +25,6 @@ import butterknife.ButterKnife;
  */
 public class NewFriendHolder extends AbstractHolder<FriendProfile> implements INewFriendHolder {
 
-
-    private View view;
-
     private IOnClickItemListHandler<FriendProfile> listener;
 
     private IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener;
@@ -55,7 +52,6 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
 
     public NewFriendHolder(View view) {
         super(view);
-        this.view = view;
         this.listener = null;
         this.addFriendListener = null;
         setup();
@@ -63,7 +59,7 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     }
 
     private void setup() {
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this, itemView);
         hideProgress();
     }
 
@@ -76,7 +72,7 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     }
 
     private void setupOnClickListener(final int position, final FriendProfile itemData) {
-        view.setOnClickListener(new View.OnClickListener() {
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
@@ -110,7 +106,7 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     }
 
     private void setupImage(String url, String letter) {
-        ImageUtils.ImageBuilder builder = new ImageUtils.ImageBuilder(view.getContext(), imageView)
+        ImageUtils.ImageBuilder builder = new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
                 .letter(letter)
                 .circle(true);
         if (Utils.presenceOf(url)) {

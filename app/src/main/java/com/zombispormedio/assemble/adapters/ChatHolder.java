@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
  */
 public class ChatHolder extends AbstractHolder<Chat> {
 
-    private View view;
 
     @BindView(R.id.username_label)
     TextView nameLabel;
@@ -31,13 +30,12 @@ public class ChatHolder extends AbstractHolder<Chat> {
 
     public ChatHolder(View view) {
         super(view);
-        this.view = view;
         this.listener = null;
         setup();
     }
 
     private void setup() {
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this, itemView);
     }
 
     @Override
@@ -47,7 +45,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
     }
 
     private void setupOnClickListener(final int position, final Chat itemData) {
-        view.setOnClickListener(new View.OnClickListener() {
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
@@ -63,7 +61,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
         String recipientName=recipient.username;
         nameLabel.setText(recipientName);
 
-        new ImageUtils.ImageBuilder(view.getContext(), imageView)
+        new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
                 .url(recipient.large_avatar_url)
                 .letter(StringUtils.firstLetter(recipientName))
                 .circle(true)

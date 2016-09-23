@@ -26,8 +26,6 @@ import butterknife.ButterKnife;
  */
 public class MeetingHolder extends AbstractHolder<Meeting> {
 
-    private View view;
-
     @BindView(R.id.name_label)
     TextView nameLabel;
 
@@ -53,13 +51,12 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
     public MeetingHolder(View view) {
         super(view);
-        this.view = view;
         this.listener = null;
         setup();
     }
 
     private void setup() {
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this, itemView);
     }
 
 
@@ -96,7 +93,7 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
 
         if(Utils.presenceOf(itemData.large_image_url)){
-            new ImageUtils.ImageBuilder(view.getContext(), meetingImage)
+            new ImageUtils.ImageBuilder(itemView.getContext(), meetingImage)
                     .url(itemData.large_image_url)
                     .build();
         }else{
@@ -107,7 +104,7 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
         teamLabel.setText(teamName);
 
-        ImageUtils.ImageBuilder teamImageBuilder= new ImageUtils.ImageBuilder(view.getContext(), teamImage)
+        ImageUtils.ImageBuilder teamImageBuilder= new ImageUtils.ImageBuilder(itemView.getContext(), teamImage)
                 .letter(StringUtils.firstLetter(teamName))
                 .circle(true);
 

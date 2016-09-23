@@ -22,7 +22,6 @@ import butterknife.ButterKnife;
 public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedContainer>
         implements ISelectedFriend {
 
-    private View view;
 
     private IOnClickComponentItemHandler<SelectedContainer, ISelectedFriend> listener;
 
@@ -34,13 +33,12 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
 
     public TeamFriendHolder(View view) {
         super(view);
-        this.view = view;
         this.listener = null;
         setup();
     }
 
     private void setup() {
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this, itemView);
     }
 
 
@@ -54,7 +52,7 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     private void setupOnClickListener(final int position, final SelectedContainer itemData) {
         final ISelectedFriend holder=this;
 
-        view.setOnClickListener(new View.OnClickListener() {
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(listener!=null){
@@ -71,7 +69,7 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     }
 
     private void setupImage(String url, String letter){
-        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(view.getContext(), imageView)
+        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
                 .letter(letter)
                 .circle(true);
         if(Utils.presenceOf(url)){
@@ -91,10 +89,12 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     public static class SelectedContainer{
         private FriendProfile content;
         private boolean selected;
+        private int seletedMemberIndex;
 
         public SelectedContainer(FriendProfile content) {
             this.content = content;
             this.selected=false;
+            seletedMemberIndex=-1;
         }
 
         public FriendProfile getContent() {
@@ -102,5 +102,24 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
         }
 
 
+        public void select(){
+            selected=true;
+        }
+
+        public void deselect(){
+            selected=false;
+        }
+
+        public boolean isSelected() {
+            return selected;
+        }
+
+        public int getSeletedMemberIndex() {
+            return seletedMemberIndex;
+        }
+
+        public void setSeletedMemberIndex(int seletedMemberIndex) {
+            this.seletedMemberIndex = seletedMemberIndex;
+        }
     }
 }

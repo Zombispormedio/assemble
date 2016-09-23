@@ -20,8 +20,6 @@ import butterknife.ButterKnife;
  */
 public class TeamHolder extends AbstractHolder<Team> {
 
-    private View view;
-
     @BindView(R.id.name_label)
     TextView nameLabel;
 
@@ -35,13 +33,12 @@ public class TeamHolder extends AbstractHolder<Team> {
 
     public TeamHolder(View view) {
         super(view);
-        this.view = view;
         this.listener = null;
         setup();
     }
 
     private void setup() {
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this, itemView);
     }
 
     @Override
@@ -65,7 +62,7 @@ public class TeamHolder extends AbstractHolder<Team> {
         String teamName=itemData.name;
         nameLabel.setText(teamName);
 
-        new ImageUtils.ImageBuilder(view.getContext(), imageView)
+        new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
                 .letter(StringUtils.firstLetter(teamName))
                 .circle(true)
                 .url(itemData.large_image_url)

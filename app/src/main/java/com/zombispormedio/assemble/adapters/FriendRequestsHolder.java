@@ -24,7 +24,6 @@ import butterknife.ButterKnife;
  */
 public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> implements IFriendRequestHolder{
 
-    private View view;
 
     private IOnClickItemListHandler<FriendRequestProfile> listener;
 
@@ -49,7 +48,6 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
 
     public FriendRequestsHolder(View view) {
         super(view);
-        this.view = view;
         this.listener = null;
         this.rejectListener=null;
         this.acceptListener=null;
@@ -57,7 +55,7 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
     }
 
     private void setup() {
-        ButterKnife.bind(this, view);
+        ButterKnife.bind(this, itemView);
     }
 
     @Override
@@ -70,7 +68,7 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
 
 
     private void setupOnClickListener(final int position, final FriendRequestProfile itemData) {
-        view.setOnClickListener(new View.OnClickListener() {
+        itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
@@ -112,7 +110,7 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
     }
 
     private void setupImage(String url, String letter){
-        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(view.getContext(), imageView)
+        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
                 .letter(letter)
                 .circle(true);
         if(Utils.presenceOf(url)){

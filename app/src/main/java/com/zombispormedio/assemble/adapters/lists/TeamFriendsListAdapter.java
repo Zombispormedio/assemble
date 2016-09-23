@@ -26,9 +26,7 @@ public class TeamFriendsListAdapter extends BaseListAdapter<
     @Override
     public TeamFriendHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         TeamFriendHolder holder = new TeamFriendHolder(getView(parent, R.layout.list_item_team_friends));
-        if (listener != null) {
-            holder.setOnClickListener(listener);
-        }
+        holder.setOnClickListener(listener);
 
         return holder;
     }
@@ -38,11 +36,10 @@ public class TeamFriendsListAdapter extends BaseListAdapter<
         this.listener = listener;
     }
 
-    public ArrayList<TeamFriendHolder.SelectedContainer> apply(ArrayList<FriendProfile> data){
-        ArrayList<TeamFriendHolder.SelectedContainer> result= new ArrayList<>();
+    public ArrayList<TeamFriendHolder.SelectedContainer> apply(ArrayList<FriendProfile> data) {
+        ArrayList<TeamFriendHolder.SelectedContainer> result = new ArrayList<>();
 
-        for (FriendProfile elem :
-                data) {
+        for (FriendProfile elem : data) {
             result.add(new TeamFriendHolder.SelectedContainer(elem));
         }
 
@@ -54,12 +51,24 @@ public class TeamFriendsListAdapter extends BaseListAdapter<
         super.setData(apply(data));
     }
 
-    public static class Factory{
+    public void selectFriend(int index){
+        TeamFriendHolder.SelectedContainer container=data.get(index);
+        container.select();
+        notifyItemChanged(index);
+    }
+
+    public void deselectFriend(int index){
+        TeamFriendHolder.SelectedContainer container=data.get(index);
+        container.deselect();
+        notifyItemChanged(index);
+    }
+
+    public static class Factory {
 
         private IOnClickComponentItemHandler<TeamFriendHolder.SelectedContainer, ISelectedFriend> listener;
 
-        public TeamFriendsListAdapter make(){
-            return  make(new ArrayList<FriendProfile>());
+        public TeamFriendsListAdapter make() {
+            return make(new ArrayList<FriendProfile>());
         }
 
         public TeamFriendsListAdapter make(ArrayList<FriendProfile> data) {
