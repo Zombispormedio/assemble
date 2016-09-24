@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.views.IFirstStepTeamView;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by Xavier Serrano on 09/09/2016.
@@ -15,10 +16,13 @@ public class FirstStepTeamController extends Controller {
 
     private FriendResource friendResource;
 
+    private LinkedList<Integer> memberIds;
+
     public FirstStepTeamController(IFirstStepTeamView ctx) {
         super(ctx);
         this.ctx = ctx;
         friendResource = getResourceComponent().provideFriendResource();
+        memberIds=new LinkedList<>();
     }
 
     @Override
@@ -29,5 +33,17 @@ public class FirstStepTeamController extends Controller {
     private void bindFriends() {
         ArrayList<FriendProfile> friends = friendResource.getAll();
         ctx.bindFriends(friends);
+    }
+
+    public void onFriendAddedToMembers(int position, FriendProfile data) {
+        ctx.addMember(data, position);
+        memberIds.add(Integer.valueOf(data.id));
+        ctx.setParticipantsSubtitle(memberIds.size(), ctx.getFriendsSize());
+    }
+
+    public void onMemberRemoved(int friendIndex, FriendProfile data) {
+        ctx.removeMember(friendIndex);
+        memberIds.remove(Integer.valueOf(data.id));
+        ctx.setParticipantsSubtitle(memberIds.size(), ctx.getFriendsSize());
     }
 }

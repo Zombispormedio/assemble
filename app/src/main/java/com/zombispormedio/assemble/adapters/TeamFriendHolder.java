@@ -2,11 +2,11 @@ package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.ISelectedFriend;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -19,11 +19,10 @@ import butterknife.ButterKnife;
  * Created by Xavier Serrano on 21/09/2016.
  */
 
-public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedContainer>
-        implements ISelectedFriend {
+public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedContainer> {
 
 
-    private IOnClickComponentItemHandler<SelectedContainer, ISelectedFriend> listener;
+    private IOnClickItemListHandler<SelectedContainer> listener;
 
     @BindView(R.id.username_label)
     TextView usernameLabel;
@@ -50,13 +49,12 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     }
 
     private void setupOnClickListener(final int position, final SelectedContainer itemData) {
-        final ISelectedFriend holder=this;
 
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(listener!=null){
-                    listener.onClick(position, itemData, holder);
+                    listener.onClick(position, itemData);
                 }
             }
         });
@@ -81,7 +79,7 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
 
 
     public void setOnClickListener(
-            IOnClickComponentItemHandler<SelectedContainer, ISelectedFriend> listener) {
+            IOnClickItemListHandler<SelectedContainer> listener) {
         this.listener = listener;
     }
 

@@ -2,11 +2,11 @@ package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.ISelectedMember;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -18,18 +18,19 @@ import butterknife.ButterKnife;
  * Created by Xavier Serrano on 23/09/2016.
  */
 
-public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Container> implements ISelectedMember {
+public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Container> {
 
 
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    private IOnClickComponentItemHandler<Container, ISelectedMember> listener;
+    private IOnClickItemListHandler<Container> listener;
 
 
     public SelectedMemberHolder(View view) {
         super(view);
         this.listener=null;
+        setup();
     }
 
     private void setup() {
@@ -59,13 +60,11 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
     }
 
     private void setupOnClickListener(final int position, final Container itemData) {
-        final ISelectedMember holder=this;
-
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if(listener!=null){
-                    listener.onClick(position, itemData, holder);
+                    listener.onClick(position, itemData);
                 }
             }
         });
@@ -74,7 +73,7 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
 
 
     public void setOnClickListener(
-            IOnClickComponentItemHandler<Container, ISelectedMember> listener) {
+            IOnClickItemListHandler<Container> listener) {
         this.listener = listener;
     }
 

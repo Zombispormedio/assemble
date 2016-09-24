@@ -2,18 +2,22 @@ package com.zombispormedio.assemble.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.adapters.SelectedMemberHolder;
 import com.zombispormedio.assemble.adapters.TeamFriendHolder;
+import com.zombispormedio.assemble.adapters.lists.SelectedMembersListAdapter;
 import com.zombispormedio.assemble.adapters.lists.TeamFriendsListAdapter;
 import com.zombispormedio.assemble.controllers.FirstStepTeamController;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.IFirstStepTeamView;
-import com.zombispormedio.assemble.views.ISelectedFriend;
 
 import java.util.ArrayList;
 
@@ -34,6 +38,8 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
     private TeamFriendsListAdapter.Factory friendsListFactory;
 
     private TeamFriendsListAdapter friendsListAdapter;
+
+    private SelectedMembersListAdapter membersListAdapter;
 
 
     @Override
@@ -65,9 +71,15 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
                 .configure();
 
         friendsListFactory.setOnClickListener(
-                new IOnClickComponentItemHandler<TeamFriendHolder.SelectedContainer, ISelectedFriend>() {
+                new IOnClickItemListHandler<TeamFriendHolder.SelectedContainer>() {
                     @Override
-                    public void onClick(int position, TeamFriendHolder.SelectedContainer data, ISelectedFriend holder) {
+                    public void onClick(int position, TeamFriendHolder.SelectedContainer data) {
+
+                        if(!data.isSelected()){
+                            ctrl.onFriendAddedToMembers(position, data.getContent());
+                        }else{
+                            ctrl.onMemberRemoved(position, data.getContent());
+                        }
 
                     }
                 });
@@ -78,6 +90,24 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
     }
 
     private void setupMembers() {
+        membersListAdapter= new SelectedMembersListAdapter();
+
+        AndroidUtils.createListConfiguration(this, membersList)
+                .orientation(LinearLayoutManager.HORIZONTAL)
+                .divider(true)
+                .itemAnimation(true)
+                .configure();
+
+        membersListAdapter.setOnClickListener(
+                new IOnClickItemListHandler<SelectedMemberHolder.Container>() {
+                    @Override
+                    public void onClick(int position, SelectedMemberHolder.Container data) {
+                        ctrl.onMemberRemoved(data.getFriendIndex(), data.getContent());
+                    }
+                });
+
+        membersList.setAdapter(membersListAdapter);
+
     }
 
     @OnClick(R.id.fab)
@@ -106,15 +136,23 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
     @Override
     public void bindFriends(ArrayList<FriendProfile> friends) {
         friendsListAdapter.setFriendProfiles(friends);
+        membersListAdapter.clear();
     }
 
     @Override
-    public void addMember(FriendProfile member) {
-
+    public void addMember(FriendProfile member, int friendIndex) {
+        membersListAdapter.addMember(member, friendIndex);
+        friendsListAdapter.selectFriend(friendIndex);
     }
 
     @Override
-    public void removeMember(int position) {
+    public void removeMember(int friendIndex) {
+        membersListAdapter.removeMemberByFriend(friendIndex);
+        friendsListAdapter.deselectFriend(friendIndex);
+    }
 
+    @Override
+    public int getFriendsSize() {
+        return friendsListAdapter.getItemCount();
     }
 }

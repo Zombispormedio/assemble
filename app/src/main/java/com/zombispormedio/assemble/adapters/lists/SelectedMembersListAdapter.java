@@ -1,15 +1,15 @@
 package com.zombispormedio.assemble.adapters.lists;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.SelectedMemberHolder;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.views.ISelectedMember;
 
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Xavier Serrano on 23/09/2016.
@@ -18,7 +18,7 @@ import java.util.HashMap;
 public class SelectedMembersListAdapter extends BaseListAdapter<
         SelectedMemberHolder.Container, SelectedMemberHolder> {
 
-    private IOnClickComponentItemHandler<SelectedMemberHolder.Container, ISelectedMember> listener;
+    private IOnClickItemListHandler<SelectedMemberHolder.Container> listener;
 
     private ArrayList<Integer> friendIndexes;
 
@@ -26,8 +26,6 @@ public class SelectedMembersListAdapter extends BaseListAdapter<
         super.setData(new ArrayList<SelectedMemberHolder.Container>());
         friendIndexes=new ArrayList<>();
     }
-
-
 
     @Override
     public SelectedMemberHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -37,7 +35,7 @@ public class SelectedMembersListAdapter extends BaseListAdapter<
     }
 
     public void setOnClickListener(
-            IOnClickComponentItemHandler<SelectedMemberHolder.Container, ISelectedMember> listener) {
+            IOnClickItemListHandler<SelectedMemberHolder.Container> listener) {
         this.listener = listener;
     }
 
@@ -82,5 +80,10 @@ public class SelectedMembersListAdapter extends BaseListAdapter<
         }
 
         return index;
+    }
+
+    public void clear(){
+        data.clear();
+        notifyDataSetChanged();
     }
 }

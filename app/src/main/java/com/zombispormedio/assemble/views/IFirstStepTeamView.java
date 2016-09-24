@@ -15,9 +15,11 @@ public interface IFirstStepTeamView extends IBaseView {
 
     void bindFriends(ArrayList<FriendProfile> friends);
 
-    void addMember(FriendProfile member);
+    void addMember(FriendProfile member, int friendIndex);
 
-    void removeMember(int position);
+    void removeMember(int friendIndex);
+
+    int getFriendsSize();
 
 
 }

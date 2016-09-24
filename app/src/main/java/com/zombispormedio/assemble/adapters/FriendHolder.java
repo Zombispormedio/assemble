@@ -7,7 +7,7 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.IMainFriendHolder;
+import com.zombispormedio.assemble.views.IFriendHolder;
 
 
 import android.view.View;
@@ -22,11 +22,11 @@ import butterknife.ButterKnife;
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public class FriendHolder extends AbstractHolder<FriendProfile> implements IMainFriendHolder {
+public class FriendHolder extends AbstractHolder<FriendProfile> implements IFriendHolder {
 
     private IOnClickItemListHandler<FriendProfile> listener;
 
-    private IOnClickComponentItemHandler<FriendProfile, IMainFriendHolder> removeButtonListener;
+    private IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener;
 
     @BindView(R.id.username_label)
     TextView usernameLabel;
@@ -76,7 +76,7 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IMain
     }
 
     private void setupOnClickRemoveButton(final int position, final FriendProfile itemData) {
-        final IMainFriendHolder holder=this;
+        final IFriendHolder holder=this;
         removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,7 +111,7 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IMain
     }
 
     public void setRemoveButtonListener(
-            IOnClickComponentItemHandler<FriendProfile, IMainFriendHolder> removeButtonListener) {
+            IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener) {
         this.removeButtonListener = removeButtonListener;
     }
 

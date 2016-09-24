@@ -3,8 +3,8 @@ package com.zombispormedio.assemble.adapters.lists;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.TeamFriendHolder;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.views.ISelectedFriend;
 
 import android.view.ViewGroup;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class TeamFriendsListAdapter extends BaseListAdapter<
         TeamFriendHolder.SelectedContainer, TeamFriendHolder> {
 
-    private IOnClickComponentItemHandler<TeamFriendHolder.SelectedContainer, ISelectedFriend> listener;
+    private IOnClickItemListHandler<TeamFriendHolder.SelectedContainer> listener;
 
     public TeamFriendsListAdapter(ArrayList<FriendProfile> data) {
         super.setData(apply(data));
@@ -32,7 +32,7 @@ public class TeamFriendsListAdapter extends BaseListAdapter<
     }
 
     public void setOnClickListener(
-            IOnClickComponentItemHandler<TeamFriendHolder.SelectedContainer, ISelectedFriend> listener) {
+            IOnClickItemListHandler<TeamFriendHolder.SelectedContainer> listener) {
         this.listener = listener;
     }
 
@@ -63,9 +63,12 @@ public class TeamFriendsListAdapter extends BaseListAdapter<
         notifyItemChanged(index);
     }
 
+
+
+
     public static class Factory {
 
-        private IOnClickComponentItemHandler<TeamFriendHolder.SelectedContainer, ISelectedFriend> listener;
+        private IOnClickItemListHandler<TeamFriendHolder.SelectedContainer> listener;
 
         public TeamFriendsListAdapter make() {
             return make(new ArrayList<FriendProfile>());
@@ -78,7 +81,7 @@ public class TeamFriendsListAdapter extends BaseListAdapter<
         }
 
         public void setOnClickListener(
-                IOnClickComponentItemHandler<TeamFriendHolder.SelectedContainer, ISelectedFriend> listener) {
+                IOnClickItemListHandler<TeamFriendHolder.SelectedContainer> listener) {
             this.listener = listener;
         }
     }

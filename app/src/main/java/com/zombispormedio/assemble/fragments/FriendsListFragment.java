@@ -16,7 +16,7 @@ import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.IMainFriendHolder;
+import com.zombispormedio.assemble.views.IFriendHolder;
 import com.zombispormedio.assemble.views.IFriendsListView;
 
 import java.util.ArrayList;
@@ -74,9 +74,9 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
             }
         });
 
-        friendsListFactory.setRemoveButtonListener(new IOnClickComponentItemHandler<FriendProfile, IMainFriendHolder>() {
+        friendsListFactory.setRemoveButtonListener(new IOnClickComponentItemHandler<FriendProfile, IFriendHolder>() {
             @Override
-            public void onClick(int position, FriendProfile data, IMainFriendHolder holder) {
+            public void onClick(int position, FriendProfile data, IFriendHolder holder) {
                 ctrl.onRemoveFriend(position, data, holder);
             }
         });

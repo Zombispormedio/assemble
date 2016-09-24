@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.adapters.FriendHolder;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.views.IMainFriendHolder;
+import com.zombispormedio.assemble.views.IFriendHolder;
 
 import android.view.ViewGroup;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class FriendsListAdapter
         extends BaseListAdapter<FriendProfile, FriendHolder> {
 
-    private IOnClickComponentItemHandler<FriendProfile, IMainFriendHolder> removeButtonListener;
+    private IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener;
 
     private IOnClickItemListHandler<FriendProfile> listener;
 
@@ -39,7 +39,7 @@ public class FriendsListAdapter
     }
 
     public void setRemoveButtonListener(
-            IOnClickComponentItemHandler<FriendProfile, IMainFriendHolder> removeButtonListener) {
+            IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener) {
         this.removeButtonListener = removeButtonListener;
     }
 
@@ -50,7 +50,7 @@ public class FriendsListAdapter
 
     public static class Factory{
 
-        private IOnClickComponentItemHandler<FriendProfile, IMainFriendHolder> removeButtonListener;
+        private IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener;
 
         private IOnClickItemListHandler<FriendProfile> listener;
 
@@ -66,7 +66,7 @@ public class FriendsListAdapter
         }
 
         public void setRemoveButtonListener(
-                IOnClickComponentItemHandler<FriendProfile, IMainFriendHolder> removeButtonListener) {
+                IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener) {
             this.removeButtonListener = removeButtonListener;
         }
 
