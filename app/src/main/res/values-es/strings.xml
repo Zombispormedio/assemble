@@ -86,6 +86,7 @@
     <string name="removed_friend">Amigo eliminado</string>
     <string name="add_participants">Añadir participantes</string>
     <string name="selected_participants">%1$d de %2$d seleccionado</string>
+    <string name="need_more_than_one_members">Necesitas más de un miembro</string>
 
 
 </resources>

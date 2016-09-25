@@ -1,18 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingBottom="15sp"
-        android:paddingTop="15sp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
+        android:layout_height="80dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         >
 
-    <ImageView
-            android:id="@+id/image_view"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
-            android:layout_gravity="left|center_vertical"
-            android:src="@drawable/profile_image_square"
+    <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            >
+        <ImageView
+                android:id="@+id/image_view"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_gravity="left|center_vertical"
+                android:src="@drawable/profile_image_square"
+                android:contentDescription="@string/profile_image_desc"
+                />
+        <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/close_circle_layer_list"
+                android:layout_gravity="right|bottom"
+                />
+
+    </FrameLayout>
+
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/example_string"
+            android:layout_gravity="bottom|center_horizontal"
+            android:id="@+id/username_label"
+            android:layout_marginTop="20dp"
             />
+
+
 </FrameLayout>

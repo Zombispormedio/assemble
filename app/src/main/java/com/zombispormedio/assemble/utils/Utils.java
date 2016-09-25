@@ -4,11 +4,14 @@ import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.UserProfile;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Field;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Locale;
 
 import io.realm.RealmObject;
@@ -137,7 +140,16 @@ public class Utils {
 
     }
 
+    public static int[] toArray(LinkedList<Integer> in){
+        int len=in.size();
+        int[] out= new int[len];
 
+        for(int i=0; i< len; i++){
+            out[i]=in.get(i);
+        }
+
+        return out;
+    }
 
 
 }

@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.utils.Utils;
 
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,6 +21,9 @@ import butterknife.ButterKnife;
 
 public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Container> {
 
+
+    @BindView(R.id.username_label)
+    TextView usernameLabel;
 
     @BindView(R.id.image_view)
     ImageView imageView;
@@ -47,6 +51,8 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
 
     private void bindData(Container data) {
         FriendProfile itemData=data.getContent();
+        usernameLabel.setText(itemData.username);
+
         String url=itemData.large_avatar_url;
         String letter= StringUtils.firstLetter(itemData.username);
         ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(itemView.getContext(), imageView)

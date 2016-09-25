@@ -16,6 +16,7 @@ import com.zombispormedio.assemble.activities.MainActivity;
 import com.zombispormedio.assemble.activities.NewFriendActivity;
 import com.zombispormedio.assemble.activities.ProfileActivity;
 import com.zombispormedio.assemble.activities.RegisterActivity;
+import com.zombispormedio.assemble.activities.SecondStepTeamActivity;
 import com.zombispormedio.assemble.activities.SettingsActivity;
 import com.zombispormedio.assemble.activities.UpdateBirthdateActivity;
 import com.zombispormedio.assemble.activities.UpdateProfileActivity;
@@ -39,19 +40,19 @@ public final class NavigationManager {
     }
 
 
-    public static void goTo(Context ctx, Class<?> cls) {
+    private static void goTo(Context ctx, Class<?> cls) {
         Intent dst = new Intent(ctx, cls);
         ctx.startActivity(dst);
 
     }
 
-    public static void goToWithResult(Activity ctx, Class<?> cls) {
+    private static void goToWithResult(Activity ctx, Class<?> cls) {
         Intent dst = new Intent(ctx, cls);
         ctx.startActivityForResult(dst, UPDATE_BIRTHDATE_CODE);
 
     }
 
-    public static void goToWithResult(Activity ctx, Class<?> cls, String... extras) {
+     private static void goToWithResult(Activity ctx, Class<?> cls, String... extras) {
         Intent dst = new Intent(ctx, cls);
         dst.putExtra(SIZE, extras.length);
 
@@ -61,6 +62,14 @@ public final class NavigationManager {
         ctx.startActivityForResult(dst, UPDATE_BIRTHDATE_CODE);
 
     }
+
+
+    private static void goWithArg(Context ctx, Class<?> cls, int[] extras){
+        Intent dst = new Intent(ctx, cls);
+        dst.putExtra(ARGS+0, extras);
+        ctx.startActivity(dst);
+    }
+
 
     public static void Login(Context ctx) {
         goTo(ctx, LoginActivity.class);
@@ -112,7 +121,11 @@ public final class NavigationManager {
 
     public static void CreateChat(Context ctx){goTo(ctx, CreateChatActivity.class);}
 
-    public static void CreateTeam(Context ctx){goTo(ctx, FirstStepTeamActivity.class);}
+    public static void FirstStepCreateTeam(Context ctx){goTo(ctx, FirstStepTeamActivity.class);}
+
+    public static void SecondStepCreateTeam(Context ctx, int[] friendIndexes){
+        goWithArg(ctx, SecondStepTeamActivity.class, friendIndexes);
+    }
 
     public static void CreateMeeting(Context ctx){goTo(ctx, CreateMeetingActivity.class);}
 
@@ -148,7 +161,11 @@ public final class NavigationManager {
 
     public void CreateMeeting(){NavigationManager.CreateMeeting(ctx);}
 
-    public void CreateTeam(){NavigationManager.CreateTeam(ctx);}
+    public void FirstStepCreateTeam(){NavigationManager.FirstStepCreateTeam(ctx);}
+
+    public void SecondStepCreateTeam(int[] friendIndexes){
+       NavigationManager.SecondStepCreateTeam(ctx, friendIndexes);
+    }
 
     public void Help() {
         NavigationManager.Help(ctx);

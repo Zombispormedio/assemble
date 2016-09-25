@@ -86,5 +86,6 @@
     <string name="add_participants">Add participants</string>
     <string name="selected_participants">%1$d of %2$d selected</string>
     <string name="title_activity_second_step_team">SecondStepTeamActivity</string>
+    <string name="need_more_than_one_members">You need more than one member</string>
 
 </resources>

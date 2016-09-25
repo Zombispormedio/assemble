@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.views;
 import com.zombispormedio.assemble.models.FriendProfile;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Created by Xavier Serrano on 09/09/2016.
@@ -21,5 +22,7 @@ public interface IFirstStepTeamView extends IBaseView {
 
     int getFriendsSize();
 
+    void showNeedMembers();
 
+    void goToNextStep(int[] memberIds);
 }

@@ -21,6 +21,14 @@
                     android:layout_marginLeft="15dp"
                     android:src="@drawable/profile_image_square"
                     />
+            <ImageView
+                    android:id="@+id/selected_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/check_circle_layer_list"
+                    android:layout_gravity="right|bottom"
+                    android:visibility="gone"
+                    />
         </FrameLayout>
 
 

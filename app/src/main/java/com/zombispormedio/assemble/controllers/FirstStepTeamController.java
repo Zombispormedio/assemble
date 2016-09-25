@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.FriendResource;
+import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IFirstStepTeamView;
 
 import java.util.ArrayList;
@@ -45,5 +46,13 @@ public class FirstStepTeamController extends Controller {
         ctx.removeMember(friendIndex);
         memberIds.remove(Integer.valueOf(data.id));
         ctx.setParticipantsSubtitle(memberIds.size(), ctx.getFriendsSize());
+    }
+
+    public void onNext() {
+        if(memberIds.size()>1){
+            ctx.goToNextStep(Utils.toArray(memberIds));
+        }else{
+            ctx.showNeedMembers();
+        }
     }
 }

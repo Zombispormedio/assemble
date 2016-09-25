@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.activities;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
@@ -99,6 +100,18 @@ public class BaseActivity extends AppCompatActivity implements IBaseView{
     }
 
 
+    protected  void setSubtitle(int id) {
+        ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null){
+            actionBar.setSubtitle(id);
+        }
+    }
 
+    protected  void setSubtitle(String id) {
+        ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null){
+            actionBar.setSubtitle(id);
+        }
+    }
 
 }

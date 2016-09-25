@@ -266,7 +266,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     @OnClick(R.id.team_fab)
     public void onTeamFabClick(View view) {
         hideOverlay();
-        navigation.CreateTeam();
+        navigation.FirstStepCreateTeam();
     }
 
     @Override

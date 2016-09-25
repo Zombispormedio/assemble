@@ -170,7 +170,7 @@
         </activity>
         <activity
                 android:name=".activities.SecondStepTeamActivity"
-                android:label="@string/title_activity_second_step_team"
+                android:label="@string/create_team_title"
                 android:parentActivityName=".activities.FirstStepTeamActivity"
                 android:theme="@style/AppTheme"
                 >

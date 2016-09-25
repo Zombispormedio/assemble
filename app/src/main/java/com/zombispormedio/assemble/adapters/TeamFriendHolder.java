@@ -30,6 +30,9 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     @BindView(R.id.image_view)
     ImageView imageView;
 
+    @BindView(R.id.selected_icon)
+    ImageView selectedIcon;
+
     public TeamFriendHolder(View view) {
         super(view);
         this.listener = null;
@@ -64,6 +67,11 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
         FriendProfile itemData=data.getContent();
         usernameLabel.setText(itemData.username);
         setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
+        if(data.isSelected()){
+            selectedIcon.setVisibility(View.VISIBLE);
+        }else{
+            selectedIcon.setVisibility(View.GONE);
+        }
     }
 
     private void setupImage(String url, String letter){
