@@ -85,7 +85,10 @@
     <string name="removed_friend">Removed friend</string>
     <string name="add_participants">Add participants</string>
     <string name="selected_participants">%1$d of %2$d selected</string>
-    <string name="title_activity_second_step_team">SecondStepTeamActivity</string>
     <string name="need_more_than_one_members">You need more than one member</string>
+    <string name="add_name">Add name</string>
+    <string name="write_the_name_here">Write the name here…</string>
+    <string name="provide_name_and_logo">Provide a <u>name</u> for the team and an icon</string>
+    <string name="participants_number">Participants: %1$d /%2$d</string>
 
 </resources>

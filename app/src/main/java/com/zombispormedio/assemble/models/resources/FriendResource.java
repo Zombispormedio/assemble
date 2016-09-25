@@ -53,6 +53,10 @@ public class FriendResource extends ConceptResource<FriendProfile> {
         });
     }
 
+    public int countAll(){
+        return storage.countAll();
+    }
+
     public void setFriendSubscription(FriendSubscription friendSubscription) {
         this.friendSubscription = friendSubscription;
     }
@@ -61,6 +65,10 @@ public class FriendResource extends ConceptResource<FriendProfile> {
         if (friendSubscription!=null){
             friendSubscription.haveChanged();
         }
+    }
+
+    public ArrayList<FriendProfile> getFriendInArrayofIds(int[] ids){
+        return  storage.inByID(ids);
     }
 
 }

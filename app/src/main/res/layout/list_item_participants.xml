@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="80dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginBottom="5dp"
+        android:clickable="true"
         android:background="?android:attr/selectableItemBackground"
         >
 
@@ -19,12 +19,6 @@
                 android:layout_gravity="left|center_vertical"
                 android:src="@drawable/profile_image_square"
                 android:contentDescription="@string/profile_image_desc"
-                />
-        <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/close_circle_layer_list"
-                android:layout_gravity="right|bottom"
                 />
 
     </FrameLayout>

@@ -152,4 +152,15 @@ public class Utils {
     }
 
 
+    public static Integer[] toInteger(int[] in){
+        int len=in.length;
+        Integer[] out=new Integer[len];
+        for(int i=0; i< len; i++){
+            out[i]=in[i];
+        }
+
+        return out;
+    }
+
+
 }

@@ -8,10 +8,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
@@ -165,7 +167,7 @@ public final class AndroidUtils {
         list.addItemDecoration(new DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL_LIST));
     }
 
-    public static ListConfiguration createListConfiguration(Context ctx, RecyclerView list){
+    public static ListConfiguration createListConfiguration(Context ctx, RecyclerView list) {
         return new ListConfiguration(ctx, list);
     }
 
@@ -185,6 +187,10 @@ public final class AndroidUtils {
 
         private boolean haveScroll;
 
+        private boolean isGrid;
+
+        private int spanCount;
+
         private RecyclerView.ItemDecoration dividerItemDecoration;
 
         private RecyclerView.ItemAnimator itemAnimator;
@@ -193,13 +199,15 @@ public final class AndroidUtils {
         public ListConfiguration(Context ctx, RecyclerView list) {
             this.list = list;
             this.ctx = ctx;
-            orientation=LinearLayoutManager.VERTICAL;
-            haveDivider=false;
-            dividerOrientation=LinearLayoutManager.VERTICAL;
-            haveItemAnimation=false;
-            haveScroll=true;
-            dividerItemDecoration=null;
-            itemAnimator=null;
+            orientation = LinearLayoutManager.VERTICAL;
+            haveDivider = false;
+            dividerOrientation = LinearLayoutManager.VERTICAL;
+            haveItemAnimation = false;
+            haveScroll = true;
+            dividerItemDecoration = null;
+            itemAnimator = null;
+            isGrid = false;
+            spanCount = 0;
         }
 
         public ListConfiguration orientation(int orientation) {
@@ -227,50 +235,85 @@ public final class AndroidUtils {
             return this;
         }
 
+        public ListConfiguration grid(boolean g) {
+            this.isGrid = g;
+            return this;
+        }
+
+        public ListConfiguration span(int s) {
+            this.spanCount = s;
+            return this;
+        }
+
+
         public ListConfiguration setItemAnimator(RecyclerView.ItemAnimator itemAnimator) {
-            haveItemAnimation=true;
+            haveItemAnimation = true;
             this.itemAnimator = itemAnimator;
             return this;
         }
 
         public ListConfiguration setDividerItemDecoration(RecyclerView.ItemDecoration dividerItemDecoration) {
-            haveDivider=true;
+            haveDivider = true;
             this.dividerItemDecoration = dividerItemDecoration;
             return this;
         }
 
-        public void configure() {
-            LinearLayoutManager layout=null;
+        private LinearLayoutManager getLinearNoScroll() {
+            return new LinearLayoutManager(ctx, orientation, false) {
+                @Override
+                public boolean canScrollVertically() {
+                    return false;
+                }
+            };
+        }
 
-            if(haveScroll){
-               layout= new LinearLayoutManager(ctx, orientation, false);
-            }else{
-                layout= new LinearLayoutManager(ctx, orientation, false) {
-                    @Override
-                    public boolean canScrollVertically() {
-                        return false;
-                    }
-                };
-            }
+        private LinearLayoutManager getLinear() {
+            return haveScroll?new LinearLayoutManager(ctx, orientation, false):getLinearNoScroll();
+        }
+
+        private GridLayoutManager getGridNoScroll() {
+            return new GridLayoutManager(ctx, spanCount, orientation, false) {
+                @Override
+                public boolean canScrollVertically() {
+                    return false;
+                }
+            };
+        }
+
+        private GridLayoutManager getGrid() {
+            return haveScroll?new GridLayoutManager(ctx, spanCount, orientation, false): getGridNoScroll();
+        }
+
+
+
+        public void configure() {
+
+            RecyclerView.LayoutManager layout = null;
+
+           if(isGrid){
+               layout=getGrid();
+           }else{
+               layout=getLinear();
+           }
+
 
             list.setLayoutManager(layout);
 
-            if(haveItemAnimation){
-                if(itemAnimator!=null){
+            if (haveItemAnimation) {
+                if (itemAnimator != null) {
                     list.setItemAnimator(itemAnimator);
-                }else{
+                } else {
                     list.setItemAnimator(new DefaultItemAnimator());
                 }
             }
 
-            if(haveDivider){
-                if(dividerItemDecoration!=null){
+            if (haveDivider) {
+                if (dividerItemDecoration != null) {
                     list.addItemDecoration(dividerItemDecoration);
-                }else{
+                } else {
                     list.addItemDecoration(new DividerItemDecoration(ctx, dividerOrientation));
                 }
             }
-
 
 
         }

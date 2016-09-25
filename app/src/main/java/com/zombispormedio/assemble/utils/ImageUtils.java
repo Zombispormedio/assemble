@@ -110,6 +110,8 @@ public class ImageUtils {
 
         private ISuccessHandler handler;
 
+        private int _drawableId;
+
         public ImageBuilder(Context _ctx, ImageView _imageView) {
             this._ctx = _ctx;
             this._imageView = _imageView;
@@ -118,6 +120,7 @@ public class ImageUtils {
             this.isCircle = false;
             this._drawable = null;
             this.handler=null;
+            this._drawableId=0;
         }
 
         public ImageBuilder() {
@@ -150,7 +153,11 @@ public class ImageUtils {
 
         public ImageBuilder drawable(Drawable _drawable) {
             this._drawable = _drawable;
+            return this;
+        }
 
+        public ImageBuilder drawableID(int d) {
+            this._drawableId=d;
             return this;
         }
 
@@ -164,9 +171,22 @@ public class ImageUtils {
             if (_ctx != null && _imageView != null) {
 
                 if (_url == null) {
-                    buildText();
+                    if(_letter==null && _drawableId!=0){
+                        RequestCreator config=Picasso.with(_ctx)
+                                .load(_drawableId);
+
+                        if(isCircle){
+                            config=config.transform(new ImageUtils.CircleTransform());
+                        }
+
+                        config.into(_imageView);
+
+                    }else{
+                        buildText();
+                    }
 
                 } else {
+
                     buildNormal();
                 }
 

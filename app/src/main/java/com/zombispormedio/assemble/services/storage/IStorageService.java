@@ -23,4 +23,8 @@ public interface IStorageService<T> {
 
     T getByID(int id);
 
+    int countAll();
+
+    ArrayList<T> inByID(int[] in);
+
 }

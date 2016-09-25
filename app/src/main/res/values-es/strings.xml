@@ -47,7 +47,7 @@
     <string name="invalid_password">Contraseña entre 6 y 50 caracteres alfanúmericos</string>
     <string name="location_example">Elche</string>
     <string name="lorem_impsum">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</string>
-    <string name="start_login">Iniciando sesión....</string>
+    <string name="start_login">Iniciando sesión...</string>
     <string name="username_example">Zombispormedio</string>
     <string name="hint_username">Nombre de usuario</string>
     <string name="hint_bio">Biografía</string>
@@ -87,6 +87,10 @@
     <string name="add_participants">Añadir participantes</string>
     <string name="selected_participants">%1$d de %2$d seleccionado</string>
     <string name="need_more_than_one_members">Necesitas más de un miembro</string>
+    <string name="add_name">Añadir nombre</string>
+    <string name="write_the_name_here">Escribe el nombre aquí...</string>
+    <string name="provide_name_and_logo">Proporciona un <u>nombre</u> para el equipo y un icono</string>
+    <string name="participants_number">Participantes: %1$d /%2$d</string>
 
 
 </resources>

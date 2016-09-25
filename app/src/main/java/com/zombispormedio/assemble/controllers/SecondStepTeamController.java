@@ -2,7 +2,6 @@ package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
-import com.zombispormedio.assemble.views.IApplicationView;
 import com.zombispormedio.assemble.views.ISecondStepTeamView;
 
 /**
@@ -26,5 +25,20 @@ public class SecondStepTeamController extends Controller {
         friendResource=getResourceComponent().provideFriendResource();
         teamResource=getResourceComponent().provideTeamResource();
 
+    }
+
+    @Override
+    public void onCreate() {
+        bindParticipants();
+    }
+
+    private void bindParticipants() {
+        ctx.setParticipantsTitle(friendIds.length, friendResource.countAll());
+        ctx.bindParticipants(friendResource.getFriendInArrayofIds(friendIds));
+    }
+
+    @Override
+    public void onDestroy() {
+        ctx=null;
     }
 }

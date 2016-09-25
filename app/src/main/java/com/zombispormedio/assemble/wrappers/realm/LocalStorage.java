@@ -76,14 +76,9 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
     public ArrayList<D> getAll() {
         RealmQuery<D> query = getQuery();
 
-        RealmResults<D> realmResults = query.findAll();
+        RealmResults<D> results = query.findAll();
 
-        ArrayList<D> results = new ArrayList<>();
-
-        for (int i = 0; i < realmResults.size(); i++) {
-            results.add(realmResults.get(i));
-        }
-        return results;
+        return toArrayList(results);
     }
 
     public void deleteByID(int id){
@@ -107,6 +102,28 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
             object.deleteFromRealm();
             database.commitTransaction();
         }
+    }
+
+    public ArrayList<D> in(String key, Integer[] values){
+        RealmQuery<D> query = getQuery().in(key, values);
+
+        RealmResults<D> results = query.findAll();
+
+        return toArrayList(results);
+    }
+
+    private ArrayList<D> toArrayList( RealmResults<D> realmResults){
+        ArrayList<D> results = new ArrayList<>();
+
+        for (int i = 0; i < realmResults.size(); i++) {
+            results.add(realmResults.get(i));
+        }
+        return results;
+    }
+
+    public int countAll(){
+        RealmQuery<D> query = getQuery();
+        return (int)query.count();
     }
 
     private RealmQuery<D> getQuery() {
@@ -140,4 +157,5 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
 
         }
     }
+
 }

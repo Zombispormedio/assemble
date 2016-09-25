@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.services.storage;
 
 import com.zombispormedio.assemble.dao.IBaseDAO;
 import com.zombispormedio.assemble.models.BaseModel;
+import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import java.util.ArrayList;
@@ -72,8 +73,6 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
             }
         }
 
-
-
     }
 
     @Override
@@ -88,15 +87,8 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
 
     @Override
     public ArrayList<M> getAll() {
-        ArrayList<M> result= new ArrayList<>();
-
         ArrayList<D> objects= storage.getAll();
-
-        for (D object: objects) {
-            result.add(((IBaseDAO<M>) object).toModel());
-        }
-
-        return result;
+        return toModel(objects);
     }
 
     @Override
@@ -108,6 +100,24 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
             result=((IBaseDAO<M>) object).toModel();
         }
 
+        return result;
+    }
+
+    @Override
+    public int countAll() {
+        return storage.countAll();
+    }
+
+    public ArrayList<M> inByID(int[] in){
+        return toModel(storage.in("id", Utils.toInteger(in)));
+    }
+
+
+    private ArrayList<M> toModel(ArrayList<D> objects){
+        ArrayList<M> result= new ArrayList<>();
+        for (D object: objects) {
+            result.add(((IBaseDAO<M>) object).toModel());
+        }
         return result;
     }
 
