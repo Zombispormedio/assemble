@@ -93,4 +93,7 @@
     <string name="name_is_needed">Team name is needed</string>
     <string name="creating_team">We are creating your team. A moment, please…</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
