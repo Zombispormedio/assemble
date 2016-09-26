@@ -90,5 +90,7 @@
     <string name="write_the_name_here">Write the name here…</string>
     <string name="provide_name_and_logo">Provide a <u>name</u> for the team and an icon</string>
     <string name="participants_number">Participants: %1$d /%2$d</string>
+    <string name="name_is_needed">Team name is needed</string>
+    <string name="creating_team">We are creating your team. A moment, please…</string>
 
 </resources>

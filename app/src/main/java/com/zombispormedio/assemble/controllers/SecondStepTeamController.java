@@ -18,13 +18,15 @@ public class SecondStepTeamController extends Controller {
 
     private int[] friendIds;
 
+    private String imagePath;
+
     public SecondStepTeamController(ISecondStepTeamView ctx, int[] friendIds) {
         super(ctx);
         this.ctx = ctx;
         this.friendIds=friendIds;
         friendResource=getResourceComponent().provideFriendResource();
         teamResource=getResourceComponent().provideTeamResource();
-
+        imagePath=null;
     }
 
     @Override
@@ -37,8 +39,27 @@ public class SecondStepTeamController extends Controller {
         ctx.bindParticipants(friendResource.getFriendInArrayofIds(friendIds));
     }
 
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     @Override
     public void onDestroy() {
         ctx=null;
+    }
+
+    public void onCreateTeam() {
+        String name=ctx.getName();
+
+        if(!name.isEmpty()){
+            beginCreatingTeam();
+        }else{
+            ctx.showNameEmpty();
+        }
+    }
+
+    private void beginCreatingTeam() {
+
     }
 }

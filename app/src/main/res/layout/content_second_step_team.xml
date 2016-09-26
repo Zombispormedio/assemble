@@ -31,7 +31,7 @@
                     android:id="@+id/image_view"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/profile_image_square"
+                    android:src="@drawable/camera_layer_list"
                     android:clickable="true"
                     android:background="?android:attr/selectableItemBackground"
                     />

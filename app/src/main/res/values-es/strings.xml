@@ -91,6 +91,8 @@
     <string name="write_the_name_here">Escribe el nombre aquí...</string>
     <string name="provide_name_and_logo">Proporciona un <u>nombre</u> para el equipo y un icono</string>
     <string name="participants_number">Participantes: %1$d /%2$d</string>
+    <string name="name_is_needed">Se necesita un nombre para el equipo</string>
+    <string name="creating_team">Estamos creando tu equipo. Un momento, por favor…</string>
 
 
 </resources>

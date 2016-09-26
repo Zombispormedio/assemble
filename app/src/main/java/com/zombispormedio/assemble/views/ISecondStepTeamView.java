@@ -15,4 +15,7 @@ public interface ISecondStepTeamView  extends IBaseView{
 
     void bindParticipants(ArrayList<FriendProfile> data);
 
+    void bindImage(String path);
+
+    void showNameEmpty();
 }

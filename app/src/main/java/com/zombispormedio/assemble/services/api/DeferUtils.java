@@ -19,6 +19,7 @@ import com.zombispormedio.assemble.net.responses.FriendsResponse;
 import com.zombispormedio.assemble.net.responses.ArrayResponse;
 import com.zombispormedio.assemble.net.responses.MeetingsResponse;
 import com.zombispormedio.assemble.net.responses.ProfileResponse;
+import com.zombispormedio.assemble.net.responses.TeamResponse;
 import com.zombispormedio.assemble.net.responses.TeamsResponse;
 
 import java.io.IOException;
@@ -89,6 +90,16 @@ class DeferUtils {
             @Override
             protected TeamsResponse getResponse(String arg) throws IOException {
                 return JsonBinder.toTeamsResponse(arg);
+            }
+        };
+    }
+
+    static PromiseHandler deferTeam(IServiceHandler<Team, Error> handler) {
+        return new PromiseHandler<TeamResponse, Team>(handler) {
+
+            @Override
+            protected TeamResponse getResponse(String arg) throws IOException {
+                return JsonBinder.toTeamResponse(arg);
             }
         };
     }
