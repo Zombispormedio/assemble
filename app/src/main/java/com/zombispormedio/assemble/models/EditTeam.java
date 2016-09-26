@@ -22,16 +22,17 @@ public class EditTeam {
     }
 
     public static class Builder {
-        public String name;
 
-        public String description;
+        private String name;
 
-        public int[] members;
+        private String description;
 
-        public int admin;
+        private int[] members;
+
+        private int admin;
 
         public Builder() {
-            name=description="";
+            name = description = "";
         }
 
         public Builder setName(String name) {
@@ -54,7 +55,23 @@ public class EditTeam {
             return this;
         }
 
-        public EditTeam build(){
+        public String getName() {
+            return name;
+        }
+
+        public String getDescription() {
+            return description;
+        }
+
+        public int[] getMembers() {
+            return members;
+        }
+
+        public int getAdmin() {
+            return admin;
+        }
+
+        public EditTeam build() {
             return new EditTeam(name, description, members, admin);
         }
 

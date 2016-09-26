@@ -18,6 +18,8 @@ import com.squareup.picasso.Transformation;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.net.State;
 
+import java.io.File;
+
 /**
  * Created by Xavier Serrano on 11/07/2016.
  */
@@ -110,6 +112,8 @@ public class ImageUtils {
 
         private ISuccessHandler handler;
 
+        private File _file;
+
         private int _drawableId;
 
         public ImageBuilder(Context _ctx, ImageView _imageView) {
@@ -119,8 +123,9 @@ public class ImageUtils {
             this._letter = null;
             this.isCircle = false;
             this._drawable = null;
-            this.handler=null;
-            this._drawableId=0;
+            this.handler = null;
+            this._drawableId = 0;
+            this._file = null;
         }
 
         public ImageBuilder() {
@@ -146,6 +151,12 @@ public class ImageUtils {
             return this;
         }
 
+        public ImageBuilder file(String path) {
+            this._file = new File(path);
+            return this;
+        }
+
+
         public ImageBuilder circle(boolean isCircle) {
             this.isCircle = isCircle;
             return this;
@@ -157,36 +168,55 @@ public class ImageUtils {
         }
 
         public ImageBuilder drawableID(int d) {
-            this._drawableId=d;
+            this._drawableId = d;
             return this;
         }
 
-        public ImageBuilder handle(ISuccessHandler handler){
-            this.handler=handler;
+        public ImageBuilder handle(ISuccessHandler handler) {
+            this.handler = handler;
             return this;
         }
+
+        public void buildDrawableId() {
+            RequestCreator config = Picasso.with(_ctx)
+                    .load(_drawableId);
+
+            if (isCircle) {
+                config = config.transform(new ImageUtils.CircleTransform());
+            }
+
+            config.into(_imageView);
+        }
+
+        public void buildFile() {
+            RequestCreator config = Picasso.with(_ctx)
+                    .load(_file);
+
+            if (isCircle) {
+                config = config.transform(new ImageUtils.CircleTransform());
+            }
+
+            config.into(_imageView);
+        }
+
 
         public void build() {
 
             if (_ctx != null && _imageView != null) {
 
                 if (_url == null) {
-                    if(_letter==null && _drawableId!=0){
-                        RequestCreator config=Picasso.with(_ctx)
-                                .load(_drawableId);
-
-                        if(isCircle){
-                            config=config.transform(new ImageUtils.CircleTransform());
-                        }
-
-                        config.into(_imageView);
-
-                    }else{
+                    if (_letter != null) {
                         buildText();
+                    }
+                    if (_drawableId != 0) {
+                        buildDrawableId();
+                    }
+
+                    if (_file != null) {
+                        buildFile();
                     }
 
                 } else {
-
                     buildNormal();
                 }
 
@@ -199,30 +229,30 @@ public class ImageUtils {
 
             RequestCreator config = null;
             if (_url != null) {
-                config=preConfig.load(_url);
+                config = preConfig.load(_url);
             }
 
-            if(_drawable!=null){
-                config=config.placeholder(_drawable);
+            if (_drawable != null) {
+                config = config.placeholder(_drawable);
             }
 
-            if(_letter !=null){
-                Drawable letterDrawable=null;
-                if(isCircle){
-                    letterDrawable=getRoundLetterImage(_letter);
-                }else{
-                    letterDrawable=getLetterImage(_letter);
+            if (_letter != null) {
+                Drawable letterDrawable = null;
+                if (isCircle) {
+                    letterDrawable = getRoundLetterImage(_letter);
+                } else {
+                    letterDrawable = getLetterImage(_letter);
                 }
 
-                config=config.placeholder(letterDrawable);
+                config = config.placeholder(letterDrawable);
             }
 
-            if(isCircle){
-                config=config.transform(new ImageUtils.CircleTransform());
+            if (isCircle) {
+                config = config.transform(new ImageUtils.CircleTransform());
             }
 
-            if(config!=null){
-                if(State.getInstance().isConnected() && handler!=null){
+            if (config != null) {
+                if (State.getInstance().isConnected() && handler != null) {
 
                     config.into(_imageView, new Callback() {
                         @Override
@@ -235,22 +265,20 @@ public class ImageUtils {
                             doHandler();
                         }
                     });
-                }else{
+                } else {
                     config.into(_imageView);
                     doHandler();
                 }
 
-            }else{
+            } else {
                 doHandler();
             }
 
 
-
-
         }
 
-        private void doHandler(){
-            if(handler!=null){
+        private void doHandler() {
+            if (handler != null) {
                 handler.onSuccess();
             }
         }
@@ -262,7 +290,6 @@ public class ImageUtils {
             } else {
                 applyLetterImage(_letter, _imageView);
             }
-
 
             doHandler();
         }

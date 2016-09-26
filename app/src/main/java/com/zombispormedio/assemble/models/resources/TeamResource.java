@@ -8,6 +8,7 @@ import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.services.interfaces.ITeamService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import javax.inject.Inject;
@@ -45,5 +46,20 @@ public class TeamResource extends ConceptResource<Team> {
             }
         });
 
+    }
+
+    public void uploadImage(int teamId, String path, final IServiceHandler<Team, Error> handler){
+        persistence.uploadImage(teamId, new File(path), new ServiceHandler<Team, Error>(){
+            @Override
+            public void onError(Error error) {
+                handler.onError(error);
+            }
+
+            @Override
+            public void onSuccess(Team result) {
+                storage.createOrUpdate(result);
+                handler.onSuccess(result);
+            }
+        });
     }
 }

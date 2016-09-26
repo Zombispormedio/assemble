@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.models.EditTeam;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.net.Error;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -17,4 +18,7 @@ public interface ITeamService {
 
 
     void create(EditTeam team, IServiceHandler<Team, Error> handler);
+
+
+    void uploadImage(int teamId, File file, IServiceHandler<Team, Error> handler);
 }

@@ -1,7 +1,12 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.orhanobut.logger.Logger;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
+import com.zombispormedio.assemble.models.EditTeam;
+import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
+import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.ISecondStepTeamView;
 
 /**
@@ -16,16 +21,21 @@ public class SecondStepTeamController extends Controller {
 
     private TeamResource teamResource;
 
-    private int[] friendIds;
+    private EditTeam.Builder editor;
 
     private String imagePath;
+
+
 
     public SecondStepTeamController(ISecondStepTeamView ctx, int[] friendIds) {
         super(ctx);
         this.ctx = ctx;
-        this.friendIds=friendIds;
+
         friendResource=getResourceComponent().provideFriendResource();
         teamResource=getResourceComponent().provideTeamResource();
+        editor=new EditTeam.Builder()
+                .setMembers(friendIds);
+
         imagePath=null;
     }
 
@@ -35,8 +45,9 @@ public class SecondStepTeamController extends Controller {
     }
 
     private void bindParticipants() {
-        ctx.setParticipantsTitle(friendIds.length, friendResource.countAll());
-        ctx.bindParticipants(friendResource.getFriendInArrayofIds(friendIds));
+        int[] members=editor.getMembers();
+        ctx.setParticipantsTitle(members.length, friendResource.countAll());
+        ctx.bindParticipants(friendResource.getFriendInArrayofIds(members));
     }
 
 
@@ -50,9 +61,9 @@ public class SecondStepTeamController extends Controller {
     }
 
     public void onCreateTeam() {
-        String name=ctx.getName();
+        editor.setName(ctx.getName());
 
-        if(!name.isEmpty()){
+        if(!editor.getName().isEmpty()){
             beginCreatingTeam();
         }else{
             ctx.showNameEmpty();
@@ -60,6 +71,48 @@ public class SecondStepTeamController extends Controller {
     }
 
     private void beginCreatingTeam() {
+        ctx.showProgress();
 
+
+        teamResource.create(editor.build(), new ServiceHandler<Team, Error>(){
+            @Override
+            public void onError(Error error) {
+                ctx.showAlert(error.msg);
+                afterCreatingTeam();
+            }
+
+            @Override
+            public void onSuccess(Team result) {
+                if(!uploadImage(result.id)){
+                    afterCreatingTeam();
+                }
+            }
+        });
+
+
+    }
+
+    private void afterCreatingTeam(){
+        ctx.hideProgress();
+        ctx.goHome();
+    }
+
+    private boolean uploadImage(int id){
+        if(imagePath==null)return false;
+
+        teamResource.uploadImage(id, imagePath, new ServiceHandler<Team, Error>(){
+            @Override
+            public void onError(Error error) {
+                ctx.showAlert(error.msg);
+                afterCreatingTeam();
+            }
+
+            @Override
+            public void onSuccess(Team result) {
+                afterCreatingTeam();
+            }
+        });
+
+        return true;
     }
 }

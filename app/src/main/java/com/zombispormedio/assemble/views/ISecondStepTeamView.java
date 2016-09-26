@@ -18,4 +18,10 @@ public interface ISecondStepTeamView  extends IBaseView{
     void bindImage(String path);
 
     void showNameEmpty();
+
+    void showProgress();
+
+    void hideProgress();
+
+    void goHome();
 }

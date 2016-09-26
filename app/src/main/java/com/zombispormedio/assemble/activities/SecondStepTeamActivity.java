@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
 import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.ParticipantsListAdapter;
 import com.zombispormedio.assemble.controllers.SecondStepTeamController;
@@ -24,6 +25,7 @@ import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.ISecondStepTeamView;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -113,13 +115,29 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
     public void bindImage(String path) {
         new ImageUtils.ImageBuilder(this, imageView)
                 .circle(true)
-                .url(path)
+                .file(path)
                 .build();
     }
 
     @Override
     public void showNameEmpty() {
         showAlert(getString(R.string.name_is_needed));
+    }
+
+    @Override
+    public void showProgress() {
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgress() {
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void goHome() {
+        NavigationManager.Home(this);
+        finish();
     }
 
     private void setupImageUploaderBottomSheet() {

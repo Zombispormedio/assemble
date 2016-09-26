@@ -5,10 +5,12 @@ import com.zombispormedio.assemble.handlers.PromiseHandler;
 import com.zombispormedio.assemble.models.EditTeam;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.FileBody;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.responses.TeamsResponse;
 import com.zombispormedio.assemble.services.interfaces.ITeamService;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -35,6 +37,14 @@ public class TeamAPIService implements ITeamService {
         api.RestWithAuth("/team")
                 .handler(DeferUtils.deferTeam(handler))
                 .post(JsonBinder.fromEditTeam(team));
+    }
+
+    @Override
+    public void uploadImage(int teamId, File file, IServiceHandler<Team, Error> handler) {
+        api.RestWithAuth("/team/:id/image")
+                .params("id", teamId)
+                .handler(DeferUtils.deferTeam(handler))
+                .patch(new FileBody(file, "image/*", "image", file.getName()));
     }
 
 
