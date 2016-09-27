@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.views;
 
+import java.text.ParseException;
+
 /**
  * Created by Xavier Serrano on 22/08/2016.
  */
@@ -11,6 +13,6 @@ public interface IBaseProfileView extends IBaseView {
 
     void setBio(String bio);
 
-    void setBirthDate(String birth);
+    void setBirthDate(String birth) throws ParseException;
 
 }

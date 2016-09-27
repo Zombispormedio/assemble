@@ -46,7 +46,7 @@
     <string name="location_example">Elche</string>
     <string name="biografy_title">Biography</string>
     <string name="birth_date_example">11/09/1994</string>
-    <string name="born_at">Born at %1$s</string>
+    <string name="born_at">\'Born at\' MMMM d yyyy</string>
     <string name="lorem_impsum">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</string>
     <string name="hint_username">Username</string>
     <string name="hint_bio">Bio</string>
@@ -94,7 +94,13 @@
     <string name="creating_team">We are creating your team. A moment, please…</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="titles_people_places">Write titles, people, places...</string>
+    <string name="titles_people_places">Write titles, people, places…</string>
     <string name="one_string_complete">(%1$s)</string>
+    <string name="simple_date">MMMM d yyyy</string>
+    <string name="simple_date_with_hours">"MMMM d yyyy 'at' HH:mm "</string>
+    <string name="all_the_day">All the day</string>
+    <string name="simple_date_with_name_of_day">E\',\' MMMM d yyyy</string>
+    <string name="simple_hour">HH:mm</string>
+    <string name="add_image">Add image</string>
 
 </resources>

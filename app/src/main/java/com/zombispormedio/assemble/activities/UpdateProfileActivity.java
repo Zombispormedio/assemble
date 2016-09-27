@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.UpdateProfileController;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.IUpdateProfileView;
 
@@ -16,6 +17,8 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+
+import java.text.ParseException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -86,8 +89,9 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
-    public void setBirthDate(String birth) {
-        birthdateInput.setText(birth);
+    public void setBirthDate(String birth) throws ParseException {
+        String format= DateUtils.format(getString(R.string.simple_date), birth);
+        birthdateInput.setText(format);
     }
 
     @Override

@@ -85,7 +85,8 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
         frameView.setBackgroundColor(Utils.getColorByString(meetingName));
 
         try {
-            String date= DateUtils.format(DateUtils.SIMPLE_SLASH_FORMAT_WITH_HOUR, itemData.start_at);
+            String format=itemView.getContext().getString(R.string.simple_date_with_hours);
+            String date= DateUtils.format(format, itemData.start_at);
             dateLabel.setText(date);
         } catch (ParseException e) {
             Logger.d(e.getMessage());

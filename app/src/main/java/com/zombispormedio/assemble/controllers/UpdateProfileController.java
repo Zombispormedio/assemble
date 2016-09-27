@@ -51,7 +51,7 @@ public class UpdateProfileController extends Controller {
 
     private void bindProfile() {
         UserProfile profile = profileResource.getProfile();
-        if(profile!=null){
+        if (profile != null) {
             editor.setProfile(profile);
             AndroidUtils.fillProfile(ctx, profile);
         }
@@ -95,7 +95,7 @@ public class UpdateProfileController extends Controller {
     public void updateBirthdate(String birthdate) {
         try {
             editor.setBirthDate(birthdate);
-            ctx.setBirthDate(DateUtils.format(DateUtils.SIMPLE_SLASH_FORMAT, birthdate));
+            ctx.setBirthDate(birthdate);
         } catch (ParseException e) {
             Logger.d(e.getMessage());
         }

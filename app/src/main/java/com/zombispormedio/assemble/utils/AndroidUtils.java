@@ -18,9 +18,12 @@ import android.widget.Toast;
 
 
 import com.orhanobut.logger.Logger;
+import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.views.IBaseProfileView;
+
+import java.text.ParseException;
 
 
 /**
@@ -135,17 +138,12 @@ public final class AndroidUtils {
                 ctx.setBio("");
             }
 
-            if (Utils.presenceOf(profile.birth_date)) {
-                try {
-                    ctx.setBirthDate(DateUtils.format(DateUtils.SIMPLE_SLASH_FORMAT, profile.birth_date));
-                } catch (Exception e) {
-                    Logger.d(e.getMessage());
-                    ctx.setBirthDate("");
-                }
-
-            } else {
-                ctx.setBirthDate("");
+            try {
+                ctx.setBirthDate(profile.birth_date);
+            } catch (Exception e) {
+                Logger.d(e.getMessage());
             }
+
         }
     }
 
@@ -268,7 +266,7 @@ public final class AndroidUtils {
         }
 
         private LinearLayoutManager getLinear() {
-            return haveScroll?new LinearLayoutManager(ctx, orientation, false):getLinearNoScroll();
+            return haveScroll ? new LinearLayoutManager(ctx, orientation, false) : getLinearNoScroll();
         }
 
         private GridLayoutManager getGridNoScroll() {
@@ -281,21 +279,19 @@ public final class AndroidUtils {
         }
 
         private GridLayoutManager getGrid() {
-            return haveScroll?new GridLayoutManager(ctx, spanCount, orientation, false): getGridNoScroll();
+            return haveScroll ? new GridLayoutManager(ctx, spanCount, orientation, false) : getGridNoScroll();
         }
-
 
 
         public void configure() {
 
             RecyclerView.LayoutManager layout = null;
 
-           if(isGrid){
-               layout=getGrid();
-           }else{
-               layout=getLinear();
-           }
-
+            if (isGrid) {
+                layout = getGrid();
+            } else {
+                layout = getLinear();
+            }
 
             list.setLayoutManager(layout);
 
@@ -317,6 +313,18 @@ public final class AndroidUtils {
 
 
         }
+    }
+
+    public static String formatDate(Context ctx, int strID, String date){
+        String formated="";
+        String format=ctx.getString(strID);
+        try {
+            formated= DateUtils.format(format, date);
+        } catch (ParseException e) {
+            Logger.d(e.getMessage());
+        }
+
+        return formated;
     }
 
 

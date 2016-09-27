@@ -18,4 +18,8 @@ public class ConceptResource<T> {
     public ArrayList<T> getAll(){
         return storage.getAll();
     }
+
+    public T getFirst(){
+        return storage.getFirst();
+    }
 }

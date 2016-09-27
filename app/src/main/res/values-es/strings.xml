@@ -41,13 +41,13 @@
     <string name="update_profile_title">Editar Perfil</string>
     <string name="invalid_email">Introducir un correo electrónico válido</string>
     <string name="fail_login"> Inicio de sesión fallido</string>
-    <string name="born_at">Nacido el %1$s</string>
+    <string name="born_at">\'Nació el\' d \'de\' MMMM \'de\' yyyy</string>
     <string name="biografy_title">Biografía</string>
     <string name="birth_date_example">11/09/1994</string>
     <string name="invalid_password">Contraseña entre 6 y 50 caracteres alfanúmericos</string>
     <string name="location_example">Elche</string>
     <string name="lorem_impsum">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</string>
-    <string name="start_login">Iniciando sesión...</string>
+    <string name="start_login">Iniciando sesión…</string>
     <string name="username_example">Zombispormedio</string>
     <string name="hint_username">Nombre de usuario</string>
     <string name="hint_bio">Biografía</string>
@@ -95,6 +95,12 @@
     <string name="creating_team">Estamos creando tu equipo. Un momento, por favor…</string>
     <string name="titles_people_places">Escribe títulos, personas, lugares...</string>
     <string name="one_string_complete">(%1$s)</string>
+    <string name="simple_date">d \'de\' MMMM \'de\' yyyy</string>
+    <string name="simple_date_with_hours">"d 'de' MMMM 'de' yyyy 'a las' HH:mm "</string>
+    <string name="all_the_day">Todo el día</string>
+    <string name="simple_date_with_name_of_day">E\',\' d \'de\' MMMM \'de\' yyyy</string>
+    <string name="simple_hour">HH:mm</string>
+    <string name="add_image">Añadir imagen</string>
 
 
 </resources>

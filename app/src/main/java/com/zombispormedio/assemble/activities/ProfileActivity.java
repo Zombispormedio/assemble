@@ -24,11 +24,15 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
 
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.utils.StringUtils;
+import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IProfileView;
+
+import java.text.ParseException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -142,9 +146,9 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     @Override
-    public void setBirthDate(String birth) {
-        if (!birth.isEmpty()) {
-            String birthDate = String.format(getString(R.string.born_at), birth);
+    public void setBirthDate(String birth) throws ParseException {
+        if (Utils.presenceOf(birth)) {
+            String birthDate = DateUtils.format(getString(R.string.born_at), birth);
             birthDateText.setText(birthDate);
         } else {
             birthDateText.setText("");

@@ -21,14 +21,14 @@ public class DateUtils {
     public static String format(String format, String inDate) throws ParseException {
         DateFormat inFormat = new SimpleDateFormat(DEFAULT_INPUT_FORMAT, Locale.ENGLISH);
         Date outDate = inFormat.parse(inDate);
-        DateFormat outFormat = new SimpleDateFormat(format, Locale.ENGLISH);
+        DateFormat outFormat = new SimpleDateFormat(format, Locale.getDefault());
         return outFormat.format(outDate);
     }
 
     public static String format(String inFormatStr, String outFormatStr, String inDate) throws ParseException {
         DateFormat inFormat = new SimpleDateFormat(inFormatStr, Locale.ENGLISH);
         Date outDate = inFormat.parse(inDate);
-        DateFormat outFormat = new SimpleDateFormat(outFormatStr, Locale.ENGLISH);
+        DateFormat outFormat = new SimpleDateFormat(outFormatStr, Locale.getDefault());
         return outFormat.format(outDate);
     }
 
@@ -54,6 +54,22 @@ public class DateUtils {
         return formatUtility.format(cal.getTime());
     }
 
+    public static String toString(int year, int month, int day, int hour, int minutes) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.YEAR, year);
+        cal.set(Calendar.MONTH, month);
+        cal.set(Calendar.DAY_OF_MONTH, day);
+
+        cal.set(Calendar.HOUR, hour);
+        cal.set(Calendar.MINUTE, minutes);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        DateFormat formatUtility = new SimpleDateFormat(DEFAULT_INPUT_FORMAT, Locale.ENGLISH);
+
+        return formatUtility.format(cal.getTime());
+    }
+
     public static Date parse(String format, String inDate) throws ParseException {
         DateFormat inFormat = new SimpleDateFormat(format, Locale.ENGLISH);
         return inFormat.parse(inDate);
@@ -64,6 +80,27 @@ public class DateUtils {
         Calendar outDate = Calendar.getInstance();
         outDate.setTime(inFormat.parse(inDate));
         return outDate;
+    }
+
+    public static class Now {
+
+        private static Calendar Cal() {
+            return Calendar.getInstance();
+        }
+
+        public static int YEAR = Cal().get(Calendar.YEAR);
+
+        public static int MONTH = Cal().get(Calendar.MONTH);
+
+        public static int DAY= Cal().get(Calendar.DAY_OF_MONTH);
+
+        public static  int HOUR=Cal().get(Calendar.HOUR);
+
+        public static int MINUTES=Cal().get(Calendar.MINUTE);
+
+        public static String toDateString(){
+          return  DateUtils.toString(YEAR, MONTH, DAY, HOUR, MINUTES);
+        }
     }
 
 }
