@@ -34,6 +34,28 @@
                     />
         </android.support.v7.widget.Toolbar>
 
+        <android.support.v7.widget.Toolbar
+                android:id="@+id/name_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/AppTheme.PopupOverlay"
+                >
+
+            <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/name_input"
+                    android:hint="@string/titles_people_places"
+                    android:imeOptions="actionDone"
+                    android:backgroundTint="@android:color/transparent"
+                    android:textColor="@color/colorWhite"
+                    android:textColorHint="@color/colorWhite"
+                    android:inputType="text|textAutoComplete"
+                    />
+
+
+        </android.support.v7.widget.Toolbar>
+
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_create_meeting" />

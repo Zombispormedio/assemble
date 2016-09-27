@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -11,6 +11,39 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.zombispormedio.assemble.activities.CreateMeetingActivity"
         tools:showIn="@layout/activity_create_meeting"
+        android:orientation="vertical"
         >
 
-</RelativeLayout>
+    <FrameLayout
+            android:id="@+id/team_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            >
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/shield"
+                    android:drawablePadding="20dp"
+                    android:textSize="18sp"
+                    android:text="@string/teams_tab_title"
+                    />
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginLeft="40dp"
+                    android:textSize="18sp"
+                    android:text="@string/one_string_complete"
+                    />
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

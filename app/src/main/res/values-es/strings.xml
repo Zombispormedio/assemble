@@ -93,6 +93,8 @@
     <string name="participants_number">Participantes: %1$d /%2$d</string>
     <string name="name_is_needed">Se necesita un nombre para el equipo</string>
     <string name="creating_team">Estamos creando tu equipo. Un momento, por favor…</string>
+    <string name="titles_people_places">Escribe títulos, personas, lugares...</string>
+    <string name="one_string_complete">(%1$s)</string>
 
 
 </resources>
