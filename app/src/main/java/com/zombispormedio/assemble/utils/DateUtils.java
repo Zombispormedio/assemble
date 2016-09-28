@@ -103,4 +103,78 @@ public class DateUtils {
         }
     }
 
+
+    public static class DateBuilder{
+        private int year;
+        private int month;
+        private int day;
+        private int hour;
+        private int minutes;
+
+        public DateBuilder(int year, int month, int day, int hour, int minutes) {
+            this.year = year;
+            this.month = month;
+            this.day = day;
+            this.hour = hour;
+            this.minutes = minutes;
+        }
+
+        public DateBuilder() {
+            this.year = DateUtils.Now.YEAR;
+            this.month = DateUtils.Now.MONTH;
+            this.day = DateUtils.Now.DAY;
+            this.hour = DateUtils.Now.HOUR;
+            this.minutes = DateUtils.Now.MINUTES;
+        }
+
+        public DateBuilder setYear(int year) {
+            this.year = year;
+            return this;
+        }
+
+        public DateBuilder setMonth(int month) {
+            this.month = month;
+            return this;
+        }
+
+        public DateBuilder setDay(int day) {
+            this.day = day;
+            return this;
+        }
+
+        public DateBuilder setHour(int hour) {
+            this.hour = hour;
+            return this;
+        }
+
+        public DateBuilder setMinutes(int minutes) {
+            this.minutes = minutes;
+            return this;
+        }
+
+        public int getYear() {
+            return year;
+        }
+
+        public int getMonth() {
+            return month;
+        }
+
+        public int getDay() {
+            return day;
+        }
+
+        public int getHour() {
+            return hour;
+        }
+
+        public int getMinutes() {
+            return minutes;
+        }
+
+        public String build(){
+            return DateUtils.toString(year, month, day, hour, minutes);
+        }
+    }
+
 }

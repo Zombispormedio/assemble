@@ -17,6 +17,7 @@ import com.zombispormedio.assemble.net.responses.DefaultResponse;
 import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.net.responses.FriendsResponse;
 import com.zombispormedio.assemble.net.responses.ArrayResponse;
+import com.zombispormedio.assemble.net.responses.MeetingResponse;
 import com.zombispormedio.assemble.net.responses.MeetingsResponse;
 import com.zombispormedio.assemble.net.responses.ProfileResponse;
 import com.zombispormedio.assemble.net.responses.TeamResponse;
@@ -81,6 +82,16 @@ class DeferUtils {
                 return JsonBinder.toMeetingsResponse(arg);
             }
 
+        };
+    }
+
+    static PromiseHandler deferMeeting(IServiceHandler<Meeting, Error> handler) {
+        return new PromiseHandler<MeetingResponse, Meeting>(handler) {
+
+            @Override
+            protected MeetingResponse getResponse(String arg) throws IOException {
+                return JsonBinder.toMeetingResponse(arg);
+            }
         };
     }
 

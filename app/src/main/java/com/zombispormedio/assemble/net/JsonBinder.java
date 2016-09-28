@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.net;
 
 import com.zombispormedio.assemble.models.Auth;
+import com.zombispormedio.assemble.models.EditMeeting;
 import com.zombispormedio.assemble.models.EditProfile;
 import com.zombispormedio.assemble.models.EditTeam;
 import com.zombispormedio.assemble.models.Meeting;
@@ -10,6 +11,7 @@ import com.zombispormedio.assemble.net.responses.ChatsResponse;
 import com.zombispormedio.assemble.net.responses.DefaultResponse;
 import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.net.responses.FriendsResponse;
+import com.zombispormedio.assemble.net.responses.MeetingResponse;
 import com.zombispormedio.assemble.net.responses.MeetingsResponse;
 import com.zombispormedio.assemble.net.responses.ProfileResponse;
 import com.zombispormedio.assemble.net.responses.TeamResponse;
@@ -54,6 +56,11 @@ public class JsonBinder<R extends AbstractResponse> {
         return jsonAdapter.toJSON(team);
     }
 
+    public static String fromEditMeeting(EditMeeting meeting) {
+        JSONWrapper<EditMeeting> jsonAdapter = new JSONWrapper<>(EditMeeting.class);
+        return jsonAdapter.toJSON(meeting);
+    }
+
     public static FriendsResponse toFriendsResponse(String arg) throws IOException {
         JSONWrapper<FriendsResponse> jsonAdapter = new JSONWrapper<>(FriendsResponse.class);
         return jsonAdapter.fromJSON(arg);
@@ -83,6 +90,12 @@ public class JsonBinder<R extends AbstractResponse> {
         JSONWrapper<TeamResponse> jsonAdapter = new JSONWrapper<>(TeamResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
+
+    public static MeetingResponse toMeetingResponse(String arg) throws IOException {
+        JSONWrapper<MeetingResponse> jsonAdapter = new JSONWrapper<>(MeetingResponse.class);
+        return jsonAdapter.fromJSON(arg);
+    }
+
 
 
 

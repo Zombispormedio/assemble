@@ -3,12 +3,15 @@ package com.zombispormedio.assemble.services.api;
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.PromiseHandler;
+import com.zombispormedio.assemble.models.EditMeeting;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.FileBody;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.responses.MeetingsResponse;
 import com.zombispormedio.assemble.services.interfaces.IMeetingService;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -29,6 +32,20 @@ public class MeetingAPIService implements IMeetingService {
                 .get();
     }
 
+    @Override
+    public void create(EditMeeting meeting, IServiceHandler<Meeting, Error> handler) {
+        api.RestWithAuth("/meeting")
+                .handler(DeferUtils.deferMeeting(handler))
+                .post(JsonBinder.fromEditMeeting(meeting));
+    }
+
+    @Override
+    public void uploadImage(int meetingId, File file, IServiceHandler<Meeting, Error> handler) {
+        api.RestWithAuth("/meeting/:id/image")
+                .params("id", meetingId)
+                .handler(DeferUtils.deferMeeting(handler))
+                .post(new FileBody(file, "image/*", "image", file.getName()));
+    }
 
 
 }

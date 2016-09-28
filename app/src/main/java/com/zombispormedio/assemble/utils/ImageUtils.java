@@ -76,7 +76,7 @@ public class ImageUtils {
         ColorGenerator generator = ColorGenerator.MATERIAL;
 
         TextDrawable drawable = TextDrawable.builder()
-                .buildRound(letter.toUpperCase(), generator.getColor(letter.hashCode()));
+                .buildRound(letter.toUpperCase(), generator.getColor(letter));
         return drawable;
     }
 
@@ -84,7 +84,7 @@ public class ImageUtils {
         ColorGenerator generator = ColorGenerator.MATERIAL;
 
         TextDrawable drawable = TextDrawable.builder()
-                .buildRect(letter.toUpperCase(), generator.getColor(letter.hashCode()));
+                .buildRect(letter.toUpperCase(), generator.getColor(letter));
         return drawable;
     }
 

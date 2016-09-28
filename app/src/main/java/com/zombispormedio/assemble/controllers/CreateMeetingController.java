@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.zombispormedio.assemble.models.EditMeeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.utils.DateUtils;
@@ -14,11 +15,15 @@ public class CreateMeetingController extends Controller {
 
     private TeamResource teamResource;
 
+    private EditMeeting.Builder editor;
+
     public CreateMeetingController(ICreateMeetingView ctx) {
         super(ctx);
         this.ctx = ctx;
 
         teamResource=getResourceComponent().provideTeamResource();
+
+        editor= new EditMeeting.Builder();
     }
 
     public void onTeamSelected(Team data) {
@@ -31,20 +36,20 @@ public class CreateMeetingController extends Controller {
         bindDatesWithNow();
     }
 
-
-
     private void bindFirstTeam() {
         Team first=teamResource.getFirst();
-
         ctx.bindTeam(first.name);
     }
 
 
     private void bindDatesWithNow() {
 
-        ctx.setupPickers(DateUtils.Now.YEAR, DateUtils.Now.MONTH, DateUtils.Now.DAY, DateUtils.Now.HOUR, DateUtils.Now.MINUTES);
+        DateUtils.DateBuilder date=editor.getStartAt();
 
-        String now= DateUtils.Now.toDateString();
+        ctx.setupPickers(date.getYear(), date.getMonth(),
+                date.getDay(), date.getHour(), date.getMinutes());
+
+        String now= date.build();
 
         ctx.bindStartDate(now);
 
