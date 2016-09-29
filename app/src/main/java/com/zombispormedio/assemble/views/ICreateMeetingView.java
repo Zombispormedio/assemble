@@ -23,7 +23,35 @@ public interface ICreateMeetingView extends IBaseView{
 
     void showHours();
 
-    void setupPickers(int year, int month, int day,  int hour, int minutes);
+    void setupStartDate(int year, int month, int day);
 
+    void setupEndDate(int year, int month, int day);
 
+    void setupStartHour( int hour, int minutes);
+
+    void setupEndHour( int hour, int minutes);
+
+    void updateStartDate(int year, int month, int day);
+
+    void updateEndDate(int year, int month, int day);
+
+    void updateStartHour( int hour, int minutes);
+
+    void updateEndHour( int hour, int minutes);
+
+    void showErrorEndDate();
+
+    void hideErrorEndDate();
+
+    void bindImage(String path);
+
+    void showProgress();
+
+    void hideProgress();
+
+    void goHome();
+
+    String getName();
+
+    void showDateErrorAlert();
 }

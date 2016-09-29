@@ -7,16 +7,16 @@ public class Chat extends BaseModel{
 
     public String created_at;
 
-    public Sender sender;
+    public UserProfile sender;
 
-    public Recipient recipient;
+    public FriendProfile recipient;
 
     public Chat() {
         super(0);
         created_at="";
     }
 
-    public Chat(int id, String created_at, Sender sender, Recipient recipient) {
+    public Chat(int id, String created_at, UserProfile sender, FriendProfile recipient) {
         super(id);
         this.created_at = created_at;
         this.sender = sender;

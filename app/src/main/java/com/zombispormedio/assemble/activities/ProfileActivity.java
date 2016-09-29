@@ -24,6 +24,7 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
 
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
@@ -194,24 +195,19 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
 
     private void setupImageUploaderBottomSheet() {
-        imageUploaderBottomSheet = new BottomSheetBuilder(this, R.style.AppTheme_BottomSheetDialog)
-                .setMode(BottomSheetBuilder.MODE_LIST)
-                .setBackground(R.color.colorWhite)
-                .setMenu(R.menu.menu_bottom_sheet)
-                .setItemClickListener(new BottomSheetItemClickListener() {
-                    @Override
-                    public void onBottomSheetItemClick(BottomSheetMenuItem item) {
-                        switch (item.getId()) {
-                            case R.id.gallery:
-                                externalNavigationManager.dispatchGalleryToSelectImage(R.string.select_picture);
-                                break;
-                            case R.id.camera:
-                                externalNavigationManager.dispatchTakePicture();
-                                break;
-                        }
-                    }
-                })
-                .createDialog();
+        imageUploaderBottomSheet = AndroidUtils.createImageUploaderBottomSheet(this, new BottomSheetItemClickListener() {
+            @Override
+            public void onBottomSheetItemClick(BottomSheetMenuItem item) {
+                switch (item.getId()) {
+                    case R.id.gallery:
+                        externalNavigationManager.dispatchGalleryToSelectImage(R.string.select_picture);
+                        break;
+                    case R.id.camera:
+                        externalNavigationManager.dispatchTakePicture();
+                        break;
+                }
+            }
+        });
     }
 
 

@@ -1,9 +1,10 @@
 package com.zombispormedio.assemble.dao;
 
 import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.Recipient;
-import com.zombispormedio.assemble.models.Sender;
-import com.zombispormedio.assemble.utils.Utils;
+import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.services.storage.FriendStorageService;
+import com.zombispormedio.assemble.services.storage.ProfileStorageService;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -18,9 +19,9 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
     public String created_at;
 
-    public SenderDAO sender;
+    public UserProfileDAO sender;
 
-    public RecipientDAO recipient;
+    public FriendProfileDAO recipient;
 
 
     @Override
@@ -33,10 +34,21 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
         this.id=model.id;
         this.created_at=model.created_at;
-        this.sender=(new SenderDAO()).fromModel(model.sender);
-        this.recipient=(new RecipientDAO()).fromModel(model.recipient);
-
+        bindUser(model.sender);
+        bindFriend(model.recipient);
         return this;
+    }
+
+    private void bindUser(UserProfile profile){
+        ProfileStorageService service=new ProfileStorageService();
+        this.sender =service.getStorage()
+                .getById(profile.id);
+    }
+
+    private void bindFriend(FriendProfile profile){
+        FriendStorageService service=new FriendStorageService();
+        this.recipient =service.getStorage()
+                .getById(profile.id);
     }
 
     @Override

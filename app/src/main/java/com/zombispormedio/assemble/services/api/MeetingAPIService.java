@@ -44,7 +44,7 @@ public class MeetingAPIService implements IMeetingService {
         api.RestWithAuth("/meeting/:id/image")
                 .params("id", meetingId)
                 .handler(DeferUtils.deferMeeting(handler))
-                .post(new FileBody(file, "image/*", "image", file.getName()));
+                .patch(new FileBody(file, "image/*", "image", file.getName()));
     }
 
 

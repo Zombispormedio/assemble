@@ -141,11 +141,7 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
     }
 
     private void setupImageUploaderBottomSheet() {
-        imageUploaderBottomSheet = new BottomSheetBuilder(this, R.style.AppTheme_BottomSheetDialog)
-                .setMode(BottomSheetBuilder.MODE_LIST)
-                .setBackground(R.color.colorWhite)
-                .setMenu(R.menu.menu_bottom_sheet)
-                .setItemClickListener(new BottomSheetItemClickListener() {
+        imageUploaderBottomSheet = AndroidUtils.createImageUploaderBottomSheet(this, new BottomSheetItemClickListener() {
                     @Override
                     public void onBottomSheetItemClick(BottomSheetMenuItem item) {
                         switch (item.getId()) {
@@ -157,8 +153,8 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
                                 break;
                         }
                     }
-                })
-                .createDialog();
+                });
+
     }
 
     @OnClick(R.id.image_view)

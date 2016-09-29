@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.adapters;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.Recipient;
+import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 
@@ -56,7 +56,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
     }
 
     private void bindData(Chat itemData) {
-        Recipient recipient=itemData.recipient;
+        FriendProfile recipient=itemData.recipient;
 
         String recipientName=recipient.username;
         nameLabel.setText(recipientName);

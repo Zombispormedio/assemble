@@ -40,10 +40,21 @@ public class EditMeeting {
 
         private DateUtils.DateBuilder endAt;
 
+        private boolean allDay;
+
         public Builder() {
             name = description = "";
             startAt=new DateUtils.DateBuilder();
             endAt=new DateUtils.DateBuilder();
+            initDates();
+            allDay=false;
+        }
+
+        private void initDates() {
+            startAt.setHour(endAt.getHour()+1);
+            startAt.setMinutes(0);
+            endAt.setHour(endAt.getHour()+2);
+            endAt.setMinutes(0);
         }
 
         public Builder setName(String name) {
@@ -61,6 +72,10 @@ public class EditMeeting {
             return this;
         }
 
+        public boolean isAllDay() {
+            return allDay;
+        }
+
         public DateUtils.DateBuilder getStartAt() {
             return startAt;
         }
@@ -69,8 +84,20 @@ public class EditMeeting {
             return endAt;
         }
 
+        public void setAllDay(boolean allDay) {
+            this.allDay = allDay;
+        }
+
+        private void resetHours(DateUtils.DateBuilder d){
+            d.setMinutes(0);
+            d.setHour(0);
+        }
 
         public EditMeeting build(){
+            if(allDay){
+                resetHours(startAt);
+                resetHours(endAt);
+            }
             return new EditMeeting(name, description, team, startAt.build(), endAt.build());
         }
     }

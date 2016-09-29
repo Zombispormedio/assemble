@@ -101,6 +101,10 @@
     <string name="simple_date_with_name_of_day">E\',\' d \'de\' MMMM \'de\' yyyy</string>
     <string name="simple_hour">HH:mm</string>
     <string name="add_image">Añadir imagen</string>
+    <string name="creating_meeting">Estamos creando tu reunión. Un momento, por favor…</string>
+    <string name="untitled">Sin título</string>
+    <string name="ok">Aceptar</string>
+    <string name="date_error_message">Cambia la hora de inicio para que sea anterior a la finalización del evento.</string>
 
 
 </resources>

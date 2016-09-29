@@ -1,7 +1,10 @@
 package com.zombispormedio.assemble.dao;
 
 import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.models.Team;
+import com.zombispormedio.assemble.services.storage.TeamStorageService;
 import com.zombispormedio.assemble.utils.Utils;
+import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
@@ -54,8 +57,14 @@ public class MeetingDAO extends RealmObject implements IBaseDAO<Meeting> {
         this.thumb_image_url = model.thumb_image_url;
         this.start_at = model.start_at;
         this.end_at=model.end_at;
-        this.team=(new TeamDAO()).fromModel(model.team);
+        bindTeam(model.team);
         return this;
+    }
+
+    private void bindTeam(Team team){
+        TeamStorageService service=new TeamStorageService();
+        this.team=service.getStorage()
+                .getById(team.id);
     }
 
     @Override

@@ -121,5 +121,7 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
         return result;
     }
 
-
+    public LocalStorage<D, M> getStorage() {
+        return storage;
+    }
 }

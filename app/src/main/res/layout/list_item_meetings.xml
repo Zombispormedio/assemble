@@ -94,9 +94,9 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="@string/date_example_with_hour"
+                                android:text="@string/simple_date_with_hours"
                                 android:textColor="@color/colorWhite"
-                                android:textSize="20sp"
+                                android:textSize="15sp"
                                 android:textStyle="bold"
 
                                 />
@@ -115,15 +115,11 @@
                 </FrameLayout>
 
 
-
-
-
             </RelativeLayout>
 
             <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
                     >
 
                 <LinearLayout

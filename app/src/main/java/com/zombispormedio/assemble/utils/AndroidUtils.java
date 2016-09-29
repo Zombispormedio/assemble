@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -17,6 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
+import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
+import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
+import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
@@ -325,6 +329,16 @@ public final class AndroidUtils {
         }
 
         return formated;
+    }
+
+
+    public static BottomSheetDialog createImageUploaderBottomSheet(Context ctx, BottomSheetItemClickListener listener){
+       return new BottomSheetBuilder(ctx, R.style.AppTheme_BottomSheetDialog)
+                .setMode(BottomSheetBuilder.MODE_LIST)
+                .setBackground(R.color.colorWhite)
+                .setMenu(R.menu.menu_bottom_sheet)
+                .setItemClickListener(listener)
+                .createDialog();
     }
 
 

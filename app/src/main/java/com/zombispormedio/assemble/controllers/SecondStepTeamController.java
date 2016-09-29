@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.EditTeam;
 import com.zombispormedio.assemble.models.Team;
@@ -78,13 +77,13 @@ public class SecondStepTeamController extends Controller {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);
-                afterCreatingTeam();
+                afterCreateTeam();
             }
 
             @Override
             public void onSuccess(Team result) {
                 if(!uploadImage(result.id)){
-                    afterCreatingTeam();
+                    afterCreateTeam();
                 }
             }
         });
@@ -92,7 +91,7 @@ public class SecondStepTeamController extends Controller {
 
     }
 
-    private void afterCreatingTeam(){
+    private void afterCreateTeam(){
         ctx.hideProgress();
         ctx.goHome();
     }
@@ -104,12 +103,12 @@ public class SecondStepTeamController extends Controller {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);
-                afterCreatingTeam();
+                afterCreateTeam();
             }
 
             @Override
             public void onSuccess(Team result) {
-                afterCreatingTeam();
+                afterCreateTeam();
             }
         });
 

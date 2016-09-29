@@ -44,7 +44,7 @@ public class DateUtils {
         cal.set(Calendar.MONTH, month);
         cal.set(Calendar.DAY_OF_MONTH, day);
 
-        cal.set(Calendar.HOUR, 0);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
@@ -60,7 +60,7 @@ public class DateUtils {
         cal.set(Calendar.MONTH, month);
         cal.set(Calendar.DAY_OF_MONTH, day);
 
-        cal.set(Calendar.HOUR, hour);
+        cal.set(Calendar.HOUR_OF_DAY, hour);
         cal.set(Calendar.MINUTE, minutes);
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
@@ -94,7 +94,7 @@ public class DateUtils {
 
         public static int DAY= Cal().get(Calendar.DAY_OF_MONTH);
 
-        public static  int HOUR=Cal().get(Calendar.HOUR);
+        public static  int HOUR=Cal().get(Calendar.HOUR_OF_DAY);
 
         public static int MINUTES=Cal().get(Calendar.MINUTE);
 
@@ -143,13 +143,17 @@ public class DateUtils {
         }
 
         public DateBuilder setHour(int hour) {
-            this.hour = hour;
+            this.hour = hour%24;
             return this;
         }
 
         public DateBuilder setMinutes(int minutes) {
-            this.minutes = minutes;
+            this.minutes = minutes%60;
             return this;
+        }
+
+        public int compare(DateBuilder compared){
+            return this.toCalendar().compareTo(compared.toCalendar());
         }
 
         public int getYear() {
@@ -172,8 +176,76 @@ public class DateUtils {
             return minutes;
         }
 
+        public Calendar toCalendar(){
+            Calendar cal = Calendar.getInstance();
+            cal.set(Calendar.YEAR, year);
+            cal.set(Calendar.MONTH, month);
+            cal.set(Calendar.DAY_OF_MONTH, day);
+
+            cal.set(Calendar.HOUR_OF_DAY, hour);
+            cal.set(Calendar.MINUTE, minutes);
+            cal.set(Calendar.SECOND, 0);
+            cal.set(Calendar.MILLISECOND, 0);
+            return cal;
+        }
+
         public String build(){
             return DateUtils.toString(year, month, day, hour, minutes);
+        }
+    }
+
+
+    public static class DateError{
+        private int code;
+
+        public DateError() {
+            this.code = 0;
+        }
+
+        public DateError year(){
+            code=Calendar.YEAR;
+            return this;
+        }
+
+        public DateError month(){
+            code=Calendar.MONTH;
+            return this;
+        }
+
+        public DateError day(){
+            code=Calendar.DAY_OF_MONTH;
+            return this;
+        }
+
+        public DateError hour(){
+            code=Calendar.HOUR_OF_DAY;
+            return this;
+        }
+
+        public DateError minute(){
+            code=Calendar.MINUTE;
+            return this;
+        }
+
+        public boolean isYear(){
+           return code==Calendar.YEAR;
+        }
+
+
+        public boolean isMonth(){
+            return code==Calendar.MONTH;
+        }
+
+        public boolean isDay(){
+            return code==Calendar.DAY_OF_MONTH;
+        }
+
+        public boolean isHour(){
+            return code==Calendar.HOUR_OF_DAY;
+        }
+
+        public boolean isMinute(){
+            return code==Calendar.MINUTE;
         }
     }
 
