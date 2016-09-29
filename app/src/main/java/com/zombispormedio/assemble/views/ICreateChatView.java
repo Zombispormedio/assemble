@@ -11,4 +11,10 @@ public interface ICreateChatView extends IBaseView{
 
     void bindFriends(ArrayList<FriendProfile> friends);
 
+    void showProgress();
+
+    void hideProgress();
+
+    void goHome();
+
 }

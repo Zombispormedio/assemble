@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.PromiseHandler;
 import com.zombispormedio.assemble.models.Chat;
+import com.zombispormedio.assemble.models.EditChat;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.responses.ChatsResponse;
@@ -31,6 +32,12 @@ public class ChatAPIService implements IChatService {
                 .get();
     }
 
+    @Override
+    public void create(EditChat chat, IServiceHandler<Chat, Error> handler) {
+        api.RestWithAuth("/chat")
+                .handler(DeferUtils.deferChat(handler))
+                .post(JsonBinder.fromEditChat(chat));
+    }
 
 
 }

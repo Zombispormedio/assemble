@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.services.interfaces;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
+import com.zombispormedio.assemble.models.EditChat;
 import com.zombispormedio.assemble.net.Error;
 
 import java.util.ArrayList;
@@ -12,4 +13,6 @@ import java.util.ArrayList;
 public interface IChatService {
 
     void getAll(IServiceHandler<ArrayList<Chat>, Error> handler);
+
+    void create(EditChat chat, IServiceHandler<Chat, Error> handler);
 }

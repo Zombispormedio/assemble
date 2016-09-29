@@ -12,6 +12,7 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.Result;
+import com.zombispormedio.assemble.net.responses.ChatResponse;
 import com.zombispormedio.assemble.net.responses.ChatsResponse;
 import com.zombispormedio.assemble.net.responses.DefaultResponse;
 import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
@@ -71,6 +72,15 @@ class DeferUtils {
             @Override
             protected ChatsResponse getResponse(String arg) throws IOException {
                 return JsonBinder.toChatsResponse(arg);
+            }
+        };
+    }
+
+    static PromiseHandler deferChat(IServiceHandler<Chat, Error> handler) {
+        return new PromiseHandler<ChatResponse, Chat>(handler) {
+            @Override
+            protected ChatResponse getResponse(String arg) throws IOException {
+                return JsonBinder.toChatResponse(arg);
             }
         };
     }

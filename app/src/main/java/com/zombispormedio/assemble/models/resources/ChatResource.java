@@ -1,7 +1,9 @@
 package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
+import com.zombispormedio.assemble.models.EditChat;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IChatService;
@@ -27,6 +29,24 @@ public class ChatResource extends ConceptResource<Chat> {
 
     public void getAll(IServiceHandler<ArrayList<Chat>, Error> handler){
         persistence.getAll(handler);
+    }
+
+
+    public void create(EditChat chat, final IServiceHandler<Chat, Error> handler){
+
+        persistence.create(chat, new ServiceHandler<Chat, Error>(){
+            @Override
+            public void onError(Error error) {
+                handler.onError(error);
+            }
+
+            @Override
+            public void onSuccess(Chat result) {
+                storage.createOrUpdate(result);
+                handler.onSuccess(result);
+            }
+        });
+
     }
 
 }
