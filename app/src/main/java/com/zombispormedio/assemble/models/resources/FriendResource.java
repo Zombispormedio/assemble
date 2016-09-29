@@ -57,6 +57,10 @@ public class FriendResource extends ConceptResource<FriendProfile> {
         return storage.countAll();
     }
 
+    public ArrayList<FriendProfile> notIn(int[] ids){
+        return storage.notInByID(ids);
+    }
+
     public void setFriendSubscription(FriendSubscription friendSubscription) {
         this.friendSubscription = friendSubscription;
     }

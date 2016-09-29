@@ -112,6 +112,11 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
         return toModel(storage.in("id", Utils.toInteger(in)));
     }
 
+    @Override
+    public ArrayList<M> notInByID(int[] in) {
+        return toModel(storage.notIn("id", Utils.toInteger(in)));
+    }
+
 
     private ArrayList<M> toModel(ArrayList<D> objects){
         ArrayList<M> result= new ArrayList<>();

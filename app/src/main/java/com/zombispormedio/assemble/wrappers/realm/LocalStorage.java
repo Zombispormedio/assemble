@@ -112,6 +112,15 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         return toArrayList(results);
     }
 
+    public ArrayList<D> notIn(String key, Integer[] values){
+        RealmQuery<D> query = getQuery().not().in(key, values);
+
+        RealmResults<D> results = query.findAll();
+
+        return toArrayList(results);
+    }
+
+
     private ArrayList<D> toArrayList( RealmResults<D> realmResults){
         ArrayList<D> results = new ArrayList<>();
 

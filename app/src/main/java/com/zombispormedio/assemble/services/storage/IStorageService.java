@@ -27,4 +27,6 @@ public interface IStorageService<T> {
 
     ArrayList<T> inByID(int[] in);
 
+    ArrayList<T> notInByID(int[] in);
+
 }

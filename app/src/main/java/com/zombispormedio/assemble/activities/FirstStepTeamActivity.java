@@ -1,14 +1,13 @@
 package com.zombispormedio.assemble.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.adapters.SelectedMemberHolder;
 import com.zombispormedio.assemble.adapters.TeamFriendHolder;
+import com.zombispormedio.assemble.adapters.SelectedMemberHolder;
 import com.zombispormedio.assemble.adapters.lists.SelectedMembersListAdapter;
 import com.zombispormedio.assemble.adapters.lists.TeamFriendsListAdapter;
 import com.zombispormedio.assemble.controllers.FirstStepTeamController;
