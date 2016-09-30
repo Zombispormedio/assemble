@@ -10,6 +10,8 @@ import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
+import com.zombispormedio.assemble.utils.StringUtils;
+import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IHomeView;
 
 
@@ -17,7 +19,6 @@ import com.zombispormedio.assemble.views.IHomeView;
  * Created by Xavier Serrano on 10/07/2016.
  */
 public class HomeController extends Controller {
-
 
     private IHomeView ctx;
 
@@ -45,9 +46,9 @@ public class HomeController extends Controller {
 
         profileResource.setSubscription(profileSubscription);
 
-        profileSubscriber=new ProfileSubscriber();
+        profileSubscriber = new ProfileSubscriber();
 
-        isProfileReady =  isTeamsReady = isMeetingsReady = isChatsReady =false;
+        isProfileReady = isTeamsReady = isMeetingsReady = isChatsReady = false;
     }
 
     @Override
@@ -57,25 +58,18 @@ public class HomeController extends Controller {
 
 
     public void onDrawerOpened() {
-        setDrawerTitle();
     }
 
-    private void setDrawerTitle() {
+    private void bindProfile() {
         UserProfile profile = profileResource.getProfile();
 
-        String title = "";
+        String username = profile.username;
+        ctx.bindUsernameLabel(username);
 
-        if (!profile.username.isEmpty()) {
-            title = profile.username;
+        ctx.bindEmailLabel(profile.email);
 
-        } else {
-            if (!profile.email.isEmpty()) {
-                title = profile.email;
-            }
-        }
-        if (ctx != null && !title.isEmpty()) {
-            ctx.setDrawerTitle(title);
-        }
+        ctx.bindAvatar(profile.large_avatar_url, StringUtils.firstLetter(username));
+
     }
 
     public void onSettingsMenuItem() {
@@ -102,6 +96,8 @@ public class HomeController extends Controller {
         if (profileResource.getProfile() == null) {
             loading();
             addSubscriptions();
+        } else {
+            bindProfile();
         }
 
         loadAll();
@@ -189,6 +185,7 @@ public class HomeController extends Controller {
 
     private void readyProfile() {
         isProfileReady = true;
+        bindProfile();
         ready();
     }
 

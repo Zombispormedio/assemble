@@ -15,12 +15,16 @@ public interface IHomeView extends IBaseView {
 
     void goToHelp();
 
-    void setDrawerTitle(String hello);
-
     void hideProgressDialog();
 
     void showProgressDialog();
 
     void showOverlay();
     void hideOverlay();
+
+    void bindUsernameLabel(String username);
+
+    void bindEmailLabel(String email);
+
+    void bindAvatar(String path, String letter);
 }

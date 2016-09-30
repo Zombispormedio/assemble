@@ -15,11 +15,13 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 import com.zombispormedio.assemble.adapters.pagers.HomePagerAdapter;
 import com.zombispormedio.assemble.controllers.HomeController;
+import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.IHomeView;
@@ -35,7 +37,13 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     @BindView(R.id.drawer_layout_home)
     DrawerLayout drawer;
 
-    private TextView navTitle;
+    private TextView usernameLabel;
+
+    private TextView emailLabel;
+
+    private ImageView imageView;
+
+    private View headerView;
 
     @BindView(R.id.nav_view)
     NavigationView nav;
@@ -69,8 +77,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         setupProgressDialog();
 
-        nav.setNavigationItemSelectedListener(NavListener());
-        drawer.addDrawerListener(DrawerListener());
+        setupDrawer();
 
         overlay.setVisibility(View.GONE);
 
@@ -78,6 +85,18 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         ctrl.onCreate();
 
+    }
+
+    private void setupDrawer() {
+        nav.setNavigationItemSelectedListener(NavListener());
+        drawer.addDrawerListener(DrawerListener());
+        headerView = nav.getHeaderView(0);
+
+        usernameLabel = (TextView) headerView.findViewById(R.id.username_label);
+
+        emailLabel = (TextView) headerView.findViewById(R.id.email_label);
+
+        imageView= (ImageView) headerView.findViewById(R.id.image_view);
     }
 
     private void setupProgressDialog() {
@@ -208,16 +227,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     }
 
     @Override
-    public void setDrawerTitle(String text) {
-        if (navTitle == null) {
-            navTitle = (TextView) findViewById(R.id.nav_title);
-        }
-        if (navTitle != null) {
-            navTitle.setText(text);
-        }
-    }
-
-    @Override
     public void hideProgressDialog() {
         progressDialog.dismiss();
     }
@@ -237,6 +246,25 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     public void hideOverlay() {
         overlay.setVisibility(View.GONE);
         fab.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void bindUsernameLabel(String username) {
+        usernameLabel.setText(username);
+    }
+
+    @Override
+    public void bindEmailLabel(String email) {
+        emailLabel.setText(email);
+    }
+
+    @Override
+    public void bindAvatar(String path, String letter) {
+        new ImageUtils.ImageBuilder(headerView.getContext(), imageView )
+                .url(path)
+                .letter(letter)
+                .circle(true)
+                .build();
     }
 
 
