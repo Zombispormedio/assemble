@@ -2,12 +2,7 @@ package com.zombispormedio.assemble.fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,20 +11,17 @@ import android.view.ViewGroup;
 import android.view.Window;
 
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.adapters.lists.TeamListDialogAdapter;
-import com.zombispormedio.assemble.adapters.lists.TeamsListAdapter;
 import com.zombispormedio.assemble.controllers.TeamDialogController;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.ITeamDialogView;
+import com.zombispormedio.assemble.views.fragments.ITeamDialogView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialogView {
 

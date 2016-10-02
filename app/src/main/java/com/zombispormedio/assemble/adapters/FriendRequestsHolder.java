@@ -8,7 +8,7 @@ import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.IFriendRequestHolder;
+import com.zombispormedio.assemble.views.holders.IFriendRequestHolder;
 
 import android.view.View;
 import android.widget.ImageButton;

@@ -16,7 +16,7 @@ import com.zombispormedio.assemble.adapters.lists.MeetingsListAdapter;
 import com.zombispormedio.assemble.controllers.MeetingsController;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.IMeetingsView;
+import com.zombispormedio.assemble.views.fragments.IMeetingsView;
 
 import java.util.ArrayList;
 

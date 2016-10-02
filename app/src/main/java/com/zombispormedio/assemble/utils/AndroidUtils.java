@@ -14,18 +14,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
-import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.views.IBaseProfileView;
+import com.zombispormedio.assemble.views.activities.IBaseProfileView;
 
 import java.text.ParseException;
 

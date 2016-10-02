@@ -1,8 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.models.FriendRequestProfile;
-import com.zombispormedio.assemble.views.IFriendRequestHolder;
-
 /**
  * Created by Xavier Serrano on 01/08/2016.
  */

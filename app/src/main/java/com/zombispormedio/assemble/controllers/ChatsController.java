@@ -7,7 +7,7 @@ import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 
-import com.zombispormedio.assemble.views.IChatsView;
+import com.zombispormedio.assemble.views.fragments.IChatsView;
 
 import java.util.ArrayList;
 

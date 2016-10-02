@@ -15,7 +15,7 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.views.IFirstStepTeamView;
+import com.zombispormedio.assemble.views.activities.IFirstStepTeamView;
 
 import java.util.ArrayList;
 

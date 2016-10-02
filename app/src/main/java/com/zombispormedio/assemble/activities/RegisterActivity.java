@@ -14,10 +14,9 @@ import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.IRegisterView;
+import com.zombispormedio.assemble.views.activities.IRegisterView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 

@@ -2,8 +2,7 @@ package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.TeamResource;
-import com.zombispormedio.assemble.views.IApplicationView;
-import com.zombispormedio.assemble.views.ITeamDialogView;
+import com.zombispormedio.assemble.views.fragments.ITeamDialogView;
 
 import java.util.ArrayList;
 

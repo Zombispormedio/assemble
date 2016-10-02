@@ -24,7 +24,7 @@ import com.zombispormedio.assemble.controllers.HomeController;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.views.IHomeView;
+import com.zombispormedio.assemble.views.activities.IHomeView;
 
 import butterknife.BindView;
 import butterknife.OnClick;

@@ -10,8 +10,7 @@ import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.utils.DateUtils;
-import com.zombispormedio.assemble.views.IUpdateProfileView;
+import com.zombispormedio.assemble.views.activities.IUpdateProfileView;
 
 import java.text.ParseException;
 

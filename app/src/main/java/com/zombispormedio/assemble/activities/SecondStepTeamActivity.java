@@ -12,10 +12,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
 import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.ParticipantsListAdapter;
 import com.zombispormedio.assemble.controllers.SecondStepTeamController;
@@ -24,7 +22,7 @@ import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.views.ISecondStepTeamView;
+import com.zombispormedio.assemble.views.activities.ISecondStepTeamView;
 
 import java.util.ArrayList;
 

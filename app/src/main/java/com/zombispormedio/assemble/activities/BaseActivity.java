@@ -13,8 +13,7 @@ import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.net.State;
 import com.zombispormedio.assemble.services.api.APIConfiguration;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.IApplicationView;
-import com.zombispormedio.assemble.views.IBaseView;
+import com.zombispormedio.assemble.views.activities.IBaseView;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import butterknife.ButterKnife;

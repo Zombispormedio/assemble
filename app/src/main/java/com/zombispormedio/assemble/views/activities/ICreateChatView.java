@@ -1,0 +1,21 @@
+package com.zombispormedio.assemble.views.activities;
+
+import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.views.activities.IBaseView;
+
+import java.util.ArrayList;
+
+/**
+ * Created by Xavier Serrano on 09/09/2016.
+ */
+public interface ICreateChatView extends IBaseView {
+
+    void bindFriends(ArrayList<FriendProfile> friends);
+
+    void showProgress();
+
+    void hideProgress();
+
+    void goHome();
+
+}

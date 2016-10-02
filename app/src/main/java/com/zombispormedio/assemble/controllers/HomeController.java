@@ -11,8 +11,7 @@ import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 import com.zombispormedio.assemble.utils.StringUtils;
-import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.IHomeView;
+import com.zombispormedio.assemble.views.activities.IHomeView;
 
 
 /**

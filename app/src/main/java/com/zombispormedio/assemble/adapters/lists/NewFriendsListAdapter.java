@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.adapters.NewFriendHolder;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.views.INewFriendHolder;
+import com.zombispormedio.assemble.views.holders.INewFriendHolder;
 
 import android.view.ViewGroup;
 

@@ -7,7 +7,7 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.IFriendHolder;
+import com.zombispormedio.assemble.views.holders.IFriendHolder;
 
 
 import android.view.View;

@@ -8,7 +8,7 @@ import android.preference.PreferenceFragment;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.SettingsActivity;
 import com.zombispormedio.assemble.controllers.SettingsController;
-import com.zombispormedio.assemble.views.ISettingsFragmentView;
+import com.zombispormedio.assemble.views.fragments.ISettingsFragmentView;
 
 
 public class SettingsFragment extends PreferenceFragment implements ISettingsFragmentView {

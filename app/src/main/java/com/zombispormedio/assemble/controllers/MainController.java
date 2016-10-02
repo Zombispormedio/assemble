@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.services.api.APIConfiguration;
-import com.zombispormedio.assemble.views.IMainView;
+import com.zombispormedio.assemble.views.activities.IMainView;
 
 /**
  * Created by Xavier Serrano on 08/07/2016.

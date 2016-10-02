@@ -11,7 +11,7 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.views.ICreateChatView;
+import com.zombispormedio.assemble.views.activities.ICreateChatView;
 
 import java.util.ArrayList;
 

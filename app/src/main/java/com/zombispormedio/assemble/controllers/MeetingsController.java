@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
-import com.zombispormedio.assemble.views.IMeetingsView;
+import com.zombispormedio.assemble.views.fragments.IMeetingsView;
 
 import java.util.ArrayList;
 

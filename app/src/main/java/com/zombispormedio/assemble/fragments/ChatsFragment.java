@@ -15,7 +15,7 @@ import com.zombispormedio.assemble.adapters.lists.ChatsListAdapter;
 import com.zombispormedio.assemble.controllers.ChatsController;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.IChatsView;
+import com.zombispormedio.assemble.views.fragments.IChatsView;
 
 import java.util.ArrayList;
 

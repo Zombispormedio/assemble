@@ -7,7 +7,7 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.views.ICreateChatView;
+import com.zombispormedio.assemble.views.activities.ICreateChatView;
 
 import java.util.ArrayList;
 

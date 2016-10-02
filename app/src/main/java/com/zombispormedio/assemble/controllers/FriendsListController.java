@@ -6,8 +6,8 @@ import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.views.IFriendHolder;
-import com.zombispormedio.assemble.views.IFriendsListView;
+import com.zombispormedio.assemble.views.holders.IFriendHolder;
+import com.zombispormedio.assemble.views.fragments.IFriendsListView;
 
 import java.util.ArrayList;
 

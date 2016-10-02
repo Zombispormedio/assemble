@@ -13,7 +13,7 @@ import com.zombispormedio.assemble.adapters.pagers.FriendsPagerAdapter;
 import com.zombispormedio.assemble.controllers.FriendsController;
 
 import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.views.IFriendsView;
+import com.zombispormedio.assemble.views.activities.IFriendsView;
 
 import butterknife.BindView;
 import butterknife.OnClick;

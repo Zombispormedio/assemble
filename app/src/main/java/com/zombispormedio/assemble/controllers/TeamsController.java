@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
-import com.zombispormedio.assemble.views.ITeamsView;
+import com.zombispormedio.assemble.views.fragments.ITeamsView;
 
 import java.util.ArrayList;
 

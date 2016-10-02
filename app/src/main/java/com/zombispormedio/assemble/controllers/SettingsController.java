@@ -6,8 +6,8 @@ import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.views.ISettingsFragmentView;
-import com.zombispormedio.assemble.views.ISettingsView;
+import com.zombispormedio.assemble.views.fragments.ISettingsFragmentView;
+import com.zombispormedio.assemble.views.activities.ISettingsView;
 
 /**
  * Created by Xavier Serrano on 16/07/2016.

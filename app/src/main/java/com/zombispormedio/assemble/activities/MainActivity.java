@@ -11,7 +11,7 @@ import com.zombispormedio.assemble.controllers.MainController;
 
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.views.IMainView;
+import com.zombispormedio.assemble.views.activities.IMainView;
 
 
 public class MainActivity extends BaseActivity implements IMainView {

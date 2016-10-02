@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.views.ISecondStepTeamView;
+import com.zombispormedio.assemble.views.activities.ISecondStepTeamView;
 
 /**
  * Created by Xavier Serrano on 25/09/2016.

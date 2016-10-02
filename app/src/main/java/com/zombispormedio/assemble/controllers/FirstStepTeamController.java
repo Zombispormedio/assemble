@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.controllers;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.IFirstStepTeamView;
+import com.zombispormedio.assemble.views.activities.IFirstStepTeamView;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

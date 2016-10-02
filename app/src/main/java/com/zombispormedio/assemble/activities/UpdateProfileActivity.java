@@ -7,7 +7,7 @@ import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.views.IUpdateProfileView;
+import com.zombispormedio.assemble.views.activities.IUpdateProfileView;
 
 
 import android.app.ProgressDialog;

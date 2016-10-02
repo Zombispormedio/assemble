@@ -1,0 +1,25 @@
+package com.zombispormedio.assemble.views.activities;
+
+
+import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.views.activities.IBaseView;
+
+import java.util.ArrayList;
+
+/**
+ * Created by Xavier Serrano on 17/09/2016.
+ */
+public interface INewFriendView extends IBaseView {
+
+    void bindSearchResults(ArrayList<FriendProfile> results);
+
+    String getSearchText();
+
+    void showProgress();
+
+    void hideProgress();
+
+    void showFriendRequestSent();
+
+
+}

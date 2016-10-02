@@ -8,9 +8,7 @@ import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.DateUtils;
-import com.zombispormedio.assemble.views.ICreateMeetingView;
-
-import java.util.Date;
+import com.zombispormedio.assemble.views.activities.ICreateMeetingView;
 
 /**
  * Created by Xavier Serrano on 09/09/2016.

@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
-import com.zombispormedio.assemble.views.IRegisterView;
+import com.zombispormedio.assemble.views.activities.IRegisterView;
 
 /**
  * Created by Xavier Serrano on 09/07/2016.

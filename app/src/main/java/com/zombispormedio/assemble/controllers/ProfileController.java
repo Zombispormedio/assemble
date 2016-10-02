@@ -11,7 +11,7 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.IProfileView;
+import com.zombispormedio.assemble.views.activities.IProfileView;
 
 /**
  * Created by Xavier Serrano on 10/07/2016.

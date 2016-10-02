@@ -8,7 +8,7 @@ import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
-import com.zombispormedio.assemble.views.IFriendsView;
+import com.zombispormedio.assemble.views.activities.IFriendsView;
 
 import java.util.ArrayList;
 

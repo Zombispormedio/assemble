@@ -1,15 +1,13 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.resources.FriendRequestResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.views.IFriendRequestHolder;
-import com.zombispormedio.assemble.views.IFriendRequestsListView;
+import com.zombispormedio.assemble.views.holders.IFriendRequestHolder;
+import com.zombispormedio.assemble.views.fragments.IFriendRequestsListView;
 
 import java.util.ArrayList;
 

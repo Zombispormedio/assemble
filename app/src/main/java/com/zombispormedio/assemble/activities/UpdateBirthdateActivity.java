@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.UpdateBirthdateController;
 
 import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.views.IUpdateBirthdateView;
+import com.zombispormedio.assemble.views.activities.IUpdateBirthdateView;
 
 import android.os.Bundle;
 

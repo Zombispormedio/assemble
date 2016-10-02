@@ -1,15 +1,13 @@
 package com.zombispormedio.assemble.fragments;
 
 import com.zombispormedio.assemble.views.IApplicationView;
-import com.zombispormedio.assemble.views.IBaseView;
-import com.zombispormedio.assemble.views.IFragmentView;
+import com.zombispormedio.assemble.views.activities.IBaseView;
+import com.zombispormedio.assemble.views.fragments.IFragmentView;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
-import android.view.View;
 
 import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by Xavier Serrano on 09/09/2016.

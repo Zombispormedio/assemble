@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.views.IHelpView;
+import com.zombispormedio.assemble.views.activities.IHelpView;
 
 /**
  * Created by Xavier Serrano on 24/08/2016.

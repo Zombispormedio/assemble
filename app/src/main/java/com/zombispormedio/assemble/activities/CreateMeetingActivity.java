@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.BottomSheetDialog;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
@@ -30,16 +29,10 @@ import com.zombispormedio.assemble.fragments.TeamDialogFragment;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.views.ICreateMeetingView;
-
-import org.w3c.dom.Text;
-
-import java.text.ParseException;
-import java.util.Calendar;
+import com.zombispormedio.assemble.views.activities.ICreateMeetingView;
 
 import butterknife.BindView;
 import butterknife.OnClick;

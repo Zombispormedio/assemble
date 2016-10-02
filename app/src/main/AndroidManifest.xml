@@ -179,6 +179,17 @@
                     android:value="com.zombispormedio.assemble.activities.FirstStepTeamActivity"
                     />
         </activity>
+        <activity
+                android:name=".activities.ChatActivity"
+                android:label="@string/title_activity_chat"
+                android:parentActivityName=".activities.HomeActivity"
+                android:theme="@style/AppTheme"
+                >
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zombispormedio.assemble.activities.HomeActivity"
+                    />
+        </activity>
     </application>
 
 </manifest>

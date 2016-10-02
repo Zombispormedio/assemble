@@ -14,7 +14,7 @@ import com.zombispormedio.assemble.controllers.LoginController;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.ILoginView;
+import com.zombispormedio.assemble.views.activities.ILoginView;
 
 import butterknife.BindView;
 import butterknife.OnClick;

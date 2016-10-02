@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.controllers;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.IUpdateBirthdateView;
+import com.zombispormedio.assemble.views.activities.IUpdateBirthdateView;
 
 import java.text.ParseException;
 import java.util.Calendar;

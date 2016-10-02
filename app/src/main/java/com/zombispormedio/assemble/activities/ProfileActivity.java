@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
 import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
 import com.zombispormedio.assemble.R;
@@ -29,9 +28,8 @@ import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.IProfileView;
+import com.zombispormedio.assemble.views.activities.IProfileView;
 
 import java.text.ParseException;
 

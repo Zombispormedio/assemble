@@ -15,7 +15,7 @@ import com.zombispormedio.assemble.adapters.lists.TeamsListAdapter;
 import com.zombispormedio.assemble.controllers.TeamsController;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.ITeamsView;
+import com.zombispormedio.assemble.views.fragments.ITeamsView;
 
 import java.util.ArrayList;
 

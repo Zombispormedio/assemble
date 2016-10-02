@@ -11,7 +11,7 @@ import com.zombispormedio.assemble.controllers.SettingsController;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.ISettingsView;
+import com.zombispormedio.assemble.views.activities.ISettingsView;
 
 
 public class SettingsActivity extends BaseActivity implements ISettingsView {
