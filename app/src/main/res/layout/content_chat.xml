@@ -5,26 +5,62 @@
         android:id="@+id/content_chat"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorAccent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:context="com.zombispormedio.assemble.activities.ChatActivity"
         tools:showIn="@layout/activity_chat"
-        android:background="@color/colorAccent"
         >
 
-
-<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/own_message_bubble"
-        android:layout_margin="5dp"
-        android:padding="10dp"
-        android:layout_gravity="bottom"
-        android:elevation="5dp"
-        >
-    <TextView
-            android:layout_width="wrap_content"
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/messages_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/example_string"
             />
-</LinearLayout>
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_margin="5dp"
+            android:orientation="horizontal"
+            android:background="@drawable/message_input_bubble"
+            android:elevation="5dp"
+            android:padding="5dp"
+            >
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                >
+            <ImageButton
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/plus_chat"
+
+                    />
+        </FrameLayout>
+
+
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:hint="@string/type_your_message"
+                android:layout_weight="1"
+                />
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                >
+            <ImageButton
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/send_chat"
+
+                    />
+        </FrameLayout>
+    </LinearLayout>
 </FrameLayout>

@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 
+import com.zombispormedio.assemble.activities.ChatActivity;
 import com.zombispormedio.assemble.activities.CreateChatActivity;
 import com.zombispormedio.assemble.activities.CreateMeetingActivity;
 import com.zombispormedio.assemble.activities.FirstStepTeamActivity;
@@ -70,6 +71,12 @@ public final class NavigationManager {
         ctx.startActivity(dst);
     }
 
+    private static void goWithArg(Context ctx, Class<?> cls, int extras){
+        Intent dst = new Intent(ctx, cls);
+        dst.putExtra(ARGS+0, extras);
+        ctx.startActivity(dst);
+    }
+
 
     public static void Login(Context ctx) {
         goTo(ctx, LoginActivity.class);
@@ -128,6 +135,10 @@ public final class NavigationManager {
     }
 
     public static void CreateMeeting(Context ctx){goTo(ctx, CreateMeetingActivity.class);}
+
+    public static void Chat(Context ctx, int id){
+        goWithArg(ctx, ChatActivity.class, id);
+    }
 
     public void Home() {
         NavigationManager.Home(ctx);

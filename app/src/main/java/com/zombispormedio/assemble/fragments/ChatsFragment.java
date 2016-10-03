@@ -13,8 +13,10 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.adapters.lists.ChatsListAdapter;
 import com.zombispormedio.assemble.controllers.ChatsController;
+import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.fragments.IChatsView;
 
 import java.util.ArrayList;
@@ -67,7 +69,12 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
                 .divider(true)
                 .itemAnimation(true)
                 .configure();
-        chatsListFactory.setOnClickListener(ctrl.getOnClickOneTeam());
+        chatsListFactory.setOnClickListener(new IOnClickItemListHandler<Chat>() {
+            @Override
+            public void onClick(int position, Chat data) {
+                ctrl.onChatItem(position, data);
+            }
+        });
         chatsListAdapter = chatsListFactory.make();
         chatsList.setAdapter(chatsListAdapter);
     }
@@ -89,6 +96,11 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     @Override
     public void finishRefresh() {
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void goToChat(int friendId) {
+        NavigationManager.Chat(view, friendId);
     }
 
 

@@ -13,4 +13,6 @@ public interface IChatsView extends IFragmentView {
 
     void finishRefresh();
 
+    void goToChat(int friendId);
+
 }

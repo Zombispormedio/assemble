@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.controllers;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
+import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
@@ -55,14 +56,8 @@ public class ChatsController extends Controller {
     }
 
 
-    public IOnClickItemListHandler<Chat> getOnClickOneTeam() {
-        return new IOnClickItemListHandler<Chat>() {
-            @Override
-            public void onClick(int position, Chat data) {
-                Logger.d(position);
-                Logger.d(data);
-            }
-        };
+    public void onChatItem(int position, Chat chat) {
+        ctx.goToChat(chat.recipient.id);
     }
 
     public void onRefresh() {
