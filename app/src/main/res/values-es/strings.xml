@@ -106,6 +106,7 @@
     <string name="ok">Aceptar</string>
     <string name="date_error_message">Cambia la hora de inicio para que sea anterior a la finalización del evento.</string>
     <string name="creating_chat">Pronto podrás conversar. Un momento, por favor…</string>
+    <string name="type_your_message">Escribe tu mensaje&#8230;</string>
 
 
 </resources>

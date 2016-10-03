@@ -49,4 +49,8 @@ public class ChatResource extends ConceptResource<Chat> {
 
     }
 
+    public Chat getById(int id){
+        return storage.getByID(id);
+    }
+
 }

@@ -57,7 +57,7 @@ public class ChatsController extends Controller {
 
 
     public void onChatItem(int position, Chat chat) {
-        ctx.goToChat(chat.recipient.id);
+        ctx.goToChat(chat.id);
     }
 
     public void onRefresh() {

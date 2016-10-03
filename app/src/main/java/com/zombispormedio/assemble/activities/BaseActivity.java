@@ -106,10 +106,18 @@ public class BaseActivity extends AppCompatActivity implements IBaseView{
         }
     }
 
-    protected  void setSubtitle(String id) {
+    protected  void setSubtitle(String subtitle) {
         ActionBar actionBar=getSupportActionBar();
         if(actionBar!=null){
-            actionBar.setSubtitle(id);
+            actionBar.setSubtitle(subtitle);
+        }
+    }
+
+
+    protected  void setTitle(String title) {
+        ActionBar actionBar=getSupportActionBar();
+        if(actionBar!=null){
+            actionBar.setTitle(title);
         }
     }
 

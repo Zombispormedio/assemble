@@ -8,4 +8,7 @@ import com.zombispormedio.assemble.views.activities.IBaseView;
 
 public interface IChatView extends IBaseView {
 
+    void bindTitle(String title);
+
+    void setAvatar(String path, String letter);
 }

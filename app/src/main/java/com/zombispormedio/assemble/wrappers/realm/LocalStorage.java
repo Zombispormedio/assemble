@@ -40,6 +40,14 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         database.commitTransaction();
     }
 
+    public void begin(){
+        database.beginTransaction();
+    }
+
+    public void commit(){
+        database.commitTransaction();
+    }
+
     public void update(D object, M params) {
         database.beginTransaction();
         ((IBaseDAO<M>) object).fromModel(params);

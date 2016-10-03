@@ -61,6 +61,7 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
         setupToolbar();
         bindActivity(this);
         setSubtitle(R.string.add_name);
+
         Bundle extra=getIntent().getExtras();
 
         ctrl=new SecondStepTeamController(this, extra.getIntArray(NavigationManager.ARGS+0));

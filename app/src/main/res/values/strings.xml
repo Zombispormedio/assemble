@@ -107,7 +107,6 @@
     <string name="date_error_message">Change the initial hour to be before the end of the meeting.</string>
     <string name="ok">Ok</string>
     <string name="creating_chat">We are creating your chat. A moment, please…</string>
-    <string name="title_activity_chat">ChatActivity</string>
-    <string name="type_your_message">Type your message</string>
+    <string name="type_your_message">Type your message&#8230;</string>
 
 </resources>
