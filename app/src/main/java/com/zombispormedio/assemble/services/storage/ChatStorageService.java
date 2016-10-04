@@ -19,7 +19,7 @@ public class ChatStorageService extends StorageService<ChatDAO, Chat> {
     }
 
 
-    public void addMessages(int id, ArrayList<Message> messages){
+    public void addMessages(int id, Message[] messages){
         ChatDAO chatDAO=storage.getById(id);
 
         MessageStorageService messageService=new MessageStorageService();
@@ -42,6 +42,29 @@ public class ChatStorageService extends StorageService<ChatDAO, Chat> {
 
         storage.begin();
         chatDAO.addMessages(messageDAOs);
+        storage.commit();
+    }
+
+    public void addMessages(ArrayList<Chat> chats){
+        for (Chat chat:chats) {
+            addMessages(chat.id, chat.messages);
+        }
+    }
+
+    public void addMessage(int id, Message message){
+        ChatDAO chatDAO=storage.getById(id);
+
+        MessageStorageService messageService=new MessageStorageService();
+
+        MessageDAO messageDAO = messageService.getStorage().getById(message.id);
+
+        if (messageDAO == null) {
+            messageDAO = new MessageDAO();
+        }
+
+        messageService.getStorage().update(messageDAO, message);
+        storage.begin();
+        chatDAO.addMessage(messageDAO);
         storage.commit();
     }
 }

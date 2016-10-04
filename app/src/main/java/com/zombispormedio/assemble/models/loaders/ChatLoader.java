@@ -7,6 +7,7 @@ import com.zombispormedio.assemble.handlers.SuccessHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IChatService;
+import com.zombispormedio.assemble.services.storage.ChatStorageService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
 
 import java.util.ArrayList;
@@ -17,11 +18,11 @@ import java.util.ArrayList;
 public class ChatLoader implements ILoader {
 
     private IChatService apiService;
-    private IStorageService<Chat> storageService;
+    private ChatStorageService storageService;
 
 
     public ChatLoader(IChatService apiService,
-            IStorageService<Chat> storageService) {
+            ChatStorageService storageService) {
         this.apiService = apiService;
         this.storageService = storageService;
     }
@@ -32,6 +33,7 @@ public class ChatLoader implements ILoader {
             @Override
             public void onSuccess(ArrayList<Chat> result) {
                 storageService.createOrUpdateOrDeleteAll(result);
+                storageService.addMessages(result);
                 handler.onSuccess();
             }
 
@@ -46,5 +48,5 @@ public class ChatLoader implements ILoader {
             }
         });
     }
-    
+
 }

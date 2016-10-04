@@ -49,6 +49,7 @@
                 android:layout_height="match_parent"
                 android:hint="@string/type_your_message"
                 android:layout_weight="1"
+                android:backgroundTint="@android:color/transparent"
                 />
 
         <FrameLayout

@@ -96,7 +96,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         emailLabel = (TextView) headerView.findViewById(R.id.email_label);
 
-        imageView= (ImageView) headerView.findViewById(R.id.image_view);
+        imageView = (ImageView) headerView.findViewById(R.id.image_view);
     }
 
     private void setupProgressDialog() {
@@ -260,7 +260,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     @Override
     public void bindAvatar(String path, String letter) {
-        new ImageUtils.ImageBuilder(headerView.getContext(), imageView )
+        new ImageUtils.ImageBuilder(headerView.getContext(), imageView)
                 .url(path)
                 .letter(letter)
                 .circle(true)

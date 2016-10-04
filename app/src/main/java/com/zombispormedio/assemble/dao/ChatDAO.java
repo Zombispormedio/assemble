@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import io.realm.RealmList;
 import io.realm.RealmObject;
+import io.realm.RealmResults;
 import io.realm.annotations.PrimaryKey;
 
 /**
@@ -34,10 +35,13 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
     @Override
     public Chat toModel() {
         int messageLen=messages.size();
+
+        RealmResults<MessageDAO> sortedMessages=messages.sort("created_at");
+
         Message[] m = new Message[messages.size()];
 
        for(int i=0; i<messageLen; i++){
-           m[i]=messages.get(i).toModel();
+           m[i]=sortedMessages.get(i).toModel();
        }
 
         return new Chat(id, created_at, sender.toModel(), recipient.toModel(), m);
@@ -60,6 +64,35 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
             messages.add(msg);
         }
     }
+
+    public void addMessage(MessageDAO msg) {
+
+        int index=searchMessage(msg.id);
+
+        if(index==-1){
+            messages.add(msg);
+        }else{
+            messages.add(msg);
+        }
+
+    }
+
+    public int searchMessage(int id){
+        int index=-1;
+        int len=messages.size();
+        int i=0;
+        while(index==-1&& i< len){
+            MessageDAO messageDAO=messages.get(i);
+            if(messageDAO.id==id){
+                index=i;
+            }
+
+            i++;
+        }
+        return index;
+    }
+
+
 
     private void bindUser(UserProfile profile) {
         ProfileStorageService service = new ProfileStorageService();

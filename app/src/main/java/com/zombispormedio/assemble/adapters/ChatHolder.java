@@ -32,6 +32,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
         super(view);
         this.listener = null;
         setup();
+
     }
 
     private void setup() {

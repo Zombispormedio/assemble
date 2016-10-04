@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.dao;
 
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.Message;
+import com.zombispormedio.assemble.models.Profile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.services.storage.FriendStorageService;
 import com.zombispormedio.assemble.services.storage.ProfileStorageService;
@@ -20,9 +21,9 @@ public class MessageDAO extends RealmObject implements IBaseDAO<Message> {
 
     public String created_at;
 
-    public UserProfileDAO sender;
+    public int sender_id;
 
-    public FriendProfileDAO recipient;
+    public int recipient_id;
 
     public String content;
 
@@ -35,16 +36,34 @@ public class MessageDAO extends RealmObject implements IBaseDAO<Message> {
 
     @Override
     public Message toModel() {
-        return new Message(id, created_at, sender.toModel(), recipient.toModel(),
-                content, is_read, is_sent, is_delivered);
+        Profile sender, recipient;
+
+        ProfileStorageService profileService= new ProfileStorageService();
+
+        FriendStorageService friendService= new FriendStorageService();
+
+        UserProfile userProfile=profileService.getFirst();
+
+        if(userProfile.id==sender_id){
+            sender=userProfile;
+            recipient=friendService.getByID(recipient_id);
+        }else{
+            recipient=userProfile;
+            sender=friendService.getByID(sender_id);
+        }
+
+
+        return new Message(id, content,
+                is_read, is_sent, is_delivered,created_at,
+                sender, recipient);
     }
 
     @Override
     public IBaseDAO fromModel(Message model) {
         this.id=model.id;
         this.created_at=model.created_at;
-        bindUser(model.sender);
-        bindFriend(model.recipient);
+        this.sender_id=model.sender.id;
+        this.recipient_id=model.recipient.id;
         this.content=model.content;
         this.is_read=model.is_read;
         this.is_sent=model.is_sent;
@@ -52,17 +71,6 @@ public class MessageDAO extends RealmObject implements IBaseDAO<Message> {
         return this;
     }
 
-    private void bindUser(UserProfile profile){
-        ProfileStorageService service=new ProfileStorageService();
-        this.sender =service.getStorage()
-                .getById(profile.id);
-    }
-
-    private void bindFriend(FriendProfile profile){
-        FriendStorageService service=new FriendStorageService();
-        this.recipient =service.getStorage()
-                .getById(profile.id);
-    }
 
     @Override
     public int getId() {
