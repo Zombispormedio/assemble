@@ -8,4 +8,21 @@ public class EditMessage {
 
     public String content;
 
+    public EditMessage(String content) {
+        this.content = content;
+    }
+
+    public static class Builder{
+        private String content;
+
+        public Builder setContent(String content) {
+            this.content = content;
+            return this;
+        }
+
+        public EditMessage build(){
+            return new EditMessage(content);
+        }
+    }
+
 }

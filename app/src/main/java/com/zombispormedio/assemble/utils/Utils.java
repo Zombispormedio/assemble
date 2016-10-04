@@ -162,5 +162,44 @@ public class Utils {
         return out;
     }
 
+    public static class Pair<X, Y>{
+        public final X first;
+        public final Y second;
+
+        public Pair(X first, Y second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
+
+    public static class IntPair extends Pair<Integer, Integer>{
+
+        public IntPair(Integer first, Integer second) {
+            super(first, second);
+        }
+    }
+
+
+    public static class IntPairBuilder{
+
+        private int first;
+        private int second;
+
+        public IntPairBuilder setFirst(int first) {
+            this.first = first;
+            return this;
+        }
+
+        public IntPairBuilder setSecond(int second) {
+            this.second = second;
+            return this;
+        }
+
+        public IntPair build(){
+            return new IntPair(first, second);
+        }
+
+    }
+
 
 }

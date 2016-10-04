@@ -5,6 +5,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
+        android:background="@color/colorAccent"
         tools:context="com.zombispormedio.assemble.activities.ChatActivity"
         >
 
@@ -40,6 +41,8 @@
     </android.support.design.widget.AppBarLayout>
 
     <include layout="@layout/content_chat" />
+
+
 
 
 </android.support.design.widget.CoordinatorLayout>

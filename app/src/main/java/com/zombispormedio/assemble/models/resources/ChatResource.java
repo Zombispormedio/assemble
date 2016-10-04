@@ -3,9 +3,12 @@ package com.zombispormedio.assemble.models.resources;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
+import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.editors.EditChat;
+import com.zombispormedio.assemble.models.editors.EditMessage;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IChatService;
+import com.zombispormedio.assemble.services.storage.ChatStorageService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
 
 import java.util.ArrayList;
@@ -53,6 +56,20 @@ public class ChatResource extends ConceptResource<Chat> {
     }
 
 
+    public void createMessage(final int id, EditMessage message, final IServiceHandler<Message, Error> handler){
+        persistence.sendMessage(id, message, new ServiceHandler<Message, Error>(){
+            @Override
+            public void onError(Error error) {
+                handler.onError(error);
+            }
+
+            @Override
+            public void onSuccess(Message result) {
+                ((ChatStorageService) storage).addMessage(id, result);
+                handler.onSuccess(result);
+            }
+        });
+    }
 
 
 }

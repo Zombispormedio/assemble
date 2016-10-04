@@ -19,6 +19,11 @@ public class Message extends ContentMessage{
         this.recipient = recipient;
     }
 
+    public Message(String content, Profile sender) {
+        super(0, content, false, false, false, null);
+        this.sender = sender;
+    }
+
     public static class Container{
         private Profile sender;
 
@@ -31,6 +36,10 @@ public class Message extends ContentMessage{
 
         public void addMessage(ContentMessage message){
             messages.add(message);
+        }
+
+        public void changeMessage(int index, ContentMessage message){
+            messages.set(index, message);
         }
 
         public Profile getSender() {

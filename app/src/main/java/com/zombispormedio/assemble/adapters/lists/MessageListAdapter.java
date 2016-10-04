@@ -4,6 +4,7 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.MessageHolder;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.Profile;
+import com.zombispormedio.assemble.utils.Utils;
 
 import android.support.v4.app.FragmentManager;
 import android.view.ViewGroup;
@@ -44,5 +45,36 @@ public class MessageListAdapter extends BaseListAdapter<Message.Container, Messa
         }
 
         setData(containers);
+    }
+
+
+    public Utils.IntPair addPending(Message message){
+        Utils.IntPairBuilder tupleBuilder=new Utils.IntPairBuilder();
+        int size=data.size();
+        int lastIndex=data.size()-1;
+        Message.Container last=data.get(lastIndex);
+
+        if(last.getSender().id==message.sender.id){
+            tupleBuilder.setFirst(lastIndex)
+                    .setSecond(last.getMessages().size());
+            last.addMessage(message);
+            notifyItemChanged(lastIndex);
+        }else{
+            Message.Container container=new Message.Container(message.sender);
+            container.addMessage(message);
+            tupleBuilder.setFirst(size)
+                    .setSecond(0);
+            data.add(container);
+            notifyItemInserted(size);
+        }
+
+        return tupleBuilder.build();
+
+    }
+
+    public void checkMessage(Utils.IntPair tuple, Message message){
+        Message.Container container=data.get(tuple.first);
+        container.changeMessage(tuple.second, message);
+        notifyItemChanged(tuple.first);
     }
 }
