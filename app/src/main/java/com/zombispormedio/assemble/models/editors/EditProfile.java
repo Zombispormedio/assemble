@@ -1,4 +1,6 @@
-package com.zombispormedio.assemble.models;
+package com.zombispormedio.assemble.models.editors;
+
+import com.zombispormedio.assemble.models.Profile;
 
 /**
  * Created by Xavier Serrano on 23/08/2016.

@@ -2,7 +2,7 @@ package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.EditMeeting;
+import com.zombispormedio.assemble.models.editors.EditMeeting;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IMeetingService;

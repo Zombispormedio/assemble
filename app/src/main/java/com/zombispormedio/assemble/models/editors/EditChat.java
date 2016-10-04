@@ -1,4 +1,4 @@
-package com.zombispormedio.assemble.models;
+package com.zombispormedio.assemble.models.editors;
 
 /**
  * Created by Xavier Serrano on 29/09/2016.

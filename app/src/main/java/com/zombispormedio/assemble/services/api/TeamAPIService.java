@@ -1,17 +1,14 @@
 package com.zombispormedio.assemble.services.api;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.handlers.PromiseHandler;
-import com.zombispormedio.assemble.models.EditTeam;
+import com.zombispormedio.assemble.models.editors.EditTeam;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.FileBody;
 import com.zombispormedio.assemble.net.JsonBinder;
-import com.zombispormedio.assemble.net.responses.TeamsResponse;
 import com.zombispormedio.assemble.services.interfaces.ITeamService;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**

@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.EditMeeting;
+import com.zombispormedio.assemble.models.editors.EditMeeting;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.MeetingResource;

@@ -2,7 +2,7 @@ package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.EditChat;
+import com.zombispormedio.assemble.models.editors.EditChat;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.FriendResource;

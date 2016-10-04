@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.controllers;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.EditProfile;
+import com.zombispormedio.assemble.models.editors.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;

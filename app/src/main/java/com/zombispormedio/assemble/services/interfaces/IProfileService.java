@@ -1,14 +1,11 @@
 package com.zombispormedio.assemble.services.interfaces;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.EditProfile;
-import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.models.FriendRequestProfile;
+import com.zombispormedio.assemble.models.editors.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.Error;
 
 import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 10/07/2016.

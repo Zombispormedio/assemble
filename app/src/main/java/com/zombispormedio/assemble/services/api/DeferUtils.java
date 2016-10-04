@@ -7,6 +7,7 @@ import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.Error;
@@ -20,6 +21,8 @@ import com.zombispormedio.assemble.net.responses.FriendsResponse;
 import com.zombispormedio.assemble.net.responses.ArrayResponse;
 import com.zombispormedio.assemble.net.responses.MeetingResponse;
 import com.zombispormedio.assemble.net.responses.MeetingsResponse;
+import com.zombispormedio.assemble.net.responses.MessageResponse;
+import com.zombispormedio.assemble.net.responses.MessagesResponse;
 import com.zombispormedio.assemble.net.responses.ProfileResponse;
 import com.zombispormedio.assemble.net.responses.TeamResponse;
 import com.zombispormedio.assemble.net.responses.TeamsResponse;
@@ -121,6 +124,27 @@ class DeferUtils {
             @Override
             protected TeamResponse getResponse(String arg) throws IOException {
                 return JsonBinder.toTeamResponse(arg);
+            }
+        };
+    }
+
+
+    static PromiseHandler deferMessages(IServiceHandler<ArrayList<Message>, Error> handler) {
+        return new ArrayPromiseHandler<MessagesResponse, Message>(handler) {
+
+            @Override
+            protected MessagesResponse getResponse(String arg) throws IOException {
+                return JsonBinder.toMessagesResponse(arg);
+            }
+        };
+    }
+
+    static PromiseHandler deferMessage(IServiceHandler<Message, Error> handler) {
+        return new PromiseHandler<MessageResponse, Message>(handler) {
+
+            @Override
+            protected MessageResponse getResponse(String arg) throws IOException {
+                return JsonBinder.toMessageResponse(arg);
             }
         };
     }

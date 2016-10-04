@@ -1,11 +1,12 @@
 package com.zombispormedio.assemble.net;
 
 import com.zombispormedio.assemble.models.Auth;
-import com.zombispormedio.assemble.models.EditChat;
-import com.zombispormedio.assemble.models.EditMeeting;
-import com.zombispormedio.assemble.models.EditProfile;
-import com.zombispormedio.assemble.models.EditTeam;
-import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.models.Message;
+import com.zombispormedio.assemble.models.editors.EditChat;
+import com.zombispormedio.assemble.models.editors.EditMeeting;
+import com.zombispormedio.assemble.models.editors.EditMessage;
+import com.zombispormedio.assemble.models.editors.EditProfile;
+import com.zombispormedio.assemble.models.editors.EditTeam;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.responses.AbstractResponse;
 import com.zombispormedio.assemble.net.responses.ChatResponse;
@@ -15,6 +16,8 @@ import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.net.responses.FriendsResponse;
 import com.zombispormedio.assemble.net.responses.MeetingResponse;
 import com.zombispormedio.assemble.net.responses.MeetingsResponse;
+import com.zombispormedio.assemble.net.responses.MessageResponse;
+import com.zombispormedio.assemble.net.responses.MessagesResponse;
 import com.zombispormedio.assemble.net.responses.ProfileResponse;
 import com.zombispormedio.assemble.net.responses.TeamResponse;
 import com.zombispormedio.assemble.net.responses.TeamsResponse;
@@ -25,22 +28,13 @@ import java.io.IOException;
 /**
  * Created by Xavier Serrano on 26/07/2016.
  */
-public class JsonBinder<R extends AbstractResponse> {
+public class JsonBinder{
 
-
-    public static DefaultResponse toDefaultResponse(String raw) throws IOException {
-        JSONWrapper<DefaultResponse> jsonAdapter = new JSONWrapper<>(DefaultResponse.class);
-        return jsonAdapter.fromJSON(raw);
-    }
+    /***FROM***/
 
     public static String fromUserProfile(UserProfile userProfile) {
         JSONWrapper<UserProfile> userAdapter = new JSONWrapper<>(UserProfile.class);
         return userAdapter.toJSON(userProfile);
-    }
-
-    public static ProfileResponse toProfileResponse(String raw) throws IOException {
-        JSONWrapper<ProfileResponse> jsonAdapter = new JSONWrapper<>(ProfileResponse.class);
-        return jsonAdapter.fromJSON(raw);
     }
 
     public static String fromAuth(Auth user) {
@@ -69,6 +63,23 @@ public class JsonBinder<R extends AbstractResponse> {
         return jsonAdapter.toJSON(chat);
     }
 
+    public static String fromEditMeesage(EditMessage message) {
+        JSONWrapper<EditMessage> jsonAdapter = new JSONWrapper<>(EditMessage.class);
+        return jsonAdapter.toJSON(message);
+    }
+
+
+    /***TO***/
+    public static DefaultResponse toDefaultResponse(String raw) throws IOException {
+        JSONWrapper<DefaultResponse> jsonAdapter = new JSONWrapper<>(DefaultResponse.class);
+        return jsonAdapter.fromJSON(raw);
+    }
+
+    public static ProfileResponse toProfileResponse(String raw) throws IOException {
+        JSONWrapper<ProfileResponse> jsonAdapter = new JSONWrapper<>(ProfileResponse.class);
+        return jsonAdapter.fromJSON(raw);
+    }
+
     public static FriendsResponse toFriendsResponse(String arg) throws IOException {
         JSONWrapper<FriendsResponse> jsonAdapter = new JSONWrapper<>(FriendsResponse.class);
         return jsonAdapter.fromJSON(arg);
@@ -84,8 +95,18 @@ public class JsonBinder<R extends AbstractResponse> {
         return jsonAdapter.fromJSON(arg);
     }
 
+    public static TeamResponse toTeamResponse(String arg) throws IOException {
+        JSONWrapper<TeamResponse> jsonAdapter = new JSONWrapper<>(TeamResponse.class);
+        return jsonAdapter.fromJSON(arg);
+    }
+
     public static MeetingsResponse toMeetingsResponse(String arg) throws IOException {
         JSONWrapper<MeetingsResponse> jsonAdapter = new JSONWrapper<>(MeetingsResponse.class);
+        return jsonAdapter.fromJSON(arg);
+    }
+
+    public static MeetingResponse toMeetingResponse(String arg) throws IOException {
+        JSONWrapper<MeetingResponse> jsonAdapter = new JSONWrapper<>(MeetingResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
 
@@ -99,15 +120,19 @@ public class JsonBinder<R extends AbstractResponse> {
         return jsonAdapter.fromJSON(arg);
     }
 
-    public static TeamResponse toTeamResponse(String arg) throws IOException {
-        JSONWrapper<TeamResponse> jsonAdapter = new JSONWrapper<>(TeamResponse.class);
+    public static MessagesResponse toMessagesResponse(String arg) throws IOException {
+        JSONWrapper<MessagesResponse> jsonAdapter=new JSONWrapper<>(MessagesResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
 
-    public static MeetingResponse toMeetingResponse(String arg) throws IOException {
-        JSONWrapper<MeetingResponse> jsonAdapter = new JSONWrapper<>(MeetingResponse.class);
+    public static MessageResponse toMessageResponse(String arg) throws IOException {
+        JSONWrapper<MessageResponse> jsonAdapter=new JSONWrapper<>(MessageResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
+
+
+
+
 
 
 

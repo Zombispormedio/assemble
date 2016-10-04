@@ -1,8 +1,6 @@
-package com.zombispormedio.assemble.models;
+package com.zombispormedio.assemble.models.editors;
 
 import com.zombispormedio.assemble.utils.DateUtils;
-
-import android.text.style.TtsSpan;
 
 /**
  * Created by Xavier Serrano on 28/09/2016.

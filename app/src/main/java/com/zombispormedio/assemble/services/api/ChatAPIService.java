@@ -1,17 +1,14 @@
 package com.zombispormedio.assemble.services.api;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.handlers.PromiseHandler;
 import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.EditChat;
+import com.zombispormedio.assemble.models.Message;
+import com.zombispormedio.assemble.models.editors.EditChat;
+import com.zombispormedio.assemble.models.editors.EditMessage;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
-import com.zombispormedio.assemble.net.responses.ChatsResponse;
 import com.zombispormedio.assemble.services.interfaces.IChatService;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -37,6 +34,22 @@ public class ChatAPIService implements IChatService {
         api.RestWithAuth("/chat")
                 .handler(DeferUtils.deferChat(handler))
                 .post(JsonBinder.fromEditChat(chat));
+    }
+
+    @Override
+    public void getMessages(int id, IServiceHandler<ArrayList<Message>, Error> handler) {
+        api.RestWithAuth("/chat/:id/messages")
+                .params("id", id)
+                .handler(DeferUtils.deferMessages(handler))
+                .get();
+    }
+
+    @Override
+    public void sendMessage(int id, EditMessage message, IServiceHandler<Message, Error> handler) {
+        api.RestWithAuth("/chat/:id/message")
+                .params("id", id)
+                .handler(DeferUtils.deferMessage(handler))
+                .put(JsonBinder.fromEditMeesage(message));
     }
 
 

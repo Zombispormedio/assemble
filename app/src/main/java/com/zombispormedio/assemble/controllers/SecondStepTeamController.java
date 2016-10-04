@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.EditTeam;
+import com.zombispormedio.assemble.models.editors.EditTeam;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;

@@ -2,8 +2,7 @@ package com.zombispormedio.assemble.services.api;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.handlers.PromiseHandler;
-import com.zombispormedio.assemble.models.EditProfile;
+import com.zombispormedio.assemble.models.editors.EditProfile;
 
 
 import com.zombispormedio.assemble.models.UserProfile;
@@ -12,12 +11,10 @@ import com.zombispormedio.assemble.net.FileBody;
 import com.zombispormedio.assemble.net.JsonBinder;
 
 
-import com.zombispormedio.assemble.net.responses.ProfileResponse;
 import com.zombispormedio.assemble.services.interfaces.IProfileService;
 
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * Created by Xavier Serrano on 27/07/2016.

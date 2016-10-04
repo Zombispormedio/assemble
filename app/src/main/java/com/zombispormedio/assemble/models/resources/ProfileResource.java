@@ -1,11 +1,9 @@
 package com.zombispormedio.assemble.models.resources;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.EditProfile;
+import com.zombispormedio.assemble.models.editors.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscription;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IProfileService;
