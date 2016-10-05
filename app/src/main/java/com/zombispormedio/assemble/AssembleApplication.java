@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble;
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import com.zombispormedio.assemble.activities.BaseActivity;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
@@ -20,10 +22,20 @@ public class AssembleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         this.resourceComponent= DaggerResourceComponent.builder().resourceModule(new ResourceModule()).build();
+
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            @Override
+            public void uncaughtException(Thread t, Throwable e) {
+                FirebaseCrash.report(e);
+            }
+        });
     }
 
     public ResourceComponent getResourceComponent() {
         return resourceComponent;
     }
+
+
+
 
 }

@@ -42,3 +42,5 @@ captures/
 
 .idea/*
 !.idea/codeStyleSettings.xml
+
+google-services.json
