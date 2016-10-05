@@ -48,12 +48,18 @@
                     android:minHeight="?attr/actionBarSize"
                     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
                     />
+
         </android.support.design.widget.AppBarLayout>
-       <!-- <ProgressBar
+
+        <ProgressBar
+                android:id="@+id/background_loading"
+                android:layout_marginTop="-5.1dp"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:indeterminate="true"/>-->
+                android:indeterminate="true"
+                android:visibility="gone"
+                />
 
         <FrameLayout
                 android:layout_width="wrap_content"
@@ -73,8 +79,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
                     android:layout_margin="@dimen/fab_margin"
-                    android:src="@drawable/plus"
                     android:foreground="?attr/selectableItemBackground"
+                    android:src="@drawable/plus"
                     app:fabSize="normal"
                     />
 
@@ -83,7 +89,6 @@
 
 
     </LinearLayout>
-
 
 
 </android.support.design.widget.CoordinatorLayout>

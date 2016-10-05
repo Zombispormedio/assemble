@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
@@ -33,6 +34,8 @@ public class HomeController extends Controller {
 
     private boolean isChatsReady;
 
+    private boolean isBackgroundLoading;
+
     private ProfileSubscriber profileSubscriber;
 
     public HomeController(IHomeView ctx) {
@@ -48,6 +51,8 @@ public class HomeController extends Controller {
         profileSubscriber = new ProfileSubscriber();
 
         isProfileReady = isTeamsReady = isMeetingsReady = isChatsReady = false;
+
+        isBackgroundLoading=false;
     }
 
     @Override
@@ -94,12 +99,19 @@ public class HomeController extends Controller {
 
         if (profileResource.getProfile() == null) {
             loading();
-            addSubscriptions();
         } else {
             bindProfile();
+            backgroundLoading();
         }
 
+        addSubscriptions();
         loadAll();
+    }
+
+    private void backgroundLoading() {
+        uncheckAll();
+        ctx.showBackgroundLoading();
+        isBackgroundLoading=true;
     }
 
 
@@ -169,7 +181,12 @@ public class HomeController extends Controller {
 
     private void ready() {
         if (isReady()) {
-            ctx.hideProgressDialog();
+            if(isBackgroundLoading){
+                isBackgroundLoading=false;
+                ctx.hideBackgroundLoading();
+            }else{
+                ctx.hideProgressDialog();
+            }
             uncheckAll();
         }
     }
@@ -183,23 +200,27 @@ public class HomeController extends Controller {
     }
 
     private void readyProfile() {
+        Logger.d("profile");
         isProfileReady = true;
         bindProfile();
         ready();
     }
 
     private void readyTeams() {
+        Logger.d("teams");
         isTeamsReady = true;
         ready();
     }
 
 
     private void readyMeetings() {
+        Logger.d("meetings");
         isMeetingsReady = true;
         ready();
     }
 
     private void readyChats() {
+        Logger.d("chats");
         isChatsReady = true;
         ready();
     }

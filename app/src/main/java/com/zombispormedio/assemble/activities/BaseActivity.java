@@ -22,30 +22,24 @@ import io.realm.RealmConfiguration;
 
 public class BaseActivity extends AppCompatActivity implements IBaseView{
 
-    public static final String AUTH_PREFERENCES = "AuthPrefs";
 
-    private static final String PREFERENCES = "Prefs";
 
-    public SharedPreferences getAuthPreferences() {
-        return getSharedPreferences(AUTH_PREFERENCES, Context.MODE_PRIVATE);
-    }
+    public static final String PREFERENCES = "Prefs";
+    public static final String AUTH = "token";
+
+
     public SharedPreferences getPreferences() {
         return getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
     }
 
     public String getAuthToken() {
-        return getAuthPreferences().getString("token", "");
+        return getPreferences().getString(AUTH, "");
     }
 
     @Override
     public void setAuthToken(String token) {
 
-        SharedPreferences settings = getAuthPreferences();
-        SharedPreferences.Editor editor = settings.edit();
-
-        editor.putString("token", token);
-        editor.apply();
-
+        setPreference(AUTH, token);
         APIConfiguration.getInstance().setToken(token);
 
     }
@@ -68,10 +62,10 @@ public class BaseActivity extends AppCompatActivity implements IBaseView{
 
     @Override
     public void clearAuthToken() {
-        SharedPreferences settings = getAuthPreferences();
+        SharedPreferences settings = getPreferences();
         SharedPreferences.Editor editor = settings.edit();
 
-        editor.remove("token");
+        editor.remove(AUTH);
         editor.apply();
 
         APIConfiguration.getInstance().clearToken();

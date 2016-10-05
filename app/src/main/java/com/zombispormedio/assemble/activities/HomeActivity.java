@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
@@ -62,6 +63,9 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     @BindView(R.id.home_pager)
     ViewPager viewTabPager;
+
+    @BindView(R.id.background_loading)
+    ProgressBar backgroundProgressBar;
 
     private ProgressDialog progressDialog;
 
@@ -123,17 +127,17 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         viewTabPager.setAdapter(adapterTabPager);
 
         viewTabPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        int position=getState();
+        int position = getState();
 
-        viewTabPager.setCurrentItem(position>-1?position:1);
+        viewTabPager.setCurrentItem(position > -1 ? position : 1);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                int position=tab.getPosition();
+                int position = tab.getPosition();
                 viewTabPager.setCurrentItem(position);
-               setState(position);
+                setState(position);
             }
 
             @Override
@@ -148,13 +152,13 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         });
     }
 
-    private void setState(int s){
+    private void setState(int s) {
         setPreference(STATE, String.valueOf(s));
     }
 
-    private int getState(){
-        String value=getPreference(STATE);
-        return value.isEmpty()?-1:Integer.parseInt(value);
+    private int getState() {
+        String value = getPreference(STATE);
+        return value.isEmpty() ? -1 : Integer.parseInt(value);
     }
 
 
@@ -281,6 +285,16 @@ public class HomeActivity extends BaseActivity implements IHomeView {
                 .letter(letter)
                 .circle(true)
                 .build();
+    }
+
+    @Override
+    public void showBackgroundLoading() {
+        backgroundProgressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideBackgroundLoading() {
+        backgroundProgressBar.setVisibility(View.GONE);
     }
 
 

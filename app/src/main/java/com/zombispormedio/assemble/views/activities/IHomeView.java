@@ -22,6 +22,7 @@ public interface IHomeView extends IBaseView {
     void showProgressDialog();
 
     void showOverlay();
+
     void hideOverlay();
 
     void bindUsernameLabel(String username);
@@ -29,4 +30,8 @@ public interface IHomeView extends IBaseView {
     void bindEmailLabel(String email);
 
     void bindAvatar(String path, String letter);
+
+    void showBackgroundLoading();
+
+    void hideBackgroundLoading();
 }
