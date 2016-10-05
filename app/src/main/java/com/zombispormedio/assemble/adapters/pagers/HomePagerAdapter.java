@@ -15,6 +15,12 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
 
     private int numTabs;
 
+    public final static int TEAMS=0;
+
+    public final static int MEETINGS=1;
+
+    public final static int CHATS=2;
+
     public HomePagerAdapter(FragmentManager fm, int numTabs) {
         super(fm);
 
@@ -28,14 +34,14 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
         Fragment item = null;
 
         switch (position) {
-            case 0:
+            case TEAMS:
                 item = new TeamsFragment();
                 break;
-            case 1:
+            case MEETINGS:
                 item = new MeetingsFragment();
                 break;
 
-            case 2:
+            case CHATS:
                 item = new ChatsFragment();
                 break;
         }

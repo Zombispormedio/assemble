@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by Xavier Serrano on 04/10/2016.
  */
 
-public class MessageListAdapter extends BaseListAdapter<Message.Container, MessageHolder> {
+public class MessageListAdapter extends BaseListAdapter<Message, MessageHolder> {
 
 
     @Override
@@ -24,57 +24,31 @@ public class MessageListAdapter extends BaseListAdapter<Message.Container, Messa
     }
 
 
-    public void bindData(ArrayList<Message> data) {
-        ArrayList<Message.Container> containers = new ArrayList<>();
-
-        Message.Container container=null;
-        for(Message msg : data){
-            if(container==null){
-                container=new Message.Container(msg.sender);
-                containers.add(container);
-                container.addMessage(msg);
-            }else{
-                if(msg.sender.id==container.getSender().id){
-                    container.addMessage(msg);
-                }else{
-                    container=new Message.Container(msg.sender);
-                    containers.add(container);
-                    container.addMessage(msg);
-                }
-            }
-        }
-
-        setData(containers);
-    }
-
-
-    public Utils.IntPair addPending(Message message){
-        Utils.IntPairBuilder tupleBuilder=new Utils.IntPairBuilder();
-        int size=data.size();
-        int lastIndex=data.size()-1;
-        Message.Container last=data.get(lastIndex);
-
-        if(last.getSender().id==message.sender.id){
-            tupleBuilder.setFirst(lastIndex)
-                    .setSecond(last.getMessages().size());
-            last.addMessage(message);
-            notifyItemChanged(lastIndex);
+    @Override
+    public void onBindViewHolder(MessageHolder holder, int position) {
+        Message item=data.get(position);
+        if(position>0){
+            holder.bind(position, item, data.get(position-1));
         }else{
-            Message.Container container=new Message.Container(message.sender);
-            container.addMessage(message);
-            tupleBuilder.setFirst(size)
-                    .setSecond(0);
-            data.add(container);
-            notifyItemInserted(size);
+            holder.bind(position, item);
         }
+    }
 
-        return tupleBuilder.build();
+    public int addPending(Message message) {
+        int index = data.size();
+
+        data.add(message);
+
+        notifyItemInserted(index);
+
+        return index;
 
     }
 
-    public void checkMessage(Utils.IntPair tuple, Message message){
-        Message.Container container=data.get(tuple.first);
-        container.changeMessage(tuple.second, message);
-        notifyItemChanged(tuple.first);
+    public void checkMessage(int index, Message message) {
+
+        data.set(index, message);
+
+        notifyItemChanged(index);
     }
 }

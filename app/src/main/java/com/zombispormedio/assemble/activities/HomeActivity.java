@@ -24,6 +24,7 @@ import com.zombispormedio.assemble.controllers.HomeController;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IHomeView;
 
 import butterknife.BindView;
@@ -31,6 +32,8 @@ import butterknife.OnClick;
 import butterknife.OnTouch;
 
 public class HomeActivity extends BaseActivity implements IHomeView {
+
+    private final static String STATE = "state";
 
     private NavigationManager navigation;
 
@@ -120,13 +123,17 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         viewTabPager.setAdapter(adapterTabPager);
 
         viewTabPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-        viewTabPager.setCurrentItem(1);
+        int position=getState();
+
+        viewTabPager.setCurrentItem(position>-1?position:1);
 
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                viewTabPager.setCurrentItem(tab.getPosition());
+                int position=tab.getPosition();
+                viewTabPager.setCurrentItem(position);
+               setState(position);
             }
 
             @Override
@@ -139,6 +146,15 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
             }
         });
+    }
+
+    private void setState(int s){
+        setPreference(STATE, String.valueOf(s));
+    }
+
+    private int getState(){
+        String value=getPreference(STATE);
+        return value.isEmpty()?-1:Integer.parseInt(value);
     }
 
 

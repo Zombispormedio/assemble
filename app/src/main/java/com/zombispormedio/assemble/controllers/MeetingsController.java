@@ -42,9 +42,6 @@ public class MeetingsController extends Controller {
 
     private void setupMeetings() {
         bindMeetings();
-
-        meetingSubscription.load();
-
     }
 
     public void bindMeetings() {

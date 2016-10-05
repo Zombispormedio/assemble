@@ -61,4 +61,5 @@ public class BaseListAdapter<T, E extends AbstractHolder<T>> extends RecyclerVie
         notifyItemRemoved(index);
     }
 
+
 }

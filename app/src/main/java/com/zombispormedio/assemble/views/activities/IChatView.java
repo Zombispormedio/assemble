@@ -20,8 +20,8 @@ public interface IChatView extends IBaseView {
 
     String getMessageInputValue();
 
-    Utils.IntPair addPendingMessage(Message message);
+    int addPendingMessage(Message message);
 
-    void addMessage(Utils.IntPair tuple, Message message);
+    void addMessage(int index, Message message);
 
 }

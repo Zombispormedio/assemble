@@ -22,11 +22,13 @@ public class ChatResource extends ConceptResource<Chat> {
 
     private IChatService persistence;
 
+    private IStorageService<Message> storageMessage;
+
     @Inject
-    public ChatResource(IChatService persistence, IStorageService<Chat> storage) {
+    public ChatResource(IChatService persistence, IStorageService<Chat> storage, IStorageService<Message> storageMessage) {
         super(storage);
         this.persistence = persistence;
-
+        this.storageMessage=storageMessage;
     }
 
     public void getAll(IServiceHandler<ArrayList<Chat>, Error> handler){
@@ -70,6 +72,12 @@ public class ChatResource extends ConceptResource<Chat> {
             }
         });
     }
+
+    public Message getMessageById(int id){
+        return storageMessage.getByID(id);
+    }
+
+
 
 
 }

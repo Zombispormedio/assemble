@@ -42,14 +42,12 @@ public class TeamsController extends Controller {
 
     private void setupTeams() {
         bindTeams();
-        teamSubscription.load();
     }
 
 
     private void bindTeams() {
         ArrayList<Team> teams = teamResource.getAll();
         ctx.bindTeams(teams);
-
     }
 
 

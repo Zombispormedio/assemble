@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
@@ -60,8 +61,14 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
     private void setupMessages() {
         AndroidUtils.createListConfiguration(this, messagesList)
-                .itemAnimation(true)
+                .startAtEnd(true)
                 .configure();
+
+        RecyclerView.ItemAnimator animator = messagesList.getItemAnimator();
+        if (animator instanceof SimpleItemAnimator) {
+            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
+        }
+
         messageListAdapter=new MessageListAdapter();
 
         messagesList.setAdapter(messageListAdapter);
@@ -84,7 +91,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
     @Override
     public void bindMessages(ArrayList<Message> messages) {
-        messageListAdapter.bindData(messages);
+        messageListAdapter.setData(messages);
     }
 
 
@@ -97,14 +104,15 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
     @Override
-    public Utils.IntPair addPendingMessage(Message message) {
-        Utils.IntPair tuple=messageListAdapter.addPending(message);
-        return tuple;
+    public int addPendingMessage(Message message) {
+        int index=messageListAdapter.addPending(message);
+        messagesList.scrollToPosition(index);
+        return index;
     }
 
     @Override
-    public void addMessage(Utils.IntPair tuple, Message message) {
-        messageListAdapter.checkMessage(tuple, message);
+    public void addMessage(int index, Message message) {
+        messageListAdapter.checkMessage(index, message);
     }
 
     @OnClick(R.id.send_button)

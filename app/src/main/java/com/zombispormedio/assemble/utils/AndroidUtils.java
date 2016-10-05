@@ -189,6 +189,8 @@ public final class AndroidUtils {
 
         private boolean isGrid;
 
+        private boolean stackFromEnd;
+
         private int spanCount;
 
         private RecyclerView.ItemDecoration dividerItemDecoration;
@@ -208,6 +210,7 @@ public final class AndroidUtils {
             itemAnimator = null;
             isGrid = false;
             spanCount = 0;
+            stackFromEnd=false;
         }
 
         public ListConfiguration orientation(int orientation) {
@@ -242,6 +245,11 @@ public final class AndroidUtils {
 
         public ListConfiguration span(int s) {
             this.spanCount = s;
+            return this;
+        }
+
+        public ListConfiguration startAtEnd(boolean start) {
+            this.stackFromEnd=start;
             return this;
         }
 
@@ -293,7 +301,13 @@ public final class AndroidUtils {
                 layout = getGrid();
             } else {
                 layout = getLinear();
+                if(stackFromEnd){
+                    ((LinearLayoutManager) layout).setStackFromEnd(true);
+
+                }
             }
+
+
 
             list.setLayoutManager(layout);
 

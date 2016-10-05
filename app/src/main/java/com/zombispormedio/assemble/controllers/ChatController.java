@@ -40,8 +40,6 @@ public class ChatController extends Controller {
 
     private ChatSubscriber chatSubscriber;
 
-    private ArrayList<Utils.Pair<Integer, Integer>> pendingMessages;
-
     public ChatController(IChatView ctx, int chatID) {
         super(ctx);
         this.ctx=ctx;
@@ -56,8 +54,6 @@ public class ChatController extends Controller {
         chatSubscriber=new ChatSubscriber();
 
         chatSubscription.addSubscriber(chatSubscriber);
-
-        pendingMessages=new ArrayList<>();
 
     }
 
@@ -87,9 +83,7 @@ public class ChatController extends Controller {
 
         UserProfile profile=profileResource.getProfile();
 
-        final Utils.IntPair tuple=ctx.addPendingMessage(new Message(content, profile));
-
-        pendingMessages.add(tuple);
+        final int index=ctx.addPendingMessage(new Message(content, profile));
 
         chatResource.createMessage(chatID, message, new ServiceHandler<Message, Error>(){
             @Override
@@ -99,16 +93,12 @@ public class ChatController extends Controller {
 
             @Override
             public void onSuccess(Message result) {
-                ctx.addMessage(tuple, result);
-                removePending(tuple);
+                ctx.addMessage(index, chatResource.getMessageById(result.id));
             }
         });
 
     }
 
-    private void removePending(Utils.IntPair tuple){
-        pendingMessages.remove(tuple);
-    }
 
     private class ChatSubscriber extends Subscriber{
 

@@ -24,32 +24,6 @@ public class Message extends ContentMessage{
         this.sender = sender;
     }
 
-    public static class Container{
-        private Profile sender;
-
-        private ArrayList<ContentMessage> messages;
-
-        public Container(Profile sender) {
-            this.sender = sender;
-            messages=new ArrayList<>();
-        }
-
-        public void addMessage(ContentMessage message){
-            messages.add(message);
-        }
-
-        public void changeMessage(int index, ContentMessage message){
-            messages.set(index, message);
-        }
-
-        public Profile getSender() {
-            return sender;
-        }
-
-        public ArrayList<ContentMessage> getMessages() {
-            return messages;
-        }
-    }
 
 
 }

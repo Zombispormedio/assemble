@@ -24,8 +24,13 @@ public class BaseActivity extends AppCompatActivity implements IBaseView{
 
     public static final String AUTH_PREFERENCES = "AuthPrefs";
 
+    private static final String PREFERENCES = "Prefs";
+
     public SharedPreferences getAuthPreferences() {
         return getSharedPreferences(AUTH_PREFERENCES, Context.MODE_PRIVATE);
+    }
+    public SharedPreferences getPreferences() {
+        return getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
     }
 
     public String getAuthToken() {
@@ -44,6 +49,22 @@ public class BaseActivity extends AppCompatActivity implements IBaseView{
         APIConfiguration.getInstance().setToken(token);
 
     }
+
+    public void setPreference(String key, String value) {
+
+        SharedPreferences settings = getPreferences();
+        SharedPreferences.Editor editor = settings.edit();
+
+        editor.putString(key, value);
+        editor.apply();
+
+    }
+
+    public String getPreference(String key){
+        return getPreferences().getString(key, "");
+    }
+
+
 
     @Override
     public void clearAuthToken() {

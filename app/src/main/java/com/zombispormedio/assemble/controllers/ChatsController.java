@@ -44,15 +44,12 @@ public class ChatsController extends Controller {
     }
 
     private void setupChats() {
-
         bindChats();
-        chatSubscription.load();
     }
 
     public void bindChats() {
         ArrayList<Chat> chats = chatResource.getAll();
         ctx.bindChats(chats);
-
     }
 
 

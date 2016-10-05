@@ -18,6 +18,7 @@ import com.zombispormedio.assemble.services.storage.ChatStorageService;
 import com.zombispormedio.assemble.services.storage.FriendRequestStorageService;
 import com.zombispormedio.assemble.services.storage.FriendStorageService;
 import com.zombispormedio.assemble.services.storage.MeetingStorageService;
+import com.zombispormedio.assemble.services.storage.MessageStorageService;
 import com.zombispormedio.assemble.services.storage.ProfileStorageService;
 import com.zombispormedio.assemble.services.storage.TeamStorageService;
 
@@ -105,6 +106,12 @@ public class ResourceModule {
         return new ChatStorageService();
     }
 
+    @Provides
+    @Singleton
+    MessageStorageService provideMessageStorageService() {
+        return new MessageStorageService();
+    }
+
 
     @Provides
     @Singleton
@@ -145,7 +152,7 @@ public class ResourceModule {
     @Provides
     @Singleton
     ChatResource provideChatResource() {
-        return new ChatResource(new ChatAPIService(), new ChatStorageService());
+        return new ChatResource(provideChatAPIService(), provideChatStorageService(), provideMessageStorageService());
     }
 
 }
