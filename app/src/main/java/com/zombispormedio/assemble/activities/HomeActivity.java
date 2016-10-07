@@ -36,6 +36,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private final static String STATE = "state";
 
+    public final static String LOADED = "loaded";
+
     private NavigationManager navigation;
 
     @BindView(R.id.drawer_layout_home)
@@ -153,11 +155,11 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     }
 
     private void setState(int s) {
-        setPreference(STATE, String.valueOf(s));
+        getPreferencesManager().set(STATE, String.valueOf(s));
     }
 
     private int getState() {
-        String value = getPreference(STATE);
+        String value = getPreferencesManager().getString(STATE);
         return value.isEmpty() ? -1 : Integer.parseInt(value);
     }
 
@@ -295,6 +297,16 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     @Override
     public void hideBackgroundLoading() {
         backgroundProgressBar.setVisibility(View.GONE);
+    }
+
+    @Override
+    public boolean isLoaded() {
+        return getPreferencesManager().getInt(LOADED) == 1;
+    }
+
+    @Override
+    public void notifyLoaded() {
+        getPreferencesManager().set(LOADED, 1);
     }
 
 

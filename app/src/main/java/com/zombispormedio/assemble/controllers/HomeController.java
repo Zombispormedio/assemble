@@ -52,7 +52,7 @@ public class HomeController extends Controller {
 
         isProfileReady = isTeamsReady = isMeetingsReady = isChatsReady = false;
 
-        isBackgroundLoading=false;
+        isBackgroundLoading = false;
     }
 
     @Override
@@ -94,24 +94,29 @@ public class HomeController extends Controller {
 
 
     private void loadData() {
+        if (!ctx.isLoaded()) {
 
-        profileSubscription.addSubscriber(profileSubscriber);
+            profileSubscription.addSubscriber(profileSubscriber);
 
-        if (profileResource.getProfile() == null) {
-            loading();
-        } else {
+            if (profileResource.getProfile() == null) {
+                loading();
+            } else {
+                bindProfile();
+                backgroundLoading();
+            }
+
+            addSubscriptions();
+            loadAll();
+        }else{
             bindProfile();
-            backgroundLoading();
         }
 
-        addSubscriptions();
-        loadAll();
     }
 
     private void backgroundLoading() {
         uncheckAll();
         ctx.showBackgroundLoading();
-        isBackgroundLoading=true;
+        isBackgroundLoading = true;
     }
 
 
@@ -181,13 +186,14 @@ public class HomeController extends Controller {
 
     private void ready() {
         if (isReady()) {
-            if(isBackgroundLoading){
-                isBackgroundLoading=false;
+            if (isBackgroundLoading) {
+                isBackgroundLoading = false;
                 ctx.hideBackgroundLoading();
-            }else{
+            } else {
                 ctx.hideProgressDialog();
             }
             uncheckAll();
+            ctx.notifyLoaded();
         }
     }
 
@@ -200,27 +206,23 @@ public class HomeController extends Controller {
     }
 
     private void readyProfile() {
-        Logger.d("profile");
         isProfileReady = true;
         bindProfile();
         ready();
     }
 
     private void readyTeams() {
-        Logger.d("teams");
         isTeamsReady = true;
         ready();
     }
 
 
     private void readyMeetings() {
-        Logger.d("meetings");
         isMeetingsReady = true;
         ready();
     }
 
     private void readyChats() {
-        Logger.d("chats");
         isChatsReady = true;
         ready();
     }

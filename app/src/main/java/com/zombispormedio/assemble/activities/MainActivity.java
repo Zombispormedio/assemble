@@ -2,10 +2,7 @@ package com.zombispormedio.assemble.activities;
 
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-
-
 import android.view.Window;
-
 
 import com.zombispormedio.assemble.controllers.MainController;
 

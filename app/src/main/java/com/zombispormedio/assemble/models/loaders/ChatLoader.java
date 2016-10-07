@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.models.loaders;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
@@ -9,6 +10,11 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IChatService;
 import com.zombispormedio.assemble.services.storage.ChatStorageService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
+import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.utils.ResourceTask;
+
+import android.app.IntentService;
+import android.content.Intent;
 
 import java.util.ArrayList;
 
@@ -31,7 +37,7 @@ public class ChatLoader implements ILoader {
     public void retrieve(final SuccessHandler handler) {
         apiService.getAll(new ServiceHandler<ArrayList<Chat>, Error>() {
             @Override
-            public void onSuccess(ArrayList<Chat> result) {
+            public void onSuccess(final ArrayList<Chat> result) {
                 storageService.createOrUpdateOrDeleteAll(result);
                 storageService.addMessages(result);
                 handler.onSuccess();

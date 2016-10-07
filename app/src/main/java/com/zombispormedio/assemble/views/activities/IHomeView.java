@@ -34,4 +34,8 @@ public interface IHomeView extends IBaseView {
     void showBackgroundLoading();
 
     void hideBackgroundLoading();
+
+    boolean isLoaded();
+
+    void notifyLoaded();
 }
