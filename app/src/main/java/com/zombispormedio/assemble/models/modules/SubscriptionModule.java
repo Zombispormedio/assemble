@@ -1,8 +1,6 @@
 package com.zombispormedio.assemble.models.modules;
 
 
-import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.models.Profile;
 import com.zombispormedio.assemble.models.loaders.ChatLoader;
 import com.zombispormedio.assemble.models.loaders.FriendLoader;
 import com.zombispormedio.assemble.models.loaders.FriendRequestLoader;
@@ -17,18 +15,18 @@ import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
-import com.zombispormedio.assemble.services.api.ChatAPIService;
-import com.zombispormedio.assemble.services.api.FriendAPIService;
-import com.zombispormedio.assemble.services.api.MeetingAPIService;
-import com.zombispormedio.assemble.services.api.ProfileAPIService;
-import com.zombispormedio.assemble.services.api.TeamAPIService;
-import com.zombispormedio.assemble.services.storage.ChatStorageService;
-import com.zombispormedio.assemble.services.storage.FriendRequestStorageService;
-import com.zombispormedio.assemble.services.storage.FriendStorageService;
-import com.zombispormedio.assemble.services.storage.MeetingStorageService;
-import com.zombispormedio.assemble.services.storage.MessageStorageService;
-import com.zombispormedio.assemble.services.storage.ProfileStorageService;
-import com.zombispormedio.assemble.services.storage.TeamStorageService;
+import com.zombispormedio.assemble.models.services.api.ChatAPIService;
+import com.zombispormedio.assemble.models.services.api.FriendAPIService;
+import com.zombispormedio.assemble.models.services.api.MeetingAPIService;
+import com.zombispormedio.assemble.models.services.api.ProfileAPIService;
+import com.zombispormedio.assemble.models.services.api.TeamAPIService;
+import com.zombispormedio.assemble.models.services.storage.ChatStorageService;
+import com.zombispormedio.assemble.models.services.storage.FriendRequestStorageService;
+import com.zombispormedio.assemble.models.services.storage.FriendStorageService;
+import com.zombispormedio.assemble.models.services.storage.MeetingStorageService;
+import com.zombispormedio.assemble.models.services.storage.MessageStorageService;
+import com.zombispormedio.assemble.models.services.storage.ProfileStorageService;
+import com.zombispormedio.assemble.models.services.storage.TeamStorageService;
 
 import javax.inject.Singleton;
 

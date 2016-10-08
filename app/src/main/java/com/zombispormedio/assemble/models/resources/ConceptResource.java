@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.models.resources;
 
-import com.zombispormedio.assemble.services.storage.IStorageService;
+import com.zombispormedio.assemble.models.services.storage.IStorageService;
 
 import java.util.ArrayList;
 

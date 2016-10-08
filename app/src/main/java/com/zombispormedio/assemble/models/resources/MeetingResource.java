@@ -5,8 +5,8 @@ import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.editors.EditMeeting;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.services.interfaces.IMeetingService;
-import com.zombispormedio.assemble.services.storage.IStorageService;
+import com.zombispormedio.assemble.models.services.interfaces.IMeetingService;
+import com.zombispormedio.assemble.models.services.storage.IStorageService;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -84,7 +84,7 @@
     <string name="friend_rejected">Friend request rejected</string>
     <string name="removed_friend">Removed recipient</string>
     <string name="add_participants">Add participants</string>
-    <string name="selected_participants">%1$d of %2$d selected</string>
+    <string name="selected_participants">%1$d of %2$d participants</string>
     <string name="need_more_than_one_members">You need more than one member</string>
     <string name="add_name">Add name</string>
     <string name="write_the_name_here">Write the name here…</string>
@@ -105,11 +105,8 @@
     <string name="creating_meeting">We are creating your meeting. A moment, please…</string>
     <string name="untitled">Untitle</string>
     <string name="date_error_message">Change the initial hour to be before the end of the meeting.</string>
-    <string name="ok">Ok</string>
+    <string name="ok">OK</string>
     <string name="creating_chat">We are creating your chat. A moment, please…</string>
     <string name="type_your_message">Type your message&#8230;</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

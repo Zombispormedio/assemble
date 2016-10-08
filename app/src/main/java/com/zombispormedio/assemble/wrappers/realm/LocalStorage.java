@@ -1,8 +1,8 @@
 package com.zombispormedio.assemble.wrappers.realm;
 
 
-import com.zombispormedio.assemble.dao.IBaseDAO;
-import com.zombispormedio.assemble.dao.IDAOFactory;
+import com.zombispormedio.assemble.wrappers.realm.dao.IBaseDAO;
+import com.zombispormedio.assemble.wrappers.realm.dao.IDAOFactory;
 import com.zombispormedio.assemble.models.BaseModel;
 
 import java.util.ArrayList;

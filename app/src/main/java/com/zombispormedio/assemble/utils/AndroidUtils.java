@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.BottomSheetDialog;
@@ -178,7 +177,7 @@ public final class AndroidUtils {
 
         private RecyclerView list;
 
-        private int orientation;
+        private int orientationType;
 
         private boolean haveDivider;
 
@@ -202,7 +201,7 @@ public final class AndroidUtils {
         public ListConfiguration(Context ctx, RecyclerView list) {
             this.list = list;
             this.ctx = ctx;
-            orientation = LinearLayoutManager.VERTICAL;
+            orientationType = LinearLayoutManager.VERTICAL;
             haveDivider = false;
             dividerOrientation = LinearLayoutManager.VERTICAL;
             haveItemAnimation = false;
@@ -215,7 +214,7 @@ public final class AndroidUtils {
         }
 
         public ListConfiguration orientation(int orientation) {
-            this.orientation = orientation;
+            this.orientationType = orientation;
             return this;
         }
 
@@ -268,7 +267,7 @@ public final class AndroidUtils {
         }
 
         private LinearLayoutManager getLinearNoScroll() {
-            return new LinearLayoutManager(ctx, orientation, false) {
+            return new LinearLayoutManager(ctx, orientationType, false) {
                 @Override
                 public boolean canScrollVertically() {
                     return false;
@@ -277,11 +276,11 @@ public final class AndroidUtils {
         }
 
         private LinearLayoutManager getLinear() {
-            return haveScroll ? new LinearLayoutManager(ctx, orientation, false) : getLinearNoScroll();
+            return haveScroll ? new LinearLayoutManager(ctx, orientationType, false) : getLinearNoScroll();
         }
 
         private GridLayoutManager getGridNoScroll() {
-            return new GridLayoutManager(ctx, spanCount, orientation, false) {
+            return new GridLayoutManager(ctx, spanCount, orientationType, false) {
                 @Override
                 public boolean canScrollVertically() {
                     return false;
@@ -290,13 +289,13 @@ public final class AndroidUtils {
         }
 
         private GridLayoutManager getGrid() {
-            return haveScroll ? new GridLayoutManager(ctx, spanCount, orientation, false) : getGridNoScroll();
+            return haveScroll ? new GridLayoutManager(ctx, spanCount, orientationType, false) : getGridNoScroll();
         }
 
 
         public void configure() {
 
-            RecyclerView.LayoutManager layout = null;
+            RecyclerView.LayoutManager layout;
 
             if (isGrid) {
                 layout = getGrid();

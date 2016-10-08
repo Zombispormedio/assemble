@@ -1,10 +1,7 @@
 package com.zombispormedio.assemble.activities;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -14,7 +11,7 @@ import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.net.State;
-import com.zombispormedio.assemble.services.api.APIConfiguration;
+import com.zombispormedio.assemble.models.services.api.APIConfiguration;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.activities.IBaseView;

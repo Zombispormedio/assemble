@@ -38,7 +38,7 @@ public class Utils {
         return it_is;
     }
 
-    public static interface IConversion{
+    public interface IConversion{
         Object doIt(Object object);
 
     }
@@ -104,7 +104,7 @@ public class Utils {
 
                 for (Field field : recipientClass.getFields()) {
                     String name = field.getName();
-                    Field thisField = null;
+                    Field thisField;
                     try {
                         thisField = emissorClass.getField(name);
                         Object value = thisField.get(emissor);

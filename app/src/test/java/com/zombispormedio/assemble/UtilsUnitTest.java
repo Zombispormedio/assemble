@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble;
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.dao.UserProfileDAO;
+import com.zombispormedio.assemble.wrappers.realm.dao.UserProfileDAO;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.utils.Utils;
 

@@ -227,17 +227,14 @@ public class ImageUtils {
         private void buildNormal() {
             Picasso preConfig = Picasso.with(_ctx);
 
-            RequestCreator config = null;
-            if (_url != null) {
-                config = preConfig.load(_url);
-            }
+            RequestCreator config = preConfig.load(_url);
 
             if (_drawable != null) {
                 config = config.placeholder(_drawable);
             }
 
             if (_letter != null) {
-                Drawable letterDrawable = null;
+                Drawable letterDrawable;
                 if (isCircle) {
                     letterDrawable = getRoundLetterImage(_letter);
                 } else {

@@ -7,9 +7,8 @@ import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.editors.EditChat;
 import com.zombispormedio.assemble.models.editors.EditMessage;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.services.interfaces.IChatService;
-import com.zombispormedio.assemble.services.storage.ChatStorageService;
-import com.zombispormedio.assemble.services.storage.IStorageService;
+import com.zombispormedio.assemble.models.services.interfaces.IChatService;
+import com.zombispormedio.assemble.models.services.storage.IStorageService;
 
 import java.util.ArrayList;
 

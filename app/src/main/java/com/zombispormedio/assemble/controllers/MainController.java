@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
-import com.zombispormedio.assemble.services.api.APIConfiguration;
+import com.zombispormedio.assemble.models.services.api.APIConfiguration;
 import com.zombispormedio.assemble.views.activities.IMainView;
 
 /**

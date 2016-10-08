@@ -5,8 +5,8 @@ import com.zombispormedio.assemble.models.editors.EditTeam;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Team;
-import com.zombispormedio.assemble.services.interfaces.ITeamService;
-import com.zombispormedio.assemble.services.storage.IStorageService;
+import com.zombispormedio.assemble.models.services.interfaces.ITeamService;
+import com.zombispormedio.assemble.models.services.storage.IStorageService;
 
 import java.io.File;
 import java.util.ArrayList;

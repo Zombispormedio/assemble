@@ -1,21 +1,11 @@
 package com.zombispormedio.assemble.models.loaders;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.handlers.SuccessHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.services.interfaces.IChatService;
-import com.zombispormedio.assemble.services.storage.ChatStorageService;
-import com.zombispormedio.assemble.services.storage.IStorageService;
-import com.zombispormedio.assemble.services.storage.MessageStorageService;
-import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.utils.ResourceTask;
-
-import android.app.IntentService;
-import android.content.Intent;
+import com.zombispormedio.assemble.models.services.interfaces.IChatService;
+import com.zombispormedio.assemble.models.services.storage.ChatStorageService;
 
 import java.util.ArrayList;
 

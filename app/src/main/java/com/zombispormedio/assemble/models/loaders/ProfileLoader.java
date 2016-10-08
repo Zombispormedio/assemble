@@ -4,10 +4,8 @@ import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.handlers.SuccessHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.services.interfaces.IProfileService;
-import com.zombispormedio.assemble.services.storage.IStorageService;
-
-import android.util.Log;
+import com.zombispormedio.assemble.models.services.interfaces.IProfileService;
+import com.zombispormedio.assemble.models.services.storage.IStorageService;
 
 /**
  * Created by Xavier Serrano on 13/09/2016.

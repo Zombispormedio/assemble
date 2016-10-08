@@ -6,8 +6,8 @@ import com.zombispormedio.assemble.models.editors.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.subscriptions.Subscription;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.services.interfaces.IProfileService;
-import com.zombispormedio.assemble.services.storage.IStorageService;
+import com.zombispormedio.assemble.models.services.interfaces.IProfileService;
+import com.zombispormedio.assemble.models.services.storage.IStorageService;
 
 import java.io.File;
 
