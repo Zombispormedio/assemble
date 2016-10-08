@@ -32,6 +32,8 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
     public RealmList<MessageDAO> messages;
 
 
+
+
     @Override
     public Chat toModel() {
         int messageLen=messages.size();
@@ -54,30 +56,33 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
         this.created_at = model.created_at;
         bindUser(model.sender);
         bindFriend(model.recipient);
-
+        bindMessages(model.messages);
         return this;
+    }
+
+    private void bindMessages(Message[] msgs) {
+
+
     }
 
     public void addMessages(ArrayList<MessageDAO> msgs) {
         messages.clear();
-        for (MessageDAO msg : msgs) {
-            messages.add(msg);
-        }
+        messages.addAll(msgs);
     }
 
     public void addMessage(MessageDAO msg) {
 
-        int index=searchMessage(msg.id);
+        int index=searchIndexMessage(msg.id);
 
         if(index==-1){
             messages.add(msg);
         }else{
-            messages.add(msg);
+            messages.set(index, msg);
         }
 
     }
 
-    public int searchMessage(int id){
+    public int searchIndexMessage(int id){
         int index=-1;
         int len=messages.size();
         int i=0;
@@ -90,6 +95,21 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
             i++;
         }
         return index;
+    }
+
+    public MessageDAO searchMessage(int id){
+        MessageDAO message=null;
+        int len=messages.size();
+        int i=0;
+        while(message==null&& i< len){
+            MessageDAO messageDAO=messages.get(i);
+            if(messageDAO.id==id){
+                message=messageDAO;
+            }
+
+            i++;
+        }
+        return message;
     }
 
 
