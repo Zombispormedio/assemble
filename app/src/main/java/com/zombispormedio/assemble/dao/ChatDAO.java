@@ -29,24 +29,18 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
     public FriendProfileDAO recipient;
 
-    public RealmList<MessageDAO> messages;
-
+    public MessageDAO last_message;
 
 
 
     @Override
     public Chat toModel() {
-        int messageLen=messages.size();
+        MessageStorageService messageStorageService=new MessageStorageService();
 
-        RealmResults<MessageDAO> sortedMessages=messages.sort("created_at");
+        Message[] messages=messageStorageService.getSortedMessagesByChat(id);
 
-        Message[] m = new Message[messages.size()];
-
-       for(int i=0; i<messageLen; i++){
-           m[i]=sortedMessages.get(i).toModel();
-       }
-
-        return new Chat(id, created_at, sender.toModel(), recipient.toModel(), m);
+        return new Chat(id, created_at, sender.toModel(), recipient.toModel(), messages,
+                last_message==null?null:last_message.toModel());
     }
 
     @Override
@@ -54,76 +48,33 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
         this.id = model.id;
         this.created_at = model.created_at;
-        bindUser(model.sender);
-        bindFriend(model.recipient);
-        bindMessages(model.messages);
+        bindUser(model.owner_id);
+        bindFriend(model.friend_id);
+        bindMessages(model.last_message);
         return this;
     }
 
-    private void bindMessages(Message[] msgs) {
-
-
-    }
-
-    public void addMessages(ArrayList<MessageDAO> msgs) {
-        messages.clear();
-        messages.addAll(msgs);
-    }
-
-    public void addMessage(MessageDAO msg) {
-
-        int index=searchIndexMessage(msg.id);
-
-        if(index==-1){
-            messages.add(msg);
-        }else{
-            messages.set(index, msg);
+    private void bindMessages(Message msg) {
+        if(msg!=null){
+            MessageStorageService service=new MessageStorageService();
+            this.last_message=service.getStorage()
+                    .getById(msg.id);
         }
 
-    }
 
-    public int searchIndexMessage(int id){
-        int index=-1;
-        int len=messages.size();
-        int i=0;
-        while(index==-1&& i< len){
-            MessageDAO messageDAO=messages.get(i);
-            if(messageDAO.id==id){
-                index=i;
-            }
-
-            i++;
-        }
-        return index;
-    }
-
-    public MessageDAO searchMessage(int id){
-        MessageDAO message=null;
-        int len=messages.size();
-        int i=0;
-        while(message==null&& i< len){
-            MessageDAO messageDAO=messages.get(i);
-            if(messageDAO.id==id){
-                message=messageDAO;
-            }
-
-            i++;
-        }
-        return message;
     }
 
 
-
-    private void bindUser(UserProfile profile) {
+    private void bindUser(int id) {
         ProfileStorageService service = new ProfileStorageService();
         this.sender = service.getStorage()
-                .getById(profile.id);
+                .getById(id);
     }
 
-    private void bindFriend(FriendProfile profile) {
+    private void bindFriend(int id) {
         FriendStorageService service = new FriendStorageService();
         this.recipient = service.getStorage()
-                .getById(profile.id);
+                .getById(id);
     }
 
     @Override

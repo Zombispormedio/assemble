@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.services.interfaces.IChatService;
 import com.zombispormedio.assemble.services.storage.ChatStorageService;
 import com.zombispormedio.assemble.services.storage.IStorageService;
+import com.zombispormedio.assemble.services.storage.MessageStorageService;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.ResourceTask;
 
@@ -27,8 +28,7 @@ public class ChatLoader implements ILoader {
     private ChatStorageService storageService;
 
 
-    public ChatLoader(IChatService apiService,
-            ChatStorageService storageService) {
+    public ChatLoader(IChatService apiService, ChatStorageService storageService) {
         this.apiService = apiService;
         this.storageService = storageService;
     }
@@ -39,7 +39,6 @@ public class ChatLoader implements ILoader {
             @Override
             public void onSuccess(final ArrayList<Chat> result) {
                 storageService.createOrUpdateOrDeleteAll(result);
-                storageService.addMessages(result);
                 handler.onSuccess();
             }
 
@@ -54,5 +53,7 @@ public class ChatLoader implements ILoader {
             }
         });
     }
+
+
 
 }

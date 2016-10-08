@@ -33,6 +33,8 @@ public class MessageDAO extends RealmObject implements IBaseDAO<Message> {
 
     public boolean is_delivered;
 
+    public int chat_id;
+
 
     @Override
     public Message toModel() {
@@ -55,19 +57,20 @@ public class MessageDAO extends RealmObject implements IBaseDAO<Message> {
 
         return new Message(id, content,
                 is_read, is_sent, is_delivered,created_at,
-                sender, recipient);
+                sender, recipient, chat_id);
     }
 
     @Override
     public IBaseDAO fromModel(Message model) {
         this.id=model.id;
         this.created_at=model.created_at;
-        this.sender_id=model.sender.id;
-        this.recipient_id=model.recipient.id;
+        this.sender_id=model.sender_id;
+        this.recipient_id=model.recipient_id;
         this.content=model.content;
         this.is_read=model.is_read;
         this.is_sent=model.is_sent;
         this.is_delivered=model.is_delivered;
+        this.chat_id=model.chat_id;
         return this;
     }
 

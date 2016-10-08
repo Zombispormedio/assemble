@@ -45,6 +45,13 @@ public class ChatAPIService implements IChatService {
     }
 
     @Override
+    public void getMessages(IServiceHandler<ArrayList<Message>, Error> handler) {
+        api.RestWithAuth("/chats/messages")
+                .handler(DeferUtils.deferMessages(handler))
+                .get();
+    }
+
+    @Override
     public void sendMessage(int id, EditMessage message, IServiceHandler<Message, Error> handler) {
         api.RestWithAuth("/chat/:id/message")
                 .params("id", id)

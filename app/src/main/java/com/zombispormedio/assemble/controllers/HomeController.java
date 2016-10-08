@@ -2,12 +2,14 @@ package com.zombispormedio.assemble.controllers;
 
 
 import com.orhanobut.logger.Logger;
+import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
+import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
@@ -20,6 +22,8 @@ import com.zombispormedio.assemble.views.activities.IHomeView;
  */
 public class HomeController extends Controller {
 
+
+
     private IHomeView ctx;
 
     private final ProfileResource profileResource;
@@ -30,9 +34,16 @@ public class HomeController extends Controller {
 
     private boolean isProfileReady;
 
+    private boolean isFriendsReady;
+
+    private boolean isFriendRequestsReady;
+
     private boolean isMeetingsReady;
 
     private boolean isChatsReady;
+
+    private boolean isMessagesReady;
+
 
     private boolean isBackgroundLoading;
 
@@ -50,7 +61,7 @@ public class HomeController extends Controller {
 
         profileSubscriber = new ProfileSubscriber();
 
-        isProfileReady = isTeamsReady = isMeetingsReady = isChatsReady = false;
+        uncheckAll();
 
         isBackgroundLoading = false;
     }
@@ -105,8 +116,8 @@ public class HomeController extends Controller {
                 backgroundLoading();
             }
 
-            addSubscriptions();
-            loadAll();
+
+            loadAllAndaddSubscriptions();
         }else{
             bindProfile();
         }
@@ -121,7 +132,7 @@ public class HomeController extends Controller {
 
 
     private boolean isReady() {
-        return isProfileReady && isTeamsReady && isMeetingsReady && isChatsReady;
+        return isProfileReady &&isFriendsReady && isFriendRequestsReady && isTeamsReady && isMeetingsReady && isChatsReady && isMessagesReady;
     }
 
     private void loading() {
@@ -130,47 +141,70 @@ public class HomeController extends Controller {
     }
 
 
-    private void addSubscriptions() {
+    private void  loadAllAndaddSubscriptions() {
+
+        profileSubscription.load();
 
         final FriendSubscription friendSubscription = getResourceComponent().provideFriendSubscription();
+        final FriendRequestSubscription friendRequestSubscription = getResourceComponent().provideFriendRequestSubscription();
+        final TeamSubscription teamSubscription = getResourceComponent().provideTeamSubscription();
+        final MeetingSubscription meetingSubscription = getResourceComponent().provideMeetingSubscription();
+        final ChatSubscription chatSubscription = getResourceComponent().provideChatSubscription();
+        final MessageSubscription messageSubscription = getResourceComponent().provideMessageSubscription();
+
+        profileSubscription.addSubscriber(new Subscriber(){
+            @Override
+            public void notifyChange() {
+                profileSubscription.removeSubscriber(this.getID());
+                readyProfile();
+                friendSubscription.load();
+            }
+        });
 
         friendSubscription.addSubscriber(new Subscriber() {
             @Override
             public void notifyChange() {
                 friendSubscription.removeSubscriber(this.getID());
+                readyFriends();
+                friendRequestSubscription.load();
             }
         });
-
-        final FriendRequestSubscription friendRequestSubscription = getResourceComponent().provideFriendRequestSubscription();
 
         friendRequestSubscription.addSubscriber(new Subscriber() {
             @Override
             public void notifyChange() {
                 friendRequestSubscription.removeSubscriber(this.getID());
+                readyFriendRequests();
+                teamSubscription.load();
             }
         });
-
-        final TeamSubscription teamSubscription = getResourceComponent().provideTeamSubscription();
 
         teamSubscription.addSubscriber(new Subscriber() {
             @Override
             public void notifyChange() {
                 teamSubscription.removeSubscriber(this.getID());
                 readyTeams();
+                meetingSubscription.load();
             }
         });
-
-        final MeetingSubscription meetingSubscription = getResourceComponent().provideMeetingSubscription();
 
         meetingSubscription.addSubscriber(new Subscriber() {
             @Override
             public void notifyChange() {
                 meetingSubscription.removeSubscriber(this.getID());
                 readyMeetings();
+                messageSubscription.load();
             }
         });
 
-        final ChatSubscription chatSubscription = getResourceComponent().provideChatSubscription();
+        messageSubscription.addSubscriber(new Subscriber() {
+            @Override
+            public void notifyChange() {
+                messageSubscription.removeSubscriber(this.getID());
+                readyMessages();
+                chatSubscription.load();
+            }
+        });
 
         chatSubscription.addSubscriber(new Subscriber() {
             @Override
@@ -179,7 +213,6 @@ public class HomeController extends Controller {
                 readyChats();
             }
         });
-
 
     }
 
@@ -199,15 +232,22 @@ public class HomeController extends Controller {
 
 
     private void uncheckAll() {
-        isProfileReady = false;
-        isTeamsReady = false;
-        isMeetingsReady = false;
-        isChatsReady = false;
+        isProfileReady = isFriendsReady=isFriendRequestsReady=isTeamsReady = isMeetingsReady = isChatsReady = isMessagesReady=false;
     }
 
     private void readyProfile() {
         isProfileReady = true;
         bindProfile();
+        ready();
+    }
+
+    private void readyFriends() {
+        isFriendsReady = true;
+        ready();
+    }
+
+    private void readyFriendRequests() {
+        isFriendRequestsReady = true;
         ready();
     }
 
@@ -224,6 +264,11 @@ public class HomeController extends Controller {
 
     private void readyChats() {
         isChatsReady = true;
+        ready();
+    }
+
+    private void readyMessages() {
+        isMessagesReady = true;
         ready();
     }
 

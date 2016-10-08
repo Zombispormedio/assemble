@@ -15,17 +15,23 @@ public class Chat extends BaseModel{
 
     public Message[] messages;
 
+    public int owner_id;
+
+    public int friend_id;
+
+    public Message last_message;
+
     public Chat() {
         super(0);
-        created_at="";
     }
 
     public Chat(int id, String created_at, UserProfile sender, FriendProfile recipient,
-            Message[] messages) {
+            Message[] messages, Message last_message) {
         super(id);
         this.created_at = created_at;
         this.sender = sender;
         this.recipient = recipient;
         this.messages = messages;
+        this.last_message = last_message;
     }
 }

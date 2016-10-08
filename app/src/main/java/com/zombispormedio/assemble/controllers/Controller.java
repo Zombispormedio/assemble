@@ -26,6 +26,7 @@ public class Controller extends AbstractController {
                 component.provideFriendRequestSubscription(),
                 component.provideTeamSubscription(),
                 component.provideMeetingSubscription(),
+                component.provideMessageSubscription(),
                 component.provideChatSubscription()
         };
 

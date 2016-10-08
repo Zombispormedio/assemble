@@ -28,17 +28,17 @@ public class ChatResource extends ConceptResource<Chat> {
     public ChatResource(IChatService persistence, IStorageService<Chat> storage, IStorageService<Message> storageMessage) {
         super(storage);
         this.persistence = persistence;
-        this.storageMessage=storageMessage;
+        this.storageMessage = storageMessage;
     }
 
-    public void getAll(IServiceHandler<ArrayList<Chat>, Error> handler){
+    public void getAll(IServiceHandler<ArrayList<Chat>, Error> handler) {
         persistence.getAll(handler);
     }
 
 
-    public void create(EditChat chat, final IServiceHandler<Chat, Error> handler){
+    public void create(EditChat chat, final IServiceHandler<Chat, Error> handler) {
 
-        persistence.create(chat, new ServiceHandler<Chat, Error>(){
+        persistence.create(chat, new ServiceHandler<Chat, Error>() {
             @Override
             public void onError(Error error) {
                 handler.onError(error);
@@ -53,13 +53,13 @@ public class ChatResource extends ConceptResource<Chat> {
 
     }
 
-    public Chat getById(int id){
+    public Chat getById(int id) {
         return storage.getByID(id);
     }
 
 
-    public void createMessage(final int id, EditMessage message, final IServiceHandler<Message, Error> handler){
-        persistence.sendMessage(id, message, new ServiceHandler<Message, Error>(){
+    public void createMessage(final int id, EditMessage message, final IServiceHandler<Message, Error> handler) {
+        persistence.sendMessage(id, message, new ServiceHandler<Message, Error>() {
             @Override
             public void onError(Error error) {
                 handler.onError(error);
@@ -67,17 +67,15 @@ public class ChatResource extends ConceptResource<Chat> {
 
             @Override
             public void onSuccess(Message result) {
-                ((ChatStorageService) storage).addMessage(id, result);
+                storageMessage.create(result);
                 handler.onSuccess(result);
             }
         });
     }
 
-    public Message getMessageById(int id){
+    public Message getMessageById(int id) {
         return storageMessage.getByID(id);
     }
-
-
 
 
 }

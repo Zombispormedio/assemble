@@ -20,6 +20,8 @@ public interface IChatService {
 
     void getMessages(int id, IServiceHandler<ArrayList<Message>, Error> handler);
 
+    void getMessages(IServiceHandler<ArrayList<Message>, Error> handler);
+
     void sendMessage(int id, EditMessage message, IServiceHandler<Message, Error> handler);
 
 }

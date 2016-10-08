@@ -1,17 +1,20 @@
 package com.zombispormedio.assemble.models.modules;
 
 
+import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.Profile;
 import com.zombispormedio.assemble.models.loaders.ChatLoader;
 import com.zombispormedio.assemble.models.loaders.FriendLoader;
 import com.zombispormedio.assemble.models.loaders.FriendRequestLoader;
 import com.zombispormedio.assemble.models.loaders.MeetingLoader;
+import com.zombispormedio.assemble.models.loaders.MessageLoader;
 import com.zombispormedio.assemble.models.loaders.ProfileLoader;
 import com.zombispormedio.assemble.models.loaders.TeamLoader;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
+import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 import com.zombispormedio.assemble.services.api.ChatAPIService;
@@ -23,6 +26,7 @@ import com.zombispormedio.assemble.services.storage.ChatStorageService;
 import com.zombispormedio.assemble.services.storage.FriendRequestStorageService;
 import com.zombispormedio.assemble.services.storage.FriendStorageService;
 import com.zombispormedio.assemble.services.storage.MeetingStorageService;
+import com.zombispormedio.assemble.services.storage.MessageStorageService;
 import com.zombispormedio.assemble.services.storage.ProfileStorageService;
 import com.zombispormedio.assemble.services.storage.TeamStorageService;
 
@@ -73,6 +77,13 @@ public class SubscriptionModule {
         return new ChatLoader(new ChatAPIService(), new ChatStorageService());
     }
 
+
+    @Provides
+    @Singleton
+    MessageLoader provideMessageLoader() {
+        return new MessageLoader(new ChatAPIService(), new MessageStorageService());
+    }
+
     @Provides
     @Singleton
     ProfileSubscription provideProfileSubscription() {
@@ -109,6 +120,9 @@ public class SubscriptionModule {
         return new  ChatSubscription(provideChatLoader());
     }
 
-
-
+    @Provides
+    @Singleton
+    MessageSubscription provideMessageSubscription() {
+        return new  MessageSubscription(provideMessageLoader());
+    }
 }

@@ -4,8 +4,10 @@ import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
+import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 
 import com.zombispormedio.assemble.views.fragments.IChatsView;
@@ -25,6 +27,10 @@ public class ChatsController extends Controller {
 
     private ChatSubscriber chatSubscriber;
 
+    private MessageSubscription messageSubscription;
+
+    private MessageSubscriber messageSubscriber;
+
     private boolean refreshing;
 
     public ChatsController(IChatsView ctx) {
@@ -33,8 +39,12 @@ public class ChatsController extends Controller {
         chatResource = getResourceComponent().provideChatResource();
 
         chatSubscription = getResourceComponent().provideChatSubscription();
+        messageSubscription=getResourceComponent().provideMessageSubscription();
         chatSubscriber = new ChatSubscriber();
         chatSubscription.addSubscriber(chatSubscriber);
+        messageSubscriber=new MessageSubscriber();
+        messageSubscription.addSubscriber(messageSubscriber);
+
         refreshing = false;
     }
 
@@ -59,7 +69,7 @@ public class ChatsController extends Controller {
 
     public void onRefresh() {
         refreshing = true;
-        chatSubscription.load();
+        messageSubscription.load();
     }
 
     private class ChatSubscriber extends Subscriber {
@@ -67,6 +77,18 @@ public class ChatsController extends Controller {
         public void notifyChange() {
             bindChats();
             finishRefresh();
+        }
+
+        @Override
+        public void notifyFail() {
+            finishRefresh();
+        }
+    }
+
+    private class MessageSubscriber extends Subscriber {
+        @Override
+        public void notifyChange() {
+            chatSubscription.load();
         }
 
         @Override
@@ -85,5 +107,6 @@ public class ChatsController extends Controller {
     @Override
     public void onDestroy() {
         chatSubscription.removeSubscriber(chatSubscriber);
+        messageSubscription.removeSubscriber(messageSubscriber);
     }
 }
