@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.utils;
 
+import com.orhanobut.logger.Logger;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -82,24 +84,67 @@ public class DateUtils {
         return outDate;
     }
 
+    public static boolean isToday(String date){
+        boolean is=false;
+
+        try {
+            Calendar cal=parse(date);
+
+            is=cal.get(Calendar.YEAR)==Now.YEAR() && cal.get(Calendar.MONTH)==Now.YEAR() && cal.get(Calendar.DAY_OF_MONTH)==Now.DAY();
+
+        } catch (ParseException e) {
+            Logger.d(e.getMessage());
+        }
+
+        return is;
+    }
+
+    public static boolean isYesterday(String date){
+        boolean is=false;
+
+        try {
+            Calendar cal=parse(date);
+
+            is=cal.get(Calendar.YEAR)==Now.YEAR() && cal.get(Calendar.MONTH)==Now.YEAR() && cal.get(Calendar.DAY_OF_MONTH)==Now.DAY()-1;
+
+        } catch (ParseException e) {
+            Logger.d(e.getMessage());
+        }
+
+        return is;
+    }
+
+
+
+
     public static class Now {
 
         private static Calendar Cal() {
             return Calendar.getInstance();
         }
 
-        public static int YEAR = Cal().get(Calendar.YEAR);
+        public static int YEAR(){
+            return Cal().get(Calendar.YEAR);
+        }
 
-        public static int MONTH = Cal().get(Calendar.MONTH);
+        public static int MONTH(){
+          return   Cal().get(Calendar.MONTH);
+        };
 
-        public static int DAY= Cal().get(Calendar.DAY_OF_MONTH);
+        public static int DAY(){
+           return Cal().get(Calendar.DAY_OF_MONTH);
+        }
 
-        public static  int HOUR=Cal().get(Calendar.HOUR_OF_DAY);
+        public static  int HOUR(){
+            return Cal().get(Calendar.HOUR_OF_DAY);
+        }
 
-        public static int MINUTES=Cal().get(Calendar.MINUTE);
+        public static int MINUTES(){
+            return Cal().get(Calendar.MINUTE);
+        }
 
         public static String toDateString(){
-          return  DateUtils.toString(YEAR, MONTH, DAY, HOUR, MINUTES);
+          return  DateUtils.toString(YEAR(), MONTH(), DAY(), HOUR(), MINUTES());
         }
     }
 
@@ -120,11 +165,11 @@ public class DateUtils {
         }
 
         public DateBuilder() {
-            this.year = DateUtils.Now.YEAR;
-            this.month = DateUtils.Now.MONTH;
-            this.day = DateUtils.Now.DAY;
-            this.hour = DateUtils.Now.HOUR;
-            this.minutes = DateUtils.Now.MINUTES;
+            this.year = DateUtils.Now.YEAR();
+            this.month = DateUtils.Now.MONTH();
+            this.day = DateUtils.Now.DAY();
+            this.hour = DateUtils.Now.HOUR();
+            this.minutes = DateUtils.Now.MINUTES();
         }
 
         public DateBuilder setYear(int year) {

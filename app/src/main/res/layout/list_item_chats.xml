@@ -8,7 +8,7 @@
         android:background="?android:attr/selectableItemBackground">
 
     <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             >
@@ -46,8 +46,34 @@
                     android:textStyle="bold"
                     />
 
+            <TextView
+                    android:id="@+id/last_message_label"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/example_string"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    />
         </LinearLayout>
 
+        <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                >
+            <TextView
+                    android:id="@+id/date_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="top|right"
+                    android:text="@string/simple_hour"
+                    android:textSize="16sp"
+                    android:textStyle="normal"
+                    android:layout_marginRight="10dp"
+                    />
+        </FrameLayout>
+
     </LinearLayout>
+
+
 
 </LinearLayout>

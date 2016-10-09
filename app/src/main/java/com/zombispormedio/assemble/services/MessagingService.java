@@ -3,21 +3,22 @@ package com.zombispormedio.assemble.services;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-import com.zombispormedio.assemble.views.IApplicationView;
+import com.orhanobut.logger.Logger;
+import com.zombispormedio.assemble.AssembleApplication;
 
 
 public class MessagingService extends FirebaseMessagingService {
 
-    private IApplicationView ctx;
+    private AssembleApplication ctx;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        ctx=(IApplicationView)getApplication();
+        ctx= (AssembleApplication) getApplication();
     }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
-
+        Logger.d(remoteMessage.getNotification().getBody());
     }
 }
