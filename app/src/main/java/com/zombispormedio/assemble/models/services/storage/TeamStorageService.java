@@ -13,5 +13,4 @@ public class TeamStorageService extends StorageService<TeamDAO, Team> {
          super(new LocalStorage<TeamDAO, Team>(TeamDAO.class, new TeamDAO.Factory()));
     }
 
-
 }

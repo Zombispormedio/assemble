@@ -79,44 +79,38 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
     private void bindData(Meeting itemData) {
 
-        String meetingName=itemData.name;
+        String meetingName = itemData.name;
 
         nameLabel.setText(meetingName);
         frameView.setBackgroundColor(Utils.getColorByString(meetingName));
 
-        try {
-            String format=itemView.getContext().getString(R.string.simple_date_with_hours);
-            String date= DateUtils.format(format, itemData.start_at);
-            dateLabel.setText(date);
-        } catch (ParseException e) {
-            Logger.d(e.getMessage());
-        }
+        String format = itemView.getContext().getString(R.string.simple_date_with_hours);
+        String date = DateUtils.format(format, itemData.start_at);
+        dateLabel.setText(date);
 
-
-        if(Utils.presenceOf(itemData.large_image_url)){
+        if (Utils.presenceOf(itemData.large_image_url)) {
             new ImageUtils.ImageBuilder(itemView.getContext(), meetingImage)
                     .url(itemData.large_image_url)
                     .build();
-        }else{
+        } else {
             meetingImage.setVisibility(View.INVISIBLE);
         }
 
-        String teamName=itemData.team.name;
+        String teamName = itemData.team.name;
 
         teamLabel.setText(teamName);
 
-        ImageUtils.ImageBuilder teamImageBuilder= new ImageUtils.ImageBuilder(itemView.getContext(), teamImage)
+        ImageUtils.ImageBuilder teamImageBuilder = new ImageUtils.ImageBuilder(itemView.getContext(), teamImage)
                 .letter(StringUtils.firstLetter(teamName))
                 .circle(true);
 
-        String teamImageUrl=itemData.team.medium_image_url;
+        String teamImageUrl = itemData.team.medium_image_url;
 
-        if(Utils.presenceOf(teamImageUrl)){
+        if (Utils.presenceOf(teamImageUrl)) {
             teamImageBuilder.url(teamImageUrl);
         }
 
         teamImageBuilder.build();
-
 
 
     }

@@ -1,13 +1,14 @@
 package com.zombispormedio.assemble.utils;
 
-import com.orhanobut.logger.Logger;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
+
 import java.util.Locale;
+
 
 /**
  * Created by Xavier Serrano on 23/08/2016.
@@ -20,18 +21,10 @@ public class DateUtils {
 
     public final static String SIMPLE_SLASH_FORMAT_WITH_HOUR = "dd/MM/yyyy HH:mm";
 
-    public static String format(String format, String inDate) throws ParseException {
-        DateFormat inFormat = new SimpleDateFormat(DEFAULT_INPUT_FORMAT, Locale.ENGLISH);
-        Date outDate = inFormat.parse(inDate);
-        DateFormat outFormat = new SimpleDateFormat(format, Locale.getDefault());
-        return outFormat.format(outDate);
-    }
-
-    public static String format(String inFormatStr, String outFormatStr, String inDate) throws ParseException {
-        DateFormat inFormat = new SimpleDateFormat(inFormatStr, Locale.ENGLISH);
-        Date outDate = inFormat.parse(inDate);
-        DateFormat outFormat = new SimpleDateFormat(outFormatStr, Locale.getDefault());
-        return outFormat.format(outDate);
+    public static String format(String format, String inDate) {
+        DateTime d = ISODateTimeFormat.dateTime().parseDateTime(inDate);
+        DateTimeFormatter formatter = DateTimeFormat.forPattern(format).withLocale(Locale.getDefault());
+        return d.toString(formatter);
     }
 
     public static long appendYearsToNow(int operator) {
@@ -40,7 +33,7 @@ public class DateUtils {
         return date.getTimeInMillis();
     }
 
-    public static String toString(int year, int month, int day) {
+    public static String toISOString(int year, int month, int day) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
@@ -51,12 +44,12 @@ public class DateUtils {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
 
-        DateFormat formatUtility = new SimpleDateFormat(DEFAULT_INPUT_FORMAT, Locale.ENGLISH);
+        DateTimeFormatter format = ISODateTimeFormat.dateTime();
 
-        return formatUtility.format(cal.getTime());
+        return format.print(cal.getTimeInMillis());
     }
 
-    public static String toString(int year, int month, int day, int hour, int minutes) {
+    public static String toISOString(int year, int month, int day, int hour, int minutes) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
@@ -67,93 +60,91 @@ public class DateUtils {
         cal.set(Calendar.SECOND, 0);
         cal.set(Calendar.MILLISECOND, 0);
 
-        DateFormat formatUtility = new SimpleDateFormat(DEFAULT_INPUT_FORMAT, Locale.ENGLISH);
+        DateTimeFormatter format = ISODateTimeFormat.dateTime();
 
-        return formatUtility.format(cal.getTime());
+        return format.print(cal.getTimeInMillis());
     }
 
-    public static Date parse(String format, String inDate) throws ParseException {
-        DateFormat inFormat = new SimpleDateFormat(format, Locale.ENGLISH);
-        return inFormat.parse(inDate);
-    }
-
-    public static Calendar parse(String inDate) throws ParseException {
-        DateFormat inFormat = new SimpleDateFormat(DEFAULT_INPUT_FORMAT, Locale.ENGLISH);
+    public static Calendar parse(String inDate) {
+        DateTime d = ISODateTimeFormat.dateTime().parseDateTime(inDate);
         Calendar outDate = Calendar.getInstance();
-        outDate.setTime(inFormat.parse(inDate));
+        outDate.setTimeInMillis(d.getMillis());
         return outDate;
     }
 
-    public static boolean isToday(String date){
-        boolean is=false;
+    public static boolean isToday(String date) {
+        boolean is;
 
-        try {
-            Calendar cal=parse(date);
+        Calendar cal = parse(date);
 
-            is=cal.get(Calendar.YEAR)==Now.YEAR() && cal.get(Calendar.MONTH)==Now.YEAR() && cal.get(Calendar.DAY_OF_MONTH)==Now.DAY();
-
-        } catch (ParseException e) {
-            Logger.d(e.getMessage());
-        }
+        is = cal.get(Calendar.YEAR) == Now.YEAR() && cal.get(Calendar.MONTH) == Now.MONTH()
+                && cal.get(Calendar.DAY_OF_MONTH) == Now.DAY();
 
         return is;
     }
 
-    public static boolean isYesterday(String date){
-        boolean is=false;
+    public static boolean isYesterday(String date) {
+        boolean is;
 
-        try {
-            Calendar cal=parse(date);
+        Calendar cal = parse(date);
 
-            is=cal.get(Calendar.YEAR)==Now.YEAR() && cal.get(Calendar.MONTH)==Now.YEAR() && cal.get(Calendar.DAY_OF_MONTH)==Now.DAY()-1;
-
-        } catch (ParseException e) {
-            Logger.d(e.getMessage());
-        }
+        is = cal.get(Calendar.YEAR) == Now.YEAR() && cal.get(Calendar.MONTH) == Now.MONTH() &&
+                cal.get(Calendar.DAY_OF_YEAR) == getYesterday().get(Calendar.DAY_OF_YEAR);
 
         return is;
     }
 
 
-
-
-    public static class Now {
+    private static class Now {
 
         private static Calendar Cal() {
             return Calendar.getInstance();
         }
 
-        public static int YEAR(){
+        static int YEAR() {
             return Cal().get(Calendar.YEAR);
         }
 
-        public static int MONTH(){
-          return   Cal().get(Calendar.MONTH);
-        };
-
-        public static int DAY(){
-           return Cal().get(Calendar.DAY_OF_MONTH);
+        static int MONTH() {
+            return Cal().get(Calendar.MONTH);
         }
 
-        public static  int HOUR(){
+        static int DAY() {
+            return Cal().get(Calendar.DAY_OF_MONTH);
+        }
+
+        static int HOUR() {
             return Cal().get(Calendar.HOUR_OF_DAY);
         }
 
-        public static int MINUTES(){
+        static int MINUTES() {
             return Cal().get(Calendar.MINUTE);
         }
 
-        public static String toDateString(){
-          return  DateUtils.toString(YEAR(), MONTH(), DAY(), HOUR(), MINUTES());
+        public static String toDateString() {
+            return DateUtils.toISOString(YEAR(), MONTH(), DAY(), HOUR(), MINUTES());
         }
     }
 
 
-    public static class DateBuilder{
+    public static Calendar getYesterday() {
+        Calendar c1 = Calendar.getInstance();
+        c1.add(Calendar.DAY_OF_YEAR, -1);
+
+        return c1;
+    }
+
+
+    public static class DateBuilder {
+
         private int year;
+
         private int month;
+
         private int day;
+
         private int hour;
+
         private int minutes;
 
         public DateBuilder(int year, int month, int day, int hour, int minutes) {
@@ -188,16 +179,16 @@ public class DateUtils {
         }
 
         public DateBuilder setHour(int hour) {
-            this.hour = hour%24;
+            this.hour = hour % 24;
             return this;
         }
 
         public DateBuilder setMinutes(int minutes) {
-            this.minutes = minutes%60;
+            this.minutes = minutes % 60;
             return this;
         }
 
-        public int compare(DateBuilder compared){
+        public int compare(DateBuilder compared) {
             return this.toCalendar().compareTo(compared.toCalendar());
         }
 
@@ -221,7 +212,7 @@ public class DateUtils {
             return minutes;
         }
 
-        public Calendar toCalendar(){
+        public Calendar toCalendar() {
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.YEAR, year);
             cal.set(Calendar.MONTH, month);
@@ -234,63 +225,64 @@ public class DateUtils {
             return cal;
         }
 
-        public String build(){
-            return DateUtils.toString(year, month, day, hour, minutes);
+        public String build() {
+            return DateUtils.toISOString(year, month, day, hour, minutes);
         }
     }
 
 
-    public static class DateError{
+    public static class DateError {
+
         private int code;
 
         public DateError() {
             this.code = 0;
         }
 
-        public DateError year(){
-            code=Calendar.YEAR;
+        public DateError year() {
+            code = Calendar.YEAR;
             return this;
         }
 
-        public DateError month(){
-            code=Calendar.MONTH;
+        public DateError month() {
+            code = Calendar.MONTH;
             return this;
         }
 
-        public DateError day(){
-            code=Calendar.DAY_OF_MONTH;
+        public DateError day() {
+            code = Calendar.DAY_OF_MONTH;
             return this;
         }
 
-        public DateError hour(){
-            code=Calendar.HOUR_OF_DAY;
+        public DateError hour() {
+            code = Calendar.HOUR_OF_DAY;
             return this;
         }
 
-        public DateError minute(){
-            code=Calendar.MINUTE;
+        public DateError minute() {
+            code = Calendar.MINUTE;
             return this;
         }
 
-        public boolean isYear(){
-           return code==Calendar.YEAR;
+        public boolean isYear() {
+            return code == Calendar.YEAR;
         }
 
 
-        public boolean isMonth(){
-            return code==Calendar.MONTH;
+        public boolean isMonth() {
+            return code == Calendar.MONTH;
         }
 
-        public boolean isDay(){
-            return code==Calendar.DAY_OF_MONTH;
+        public boolean isDay() {
+            return code == Calendar.DAY_OF_MONTH;
         }
 
-        public boolean isHour(){
-            return code==Calendar.HOUR_OF_DAY;
+        public boolean isHour() {
+            return code == Calendar.HOUR_OF_DAY;
         }
 
-        public boolean isMinute(){
-            return code==Calendar.MINUTE;
+        public boolean isMinute() {
+            return code == Calendar.MINUTE;
         }
     }
 

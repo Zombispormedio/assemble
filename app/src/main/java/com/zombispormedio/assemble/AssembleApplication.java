@@ -9,6 +9,8 @@ import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.models.modules.ResourceModule;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 
+import net.danlew.android.joda.JodaTimeAndroid;
+
 import android.app.Application;
 import android.util.Log;
 
@@ -27,6 +29,7 @@ public class AssembleApplication extends Application {
         this.resourceComponent= DaggerResourceComponent.builder().resourceModule(new ResourceModule()).build();
         PreferencesManager preferencesManager = new PreferencesManager(this);
         preferencesManager.remove(HomeActivity.LOADED);
+        JodaTimeAndroid.init(this);
 
     }
 

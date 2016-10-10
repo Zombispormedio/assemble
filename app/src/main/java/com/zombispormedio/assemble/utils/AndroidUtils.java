@@ -307,8 +307,6 @@ public final class AndroidUtils {
                 }
             }
 
-
-
             list.setLayoutManager(layout);
 
             if (haveItemAnimation) {
@@ -332,15 +330,8 @@ public final class AndroidUtils {
     }
 
     public static String formatDate(Context ctx, int strID, String date){
-        String formated="";
         String format=ctx.getString(strID);
-        try {
-            formated= DateUtils.format(format, date);
-        } catch (ParseException e) {
-            Logger.d(e.getMessage());
-        }
-
-        return formated;
+        return DateUtils.format(format, date);
     }
 
 

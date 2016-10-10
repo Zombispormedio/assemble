@@ -23,8 +23,6 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
     public FriendProfileDAO recipient;
 
-    public MessageDAO last_message;
-
 
 
     @Override
@@ -33,8 +31,7 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
         Message[] messages=messageStorageService.getSortedMessagesByChat(id);
 
-        return new Chat(id, created_at, sender.toModel(), recipient.toModel(), messages,
-                last_message==null?null:last_message.toModel());
+        return new Chat(id, created_at, sender.toModel(), recipient.toModel(), messages);
     }
 
     @Override
@@ -44,18 +41,7 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
         this.created_at = model.created_at;
         bindUser(model.owner_id);
         bindFriend(model.friend_id);
-        bindMessages(model.last_message);
         return this;
-    }
-
-    private void bindMessages(Message msg) {
-        if(msg!=null){
-            MessageStorageService service=new MessageStorageService();
-            this.last_message=service.getStorage()
-                    .getById(msg.id);
-        }
-
-
     }
 
 

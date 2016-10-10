@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.ParseException;
+import java.util.Calendar;
 import java.util.Date;
 
 import butterknife.BindView;
@@ -77,7 +78,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
         String recipientName = recipient.username;
         nameLabel.setText(recipientName);
 
-        bindLastMessage(itemData.last_message);
+        bindLastMessage(itemData.messages);
 
         new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
                 .url(recipient.large_avatar_url)
@@ -86,36 +87,34 @@ public class ChatHolder extends AbstractHolder<Chat> {
                 .build();
     }
 
-    private void bindLastMessage(Message last) {
-        String content="";
+    private void bindLastMessage(Message[] messages) {
+        String content = "";
         String formatDate = "";
 
-        if(last!=null){
-            content=last.content;
+        if (messages != null) {
+            if (messages.length > 0) {
+                Message last = messages[0];
 
-            if(content.length()>50){
-                content=content.substring(0,50)+"…";
-            }
+                content = last.content;
+                if (content.length() > 50) {
+                    content = content.substring(0, 50) + "…";
+                }
 
-            String date = last.created_at;
-            Context ctx = itemView.getContext();
+                String date = last.created_at;
+                Context ctx = itemView.getContext();
 
-            try {
                 if (DateUtils.isToday(date)) {
-
-                    formatDate = DateUtils.format( ctx.getString(R.string.simple_hour), date);
-
+                    formatDate = DateUtils.format(ctx.getString(R.string.simple_hour), date);
                 } else {
                     if (DateUtils.isYesterday(date)) {
-                        formatDate=ctx.getString(R.string.yesterday);
+                        formatDate = ctx.getString(R.string.yesterday);
                     } else {
                         formatDate = DateUtils.format(ctx.getString(R.string.slash_date), date);
                     }
                 }
 
-            } catch (ParseException e) {
-                Logger.d(e.getMessage());
             }
+
         }
 
         lastMessage.setText(content);
