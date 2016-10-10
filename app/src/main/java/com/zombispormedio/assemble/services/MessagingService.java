@@ -9,12 +9,10 @@ import com.zombispormedio.assemble.AssembleApplication;
 
 public class MessagingService extends FirebaseMessagingService {
 
-    private AssembleApplication ctx;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        ctx= (AssembleApplication) getApplication();
     }
 
     @Override

@@ -10,12 +10,10 @@ import com.zombispormedio.assemble.views.IApplicationView;
 
 public class InstanceIDService extends FirebaseInstanceIdService {
 
-    private IApplicationView ctx;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        ctx=(IApplicationView)getApplication();
     }
 
 

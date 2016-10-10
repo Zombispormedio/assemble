@@ -91,10 +91,14 @@ public class ChatHolder extends AbstractHolder<Chat> {
 
         if (messages != null) {
             if (messages.length > 0) {
+                for(Message m : messages){
+                    Logger.d(m.content);
+                }
+
                 Message last = messages[messages.length-1];
                 content = last.content;
                 if (content.length() > 50) {
-                    content = content.substring(0, 50) + "…";
+                    content = content.substring(0, 30) + "…";
                 }
 
                 String date = last.created_at;
