@@ -3,13 +3,8 @@ package com.zombispormedio.assemble.adapters.lists;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.MessageHolder;
 import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.models.Profile;
-import com.zombispormedio.assemble.utils.Utils;
-
-import android.support.v4.app.FragmentManager;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 04/10/2016.

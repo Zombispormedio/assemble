@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.utils;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.SuccessHandler;
 import com.zombispormedio.assemble.handlers.WorkerHandler;
 

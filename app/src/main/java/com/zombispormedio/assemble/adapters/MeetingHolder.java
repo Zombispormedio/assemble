@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.adapters;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Meeting;
@@ -15,8 +14,6 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.text.ParseException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

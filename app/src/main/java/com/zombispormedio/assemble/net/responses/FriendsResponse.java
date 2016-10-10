@@ -4,8 +4,6 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.net.Error;
 
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by Xavier Serrano on 25/08/2016.

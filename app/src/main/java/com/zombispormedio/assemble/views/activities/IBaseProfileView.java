@@ -13,6 +13,6 @@ public interface IBaseProfileView extends IBaseView {
 
     void setBio(String bio);
 
-    void setBirthDate(String birth) throws ParseException;
+    void setBirthDate(String birth);
 
 }

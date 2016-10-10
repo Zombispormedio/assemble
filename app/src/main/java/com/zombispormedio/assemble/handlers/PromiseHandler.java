@@ -5,7 +5,6 @@ import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.responses.AbstractResponse;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 13/09/2016.

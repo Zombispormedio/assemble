@@ -89,7 +89,7 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
-    public void setBirthDate(String birth) throws ParseException {
+    public void setBirthDate(String birth){
         String format= DateUtils.format(getString(R.string.simple_date), birth);
         birthdateInput.setText(format);
     }

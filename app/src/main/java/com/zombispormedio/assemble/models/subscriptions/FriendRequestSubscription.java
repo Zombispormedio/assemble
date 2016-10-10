@@ -1,7 +1,5 @@
 package com.zombispormedio.assemble.models.subscriptions;
 
-import com.zombispormedio.assemble.handlers.ISuccessHandler;
-import com.zombispormedio.assemble.handlers.SuccessHandler;
 import com.zombispormedio.assemble.models.loaders.FriendRequestLoader;
 
 import javax.inject.Inject;

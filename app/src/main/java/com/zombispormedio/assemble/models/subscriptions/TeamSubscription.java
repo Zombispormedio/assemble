@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.models.subscriptions;
 
-import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.models.loaders.TeamLoader;
 
 import javax.inject.Inject;

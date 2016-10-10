@@ -88,7 +88,7 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
                     break;
             }
 
-        } catch (IOException | JSONException e) {
+        } catch (IOException e) {
             Logger.d(e);
         }
 

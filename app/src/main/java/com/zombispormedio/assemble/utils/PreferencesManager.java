@@ -1,7 +1,5 @@
 package com.zombispormedio.assemble.utils;
 
-import com.zombispormedio.assemble.models.ContentMessage;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 

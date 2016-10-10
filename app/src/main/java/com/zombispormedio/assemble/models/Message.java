@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.models;
 
-import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 03/10/2016.

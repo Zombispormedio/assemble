@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.models;
 
-import io.realm.RealmModel;
 
 /**
  * Created by Xavier Serrano on 30/07/2016.

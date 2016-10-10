@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.adapters;
 
+
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
@@ -10,16 +11,12 @@ import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 
-import org.w3c.dom.Text;
+
 
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.text.ParseException;
-import java.util.Calendar;
-import java.util.Date;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -91,10 +88,10 @@ public class ChatHolder extends AbstractHolder<Chat> {
         String content = "";
         String formatDate = "";
 
+
         if (messages != null) {
             if (messages.length > 0) {
-                Message last = messages[0];
-
+                Message last = messages[messages.length-1];
                 content = last.content;
                 if (content.length() > 50) {
                     content = content.substring(0, 50) + "…";

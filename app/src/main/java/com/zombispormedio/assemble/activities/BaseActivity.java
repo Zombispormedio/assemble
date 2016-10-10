@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
-import com.zombispormedio.assemble.net.State;
+import com.zombispormedio.assemble.net.ConnectionState;
 import com.zombispormedio.assemble.models.services.api.APIConfiguration;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.PreferencesManager;
@@ -77,18 +77,6 @@ public class BaseActivity extends AppCompatActivity implements IBaseView{
 
     protected void bindActivity(Activity target){
         ButterKnife.bind(target);
-        RealmConfiguration realmConfiguration= new RealmConfiguration.Builder(target)
-                .deleteRealmIfMigrationNeeded()
-                .build();
-
-        Realm.setDefaultConfiguration(realmConfiguration);
-
-        LocalStorage.Configuration
-                .getInstance()
-                .setDatabase(Realm.getDefaultInstance());
-
-        State.getInstance().setContext(this);
-
     }
 
     @Override

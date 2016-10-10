@@ -92,13 +92,8 @@ public class UpdateProfileController extends Controller {
     }
 
     public void updateBirthdate(String birthdate) {
-        try {
-            editor.setBirthDate(birthdate);
-            ctx.setBirthDate(birthdate);
-        } catch (ParseException e) {
-            Logger.d(e.getMessage());
-        }
-
+        editor.setBirthDate(birthdate);
+        ctx.setBirthDate(birthdate);
     }
 
     public void bindEditor() {

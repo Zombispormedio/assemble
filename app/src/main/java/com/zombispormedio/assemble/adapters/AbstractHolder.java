@@ -1,7 +1,5 @@
 package com.zombispormedio.assemble.adapters;
 
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;

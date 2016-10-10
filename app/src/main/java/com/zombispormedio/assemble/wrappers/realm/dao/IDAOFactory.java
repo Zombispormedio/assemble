@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.wrappers.realm.dao;
 
-import com.zombispormedio.assemble.models.BaseModel;
 
 import io.realm.RealmObject;
 

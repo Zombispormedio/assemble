@@ -1,8 +1,6 @@
 package com.zombispormedio.assemble.views.activities;
 
 import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.views.activities.IBaseView;
 
 import java.util.ArrayList;
 

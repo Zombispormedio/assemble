@@ -1,7 +1,5 @@
 package com.zombispormedio.assemble.models.loaders;
 
-import com.zombispormedio.assemble.handlers.IPromiseHandler;
-import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.SuccessHandler;
 
 /**

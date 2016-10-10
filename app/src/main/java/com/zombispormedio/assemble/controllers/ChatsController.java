@@ -1,10 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
@@ -49,15 +46,11 @@ public class ChatsController extends Controller {
     }
 
     @Override
-    public void onCreate() {
-        setupChats();
-    }
-
-    private void setupChats() {
+    public void onStart() {
         bindChats();
     }
 
-    public void bindChats() {
+    private void bindChats() {
         ArrayList<Chat> chats = chatResource.getAll();
         ctx.bindChats(chats);
     }

@@ -25,8 +25,6 @@ import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.views.activities.IBaseProfileView;
 
-import java.text.ParseException;
-
 
 /**
  * Created by Xavier Serrano on 26/06/2016.

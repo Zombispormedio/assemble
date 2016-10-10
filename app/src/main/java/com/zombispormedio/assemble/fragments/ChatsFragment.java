@@ -57,11 +57,13 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
         setupChats();
 
         setupRefresh();
-
-        ctrl.onCreate();
     }
 
-
+    @Override
+    public void onStart() {
+        super.onStart();
+        ctrl.onStart();
+    }
 
     private void setupChats() {
         chatsListFactory = new ChatsListAdapter.Factory();

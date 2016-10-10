@@ -1,14 +1,12 @@
 package com.zombispormedio.assemble.net;
 
 import com.zombispormedio.assemble.models.Auth;
-import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.editors.EditChat;
 import com.zombispormedio.assemble.models.editors.EditMeeting;
 import com.zombispormedio.assemble.models.editors.EditMessage;
 import com.zombispormedio.assemble.models.editors.EditProfile;
 import com.zombispormedio.assemble.models.editors.EditTeam;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.net.responses.AbstractResponse;
 import com.zombispormedio.assemble.net.responses.ChatResponse;
 import com.zombispormedio.assemble.net.responses.ChatsResponse;
 import com.zombispormedio.assemble.net.responses.DefaultResponse;

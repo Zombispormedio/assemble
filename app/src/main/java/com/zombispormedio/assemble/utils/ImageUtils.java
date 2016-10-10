@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Transformation;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
-import com.zombispormedio.assemble.net.State;
+import com.zombispormedio.assemble.net.ConnectionState;
 
 import java.io.File;
 
@@ -249,7 +249,7 @@ public class ImageUtils {
             }
 
             if (config != null) {
-                if (State.getInstance().isConnected() && handler != null) {
+                if (ConnectionState.getInstance().isConnected() && handler != null) {
 
                     config.into(_imageView, new Callback() {
                         @Override

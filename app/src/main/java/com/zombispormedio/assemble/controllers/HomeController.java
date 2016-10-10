@@ -1,8 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;

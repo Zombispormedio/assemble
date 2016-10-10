@@ -44,7 +44,7 @@ public class RestWrapper {
     }
 
 
-    public String get() throws IOException, JSONException {
+    public String get() throws IOException {
         Request req = builder.get()
                 .build();
 
@@ -53,7 +53,7 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String post(String obj) throws IOException, JSONException {
+    public String post(String obj) throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, obj);
 
@@ -66,7 +66,7 @@ public class RestWrapper {
     }
 
 
-    public String post() throws IOException, JSONException {
+    public String post() throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, "{}");
 
@@ -78,7 +78,7 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String post(FileBody file) throws IOException, JSONException {
+    public String post(FileBody file) throws IOException {
         MediaType mediaType = MediaType.parse(file.getMediaType());
         RequestBody reqBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -94,7 +94,7 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String put(String obj) throws IOException, JSONException {
+    public String put(String obj) throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, obj);
 
@@ -106,7 +106,7 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String put(FileBody file) throws IOException, JSONException {
+    public String put(FileBody file) throws IOException{
         MediaType mediaType = MediaType.parse(file.getMediaType());
         RequestBody reqBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -122,7 +122,7 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String patch(String obj) throws IOException, JSONException {
+    public String patch(String obj) throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, obj);
 
@@ -134,7 +134,7 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String patch(FileBody file) throws IOException, JSONException {
+    public String patch(FileBody file) throws IOException {
         MediaType mediaType = MediaType.parse(file.getMediaType());
         RequestBody reqBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -150,7 +150,7 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String delete() throws IOException, JSONException {
+    public String delete() throws IOException {
         Request req = builder.delete()
                 .build();
 

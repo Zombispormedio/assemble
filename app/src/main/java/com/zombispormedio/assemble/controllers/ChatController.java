@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.FriendProfile;
@@ -9,18 +8,15 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.editors.EditMessage;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
-import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.StringUtils;
-import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import javax.security.auth.login.LoginException;
 
 /**
  * Created by Xavier Serrano on 02/10/2016.

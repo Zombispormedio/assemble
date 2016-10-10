@@ -145,7 +145,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     @Override
-    public void setBirthDate(String birth) throws ParseException {
+    public void setBirthDate(String birth) {
         if (Utils.presenceOf(birth)) {
             String birthDate = DateUtils.format(getString(R.string.born_at), birth);
             birthDateText.setText(birthDate);

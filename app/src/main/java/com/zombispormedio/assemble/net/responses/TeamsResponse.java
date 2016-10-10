@@ -4,8 +4,6 @@ package com.zombispormedio.assemble.net.responses;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.net.Error;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Created by Xavier Serrano on 04/09/2016.

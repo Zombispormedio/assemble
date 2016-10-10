@@ -2,7 +2,6 @@ package com.zombispormedio.assemble.services;
 
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.views.IApplicationView;
 
 /**

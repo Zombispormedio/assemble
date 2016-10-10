@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.net.responses;
 
 import com.zombispormedio.assemble.models.BaseModel;
-import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.net.Error;
 
 import java.util.ArrayList;

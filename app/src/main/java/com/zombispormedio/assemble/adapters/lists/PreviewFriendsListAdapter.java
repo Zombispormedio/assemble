@@ -7,7 +7,6 @@ import com.zombispormedio.assemble.models.FriendProfile;
 
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 29/09/2016.

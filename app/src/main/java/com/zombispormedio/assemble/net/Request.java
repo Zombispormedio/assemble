@@ -80,7 +80,7 @@ public class Request {
     }
 
     public void start() {
-        if(State.getInstance().isConnected()){
+        if(ConnectionState.getInstance().isConnected()){
             new AsyncRequest().execute(this);
         }else {
             handler.onNotConnected();
