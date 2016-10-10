@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.wrappers.realm.dao.IBaseDAO;
 import com.zombispormedio.assemble.models.BaseModel;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
+import com.zombispormedio.assemble.wrappers.realm.dao.IDAOFactory;
 
 import java.util.ArrayList;
 

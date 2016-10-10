@@ -16,6 +16,10 @@ public class MessageStorageService  extends StorageService<MessageDAO, Message> 
         super(new LocalStorage<MessageDAO, Message>(MessageDAO.class, new MessageDAO.Factory()));
     }
 
+    public MessageStorageService(
+            LocalStorage<MessageDAO, Message> storage) {
+        super(storage);
+    }
 
     public Message[] getSortedMessagesByChat(int chatId){
         ArrayList<MessageDAO> daos=storage.findByAndSort("chat_id", chatId, "created_at");

@@ -1,8 +1,6 @@
 package com.zombispormedio.assemble.models.components;
 
-import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.models.modules.ResourceModule;
-import com.zombispormedio.assemble.models.modules.SubscriptionModule;
+import com.zombispormedio.assemble.models.modules.PersistenceModule;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.FriendRequestResource;
 import com.zombispormedio.assemble.models.resources.FriendResource;
@@ -26,7 +24,7 @@ import dagger.Component;
  * Created by Xavier Serrano on 18/09/2016.
  */
 @Singleton
-@Component(modules = {ResourceModule.class, SubscriptionModule.class})
+@Component(modules = {PersistenceModule.class})
 public interface ResourceComponent {
 
     UserResource provideUserResource();

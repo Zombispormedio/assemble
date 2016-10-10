@@ -14,4 +14,10 @@ public class FriendRequestStorageService extends StorageService<FriendRequestPro
       super(new LocalStorage<FriendRequestProfileDAO, FriendRequestProfile>(FriendRequestProfileDAO.class,
               new FriendRequestProfileDAO.Factory()));
     }
+
+
+    public FriendRequestStorageService(
+            LocalStorage<FriendRequestProfileDAO, FriendRequestProfile> storage) {
+        super(storage);
+    }
 }

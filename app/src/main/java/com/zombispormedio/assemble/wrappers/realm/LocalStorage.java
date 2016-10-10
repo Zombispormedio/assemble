@@ -25,7 +25,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
 
     public LocalStorage(Class<D> opClass, IDAOFactory<D> factory) {
         this.opClass = opClass;
-        this.factory=factory;
+        this.factory = factory;
         database = Configuration.getInstance().getDatabase();
     }
 
@@ -35,16 +35,17 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         database.beginTransaction();
 
         ((IBaseDAO<M>) object).fromModel(params);
+
         database.copyToRealm(object);
 
         database.commitTransaction();
     }
 
-    public void begin(){
+    public void begin() {
         database.beginTransaction();
     }
 
-    public void commit(){
+    public void commit() {
         database.commitTransaction();
     }
 
@@ -55,11 +56,11 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         database.commitTransaction();
     }
 
-    public void updateAll(ArrayList<M> params){
+    public void updateAll(ArrayList<M> params) {
         database.beginTransaction();
-        ArrayList<D> objects=new ArrayList<>();
-        for(int i=0; i<params.size();i++){
-            D object= factory.create();
+        ArrayList<D> objects = new ArrayList<>();
+        for (int i = 0; i < params.size(); i++) {
+            D object = factory.create();
             ((IBaseDAO<M>) object).fromModel(params.get(i));
             objects.add(object);
         }
@@ -75,7 +76,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         return query.findFirst();
     }
 
-    public ArrayList<D> findByAndSort(String keyId, int valueId, String sortKey){
+    public ArrayList<D> findByAndSort(String keyId, int valueId, String sortKey) {
         RealmQuery<D> query = getQuery();
 
         query.equalTo(keyId, valueId);
@@ -97,30 +98,29 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         return toArrayList(results);
     }
 
-    public void deleteByID(int id){
+    public void deleteByID(int id) {
         RealmQuery<D> query = getQuery();
 
         query.equalTo("id", id);
 
-        D object =query.findFirst();
+        D object = query.findFirst();
 
-
-        if(object!=null){
+        if (object != null) {
             database.beginTransaction();
             object.deleteFromRealm();
             database.commitTransaction();
         }
     }
 
-    public void delete(D object){
-        if(object!=null){
+    public void delete(D object) {
+        if (object != null) {
             database.beginTransaction();
             object.deleteFromRealm();
             database.commitTransaction();
         }
     }
 
-    public ArrayList<D> in(String key, Integer[] values){
+    public ArrayList<D> in(String key, Integer[] values) {
         RealmQuery<D> query = getQuery().in(key, values);
 
         RealmResults<D> results = query.findAll();
@@ -128,7 +128,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         return toArrayList(results);
     }
 
-    public ArrayList<D> notIn(String key, Integer[] values){
+    public ArrayList<D> notIn(String key, Integer[] values) {
         RealmQuery<D> query = getQuery().not().in(key, values);
 
         RealmResults<D> results = query.findAll();
@@ -137,7 +137,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
     }
 
 
-    private ArrayList<D> toArrayList( RealmResults<D> realmResults){
+    private ArrayList<D> toArrayList(RealmResults<D> realmResults) {
         ArrayList<D> results = new ArrayList<>();
 
         for (int i = 0; i < realmResults.size(); i++) {
@@ -146,9 +146,9 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         return results;
     }
 
-    public int countAll(){
+    public int countAll() {
         RealmQuery<D> query = getQuery();
-        return (int)query.count();
+        return (int) query.count();
     }
 
     private RealmQuery<D> getQuery() {
@@ -173,8 +173,8 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
             this.database = database;
         }
 
-        public static void deleteAll(){
-            Realm realm=ourInstance.database;
+        public static void deleteAll() {
+            Realm realm = ourInstance.database;
 
             realm.beginTransaction();
             realm.deleteAll();

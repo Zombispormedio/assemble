@@ -13,4 +13,9 @@ public class MeetingStorageService extends StorageService<MeetingDAO, Meeting> {
     public MeetingStorageService() {
         super(new LocalStorage<MeetingDAO, Meeting>(MeetingDAO.class, new MeetingDAO.Factory()));
     }
+
+    public MeetingStorageService(
+            LocalStorage<MeetingDAO, Meeting> storage) {
+        super(storage);
+    }
 }

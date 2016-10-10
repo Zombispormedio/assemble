@@ -6,7 +6,7 @@ import com.google.firebase.crash.FirebaseCrash;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
-import com.zombispormedio.assemble.models.modules.ResourceModule;
+import com.zombispormedio.assemble.models.modules.PersistenceModule;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -26,7 +26,7 @@ public class AssembleApplication extends Application {
     public void onCreate() {
         super.onCreate();
         setupUncaughtException();
-        this.resourceComponent= DaggerResourceComponent.builder().resourceModule(new ResourceModule()).build();
+        this.resourceComponent= DaggerResourceComponent.builder().persistenceModule(new PersistenceModule()).build();
         PreferencesManager preferencesManager = new PreferencesManager(this);
         preferencesManager.remove(HomeActivity.LOADED);
         JodaTimeAndroid.init(this);

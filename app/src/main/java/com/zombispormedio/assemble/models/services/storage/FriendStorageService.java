@@ -15,4 +15,9 @@ public class FriendStorageService extends StorageService<FriendProfileDAO, Frien
     public FriendStorageService() {
         super(new LocalStorage<FriendProfileDAO, FriendProfile>(FriendProfileDAO.class, new FriendProfileDAO.Factory()));
     }
+
+    public FriendStorageService(
+            LocalStorage<FriendProfileDAO, FriendProfile> storage) {
+        super(storage);
+    }
 }

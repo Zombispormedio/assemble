@@ -13,5 +13,8 @@ public class ProfileStorageService extends StorageService<UserProfileDAO, UserPr
         super(new LocalStorage<UserProfileDAO, UserProfile>(UserProfileDAO.class, new UserProfileDAO.Factory()));
     }
 
-
+    public ProfileStorageService(
+            LocalStorage<UserProfileDAO, UserProfile> storage) {
+        super(storage);
+    }
 }

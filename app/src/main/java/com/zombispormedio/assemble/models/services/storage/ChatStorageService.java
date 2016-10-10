@@ -13,4 +13,8 @@ public class ChatStorageService extends StorageService<ChatDAO, Chat> {
         super(new LocalStorage<ChatDAO, Chat>(ChatDAO.class, new ChatDAO.Factory()));
     }
 
+    public ChatStorageService(
+            LocalStorage<ChatDAO, Chat> storage) {
+        super(storage);
+    }
 }
