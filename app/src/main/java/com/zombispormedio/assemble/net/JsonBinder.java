@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.net;
 
 import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.models.editors.EditChat;
+import com.zombispormedio.assemble.models.editors.EditGCM;
 import com.zombispormedio.assemble.models.editors.EditMeeting;
 import com.zombispormedio.assemble.models.editors.EditMessage;
 import com.zombispormedio.assemble.models.editors.EditProfile;
@@ -64,6 +65,11 @@ public class JsonBinder{
     public static String fromEditMeesage(EditMessage message) {
         JSONWrapper<EditMessage> jsonAdapter = new JSONWrapper<>(EditMessage.class);
         return jsonAdapter.toJSON(message);
+    }
+
+    public static String fromEditGCM(EditGCM gcm) {
+        JSONWrapper<EditGCM> jsonAdapter = new JSONWrapper<>(EditGCM.class);
+        return jsonAdapter.toJSON(gcm);
     }
 
 

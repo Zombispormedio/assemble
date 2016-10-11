@@ -4,10 +4,10 @@ package com.zombispormedio.assemble;
 import com.google.firebase.crash.FirebaseCrash;
 
 import com.squareup.leakcanary.LeakCanary;
+import com.zombispormedio.assemble.activities.ChatActivity;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
-import com.zombispormedio.assemble.models.modules.PersistenceModule;
 import com.zombispormedio.assemble.models.modules.ResourceModule;
 import com.zombispormedio.assemble.net.ConnectionState;
 import com.zombispormedio.assemble.utils.PreferencesManager;
@@ -24,12 +24,18 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 
+
 /**
  * Created by Xavier Serrano on 18/09/2016.
  */
 public class AssembleApplication extends Application implements IAssembleApplication {
 
+
+    public final static String RUNNING_ACTIVITY="running_activity";
+
     private ResourceComponent resourceComponent;
+
+    private PreferencesManager preferencesManager;
 
     @Override
     public void onCreate() {
@@ -39,19 +45,21 @@ public class AssembleApplication extends Application implements IAssembleApplica
             // You should not init your app in this process.
             return;
         }
-        LeakCanary.install(this);
 
-        setupUncaughtException();
-        this.resourceComponent= DaggerResourceComponent.builder().resourceModule(new ResourceModule()).build();
-        PreferencesManager preferencesManager = new PreferencesManager(this);
-        preferencesManager.remove(HomeActivity.LOADED);
+        LeakCanary.install(this);
         JodaTimeAndroid.init(this);
         ConnectionState.getInstance().setContext(this);
 
+        this.resourceComponent= DaggerResourceComponent.builder().resourceModule(new ResourceModule()).build();
+
+        setupUncaughtException();
+
+        setupPreferences();
+
         setupLocalStorage();
-
-
     }
+
+
     private void setupLocalStorage() {
         RealmConfiguration realmConfiguration= new RealmConfiguration.Builder(this)
                 .deleteRealmIfMigrationNeeded()
@@ -78,6 +86,13 @@ public class AssembleApplication extends Application implements IAssembleApplica
 
     public ResourceComponent getResourceComponent() {
         return resourceComponent;
+    }
+
+    private void setupPreferences() {
+        preferencesManager = new PreferencesManager(this);
+        preferencesManager.remove(HomeActivity.LOADED);
+        preferencesManager.remove(AssembleApplication.RUNNING_ACTIVITY);
+        preferencesManager.remove(ChatActivity.CHAT_ID);
     }
 
 

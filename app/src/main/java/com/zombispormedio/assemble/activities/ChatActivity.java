@@ -7,6 +7,8 @@ import android.support.v7.widget.SimpleItemAnimator;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import com.orhanobut.logger.Logger;
+import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.MessageListAdapter;
 import com.zombispormedio.assemble.controllers.ChatController;
@@ -14,6 +16,7 @@ import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
+import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
 import java.util.ArrayList;
@@ -22,6 +25,8 @@ import butterknife.BindView;
 import butterknife.OnClick;
 
 public class ChatActivity extends BaseActivity implements IChatView {
+
+    public static final String CHAT_ID = "chat_id";
 
     private ChatController ctrl;
 
@@ -43,14 +48,19 @@ public class ChatActivity extends BaseActivity implements IChatView {
         setupToolbar();
         bindActivity(this);
 
-        Bundle extra=getIntent().getExtras();
+        Bundle extra = getIntent().getExtras();
 
-        ctrl = new ChatController(this, extra.getInt(NavigationManager.ARGS+0));
+        int dataId = extra.getInt(NavigationManager.ARGS + 0);
+
+        ctrl = new ChatController(this, dataId);
+
+        registerIDToMessageginService(dataId);
 
         setupMessages();
 
         ctrl.onCreate();
     }
+
 
     private void setupMessages() {
         AndroidUtils.createListConfiguration(this, messagesList)
@@ -62,7 +72,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
             ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
         }
 
-        messageListAdapter=new MessageListAdapter();
+        messageListAdapter = new MessageListAdapter();
 
         messagesList.setAdapter(messageListAdapter);
     }
@@ -75,8 +85,8 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
     @Override
     public void setAvatar(String path, String letter) {
-        new ImageUtils.ImageBuilder(this, imageView)
-                .url(path)
+        ImageUtils.ImageBuilder builder = new ImageUtils.ImageBuilder(this, imageView);
+        builder.url(path)
                 .letter(letter)
                 .circle(true)
                 .build();
@@ -88,17 +98,16 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
 
-
     @Override
     public String getMessageInputValue() {
-        String value=messageInput.getText().toString();
+        String value = messageInput.getText().toString();
         messageInput.setText("");
         return value;
     }
 
     @Override
     public int addPendingMessage(Message message) {
-        int index=messageListAdapter.addPending(message);
+        int index = messageListAdapter.addPending(message);
         messagesList.scrollToPosition(index);
         return index;
     }
@@ -109,7 +118,28 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
     @OnClick(R.id.send_button)
-    public void onSend(){
+    public void onSend() {
         ctrl.onMessageSend();
+    }
+
+
+    private void registerIDToMessageginService(int dataId) {
+        PreferencesManager preferencesManager = getPreferencesManager();
+        preferencesManager.set(AssembleApplication.RUNNING_ACTIVITY, getClass().getName());
+        preferencesManager.set(CHAT_ID, dataId);
+    }
+
+    private void unregisterIDToMessageginService() {
+        PreferencesManager preferencesManager = getPreferencesManager();
+        preferencesManager.remove(AssembleApplication.RUNNING_ACTIVITY);
+        preferencesManager.remove(CHAT_ID);
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+        unregisterIDToMessageginService();
     }
 }

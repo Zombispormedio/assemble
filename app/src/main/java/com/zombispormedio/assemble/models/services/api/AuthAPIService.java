@@ -4,6 +4,7 @@ package com.zombispormedio.assemble.models.services.api;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 
 import com.zombispormedio.assemble.models.Auth;
+import com.zombispormedio.assemble.models.editors.EditGCM;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.Result;
@@ -31,19 +32,17 @@ public class AuthAPIService implements IAuthService {
     }
 
     @Override
-    public void login(String email, String password, final IServiceHandler<Result, Error> handler) {
-        Auth user = new Auth(email, password);
+    public void login(Auth auth, final IServiceHandler<Result, Error> handler) {
         api.Rest("/login")
                 .handler(DeferUtils.defer(handler))
-                .post(JsonBinder.fromAuth(user));
+                .post(JsonBinder.fromAuth(auth));
     }
 
     @Override
-    public void register(String email, String password, final IServiceHandler<Result, Error> handler) {
-        Auth user = new Auth(email, password);
+    public void register(Auth auth, final IServiceHandler<Result, Error> handler) {
         api.Rest("/signup")
                 .handler(DeferUtils.defer(handler))
-                .post(JsonBinder.fromAuth(user));
+                .post(JsonBinder.fromAuth(auth));
     }
 
     @Override
@@ -53,9 +52,12 @@ public class AuthAPIService implements IAuthService {
                 .get();
     }
 
-
-
-
+    @Override
+    public void refreshGCM(String gcmToken, IServiceHandler<Result, Error> handler) {
+        api.RestWithAuth("/gcm")
+                .handler(DeferUtils.defer(handler))
+                .patch(JsonBinder.fromEditGCM(new EditGCM(gcmToken)));
+    }
 
 
 }

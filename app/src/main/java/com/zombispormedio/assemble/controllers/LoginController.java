@@ -1,6 +1,8 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
+import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Result;
@@ -27,12 +29,17 @@ public class LoginController extends Controller {
             ctx.showFailValidation();
 
         } else {
-            String email = ctx.getEmail();
-            String pass = ctx.getPassword();
-
             whileLogin();
 
-            user.login(email, pass, new LoginServiceHandler());
+            Auth auth=new Auth(ctx.getEmail(),  ctx.getPassword());
+
+            String gcmToken=ctx.getMessagingId();
+            Logger.d(gcmToken);
+            if(!gcmToken.isEmpty()){
+                auth.gcm_token=gcmToken;
+            }
+
+            user.login(auth, new LoginServiceHandler());
         }
     }
 
@@ -47,6 +54,7 @@ public class LoginController extends Controller {
         @Override
         public void onSuccess(Result result) {
             ctx.setAuthToken(result.token);
+            ctx.removeMessagingId();
 
             ctx.showSuccessfulLogin();
 

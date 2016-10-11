@@ -197,7 +197,7 @@
             </intent-filter>
         </service>
 
-        <service android:name="com.zombispormedio.assemble.services.InstanceIDService">
+        <service android:name="com.zombispormedio.assemble.services.MessagingIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
             </intent-filter>

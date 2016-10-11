@@ -12,7 +12,6 @@ import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 
 
-
 import android.content.Context;
 import android.view.View;
 import android.widget.ImageView;
@@ -88,34 +87,22 @@ public class ChatHolder extends AbstractHolder<Chat> {
         String content = "";
         String formatDate = "";
 
-
         if (messages != null) {
             if (messages.length > 0) {
-                for(Message m : messages){
-                    Logger.d(m.content);
-                }
-
-                Message last = messages[messages.length-1];
+                Message last = messages[messages.length - 1];
                 content = last.content;
-                if (content.length() > 50) {
+                if (content.length() > 30) {
                     content = content.substring(0, 30) + "…";
                 }
 
                 String date = last.created_at;
                 Context ctx = itemView.getContext();
 
-                if (DateUtils.isToday(date)) {
-                    formatDate = DateUtils.format(ctx.getString(R.string.simple_hour), date);
-                } else {
-                    if (DateUtils.isYesterday(date)) {
-                        formatDate = ctx.getString(R.string.yesterday);
-                    } else {
-                        formatDate = DateUtils.format(ctx.getString(R.string.slash_date), date);
-                    }
-                }
+                formatDate = DateUtils.isToday(date) ? DateUtils.format(ctx.getString(R.string.simple_hour), date)
+                        : DateUtils.isYesterday(date) ? ctx.getString(R.string.yesterday)
+                                : DateUtils.format(ctx.getString(R.string.slash_date), date);
 
             }
-
         }
 
         lastMessage.setText(content);

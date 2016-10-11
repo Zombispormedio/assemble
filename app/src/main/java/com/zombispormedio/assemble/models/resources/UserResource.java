@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
+import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.models.services.interfaces.IAuthService;
@@ -16,30 +17,30 @@ import javax.inject.Inject;
  */
 public class UserResource {
 
-    private IAuthService auth;
+    private IAuthService service;
 
     @Inject
-    public UserResource(IAuthService auth) {
-        this.auth = auth;
+    public UserResource(IAuthService service) {
+        this.service = service;
     }
 
     public void checkAccess(IServiceHandler<Result, Error> listener) {
-        auth.checkAccess(listener);
+        service.checkAccess(listener);
     }
 
 
-    public void login(String email, String password, IServiceHandler<Result, Error> listener) {
-        auth.login(email, password, listener);
+    public void login(Auth auth, IServiceHandler<Result, Error> listener) {
+        service.login(auth, listener);
     }
 
 
-    public void signin(String email, String password, IServiceHandler<Result, Error> listener) {
-        auth.register(email, password, listener);
+    public void signin(Auth auth, IServiceHandler<Result, Error> listener) {
+        service.register(auth, listener);
     }
 
 
     public void signOut(final IServiceHandler<Result, Error> handler) {
-        auth.signOut(new ServiceHandler<Result, Error>() {
+        service.signOut(new ServiceHandler<Result, Error>() {
             @Override
             public void onError(Error error) {
                 handler.onError(error);
@@ -53,6 +54,10 @@ public class UserResource {
 
         });
 
+    }
+
+    public void refreshGCM(String gcmToken, final IServiceHandler<Result, Error> handler){
+        service.refreshGCM(gcmToken, handler);
     }
 
 

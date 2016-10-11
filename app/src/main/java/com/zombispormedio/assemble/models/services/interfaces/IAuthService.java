@@ -1,6 +1,8 @@
 package com.zombispormedio.assemble.models.services.interfaces;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.models.Auth;
+import com.zombispormedio.assemble.models.editors.EditGCM;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 
@@ -12,11 +14,13 @@ public interface IAuthService {
 
     void checkAccess(final IServiceHandler<Result, Error> listener);
 
-    void login(String email, String password, final IServiceHandler<Result, Error> listener);
+    void login(Auth auth, final IServiceHandler<Result, Error> listener);
 
-    void register(String email, String password, final IServiceHandler<Result, Error> listener);
+    void register(Auth auth, final IServiceHandler<Result, Error> listener);
 
     void signOut(final IServiceHandler<Result, Error> handler);
+
+    void refreshGCM(String gcmToken, final IServiceHandler<Result, Error> handler );
 
 
 }

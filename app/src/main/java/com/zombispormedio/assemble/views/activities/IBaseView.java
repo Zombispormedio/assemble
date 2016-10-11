@@ -15,6 +15,9 @@ public interface IBaseView extends IApplicationView {
 
     void showAlert(String msg);
 
+    String getMessagingId();
+
+    void removeMessagingId();
 
 
 }

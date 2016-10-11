@@ -9,6 +9,8 @@ public class Auth {
 
     public String password;
 
+    public String gcm_token;
+
     public Auth(String email, String password) {
         this.email = email;
         this.password = password;

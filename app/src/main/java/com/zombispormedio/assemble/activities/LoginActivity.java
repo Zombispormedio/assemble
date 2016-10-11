@@ -119,28 +119,18 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         String password = getPassword();
 
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            if (email.isEmpty()) {
-                emailInputHelper.setError(getString(R.string.email_empty));
-            } else {
-                emailInputHelper.setError(getString(R.string.invalid_email));
-            }
-
+            emailInputHelper.setError(email.isEmpty() ? getString(R.string.email_empty) : getString(R.string.invalid_email));
             valid = false;
-        } else {
+        } else
             emailInputHelper.setError(null);
-        }
 
         if (password.isEmpty() || password.length() < 6 || password.length() > 50) {
-            if (password.isEmpty()) {
-                passwordInputHelper.setError(getString(R.string.pass_empty));
-            } else {
-                passwordInputHelper.setError(getString(R.string.invalid_password));
-            }
+            passwordInputHelper
+                    .setError(password.isEmpty() ? getString(R.string.pass_empty) : getString(R.string.invalid_password));
 
             valid = false;
-        } else {
+        } else
             passwordInputHelper.setError(null);
-        }
 
         return valid;
     }
@@ -171,4 +161,7 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     public void onBackPressed() {
         moveTaskToBack(true);
     }
+
+
+
 }

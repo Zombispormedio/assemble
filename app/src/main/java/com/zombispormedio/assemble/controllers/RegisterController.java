@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.controllers;
 
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
+import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
@@ -31,25 +32,30 @@ public class RegisterController extends Controller {
 
         if (email.isEmpty() || pass.isEmpty() || rep_pass.isEmpty()) {
             afterTryLogin();
-            if (email.isEmpty()) {
-                ctx.showEmptyEmail();
-            } else {
+            if (!email.isEmpty())
                 if (pass.isEmpty()) {
                     ctx.showEmptyPassword();
-                } else {
-                    if (rep_pass.isEmpty()) {
-                        ctx.showEmptyRepPassword();
-                    }
+                } else if (rep_pass.isEmpty()) {
+                    ctx.showEmptyRepPassword();
                 }
+            else {
+                ctx.showEmptyEmail();
             }
-        } else {
-            if (!pass.equals(rep_pass)) {
-                afterTryLogin();
-                ctx.showNotEqualsBothPassword();
+        } else if (!pass.equals(rep_pass)) {
+            afterTryLogin();
+            ctx.showNotEqualsBothPassword();
 
-            } else {
-                user.signin(email, pass, new RegisterServiceHandler());
+        } else {
+
+            Auth auth = new Auth(email, pass);
+
+            String gcmToken = ctx.getMessagingId();
+
+            if (!gcmToken.isEmpty()) {
+                auth.gcm_token = gcmToken;
             }
+
+            user.signin(auth, new RegisterServiceHandler());
         }
     }
 
@@ -64,26 +70,21 @@ public class RegisterController extends Controller {
                 if (error.email.length > 0) {
                     alert = error.email[0];
                     alerted = true;
-                }
-            } else {
-                if (error.password != null) {
+                } else if (error.password != null) {
                     if (error.password.length > 0) {
                         alert = error.password[0];
                         alerted = true;
-                    }
-                } else {
-                    if (error.msg != null) {
+                    } else if (error.msg != null) {
                         alert = error.msg;
                         alerted = true;
                     }
                 }
             }
 
-            if (!alerted) {
+            if (!alerted)
                 ctx.showUnknowError();
-            } else {
+            else
                 ctx.showAlert(alert);
-            }
 
             afterTryLogin();
         }
@@ -91,6 +92,7 @@ public class RegisterController extends Controller {
         @Override
         public void onSuccess(Result result) {
             ctx.showSuccessfulRegister();
+            ctx.removeMessagingId();
             ctx.goToLogin();
         }
     }
