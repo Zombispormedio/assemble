@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
@@ -47,10 +46,10 @@ public class ChatsController extends Controller {
 
     @Override
     public void onStart() {
-        bindChats();
+        renderChats();
     }
 
-    private void bindChats() {
+    private void renderChats() {
         ArrayList<Chat> chats = chatResource.getAll();
         ctx.bindChats(chats);
     }
@@ -68,7 +67,7 @@ public class ChatsController extends Controller {
     private class ChatSubscriber extends Subscriber {
         @Override
         public void notifyChange() {
-            bindChats();
+            renderChats();
             finishRefresh();
         }
 

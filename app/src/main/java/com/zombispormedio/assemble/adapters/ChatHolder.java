@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.adapters;
 
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
@@ -53,7 +52,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
 
     @Override
     public void bind(int position, Chat itemData) {
-        bindData(itemData);
+        renderData(itemData);
         setupOnClickListener(position, itemData);
     }
 
@@ -68,13 +67,13 @@ public class ChatHolder extends AbstractHolder<Chat> {
         });
     }
 
-    private void bindData(Chat itemData) {
+    private void renderData(Chat itemData) {
         FriendProfile recipient = itemData.recipient;
 
         String recipientName = recipient.username;
         nameLabel.setText(recipientName);
 
-        bindLastMessage(itemData.messages);
+        renderLastMessage(itemData.messages);
 
         new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
                 .url(recipient.large_avatar_url)
@@ -83,7 +82,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
                 .build();
     }
 
-    private void bindLastMessage(Message[] messages) {
+    private void renderLastMessage(Message[] messages) {
         String content = "";
         String formatDate = "";
 

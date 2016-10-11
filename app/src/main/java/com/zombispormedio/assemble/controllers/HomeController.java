@@ -21,7 +21,6 @@ import com.zombispormedio.assemble.views.activities.IHomeView;
 public class HomeController extends Controller {
 
 
-
     private IHomeView ctx;
 
     private final ProfileResource profileResource;
@@ -73,7 +72,7 @@ public class HomeController extends Controller {
     public void onDrawerOpened() {
     }
 
-    private void bindProfile() {
+    private void renderProfile() {
         UserProfile profile = profileResource.getProfile();
 
         String username = profile.username;
@@ -110,14 +109,13 @@ public class HomeController extends Controller {
             if (profileResource.getProfile() == null) {
                 loading();
             } else {
-                bindProfile();
+                renderProfile();
                 backgroundLoading();
             }
 
-
             loadAllAndaddSubscriptions();
-        }else{
-            bindProfile();
+        } else {
+            renderProfile();
         }
 
     }
@@ -130,7 +128,8 @@ public class HomeController extends Controller {
 
 
     private boolean isReady() {
-        return isProfileReady &&isFriendsReady && isFriendRequestsReady && isTeamsReady && isMeetingsReady && isChatsReady && isMessagesReady;
+        return isProfileReady && isFriendsReady && isFriendRequestsReady && isTeamsReady && isMeetingsReady && isChatsReady
+                && isMessagesReady;
     }
 
     private void loading() {
@@ -139,7 +138,7 @@ public class HomeController extends Controller {
     }
 
 
-    private void  loadAllAndaddSubscriptions() {
+    private void loadAllAndaddSubscriptions() {
 
         profileSubscription.load();
 
@@ -150,7 +149,7 @@ public class HomeController extends Controller {
         final ChatSubscription chatSubscription = getResourceComponent().provideChatSubscription();
         final MessageSubscription messageSubscription = getResourceComponent().provideMessageSubscription();
 
-        profileSubscription.addSubscriber(new Subscriber(){
+        profileSubscription.addSubscriber(new Subscriber() {
             @Override
             public void notifyChange() {
                 profileSubscription.removeSubscriber(this.getID());
@@ -230,12 +229,13 @@ public class HomeController extends Controller {
 
 
     private void uncheckAll() {
-        isProfileReady = isFriendsReady=isFriendRequestsReady=isTeamsReady = isMeetingsReady = isChatsReady = isMessagesReady=false;
+        isProfileReady = isFriendsReady = isFriendRequestsReady = isTeamsReady = isMeetingsReady = isChatsReady =
+                isMessagesReady = false;
     }
 
     private void readyProfile() {
         isProfileReady = true;
-        bindProfile();
+        renderProfile();
         ready();
     }
 
@@ -278,7 +278,6 @@ public class HomeController extends Controller {
     }
 
     private class ProfileSubscriber extends Subscriber {
-
         @Override
         public void notifyChange() {
             readyProfile();

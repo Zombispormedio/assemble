@@ -150,4 +150,10 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
     public void goToNewFriend() {
         NavigationManager.NewFriend(this);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

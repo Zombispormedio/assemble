@@ -40,10 +40,10 @@ public class SecondStepTeamController extends Controller {
 
     @Override
     public void onCreate() {
-        bindParticipants();
+        renderParticipants();
     }
 
-    private void bindParticipants() {
+    private void renderParticipants() {
         int[] members=editor.getMembers();
         ctx.setParticipantsTitle(members.length, friendResource.countAll());
         ctx.bindParticipants(friendResource.getFriendInArrayofIds(members));
@@ -54,10 +54,7 @@ public class SecondStepTeamController extends Controller {
         this.imagePath = imagePath;
     }
 
-    @Override
-    public void onDestroy() {
-        ctx=null;
-    }
+
 
     public void onCreateTeam() {
         editor.setName(ctx.getName());
@@ -113,5 +110,10 @@ public class SecondStepTeamController extends Controller {
         });
 
         return true;
+    }
+
+    @Override
+    public void onDestroy() {
+        ctx=null;
     }
 }

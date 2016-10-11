@@ -32,10 +32,10 @@ public class CreateChatController extends Controller {
 
     @Override
     public void onCreate() {
-        bindFriends();
+        renderFriends();
     }
 
-    private void bindFriends() {
+    private void renderFriends() {
         ArrayList<Chat> chats=chatResource.getAll();
 
         int[] friendInChatIds=new int[chats.size()];
@@ -50,10 +50,10 @@ public class CreateChatController extends Controller {
     }
 
     public void onFriend(FriendProfile data) {
-        createFriend(data);
+        createChat(data);
     }
 
-    private void createFriend(FriendProfile data) {
+    private void createChat(FriendProfile data) {
         ctx.showProgress();
 
         chatResource.create(new EditChat(data.id), new ServiceHandler<Chat, Error>(){
@@ -74,5 +74,10 @@ public class CreateChatController extends Controller {
     private void afterCreate(){
         ctx.hideProgress();
         ctx.goHome();
+    }
+
+    @Override
+    public void onDestroy() {
+        ctx=null;
     }
 }

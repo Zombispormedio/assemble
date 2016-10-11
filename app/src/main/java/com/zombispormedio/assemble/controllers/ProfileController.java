@@ -43,7 +43,7 @@ public class ProfileController extends Controller {
 
     @Override
     public void onCreate() {
-        bindProfile();
+        renderProfile();
         profileSubscription.load();
 
     }
@@ -97,7 +97,7 @@ public class ProfileController extends Controller {
     }
 
 
-    private void bindProfile() {
+    private void renderProfile() {
 
         UserProfile profile = profileResource.getProfile();
 
@@ -125,7 +125,7 @@ public class ProfileController extends Controller {
 
         @Override
         public void notifyChange() {
-            bindProfile();
+            renderProfile();
         }
     }
 

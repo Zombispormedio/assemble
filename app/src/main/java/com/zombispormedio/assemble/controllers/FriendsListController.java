@@ -38,10 +38,10 @@ public class FriendsListController extends Controller {
 
     @Override
     public void onCreate() {
-        bindFriends();
+        renderFriends();
     }
 
-    private void bindFriends() {
+    private void renderFriends() {
         ArrayList<FriendProfile> friends = friendResource.getAll();
         ctx.bindFriends(friends);
     }
@@ -66,7 +66,7 @@ public class FriendsListController extends Controller {
             @Override
             public void onSuccess(ArrayList<FriendProfile> result) {
                 holder.hideProgress();
-                bindFriends();
+                renderFriends();
                 ctx.showRemovedFriend();
             }
         });
@@ -76,7 +76,7 @@ public class FriendsListController extends Controller {
 
         @Override
         public void notifyChange() {
-            bindFriends();
+            renderFriends();
             finishRefresh();
         }
 

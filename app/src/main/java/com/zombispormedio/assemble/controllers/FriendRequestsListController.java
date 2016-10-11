@@ -43,10 +43,10 @@ public class FriendRequestsListController extends Controller {
 
     @Override
     public void onCreate() {
-        bindRequests();
+        renderRequests();
     }
 
-    private void bindRequests() {
+    private void renderRequests() {
         ArrayList<FriendRequestProfile> friendRequests = friendRequestResource.getAll();
 
         ctx.bindFriendRequests(friendRequests);
@@ -69,7 +69,7 @@ public class FriendRequestsListController extends Controller {
             @Override
             public void onSuccess(ArrayList<FriendRequestProfile> result) {
                 holder.hideProgress();
-                bindRequests();
+                renderRequests();
                 ctx.showFriendAccepted();
             }
         });
@@ -87,7 +87,7 @@ public class FriendRequestsListController extends Controller {
             @Override
             public void onSuccess(ArrayList<FriendRequestProfile> result) {
                 holder.hideProgress();
-                bindRequests();
+                renderRequests();
                 ctx.showFriendAccepted();
             }
         });
@@ -102,7 +102,7 @@ public class FriendRequestsListController extends Controller {
 
         @Override
         public void notifyChange() {
-            bindRequests();
+            renderRequests();
             finishRefresh();
         }
 

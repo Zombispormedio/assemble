@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.editors.EditProfile;
@@ -11,8 +10,6 @@ import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.activities.IUpdateProfileView;
-
-import java.text.ParseException;
 
 /**
  * Created by Xavier Serrano on 04/08/2016.
@@ -45,10 +42,10 @@ public class UpdateProfileController extends Controller {
 
     @Override
     public void onCreate() {
-        bindProfile();
+        renderProfile();
     }
 
-    private void bindProfile() {
+    private void renderProfile() {
         UserProfile profile = profileResource.getProfile();
         if (profile != null) {
             editor.setProfile(profile);
@@ -121,7 +118,7 @@ public class UpdateProfileController extends Controller {
 
         @Override
         public void notifyChange() {
-            bindProfile();
+            renderProfile();
         }
     }
 

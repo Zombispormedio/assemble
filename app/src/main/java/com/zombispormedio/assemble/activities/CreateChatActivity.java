@@ -91,4 +91,10 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
     public void goHome() {
         NavigationManager.Home(this);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

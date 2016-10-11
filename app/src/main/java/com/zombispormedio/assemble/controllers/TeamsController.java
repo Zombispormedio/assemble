@@ -37,15 +37,10 @@ public class TeamsController extends Controller {
 
     @Override
     public void onCreate() {
-        setupTeams();
+        renderTeams();
     }
 
-    private void setupTeams() {
-        bindTeams();
-    }
-
-
-    private void bindTeams() {
+    private void renderTeams() {
         ArrayList<Team> teams = teamResource.getAll();
         ctx.bindTeams(teams);
     }
@@ -70,7 +65,7 @@ public class TeamsController extends Controller {
 
         @Override
         public void notifyChange() {
-            bindTeams();
+            renderTeams();
             finishRefresh();
         }
 
@@ -91,5 +86,6 @@ public class TeamsController extends Controller {
     @Override
     public void onDestroy() {
         teamSubscription.removeSubscriber(teamSubscriber);
+        ctx=null;
     }
 }

@@ -55,10 +55,10 @@ public class ChatController extends Controller {
 
     @Override
     public void onCreate() {
-        bindChat();
+        renderChat();
     }
 
-    private void bindChat() {
+    private void renderChat() {
         Chat chat=chatResource.getById(chatID);
         FriendProfile friend=chat.recipient;
         String friendName=friend.username;
@@ -100,7 +100,7 @@ public class ChatController extends Controller {
 
         @Override
         public void notifyChange() {
-            bindChat();
+            renderChat();
         }
     }
 

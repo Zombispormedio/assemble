@@ -37,18 +37,13 @@ public class MeetingsController extends Controller {
 
     @Override
     public void onCreate() {
-        setupMeetings();
+        renderMeetings();
     }
 
-    private void setupMeetings() {
-        bindMeetings();
-    }
 
-    public void bindMeetings() {
+    private void renderMeetings() {
         ArrayList<Meeting> meetings = meetingResource.getAll();
-
         ctx.bindMeetings(meetings);
-
     }
 
 
@@ -71,7 +66,7 @@ public class MeetingsController extends Controller {
 
         @Override
         public void notifyChange() {
-            bindMeetings();
+            renderMeetings();
             finishRefresh();
         }
 
@@ -91,5 +86,6 @@ public class MeetingsController extends Controller {
     @Override
     public void onDestroy() {
         meetingSubscription.removeSubscriber(meetingSubscriber);
+        ctx=null;
     }
 }

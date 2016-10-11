@@ -132,7 +132,7 @@ public class FriendsController extends Controller {
 
     @Override
     public void onDestroy() {
-        ctx=null;
+        ctx = null;
     }
 
     public void onFriendTabEnter() {

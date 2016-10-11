@@ -23,7 +23,6 @@ public class NewFriendController extends Controller {
     public NewFriendController(INewFriendView ctx) {
         super(ctx);
         this.ctx = ctx;
-
         friendResource=getResourceComponent().provideFriendResource();
     }
 
@@ -74,6 +73,10 @@ public class NewFriendController extends Controller {
 
         });
 
+    }
 
+    @Override
+    public void onDestroy() {
+        ctx=null;
     }
 }

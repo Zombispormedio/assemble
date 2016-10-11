@@ -25,12 +25,16 @@ public class TeamDialogController extends Controller {
 
     @Override
     public void onCreate() {
-        setupTeams();
+        renderTeams();
     }
 
-    private void setupTeams() {
+    private void renderTeams() {
         ArrayList<Team> teams = teamResource.getAll();
         ctx.bindTeams(teams);
     }
 
+    @Override
+    public void onDestroy() {
+        ctx=null;
+    }
 }

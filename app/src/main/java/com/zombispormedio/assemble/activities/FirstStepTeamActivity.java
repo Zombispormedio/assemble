@@ -176,4 +176,11 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
     public void goToNextStep(int[] memberIds) {
         NavigationManager.SecondStepCreateTeam(this, memberIds);
     }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

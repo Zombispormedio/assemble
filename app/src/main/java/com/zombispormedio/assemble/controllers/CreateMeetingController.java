@@ -51,11 +51,11 @@ public class CreateMeetingController extends Controller {
 
     @Override
     public void onCreate() {
-        bindFirstTeam();
-        bindDatesWithNow();
+        renderFirstTeam();
+        renderDatesWithNow();
     }
 
-    private void bindFirstTeam() {
+    private void renderFirstTeam() {
         Team first = teamResource.getFirst();
         editor.setTeam(first.id);
         ctx.bindTeam(first.name);
@@ -64,7 +64,7 @@ public class CreateMeetingController extends Controller {
 
 
 
-    private void bindDatesWithNow() {
+    private void renderDatesWithNow() {
 
         DateUtils.DateBuilder startDate = editor.getStartAt();
         DateUtils.DateBuilder endDate = editor.getEndAt();
@@ -222,5 +222,10 @@ public class CreateMeetingController extends Controller {
         });
 
         return true;
+    }
+
+    @Override
+    public void onDestroy() {
+        ctx=null;
     }
 }

@@ -134,4 +134,9 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
         this.listener = listener;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

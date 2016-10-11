@@ -28,10 +28,10 @@ public class FirstStepTeamController extends Controller {
 
     @Override
     public void onCreate() {
-        bindFriends();
+        renderFriends();
     }
 
-    private void bindFriends() {
+    private void renderFriends() {
         ArrayList<FriendProfile> friends = friendResource.getAll();
         ctx.bindFriends(friends);
     }
@@ -54,5 +54,10 @@ public class FirstStepTeamController extends Controller {
         }else{
             ctx.showNeedMembers();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        ctx=null;
     }
 }

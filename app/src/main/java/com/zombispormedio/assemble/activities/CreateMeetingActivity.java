@@ -383,5 +383,9 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
         }
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+    }
 }

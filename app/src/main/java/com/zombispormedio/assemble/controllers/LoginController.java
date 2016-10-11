@@ -27,23 +27,22 @@ public class LoginController extends Controller {
 
         if (!ctx.validate()) {
             ctx.showFailValidation();
-
         } else {
             whileLogin();
 
-            Auth auth=new Auth(ctx.getEmail(),  ctx.getPassword());
+            Auth auth = new Auth(ctx.getEmail(), ctx.getPassword());
 
-            String gcmToken=ctx.getMessagingId();
+            String gcmToken = ctx.getMessagingId();
             Logger.d(gcmToken);
-            if(!gcmToken.isEmpty()){
-                auth.gcm_token=gcmToken;
+            if (!gcmToken.isEmpty()) {
+                auth.gcm_token = gcmToken;
             }
 
             user.login(auth, new LoginServiceHandler());
         }
     }
 
-    public class LoginServiceHandler extends ServiceHandler<Result, Error> {
+    private class LoginServiceHandler extends ServiceHandler<Result, Error> {
 
         @Override
         public void onError(Error error) {

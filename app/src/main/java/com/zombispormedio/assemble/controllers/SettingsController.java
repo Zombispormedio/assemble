@@ -40,7 +40,6 @@ public class SettingsController extends Controller {
     }
 
     private class SignOutDialogEvent implements ISuccessHandler {
-
         @Override
         public void onSuccess() {
             user.signOut(new SignOutServiceHandler());
