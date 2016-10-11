@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
  */
 public class ChatHolder extends AbstractHolder<Chat> {
 
+    private static final int CONTENT_LIMIT=30;
 
     @BindView(R.id.username_label)
     TextView nameLabel;
@@ -89,17 +90,11 @@ public class ChatHolder extends AbstractHolder<Chat> {
         if (messages != null) {
             if (messages.length > 0) {
                 Message last = messages[messages.length - 1];
-                content = last.content;
-                if (content.length() > 30) {
-                    content = content.substring(0, 30) + "…";
-                }
+                content = last.getLimitedContent(CONTENT_LIMIT);
 
-                String date = last.created_at;
-                Context ctx = itemView.getContext();
-
-                formatDate = DateUtils.isToday(date) ? DateUtils.format(ctx.getString(R.string.simple_hour), date)
-                        : DateUtils.isYesterday(date) ? ctx.getString(R.string.yesterday)
-                                : DateUtils.format(ctx.getString(R.string.slash_date), date);
+                formatDate = last.isCreatedToday() ? last.formatCreated(getString(R.string.simple_hour))
+                        : last.isCreatedYesterday() ? getString(R.string.yesterday)
+                                : last.formatCreated(getString(R.string.slash_date));
 
             }
         }
@@ -107,6 +102,11 @@ public class ChatHolder extends AbstractHolder<Chat> {
         lastMessage.setText(content);
 
         dateLabel.setText(formatDate);
+    }
+
+
+    private String getString(int id){
+        return itemView.getContext().getString(id);
     }
 
     public void setOnClickListener(IOnClickItemListHandler<Chat> listener) {
