@@ -31,4 +31,8 @@ public class StringUtils {
     public static String firstLetter(String word){
         return !word.isEmpty()?String.valueOf(word.charAt(0)): "X";
     }
+
+    public static String ellipse(String str, int limit){
+       return str.substring(0, limit) + "…";
+    }
 }

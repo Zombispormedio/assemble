@@ -34,7 +34,7 @@ public class PreviewFriendHolder extends AbstractHolder<FriendProfile> {
         setup();
     }
     private void setup() {
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, getView());
     }
 
     @Override
@@ -55,23 +55,13 @@ public class PreviewFriendHolder extends AbstractHolder<FriendProfile> {
         });
     }
 
-    private void renderData(FriendProfile itemData) {
-        usernameLabel.setText(itemData.username);
-        setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
-
+    private void renderData(FriendProfile friend) {
+        usernameLabel.setText(friend.username);
+        friend.getLargeImageBuilder()
+                .context(getContext())
+                .imageView(imageView)
+                .build();
     }
-
-    private void setupImage(String url, String letter){
-        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
-                .letter(letter)
-                .circle(true);
-        if(Utils.presenceOf(url)){
-            builder=builder.url(url);
-        }
-
-        builder.build();
-    }
-
 
     public void setOnClickListener(
             IOnClickItemListHandler<FriendProfile> listener) {

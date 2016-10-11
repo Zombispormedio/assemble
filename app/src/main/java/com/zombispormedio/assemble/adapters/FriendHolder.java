@@ -51,7 +51,7 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IFrie
     }
 
     private void setup() {
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, getView());
     }
 
     @Override
@@ -93,7 +93,7 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IFrie
         emailLabel.setText(friend.email);
 
         friend.getLargeImageBuilder()
-                .context(itemView.getContext())
+                .context(getContext())
                 .imageView(imageView)
                 .build();
     }

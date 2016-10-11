@@ -54,7 +54,7 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
     }
 
     private void setup() {
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, getView());
     }
 
 
@@ -95,7 +95,7 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
         teamLabel.setText(team.name);
 
         team.getMediumImageBuilder()
-                .context(itemView.getContext())
+                .context(getContext())
                 .imageView(teamImage)
                 .build();
     }
@@ -104,7 +104,8 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
         if (meeting.haveLargeImage()) {
 
             meeting.getLargeImageBuilder()
-                    .context(itemView.getContext())
+                    .context(getContext())
+                    .circle(false)
                     .imageView(meetingImage)
                     .build();
 

@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.adapters;
 
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
@@ -14,9 +15,14 @@ public abstract class AbstractHolder<T> extends RecyclerView.ViewHolder {
     }
 
     public void bind(int position, T itemData) {
-
     }
 
+    protected Context getContext(){
+        return itemView.getContext();
+    }
 
+    protected View getView(){
+        return itemView;
+    }
 
 }

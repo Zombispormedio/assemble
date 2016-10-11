@@ -20,6 +20,8 @@ import butterknife.ButterKnife;
 public class ParticipantHolder extends AbstractHolder<FriendProfile> {
 
 
+    private static final int USERNAME_LIMIT = 10;
+
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
@@ -32,7 +34,7 @@ public class ParticipantHolder extends AbstractHolder<FriendProfile> {
     }
 
     private void setup() {
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, getView());
     }
 
     @Override
@@ -41,26 +43,13 @@ public class ParticipantHolder extends AbstractHolder<FriendProfile> {
     }
 
 
-    private void renderData(FriendProfile itemData) {
-        String username=itemData.username;
-
-        if(username.length()>10){
-            username=username.substring(0,10)+"…";
-        }
-
-        usernameLabel.setText(username);
-        setupImage(itemData.large_avatar_url, StringUtils.firstLetter(username));
+    private void renderData(FriendProfile friend) {
+        usernameLabel.setText(friend.getLimitedUsername(USERNAME_LIMIT));
+        friend.getLargeImageBuilder()
+                .context(getContext())
+                .imageView(imageView)
+                .build();
     }
 
-    private void setupImage(String url, String letter) {
-        ImageUtils.ImageBuilder builder = new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
-                .letter(letter)
-                .circle(true);
-        if (Utils.presenceOf(url)) {
-            builder = builder.url(url);
-        }
-
-        builder.build();
-    }
 
 }

@@ -41,8 +41,11 @@ public class MessageHolder extends AbstractHolder<Message> {
     @BindView(R.id.message_state)
     ImageView userImageView;
 
+    private boolean haveSiblings;
+
     public MessageHolder(View itemView) {
         super(itemView);
+        haveSiblings=false;
         setup();
     }
 
@@ -52,66 +55,70 @@ public class MessageHolder extends AbstractHolder<Message> {
 
     @Override
     public void bind(int position, Message message) {
-        renderData(message, false);
+        renderData(message);
     }
 
     public void bind(int position, Message message, Message previous) {
-        boolean haveSiblings=message.sender.id==previous.sender.id;
-        renderData(message, haveSiblings);
+        registerIfHaveSiblings(message, previous);
+        renderData(message);
     }
 
-    public void renderData(Message message, boolean haveSiblings){
+    public void renderData(Message message) {
 
-        if(message.sender instanceof UserProfile){
+        if (message.sender instanceof UserProfile) {
             renderUserMessage(message);
-        }else{
-            renderFriendMessage(message, haveSiblings);
+        } else {
+            renderFriendMessage(message);
         }
     }
 
-    private void renderFriendMessage(Message message, boolean haveSiblings) {
+    private void renderFriendMessage(Message message) {
         showFriend();
+        
         friendContent.setText(message.content);
-        if(haveSiblings){
+        
+        if (haveSiblings) {
             friendImageView.setVisibility(View.INVISIBLE);
-        }else{
-            friendImageView.setVisibility(View.VISIBLE);
-            Profile sender=message.sender;
-            setupFriendImage(sender.medium_avatar_url, StringUtils.firstLetter(sender.username));
+        } else {
+            doIfFriendMessageHaveSiblings(message);
         }
 
     }
 
-    private void setupFriendImage(String path, String letter) {
-        new ImageUtils.ImageBuilder(itemView.getContext(), friendImageView)
-                .url(path)
-                .letter(letter)
-                .circle(true)
+    private void doIfFriendMessageHaveSiblings(Message message) {
+        friendImageView.setVisibility(View.VISIBLE);
+        message.sender.getMediumImageBuilder()
+                .context(getContext())
+                .imageView(friendImageView)
                 .build();
     }
 
     private void renderUserMessage(Message message) {
         showUser();
         userContent.setText(message.content);
-        if(message.is_read){
-            userImageView.setImageResource(R.drawable.message_check_all_layer);
-        }else{
-            if(message.is_sent){
-                userImageView.setImageResource(R.drawable.message_check_layer);
-            }
-        }
+        renderUserMessageState(message);
     }
 
-    private void showFriend(){
+    private void renderUserMessageState(Message message) {
+        if (message.is_read)
+            userImageView.setImageResource(R.drawable.message_check_all_layer);
+        else if (message.is_sent)
+            userImageView.setImageResource(R.drawable.message_check_layer);
+    }
+
+    private void showFriend() {
         friendLayout.setVisibility(View.VISIBLE);
         userLayout.setVisibility(View.GONE);
     }
 
 
-    private void showUser(){
+    private void showUser() {
         userLayout.setVisibility(View.VISIBLE);
         friendLayout.setVisibility(View.GONE);
     }
 
-
+    private void registerIfHaveSiblings(Message that, Message previous){
+        haveSiblings=that.sender.id==previous.sender.id;
+    }
+    
 }

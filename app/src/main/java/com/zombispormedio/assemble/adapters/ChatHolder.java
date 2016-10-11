@@ -44,11 +44,10 @@ public class ChatHolder extends AbstractHolder<Chat> {
         super(view);
         this.listener = null;
         setup();
-
     }
 
     private void setup() {
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, getView());
     }
 
     @Override
@@ -58,7 +57,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
     }
 
     private void setupOnClickListener(final int position, final Chat itemData) {
-        itemView.setOnClickListener(new View.OnClickListener() {
+        getView().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (listener != null) {
@@ -74,7 +73,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
         nameLabel.setText(recipient.username);
 
         recipient.getLargeImageBuilder()
-                .context(itemView.getContext())
+                .context(getContext())
                 .imageView(imageView)
                 .build();
 
@@ -105,7 +104,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
 
 
     private String getString(int id){
-        return itemView.getContext().getString(id);
+        return getContext().getString(id);
     }
 
     public void setOnClickListener(IOnClickItemListHandler<Chat> listener) {

@@ -59,7 +59,7 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     }
 
     private void setup() {
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, getView());
         hideProgress();
     }
 
@@ -96,22 +96,14 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     }
 
 
-    private void renderData(FriendProfile itemData) {
-        usernameLabel.setText(itemData.username);
-        emailLabel.setText(itemData.email);
-        setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
-        setFriendChecked(itemData.in_request);
-    }
-
-    private void setupImage(String url, String letter) {
-        ImageUtils.ImageBuilder builder = new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
-                .letter(letter)
-                .circle(true);
-        if (Utils.presenceOf(url)) {
-            builder = builder.url(url);
-        }
-
-        builder.build();
+    private void renderData(FriendProfile friend) {
+        usernameLabel.setText(friend.username);
+        emailLabel.setText(friend.email);
+        friend.getLargeImageBuilder()
+                .context(getContext())
+                .imageView(imageView)
+                .build();
+        setFriendChecked(friend.in_request);
     }
 
 

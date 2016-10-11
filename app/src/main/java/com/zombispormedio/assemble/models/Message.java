@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.models;
 
 
 import com.zombispormedio.assemble.utils.DateUtils;
+import com.zombispormedio.assemble.utils.StringUtils;
 
 /**
  * Created by Xavier Serrano on 03/10/2016.
@@ -53,13 +54,12 @@ public class Message extends BaseModel {
 
 
     public String getLimitedContent(int limit){
-        return content.length() > 30?ellipseContent(limit):content;
+        return content.length() > limit?ellipseContent(limit):content;
     }
 
     private String ellipseContent(int limit){
-        return content.substring(0, limit) + "…";
+        return StringUtils.ellipse(content, limit);
     }
-
 
     public boolean isCreatedToday(){
         return DateUtils.isToday(created_at);

@@ -49,19 +49,13 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
 
 
     private void renderData(Container data) {
-        FriendProfile itemData=data.getContent();
-        usernameLabel.setText(itemData.username);
+        FriendProfile friend=data.getContent();
+        usernameLabel.setText(friend.username);
 
-        String url=itemData.large_avatar_url;
-        String letter= StringUtils.firstLetter(itemData.username);
-        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
-                .letter(letter)
-                .circle(true);
-        if(Utils.presenceOf(url)){
-            builder=builder.url(url);
-        }
-
-        builder.build();
+        friend.getLargeImageBuilder()
+                .context(getContext())
+                .imageView(imageView)
+                .build();
     }
 
     private void setupOnClickListener(final int position, final Container itemData) {
@@ -74,7 +68,6 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
             }
         });
     }
-
 
 
     public void setOnClickListener(

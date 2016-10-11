@@ -38,7 +38,7 @@ public class TeamHolder extends AbstractHolder<Team> {
     }
 
     private void setup() {
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, getView());
     }
 
     @Override
@@ -58,13 +58,11 @@ public class TeamHolder extends AbstractHolder<Team> {
         });
     }
 
-    private void renderData(Team itemData) {
-        String teamName=itemData.name;
-        nameLabel.setText(teamName);
-        new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
-                .letter(StringUtils.firstLetter(teamName))
-                .circle(true)
-                .url(itemData.large_image_url)
+    private void renderData(Team team) {
+        nameLabel.setText(team.name);
+        team.getLargeImageBuilder()
+                .context(getContext())
+                .imageView(imageView)
                 .build();
     }
 

@@ -55,7 +55,7 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
     }
 
     private void setup() {
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, getView());
     }
 
     @Override
@@ -106,8 +106,9 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
 
     private void renderData(FriendRequestProfile friendRequest) {
         usernameLabel.setText(friendRequest.username);
+
         friendRequest.getLargeImageBuilder()
-                .context(itemView.getContext())
+                .context(getContext())
                 .imageView(imageView)
                 .build();
     }

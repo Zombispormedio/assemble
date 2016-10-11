@@ -66,7 +66,15 @@ public class People extends BaseModel {
                 .circle(true);
     }
 
-    public String getUsernameFirstLetter() {
+    private String getUsernameFirstLetter() {
         return StringUtils.firstLetter(username);
+    }
+
+    public String getLimitedUsername(int limit){
+        return username.length() > limit?ellipseContent(limit):username;
+    }
+
+    private String ellipseContent(int limit){
+        return StringUtils.ellipse(username, limit);
     }
 }

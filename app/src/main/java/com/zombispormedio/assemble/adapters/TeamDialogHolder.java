@@ -35,7 +35,7 @@ public class TeamDialogHolder extends AbstractHolder<Team> {
     }
 
     private void setup() {
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, getView());
     }
 
     @Override
@@ -55,17 +55,13 @@ public class TeamDialogHolder extends AbstractHolder<Team> {
         });
     }
 
-    private void renderData(Team itemData) {
-        String teamName=itemData.name;
-        nameLabel.setText(teamName);
+    private void renderData(Team team) {
+        nameLabel.setText(team.name);
 
-        new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
-                .letter(StringUtils.firstLetter(teamName))
-                .circle(true)
-                .url(itemData.large_image_url)
+        team.getLargeImageBuilder()
+                .context(getContext())
+                .imageView(imageView)
                 .build();
-
-
     }
 
     public void setOnClickListener(IOnClickItemListHandler<Team> listener) {

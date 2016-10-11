@@ -3,9 +3,6 @@ package com.zombispormedio.assemble.adapters;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.StringUtils;
-import com.zombispormedio.assemble.utils.Utils;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -39,9 +36,8 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     }
 
     private void setup() {
-        ButterKnife.bind(this, itemView);
+        ButterKnife.bind(this, getView());
     }
-
 
 
     @Override
@@ -55,7 +51,7 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
         itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(listener!=null){
+                if (listener != null) {
                     listener.onClick(position, itemData);
                 }
             }
@@ -63,26 +59,18 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     }
 
     private void renderData(SelectedContainer data) {
-        FriendProfile item=data.getContent();
-        String username=item.username;
-        usernameLabel.setText(username);
-        setupImage(item.large_avatar_url, StringUtils.firstLetter(username));
-        if(data.isSelected()){
+        FriendProfile friend = data.getContent();
+        usernameLabel.setText(friend.username);
+        friend.getLargeImageBuilder()
+                .context(getContext())
+                .imageView(imageView)
+                .build();
+
+        if (data.isSelected()) {
             selectedIcon.setVisibility(View.VISIBLE);
-        }else{
+        } else {
             selectedIcon.setVisibility(View.GONE);
         }
-    }
-
-    private void setupImage(String url, String letter){
-        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
-                .letter(letter)
-                .circle(true);
-        if(Utils.presenceOf(url)){
-            builder=builder.url(url);
-        }
-
-        builder.build();
     }
 
 
@@ -92,15 +80,18 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     }
 
 
-    public static class SelectedContainer{
+    public static class SelectedContainer {
+
         private FriendProfile content;
+
         private boolean selected;
-        private int seletedMemberIndex;
+
+        private int selectedMemberIndex;
 
         public SelectedContainer(FriendProfile content) {
             this.content = content;
-            this.selected=false;
-            seletedMemberIndex=-1;
+            this.selected = false;
+            selectedMemberIndex = -1;
         }
 
         public FriendProfile getContent() {
@@ -108,24 +99,24 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
         }
 
 
-        public void select(){
-            selected=true;
+        public void select() {
+            selected = true;
         }
 
-        public void deselect(){
-            selected=false;
+        public void deselect() {
+            selected = false;
         }
 
         public boolean isSelected() {
             return selected;
         }
 
-        public int getSeletedMemberIndex() {
-            return seletedMemberIndex;
+        public int getSelectedMemberIndex() {
+            return selectedMemberIndex;
         }
 
-        public void setSeletedMemberIndex(int seletedMemberIndex) {
-            this.seletedMemberIndex = seletedMemberIndex;
+        public void setSelectedMemberIndex(int selectedMemberIndex) {
+            this.selectedMemberIndex = selectedMemberIndex;
         }
     }
 }
