@@ -43,7 +43,7 @@ public class TeamHolder extends AbstractHolder<Team> {
 
     @Override
     public void bind(int position, Team itemData) {
-        bindData(itemData);
+        renderData(itemData);
         setupOnClickListener(position, itemData);
     }
 
@@ -58,17 +58,14 @@ public class TeamHolder extends AbstractHolder<Team> {
         });
     }
 
-    private void bindData(Team itemData) {
+    private void renderData(Team itemData) {
         String teamName=itemData.name;
         nameLabel.setText(teamName);
-
         new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
                 .letter(StringUtils.firstLetter(teamName))
                 .circle(true)
                 .url(itemData.large_image_url)
                 .build();
-
-
     }
 
     public void setOnClickListener(IOnClickItemListHandler<Team> listener) {

@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.adapters;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
@@ -59,7 +60,7 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
     @Override
     public void bind(int position, Meeting itemData) {
-        bindData(itemData);
+        renderData(itemData);
         setupOnClickListener(position, itemData);
     }
 
@@ -74,26 +75,23 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
         });
     }
 
-    private void bindData(Meeting itemData) {
+    private void renderData(Meeting itemData) {
 
         String meetingName = itemData.name;
 
         nameLabel.setText(meetingName);
         frameView.setBackgroundColor(Utils.getColorByString(meetingName));
 
-        String format = itemView.getContext().getString(R.string.simple_date_with_hours);
-        String date = DateUtils.format(format, itemData.start_at);
-        dateLabel.setText(date);
+        renderDate(itemData.start_at);
 
-        if (Utils.presenceOf(itemData.large_image_url)) {
-            new ImageUtils.ImageBuilder(itemView.getContext(), meetingImage)
-                    .url(itemData.large_image_url)
-                    .build();
-        } else {
-            meetingImage.setVisibility(View.INVISIBLE);
-        }
+        renderMeetingImage(itemData.large_image_url);
 
-        String teamName = itemData.team.name;
+        renderTeam(itemData.team);
+
+    }
+
+    private void renderTeam(Team team) {
+        String teamName = team.name;
 
         teamLabel.setText(teamName);
 
@@ -101,15 +99,29 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
                 .letter(StringUtils.firstLetter(teamName))
                 .circle(true);
 
-        String teamImageUrl = itemData.team.medium_image_url;
+        String teamImageUrl = team.medium_image_url;
 
         if (Utils.presenceOf(teamImageUrl)) {
             teamImageBuilder.url(teamImageUrl);
         }
 
         teamImageBuilder.build();
+    }
 
+    private void renderMeetingImage(String imagePath) {
+        if (Utils.presenceOf(imagePath)) {
+            new ImageUtils.ImageBuilder(itemView.getContext(), meetingImage)
+                    .url(imagePath)
+                    .build();
+        } else {
+            meetingImage.setVisibility(View.INVISIBLE);
+        }
+    }
 
+    private void renderDate(String startAt) {
+        String format = itemView.getContext().getString(R.string.simple_date_with_hours);
+        String date = DateUtils.format(format, startAt);
+        dateLabel.setText(date);
     }
 
     public void setOnClickListener(IOnClickItemListHandler<Meeting> listener) {

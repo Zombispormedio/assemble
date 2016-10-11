@@ -56,7 +56,7 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IFrie
 
     @Override
     public void bind(int position, FriendProfile itemData) {
-        bindData(itemData);
+        renderData(itemData);
         setupOnClickListener(position, itemData);
         setupOnClickRemoveButton(position, itemData);
     }
@@ -88,7 +88,7 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IFrie
     }
 
 
-    private void bindData(FriendProfile itemData) {
+    private void renderData(FriendProfile itemData) {
         usernameLabel.setText(itemData.username);
         emailLabel.setText(itemData.email);
         setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));

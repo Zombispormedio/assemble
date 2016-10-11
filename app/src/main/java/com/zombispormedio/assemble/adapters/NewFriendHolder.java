@@ -65,7 +65,7 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
 
     @Override
     public void bind(int position, FriendProfile itemData) {
-        bindData(itemData);
+        renderData(itemData);
         setupOnClickListener(position, itemData);
         setupAddFriendButton(position, itemData);
 
@@ -96,13 +96,11 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     }
 
 
-    private void bindData(FriendProfile itemData) {
+    private void renderData(FriendProfile itemData) {
         usernameLabel.setText(itemData.username);
         emailLabel.setText(itemData.email);
         setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
-
         setFriendChecked(itemData.in_request);
-
     }
 
     private void setupImage(String url, String letter) {

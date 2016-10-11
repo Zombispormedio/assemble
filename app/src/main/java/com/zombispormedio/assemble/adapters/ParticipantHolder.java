@@ -37,11 +37,11 @@ public class ParticipantHolder extends AbstractHolder<FriendProfile> {
 
     @Override
     public void bind(int position, FriendProfile itemData) {
-        bindData(itemData);
+        renderData(itemData);
     }
 
 
-    private void bindData(FriendProfile itemData) {
+    private void renderData(FriendProfile itemData) {
         String username=itemData.username;
 
         if(username.length()>10){
@@ -49,7 +49,7 @@ public class ParticipantHolder extends AbstractHolder<FriendProfile> {
         }
 
         usernameLabel.setText(username);
-        setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
+        setupImage(itemData.large_avatar_url, StringUtils.firstLetter(username));
     }
 
     private void setupImage(String url, String letter) {

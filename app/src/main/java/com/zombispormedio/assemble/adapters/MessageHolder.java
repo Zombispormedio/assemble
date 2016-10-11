@@ -52,24 +52,24 @@ public class MessageHolder extends AbstractHolder<Message> {
 
     @Override
     public void bind(int position, Message message) {
-        bindData(message, false);
+        renderData(message, false);
     }
 
     public void bind(int position, Message message, Message previous) {
         boolean haveSiblings=message.sender.id==previous.sender.id;
-        bindData(message, haveSiblings);
+        renderData(message, haveSiblings);
     }
 
-    public void bindData(Message message, boolean haveSiblings){
+    public void renderData(Message message, boolean haveSiblings){
 
         if(message.sender instanceof UserProfile){
-            bindUserMessage(message);
+            renderUserMessage(message);
         }else{
-            bindFriendMessage(message, haveSiblings);
+            renderFriendMessage(message, haveSiblings);
         }
     }
 
-    private void bindFriendMessage(Message message, boolean haveSiblings) {
+    private void renderFriendMessage(Message message, boolean haveSiblings) {
         showFriend();
         friendContent.setText(message.content);
         if(haveSiblings){
@@ -90,7 +90,7 @@ public class MessageHolder extends AbstractHolder<Message> {
                 .build();
     }
 
-    private void bindUserMessage(Message message) {
+    private void renderUserMessage(Message message) {
         showUser();
         userContent.setText(message.content);
         if(message.is_read){

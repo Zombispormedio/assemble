@@ -39,7 +39,7 @@ public class PreviewFriendHolder extends AbstractHolder<FriendProfile> {
 
     @Override
     public void bind(int position, FriendProfile itemData) {
-        bindData(itemData);
+        renderData(itemData);
         setupOnClickListener(position, itemData);
     }
 
@@ -55,7 +55,7 @@ public class PreviewFriendHolder extends AbstractHolder<FriendProfile> {
         });
     }
 
-    private void bindData(FriendProfile itemData) {
+    private void renderData(FriendProfile itemData) {
         usernameLabel.setText(itemData.username);
         setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
 

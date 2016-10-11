@@ -60,7 +60,7 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
 
     @Override
     public void bind(int position, FriendRequestProfile itemData) {
-        bindData(itemData);
+        renderData(itemData);
         setupOnClickListener(position, itemData);
         setupAcceptButton(position, itemData);
         setupRejectButton(position, itemData);
@@ -104,7 +104,7 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
     }
 
 
-    private void bindData(FriendRequestProfile itemData) {
+    private void renderData(FriendRequestProfile itemData) {
         usernameLabel.setText(itemData.username);
         setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
     }

@@ -46,7 +46,7 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
 
     @Override
     public void bind(int position, SelectedContainer itemData) {
-        bindData(itemData);
+        renderData(itemData);
         setupOnClickListener(position, itemData);
     }
 
@@ -62,10 +62,11 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
         });
     }
 
-    private void bindData(SelectedContainer data) {
-        FriendProfile itemData=data.getContent();
-        usernameLabel.setText(itemData.username);
-        setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
+    private void renderData(SelectedContainer data) {
+        FriendProfile item=data.getContent();
+        String username=item.username;
+        usernameLabel.setText(username);
+        setupImage(item.large_avatar_url, StringUtils.firstLetter(username));
         if(data.isSelected()){
             selectedIcon.setVisibility(View.VISIBLE);
         }else{

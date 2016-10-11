@@ -40,7 +40,7 @@ public class TeamDialogHolder extends AbstractHolder<Team> {
 
     @Override
     public void bind(int position, Team itemData) {
-        bindData(itemData);
+        renderData(itemData);
         setupOnClickListener(position, itemData);
     }
 
@@ -55,7 +55,7 @@ public class TeamDialogHolder extends AbstractHolder<Team> {
         });
     }
 
-    private void bindData(Team itemData) {
+    private void renderData(Team itemData) {
         String teamName=itemData.name;
         nameLabel.setText(teamName);
 

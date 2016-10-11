@@ -43,12 +43,12 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
 
     @Override
     public void bind(int position, Container itemData) {
-        bindData(itemData);
+        renderData(itemData);
         setupOnClickListener(position, itemData);
     }
 
 
-    private void bindData(Container data) {
+    private void renderData(Container data) {
         FriendProfile itemData=data.getContent();
         usernameLabel.setText(itemData.username);
 
