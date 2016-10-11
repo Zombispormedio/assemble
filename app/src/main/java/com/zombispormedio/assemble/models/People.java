@@ -1,10 +1,14 @@
 package com.zombispormedio.assemble.models;
 
 
+import com.zombispormedio.assemble.utils.ImageUtils;
+import com.zombispormedio.assemble.utils.StringUtils;
+import com.zombispormedio.assemble.utils.Utils;
+
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
-public class People extends BaseModel{
+public class People extends BaseModel {
 
     public String email;
 
@@ -33,5 +37,36 @@ public class People extends BaseModel{
         super(0);
         this.email = "";
         this.username = "";
+    }
+
+    public ImageUtils.ImageBuilder getLargeImageBuilder() {
+        return getImageBuilder(large_avatar_url);
+    }
+
+    public ImageUtils.ImageBuilder getFullImageBuilder() {
+        return getImageBuilder(full_avatar_url);
+    }
+
+    public ImageUtils.ImageBuilder getMediumImageBuilder() {
+        return getImageBuilder(medium_avatar_url);
+    }
+
+    public ImageUtils.ImageBuilder getThumbImageBuilder() {
+        return getImageBuilder(thumb_avatar_url);
+    }
+
+
+    private ImageUtils.ImageBuilder getImageBuilder(String path) {
+        ImageUtils.ImageBuilder builder = new ImageUtils.ImageBuilder();
+        if (Utils.presenceOf(path)) {
+            builder.url(path);
+        }
+        return builder
+                .letter(getUsernameFirstLetter())
+                .circle(true);
+    }
+
+    public String getUsernameFirstLetter() {
+        return StringUtils.firstLetter(username);
     }
 }

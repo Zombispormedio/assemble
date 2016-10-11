@@ -68,19 +68,18 @@ public class ChatHolder extends AbstractHolder<Chat> {
         });
     }
 
-    private void renderData(Chat itemData) {
-        FriendProfile recipient = itemData.recipient;
+    private void renderData(Chat chat) {
+        FriendProfile recipient = chat.recipient;
 
-        String recipientName = recipient.username;
-        nameLabel.setText(recipientName);
+        nameLabel.setText(recipient.username);
 
-        renderLastMessage(itemData.messages);
-
-        new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
-                .url(recipient.large_avatar_url)
-                .letter(StringUtils.firstLetter(recipientName))
-                .circle(true)
+        recipient.getLargeImageBuilder()
+                .context(itemView.getContext())
+                .imageView(imageView)
                 .build();
+
+        renderLastMessage(chat.messages);
+
     }
 
     private void renderLastMessage(Message[] messages) {

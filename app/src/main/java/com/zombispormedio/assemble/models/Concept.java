@@ -1,5 +1,9 @@
 package com.zombispormedio.assemble.models;
 
+import com.zombispormedio.assemble.utils.ImageUtils;
+import com.zombispormedio.assemble.utils.StringUtils;
+import com.zombispormedio.assemble.utils.Utils;
+
 /**
  * Created by Xavier Serrano on 03/09/2016.
  */
@@ -36,4 +40,58 @@ public abstract class Concept extends BaseModel {
         super(0);
         this.name = "";
     }
+
+
+    public boolean haveMediumImage() {
+        return have(medium_image_url);
+    }
+
+    public boolean haveLargeImage() {
+        return have(large_image_url);
+    }
+
+    public boolean haveFullImage() {
+        return have(full_image_url);
+    }
+
+    public boolean haveThumbImage() {
+        return have(thumb_image_url);
+    }
+
+    private boolean have(String path) {
+        return Utils.presenceOf(path);
+    }
+
+
+    public ImageUtils.ImageBuilder getLargeImageBuilder() {
+        return getImageBuilder(large_image_url);
+    }
+
+    public ImageUtils.ImageBuilder getFullImageBuilder() {
+        return getImageBuilder(full_image_url);
+    }
+
+    public ImageUtils.ImageBuilder getMediumImageBuilder() {
+        return getImageBuilder(medium_image_url);
+    }
+
+    public ImageUtils.ImageBuilder getThumbImageBuilder() {
+        return getImageBuilder(thumb_image_url);
+    }
+
+
+    private ImageUtils.ImageBuilder getImageBuilder(String path) {
+        ImageUtils.ImageBuilder builder = new ImageUtils.ImageBuilder();
+        if (Utils.presenceOf(path)) {
+            builder.url(path);
+        }
+        return builder
+                .letter(getNameFirstLetter())
+                .circle(true);
+    }
+
+    public String getNameFirstLetter() {
+        return StringUtils.firstLetter(name);
+    }
+
 }

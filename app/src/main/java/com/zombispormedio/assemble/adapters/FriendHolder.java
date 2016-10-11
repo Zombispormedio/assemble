@@ -88,21 +88,14 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IFrie
     }
 
 
-    private void renderData(FriendProfile itemData) {
-        usernameLabel.setText(itemData.username);
-        emailLabel.setText(itemData.email);
-        setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
-    }
+    private void renderData(FriendProfile friend) {
+        usernameLabel.setText(friend.username);
+        emailLabel.setText(friend.email);
 
-    private void setupImage(String url, String letter){
-        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
-                .letter(letter)
-                .circle(true);
-        if(Utils.presenceOf(url)){
-            builder=builder.url(url);
-        }
-
-        builder.build();
+        friend.getLargeImageBuilder()
+                .context(itemView.getContext())
+                .imageView(imageView)
+                .build();
     }
 
 

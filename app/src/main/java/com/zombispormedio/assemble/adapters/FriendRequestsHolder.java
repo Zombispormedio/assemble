@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> implements IFriendRequestHolder{
+public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> implements IFriendRequestHolder {
 
 
     private IOnClickItemListHandler<FriendRequestProfile> listener;
@@ -49,8 +49,8 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
     public FriendRequestsHolder(View view) {
         super(view);
         this.listener = null;
-        this.rejectListener=null;
-        this.acceptListener=null;
+        this.rejectListener = null;
+        this.acceptListener = null;
         setup();
     }
 
@@ -80,11 +80,11 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
     }
 
     private void setupAcceptButton(final int position, final FriendRequestProfile itemData) {
-        final IFriendRequestHolder holder=this;
+        final IFriendRequestHolder holder = this;
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(acceptListener!=null){
+                if (acceptListener != null) {
                     acceptListener.onClick(position, itemData, holder);
                 }
             }
@@ -92,11 +92,11 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
     }
 
     private void setupRejectButton(final int position, final FriendRequestProfile itemData) {
-        final IFriendRequestHolder holder=this;
+        final IFriendRequestHolder holder = this;
         rejectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(rejectListener!=null){
+                if (rejectListener != null) {
                     rejectListener.onClick(position, itemData, holder);
                 }
             }
@@ -104,19 +104,12 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
     }
 
 
-    private void renderData(FriendRequestProfile itemData) {
-        usernameLabel.setText(itemData.username);
-        setupImage(itemData.large_avatar_url, StringUtils.firstLetter(itemData.username));
-    }
-
-    private void setupImage(String url, String letter){
-        ImageUtils.ImageBuilder builder=new ImageUtils.ImageBuilder(itemView.getContext(), imageView)
-                .letter(letter)
-                .circle(true);
-        if(Utils.presenceOf(url)){
-            builder=builder.url(url);
-        }
-        builder.build();
+    private void renderData(FriendRequestProfile friendRequest) {
+        usernameLabel.setText(friendRequest.username);
+        friendRequest.getLargeImageBuilder()
+                .context(itemView.getContext())
+                .imageView(imageView)
+                .build();
     }
 
     public void setOnClickListener(IOnClickItemListHandler<FriendRequestProfile> listener) {

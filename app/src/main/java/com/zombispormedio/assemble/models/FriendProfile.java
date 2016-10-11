@@ -21,4 +21,5 @@ public class FriendProfile extends Profile {
     public FriendProfile() {
         super();
     }
+
 }

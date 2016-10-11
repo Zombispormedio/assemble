@@ -75,44 +75,39 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
         });
     }
 
-    private void renderData(Meeting itemData) {
+    private void renderData(Meeting meeting) {
 
-        String meetingName = itemData.name;
+        String meetingName = meeting.name;
 
         nameLabel.setText(meetingName);
         frameView.setBackgroundColor(Utils.getColorByString(meetingName));
 
-        renderDate(itemData.start_at);
+        renderDate(meeting.start_at);
 
-        renderMeetingImage(itemData.large_image_url);
+        renderMeetingImage(meeting);
 
-        renderTeam(itemData.team);
+        renderTeam(meeting.team);
 
     }
 
     private void renderTeam(Team team) {
-        String teamName = team.name;
 
-        teamLabel.setText(teamName);
+        teamLabel.setText(team.name);
 
-        ImageUtils.ImageBuilder teamImageBuilder = new ImageUtils.ImageBuilder(itemView.getContext(), teamImage)
-                .letter(StringUtils.firstLetter(teamName))
-                .circle(true);
-
-        String teamImageUrl = team.medium_image_url;
-
-        if (Utils.presenceOf(teamImageUrl)) {
-            teamImageBuilder.url(teamImageUrl);
-        }
-
-        teamImageBuilder.build();
+        team.getMediumImageBuilder()
+                .context(itemView.getContext())
+                .imageView(teamImage)
+                .build();
     }
 
-    private void renderMeetingImage(String imagePath) {
-        if (Utils.presenceOf(imagePath)) {
-            new ImageUtils.ImageBuilder(itemView.getContext(), meetingImage)
-                    .url(imagePath)
+    private void renderMeetingImage(Meeting meeting) {
+        if (meeting.haveLargeImage()) {
+
+            meeting.getLargeImageBuilder()
+                    .context(itemView.getContext())
+                    .imageView(meetingImage)
                     .build();
+
         } else {
             meetingImage.setVisibility(View.INVISIBLE);
         }
