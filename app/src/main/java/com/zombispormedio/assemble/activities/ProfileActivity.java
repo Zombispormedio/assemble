@@ -164,6 +164,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     protected void onDestroy() {
         super.onDestroy();
         ctrl.onDestroy();
+        externalNavigationManager.onDestroy();
     }
 
     @Override

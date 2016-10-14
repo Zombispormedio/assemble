@@ -118,7 +118,6 @@ public class ChatController extends Controller {
         @Override
         public void notifyChange() {
             renderChat();
-            Logger.d("Notification received");
         }
     }
 

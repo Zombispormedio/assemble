@@ -51,4 +51,8 @@ public class PreferencesManager {
         editor.apply();
     }
 
+    public void onDestroy(){
+        ctx=null;
+    }
+
 }

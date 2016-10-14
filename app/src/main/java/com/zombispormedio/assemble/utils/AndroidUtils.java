@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.TextInputLayout;
+import android.support.v4.util.ArrayMap;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -119,9 +120,9 @@ public final class AndroidUtils {
             input.setError(message);
         }
 
-        public void preventLeakMemoryOnDestroy(){
-            input=null;
-            layout=null;
+        public void preventLeakMemoryOnDestroy() {
+            input = null;
+            layout = null;
         }
     }
 
@@ -146,10 +147,10 @@ public final class AndroidUtils {
                 ctx.setBio("");
             }
 
-            try {
+            if(Utils.presenceOf(profile.birth_date)){
                 ctx.setBirthDate(profile.birth_date);
-            } catch (Exception e) {
-                Logger.d(e.getMessage());
+            }else{
+                ctx.setBirthDate("");
             }
 
         }
@@ -216,7 +217,7 @@ public final class AndroidUtils {
             itemAnimator = null;
             isGrid = false;
             spanCount = 0;
-            stackFromEnd=false;
+            stackFromEnd = false;
         }
 
         public ListConfiguration orientation(int orientation) {
@@ -255,7 +256,7 @@ public final class AndroidUtils {
         }
 
         public ListConfiguration startAtEnd(boolean start) {
-            this.stackFromEnd=start;
+            this.stackFromEnd = start;
             return this;
         }
 
@@ -307,7 +308,7 @@ public final class AndroidUtils {
                 layout = getGrid();
             } else {
                 layout = getLinear();
-                if(stackFromEnd){
+                if (stackFromEnd) {
                     ((LinearLayoutManager) layout).setStackFromEnd(true);
 
                 }
@@ -331,20 +332,20 @@ public final class AndroidUtils {
                 }
             }
 
-            ctx=null;
+            ctx = null;
 
 
         }
     }
 
-    public static String formatDate(Context ctx, int strID, String date){
-        String format=ctx.getString(strID);
+    public static String formatDate(Context ctx, int strID, String date) {
+        String format = ctx.getString(strID);
         return DateUtils.format(format, date);
     }
 
 
-    public static BottomSheetDialog createImageUploaderBottomSheet(Context ctx, BottomSheetItemClickListener listener){
-       return new BottomSheetBuilder(ctx, R.style.AppTheme_BottomSheetDialog)
+    public static BottomSheetDialog createImageUploaderBottomSheet(Context ctx, BottomSheetItemClickListener listener) {
+        return new BottomSheetBuilder(ctx, R.style.AppTheme_BottomSheetDialog)
                 .setMode(BottomSheetBuilder.MODE_LIST)
                 .setBackground(R.color.colorWhite)
                 .setMenu(R.menu.menu_bottom_sheet)
@@ -352,14 +353,27 @@ public final class AndroidUtils {
                 .createDialog();
     }
 
-    public static HashMap<String, String> convertBundleToStringHashMap(Bundle bundle){
-        HashMap<String, String> hash=new HashMap<>();
+    public static HashMap<String, String> convertBundleToStringHashMap(Bundle bundle) {
+        HashMap<String, String> hash = new HashMap<>();
 
         for (String key : bundle.keySet()) {
-            Object value=bundle.get(key);
-            if(value instanceof String){
-                hash.put(key, (String)value);
+            Object value = bundle.get(key);
+            if (value instanceof String) {
+                hash.put(key, (String) value);
             }
+        }
+
+        return hash;
+    }
+
+    public static HashMap<String, String> convertArrayMapToHashMap(ArrayMap<String, String> map) {
+        HashMap<String, String> hash = new HashMap<>();
+
+        for (String key : map.keySet()) {
+            String value = map.get(key);
+
+            hash.put(key, value);
+
         }
 
         return hash;

@@ -2,15 +2,19 @@ package com.zombispormedio.assemble.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.models.services.api.APIConfiguration;
+import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.services.MessagingIDService;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.PreferencesManager;
@@ -21,50 +25,32 @@ import butterknife.ButterKnife;
 public class BaseActivity extends AppCompatActivity implements IBaseView {
 
 
-    private PreferencesManager preferencesManager;
-
     public static final String AUTH = "token";
 
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        preferencesManager = new PreferencesManager(this);
-    }
-
+    /*********Authentication*****/
     public String getAuthToken() {
-        return preferencesManager.getString(AUTH);
+        return getPreferencesManager().getString(AUTH);
     }
 
     @Override
     public void setAuthToken(String token) {
-        preferencesManager.set(AUTH, token);
+        getPreferencesManager().set(AUTH, token);
         APIConfiguration.getInstance().setToken(token);
     }
 
     @Override
     public void clearAuthToken() {
-        preferencesManager.remove(AUTH);
+        getPreferencesManager().remove(AUTH);
         APIConfiguration.getInstance().clearToken();
     }
+    /*******************/
 
-    protected PreferencesManager getPreferencesManager() {
-        return preferencesManager;
-    }
+
+    /*******UI****/
 
     public void showAlert(String msg) {
         AndroidUtils.showAlert(this, msg);
     }
-
-    @Override
-    public String getMessagingId() {
-        return preferencesManager.getString(MessagingIDService.MESSAGING_ID);
-    }
-
-    @Override
-    public void removeMessagingId() {
-        preferencesManager.remove(MessagingIDService.MESSAGING_ID);
-    }
-
 
     protected void setupToolbar() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -84,12 +70,6 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     protected void bindActivity(Activity target) {
         ButterKnife.bind(target);
     }
-
-    @Override
-    public ResourceComponent getResourceComponent() {
-        return ((AssembleApplication) getApplication()).getResourceComponent();
-    }
-
 
     protected void setSubtitle(int id) {
         ActionBar actionBar = getSupportActionBar();
@@ -112,5 +92,36 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
             actionBar.setTitle(title);
         }
     }
+
+    /************************************************/
+
+    /******************Getters***********/
+
+    @Override
+    public ResourceComponent getResourceComponent() {
+        return ((AssembleApplication) getApplication()).getResourceComponent();
+    }
+
+    protected PreferencesManager getPreferencesManager() {
+        return ((AssembleApplication) getApplication()).getPreferencesManager();
+    }
+    /************************************************/
+
+    /**********************Messaging******************/
+
+    @Override
+    public String getMessagingId() {
+        return getPreferencesManager().getString(MessagingIDService.MESSAGING_ID);
+    }
+
+    @Override
+    public void removeMessagingId() {
+        getPreferencesManager().remove(MessagingIDService.MESSAGING_ID);
+    }
+
+
+
+
+
 
 }

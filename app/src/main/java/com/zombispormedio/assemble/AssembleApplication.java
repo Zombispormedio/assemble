@@ -14,14 +14,17 @@ import com.zombispormedio.assemble.models.modules.SubscriptionModule;
 import com.zombispormedio.assemble.models.services.api.APIConfiguration;
 import com.zombispormedio.assemble.net.ConnectionState;
 import com.zombispormedio.assemble.utils.PreferencesManager;
+import com.zombispormedio.assemble.utils.RunningActivity;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Bundle;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -33,11 +36,8 @@ import io.realm.RealmConfiguration;
 public class AssembleApplication extends Application implements IAssembleApplication {
 
 
-    public final static String RUNNING_ACTIVITY = "running_activity";
-
     private final static String[] REFERENCES_TO_RESET_ON_START = new String[]{
             HomeActivity.LOADED,
-            AssembleApplication.RUNNING_ACTIVITY,
             ChatActivity.CHAT_ID
     };
 
@@ -56,6 +56,7 @@ public class AssembleApplication extends Application implements IAssembleApplica
         LeakCanary.install(this);
         JodaTimeAndroid.init(this);
         ConnectionState.getInstance().setContext(this);
+        registerActivityLifecycleCallbacks(new RunningActivity());
 
         preferencesManager = new PreferencesManager(this);
 
@@ -72,6 +73,8 @@ public class AssembleApplication extends Application implements IAssembleApplica
 
         setupAPI();
     }
+
+
 
     private void setupAPI() {
         String token=preferencesManager.getString(BaseActivity.AUTH);
@@ -97,23 +100,23 @@ public class AssembleApplication extends Application implements IAssembleApplica
             public void uncaughtException(Thread t, Throwable e) {
                 FirebaseCrash.report(e);
                 e.printStackTrace();
-                System.exit(0);
+                //System.exit(0);
             }
         });
     }
 
+    public PreferencesManager getPreferencesManager() {
+        return preferencesManager;
+    }
 
     public ResourceComponent getResourceComponent() {
         return resourceComponent;
     }
 
     private void setupPreferences() {
-
-
         for (String key : REFERENCES_TO_RESET_ON_START) {
             preferencesManager.remove(key);
         }
-
     }
 
 
@@ -132,5 +135,8 @@ public class AssembleApplication extends Application implements IAssembleApplica
     public void onTerminate() {
         super.onTerminate();
         ConnectionState.getInstance().onTerminate();
+        preferencesManager.onDestroy();
     }
+
+
 }

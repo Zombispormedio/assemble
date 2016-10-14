@@ -50,6 +50,10 @@ public class ExternalNavigationManager {
         this.ctx = ctx;
     }
 
+    public void onDestroy(){
+        ctx=null;
+    }
+
 
     public void dispatchGalleryToSelectImage(int title) {
 

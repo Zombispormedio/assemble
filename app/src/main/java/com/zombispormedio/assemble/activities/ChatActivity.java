@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.RecyclerView;
@@ -147,15 +148,12 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
 
     private void registerIDToMessagingService(int dataId) {
-        PreferencesManager preferencesManager = getPreferencesManager();
-        preferencesManager.set(AssembleApplication.RUNNING_ACTIVITY, getClass().getName());
-        preferencesManager.set(CHAT_ID, dataId);
+        getPreferencesManager().set(CHAT_ID, dataId);
     }
 
+
     private void unregisterIDToMessagingService() {
-        PreferencesManager preferencesManager = getPreferencesManager();
-        preferencesManager.remove(AssembleApplication.RUNNING_ACTIVITY);
-        preferencesManager.remove(CHAT_ID);
+        getPreferencesManager().remove(CHAT_ID);
     }
 
 
@@ -186,18 +184,14 @@ public class ChatActivity extends BaseActivity implements IChatView {
     private void goBack() {
         Intent upIntent = NavUtils.getParentActivityIntent(this);
         if (fromNotification) {
-            // This activity is NOT part of this app's task, so create a new task
-            // when navigating up, with a synthesized back stack.
             TaskStackBuilder.create(this)
-                    // Add all of this activity's parents to the back stack
                     .addNextIntentWithParentStack(upIntent)
-                    // Navigate up to the closest parent
                     .startActivities();
         } else {
-            // This activity is part of this app's task, so simply
-            // navigate up to the logical parent activity.
             NavUtils.navigateUpTo(this, upIntent);
         }
     }
+
+
 
 }

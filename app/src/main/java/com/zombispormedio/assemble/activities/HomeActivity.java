@@ -19,6 +19,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import android.preference.PreferenceManager;
+
 
 import com.zombispormedio.assemble.adapters.pagers.HomePagerAdapter;
 import com.zombispormedio.assemble.controllers.HomeController;
