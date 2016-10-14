@@ -179,20 +179,19 @@
                     />
         </activity>
         <activity
-                android:name=".activities.ChatActivity"
+                android:name="com.zombispormedio.assemble.activities.ChatActivity"
                 android:label="@string/app_name"
-                android:parentActivityName=".activities.HomeActivity"
+                android:parentActivityName="com.zombispormedio.assemble.activities.HomeActivity"
                 android:theme="@style/AppTheme"
                 >
-            <meta-data
-                    android:name="android.support.PARENT_ACTIVITY"
-                    android:value="com.zombispormedio.assemble.activities.HomeActivity"
-                    />
             <intent-filter>
                 <action android:name="NEW_MESSAGE_ACTION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
+            <meta-data
+                    android:name="android.support.PARENT_ACTIVITY"
+                    android:value="com.zombispormedio.assemble.activities.HomeActivity"
+                    />
         </activity>
 
         <service android:name="com.zombispormedio.assemble.services.MessagingService">

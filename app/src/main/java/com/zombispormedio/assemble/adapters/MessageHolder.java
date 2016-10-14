@@ -1,11 +1,10 @@
 package com.zombispormedio.assemble.adapters;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.models.Profile;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.StringUtils;
+import com.zombispormedio.assemble.models.modules.LoaderModule;
 
 
 import android.view.View;
@@ -41,11 +40,11 @@ public class MessageHolder extends AbstractHolder<Message> {
     @BindView(R.id.message_state)
     ImageView userImageView;
 
-    private boolean haveSiblings;
+    private boolean isRoot;
 
     public MessageHolder(View itemView) {
         super(itemView);
-        haveSiblings=false;
+        isRoot = false;
         setup();
     }
 
@@ -55,11 +54,12 @@ public class MessageHolder extends AbstractHolder<Message> {
 
     @Override
     public void bind(int position, Message message) {
+        isRoot = true;
         renderData(message);
     }
 
     public void bind(int position, Message message, Message previous) {
-        registerIfHaveSiblings(message, previous);
+        registerIfIsRoot(message, previous);
         renderData(message);
     }
 
@@ -74,18 +74,18 @@ public class MessageHolder extends AbstractHolder<Message> {
 
     private void renderFriendMessage(Message message) {
         showFriend();
-        
+
         friendContent.setText(message.content);
-        
-        if (haveSiblings) {
-            friendImageView.setVisibility(View.INVISIBLE);
+        if (isRoot) {
+            doIfRootFriendMessage(message);
+
         } else {
-            doIfFriendMessageHaveSiblings(message);
+            friendImageView.setVisibility(View.INVISIBLE);
         }
 
     }
 
-    private void doIfFriendMessageHaveSiblings(Message message) {
+    private void doIfRootFriendMessage(Message message) {
         friendImageView.setVisibility(View.VISIBLE);
         message.sender.getMediumImageBuilder()
                 .context(getContext())
@@ -100,10 +100,11 @@ public class MessageHolder extends AbstractHolder<Message> {
     }
 
     private void renderUserMessageState(Message message) {
-        if (message.is_read)
+        if (message.is_read) {
             userImageView.setImageResource(R.drawable.message_check_all_layer);
-        else if (message.is_sent)
+        } else if (message.is_sent) {
             userImageView.setImageResource(R.drawable.message_check_layer);
+        }
     }
 
     private void showFriend() {
@@ -117,8 +118,8 @@ public class MessageHolder extends AbstractHolder<Message> {
         friendLayout.setVisibility(View.GONE);
     }
 
-    private void registerIfHaveSiblings(Message that, Message previous){
-        haveSiblings=that.sender.id==previous.sender.id;
+    private void registerIfIsRoot(Message that, Message previous) {
+        isRoot = that.sender.id != previous.sender.id;
     }
-    
+
 }

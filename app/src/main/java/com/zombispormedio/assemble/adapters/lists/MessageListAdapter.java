@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.adapters.lists;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.MessageHolder;
 import com.zombispormedio.assemble.models.Message;
@@ -22,8 +23,9 @@ public class MessageListAdapter extends BaseListAdapter<Message, MessageHolder> 
     @Override
     public void onBindViewHolder(MessageHolder holder, int position) {
         Message item=data.get(position);
+        int prev=position-1;
         if(position>0){
-            holder.bind(position, item, data.get(position-1));
+            holder.bind(position, item, data.get(prev));
         }else{
             holder.bind(position, item);
         }

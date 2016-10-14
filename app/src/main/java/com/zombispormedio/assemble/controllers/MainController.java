@@ -29,8 +29,6 @@ public class MainController extends Controller {
             ctx.goToLogin();
         } else {
 
-            APIConfiguration.getInstance().setToken(token);
-
             user.checkAccess(new ServiceHandler<Result, Error>() {
                 @Override
                 public void onError(Error error) {

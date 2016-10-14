@@ -2,9 +2,12 @@ package com.zombispormedio.assemble.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 
+import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 
@@ -22,7 +25,6 @@ import com.zombispormedio.assemble.views.activities.IChatView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -46,13 +48,16 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
     private MessageListAdapter messageListAdapter;
 
+    private boolean fromNotification;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         setupToolbar();
         bindActivity(this);
-
+        fromNotification = false;
         int chatId = setupController();
 
         registerIDToMessagingService(chatId);
@@ -67,11 +72,12 @@ public class ChatActivity extends BaseActivity implements IChatView {
         String action = intent.getAction();
         int chatId;
         Bundle extra = intent.getExtras();
+
         if (NEW_MESSAGE_ACTION.equals(action)) {
             HashMap<String, String> message = AndroidUtils.convertBundleToStringHashMap(extra);
             ctrl = new ChatController(this, message);
-            chatId=Integer.parseInt(message.get(CHAT_ID));
-
+            chatId = Integer.parseInt(message.get(CHAT_ID));
+            fromNotification = true;
         } else {
             chatId = extra.getInt(NavigationManager.ARGS + 0);
             ctrl = new ChatController(this, chatId);
@@ -146,7 +152,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
         preferencesManager.set(CHAT_ID, dataId);
     }
 
-    private void unregisterIDToMessageginService() {
+    private void unregisterIDToMessagingService() {
         PreferencesManager preferencesManager = getPreferencesManager();
         preferencesManager.remove(AssembleApplication.RUNNING_ACTIVITY);
         preferencesManager.remove(CHAT_ID);
@@ -157,6 +163,41 @@ public class ChatActivity extends BaseActivity implements IChatView {
     protected void onDestroy() {
         super.onDestroy();
         ctrl.onDestroy();
-        unregisterIDToMessageginService();
+        unregisterIDToMessagingService();
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                goBack();
+
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        goBack();
+    }
+
+    private void goBack() {
+        Intent upIntent = NavUtils.getParentActivityIntent(this);
+        if (fromNotification) {
+            // This activity is NOT part of this app's task, so create a new task
+            // when navigating up, with a synthesized back stack.
+            TaskStackBuilder.create(this)
+                    // Add all of this activity's parents to the back stack
+                    .addNextIntentWithParentStack(upIntent)
+                    // Navigate up to the closest parent
+                    .startActivities();
+        } else {
+            // This activity is part of this app's task, so simply
+            // navigate up to the logical parent activity.
+            NavUtils.navigateUpTo(this, upIntent);
+        }
+    }
+
 }

@@ -40,6 +40,10 @@ public final class NavigationManager {
 
     }
 
+    public void onDestroy(){
+        ctx=null;
+    }
+
 
     private static void goTo(Context ctx, Class<?> cls) {
         Intent dst = new Intent(ctx, cls);

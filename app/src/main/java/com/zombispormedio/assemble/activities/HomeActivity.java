@@ -342,5 +342,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     protected void onDestroy() {
         super.onDestroy();
         ctrl.onDestroy();
+        navigation.onDestroy();
     }
 }
