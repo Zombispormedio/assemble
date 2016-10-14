@@ -25,27 +25,6 @@ public class UtilsUnitTest {
     }
 
 
-    @Test
-    public void test_merge_builder() throws Exception {
-
-        UserProfile profile1=new UserProfile();
-
-
-        UserProfileDAO profile2=new UserProfileDAO();
-        profile2.id=1;
-        profile2.username="hello";
-
-        new Utils.MergeBuilder<UserProfileDAO, UserProfile >()
-                .emite(profile2)
-                .receive(profile1)
-                .merge();
-        System.out.println(profile1.id);
-
-        assertSame("Field id must be the same", profile2.id, profile1.id);
-
-        assertSame("Field username must be the same", profile2.username, profile1.username);
-
-    }
 
 
 }

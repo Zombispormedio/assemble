@@ -18,8 +18,5 @@ public class FriendProfile extends Profile {
         this.in_request=in_request;
     }
 
-    public FriendProfile() {
-        super();
-    }
 
 }

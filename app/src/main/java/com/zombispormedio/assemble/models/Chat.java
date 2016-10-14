@@ -1,26 +1,25 @@
 package com.zombispormedio.assemble.models;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
 public class Chat extends BaseModel{
 
-    public String created_at;
+    public final String created_at;
 
-    public UserProfile sender;
+    public final UserProfile sender;
 
-    public FriendProfile recipient;
+    public final FriendProfile recipient;
 
-    public Message[] messages;
+    public final Message[] messages;
 
     public int owner_id;
 
     public int friend_id;
-
-    public Chat() {
-        super(0);
-    }
 
     public Chat(int id, String created_at, UserProfile sender, FriendProfile recipient,
             Message[] messages) {
@@ -29,5 +28,9 @@ public class Chat extends BaseModel{
         this.sender = sender;
         this.recipient = recipient;
         this.messages = messages;
+    }
+
+    public ArrayList<Message> getMessages(){
+        return new ArrayList<>(Arrays.asList(messages));
     }
 }

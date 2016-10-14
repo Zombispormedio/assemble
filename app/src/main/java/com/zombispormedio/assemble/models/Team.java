@@ -10,7 +10,4 @@ public class Team extends Concept {
         super(id, name, description, created_at, full_image_url, large_image_url, medium_image_url, thumb_image_url);
     }
 
-    public Team() {
-        super();
-    }
 }

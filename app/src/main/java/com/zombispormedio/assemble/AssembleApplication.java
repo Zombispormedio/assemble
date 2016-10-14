@@ -9,6 +9,7 @@ import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.models.modules.ResourceModule;
+import com.zombispormedio.assemble.models.modules.SubscriptionModule;
 import com.zombispormedio.assemble.net.ConnectionState;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
@@ -24,18 +25,21 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 
-
 /**
  * Created by Xavier Serrano on 18/09/2016.
  */
 public class AssembleApplication extends Application implements IAssembleApplication {
 
 
-    public final static String RUNNING_ACTIVITY="running_activity";
+    public final static String RUNNING_ACTIVITY = "running_activity";
+
+    private final static String[] REFERENCES_TO_RESET_ON_START = new String[]{
+            HomeActivity.LOADED,
+            AssembleApplication.RUNNING_ACTIVITY,
+            ChatActivity.CHAT_ID
+    };
 
     private ResourceComponent resourceComponent;
-
-    private PreferencesManager preferencesManager;
 
     @Override
     public void onCreate() {
@@ -50,7 +54,10 @@ public class AssembleApplication extends Application implements IAssembleApplica
         JodaTimeAndroid.init(this);
         ConnectionState.getInstance().setContext(this);
 
-        this.resourceComponent= DaggerResourceComponent.builder().resourceModule(new ResourceModule()).build();
+        this.resourceComponent = DaggerResourceComponent.builder()
+                .resourceModule(new ResourceModule())
+                .subscriptionModule(new SubscriptionModule())
+                .build();
 
         setupUncaughtException();
 
@@ -61,7 +68,7 @@ public class AssembleApplication extends Application implements IAssembleApplica
 
 
     private void setupLocalStorage() {
-        RealmConfiguration realmConfiguration= new RealmConfiguration.Builder(this)
+        RealmConfiguration realmConfiguration = new RealmConfiguration.Builder(this)
                 .deleteRealmIfMigrationNeeded()
                 .build();
 
@@ -89,21 +96,22 @@ public class AssembleApplication extends Application implements IAssembleApplica
     }
 
     private void setupPreferences() {
-        preferencesManager = new PreferencesManager(this);
-        preferencesManager.remove(HomeActivity.LOADED);
-        preferencesManager.remove(AssembleApplication.RUNNING_ACTIVITY);
-        preferencesManager.remove(ChatActivity.CHAT_ID);
+        PreferencesManager preferencesManager = new PreferencesManager(this);
+
+        for (String key : REFERENCES_TO_RESET_ON_START) {
+            preferencesManager.remove(key);
+        }
     }
 
 
     @Override
     public boolean isConnected() {
-        boolean haveConnection=false;
-            ConnectivityManager cm=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo activeNetwork= cm.getActiveNetworkInfo();
-            if(activeNetwork!=null){
-                haveConnection=activeNetwork.isConnectedOrConnecting();
-            }
+        boolean haveConnection = false;
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null) {
+            haveConnection = activeNetwork.isConnectedOrConnecting();
+        }
         return haveConnection;
     }
 

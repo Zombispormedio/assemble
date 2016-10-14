@@ -16,15 +16,15 @@ public class Message extends BaseModel {
 
     public int chat_id;
 
-    public Profile sender;
+    public final Profile sender;
 
     public Profile recipient;
 
-    public String content;
+    public final String content;
 
-    public boolean is_read;
+    public final boolean is_read;
 
-    public boolean is_sent;
+    public final boolean is_sent;
 
     public boolean is_delivered;
 

@@ -5,11 +5,11 @@ package com.zombispormedio.assemble.models;
  */
 public class Meeting extends Concept {
 
-    public String start_at;
+    public final String start_at;
 
-    public String end_at;
+    public final String end_at;
 
-    public Team team;
+    public final Team team;
 
     public Meeting(int id, String name, String description, String created_at, String full_image_url,
             String large_image_url, String medium_image_url, String thumb_image_url, String start_at, String end_at, Team team) {
@@ -19,7 +19,4 @@ public class Meeting extends Concept {
         this.team=team;
     }
 
-    public Meeting() {
-        super();
-    }
 }

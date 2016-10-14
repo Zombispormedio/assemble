@@ -5,9 +5,9 @@ package com.zombispormedio.assemble.models;
  */
 public class Auth {
 
-    public String email;
+    public final String email;
 
-    public String password;
+    public final String password;
 
     public String gcm_token;
 

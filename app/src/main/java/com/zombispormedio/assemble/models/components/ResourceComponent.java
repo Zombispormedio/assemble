@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
+import com.zombispormedio.assemble.models.services.storage.MessageStorageService;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
@@ -56,4 +57,5 @@ public interface ResourceComponent {
     ChatSubscription provideChatSubscription();
 
     MessageSubscription provideMessageSubscription();
+
 }

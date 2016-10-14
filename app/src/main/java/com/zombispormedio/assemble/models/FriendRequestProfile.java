@@ -15,7 +15,4 @@ public class FriendRequestProfile extends Profile{
 
     }
 
-    public FriendRequestProfile() {
-        super();
-    }
 }

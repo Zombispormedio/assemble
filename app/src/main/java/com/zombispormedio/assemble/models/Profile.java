@@ -5,13 +5,13 @@ package com.zombispormedio.assemble.models;
  */
 public class Profile extends People {
 
-    public String birth_date;
+    public final String birth_date;
 
-    public String location;
+    public final String location;
 
-    public String bio;
+    public final String bio;
 
-    public String sign_up_at;
+    public final String sign_up_at;
 
     public Profile(int id, String email, String username, String full_avatar_url, String large_avatar_url,
             String medium_avatar_url, String thumb_avatar_url, String birth_date, String location, String bio,
@@ -23,7 +23,4 @@ public class Profile extends People {
         this.sign_up_at = sign_up_at;
     }
 
-    public Profile() {
-        super();
-    }
 }

@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.FriendProfile;
@@ -61,13 +62,11 @@ public class ChatController extends Controller {
     private void renderChat() {
         Chat chat=chatResource.getById(chatID);
         FriendProfile friend=chat.recipient;
-        String friendName=friend.username;
+        ctx.bindTitle(friend.username);
 
-        ctx.bindTitle(friendName);
+        ctx.setAvatar(friend.getLargeImageBuilder());
 
-        ctx.setAvatar(friend.large_avatar_url, StringUtils.firstLetter(friendName));
-
-        ctx.bindMessages(new ArrayList<>(Arrays.asList(chat.messages)));
+        ctx.bindMessages(chat.getMessages());
 
     }
 
@@ -101,6 +100,7 @@ public class ChatController extends Controller {
         @Override
         public void notifyChange() {
             renderChat();
+            Logger.d("Notification received");
         }
     }
 

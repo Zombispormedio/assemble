@@ -37,50 +37,7 @@ import dagger.Provides;
  * Created by Xavier Serrano on 18/09/2016.
  */
 @Module
-public class SubscriptionModule {
-
-    @Provides
-    @Singleton
-    ProfileLoader provideProfileLoader() {
-        return new ProfileLoader(new ProfileAPIService(), new ProfileStorageService());
-    }
-
-    @Provides
-    @Singleton
-    FriendLoader provideFriendLoader() {
-        return new FriendLoader(new FriendAPIService(), new FriendStorageService());
-    }
-
-    @Provides
-    @Singleton
-    FriendRequestLoader provideFriendRequestLoader() {
-        return new FriendRequestLoader(new FriendAPIService(), new FriendRequestStorageService());
-    }
-
-    @Provides
-    @Singleton
-    TeamLoader provideTeamLoader() {
-        return new TeamLoader(new TeamAPIService(), new TeamStorageService());
-    }
-
-    @Provides
-    @Singleton
-    MeetingLoader provideMeetingLoader() {
-        return new MeetingLoader(new MeetingAPIService(), new MeetingStorageService());
-    }
-
-    @Provides
-    @Singleton
-    ChatLoader provideChatLoader() {
-        return new ChatLoader(new ChatAPIService(), new ChatStorageService());
-    }
-
-
-    @Provides
-    @Singleton
-    MessageLoader provideMessageLoader() {
-        return new MessageLoader(new ChatAPIService(), new MessageStorageService());
-    }
+public class SubscriptionModule extends LoaderModule {
 
     @Provides
     @Singleton

@@ -15,8 +15,4 @@ public class UserProfile extends Profile{
                 sign_up_at);
 
     }
-
-    public UserProfile() {
-        super();
-    }
 }

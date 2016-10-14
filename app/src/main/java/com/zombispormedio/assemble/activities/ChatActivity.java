@@ -84,11 +84,9 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
     @Override
-    public void setAvatar(String path, String letter) {
-        ImageUtils.ImageBuilder builder = new ImageUtils.ImageBuilder(this, imageView);
-        builder.url(path)
-                .letter(letter)
-                .circle(true)
+    public void setAvatar(ImageUtils.ImageBuilder builder) {
+        builder.context(this)
+                .imageView(imageView)
                 .build();
     }
 

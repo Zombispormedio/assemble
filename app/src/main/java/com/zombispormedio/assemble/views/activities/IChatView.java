@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.views.activities;
 
 import com.zombispormedio.assemble.models.Message;
+import com.zombispormedio.assemble.utils.ImageUtils;
 
 import java.util.ArrayList;
 
@@ -12,7 +13,7 @@ public interface IChatView extends IBaseView {
 
     void bindTitle(String title);
 
-    void setAvatar(String path, String letter);
+    void setAvatar(ImageUtils.ImageBuilder builder);
 
     void bindMessages(ArrayList<Message> messages);
 

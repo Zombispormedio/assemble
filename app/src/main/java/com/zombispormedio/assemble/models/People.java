@@ -10,17 +10,17 @@ import com.zombispormedio.assemble.utils.Utils;
  */
 public class People extends BaseModel {
 
-    public String email;
+    public final String email;
 
-    public String username;
+    public final String username;
 
-    public String full_avatar_url;
+    public final String full_avatar_url;
 
-    public String large_avatar_url;
+    public final String large_avatar_url;
 
-    public String medium_avatar_url;
+    public final String medium_avatar_url;
 
-    public String thumb_avatar_url;
+    public final String thumb_avatar_url;
 
     public People(int id, String email, String username, String full_avatar_url, String large_avatar_url,
             String medium_avatar_url, String thumb_avatar_url) {
@@ -33,11 +33,6 @@ public class People extends BaseModel {
         this.thumb_avatar_url = thumb_avatar_url;
     }
 
-    public People() {
-        super(0);
-        this.email = "";
-        this.username = "";
-    }
 
     public ImageUtils.ImageBuilder getLargeImageBuilder() {
         return getImageBuilder(large_avatar_url);

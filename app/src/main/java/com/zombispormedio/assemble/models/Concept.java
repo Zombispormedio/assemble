@@ -10,19 +10,19 @@ import com.zombispormedio.assemble.utils.Utils;
 public abstract class Concept extends BaseModel {
 
 
-    public String name;
+    public final String name;
 
-    public String description;
+    public final String description;
 
-    public String created_at;
+    public final String created_at;
 
-    public String full_image_url;
+    public final String full_image_url;
 
-    public String large_image_url;
+    public final String large_image_url;
 
-    public String medium_image_url;
+    public final String medium_image_url;
 
-    public String thumb_image_url;
+    public final String thumb_image_url;
 
     public Concept(int id, String name, String description, String created_at, String full_image_url,
             String large_image_url, String medium_image_url, String thumb_image_url) {
@@ -34,11 +34,6 @@ public abstract class Concept extends BaseModel {
         this.large_image_url = large_image_url;
         this.medium_image_url = medium_image_url;
         this.thumb_image_url = thumb_image_url;
-    }
-
-    public Concept() {
-        super(0);
-        this.name = "";
     }
 
 
