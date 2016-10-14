@@ -17,6 +17,8 @@ import com.zombispormedio.assemble.views.activities.IChatView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
 
 
 /**
@@ -41,7 +43,24 @@ public class ChatController extends Controller {
         super(ctx);
         this.ctx=ctx;
         this.chatID=chatID;
+        setup();
+    }
 
+    public ChatController(IChatView ctx, HashMap<String, String> messageMap) {
+        super(ctx);
+        this.ctx=ctx;
+        setup();
+
+        this.chatID=setupMessage(messageMap);
+    }
+
+    private int setupMessage(HashMap<String, String> messageMap) {
+        Message newMessage=Message.createMessage(messageMap);
+        chatResource.storageMessage(newMessage);
+        return newMessage.chat_id;
+    }
+
+    private void setup() {
         profileResource=getResourceComponent().provideProfileResource();
 
         chatResource=getResourceComponent().provideChatResource();
@@ -51,7 +70,6 @@ public class ChatController extends Controller {
         chatSubscriber=new ChatSubscriber();
 
         chatSubscription.addSubscriber(chatSubscriber);
-
     }
 
     @Override
@@ -106,6 +124,7 @@ public class ChatController extends Controller {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         chatSubscription.removeSubscriber(chatSubscriber);
         ctx=null;
     }

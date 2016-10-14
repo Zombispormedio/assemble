@@ -25,7 +25,7 @@ public class MessagingService extends FirebaseMessagingService {
         Logger.d(remoteMessage.getData().containsKey("score"));
         Logger.d(preferencesManager.getString(AssembleApplication.RUNNING_ACTIVITY));
         Logger.d(preferencesManager.getInt(ChatActivity.CHAT_ID));
-        getResourceComponent().provideMessageSubscription().haveChanged();
+       // getResourceComponent().provideMessageSubscription().haveChanged();
 
     }
 

@@ -222,6 +222,8 @@ public class ImageUtils {
 
 
             }
+
+            _ctx=null;
         }
 
         private void buildNormal() {

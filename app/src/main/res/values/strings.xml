@@ -108,5 +108,6 @@
     <string name="type_your_message">Type your message&#8230;</string>
     <string name="slash_date">dd/MM/yy</string>
     <string name="yesterday">Yesterday</string>
+    <string name="new_message_title">New direct message</string>
 
 </resources>

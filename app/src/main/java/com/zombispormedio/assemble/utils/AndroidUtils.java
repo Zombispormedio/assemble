@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.design.widget.BottomSheetDialog;
@@ -24,6 +25,8 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.views.activities.IBaseProfileView;
+
+import java.util.HashMap;
 
 
 /**
@@ -114,6 +117,11 @@ public final class AndroidUtils {
 
         public void setError(String message) {
             input.setError(message);
+        }
+
+        public void preventLeakMemoryOnDestroy(){
+            input=null;
+            layout=null;
         }
     }
 
@@ -323,6 +331,8 @@ public final class AndroidUtils {
                 }
             }
 
+            ctx=null;
+
 
         }
     }
@@ -340,6 +350,19 @@ public final class AndroidUtils {
                 .setMenu(R.menu.menu_bottom_sheet)
                 .setItemClickListener(listener)
                 .createDialog();
+    }
+
+    public static HashMap<String, String> convertBundleToStringHashMap(Bundle bundle){
+        HashMap<String, String> hash=new HashMap<>();
+
+        for (String key : bundle.keySet()) {
+            Object value=bundle.get(key);
+            if(value instanceof String){
+                hash.put(key, (String)value);
+            }
+        }
+
+        return hash;
     }
 
 

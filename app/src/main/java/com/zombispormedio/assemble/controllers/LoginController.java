@@ -33,7 +33,6 @@ public class LoginController extends Controller {
             Auth auth = new Auth(ctx.getEmail(), ctx.getPassword());
 
             String gcmToken = ctx.getMessagingId();
-            Logger.d(gcmToken);
             if (!gcmToken.isEmpty()) {
                 auth.gcm_token = gcmToken;
             }

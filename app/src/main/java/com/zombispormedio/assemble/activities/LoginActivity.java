@@ -155,6 +155,8 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     protected void onDestroy() {
         super.onDestroy();
         ctrl.onDestroy();
+        emailInputHelper.preventLeakMemoryOnDestroy();
+        passwordInputHelper.preventLeakMemoryOnDestroy();
     }
 
     @Override

@@ -8,19 +8,20 @@ import com.zombispormedio.assemble.views.IApplicationView;
  * Created by Xavier Serrano on 18/09/2016.
  */
 public class Controller extends AbstractController {
+
     private IApplicationView app;
 
     public Controller(IApplicationView app) {
         this.app = app;
     }
 
-    protected ResourceComponent getResourceComponent(){
-        return app!=null?app.getResourceComponent():null;
+    protected ResourceComponent getResourceComponent() {
+        return app != null ? app.getResourceComponent() : null;
     }
 
-    protected void loadAll(){
-        ResourceComponent component=getResourceComponent();
-        DataSubscription[] subscriptions=new DataSubscription[]{
+    protected void loadAll() {
+        ResourceComponent component = getResourceComponent();
+        DataSubscription[] subscriptions = new DataSubscription[]{
                 component.provideProfileSubscription(),
                 component.provideFriendSubscription(),
                 component.provideFriendRequestSubscription(),
@@ -30,8 +31,13 @@ public class Controller extends AbstractController {
                 component.provideChatSubscription()
         };
 
-        for (DataSubscription subscription: subscriptions) {
+        for (DataSubscription subscription : subscriptions) {
             subscription.load();
         }
+    }
+
+    @Override
+    public void onDestroy() {
+        app=null;
     }
 }

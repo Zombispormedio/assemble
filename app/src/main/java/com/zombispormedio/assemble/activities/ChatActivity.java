@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
@@ -20,6 +21,8 @@ import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -27,6 +30,8 @@ import butterknife.OnClick;
 public class ChatActivity extends BaseActivity implements IChatView {
 
     public static final String CHAT_ID = "chat_id";
+
+    public static final String NEW_MESSAGE_ACTION = "NEW_MESSAGE_ACTION";
 
     private ChatController ctrl;
 
@@ -48,17 +53,31 @@ public class ChatActivity extends BaseActivity implements IChatView {
         setupToolbar();
         bindActivity(this);
 
-        Bundle extra = getIntent().getExtras();
+        int chatId = setupController();
 
-        int dataId = extra.getInt(NavigationManager.ARGS + 0);
-
-        ctrl = new ChatController(this, dataId);
-
-        registerIDToMessageginService(dataId);
+        registerIDToMessagingService(chatId);
 
         setupMessages();
 
         ctrl.onCreate();
+    }
+
+    private int setupController() {
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        int chatId;
+        Bundle extra = intent.getExtras();
+        if (NEW_MESSAGE_ACTION.equals(action)) {
+            HashMap<String, String> message = AndroidUtils.convertBundleToStringHashMap(extra);
+            ctrl = new ChatController(this, message);
+            chatId=Integer.parseInt(message.get(CHAT_ID));
+
+        } else {
+            chatId = extra.getInt(NavigationManager.ARGS + 0);
+            ctrl = new ChatController(this, chatId);
+        }
+
+        return chatId;
     }
 
 
@@ -121,7 +140,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
 
-    private void registerIDToMessageginService(int dataId) {
+    private void registerIDToMessagingService(int dataId) {
         PreferencesManager preferencesManager = getPreferencesManager();
         preferencesManager.set(AssembleApplication.RUNNING_ACTIVITY, getClass().getName());
         preferencesManager.set(CHAT_ID, dataId);

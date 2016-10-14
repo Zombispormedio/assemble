@@ -80,7 +80,7 @@ public class ChatsController extends Controller {
     private class MessageSubscriber extends Subscriber {
         @Override
         public void notifyChange() {
-            chatSubscription.load();
+            if(refreshing)chatSubscription.load();
         }
 
         @Override

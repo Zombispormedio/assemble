@@ -66,7 +66,7 @@ public class ChatResource extends ConceptResource<Chat> {
 
             @Override
             public void onSuccess(Message result) {
-                storageMessage.create(result);
+                storageMessage.createOrUpdate(result);
                 handler.onSuccess(result);
             }
         });
@@ -74,6 +74,10 @@ public class ChatResource extends ConceptResource<Chat> {
 
     public Message getMessageById(int id) {
         return storageMessage.getByID(id);
+    }
+
+    public void storageMessage(Message message){
+        storageMessage.createOrUpdate(message);
     }
 
 
