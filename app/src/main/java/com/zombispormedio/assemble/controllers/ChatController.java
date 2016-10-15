@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.FriendProfile;
@@ -9,16 +8,12 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.editors.EditMessage;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
-import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
+import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 
 
 /**
@@ -35,9 +30,9 @@ public class ChatController extends Controller {
 
     private ProfileResource profileResource;
 
-    private ChatSubscription chatSubscription;
+    private MessageSubscription messageSubscription;
 
-    private ChatSubscriber chatSubscriber;
+    private MessageSubscriber messageSubscriber;
 
     public ChatController(IChatView ctx, int chatID) {
         super(ctx);
@@ -65,11 +60,11 @@ public class ChatController extends Controller {
 
         chatResource=getResourceComponent().provideChatResource();
 
-        chatSubscription=getResourceComponent().provideChatSubscription();
+        messageSubscription =getResourceComponent().provideMessageSubscription();
 
-        chatSubscriber=new ChatSubscriber();
+        messageSubscriber =new MessageSubscriber();
 
-        chatSubscription.addSubscriber(chatSubscriber);
+        messageSubscription.addSubscriber(messageSubscriber);
     }
 
     @Override
@@ -113,7 +108,7 @@ public class ChatController extends Controller {
     }
 
 
-    private class ChatSubscriber extends Subscriber{
+    private class MessageSubscriber extends Subscriber{
 
         @Override
         public void notifyChange() {
@@ -124,7 +119,7 @@ public class ChatController extends Controller {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        chatSubscription.removeSubscriber(chatSubscriber);
+        messageSubscription.removeSubscriber(messageSubscriber);
         ctx=null;
     }
 }

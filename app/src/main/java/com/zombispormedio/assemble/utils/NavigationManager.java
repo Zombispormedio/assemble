@@ -21,6 +21,12 @@ import com.zombispormedio.assemble.activities.SecondStepTeamActivity;
 import com.zombispormedio.assemble.activities.SettingsActivity;
 import com.zombispormedio.assemble.activities.UpdateBirthdateActivity;
 import com.zombispormedio.assemble.activities.UpdateProfileActivity;
+import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 
 /**
  * Created by Xavier Serrano on 25/06/2016.
@@ -29,7 +35,7 @@ public final class NavigationManager {
 
     private Context ctx;
 
-    public static final int UPDATE_BIRTHDATE_CODE = 5956;
+    public static final int ACTIVITY_RESULT_CODE = 5956;
 
     public static final String ARGS = "args";
 
@@ -53,7 +59,7 @@ public final class NavigationManager {
 
     private static void goToWithResult(Activity ctx, Class<?> cls) {
         Intent dst = new Intent(ctx, cls);
-        ctx.startActivityForResult(dst, UPDATE_BIRTHDATE_CODE);
+        ctx.startActivityForResult(dst, ACTIVITY_RESULT_CODE);
 
     }
 
@@ -64,7 +70,7 @@ public final class NavigationManager {
         for (int i = 0; i < extras.length; i++) {
             dst.putExtra(ARGS + i, extras[i]);
         }
-        ctx.startActivityForResult(dst, UPDATE_BIRTHDATE_CODE);
+        ctx.startActivityForResult(dst, ACTIVITY_RESULT_CODE);
 
     }
 
@@ -78,6 +84,14 @@ public final class NavigationManager {
     private static void goWithArg(Context ctx, Class<?> cls, int extras){
         Intent dst = new Intent(ctx, cls);
         dst.putExtra(ARGS+0, extras);
+        ctx.startActivity(dst);
+    }
+
+    private static void goWithHash(Context ctx, Class<?> cls, HashMap<String, String> hash) {
+        Intent dst = new Intent(ctx, cls);
+        for(Map.Entry<String, String> entry : hash.entrySet()){
+            dst.putExtra(entry.getKey(), entry.getValue());
+        }
         ctx.startActivity(dst);
     }
 
@@ -141,7 +155,9 @@ public final class NavigationManager {
     public static void CreateMeeting(Context ctx){goTo(ctx, CreateMeetingActivity.class);}
 
     public static void Chat(Context ctx, int id){
-        goWithArg(ctx, ChatActivity.class, id);
+        HashMap<String, String> hash=new HashMap<>();
+        hash.put(CHAT_ID, String.valueOf(id));
+        goWithHash(ctx, ChatActivity.class, hash);
     }
 
     public void Home() {

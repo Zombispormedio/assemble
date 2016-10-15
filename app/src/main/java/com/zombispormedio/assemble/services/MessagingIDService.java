@@ -5,14 +5,16 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.AssembleApplication;
-import com.zombispormedio.assemble.activities.BaseActivity;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.utils.PreferencesManager;
-import com.zombispormedio.assemble.views.IApplicationView;
+
+
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.AUTH;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGING_ID;
 
 /**
  * Created by Xavier Serrano on 08/10/2016.
@@ -20,7 +22,6 @@ import com.zombispormedio.assemble.views.IApplicationView;
 
 public class MessagingIDService extends FirebaseInstanceIdService {
 
-    public static final String MESSAGING_ID="messaging:id";
 
     private PreferencesManager preferencesManager;
 
@@ -34,7 +35,7 @@ public class MessagingIDService extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
         String refreshedToken=FirebaseInstanceId.getInstance().getToken();
-        boolean isNotAuth=preferencesManager.getString(BaseActivity.AUTH).isEmpty();
+        boolean isNotAuth=preferencesManager.getString(AUTH).isEmpty();
 
         if(isNotAuth){
             preferencesManager.set(MESSAGING_ID, refreshedToken);

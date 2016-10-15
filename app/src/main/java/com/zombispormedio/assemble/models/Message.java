@@ -4,6 +4,9 @@ package com.zombispormedio.assemble.models;
 import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -12,7 +15,7 @@ import java.util.Set;
  * Created by Xavier Serrano on 03/10/2016.
  */
 
-public class Message extends BaseModel {
+public class Message extends BaseModel implements Parcelable {
 
     public int sender_id;
 
@@ -72,6 +75,32 @@ public class Message extends BaseModel {
     }
 
 
+    protected Message(Parcel in) {
+        super(in.readInt());
+        content = in.readString();
+        is_read = in.readByte() != 0;
+        is_sent = in.readByte() != 0;
+        is_delivered = in.readByte() != 0;
+        created_at = in.readString();
+        sender_id = in.readInt();
+        recipient_id = in.readInt();
+        chat_id = in.readInt();
+        this.sender = null;
+        this.recipient = null;
+    }
+
+    public static final Creator<Message> CREATOR = new Creator<Message>() {
+        @Override
+        public Message createFromParcel(Parcel in) {
+            return new Message(in);
+        }
+
+        @Override
+        public Message[] newArray(int size) {
+            return new Message[size];
+        }
+    };
+
     public String getLimitedContent(int limit) {
         return content.length() > limit ? ellipseContent(limit) : content;
     }
@@ -90,6 +119,24 @@ public class Message extends BaseModel {
 
     public String formatCreated(String format) {
         return DateUtils.format(format, created_at);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(content);
+        dest.writeByte((byte)(is_read?1:0));
+        dest.writeByte((byte)(is_sent?1:0));
+        dest.writeByte((byte)(is_delivered?1:0));
+        dest.writeString(created_at);
+        dest.writeInt(sender_id);
+        dest.writeInt(recipient_id);
+        dest.writeInt(chat_id);
     }
 
     public static class Builder {
@@ -201,7 +248,6 @@ public class Message extends BaseModel {
                     break;
             }
         }
-
 
         return builder.build();
     }

@@ -1,8 +1,10 @@
 package com.zombispormedio.assemble.activities;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.widget.RecyclerView;
@@ -13,15 +15,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.MessageListAdapter;
 import com.zombispormedio.assemble.controllers.ChatController;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
 import java.util.ArrayList;
@@ -30,11 +29,12 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.NEW_MESSAGE_ACTION;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.FOREGROUND_NOTIFICATION;
+
 public class ChatActivity extends BaseActivity implements IChatView {
-
-    public static final String CHAT_ID = "chat_id";
-
-    public static final String NEW_MESSAGE_ACTION = "NEW_MESSAGE_ACTION";
 
     private ChatController ctrl;
 
@@ -50,6 +50,8 @@ public class ChatActivity extends BaseActivity implements IChatView {
     private MessageListAdapter messageListAdapter;
 
     private boolean fromNotification;
+
+    private MessageReceiver messageReceiver;
 
 
     @Override
@@ -80,8 +82,10 @@ public class ChatActivity extends BaseActivity implements IChatView {
             chatId = Integer.parseInt(message.get(CHAT_ID));
             fromNotification = true;
         } else {
-            chatId = extra.getInt(NavigationManager.ARGS + 0);
+            String rawChatId=extra.getString(CHAT_ID);
+            chatId = Integer.parseInt(rawChatId);
             ctrl = new ChatController(this, chatId);
+            fromNotification=extra.getBoolean(FOREGROUND_NOTIFICATION);
         }
 
         return chatId;
@@ -119,6 +123,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
     @Override
     public void bindMessages(ArrayList<Message> messages) {
         messageListAdapter.setData(messages);
+        messagesList.scrollToPosition(messages.size()-1);
     }
 
 
@@ -167,10 +172,8 @@ public class ChatActivity extends BaseActivity implements IChatView {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
             case android.R.id.home:
                 goBack();
-
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -192,6 +195,29 @@ public class ChatActivity extends BaseActivity implements IChatView {
         }
     }
 
+
+    @Override
+    protected void setupReceivers() {
+        super.setupReceivers();
+        messageReceiver=new MessageReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction(ON_MESSAGE_NOTIFY_CHAT);
+        registerReceiver(messageReceiver, intentFilter);
+    }
+
+    @Override
+    protected void slashReceivers() {
+        super.slashReceivers();
+        unregisterReceiver(messageReceiver);
+    }
+
+    private class MessageReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getResourceComponent().provideMessageSubscription().haveChanged();
+        }
+    }
 
 
 }

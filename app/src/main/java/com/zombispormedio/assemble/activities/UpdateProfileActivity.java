@@ -18,8 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
-import java.text.ParseException;
-
 import butterknife.BindView;
 import butterknife.OnClick;
 
@@ -168,7 +166,7 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == NavigationManager.UPDATE_BIRTHDATE_CODE) {
+        if (requestCode == NavigationManager.ACTIVITY_RESULT_CODE) {
             if (resultCode == RESULT_OK) {
                 int countArgs = data.getIntExtra(NavigationManager.SIZE, 0);
                 if (countArgs > 0) {

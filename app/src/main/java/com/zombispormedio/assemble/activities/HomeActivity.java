@@ -1,6 +1,10 @@
 package com.zombispormedio.assemble.activities;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -19,9 +23,6 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import android.preference.PreferenceManager;
-
-
 import com.zombispormedio.assemble.adapters.pagers.HomePagerAdapter;
 import com.zombispormedio.assemble.controllers.HomeController;
 import com.zombispormedio.assemble.utils.ImageUtils;
@@ -33,11 +34,11 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTouch;
 
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_HOME;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.LOADED;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.STATE;
+
 public class HomeActivity extends BaseActivity implements IHomeView {
-
-    private final static String STATE = "state";
-
-    public final static String LOADED = "loaded";
 
     private NavigationManager navigation;
 
@@ -74,6 +75,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private HomeController ctrl;
 
+    private MessageReceiver messageReceiver;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,6 +98,14 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         ctrl.onCreate();
 
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ctrl.onDestroy();
+        navigation.onDestroy();
     }
 
     private void setupDrawer() {
@@ -139,8 +150,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int position = tab.getPosition();
-                viewTabPager.setCurrentItem(position);
-                setState(position);
+                moveToPosition(position);
             }
 
             @Override
@@ -155,6 +165,11 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         });
     }
 
+    private void moveToPosition(int position) {
+        viewTabPager.setCurrentItem(position);
+        setState(position);
+    }
+
     private void setState(int s) {
         getPreferencesManager().set(STATE, String.valueOf(s));
     }
@@ -164,17 +179,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         return value.isEmpty() ? -1 : Integer.parseInt(value);
     }
 
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                drawer.openDrawer(GravityCompat.START);
-                return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
 
     private NavigationView.OnNavigationItemSelectedListener NavListener() {
@@ -218,10 +222,20 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                drawer.openDrawer(GravityCompat.START);
+                return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onBackPressed() {
         moveTaskToBack(true);
     }
-
 
     @Override
     public void goToLogin() {
@@ -340,10 +354,32 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         navigation.FirstStepCreateTeam();
     }
 
+
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        ctrl.onDestroy();
-        navigation.onDestroy();
+    protected void setupReceivers() {
+        super.setupReceivers();
+        messageReceiver=new MessageReceiver();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction(ON_MESSAGE_NOTIFY_HOME);
+        registerReceiver(messageReceiver, intentFilter);
+    }
+
+    @Override
+    protected void slashReceivers() {
+        super.slashReceivers();
+        unregisterReceiver(messageReceiver);
+    }
+
+    private class MessageReceiver extends BroadcastReceiver{
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            getResourceComponent().provideChatSubscription().haveChanged();
+            if(getState()!=HomePagerAdapter.CHATS){
+                moveToPosition(HomePagerAdapter.CHATS);
+            }
+
+
+        }
     }
 }

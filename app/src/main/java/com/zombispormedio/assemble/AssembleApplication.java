@@ -4,9 +4,6 @@ package com.zombispormedio.assemble;
 import com.google.firebase.crash.FirebaseCrash;
 
 import com.squareup.leakcanary.LeakCanary;
-import com.zombispormedio.assemble.activities.BaseActivity;
-import com.zombispormedio.assemble.activities.ChatActivity;
-import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.models.modules.ResourceModule;
@@ -19,15 +16,17 @@ import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
-import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.AUTH;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.LOADED;
 
 
 /**
@@ -37,11 +36,12 @@ public class AssembleApplication extends Application implements IAssembleApplica
 
 
     private final static String[] REFERENCES_TO_RESET_ON_START = new String[]{
-            HomeActivity.LOADED,
-            ChatActivity.CHAT_ID
+            LOADED,
+            CHAT_ID
     };
 
     private ResourceComponent resourceComponent;
+
     private PreferencesManager preferencesManager;
 
     @Override
@@ -75,9 +75,8 @@ public class AssembleApplication extends Application implements IAssembleApplica
     }
 
 
-
     private void setupAPI() {
-        String token=preferencesManager.getString(BaseActivity.AUTH);
+        String token = preferencesManager.getString(AUTH);
         APIConfiguration.getInstance().setToken(token);
     }
 
