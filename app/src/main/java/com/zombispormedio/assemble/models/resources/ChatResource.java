@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.editors.EditChat;
 import com.zombispormedio.assemble.models.editors.EditMessage;
+import com.zombispormedio.assemble.models.services.storage.MessageStorageService;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.models.services.interfaces.IChatService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
@@ -21,10 +22,10 @@ public class ChatResource extends ConceptResource<Chat> {
 
     private IChatService persistence;
 
-    private IStorageService<Message> storageMessage;
+    private MessageStorageService storageMessage;
 
     @Inject
-    public ChatResource(IChatService persistence, IStorageService<Chat> storage, IStorageService<Message> storageMessage) {
+    public ChatResource(IChatService persistence, IStorageService<Chat> storage, MessageStorageService storageMessage) {
         super(storage);
         this.persistence = persistence;
         this.storageMessage = storageMessage;
@@ -78,6 +79,10 @@ public class ChatResource extends ConceptResource<Chat> {
 
     public void storageMessage(Message message){
         storageMessage.createOrUpdate(message);
+    }
+
+    public ArrayList<Message> getMessages(int id){
+        return storageMessage.getSortedMessagesByChat(id);
     }
 
 

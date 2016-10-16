@@ -21,15 +21,19 @@ public class MessageStorageService  extends StorageService<MessageDAO, Message> 
         super(storage);
     }
 
-    public Message[] getSortedMessagesByChat(int chatId){
+    public ArrayList<Message> getSortedMessagesByChat(int chatId){
         ArrayList<MessageDAO> daos=storage.findByAndSort("chat_id", chatId, "created_at");
-        int len=daos.size();
-        Message[] messages=new Message[len];
+        ArrayList<Message> messages=new ArrayList<>();
 
-        for(int i=0;i<len;i++){
-            messages[i]=daos.get(i).toModel();
+        for (MessageDAO dao : daos) {
+            messages.add(dao.toModel());
         }
 
         return messages;
+    }
+
+    public Message getLastMessage(int chatId){
+        MessageDAO dao=storage.findOneByAndSort("chat_id", chatId, "created_at");
+        return dao!=null?dao.toModel():null;
     }
 }

@@ -61,12 +61,12 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @OnClick(R.id.save_button)
-    public void onSave(View view){
+    public void onSave(View view) {
         ctrl.save();
     }
 
     @OnClick(R.id.birthdate_input)
-    public void onClickBirthDateInput(View view){
+    public void onClickBirthDateInput(View view) {
         ctrl.editBirthDate();
     }
 
@@ -87,9 +87,13 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
-    public void setBirthDate(String birth){
-        String format= DateUtils.format(getString(R.string.simple_date), birth);
-        birthdateInput.setText(format);
+    public void setBirthDate(String birth) {
+        birthdateInput.setText(birth);
+    }
+
+    @Override
+    public String getDateFormat() {
+        return getString(R.string.simple_date);
     }
 
     @Override

@@ -15,22 +15,19 @@ public class Chat extends BaseModel{
 
     public final FriendProfile recipient;
 
-    public final Message[] messages;
+    public final Message lastMessage;
 
     public int owner_id;
 
     public int friend_id;
 
     public Chat(int id, String created_at, UserProfile sender, FriendProfile recipient,
-            Message[] messages) {
+            Message lastMessage) {
         super(id);
         this.created_at = created_at;
         this.sender = sender;
         this.recipient = recipient;
-        this.messages = messages;
+        this.lastMessage = lastMessage;
     }
 
-    public ArrayList<Message> getMessages(){
-        return new ArrayList<>(Arrays.asList(messages));
-    }
 }

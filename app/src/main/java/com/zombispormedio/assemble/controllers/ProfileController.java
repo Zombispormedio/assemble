@@ -31,14 +31,13 @@ public class ProfileController extends Controller {
         super(ctx);
         this.ctx = ctx;
 
-        profileResource=getResourceComponent().provideProfileResource();
+        profileResource = getResourceComponent().provideProfileResource();
         profileSubscription = getResourceComponent().provideProfileSubscription();
         profileResource.setSubscription(profileSubscription);
         profileSubscriber = new ProfileSubscriber();
         profileSubscription.addSubscriber(profileSubscriber);
 
     }
-
 
 
     @Override
@@ -48,35 +47,6 @@ public class ProfileController extends Controller {
 
     }
 
-
-    public void changeProfileImage(UserProfile profile, ISuccessHandler handler) {
-        if (ctx != null) {
-            String letter=StringUtils.firstLetter(profile.username);
-
-            if (Utils.presenceOf(profile.large_avatar_url)) {
-                ctx.setProfileImage(profile.large_avatar_url, letter, handler);
-            } else {
-
-                ctx.loadLetterImage(letter, handler);
-            }
-        }
-
-    }
-
-
-    private void beforeLoadingImage() {
-        if (ctx != null) {
-            ctx.hideImageForm();
-            ctx.showImageProgressBar();
-        }
-    }
-
-    private void afterLoadingImage() {
-        if (ctx != null) {
-            ctx.showImageForm();
-            ctx.hideImageProgressBar();
-        }
-    }
 
     public void uploadAvatar(String path) {
 
@@ -101,16 +71,9 @@ public class ProfileController extends Controller {
 
         UserProfile profile = profileResource.getProfile();
 
-        if(profile!=null){
+        if (profile != null) {
             AndroidUtils.fillProfile(ctx, profile);
-
-            beforeLoadingImage();
-            changeProfileImage(profile, new ISuccessHandler() {
-                @Override
-                public void onSuccess() {
-                    afterLoadingImage();
-                }
-            });
+            ctx.setProfileImage(profile.getLargeImageBuilder());
         }
 
 

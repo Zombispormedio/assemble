@@ -216,7 +216,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
             @Override
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                ctrl.onDrawerOpened();
             }
         };
     }

@@ -13,6 +13,7 @@ import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -79,7 +80,9 @@ public class ChatController extends Controller {
 
         ctx.setAvatar(friend.getLargeImageBuilder());
 
-        ctx.bindMessages(chat.getMessages());
+        ArrayList<Message> messages=chatResource.getMessages(chatID);
+
+        ctx.bindMessages(messages);
 
     }
 

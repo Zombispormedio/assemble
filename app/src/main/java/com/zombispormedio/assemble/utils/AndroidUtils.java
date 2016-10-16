@@ -148,7 +148,8 @@ public final class AndroidUtils {
             }
 
             if(Utils.presenceOf(profile.birth_date)){
-                ctx.setBirthDate(profile.birth_date);
+                String formatedDate=DateUtils.format(ctx.getDateFormat(), profile.birth_date);
+                ctx.setBirthDate(formatedDate);
             }else{
                 ctx.setBirthDate("");
             }
@@ -156,23 +157,6 @@ public final class AndroidUtils {
         }
     }
 
-    public static void setupNoScrollList(Context ctx, RecyclerView list) {
-        list.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false) {
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        });
-        list.setItemAnimator(new DefaultItemAnimator());
-
-        list.addItemDecoration(new DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL_LIST));
-    }
-
-    public static void setupScrollList(Context ctx, RecyclerView list) {
-        list.setLayoutManager(new LinearLayoutManager(ctx, LinearLayoutManager.VERTICAL, false));
-        list.setItemAnimator(new DefaultItemAnimator());
-        list.addItemDecoration(new DividerItemDecoration(ctx, DividerItemDecoration.VERTICAL_LIST));
-    }
 
     public static ListConfiguration createListConfiguration(Context ctx, RecyclerView list) {
         return new ListConfiguration(ctx, list);

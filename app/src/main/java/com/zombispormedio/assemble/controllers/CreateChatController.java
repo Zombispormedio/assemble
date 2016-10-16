@@ -37,14 +37,19 @@ public class CreateChatController extends Controller {
 
     private void renderFriends() {
         ArrayList<Chat> chats=chatResource.getAll();
+        ArrayList<FriendProfile> friends;
 
-        int[] friendInChatIds=new int[chats.size()];
+        if(chats.size()>0){
+            int[] friendInChatIds=new int[chats.size()];
 
-        for (int i=0; i<chats.size(); i++) {
-            friendInChatIds[i]=chats.get(i).recipient.id;
+            for (int i=0; i<chats.size(); i++) {
+                friendInChatIds[i]=chats.get(i).recipient.id;
+            }
+
+            friends=friendResource.notIn(friendInChatIds);
+        }else{
+            friends=friendResource.getAll();
         }
-
-        ArrayList<FriendProfile> friends=friendResource.notIn(friendInChatIds);
 
         ctx.bindFriends(friends);
     }

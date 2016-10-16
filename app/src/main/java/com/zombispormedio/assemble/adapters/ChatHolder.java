@@ -24,7 +24,7 @@ import butterknife.ButterKnife;
  */
 public class ChatHolder extends AbstractHolder<Chat> {
 
-    private static final int CONTENT_LIMIT=30;
+    private static final int CONTENT_LIMIT = 30;
 
     @BindView(R.id.username_label)
     TextView nameLabel;
@@ -77,24 +77,21 @@ public class ChatHolder extends AbstractHolder<Chat> {
                 .imageView(imageView)
                 .build();
 
-        renderLastMessage(chat.messages);
+        renderLastMessage(chat.lastMessage);
 
     }
 
-    private void renderLastMessage(Message[] messages) {
+    private void renderLastMessage(Message last) {
         String content = "";
         String formatDate = "";
 
-        if (messages != null) {
-            if (messages.length > 0) {
-                Message last = messages[messages.length - 1];
-                content = last.getLimitedContent(CONTENT_LIMIT);
+        if (last != null) {
 
-                formatDate = last.isCreatedToday() ? last.formatCreated(getString(R.string.simple_hour))
-                        : last.isCreatedYesterday() ? getString(R.string.yesterday)
-                                : last.formatCreated(getString(R.string.slash_date));
+            content = last.getLimitedContent(CONTENT_LIMIT);
 
-            }
+            formatDate = last.isCreatedToday() ? last.formatCreated(getString(R.string.simple_hour))
+                    : last.isCreatedYesterday() ? getString(R.string.yesterday)
+                            : last.formatCreated(getString(R.string.slash_date));
         }
 
         lastMessage.setText(content);
@@ -103,7 +100,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
     }
 
 
-    private String getString(int id){
+    private String getString(int id) {
         return getContext().getString(id);
     }
 

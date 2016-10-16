@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.views.activities;
 
 
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.views.activities.IBaseProfileView;
 
 /**
@@ -9,21 +10,11 @@ import com.zombispormedio.assemble.views.activities.IBaseProfileView;
  */
 public interface IProfileView extends IBaseProfileView {
 
-    void setProfileImage(String url, String letter, final ISuccessHandler handler);
-
-    void loadLetterImage(String letter, final ISuccessHandler handler);
-
-    void hideImageForm();
-
-    void showImageForm();
+    void setProfileImage(ImageUtils.ImageBuilder buidler);
 
     void hideImageProgressDialog();
 
     void showImageProgressDialog();
-
-    void hideImageProgressBar();
-
-    void showImageProgressBar();
 
     void goToUpdateProfile();
 

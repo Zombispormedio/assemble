@@ -49,9 +49,6 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     @BindView(R.id.image_upload_button)
     FloatingActionButton imageFab;
 
-    @BindView(R.id.progress_image)
-    ProgressBar imageProgress;
-
     @BindView(R.id.profile_username_text)
     TextView usernameText;
 
@@ -103,30 +100,12 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
         openImageBottomSheet();
     }
 
-    public void hideImageForm() {
-        imageFab.setVisibility(View.INVISIBLE);
-    }
-
-    public void showImageForm() {
-        imageFab.setVisibility(View.VISIBLE);
-    }
-
     public void hideImageProgressDialog() {
         imageProgressDialog.dismiss();
     }
 
     public void showImageProgressDialog() {
         imageProgressDialog.show();
-    }
-
-    @Override
-    public void hideImageProgressBar() {
-        imageProgress.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void showImageProgressBar() {
-        imageProgress.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -146,13 +125,12 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     @Override
     public void setBirthDate(String birth) {
-        if (Utils.presenceOf(birth)) {
-            String birthDate = DateUtils.format(getString(R.string.born_at), birth);
-            birthDateText.setText(birthDate);
-        } else {
-            birthDateText.setText("");
-        }
+        birthDateText.setText(birth);
+    }
 
+    @Override
+    public String getDateFormat() {
+        return getString(R.string.born_at);
     }
 
     @Override
@@ -174,21 +152,9 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     @Override
-    public void setProfileImage(String url, String letter, final ISuccessHandler handler) {
-        new ImageUtils.ImageBuilder(this, imageProfile)
-                .circle(true)
-                .url(url)
-                .handle(handler)
-                .letter(letter)
-                .build();
-    }
-
-
-    public void loadLetterImage(String letter, final ISuccessHandler handler) {
-        new ImageUtils.ImageBuilder(this, imageProfile)
-                .circle(true)
-                .handle(handler)
-                .letter(letter)
+    public void setProfileImage(ImageUtils.ImageBuilder builder) {
+        builder.context(this)
+                .imageView(imageProfile)
                 .build();
     }
 

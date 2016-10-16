@@ -10,9 +10,15 @@ import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.models.subscriptions.Subscription;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 import com.zombispormedio.assemble.utils.StringUtils;
+import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IHomeView;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 
 /**
@@ -24,8 +30,6 @@ public class HomeController extends Controller {
     private IHomeView ctx;
 
     private final ProfileResource profileResource;
-
-    private ProfileSubscription profileSubscription;
 
     private boolean isTeamsReady;
 
@@ -41,10 +45,9 @@ public class HomeController extends Controller {
 
     private boolean isMessagesReady;
 
-
     private boolean isBackgroundLoading;
 
-    private ProfileSubscriber profileSubscriber;
+    private HashMap<String, Utils.Pair<Subscription, Subscriber>> subscriptions;
 
     public HomeController(IHomeView ctx) {
         super(ctx);
@@ -52,11 +55,7 @@ public class HomeController extends Controller {
 
         profileResource = getResourceComponent().provideProfileResource();
 
-        profileSubscription = getResourceComponent().provideProfileSubscription();
-
-        profileResource.setSubscription(profileSubscription);
-
-        profileSubscriber = new ProfileSubscriber();
+        subscriptions=new HashMap<>();
 
         uncheckAll();
 
@@ -69,42 +68,8 @@ public class HomeController extends Controller {
     }
 
 
-    public void onDrawerOpened() {
-    }
-
-    private void renderProfile() {
-        UserProfile profile = profileResource.getProfile();
-
-        String username = profile.username;
-        ctx.bindUsernameLabel(username);
-
-        ctx.bindEmailLabel(profile.email);
-
-        ctx.bindAvatar(profile.large_avatar_url, StringUtils.firstLetter(username));
-
-    }
-
-    public void onSettingsMenuItem() {
-        ctx.goToSettings();
-    }
-
-    public void onProfileMenuItem() {
-        ctx.goToProfile();
-    }
-
-    public void onHelpMenuItem() {
-        ctx.goToHelp();
-    }
-
-    public void onFriendsMenuItem() {
-        ctx.goToFriends();
-    }
-
-
     private void loadData() {
         if (!ctx.isLoaded()) {
-
-            profileSubscription.addSubscriber(profileSubscriber);
 
             if (profileResource.getProfile() == null) {
                 loading();
@@ -113,11 +78,102 @@ public class HomeController extends Controller {
                 backgroundLoading();
             }
 
-            loadAllAndaddSubscriptions();
+            loadAllAndAddSubscriptions();
         } else {
             renderProfile();
         }
 
+    }
+
+
+    private void loadAllAndAddSubscriptions() {
+
+        final ProfileSubscription profileSubscription=getResourceComponent().provideProfileSubscription();
+        final FriendSubscription friendSubscription = getResourceComponent().provideFriendSubscription();
+        final FriendRequestSubscription friendRequestSubscription = getResourceComponent().provideFriendRequestSubscription();
+        final TeamSubscription teamSubscription = getResourceComponent().provideTeamSubscription();
+        final MeetingSubscription meetingSubscription = getResourceComponent().provideMeetingSubscription();
+        final ChatSubscription chatSubscription = getResourceComponent().provideChatSubscription();
+        final MessageSubscription messageSubscription = getResourceComponent().provideMessageSubscription();
+
+
+        addSubscription(profileSubscription, new Subscriber() {
+            @Override
+            public void notifyChange() {
+                removeSubscription(this.getID());
+                readyProfile();
+                friendSubscription.load();
+            }
+        });
+
+
+        addSubscription(friendSubscription, new Subscriber() {
+            @Override
+            public void notifyChange() {
+                removeSubscription(this.getID());
+                readyFriends();
+                friendRequestSubscription.load();
+            }
+        });
+
+        addSubscription(friendRequestSubscription, new Subscriber() {
+            @Override
+            public void notifyChange() {
+                removeSubscription(this.getID());
+                readyFriendRequests();
+                teamSubscription.load();
+            }
+        });
+
+        addSubscription(teamSubscription, new Subscriber() {
+            @Override
+            public void notifyChange() {
+                removeSubscription(this.getID());
+                readyTeams();
+                meetingSubscription.load();
+            }
+        });
+
+        addSubscription(meetingSubscription, new Subscriber() {
+            @Override
+            public void notifyChange() {
+                removeSubscription(this.getID());
+                readyMeetings();
+                messageSubscription.load();
+            }
+        });
+
+        addSubscription(meetingSubscription, new Subscriber() {
+            @Override
+            public void notifyChange() {
+                removeSubscription(this.getID());
+                readyMessages();
+                chatSubscription.load();
+            }
+        });
+
+        addSubscription(chatSubscription, new Subscriber() {
+            @Override
+            public void notifyChange() {
+                removeSubscription(this.getID());
+                readyChats();
+            }
+        });
+
+        profileSubscription.load();
+
+    }
+
+    private void addSubscription(Subscription subscription, Subscriber subscriber){
+        subscription.addSubscriber(subscriber);
+        subscriptions.put(subscriber.getID(), new Utils.Pair<>(subscription, subscriber));
+    }
+
+    private void removeSubscription(String id){
+        Utils.Pair<Subscription, Subscriber> pair=subscriptions.get(id);
+        Subscription subscription=pair.first;
+        subscription.removeSubscriber(id);
+        subscriptions.remove(id);
     }
 
     private void backgroundLoading() {
@@ -138,82 +194,6 @@ public class HomeController extends Controller {
     }
 
 
-    private void loadAllAndaddSubscriptions() {
-
-        profileSubscription.load();
-
-        final FriendSubscription friendSubscription = getResourceComponent().provideFriendSubscription();
-        final FriendRequestSubscription friendRequestSubscription = getResourceComponent().provideFriendRequestSubscription();
-        final TeamSubscription teamSubscription = getResourceComponent().provideTeamSubscription();
-        final MeetingSubscription meetingSubscription = getResourceComponent().provideMeetingSubscription();
-        final ChatSubscription chatSubscription = getResourceComponent().provideChatSubscription();
-        final MessageSubscription messageSubscription = getResourceComponent().provideMessageSubscription();
-
-        profileSubscription.addSubscriber(new Subscriber() {
-            @Override
-            public void notifyChange() {
-                profileSubscription.removeSubscriber(this.getID());
-                readyProfile();
-                friendSubscription.load();
-            }
-        });
-
-        friendSubscription.addSubscriber(new Subscriber() {
-            @Override
-            public void notifyChange() {
-                friendSubscription.removeSubscriber(this.getID());
-                readyFriends();
-                friendRequestSubscription.load();
-            }
-        });
-
-        friendRequestSubscription.addSubscriber(new Subscriber() {
-            @Override
-            public void notifyChange() {
-                friendRequestSubscription.removeSubscriber(this.getID());
-                readyFriendRequests();
-                teamSubscription.load();
-            }
-        });
-
-        teamSubscription.addSubscriber(new Subscriber() {
-            @Override
-            public void notifyChange() {
-                teamSubscription.removeSubscriber(this.getID());
-                readyTeams();
-                meetingSubscription.load();
-            }
-        });
-
-        meetingSubscription.addSubscriber(new Subscriber() {
-            @Override
-            public void notifyChange() {
-                meetingSubscription.removeSubscriber(this.getID());
-                readyMeetings();
-                messageSubscription.load();
-            }
-        });
-
-        messageSubscription.addSubscriber(new Subscriber() {
-            @Override
-            public void notifyChange() {
-                messageSubscription.removeSubscriber(this.getID());
-                readyMessages();
-                chatSubscription.load();
-            }
-        });
-
-        chatSubscription.addSubscriber(new Subscriber() {
-            @Override
-            public void notifyChange() {
-                chatSubscription.removeSubscriber(this.getID());
-                readyChats();
-            }
-        });
-
-    }
-
-
     private void ready() {
         if (isReady()) {
             if (isBackgroundLoading) {
@@ -226,6 +206,7 @@ public class HomeController extends Controller {
             ctx.notifyLoaded();
         }
     }
+
 
 
     private void uncheckAll() {
@@ -271,18 +252,48 @@ public class HomeController extends Controller {
     }
 
 
+
+    private void renderProfile() {
+        UserProfile profile = profileResource.getProfile();
+
+        String username = profile.username;
+
+        ctx.bindUsernameLabel(username);
+
+        ctx.bindEmailLabel(profile.email);
+
+        ctx.bindAvatar(profile.large_avatar_url, StringUtils.firstLetter(username));
+
+    }
+
+    public void onSettingsMenuItem() {
+        ctx.goToSettings();
+    }
+
+    public void onProfileMenuItem() {
+        ctx.goToProfile();
+    }
+
+    public void onHelpMenuItem() {
+        ctx.goToHelp();
+    }
+
+    public void onFriendsMenuItem() {
+        ctx.goToFriends();
+    }
+
+
     @Override
     public void onDestroy() {
         ctx = null;
-        profileSubscription.removeSubscriber(profileSubscriber);
+        clearSubscriptions();
     }
 
-    private class ProfileSubscriber extends Subscriber {
-        @Override
-        public void notifyChange() {
-            readyProfile();
+    private void clearSubscriptions() {
+        Set<String> keys=subscriptions.keySet();
+        for (String id: keys) {
+            removeSubscription(id);
         }
     }
-
 
 }

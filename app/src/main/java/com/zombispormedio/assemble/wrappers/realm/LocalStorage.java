@@ -84,6 +84,19 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         return toArrayList(query.findAllSorted(sortKey));
     }
 
+    public D findOneByAndSort(String keyId, int valueId, String sortKey) {
+        RealmQuery<D> query = getQuery();
+
+        query.equalTo(keyId, valueId);
+        RealmResults<D> results=query.findAllSorted(sortKey);
+        D result=null;
+        if(results.size()>0){
+            result=results.last();
+        }
+
+        return result;
+    }
+
     public D getFirst() {
         RealmQuery<D> query = getQuery();
 

@@ -23,15 +23,13 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
     public FriendProfileDAO recipient;
 
-
-
     @Override
     public Chat toModel() {
         MessageStorageService messageStorageService=new MessageStorageService();
 
-        Message[] messages=messageStorageService.getSortedMessagesByChat(id);
+        Message message=messageStorageService.getLastMessage(id);
 
-        return new Chat(id, created_at, sender.toModel(), recipient.toModel(), messages);
+        return new Chat(id, created_at, sender.toModel(), recipient.toModel(), message);
     }
 
     @Override

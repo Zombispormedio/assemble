@@ -70,6 +70,7 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
         AndroidUtils.createListConfiguration(view, chatsList)
                 .divider(true)
                 .itemAnimation(true)
+                .scrolling(false)
                 .configure();
         chatsListFactory.setOnClickListener(new IOnClickItemListHandler<Chat>() {
             @Override

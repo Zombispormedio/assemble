@@ -15,4 +15,6 @@ public interface IBaseProfileView extends IBaseView {
 
     void setBirthDate(String birth);
 
+    String getDateFormat();
+
 }
