@@ -26,7 +26,7 @@ public class Meeting extends Concept implements Sorted<Meeting> {
     public int compareTo(Meeting o) {
         int result = DateUtils.compareISODateString(start_at, o.start_at);
         if (result == 0) {
-            result = name.compareToIgnoreCase(name);
+            result = name.compareToIgnoreCase(o.name);
         }
 
         return result;

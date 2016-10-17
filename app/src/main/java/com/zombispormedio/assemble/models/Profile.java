@@ -28,7 +28,7 @@ public class Profile<T extends Profile> extends People implements Sorted<T>{
 
     @Override
     public int compareTo(T o) {
-        return username.compareToIgnoreCase(username);
+        return username.compareToIgnoreCase(o.username);
     }
 
     @Override
