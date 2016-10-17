@@ -17,7 +17,8 @@ public class ChatsListAdapter extends BaseListAdapter<Chat, ChatHolder> {
     private IOnClickItemListHandler<Chat> listener;
 
     public ChatsListAdapter(ArrayList<Chat> data) {
-        super(data);
+        super(Chat.class);
+        addAll(data);
     }
 
     @Override
@@ -27,6 +28,11 @@ public class ChatsListAdapter extends BaseListAdapter<Chat, ChatHolder> {
             holder.setOnClickListener(listener);
         }
         return holder;
+    }
+
+    @Override
+    protected int compareItems(Chat o1, Chat o2) {
+        return -super.compareItems(o1, o2);
     }
 
     public void setOnClickListener(

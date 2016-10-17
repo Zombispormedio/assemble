@@ -21,7 +21,6 @@ import android.widget.Toast;
 
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.models.UserProfile;
@@ -148,7 +147,7 @@ public final class AndroidUtils {
             }
 
             if(Utils.presenceOf(profile.birth_date)){
-                String formatedDate=DateUtils.format(ctx.getDateFormat(), profile.birth_date);
+                String formatedDate=DateUtils.formatISODate(ctx.getDateFormat(), profile.birth_date);
                 ctx.setBirthDate(formatedDate);
             }else{
                 ctx.setBirthDate("");
@@ -324,7 +323,7 @@ public final class AndroidUtils {
 
     public static String formatDate(Context ctx, int strID, String date) {
         String format = ctx.getString(strID);
-        return DateUtils.format(format, date);
+        return DateUtils.formatISODate(format, date);
     }
 
 

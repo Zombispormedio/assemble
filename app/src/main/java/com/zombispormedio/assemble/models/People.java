@@ -8,7 +8,7 @@ import com.zombispormedio.assemble.utils.Utils;
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
-public class People extends BaseModel {
+public class People extends BaseModel{
 
     public final String email;
 
@@ -72,4 +72,5 @@ public class People extends BaseModel {
     private String ellipseContent(int limit){
         return StringUtils.ellipse(username, limit);
     }
+
 }

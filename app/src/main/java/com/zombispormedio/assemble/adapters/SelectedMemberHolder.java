@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.adapters;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.Sorted;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
@@ -75,7 +76,7 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
         this.listener = listener;
     }
 
-    public static class Container{
+    public static class Container implements Sorted<Container>{
         private FriendProfile content;
         private int friendIndex;
 
@@ -90,6 +91,16 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
 
         public int getFriendIndex() {
             return friendIndex;
+        }
+
+        @Override
+        public boolean areTheSame(Container o) {
+            return content.areTheSame(o.getContent());
+        }
+
+        @Override
+        public int compareTo(Container o) {
+            return content.compareTo(o.getContent());
         }
     }
 

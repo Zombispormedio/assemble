@@ -17,7 +17,8 @@ public class TeamsListAdapter extends BaseListAdapter<Team, TeamHolder> {
     private IOnClickItemListHandler<Team> listener;
 
     public TeamsListAdapter(ArrayList<Team> data) {
-        super(data);
+        super(Team.class);
+        addAll(data);
     }
 
     @Override

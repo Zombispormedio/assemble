@@ -19,7 +19,8 @@ public class TeamFriendsListAdapter extends BaseListAdapter<
     private IOnClickItemListHandler<TeamFriendHolder.SelectedContainer> listener;
 
     public TeamFriendsListAdapter(ArrayList<FriendProfile> data) {
-        super.setData(apply(data));
+        super(TeamFriendHolder.SelectedContainer.class);
+        addAll(apply(data));
     }
 
     @Override
@@ -47,17 +48,17 @@ public class TeamFriendsListAdapter extends BaseListAdapter<
 
 
     public void setFriendProfiles(ArrayList<FriendProfile> data) {
-        super.setData(apply(data));
+        super.addAll(apply(data));
     }
 
     public void selectFriend(int index){
-        TeamFriendHolder.SelectedContainer container=data.get(index);
+        TeamFriendHolder.SelectedContainer container= mData.get(index);
         container.select();
         notifyItemChanged(index);
     }
 
     public void deselectFriend(int index){
-        TeamFriendHolder.SelectedContainer container=data.get(index);
+        TeamFriendHolder.SelectedContainer container= mData.get(index);
         container.deselect();
         notifyItemChanged(index);
     }

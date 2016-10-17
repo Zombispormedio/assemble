@@ -4,7 +4,7 @@ package com.zombispormedio.assemble.models;
 /**
  * Created by Xavier Serrano on 30/07/2016.
  */
-public class FriendRequestProfile extends Profile{
+public class FriendRequestProfile extends Profile<FriendRequestProfile>{
 
     public FriendRequestProfile(int id, String email, String username, String full_avatar_url, String large_avatar_url,
             String medium_avatar_url, String thumb_avatar_url, String birth_date, String location, String bio,

@@ -122,7 +122,7 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
 
     @Override
     public void bindSearchResults(ArrayList<FriendProfile> results) {
-        friendsListAdapter.setData(results);
+        friendsListAdapter.addAll(results);
         friendsListAdapter.notifyDataSetChanged();
     }
 

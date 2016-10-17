@@ -15,16 +15,15 @@ import java.util.ArrayList;
  * Created by Xavier Serrano on 25/08/2016.
  */
 public class FriendsListAdapter
-        extends BaseListAdapter<FriendProfile, FriendHolder> {
+        extends FriendProfileAdapter<FriendHolder> {
 
     private IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener;
 
     private IOnClickItemListHandler<FriendProfile> listener;
 
-    public FriendsListAdapter(ArrayList<FriendProfile> data) {
+    private FriendsListAdapter(ArrayList<FriendProfile> data) {
         super(data);
     }
-
 
     @Override
     public FriendHolder onCreateViewHolder(ViewGroup parent, int viewType) {

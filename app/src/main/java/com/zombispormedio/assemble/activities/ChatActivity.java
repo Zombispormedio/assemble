@@ -14,7 +14,6 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.MessageListAdapter;
 import com.zombispormedio.assemble.controllers.ChatController;
@@ -122,7 +121,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
     @Override
     public void bindMessages(ArrayList<Message> messages) {
-        messageListAdapter.setData(messages);
+        messageListAdapter.addAll(messages);
         messagesList.scrollToPosition(messages.size()-1);
     }
 

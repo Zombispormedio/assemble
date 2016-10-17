@@ -115,7 +115,7 @@ public class ExternalNavigationManager {
 
     public Uri resolveCameraPath(Intent data) {
         Bundle extras = data.getExtras();
-        Bitmap imageBitmap = (Bitmap) extras.get("data");
+        Bitmap imageBitmap = (Bitmap) extras.get("mData");
 
         return getImageCameraURI(ctx.getApplicationContext(), imageBitmap);
     }

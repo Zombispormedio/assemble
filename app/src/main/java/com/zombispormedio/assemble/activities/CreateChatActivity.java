@@ -74,7 +74,7 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
 
     @Override
     public void bindFriends(ArrayList<FriendProfile> friends) {
-        adapter.setData(friends);
+        adapter.addAll(friends);
     }
 
     @Override

@@ -5,8 +5,6 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.utils.DateUtils;
-import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 
 
@@ -116,7 +114,7 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
     private void renderDate(String startAt) {
         String format = itemView.getContext().getString(R.string.simple_date_with_hours);
-        String date = DateUtils.format(format, startAt);
+        String date = DateUtils.formatISODate(format, startAt);
         dateLabel.setText(date);
     }
 

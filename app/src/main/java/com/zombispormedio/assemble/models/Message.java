@@ -3,19 +3,18 @@ package com.zombispormedio.assemble.models;
 
 import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
+import com.zombispormedio.assemble.utils.Utils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Created by Xavier Serrano on 03/10/2016.
  */
 
-public class Message extends BaseModel implements Parcelable {
+public class Message extends BaseModel implements Parcelable, Sorted<Message> {
 
     public int sender_id;
 
@@ -35,7 +34,7 @@ public class Message extends BaseModel implements Parcelable {
 
     public final boolean is_delivered;
 
-    public String created_at;
+    public final String created_at;
 
     public Message(int id, String content, boolean is_read, boolean is_sent, boolean is_delivered, String created_at,
             Profile sender, Profile recipient, int chat_id) {
@@ -50,13 +49,14 @@ public class Message extends BaseModel implements Parcelable {
         this.chat_id = chat_id;
     }
 
-    public Message(String content, Profile sender) {
+    public Message(String content, Profile sender, String created_at) {
         super(0);
         this.sender = sender;
         this.content = content;
         this.is_read = false;
         this.is_sent = false;
         this.is_delivered = false;
+        this.created_at = created_at;
     }
 
     public Message(int id, String content, boolean is_read, boolean is_sent, boolean is_delivered, String created_at,
@@ -118,7 +118,7 @@ public class Message extends BaseModel implements Parcelable {
     }
 
     public String formatCreated(String format) {
-        return DateUtils.format(format, created_at);
+        return DateUtils.formatISODate(format, created_at);
     }
 
     @Override
@@ -130,13 +130,24 @@ public class Message extends BaseModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(content);
-        dest.writeByte((byte)(is_read?1:0));
-        dest.writeByte((byte)(is_sent?1:0));
-        dest.writeByte((byte)(is_delivered?1:0));
+        dest.writeByte((byte) (is_read ? 1 : 0));
+        dest.writeByte((byte) (is_sent ? 1 : 0));
+        dest.writeByte((byte) (is_delivered ? 1 : 0));
         dest.writeString(created_at);
         dest.writeInt(sender_id);
         dest.writeInt(recipient_id);
         dest.writeInt(chat_id);
+    }
+
+    @Override
+    public int compareTo(Message o) {
+        return DateUtils.compareISODateString(created_at, o.created_at);
+    }
+
+    @Override
+    public boolean areTheSame(Message obj) {
+        return obj != null && (id == obj.id &&
+                Utils.safeEquals(content,obj.content));
     }
 
     public static class Builder {

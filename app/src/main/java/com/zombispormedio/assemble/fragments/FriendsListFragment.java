@@ -95,7 +95,7 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
 
     @Override
     public void bindFriends(ArrayList<FriendProfile> data) {
-        friendsListAdapter.setData(data);
+        friendsListAdapter.addAll(data);
     }
 
     @Override

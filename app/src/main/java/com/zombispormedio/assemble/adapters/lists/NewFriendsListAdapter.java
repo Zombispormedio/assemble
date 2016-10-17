@@ -14,13 +14,13 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 17/09/2016.
  */
-public class NewFriendsListAdapter extends BaseListAdapter<FriendProfile, NewFriendHolder> {
+public class NewFriendsListAdapter extends FriendProfileAdapter<NewFriendHolder> {
 
     private IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener;
 
     private IOnClickItemListHandler<FriendProfile> listener;
 
-    public NewFriendsListAdapter(ArrayList<FriendProfile> data) {
+    private NewFriendsListAdapter(ArrayList<FriendProfile> data) {
         super(data);
     }
 

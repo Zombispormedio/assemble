@@ -21,7 +21,7 @@ public class DateUtils {
 
     public final static String SIMPLE_SLASH_FORMAT_WITH_HOUR = "dd/MM/yyyy HH:mm";
 
-    public static String format(String format, String inDate) {
+    public static String formatISODate(String format, String inDate) {
         DateTime d = ISODateTimeFormat.dateTime().parseDateTime(inDate);
         DateTimeFormatter formatter = DateTimeFormat.forPattern(format).withLocale(Locale.getDefault());
         return d.toString(formatter);
@@ -33,7 +33,7 @@ public class DateUtils {
         return date.getTimeInMillis();
     }
 
-    public static String toISOString(int year, int month, int day) {
+    public static String convertToISOString(int year, int month, int day) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
@@ -49,7 +49,7 @@ public class DateUtils {
         return format.print(cal.getTimeInMillis());
     }
 
-    public static String toISOString(int year, int month, int day, int hour, int minutes) {
+    public static String convertToISOString(int year, int month, int day, int hour, int minutes) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
         cal.set(Calendar.MONTH, month);
@@ -70,6 +70,12 @@ public class DateUtils {
         Calendar outDate = Calendar.getInstance();
         outDate.setTimeInMillis(d.getMillis());
         return outDate;
+    }
+
+    public static int compareISODateString(String d1, String d2){
+        Calendar c1=parse(d1);
+        Calendar c2=parse(d2);
+        return c1.compareTo(c2);
     }
 
     public static boolean isToday(String date) {
@@ -95,7 +101,7 @@ public class DateUtils {
     }
 
 
-    private static class Now {
+    public static class Now {
 
         private static Calendar Cal() {
             return Calendar.getInstance();
@@ -122,7 +128,7 @@ public class DateUtils {
         }
 
         public static String toDateString() {
-            return DateUtils.toISOString(YEAR(), MONTH(), DAY(), HOUR(), MINUTES());
+            return DateUtils.convertToISOString(YEAR(), MONTH(), DAY(), HOUR(), MINUTES());
         }
     }
 
@@ -226,7 +232,7 @@ public class DateUtils {
         }
 
         public String build() {
-            return DateUtils.toISOString(year, month, day, hour, minutes);
+            return DateUtils.convertToISOString(year, month, day, hour, minutes);
         }
     }
 

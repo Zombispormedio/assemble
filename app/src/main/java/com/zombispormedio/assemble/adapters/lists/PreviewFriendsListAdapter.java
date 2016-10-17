@@ -12,7 +12,7 @@ import android.view.ViewGroup;
  * Created by Xavier Serrano on 29/09/2016.
  */
 
-public class PreviewFriendsListAdapter extends BaseListAdapter<FriendProfile, PreviewFriendHolder> {
+public class PreviewFriendsListAdapter extends FriendProfileAdapter<PreviewFriendHolder> {
 
     private IOnClickItemListHandler<FriendProfile> listener;
 

@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.adapters;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.Sorted;
 
 import android.view.View;
 import android.widget.ImageView;
@@ -80,7 +81,7 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     }
 
 
-    public static class SelectedContainer {
+    public static class SelectedContainer implements Sorted<SelectedContainer> {
 
         private FriendProfile content;
 
@@ -117,6 +118,16 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
 
         public void setSelectedMemberIndex(int selectedMemberIndex) {
             this.selectedMemberIndex = selectedMemberIndex;
+        }
+
+        @Override
+        public boolean areTheSame(SelectedContainer o) {
+            return content.areTheSame(o.getContent());
+        }
+
+        @Override
+        public int compareTo(SelectedContainer o) {
+            return content.compareTo(o.getContent());
         }
     }
 }

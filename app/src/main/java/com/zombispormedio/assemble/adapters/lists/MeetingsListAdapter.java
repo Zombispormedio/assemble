@@ -16,8 +16,9 @@ public class MeetingsListAdapter extends BaseListAdapter<Meeting, MeetingHolder>
 
     private IOnClickItemListHandler<Meeting> listener;
 
-    public MeetingsListAdapter(ArrayList<Meeting> data) {
-        super(data);
+    private MeetingsListAdapter(ArrayList<Meeting> data) {
+        super(Meeting.class);
+        addAll(data);
     }
 
     @Override
@@ -30,10 +31,18 @@ public class MeetingsListAdapter extends BaseListAdapter<Meeting, MeetingHolder>
         return holder;
     }
 
+
+    @Override
+    protected int compareItems(Meeting o1, Meeting o2) {
+        return -super.compareItems(o1, o2);
+    }
+
     public void setOnClickListener(
             IOnClickItemListHandler<Meeting> listener) {
         this.listener = listener;
     }
+
+
 
     public static class Factory  {
 

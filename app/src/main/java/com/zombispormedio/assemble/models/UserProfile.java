@@ -4,7 +4,7 @@ package com.zombispormedio.assemble.models;
 /**
  * Created by Xavier Serrano on 25/07/2016.
  */
-public class UserProfile extends Profile{
+public class UserProfile extends Profile<UserProfile>{
 
 
     public UserProfile(int id, String email, String username, String full_avatar_url, String large_avatar_url,

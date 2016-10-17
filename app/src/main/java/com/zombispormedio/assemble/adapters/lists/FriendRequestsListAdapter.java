@@ -26,7 +26,8 @@ public class FriendRequestsListAdapter
 
 
     public FriendRequestsListAdapter(ArrayList<FriendRequestProfile> data) {
-        super(data);
+        super(FriendRequestProfile.class);
+        addAll(data);
     }
 
     @Override

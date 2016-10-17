@@ -18,7 +18,8 @@ public class TeamListDialogAdapter extends BaseListAdapter<Team, TeamDialogHolde
     private IOnClickItemListHandler<Team> listener;
 
     public TeamListDialogAdapter(ArrayList<Team> data) {
-        super(data);
+        super(Team.class);
+        addAll(data);
     }
 
     @Override

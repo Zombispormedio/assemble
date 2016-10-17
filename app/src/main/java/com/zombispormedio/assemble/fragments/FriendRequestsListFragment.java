@@ -109,7 +109,7 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
 
     @Override
     public void bindFriendRequests(ArrayList<FriendRequestProfile> data) {
-        friendRequestsListAdapter.setData(data);
+        friendRequestsListAdapter.addAll(data);
     }
 
     @Override

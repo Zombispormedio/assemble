@@ -125,7 +125,7 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
 
     @Override
     public void bindTeams(ArrayList<Team> data) {
-        teamsListAdapter.setData(data);
+        teamsListAdapter.addAll(data);
     }
 
 

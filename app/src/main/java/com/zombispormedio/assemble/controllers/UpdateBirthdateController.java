@@ -48,7 +48,7 @@ public class UpdateBirthdateController extends Controller {
         int year = ctx.getYearOfBirthdate();
         int month = ctx.getMonthOfBirthdate();
         int day = ctx.getDayOfBirthdate();
-        String date = DateUtils.toISOString(year, month, day);
+        String date = DateUtils.convertToISOString(year, month, day);
         ctx.finishWithResult(date);
     }
 

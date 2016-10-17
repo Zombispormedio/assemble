@@ -30,13 +30,21 @@ public class Utils {
         return it_is;
     }
 
-    public interface IConversion{
-        Object doIt(Object object);
+    public static boolean safeEquals(Object o1, Object o2) {
+        boolean equals = o1 != null && o2 != null;
+        if (equals) {
+            equals = o1.equals(o2);
+        }
+        return equals;
+    }
 
+    interface IConversion {
+
+        Object doIt(Object object);
     }
 
 
-    public static class MergeBuilder<E, R> {
+    static class MergeBuilder<E, R> {
 
         private Class<? extends E> emissorClass;
 
@@ -60,15 +68,15 @@ public class Utils {
             return this;
         }
 
-        public MergeBuilder convert(IConversion conversion){
-            this.conversion=conversion;
+        public MergeBuilder convert(IConversion conversion) {
+            this.conversion = conversion;
             return this;
         }
 
         public MergeBuilder() {
             this.recipient = null;
             this.emissor = null;
-            this.conversion=null;
+            this.conversion = null;
         }
 
         private void setEmissorClass() {
@@ -101,10 +109,10 @@ public class Utils {
                         thisField = emissorClass.getField(name);
                         Object value = thisField.get(emissor);
 
-                        if(conversion!=null){
-                            Object preValue=conversion.doIt(value);
-                            if(preValue!=null){
-                                value=preValue;
+                        if (conversion != null) {
+                            Object preValue = conversion.doIt(value);
+                            if (preValue != null) {
+                                value = preValue;
                             }
                         }
 
@@ -121,41 +129,43 @@ public class Utils {
         }
     }
 
-    public static int getRandomColor(){
+    public static int getRandomColor() {
         ColorGenerator generator = ColorGenerator.MATERIAL;
         return generator.getRandomColor();
     }
 
-    public static int getColorByString(String str){
+    public static int getColorByString(String str) {
         ColorGenerator generator = ColorGenerator.MATERIAL;
         return generator.getColor(str.hashCode());
 
     }
 
-    public static int[] toArray(LinkedList<Integer> in){
-        int len=in.size();
-        int[] out= new int[len];
+    public static int[] toArray(LinkedList<Integer> in) {
+        int len = in.size();
+        int[] out = new int[len];
 
-        for(int i=0; i< len; i++){
-            out[i]=in.get(i);
+        for (int i = 0; i < len; i++) {
+            out[i] = in.get(i);
         }
 
         return out;
     }
 
 
-    public static Integer[] toInteger(int[] in){
-        int len=in.length;
-        Integer[] out=new Integer[len];
-        for(int i=0; i< len; i++){
-            out[i]=in[i];
+    public static Integer[] toInteger(int[] in) {
+        int len = in.length;
+        Integer[] out = new Integer[len];
+        for (int i = 0; i < len; i++) {
+            out[i] = in[i];
         }
 
         return out;
     }
 
-    public static class Pair<X, Y>{
+    public static class Pair<X, Y> {
+
         public final X first;
+
         public final Y second;
 
         public Pair(X first, Y second) {
@@ -164,7 +174,7 @@ public class Utils {
         }
     }
 
-    public static class IntPair extends Pair<Integer, Integer>{
+    public static class IntPair extends Pair<Integer, Integer> {
 
         public IntPair(Integer first, Integer second) {
             super(first, second);
@@ -172,9 +182,10 @@ public class Utils {
     }
 
 
-    public static class IntPairBuilder{
+    public static class IntPairBuilder {
 
         private int first;
+
         private int second;
 
         public IntPairBuilder setFirst(int first) {
@@ -187,7 +198,7 @@ public class Utils {
             return this;
         }
 
-        public IntPair build(){
+        public IntPair build() {
             return new IntPair(first, second);
         }
 

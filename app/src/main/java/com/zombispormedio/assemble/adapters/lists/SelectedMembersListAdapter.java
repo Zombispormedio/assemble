@@ -21,13 +21,13 @@ public class SelectedMembersListAdapter extends BaseListAdapter<
     private ArrayList<Integer> friendIndexes;
 
     public SelectedMembersListAdapter() {
-        super.setData(new ArrayList<SelectedMemberHolder.Container>());
-        friendIndexes=new ArrayList<>();
+        super(SelectedMemberHolder.Container.class);
+        friendIndexes = new ArrayList<>();
     }
 
     @Override
     public SelectedMemberHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        SelectedMemberHolder holder = new    SelectedMemberHolder(getView(parent, R.layout.list_item_selected_members));
+        SelectedMemberHolder holder = new SelectedMemberHolder(getView(parent, R.layout.list_item_selected_members));
         holder.setOnClickListener(listener);
         return holder;
     }
@@ -37,40 +37,33 @@ public class SelectedMembersListAdapter extends BaseListAdapter<
         this.listener = listener;
     }
 
-    public void addMember(FriendProfile content, int friendIndex){
-        if(!friendIndexes.contains(friendIndex)){
-            int index=data.size();
-            data.add(new SelectedMemberHolder.Container(content, friendIndex));
-            friendIndexes.add(index,friendIndex);
-            notifyItemInserted(index);
+    public void addMember(FriendProfile content, int friendIndex) {
+        if (!friendIndexes.contains(friendIndex)) {
+
+            int index = add(new SelectedMemberHolder.Container(content, friendIndex));
+            friendIndexes.add(index, friendIndex);
+
         }
 
     }
 
-    public void removeMember(int index){
-        data.remove(index);
-        friendIndexes.remove(index);
-        notifyItemRemoved(index);
-    }
-
-    public void removeMemberByFriend(int friendIndex){
-        int index=findIndexByFriend(friendIndex);
-        if(index>-1){
-            data.remove(index);
+    public void removeMemberByFriend(int friendIndex) {
+        int index = findIndexByFriend(friendIndex);
+        if (index > -1) {
+            removeItemAt(index);
             friendIndexes.remove(index);
-            notifyItemRemoved(index);
         }
     }
 
-    private int findIndexByFriend(int friendIndex){
-        int index=-1;
-        if(friendIndexes.contains(friendIndex)){
-            int i=0;
+    private int findIndexByFriend(int friendIndex) {
+        int index = -1;
+        if (friendIndexes.contains(friendIndex)) {
+            int i = 0;
 
-            while(i<data.size()&&index==-1){
-                SelectedMemberHolder.Container t=data.get(i);
-                if(t.getFriendIndex()==friendIndex){
-                    index=i;
+            while (i < mData.size() && index == -1) {
+                SelectedMemberHolder.Container t = mData.get(i);
+                if (t.getFriendIndex() == friendIndex) {
+                    index = i;
                 }
                 i++;
             }
@@ -80,8 +73,4 @@ public class SelectedMembersListAdapter extends BaseListAdapter<
         return index;
     }
 
-    public void clear(){
-        data.clear();
-        notifyDataSetChanged();
-    }
 }

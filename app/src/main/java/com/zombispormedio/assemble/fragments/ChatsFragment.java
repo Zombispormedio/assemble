@@ -93,7 +93,7 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
 
     @Override
     public void bindChats(ArrayList<Chat> data) {
-        chatsListAdapter.setData(data);
+        chatsListAdapter.addAll(data);
     }
 
     @Override

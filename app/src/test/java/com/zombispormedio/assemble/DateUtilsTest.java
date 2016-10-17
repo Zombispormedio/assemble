@@ -16,7 +16,7 @@ public class DateUtilsTest {
 
     @Test
     public void format_Test() throws Exception {
-        String d=DateUtils.format("HH:mm", "2016-10-10T08:53:10.688Z");
+        String d=DateUtils.formatISODate("HH:mm", "2016-10-10T08:53:10.688Z");
         assertEquals("10:53", d);
     }
 }

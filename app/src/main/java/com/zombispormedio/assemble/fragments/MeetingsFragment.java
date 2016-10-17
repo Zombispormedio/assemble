@@ -81,7 +81,7 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
 
     @Override
     public void bindMeetings(ArrayList<Meeting> data) {
-        meetingsListAdapter.setData(data);
+        meetingsListAdapter.addAll(data);
     }
 
     @Override

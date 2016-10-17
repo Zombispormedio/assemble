@@ -9,7 +9,6 @@ import com.zombispormedio.assemble.utils.Utils;
  */
 public abstract class Concept extends BaseModel {
 
-
     public final String name;
 
     public final String description;
@@ -57,7 +56,6 @@ public abstract class Concept extends BaseModel {
         return Utils.presenceOf(path);
     }
 
-
     public ImageUtils.ImageBuilder getLargeImageBuilder() {
         return getImageBuilder(large_image_url);
     }
@@ -87,6 +85,19 @@ public abstract class Concept extends BaseModel {
 
     public String getNameFirstLetter() {
         return StringUtils.firstLetter(name);
+    }
+
+    public boolean areContentTheSame(Concept o) {
+
+
+
+        return id == o.id &&
+                Utils.safeEquals(name, o.name) &&
+                Utils.safeEquals(description, o.description) &&
+                Utils.safeEquals(full_image_url, o.full_image_url) &&
+                Utils.safeEquals(large_image_url, o.large_image_url) &&
+                Utils.safeEquals(medium_image_url,o.medium_image_url) &&
+                Utils.safeEquals(thumb_image_url,o.thumb_image_url);
     }
 
 }

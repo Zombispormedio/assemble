@@ -82,7 +82,7 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
 
     @Override
     public void bindTeams(ArrayList<Team> data) {
-        teamsListAdapter.setData(data);
+        teamsListAdapter.addAll(data);
     }
 
     @Override

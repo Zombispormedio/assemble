@@ -11,8 +11,7 @@ import android.view.ViewGroup;
  * Created by Xavier Serrano on 25/09/2016.
  */
 
-public class ParticipantsListAdapter extends BaseListAdapter<
-        FriendProfile, ParticipantHolder> {
+public class ParticipantsListAdapter extends FriendProfileAdapter<ParticipantHolder> {
 
     @Override
     public ParticipantHolder onCreateViewHolder(ViewGroup parent, int viewType) {

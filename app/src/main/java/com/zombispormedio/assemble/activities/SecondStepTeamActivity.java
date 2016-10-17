@@ -107,7 +107,7 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
 
     @Override
     public void bindParticipants(ArrayList<FriendProfile> data) {
-        participantsListAdapter.setData(data);
+        participantsListAdapter.addAll(data);
     }
 
     @Override
