@@ -64,7 +64,7 @@ public class NewFriendsListAdapter extends FriendProfileAdapter<NewFriendHolder>
         }
 
         public NewFriendsListAdapter make() {
-            return make(new ArrayList<FriendProfile>());
+            return make(new ArrayList<>());
         }
 
         public NewFriendsListAdapter make(ArrayList<FriendProfile> data) {

@@ -15,11 +15,11 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
 
     private int numTabs;
 
-    public final static int TEAMS=0;
+    public final static int TEAMS = 0;
 
-    public final static int MEETINGS=1;
+    public final static int MEETINGS = 1;
 
-    public final static int CHATS=2;
+    public final static int CHATS = 2;
 
     public HomePagerAdapter(FragmentManager fm, int numTabs) {
         super(fm);

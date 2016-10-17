@@ -48,12 +48,9 @@ public class TeamHolder extends AbstractHolder<Team> {
     }
 
     private void setupOnClickListener(final int position, final Team itemData) {
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) {
-                    listener.onClick(position, itemData);
-                }
+        cardView.setOnClickListener(view -> {
+            if (listener != null) {
+                listener.onClick(position, itemData);
             }
         });
     }

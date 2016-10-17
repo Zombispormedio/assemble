@@ -36,8 +36,6 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
     View divider;
 
 
-    private TeamFriendsListAdapter.Factory friendsListFactory;
-
     private TeamFriendsListAdapter friendsListAdapter;
 
     private SelectedMembersListAdapter membersListAdapter;
@@ -63,7 +61,7 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
 
 
     private void setupFriends() {
-        friendsListFactory= new TeamFriendsListAdapter.Factory();
+        TeamFriendsListAdapter.Factory friendsListFactory = new TeamFriendsListAdapter.Factory();
 
         AndroidUtils.createListConfiguration(this, friendsList)
                 .divider(true)
@@ -71,16 +69,11 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
                 .configure();
 
         friendsListFactory.setOnClickListener(
-                new IOnClickItemListHandler<TeamFriendHolder.SelectedContainer>() {
-                    @Override
-                    public void onClick(int position, TeamFriendHolder.SelectedContainer data) {
-
-                        if(!data.isSelected()){
-                            ctrl.onFriendAddedToMembers(position, data.getContent());
-                        }else{
-                            ctrl.onMemberRemoved(position, data.getContent());
-                        }
-
+                (position, data) -> {
+                    if(!data.isSelected()){
+                        ctrl.onFriendAddedToMembers(position, data.getContent());
+                    }else{
+                        ctrl.onMemberRemoved(position, data.getContent());
                     }
                 });
 
@@ -98,12 +91,7 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
                 .configure();
 
         membersListAdapter.setOnClickListener(
-                new IOnClickItemListHandler<SelectedMemberHolder.Container>() {
-                    @Override
-                    public void onClick(int position, SelectedMemberHolder.Container data) {
-                        ctrl.onMemberRemoved(data.getFriendIndex(), data.getContent());
-                    }
-                });
+                (position, data) -> ctrl.onMemberRemoved(data.getFriendIndex(), data.getContent()));
 
         membersList.setAdapter(membersListAdapter);
 

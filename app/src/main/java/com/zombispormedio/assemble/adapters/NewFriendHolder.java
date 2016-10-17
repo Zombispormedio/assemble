@@ -72,25 +72,19 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     }
 
     private void setupOnClickListener(final int position, final FriendProfile itemData) {
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) {
-                    listener.onClick(position, itemData);
-                }
-
+        itemView.setOnClickListener(view -> {
+            if (listener != null) {
+                listener.onClick(position, itemData);
             }
+
         });
     }
 
     private void setupAddFriendButton(final int position, final FriendProfile itemData) {
         final INewFriendHolder holder = this;
-        addFriendButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (addFriendListener != null) {
-                    addFriendListener.onClick(position, itemData, holder);
-                }
+        addFriendButton.setOnClickListener(v -> {
+            if (addFriendListener != null) {
+                addFriendListener.onClick(position, itemData, holder);
             }
         });
     }

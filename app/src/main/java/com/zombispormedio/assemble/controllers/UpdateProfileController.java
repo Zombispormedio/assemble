@@ -103,12 +103,7 @@ public class UpdateProfileController extends Controller {
     public void checkChanges() {
         bindEditor();
         if (editor.hasChanged()) {
-            ctx.showRejectChangesDialog(new ISuccessHandler() {
-                @Override
-                public void onSuccess() {
-                    ctx.close();
-                }
-            });
+            ctx.showRejectChangesDialog(() -> ctx.close());
         } else {
             ctx.close();
         }

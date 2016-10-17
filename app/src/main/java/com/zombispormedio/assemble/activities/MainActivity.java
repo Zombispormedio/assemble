@@ -30,14 +30,7 @@ public class MainActivity extends BaseActivity implements IMainView {
 
         navigation = new NavigationManager(this);
 
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    @Override
-                    public void run() {
-                        ctrl.checkAccess();
-                    }
-                }, 500);
-
+        new android.os.Handler().postDelayed(() -> ctrl.checkAccess(), 500);
 
     }
 
@@ -54,22 +47,12 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     public void goToLogin() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Login();
-            }
-        });
+        runOnUiThread(() -> Login());
     }
 
     @Override
     public void goHome() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Home();
-            }
-        });
+        runOnUiThread(() -> Home());
     }
 
 

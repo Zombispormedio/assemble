@@ -140,19 +140,16 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
     }
 
     private void setupImageUploaderBottomSheet() {
-        imageUploaderBottomSheet = AndroidUtils.createImageUploaderBottomSheet(this, new BottomSheetItemClickListener() {
-                    @Override
-                    public void onBottomSheetItemClick(BottomSheetMenuItem item) {
-                        switch (item.getId()) {
-                            case R.id.gallery:
-                                externalNavigationManager.dispatchGalleryToSelectImage(R.string.select_picture);
-                                break;
-                            case R.id.camera:
-                                externalNavigationManager.dispatchTakePicture();
-                                break;
-                        }
-                    }
-                });
+        imageUploaderBottomSheet = AndroidUtils.createImageUploaderBottomSheet(this, item -> {
+            switch (item.getId()) {
+                case R.id.gallery:
+                    externalNavigationManager.dispatchGalleryToSelectImage(R.string.select_picture);
+                    break;
+                case R.id.camera:
+                    externalNavigationManager.dispatchTakePicture();
+                    break;
+            }
+        });
 
     }
 

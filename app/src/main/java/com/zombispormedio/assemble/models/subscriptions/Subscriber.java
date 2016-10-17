@@ -9,7 +9,6 @@ public class Subscriber {
 
     private String uuid;
 
-
     public Subscriber() {
         uuid= UUID.randomUUID().toString();
     }

@@ -35,8 +35,6 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     @BindView(R.id.meetings_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    private MeetingsListAdapter.Factory meetingsListFactory;
-
     private MeetingsListAdapter meetingsListAdapter;
 
     @Override
@@ -60,7 +58,7 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     }
 
     private void setupMeetings() {
-        meetingsListFactory = new MeetingsListAdapter.Factory();
+        MeetingsListAdapter.Factory meetingsListFactory = new MeetingsListAdapter.Factory();
         AndroidUtils.createListConfiguration(view, meetingsList)
                 .itemAnimation(true)
                 .scrolling(false)
@@ -71,12 +69,7 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     }
 
     private void setupRefresh() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                ctrl.onRefresh();
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> ctrl.onRefresh());
     }
 
     @Override

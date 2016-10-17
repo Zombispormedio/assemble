@@ -64,25 +64,19 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IFrie
 
 
     private void setupOnClickListener(final int position, final FriendProfile itemData) {
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) {
-                    listener.onClick(position, itemData);
-                }
-
+        itemView.setOnClickListener(view -> {
+            if (listener != null) {
+                listener.onClick(position, itemData);
             }
+
         });
     }
 
     private void setupOnClickRemoveButton(final int position, final FriendProfile itemData) {
         final IFriendHolder holder=this;
-        removeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(removeButtonListener!=null){
-                    removeButtonListener.onClick(position, itemData, holder);
-                }
+        removeButton.setOnClickListener(v -> {
+            if(removeButtonListener!=null){
+                removeButtonListener.onClick(position, itemData, holder);
             }
         });
     }

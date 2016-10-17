@@ -22,12 +22,14 @@ public class FriendsPagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
-        Fragment item=null;
+        Fragment item = null;
 
-        switch (position){
-            case 0: item= new FriendsListFragment();
+        switch (position) {
+            case 0:
+                item = new FriendsListFragment();
                 break;
-            case 1: item= new FriendRequestsListFragment();
+            case 1:
+                item = new FriendRequestsListFragment();
                 break;
         }
 

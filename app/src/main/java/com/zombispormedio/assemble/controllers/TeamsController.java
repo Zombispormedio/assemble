@@ -47,12 +47,9 @@ public class TeamsController extends Controller {
 
 
     public IOnClickItemListHandler<Team> getOnClickOneTeam() {
-        return new IOnClickItemListHandler<Team>() {
-            @Override
-            public void onClick(int position, Team data) {
-                Logger.d(position);
-                Logger.d(data);
-            }
+        return (position, data) -> {
+            Logger.d(position);
+            Logger.d(data);
         };
     }
 

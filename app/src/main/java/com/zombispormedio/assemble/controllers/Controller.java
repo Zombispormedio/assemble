@@ -19,23 +19,6 @@ public class Controller extends AbstractController {
         return app != null ? app.getResourceComponent() : null;
     }
 
-    protected void loadAll() {
-        ResourceComponent component = getResourceComponent();
-        DataSubscription[] subscriptions = new DataSubscription[]{
-                component.provideProfileSubscription(),
-                component.provideFriendSubscription(),
-                component.provideFriendRequestSubscription(),
-                component.provideTeamSubscription(),
-                component.provideMeetingSubscription(),
-                component.provideMessageSubscription(),
-                component.provideChatSubscription()
-        };
-
-        for (DataSubscription subscription : subscriptions) {
-            subscription.load();
-        }
-    }
-
     @Override
     public void onDestroy() {
         app=null;

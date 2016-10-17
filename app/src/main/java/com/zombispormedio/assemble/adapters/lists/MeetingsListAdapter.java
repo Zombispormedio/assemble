@@ -49,7 +49,7 @@ public class MeetingsListAdapter extends BaseListAdapter<Meeting, MeetingHolder>
         private IOnClickItemListHandler<Meeting> listener;
 
         public MeetingsListAdapter make(){
-            return make(new ArrayList<Meeting>());
+            return make(new ArrayList<>());
         }
 
         public MeetingsListAdapter make(ArrayList<Meeting> data) {

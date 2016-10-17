@@ -76,7 +76,7 @@ public class TeamFriendsListAdapter extends BaseListAdapter<
         private IOnClickItemListHandler<TeamFriendHolder.SelectedContainer> listener;
 
         public TeamFriendsListAdapter make() {
-            return make(new ArrayList<FriendProfile>());
+            return make(new ArrayList<>());
         }
 
         public TeamFriendsListAdapter make(ArrayList<FriendProfile> data) {

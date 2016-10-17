@@ -72,23 +72,13 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        chatsListFactory.setOnClickListener(new IOnClickItemListHandler<Chat>() {
-            @Override
-            public void onClick(int position, Chat data) {
-                ctrl.onChatItem(position, data);
-            }
-        });
+        chatsListFactory.setOnClickListener((position, data) -> ctrl.onChatItem(position, data));
         chatsListAdapter = chatsListFactory.make();
         chatsList.setAdapter(chatsListAdapter);
     }
 
     private void setupRefresh() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                ctrl.onRefresh();
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> ctrl.onRefresh());
     }
 
     @Override

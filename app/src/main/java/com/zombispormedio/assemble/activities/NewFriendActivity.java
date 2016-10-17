@@ -70,19 +70,16 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
 
     private void setupSearch() {
 
-        searchView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-                boolean handled = false;
+        searchView.setOnEditorActionListener((textView, actionId, keyEvent) -> {
+            boolean handled = false;
 
-                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-                    ctrl.onSearch();
-                    hideKeyboard();
-                    handled = true;
-                }
-
-                return handled;
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                ctrl.onSearch();
+                hideKeyboard();
+                handled = true;
             }
+
+            return handled;
         });
 
     }
@@ -102,19 +99,9 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
                 .divider(true)
                 .itemAnimation(true)
                 .configure();
-        friendsListFactory.setOnClickListener(new IOnClickItemListHandler<FriendProfile>() {
-            @Override
-            public void onClick(int position, FriendProfile data) {
-                ctrl.onItemClick(position, data);
-            }
-        });
+        friendsListFactory.setOnClickListener((position, data) -> ctrl.onItemClick(position, data));
 
-        friendsListFactory.setAddFriendListener(new IOnClickComponentItemHandler<FriendProfile, INewFriendHolder>() {
-            @Override
-            public void onClick(int position, FriendProfile data, INewFriendHolder holder) {
-                ctrl.onAddFriendClick(position, data, holder);
-            }
-        });
+        friendsListFactory.setAddFriendListener((position, data, holder) -> ctrl.onAddFriendClick(position, data, holder));
 
         friendsListAdapter = friendsListFactory.make();
         friendsList.setAdapter(friendsListAdapter);

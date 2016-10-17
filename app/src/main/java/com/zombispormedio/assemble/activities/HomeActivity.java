@@ -183,32 +183,28 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
 
     private NavigationView.OnNavigationItemSelectedListener NavListener() {
-        return new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        return item -> {
+            switch (item.getItemId()) {
+                case R.id.settings_menu:
+                    ctrl.onSettingsMenuItem();
+                    break;
 
-                switch (item.getItemId()) {
-                    case R.id.settings_menu:
-                        ctrl.onSettingsMenuItem();
-                        break;
+                case R.id.profile_menu:
+                    ctrl.onProfileMenuItem();
+                    break;
 
-                    case R.id.profile_menu:
-                        ctrl.onProfileMenuItem();
-                        break;
+                case R.id.help_menu:
+                    ctrl.onHelpMenuItem();
+                    break;
 
-                    case R.id.help_menu:
-                        ctrl.onHelpMenuItem();
-                        break;
+                case R.id.friends_menu:
+                    ctrl.onFriendsMenuItem();
+                    break;
 
-                    case R.id.friends_menu:
-                        ctrl.onFriendsMenuItem();
-                        break;
-
-                }
-                item.setChecked(false);
-                drawer.closeDrawers();
-                return true;
             }
+            item.setChecked(false);
+            drawer.closeDrawers();
+            return true;
         };
     }
 
@@ -378,8 +374,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
             if(getState()!=HomePagerAdapter.CHATS){
                 moveToPosition(HomePagerAdapter.CHATS);
             }
-
-
         }
     }
 }

@@ -68,37 +68,28 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
 
 
     private void setupOnClickListener(final int position, final FriendRequestProfile itemData) {
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) {
-                    listener.onClick(position, itemData);
-                }
-
+        itemView.setOnClickListener(view -> {
+            if (listener != null) {
+                listener.onClick(position, itemData);
             }
+
         });
     }
 
     private void setupAcceptButton(final int position, final FriendRequestProfile itemData) {
         final IFriendRequestHolder holder = this;
-        acceptButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (acceptListener != null) {
-                    acceptListener.onClick(position, itemData, holder);
-                }
+        acceptButton.setOnClickListener(v -> {
+            if (acceptListener != null) {
+                acceptListener.onClick(position, itemData, holder);
             }
         });
     }
 
     private void setupRejectButton(final int position, final FriendRequestProfile itemData) {
         final IFriendRequestHolder holder = this;
-        rejectButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (rejectListener != null) {
-                    rejectListener.onClick(position, itemData, holder);
-                }
+        rejectButton.setOnClickListener(v -> {
+            if (rejectListener != null) {
+                rejectListener.onClick(position, itemData, holder);
             }
         });
     }

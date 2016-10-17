@@ -111,21 +111,11 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
 
     private void setupTeamDialog() {
         teamDialogFragment = new TeamDialogFragment();
-        teamDialogFragment.setOnItemClickedListener(new IOnClickItemListHandler<Team>() {
-            @Override
-            public void onClick(int position, Team data) {
-                ctrl.onTeamSelected(data);
-            }
-        });
+        teamDialogFragment.setOnItemClickedListener((position, data) -> ctrl.onTeamSelected(data));
     }
 
     private void setupAllDay() {
-        isEveryDay.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                ctrl.onAllDayChanged(isChecked);
-            }
-        });
+        isEveryDay.setOnCheckedChangeListener((buttonView, isChecked) -> ctrl.onAllDayChanged(isChecked));
     }
 
     private void setupProgressDialog() {
@@ -155,44 +145,28 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
     @Override
     public void setupStartDate(int year, int month, int day) {
 
-        startDatePickerDialog = new DatePickerDialog(this, R.style.DateDialogTheme, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                ctrl.onStartDateChanged(year, month, dayOfMonth);
-            }
-        }, year, month, day);
+        startDatePickerDialog = new DatePickerDialog(this, R.style.DateDialogTheme,
+                (view, year1, month1, dayOfMonth) -> ctrl.onStartDateChanged(year1, month1, dayOfMonth), year, month, day);
 
     }
 
     @Override
     public void setupEndDate(int year, int month, int day) {
-        endDatePickerDialog = new DatePickerDialog(this, R.style.DateDialogTheme, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                ctrl.onEndDateChanged(year, month, dayOfMonth);
-            }
-        }, year, month, day);
+        endDatePickerDialog = new DatePickerDialog(this, R.style.DateDialogTheme,
+                (view, year1, month1, dayOfMonth) -> ctrl.onEndDateChanged(year1, month1, dayOfMonth), year, month, day);
     }
 
     @Override
     public void setupStartHour(int hour, int minutes) {
-        startHourPickerDialog = new TimePickerDialog(this, R.style.DateDialogTheme, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                ctrl.onStartHourChanged(hourOfDay, minute);
-            }
-        }, hour, minutes, true);
+        startHourPickerDialog = new TimePickerDialog(this, R.style.DateDialogTheme,
+                (view, hourOfDay, minute) -> ctrl.onStartHourChanged(hourOfDay, minute), hour, minutes, true);
     }
 
     @Override
     public void setupEndHour(int hour, int minutes) {
-        endHourPickerDialog = new TimePickerDialog(this, R.style.DateDialogTheme, new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                Logger.d(hourOfDay);
-                ctrl.onEndHourChanged(hourOfDay, minute);
-            }
-        }, hour, minutes, true);
+        endHourPickerDialog = new TimePickerDialog(this, R.style.DateDialogTheme,
+                (view, hourOfDay, minute) -> ctrl.onEndHourChanged(hourOfDay, minute)
+                , hour, minutes, true);
     }
 
     @Override
@@ -252,19 +226,15 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
 
     @Override
     public String getName() {
-        String value=nameInput.getText().toString();
-        return value.isEmpty()?getString(R.string.untitled):value;
+        String value = nameInput.getText().toString();
+        return value.isEmpty() ? getString(R.string.untitled) : value;
     }
 
     @Override
     public void showDateErrorAlert() {
         new AlertDialog.Builder(this)
                 .setMessage(R.string.date_error_message)
-                .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-            }
-        }).show();
+                .setPositiveButton(R.string.ok, (dialog, id) -> dialog.dismiss()).show();
     }
 
     @OnClick(R.id.start_date_label)
@@ -340,17 +310,14 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
     }
 
     private void setupImageUploaderBottomSheet() {
-        imageUploaderBottomSheet = AndroidUtils.createImageUploaderBottomSheet(this, new BottomSheetItemClickListener() {
-            @Override
-            public void onBottomSheetItemClick(BottomSheetMenuItem item) {
-                switch (item.getId()) {
-                    case R.id.gallery:
-                        externalNavigationManager.dispatchGalleryToSelectImage(R.string.select_picture);
-                        break;
-                    case R.id.camera:
-                        externalNavigationManager.dispatchTakePicture();
-                        break;
-                }
+        imageUploaderBottomSheet = AndroidUtils.createImageUploaderBottomSheet(this, item -> {
+            switch (item.getId()) {
+                case R.id.gallery:
+                    externalNavigationManager.dispatchGalleryToSelectImage(R.string.select_picture);
+                    break;
+                case R.id.camera:
+                    externalNavigationManager.dispatchTakePicture();
+                    break;
             }
         });
     }

@@ -41,7 +41,7 @@ public class TeamsListAdapter extends BaseListAdapter<Team, TeamHolder> {
         private IOnClickItemListHandler<Team> listener;
 
         public TeamsListAdapter make() {
-            return make(new ArrayList<Team>());
+            return make(new ArrayList<>());
         }
 
         public TeamsListAdapter make(ArrayList<Team> data) {

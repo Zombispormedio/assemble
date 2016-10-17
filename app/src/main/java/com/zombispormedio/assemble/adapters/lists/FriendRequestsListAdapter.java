@@ -67,7 +67,7 @@ public class FriendRequestsListAdapter
         private IOnClickItemListHandler<FriendRequestProfile> listener;
 
         public FriendRequestsListAdapter make(){
-            return make(new ArrayList<FriendRequestProfile>());
+            return make(new ArrayList<>());
         }
 
         public FriendRequestsListAdapter make(ArrayList<FriendRequestProfile> data) {

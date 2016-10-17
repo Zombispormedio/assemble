@@ -35,8 +35,6 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
 
     private FriendsListController ctrl;
 
-    private FriendsListAdapter.Factory friendsListFactory;
-
     private FriendsListAdapter friendsListAdapter;
 
 
@@ -61,36 +59,21 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     }
 
     private void setupFriends() {
-        friendsListFactory = new FriendsListAdapter.Factory();
+        FriendsListAdapter.Factory friendsListFactory = new FriendsListAdapter.Factory();
         AndroidUtils.createListConfiguration(view, friendsList)
                 .divider(true)
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        friendsListFactory.setOnClickListener(new IOnClickItemListHandler<FriendProfile>() {
-            @Override
-            public void onClick(int position, FriendProfile data) {
-                ctrl.onClickFriend(position, data);
-            }
-        });
+        friendsListFactory.setOnClickListener((position, data) -> ctrl.onClickFriend(position, data));
 
-        friendsListFactory.setRemoveButtonListener(new IOnClickComponentItemHandler<FriendProfile, IFriendHolder>() {
-            @Override
-            public void onClick(int position, FriendProfile data, IFriendHolder holder) {
-                ctrl.onRemoveFriend(position, data, holder);
-            }
-        });
+        friendsListFactory.setRemoveButtonListener((position, data, holder) -> ctrl.onRemoveFriend(position, data, holder));
         friendsListAdapter = friendsListFactory.make();
         friendsList.setAdapter(friendsListAdapter);
     }
 
     private void setupRefresh() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                ctrl.onRefresh();
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> ctrl.onRefresh());
     }
 
     @Override

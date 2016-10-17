@@ -45,12 +45,9 @@ public class PreviewFriendHolder extends AbstractHolder<FriendProfile> {
 
     private void setupOnClickListener(final int position, final FriendProfile itemData) {
 
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(listener!=null){
-                    listener.onClick(position, itemData);
-                }
+        itemView.setOnClickListener(view -> {
+            if(listener!=null){
+                listener.onClick(position, itemData);
             }
         });
     }

@@ -35,8 +35,6 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
 
     private IOnClickItemListHandler<Team> listener;
 
-    private TeamListDialogAdapter.Factory teamsListFactory;
-
     private TeamListDialogAdapter teamsListAdapter;
 
     public TeamDialogFragment() {
@@ -72,19 +70,16 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
 
     private void setupTeams() {
 
-        teamsListFactory = new TeamListDialogAdapter.Factory();
+        TeamListDialogAdapter.Factory teamsListFactory = new TeamListDialogAdapter.Factory();
         AndroidUtils.createListConfiguration(view, teamsList)
                 .itemAnimation(true)
                 .divider(true)
                 .configure();
-        teamsListFactory.setOnClickListener(new IOnClickItemListHandler<Team>() {
-            @Override
-            public void onClick(int position, Team data) {
-                if(listener!=null){
-                    listener.onClick(position, data);
-                }
-                dismiss();
+        teamsListFactory.setOnClickListener((position, data) -> {
+            if(listener!=null){
+                listener.onClick(position, data);
             }
+            dismiss();
         });
         teamsListAdapter = teamsListFactory.make();
         teamsList.setAdapter(teamsListAdapter);

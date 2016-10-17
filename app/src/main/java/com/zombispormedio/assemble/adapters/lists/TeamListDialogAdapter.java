@@ -42,7 +42,7 @@ public class TeamListDialogAdapter extends BaseListAdapter<Team, TeamDialogHolde
         private IOnClickItemListHandler<Team> listener;
 
         public TeamListDialogAdapter make() {
-            return make(new ArrayList<Team>());
+            return make(new ArrayList<>());
         }
 
         public TeamListDialogAdapter make(ArrayList<Team> data) {

@@ -58,17 +58,13 @@ public final class AndroidUtils {
 
 
     public static DialogInterface.OnClickListener createDialogClickListener(final ISuccessHandler listener) {
-        return new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                switch (i) {
-                    case DialogInterface.BUTTON_POSITIVE:
-                        listener.onSuccess();
-                        break;
+        return (dialogInterface, i) -> {
+            switch (i) {
+                case DialogInterface.BUTTON_POSITIVE:
+                    listener.onSuccess();
+                    break;
 
 
-                }
             }
         };
     }

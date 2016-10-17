@@ -37,8 +37,6 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
 
     private FriendRequestsListController ctrl;
 
-    private FriendRequestsListAdapter.Factory friendRequestsListFactory;
-
     private FriendRequestsListAdapter friendRequestsListAdapter;
 
     @Override
@@ -65,46 +63,26 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
 
 
     private void setupRequestFriends() {
-        friendRequestsListFactory = new FriendRequestsListAdapter.Factory();
+        FriendRequestsListAdapter.Factory friendRequestsListFactory = new FriendRequestsListAdapter.Factory();
         AndroidUtils.createListConfiguration(view, friendRequestsList)
                 .divider(true)
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        friendRequestsListFactory.setOnClickListener(new IOnClickItemListHandler<FriendRequestProfile>() {
-            @Override
-            public void onClick(int position, FriendRequestProfile data) {
-                ctrl.onClickRequestItem(position, data);
-            }
-        });
+        friendRequestsListFactory.setOnClickListener((position, data) -> ctrl.onClickRequestItem(position, data));
 
         friendRequestsListFactory.setAcceptListener(
-                new IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder>() {
-                    @Override
-                    public void onClick(int position, FriendRequestProfile data, IFriendRequestHolder holder) {
-                        ctrl.onAcceptRequest(position, data, holder);
-                    }
-                });
+                (position, data, holder) -> ctrl.onAcceptRequest(position, data, holder));
 
         friendRequestsListFactory.setRejectListener(
-                new IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder>() {
-                    @Override
-                    public void onClick(int position, FriendRequestProfile data, IFriendRequestHolder holder) {
-                        ctrl.onRejectRequest(position, data, holder);
-                    }
-                });
+                (position, data, holder) -> ctrl.onRejectRequest(position, data, holder));
 
         friendRequestsListAdapter = friendRequestsListFactory.make();
         friendRequestsList.setAdapter(friendRequestsListAdapter);
     }
 
     private void setupRefresh() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                ctrl.onRefresh();
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> ctrl.onRefresh());
     }
 
     @Override

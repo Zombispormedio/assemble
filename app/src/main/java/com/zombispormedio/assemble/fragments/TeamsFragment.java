@@ -34,8 +34,6 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     @BindView(R.id.teams_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
-    private TeamsListAdapter.Factory teamsListFactory;
-
     private TeamsListAdapter teamsListAdapter;
 
     @Override
@@ -59,17 +57,12 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     }
 
     private void setupRefresh() {
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                ctrl.onRefresh();
-            }
-        });
+        swipeRefreshLayout.setOnRefreshListener(() -> ctrl.onRefresh());
     }
 
 
     private void setupTeams() {
-        teamsListFactory = new TeamsListAdapter.Factory();
+        TeamsListAdapter.Factory teamsListFactory = new TeamsListAdapter.Factory();
         AndroidUtils.createListConfiguration(view, teamsList)
                 .itemAnimation(true)
                 .scrolling(false)

@@ -98,61 +98,61 @@ public class ImageUtils {
 
     public static class ImageBuilder {
 
-        private Context _ctx;
+        private Context mCtx;
 
-        private ImageView _imageView;
+        private ImageView mImageView;
 
-        private String _url;
+        private String mUrl;
 
-        private String _letter;
+        private String mLetter;
 
         private boolean isCircle;
 
-        private Drawable _drawable;
+        private Drawable mDrawable;
 
         private ISuccessHandler handler;
 
-        private File _file;
+        private File mFile;
 
-        private int _drawableId;
+        private int mDrawableId;
 
-        public ImageBuilder(Context _ctx, ImageView _imageView) {
-            this._ctx = _ctx;
-            this._imageView = _imageView;
-            this._url = null;
-            this._letter = null;
+        public ImageBuilder(Context mCtx, ImageView mImageView) {
+            this.mCtx = mCtx;
+            this.mImageView = mImageView;
+            this.mUrl = null;
+            this.mLetter = null;
             this.isCircle = false;
-            this._drawable = null;
+            this.mDrawable = null;
             this.handler = null;
-            this._drawableId = 0;
-            this._file = null;
+            this.mDrawableId = 0;
+            this.mFile = null;
         }
 
         public ImageBuilder() {
         }
 
         public ImageBuilder context(Context ctx) {
-            this._ctx = ctx;
+            this.mCtx = ctx;
             return this;
         }
 
         public ImageBuilder imageView(ImageView _imageView) {
-            this._imageView = _imageView;
+            this.mImageView = _imageView;
             return this;
         }
 
         public ImageBuilder url(String _url) {
-            this._url = _url;
+            this.mUrl = _url;
             return this;
         }
 
         public ImageBuilder letter(String _letter) {
-            this._letter = _letter;
+            this.mLetter = _letter;
             return this;
         }
 
         public ImageBuilder file(String path) {
-            this._file = new File(path);
+            this.mFile = new File(path);
             return this;
         }
 
@@ -163,12 +163,12 @@ public class ImageUtils {
         }
 
         public ImageBuilder drawable(Drawable _drawable) {
-            this._drawable = _drawable;
+            this.mDrawable = _drawable;
             return this;
         }
 
         public ImageBuilder drawableID(int d) {
-            this._drawableId = d;
+            this.mDrawableId = d;
             return this;
         }
 
@@ -178,41 +178,41 @@ public class ImageUtils {
         }
 
         public void buildDrawableId() {
-            RequestCreator config = Picasso.with(_ctx)
-                    .load(_drawableId);
+            RequestCreator config = Picasso.with(mCtx)
+                    .load(mDrawableId);
 
             if (isCircle) {
                 config = config.transform(new ImageUtils.CircleTransform());
             }
 
-            config.into(_imageView);
+            config.into(mImageView);
         }
 
         public void buildFile() {
-            RequestCreator config = Picasso.with(_ctx)
-                    .load(_file);
+            RequestCreator config = Picasso.with(mCtx)
+                    .load(mFile);
 
             if (isCircle) {
                 config = config.transform(new ImageUtils.CircleTransform());
             }
 
-            config.into(_imageView);
+            config.into(mImageView);
         }
 
 
         public void build() {
 
-            if (_ctx != null && _imageView != null) {
+            if (mCtx != null && mImageView != null) {
 
-                if (_url == null) {
-                    if (_letter != null) {
+                if (mUrl == null) {
+                    if (mLetter != null) {
                         buildText();
                     }
-                    if (_drawableId != 0) {
+                    if (mDrawableId != 0) {
                         buildDrawableId();
                     }
 
-                    if (_file != null) {
+                    if (mFile != null) {
                         buildFile();
                     }
 
@@ -223,24 +223,24 @@ public class ImageUtils {
 
             }
 
-            _ctx=null;
+            mCtx =null;
         }
 
         private void buildNormal() {
-            Picasso preConfig = Picasso.with(_ctx);
+            Picasso preConfig = Picasso.with(mCtx);
 
-            RequestCreator config = preConfig.load(_url);
+            RequestCreator config = preConfig.load(mUrl);
 
-            if (_drawable != null) {
-                config = config.placeholder(_drawable);
+            if (mDrawable != null) {
+                config = config.placeholder(mDrawable);
             }
 
-            if (_letter != null) {
+            if (mLetter != null) {
                 Drawable letterDrawable;
                 if (isCircle) {
-                    letterDrawable = getRoundLetterImage(_letter);
+                    letterDrawable = getRoundLetterImage(mLetter);
                 } else {
-                    letterDrawable = getLetterImage(_letter);
+                    letterDrawable = getLetterImage(mLetter);
                 }
 
                 config = config.placeholder(letterDrawable);
@@ -253,7 +253,7 @@ public class ImageUtils {
             if (config != null) {
                 if (ConnectionState.getInstance().isConnected() && handler != null) {
 
-                    config.into(_imageView, new Callback() {
+                    config.into(mImageView, new Callback() {
                         @Override
                         public void onSuccess() {
                             doHandler();
@@ -265,7 +265,7 @@ public class ImageUtils {
                         }
                     });
                 } else {
-                    config.into(_imageView);
+                    config.into(mImageView);
                     doHandler();
                 }
 
@@ -284,10 +284,10 @@ public class ImageUtils {
 
         private void buildText() {
             if (isCircle) {
-                applyRoundLetterImage(_letter, _imageView);
+                applyRoundLetterImage(mLetter, mImageView);
 
             } else {
-                applyLetterImage(_letter, _imageView);
+                applyLetterImage(mLetter, mImageView);
             }
 
             doHandler();

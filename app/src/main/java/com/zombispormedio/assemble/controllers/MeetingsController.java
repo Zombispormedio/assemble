@@ -48,12 +48,9 @@ public class MeetingsController extends Controller {
 
 
     public IOnClickItemListHandler<Meeting> getOnClickOneTeam() {
-        return new IOnClickItemListHandler<Meeting>() {
-            @Override
-            public void onClick(int position, Meeting data) {
-                Logger.d(position);
-                Logger.d(data);
-            }
+        return (position, data) -> {
+            Logger.d(position);
+            Logger.d(data);
         };
     }
 

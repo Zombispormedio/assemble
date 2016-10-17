@@ -53,12 +53,7 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
                 .itemAnimation(true)
                 .configure();
 
-        adapter.setOnClickListener(new IOnClickItemListHandler<FriendProfile>() {
-            @Override
-            public void onClick(int position, FriendProfile data) {
-                ctrl.onFriend(data);
-            }
-        });
+        adapter.setOnClickListener((position, data) -> ctrl.onFriend(data));
 
         friendsList.setAdapter(adapter);
 

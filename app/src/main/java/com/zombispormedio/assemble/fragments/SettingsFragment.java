@@ -28,12 +28,9 @@ public class SettingsFragment extends PreferenceFragment implements ISettingsFra
 
         ctrl.setFragmentView(this);
 
-        signOutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            @Override
-            public boolean onPreferenceClick(Preference preference) {
-                ctrl.signout();
-                return false;
-            }
+        signOutPref.setOnPreferenceClickListener(preference -> {
+            ctrl.signout();
+            return false;
         });
 
     }

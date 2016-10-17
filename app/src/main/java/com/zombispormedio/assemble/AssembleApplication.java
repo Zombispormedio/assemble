@@ -86,13 +86,10 @@ public class AssembleApplication extends Application implements IAssembleApplica
     }
 
     private void setupUncaughtException() {
-        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-            @Override
-            public void uncaughtException(Thread t, Throwable e) {
-                FirebaseCrash.report(e);
-                e.printStackTrace();
-                //System.exit(0);
-            }
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+            FirebaseCrash.report(e);
+            e.printStackTrace();
+            //System.exit(0);
         });
     }
 

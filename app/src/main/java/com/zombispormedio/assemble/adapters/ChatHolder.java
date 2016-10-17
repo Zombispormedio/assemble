@@ -57,12 +57,9 @@ public class ChatHolder extends AbstractHolder<Chat> {
     }
 
     private void setupOnClickListener(final int position, final Chat itemData) {
-        getView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) {
-                    listener.onClick(position, itemData);
-                }
+        getView().setOnClickListener(view -> {
+            if (listener != null) {
+                listener.onClick(position, itemData);
             }
         });
     }

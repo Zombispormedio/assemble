@@ -60,12 +60,9 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
     }
 
     private void setupOnClickListener(final int position, final Container itemData) {
-        itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(listener!=null){
-                    listener.onClick(position, itemData);
-                }
+        itemView.setOnClickListener(view -> {
+            if(listener!=null){
+                listener.onClick(position, itemData);
             }
         });
     }

@@ -63,12 +63,9 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
     }
 
     private void setupOnClickListener(final int position, final Meeting itemData) {
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (listener != null) {
-                    listener.onClick(position, itemData);
-                }
+        cardView.setOnClickListener(view -> {
+            if (listener != null) {
+                listener.onClick(position, itemData);
             }
         });
     }
