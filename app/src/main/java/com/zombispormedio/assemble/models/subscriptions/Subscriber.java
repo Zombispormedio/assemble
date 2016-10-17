@@ -25,4 +25,8 @@ public class Subscriber {
     public void notifyFail(){
 
     }
+
+    public void notifyOneChange(int id){
+        
+    }
 }

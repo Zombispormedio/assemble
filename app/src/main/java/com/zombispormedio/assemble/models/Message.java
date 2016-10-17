@@ -146,8 +146,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
 
     @Override
     public boolean areTheSame(Message obj) {
-        return obj != null && (id == obj.id &&
-                Utils.safeEquals(content,obj.content));
+        return obj != null && id == obj.id;
     }
 
     public static class Builder {

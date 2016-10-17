@@ -97,6 +97,12 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     }
 
     @Override
+    public void updateChat(Chat chat) {
+        int index=chatsListAdapter.indexOf(chat);
+        chatsListAdapter.updateItemAt(index, chat);
+    }
+
+    @Override
     public void finishRefresh() {
         swipeRefreshLayout.setRefreshing(false);
     }

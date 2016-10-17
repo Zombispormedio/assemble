@@ -3,7 +3,6 @@ package com.zombispormedio.assemble;
 
 import com.google.firebase.crash.FirebaseCrash;
 
-import com.squareup.leakcanary.LeakCanary;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.models.modules.ResourceModule;
@@ -47,13 +46,6 @@ public class AssembleApplication extends Application implements IAssembleApplica
     @Override
     public void onCreate() {
         super.onCreate();
-        if (LeakCanary.isInAnalyzerProcess(this)) {
-            // This process is dedicated to LeakCanary for heap analysis.
-            // You should not init your app in this process.
-            return;
-        }
-
-        LeakCanary.install(this);
         JodaTimeAndroid.init(this);
         ConnectionState.getInstance().setContext(this);
         registerActivityLifecycleCallbacks(new RunningActivity());

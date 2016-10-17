@@ -57,7 +57,7 @@ public class MessagingService extends FirebaseMessagingService {
             notifyChat(message, currentChatID);
 
         }else if(who.equals(HomeActivity.class.getName())){
-            notifyHome();
+            notifyHome(message.chat_id);
         }else {
             notifyEveryWhere(message);
         }
@@ -81,9 +81,10 @@ public class MessagingService extends FirebaseMessagingService {
 
 
 
-    private void notifyHome() {
+    private void notifyHome(int chatID) {
         Intent intent=new Intent();
         intent.setAction(ON_MESSAGE_NOTIFY_HOME);
+        intent.putExtra(CHAT_ID, chatID);
         sendBroadcast(intent);
     }
 

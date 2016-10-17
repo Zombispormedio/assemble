@@ -31,7 +31,7 @@ public class Utils {
     }
 
     public static boolean safeEquals(Object o1, Object o2) {
-        boolean equals = o1 != null && o2 != null;
+        boolean equals = o1 != null;
         if (equals) {
             equals = o1.equals(o2);
         }

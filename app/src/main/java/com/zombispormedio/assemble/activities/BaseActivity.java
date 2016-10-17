@@ -1,5 +1,8 @@
 package com.zombispormedio.assemble.activities;
 
+import com.google.firebase.crash.FirebaseCrash;
+import com.google.firebase.iid.FirebaseInstanceId;
+
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -15,6 +18,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.models.Message;
@@ -23,6 +27,8 @@ import com.zombispormedio.assemble.models.services.api.APIConfiguration;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.activities.IBaseView;
+
+import java.io.IOException;
 
 import butterknife.ButterKnife;
 
@@ -65,8 +71,14 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     @Override
     public void clearAuthToken() {
-        getPreferencesManager().remove(AUTH);
         APIConfiguration.getInstance().clearToken();
+        getPreferencesManager().clear();
+        try {
+            FirebaseInstanceId.getInstance().deleteInstanceId();
+        } catch (IOException e) {
+            Logger.d(e.getMessage());
+            FirebaseCrash.report(e);
+        }
     }
     /*******************/
 

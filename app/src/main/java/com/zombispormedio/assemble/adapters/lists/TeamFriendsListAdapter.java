@@ -31,6 +31,11 @@ public class TeamFriendsListAdapter extends BaseListAdapter<
         return holder;
     }
 
+    @Override
+    protected boolean areItemsEquals(TeamFriendHolder.SelectedContainer item1, TeamFriendHolder.SelectedContainer item2) {
+        return item1.getContent().id==item2.getContent().id;
+    }
+
     public void setOnClickListener(
             IOnClickItemListHandler<TeamFriendHolder.SelectedContainer> listener) {
         this.listener = listener;

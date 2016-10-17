@@ -105,7 +105,24 @@ public class BaseListAdapter<T extends Sorted<T>, E extends AbstractHolder<T>> e
     }
 
     public int indexOf(T item){
-        return mData.indexOf(item);
+        int result=-1;
+        if(item instanceof BaseModel){
+            int size=mData.size();
+            int i=0;
+           while(i<size&&result==-1){
+               T item2=mData.get(i);
+               if(((BaseModel) item).id==((BaseModel) item2).id){
+                   result=i;
+               }
+
+               i++;
+           }
+
+        }else{
+            result= mData.indexOf(item);
+        }
+
+        return result;
     }
 
     public void updateItemAt(int index, T item){

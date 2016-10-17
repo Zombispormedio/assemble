@@ -51,10 +51,6 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.4.1'
     compile 'com.squareup.moshi:moshi:1.2.0'
 
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-    testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
-
     compile 'com.jakewharton:butterknife:8.4.0'
 
     compile 'net.danlew:android.joda:2.9.4.2'

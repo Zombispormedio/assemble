@@ -35,6 +35,7 @@ import butterknife.OnClick;
 import butterknife.OnTouch;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_HOME;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.LOADED;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.STATE;
 
@@ -373,7 +374,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            getResourceComponent().provideChatSubscription().haveChanged();
+            getResourceComponent().provideChatSubscription().haveOneChanged(intent.getExtras().getInt(CHAT_ID));
             if(getState()!=HomePagerAdapter.CHATS){
                 moveToPosition(HomePagerAdapter.CHATS);
             }

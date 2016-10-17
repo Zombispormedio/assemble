@@ -51,6 +51,12 @@ public class PreferencesManager {
         editor.apply();
     }
 
+    public void clear(){
+        SharedPreferences.Editor editor = getEditor();
+        editor.clear();
+        editor.apply();
+    }
+
     public void onDestroy(){
         ctx=null;
     }

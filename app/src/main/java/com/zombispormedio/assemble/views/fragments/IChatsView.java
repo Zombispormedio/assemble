@@ -11,6 +11,8 @@ public interface IChatsView extends IFragmentView {
 
     void bindChats(ArrayList<Chat> data);
 
+    void updateChat(Chat chat);
+
     void finishRefresh();
 
     void goToChat(int friendId);

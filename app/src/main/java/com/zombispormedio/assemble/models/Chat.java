@@ -1,6 +1,8 @@
 package com.zombispormedio.assemble.models;
 
 
+import com.zombispormedio.assemble.utils.DateUtils;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -36,22 +38,31 @@ public class Chat extends BaseModel implements Sorted<Chat> {
     public int compareTo(Chat o) {
         int result;
         Message m2 = o.lastMessage;
-
-        if (m2 == null) {
-            result = 1;
-        } else if (lastMessage == null) {
-            result = -1;
+        if (m2 == null && lastMessage == null) {
+            result= DateUtils.compareISODateString(created_at, o.created_at);
         } else {
-            result = lastMessage.compareTo(m2);
+            if (m2 == null) {
+                result = DateUtils.compareISODateString(lastMessage.created_at, o.created_at);
+            } else if (lastMessage == null) {
+                result = DateUtils.compareISODateString(created_at, m2.created_at);
+            } else {
+                result = lastMessage.compareTo(m2);
+            }
         }
-
         return result;
     }
 
     @Override
     public boolean areTheSame(Chat o) {
-        return id==o.id &&
-                lastMessage!=null &&
-                lastMessage.areTheSame(o.lastMessage);
+        return id == o.id &&
+                safeCompareLastMessage(o.lastMessage);
+    }
+
+    private boolean safeCompareLastMessage(Message last2) {
+        boolean comp = lastMessage != null;
+        if (comp) {
+            comp = lastMessage.areTheSame(last2);
+        }
+        return comp;
     }
 }

@@ -75,6 +75,12 @@ public class ChatsController extends Controller {
         public void notifyFail() {
             finishRefresh();
         }
+
+        @Override
+        public void notifyOneChange(int id) {
+            Chat chat=chatResource.getById(id);
+            ctx.updateChat(chat);
+        }
     }
 
     private class MessageSubscriber extends Subscriber {
