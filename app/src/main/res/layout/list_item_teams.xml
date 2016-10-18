@@ -1,22 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="10dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         android:background="?android:attr/selectableItemBackground"
         android:orientation="vertical"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="5dp"
         >
 
     <android.support.v7.widget.CardView
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:foreground="?android:attr/selectableItemBackground"
-            android:clickable="true"
+            android:layout_marginBottom="2.5dp"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
-            android:layout_marginBottom="2.5dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:clickable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             >
 
         <LinearLayout
@@ -24,42 +29,46 @@
                 android:layout_height="match_parent"
                 android:paddingBottom="15sp"
                 android:paddingTop="15sp"
+                android:clipChildren="false"
+                android:clipToPadding="false"
                 >
 
-            <FrameLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    >
 
-                <ImageView
-                        android:id="@+id/image_view"
-                        android:layout_width="45dp"
-                        android:layout_height="45dp"
-                        android:layout_gravity="left|center_vertical"
-                        android:layout_marginLeft="15dp"
-                        android:src="@drawable/profile_image_square"
-                        />
-            </FrameLayout>
+            <ImageView
+                    android:id="@+id/image_view"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="15dp"
+                    android:src="@drawable/profile_image_square"
+                    />
 
 
-            <LinearLayout
-                    android:layout_width="wrap_content"
+            <TextView
+                    android:id="@+id/name_label"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginLeft="15dp"
-                    android:orientation="vertical"
-                    >
+                    android:text="@string/example_string"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_weight="1"
+                    />
 
-                <TextView
-                        android:id="@+id/name_label"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/example_string"
-                        android:textSize="20sp"
-                        android:textStyle="bold"
-                        />
 
-            </LinearLayout>
+            <com.varunest.sparkbutton.SparkButton
+                    android:id="@+id/bookmark_button"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginRight="10dp"
+                    app:sparkbutton_activeImage="@drawable/star_active"
+                    app:sparkbutton_animationSpeed=".5"
+                    app:sparkbutton_iconSize="40dp"
+                    app:sparkbutton_inActiveImage="@drawable/star_inactive"
+                    app:sparkbutton_primaryColor="@color/colorAccent"
+                    app:sparkbutton_secondaryColor="@color/colorAccentLight"
+                    />
 
         </LinearLayout>
 

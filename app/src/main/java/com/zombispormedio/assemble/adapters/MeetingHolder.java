@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.adapters;
 
+import com.varunest.sparkbutton.SparkButton;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Meeting;
@@ -42,6 +43,9 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
     @BindView(R.id.card_view)
     CardView cardView;
+
+    @BindView(R.id.bookmark_button)
+    SparkButton bookmarkButton;
 
     private IOnClickItemListHandler<Meeting> listener;
 
