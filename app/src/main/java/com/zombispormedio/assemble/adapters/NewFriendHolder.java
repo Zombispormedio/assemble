@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.adapters;
 
+import com.varunest.sparkbutton.SparkButton;
+import com.varunest.sparkbutton.SparkEventListener;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
@@ -39,16 +41,10 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     ImageView imageView;
 
     @BindView(R.id.add_friend_button)
-    ImageButton addFriendButton;
+    SparkButton addFriendButton;
 
-    @BindDrawable(R.drawable.account_check)
-    Drawable accountCheckDrawable;
 
-    @BindDrawable(R.drawable.account_plus)
-    Drawable accountPlusDrawable;
 
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
 
     public NewFriendHolder(View view) {
         super(view);
@@ -60,7 +56,6 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
 
     private void setup() {
         ButterKnife.bind(this, getView());
-        hideProgress();
     }
 
     @Override
@@ -82,9 +77,11 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
 
     private void setupAddFriendButton(final int position, final FriendProfile itemData) {
         final INewFriendHolder holder = this;
-        addFriendButton.setOnClickListener(v -> {
-            if (addFriendListener != null) {
-                addFriendListener.onClick(position, itemData, holder);
+        addFriendButton.setEventListener((button, buttonState) -> {
+            if(buttonState){
+                if (addFriendListener != null) {
+                    addFriendListener.onClick(position, itemData, holder);
+                }
             }
         });
     }
@@ -115,23 +112,12 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
 
         if (checked) {
             addFriendButton.setEnabled(false);
-            addFriendButton.setImageDrawable(accountCheckDrawable);
+            addFriendButton.setChecked(true);
         } else {
             addFriendButton.setEnabled(true);
-            addFriendButton.setImageDrawable(accountPlusDrawable);
+            addFriendButton.setChecked(false);
         }
 
     }
 
-    @Override
-    public void showProgress() {
-        progressBar.setVisibility(View.VISIBLE);
-        addFriendButton.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void hideProgress() {
-        progressBar.setVisibility(View.GONE);
-        addFriendButton.setVisibility(View.VISIBLE);
-    }
 }

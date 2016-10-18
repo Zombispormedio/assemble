@@ -7,8 +7,4 @@ package com.zombispormedio.assemble.views.holders;
 public interface INewFriendHolder {
 
     void setFriendChecked(boolean checked);
-
-    void showProgress();
-
-    void hideProgress();
 }

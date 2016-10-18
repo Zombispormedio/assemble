@@ -56,8 +56,7 @@ public class NewFriendController extends Controller {
     }
 
     public void onAddFriendClick(int position, FriendProfile data, final INewFriendHolder holder) {
-        holder.showProgress();
-
+        holder.setFriendChecked(true);
         friendResource.requestNewFriend(data.id, new ServiceHandler<Result, Error>() {
             @Override
             public void onError(Error error) {
@@ -67,8 +66,6 @@ public class NewFriendController extends Controller {
             @Override
             public void onSuccess(Result result) {
                 ctx.showFriendRequestSent();
-                holder.hideProgress();
-                holder.setFriendChecked(true);
             }
 
         });
