@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
+import com.zombispormedio.assemble.models.BaseModel;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.Sorted;
 import com.zombispormedio.assemble.utils.ImageUtils;
@@ -93,6 +94,11 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
         @Override
         public boolean areTheSame(Container o) {
             return content.areTheSame(o.getContent());
+        }
+
+        @Override
+        public int getIdentity() {
+            return content.getIdentity();
         }
 
         @Override

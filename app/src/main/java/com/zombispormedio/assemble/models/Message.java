@@ -149,6 +149,11 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         return obj != null && id == obj.id;
     }
 
+    @Override
+    public int getIdentity() {
+        return id;
+    }
+
     public static class Builder {
 
         public int id;

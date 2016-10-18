@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.net;
 
 import android.os.AsyncTask;
 
+import com.annimon.stream.Stream;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.wrappers.okhttp.RestWrapper;
 
@@ -26,12 +27,8 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
 
         HashMap<String, String> headers = req.getHeaders();
         if (headers != null) {
-            for (Map.Entry<String, String> entry : headers.entrySet()) {
-                String value = entry.getValue();
-                String key = entry.getKey();
-
-                rest.header(key, value);
-            }
+            Stream.of(headers)
+                    .forEach((entry) -> rest.header(entry.getKey(), entry.getValue()));
         }
 
         try {
@@ -48,10 +45,10 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
                         result = rest.post(req.getBody());
                     } else {
                         FileBody file = req.getFile();
-                        if(file!=null){
+                        if (file != null) {
                             result = rest.post(file);
-                        }else{
-                            result=rest.post();
+                        } else {
+                            result = rest.post();
                         }
                     }
 

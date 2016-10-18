@@ -93,7 +93,7 @@ public class UpdateProfileController extends Controller {
         ctx.setBirthDate(birthdate);
     }
 
-    public void bindEditor() {
+    private void bindEditor() {
         editor.setUsername(ctx.getUsername());
         editor.setBio(ctx.getBio());
         editor.setLocation(ctx.getLocation());

@@ -43,4 +43,9 @@ public class Profile<T extends Profile> extends People implements Sorted<T>{
                 Utils.safeEquals(birth_date,o.birth_date) &&
                 Utils.safeEquals(location,o.location);
     }
+
+    @Override
+    public int getIdentity() {
+        return id;
+    }
 }

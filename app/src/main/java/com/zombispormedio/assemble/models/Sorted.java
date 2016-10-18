@@ -8,4 +8,6 @@ public interface Sorted<T> extends Comparable<T> {
 
     boolean areTheSame(T o);
 
+    int getIdentity();
+
 }

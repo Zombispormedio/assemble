@@ -16,6 +16,11 @@ public class Team extends Concept implements Sorted<Team> {
     }
 
     @Override
+    public int getIdentity() {
+        return id;
+    }
+
+    @Override
     public int compareTo(Team o) {
         int result=name.compareToIgnoreCase(o.name);
         return result;

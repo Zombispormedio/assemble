@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 
+import com.annimon.stream.Stream;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
 import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
 import com.zombispormedio.assemble.R;
@@ -142,10 +143,10 @@ public final class AndroidUtils {
                 ctx.setBio("");
             }
 
-            if(Utils.presenceOf(profile.birth_date)){
-                String formatedDate=DateUtils.formatISODate(ctx.getDateFormat(), profile.birth_date);
+            if (Utils.presenceOf(profile.birth_date)) {
+                String formatedDate = DateUtils.formatISODate(ctx.getDateFormat(), profile.birth_date);
                 ctx.setBirthDate(formatedDate);
-            }else{
+            } else {
                 ctx.setBirthDate("");
             }
 
@@ -333,29 +334,25 @@ public final class AndroidUtils {
     }
 
     public static HashMap<String, String> convertBundleToStringHashMap(Bundle bundle) {
-        HashMap<String, String> hash = new HashMap<>();
 
-        for (String key : bundle.keySet()) {
-            Object value = bundle.get(key);
-            if (value instanceof String) {
-                hash.put(key, (String) value);
-            }
-        }
+       return  Stream.of(bundle.keySet())
+                .filter(key -> bundle.get(key) instanceof String)
+                .reduce(new HashMap<String, String>(), (memo, key) -> {
+                    memo.put(key, (String) bundle.get(key));
+                    return memo;
+                });
 
-        return hash;
     }
 
     public static HashMap<String, String> convertArrayMapToHashMap(ArrayMap<String, String> map) {
-        HashMap<String, String> hash = new HashMap<>();
 
-        for (String key : map.keySet()) {
-            String value = map.get(key);
+        return Stream.of(map.keySet())
+                .reduce(new HashMap<String, String>(), (memo, key)->{
+                    memo.put(key, map.get(key));
 
-            hash.put(key, value);
+                    return memo;
+                });
 
-        }
-
-        return hash;
     }
 
 

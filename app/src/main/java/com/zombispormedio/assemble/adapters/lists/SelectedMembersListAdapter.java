@@ -32,10 +32,6 @@ public class SelectedMembersListAdapter extends BaseListAdapter<
         return holder;
     }
 
-    @Override
-    protected boolean areItemsEquals(SelectedMemberHolder.Container item1, SelectedMemberHolder.Container item2) {
-        return item1.getContent().id==item2.getContent().id;
-    }
 
     public void setOnClickListener(
             IOnClickItemListHandler<SelectedMemberHolder.Container> listener) {

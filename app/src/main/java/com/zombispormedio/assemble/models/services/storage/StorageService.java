@@ -1,6 +1,8 @@
 package com.zombispormedio.assemble.models.services.storage;
 
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.wrappers.realm.dao.IBaseDAO;
 import com.zombispormedio.assemble.models.BaseModel;
 import com.zombispormedio.assemble.utils.Utils;
@@ -8,6 +10,7 @@ import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import java.util.ArrayList;
 
+import hugo.weaving.DebugLog;
 import io.realm.RealmObject;
 
 /**
@@ -56,48 +59,47 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
 
     @Override
     public void createOrUpdateOrDeleteAll(ArrayList<M> params) {
-        ArrayList<D> objects= storage.getAll();
-        ArrayList<Integer> updIds=new ArrayList<>();
+        if(params.size()>0){
+            Integer[] ids = Stream.of(params)
+                    .map(item -> item.id)
+                    .toArray(Integer[]::new);
 
-        createOrUpdateAll(params);
+            createOrUpdateAll(params);
 
-        for(M param : params){
-            updIds.add(param.id);
-        }
+            ArrayList<D> objects = storage.notIn("id", ids);
 
-        for(D object : objects){
-            int id= ((IBaseDAO<M>)object).getId();
-
-            if(!updIds.contains(id)){
-                storage.delete(object);
+            if(objects.size()>0){
+                Stream.of(objects)
+                        .forEach(storage::delete);
             }
+
         }
 
     }
 
     @Override
     public M getFirst() {
-        M result=null;
-        D object=storage.getFirst();
-        if(object!=null){
-            result= ((IBaseDAO<M>) object).toModel();
+        M result = null;
+        D object = storage.getFirst();
+        if (object != null) {
+            result = ((IBaseDAO<M>) object).toModel();
         }
         return result;
     }
 
     @Override
     public ArrayList<M> getAll() {
-        ArrayList<D> objects= storage.getAll();
+        ArrayList<D> objects = storage.getAll();
         return toModel(objects);
     }
 
     @Override
     public M getByID(int id) {
-        M result=null;
-        D object=storage.getById(id);
+        M result = null;
+        D object = storage.getById(id);
 
-        if(object!=null){
-            result=((IBaseDAO<M>) object).toModel();
+        if (object != null) {
+            result = ((IBaseDAO<M>) object).toModel();
         }
 
         return result;
@@ -108,7 +110,7 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
         return storage.countAll();
     }
 
-    public ArrayList<M> inByID(int[] in){
+    public ArrayList<M> inByID(int[] in) {
         return toModel(storage.in("id", Utils.toInteger(in)));
     }
 
@@ -118,12 +120,10 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
     }
 
 
-    private ArrayList<M> toModel(ArrayList<D> objects){
-        ArrayList<M> result= new ArrayList<>();
-        for (D object: objects) {
-            result.add(((IBaseDAO<M>) object).toModel());
-        }
-        return result;
+    private ArrayList<M> toModel(ArrayList<D> objects) {
+        return Stream.of(objects)
+                .map(object->((IBaseDAO<M>) object).toModel())
+                .collect(Collectors.toCollection(ArrayList<M>::new));
     }
 
     public LocalStorage<D, M> getStorage() {

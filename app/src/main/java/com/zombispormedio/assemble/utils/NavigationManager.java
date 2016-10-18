@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 
 
+import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.activities.ChatActivity;
 import com.zombispormedio.assemble.activities.CreateChatActivity;
 import com.zombispormedio.assemble.activities.CreateMeetingActivity;

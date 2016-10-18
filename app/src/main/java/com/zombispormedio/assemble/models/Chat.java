@@ -58,6 +58,11 @@ public class Chat extends BaseModel implements Sorted<Chat> {
                 safeCompareLastMessage(o.lastMessage);
     }
 
+    @Override
+    public int getIdentity() {
+        return id;
+    }
+
     private boolean safeCompareLastMessage(Message last2) {
         boolean comp = lastMessage != null;
         if (comp) {

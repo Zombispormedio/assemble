@@ -41,5 +41,10 @@ public class Meeting extends Concept implements Sorted<Meeting> {
                 Utils.safeEquals(end_at,o.end_at);
     }
 
+    @Override
+    public int getIdentity() {
+        return id;
+    }
+
 
 }

@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.models.services.storage;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.wrappers.realm.dao.MessageDAO;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
@@ -23,13 +25,9 @@ public class MessageStorageService  extends StorageService<MessageDAO, Message> 
 
     public ArrayList<Message> getSortedMessagesByChat(int chatId){
         ArrayList<MessageDAO> daos=storage.findByAndSort("chat_id", chatId, "created_at");
-        ArrayList<Message> messages=new ArrayList<>();
-
-        for (MessageDAO dao : daos) {
-            messages.add(dao.toModel());
-        }
-
-        return messages;
+        return Stream.of(daos)
+                .map(MessageDAO::toModel)
+                .collect(Collectors.toCollection(ArrayList<Message>::new));
     }
 
     public Message getLastMessage(int chatId){

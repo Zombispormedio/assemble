@@ -1,5 +1,8 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
+import com.annimon.stream.function.Function;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.editors.EditChat;
@@ -10,6 +13,7 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.activities.ICreateChatView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Xavier Serrano on 09/09/2016.
@@ -40,11 +44,10 @@ public class CreateChatController extends Controller {
         ArrayList<FriendProfile> friends;
 
         if(chats.size()>0){
-            int[] friendInChatIds=new int[chats.size()];
-
-            for (int i=0; i<chats.size(); i++) {
-                friendInChatIds[i]=chats.get(i).recipient.id;
-            }
+          int[] friendInChatIds=Stream.of(chats)
+                  .map(item->item.recipient.id)
+                  .mapToInt(i->i)
+                  .toArray();
 
             friends=friendResource.notIn(friendInChatIds);
         }else{
