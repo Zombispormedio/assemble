@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by Xavier Serrano on 23/09/2016.
  */
 
-public class SelectedMembersListAdapter extends BaseListAdapter<
+public class SelectedMembersListAdapter extends BaseSortedListAdapter<
         SelectedMemberHolder.Container, SelectedMemberHolder> {
 
     private IOnClickItemListHandler<SelectedMemberHolder.Container> listener;

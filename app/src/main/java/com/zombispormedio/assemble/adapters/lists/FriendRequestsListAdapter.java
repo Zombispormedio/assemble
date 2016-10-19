@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * Created by Xavier Serrano on 26/08/2016.
  */
 public class FriendRequestsListAdapter
-        extends BaseListAdapter<FriendRequestProfile, FriendRequestsHolder> {
+        extends BaseSortedListAdapter<FriendRequestProfile, FriendRequestsHolder> {
 
     private IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder> acceptListener;
 

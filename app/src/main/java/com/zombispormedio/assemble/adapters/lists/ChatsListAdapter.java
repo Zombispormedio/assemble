@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
-public class ChatsListAdapter extends BaseListAdapter<Chat, ChatHolder> {
+public class ChatsListAdapter extends BaseSortedListAdapter<Chat, ChatHolder> {
 
     private IOnClickItemListHandler<Chat> listener;
 

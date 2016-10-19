@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 03/09/2016.
  */
-public class TeamsListAdapter extends BaseListAdapter<Team, TeamHolder> {
+public class TeamsListAdapter extends BaseSortedListAdapter<Team, TeamHolder> {
 
     private IOnClickItemListHandler<Team> listener;
 

@@ -4,6 +4,7 @@ package com.zombispormedio.assemble.adapters.lists;
 import com.annimon.stream.Collectors;
 import com.annimon.stream.IntStream;
 import com.annimon.stream.Stream;
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.adapters.AbstractHolder;
 import com.zombispormedio.assemble.models.BaseModel;
 import com.zombispormedio.assemble.models.Sorted;
@@ -20,12 +21,12 @@ import java.util.List;
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
-public class BaseListAdapter<T extends Sorted<T>, E extends AbstractHolder<T>> extends RecyclerView.Adapter<E> {
+public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder<T>> extends RecyclerView.Adapter<E> {
 
 
     protected SortedList<T> mData;
 
-    public BaseListAdapter(Class<T> tClass) {
+    public BaseSortedListAdapter(Class<T> tClass) {
         mData = new SortedList<>(tClass, new SortedList.Callback<T>() {
             @Override
             public int compare(T o1, T o2) {
@@ -106,12 +107,16 @@ public class BaseListAdapter<T extends Sorted<T>, E extends AbstractHolder<T>> e
     }
 
     public int indexOf(T item) {
+        return indexByIdentity(item.getIdentity());
+    }
+
+    public int indexByIdentity(int identity) {
         int result = -1;
         int size = mData.size();
         int i = 0;
         while (i < size && result == -1) {
             T item2 = mData.get(i);
-            if (item.getIdentity() == item2.getIdentity()) {
+            if (identity == item2.getIdentity()) {
                 result = i;
             }
             i++;
@@ -125,14 +130,16 @@ public class BaseListAdapter<T extends Sorted<T>, E extends AbstractHolder<T>> e
     }
 
     public void addAll(List<T> items) {
-        if (items.size() < mData.size()) {
+        if (items.size() == 0) {
+            clear();
+        } else {
             removeComparingWithList(items);
-        }
 
-        mData.beginBatchedUpdates();
-        Stream.of(items)
-                .forEach(item -> mData.add(item));
-        mData.endBatchedUpdates();
+            mData.beginBatchedUpdates();
+            Stream.of(items)
+                    .forEach(item -> mData.add(item));
+            mData.endBatchedUpdates();
+        }
     }
 
     private void removeComparingWithList(List<T> items) {
@@ -140,14 +147,27 @@ public class BaseListAdapter<T extends Sorted<T>, E extends AbstractHolder<T>> e
                 .map(Sorted::getIdentity)
                 .collect(Collectors.toCollection(ArrayList<Integer>::new));
 
-        IntStream.range(0, mData.size() - 1)
-                .filter(i -> !ids.contains(mData.get(i).getIdentity()))
-                .forEach(this::removeItemAt);
+        int[] identitiesToRemove = IntStream.range(0, mData.size())
+                .map(i -> mData.get(i).getIdentity())
+                .filter(identity -> !ids.contains(identity))
+                .toArray();
+
+        mData.beginBatchedUpdates();
+        for (int identity : identitiesToRemove) {
+            removeByIdentity(identity);
+        }
+        mData.endBatchedUpdates();
     }
 
 
     public boolean remove(T item) {
-        return mData.remove(item);
+        int index = indexOf(item);
+        return mData.removeItemAt(index) != null;
+    }
+
+    public boolean removeByIdentity(int identity) {
+        int index = indexByIdentity(identity);
+        return mData.removeItemAt(index) != null;
     }
 
     public T removeItemAt(int index) {

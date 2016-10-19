@@ -7,12 +7,16 @@
         android:orientation="vertical"
         android:paddingBottom="15sp"
         android:paddingTop="15sp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         >
 
     <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
+            android:clipChildren="false"
+            android:clipToPadding="false"
             >
 
         <FrameLayout
@@ -67,7 +71,7 @@
             android:layout_marginRight="20sp"
             android:layout_gravity="right|center_vertical"
             app:sparkbutton_activeImage="@drawable/account_check"
-            app:sparkbutton_animationSpeed=".5"
+            app:sparkbutton_animationSpeed=".85"
             app:sparkbutton_iconSize="40dp"
             app:sparkbutton_inActiveImage="@drawable/account_plus"
             app:sparkbutton_primaryColor="@color/light_green"

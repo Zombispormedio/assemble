@@ -12,7 +12,7 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 06/09/2016.
  */
-public class MeetingsListAdapter extends BaseListAdapter<Meeting, MeetingHolder> {
+public class MeetingsListAdapter extends BaseSortedListAdapter<Meeting, MeetingHolder> {
 
     private IOnClickItemListHandler<Meeting> listener;
 

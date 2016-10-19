@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by Xavier Serrano on 26/09/2016.
  */
 
-public class TeamListDialogAdapter extends BaseListAdapter<Team, TeamDialogHolder>  {
+public class TeamListDialogAdapter extends BaseSortedListAdapter<Team, TeamDialogHolder> {
 
     private IOnClickItemListHandler<Team> listener;
 

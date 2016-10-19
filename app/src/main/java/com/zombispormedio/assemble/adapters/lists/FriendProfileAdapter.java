@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Xavier Serrano on 17/10/2016.
  */
 
-public class FriendProfileAdapter<H extends AbstractHolder<FriendProfile>> extends BaseListAdapter<FriendProfile, H> {
+public class FriendProfileAdapter<H extends AbstractHolder<FriendProfile>> extends BaseSortedListAdapter<FriendProfile, H> {
 
     public FriendProfileAdapter(List<FriendProfile> data) {
         super(FriendProfile.class);

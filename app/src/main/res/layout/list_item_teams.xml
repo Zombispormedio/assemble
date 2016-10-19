@@ -63,7 +63,7 @@
                     android:layout_height="60dp"
                     android:layout_marginRight="10dp"
                     app:sparkbutton_activeImage="@drawable/star_active"
-                    app:sparkbutton_animationSpeed=".5"
+                    app:sparkbutton_animationSpeed=".85"
                     app:sparkbutton_iconSize="40dp"
                     app:sparkbutton_inActiveImage="@drawable/star_inactive"
                     app:sparkbutton_primaryColor="@color/colorAccent"

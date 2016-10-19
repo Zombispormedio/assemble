@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * Created by Xavier Serrano on 21/09/2016.
  */
 
-public class TeamFriendsListAdapter extends BaseListAdapter<
+public class TeamFriendsListAdapter extends BaseSortedListAdapter<
         TeamFriendHolder.SelectedContainer, TeamFriendHolder> {
 
     private IOnClickItemListHandler<TeamFriendHolder.SelectedContainer> listener;
