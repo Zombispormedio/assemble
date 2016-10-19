@@ -7,8 +7,12 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.modules.LoaderModule;
 
 
+import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -44,21 +48,21 @@ public class MessageHolder extends AbstractHolder<Message> {
     @BindView(R.id.message_date_label)
     TextView messageDateLabel;
 
+    @BindView(R.id.user_bubble)
+    FrameLayout userBubble;
 
     private boolean isRoot;
 
-    private boolean clicked;
 
     public MessageHolder(View itemView) {
         super(itemView);
         isRoot = false;
-        clicked=false;
         setup();
     }
 
     private void setup() {
         ButterKnife.bind(this, itemView);
-        setupOnClick();
+
     }
 
     @Override
@@ -80,16 +84,33 @@ public class MessageHolder extends AbstractHolder<Message> {
 
         } else {
             renderFriendMessage(message);
-        }
 
+        }
         bindDate(message);
+        setupOnClick(message);
+
     }
 
     private void bindDate(Message message) {
-        String formatDate = message.isCreatedToday() ? message.formatCreated(getString(R.string.message_date_today))
-                : message.isCreatedYesterday() ? message.formatCreated(getString(R.string.message_date_yesteday))
+        boolean isToday=message.isCreatedToday();
+        boolean isYesterday=message.isCreatedYesterday();
+
+        String formatDate = isToday ? message.formatCreated(getString(R.string.message_date_today))
+                : isYesterday ? message.formatCreated(getString(R.string.message_date_yesteday))
                         : message.formatCreated(getString(R.string.message_date));
         messageDateLabel.setText(formatDate);
+
+        int marginLeft;
+        if((message.sender instanceof UserProfile) && (message.content.length() < 38)){
+            int shortDate=(int)getDimen(R.dimen.short_date_message_margin);
+            int nearDate= (int) getDimen(R.dimen.near_date_message_margin);
+            marginLeft= isToday||isYesterday?nearDate:shortDate;
+        }else{
+            marginLeft= (int) getDimen(R.dimen.date_message_margin_left);
+        }
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) messageDateLabel.getLayoutParams();
+        params.setMargins(marginLeft, params.topMargin, params.rightMargin, params.bottomMargin);
+        messageDateLabel.setLayoutParams(params);
     }
 
     private void renderFriendMessage(Message message) {
@@ -103,8 +124,6 @@ public class MessageHolder extends AbstractHolder<Message> {
         } else {
             friendImageView.setVisibility(View.INVISIBLE);
         }
-
-
 
     }
 
@@ -131,6 +150,8 @@ public class MessageHolder extends AbstractHolder<Message> {
             setTopToUserLayout((int) getDimen(R.dimen.root_message_margin_top));
         }
     }
+
+
 
     private void setTopToUserLayout(int top) {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) userLayout.getLayoutParams();
@@ -161,16 +182,30 @@ public class MessageHolder extends AbstractHolder<Message> {
         isRoot = that.sender.id != previous.sender.id;
     }
 
-    private void setupOnClick(){
+    private void setupOnClick(Message message) {
+        if(message.clicked){
+            showDate();
+        }else{
+            hideDate();
+        }
+
         getView().setOnClickListener(v -> {
-            if(clicked){
-                messageDateLabel.setVisibility(View.GONE);
-                clicked=false;
-            }else{
-                messageDateLabel.setVisibility(View.VISIBLE);
-                clicked=true;
+            if (message.clicked) {
+                message.clicked=false;
+                hideDate();
+            } else {
+                message.clicked=true;
+                showDate();
             }
         });
+    }
+
+    private void showDate(){
+        messageDateLabel.setVisibility(View.VISIBLE);
+    }
+
+    private void hideDate(){
+        messageDateLabel.setVisibility(View.GONE);
     }
 
 }

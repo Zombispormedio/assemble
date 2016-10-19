@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
  */
 public class ChatHolder extends AbstractHolder<Chat> {
 
-    private static final int CONTENT_LIMIT = 30;
+    private static final int CONTENT_LIMIT = 25;
 
     @BindView(R.id.username_label)
     TextView nameLabel;
