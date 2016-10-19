@@ -3,6 +3,7 @@ package com.zombispormedio.assemble;
 
 import com.google.firebase.crash.FirebaseCrash;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.models.modules.ResourceModule;
@@ -88,6 +89,7 @@ public class AssembleApplication extends Application implements IAssembleApplica
     private void setupUncaughtException() {
         Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
             FirebaseCrash.report(e);
+            Logger.d(e.getMessage());
             e.printStackTrace();
             //System.exit(0);
         });

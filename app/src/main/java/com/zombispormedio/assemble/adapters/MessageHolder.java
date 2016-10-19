@@ -8,6 +8,7 @@ import com.zombispormedio.assemble.models.modules.LoaderModule;
 
 
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -40,16 +41,24 @@ public class MessageHolder extends AbstractHolder<Message> {
     @BindView(R.id.message_state)
     ImageView userImageView;
 
+    @BindView(R.id.message_date_label)
+    TextView messageDateLabel;
+
+
     private boolean isRoot;
+
+    private boolean clicked;
 
     public MessageHolder(View itemView) {
         super(itemView);
         isRoot = false;
+        clicked=false;
         setup();
     }
 
     private void setup() {
         ButterKnife.bind(this, itemView);
+        setupOnClick();
     }
 
     @Override
@@ -63,13 +72,24 @@ public class MessageHolder extends AbstractHolder<Message> {
         renderData(message);
     }
 
+
     public void renderData(Message message) {
 
         if (message.sender instanceof UserProfile) {
             renderUserMessage(message);
+
         } else {
             renderFriendMessage(message);
         }
+
+        bindDate(message);
+    }
+
+    private void bindDate(Message message) {
+        String formatDate = message.isCreatedToday() ? message.formatCreated(getString(R.string.message_date_today))
+                : message.isCreatedYesterday() ? message.formatCreated(getString(R.string.message_date_yesteday))
+                        : message.formatCreated(getString(R.string.message_date));
+        messageDateLabel.setText(formatDate);
     }
 
     private void renderFriendMessage(Message message) {
@@ -78,12 +98,22 @@ public class MessageHolder extends AbstractHolder<Message> {
         friendContent.setText(message.content);
         if (isRoot) {
             doIfRootFriendMessage(message);
+            setTopToFriendLayout((int) getDimen(R.dimen.root_message_margin_top));
 
         } else {
             friendImageView.setVisibility(View.INVISIBLE);
         }
 
+
+
     }
+
+    private void setTopToFriendLayout(int top) {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) friendLayout.getLayoutParams();
+        params.setMargins(params.leftMargin, top, params.rightMargin, params.bottomMargin);
+        friendLayout.setLayoutParams(params);
+    }
+
 
     private void doIfRootFriendMessage(Message message) {
         friendImageView.setVisibility(View.VISIBLE);
@@ -97,6 +127,15 @@ public class MessageHolder extends AbstractHolder<Message> {
         showUser();
         userContent.setText(message.content);
         renderUserMessageState(message);
+        if (isRoot) {
+            setTopToUserLayout((int) getDimen(R.dimen.root_message_margin_top));
+        }
+    }
+
+    private void setTopToUserLayout(int top) {
+        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) userLayout.getLayoutParams();
+        params.setMargins(params.leftMargin, top, params.rightMargin, params.bottomMargin);
+        userLayout.setLayoutParams(params);
     }
 
     private void renderUserMessageState(Message message) {
@@ -120,6 +159,18 @@ public class MessageHolder extends AbstractHolder<Message> {
 
     private void registerIfIsRoot(Message that, Message previous) {
         isRoot = that.sender.id != previous.sender.id;
+    }
+
+    private void setupOnClick(){
+        getView().setOnClickListener(v -> {
+            if(clicked){
+                messageDateLabel.setVisibility(View.GONE);
+                clicked=false;
+            }else{
+                messageDateLabel.setVisibility(View.VISIBLE);
+                clicked=true;
+            }
+        });
     }
 
 }

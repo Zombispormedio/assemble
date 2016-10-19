@@ -6,12 +6,11 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.utils.DateUtils;
-import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.StringUtils;
+import com.zombispormedio.assemble.models.UserProfile;
 
 
-import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,7 +32,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
     ImageView imageView;
 
     @BindView(R.id.last_message_label)
-    TextView lastMessage;
+    TextView lastMessageLabel;
 
     @BindView(R.id.date_label)
     TextView dateLabel;
@@ -89,17 +88,29 @@ public class ChatHolder extends AbstractHolder<Chat> {
             formatDate = last.isCreatedToday() ? last.formatCreated(getString(R.string.simple_hour))
                     : last.isCreatedYesterday() ? getString(R.string.yesterday)
                             : last.formatCreated(getString(R.string.slash_date));
+
+            if(last.sender instanceof UserProfile){
+                int drawableID=R.drawable.message_clock_layer;
+                if(last.is_read){
+                    drawableID=R.drawable.message_check_all_layer;
+                }else if(last.is_sent){
+                    drawableID=R.drawable.message_check_layer;
+                }
+                Drawable drawable=getDrawable(drawableID, 20, 20);
+
+                lastMessageLabel.setCompoundDrawables(drawable, null, null, null);
+                lastMessageLabel.setCompoundDrawablePadding(5);
+            }
+
         }
 
-        lastMessage.setText(content);
+        lastMessageLabel.setText(content);
 
         dateLabel.setText(formatDate);
     }
 
 
-    private String getString(int id) {
-        return getContext().getString(id);
-    }
+
 
     public void setOnClickListener(IOnClickItemListHandler<Chat> listener) {
         this.listener = listener;

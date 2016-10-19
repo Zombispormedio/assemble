@@ -19,5 +19,8 @@
     <dimen name="text_margin">16dp</dimen>
     <dimen name="spinner_dialog_width">300dp</dimen>
     <dimen name="spinner_dialog_height">450dp</dimen>
+    <dimen name="message_text_size">16sp</dimen>
+    <dimen name="message_padding">7dp</dimen>
+    <dimen name="root_message_margin_top">7dp</dimen>
 
 </resources>

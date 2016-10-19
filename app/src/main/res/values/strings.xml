@@ -25,7 +25,7 @@
     <string name="profile_title">Profile</string>
     <string name="profile_image_desc">Profile image</string>
     <string name="gatherings_tab_title">Gatherings</string>
-    <string name="messages_tab_title">Messages</string>
+    <string name="messages_tab_title">Direct messages</string>
     <string name="teams_tab_title">Teams</string>
     <string name="help_title">Help</string>
     <string name="account_title">Account</string>
@@ -95,7 +95,7 @@
     <string name="titles_people_places">Write titles, people, places…</string>
     <string name="one_string_complete">(%1$s)</string>
     <string name="simple_date">MMMM d yyyy</string>
-    <string name="simple_date_with_hours">"MMMM d yyyy 'at' HH:mm "</string>
+    <string name="simple_date_with_hours">MMMM d yyyy \'at\' HH:mm </string>
     <string name="all_the_day">All the day</string>
     <string name="simple_date_with_name_of_day">E\',\' MMMM d yyyy</string>
     <string name="simple_hour">HH:mm</string>
@@ -109,5 +109,8 @@
     <string name="slash_date">dd/MM/yy</string>
     <string name="yesterday">Yesterday</string>
     <string name="new_message_title">New direct message</string>
+    <string name="message_date">MMMM d yyyy \'·\' HH:mm </string>
+    <string name="message_date_today">\'Today ·\' HH:mm</string>
+    <string name="message_date_yesteday">\'Yesterday ·\' HH:mm</string>
 
 </resources>

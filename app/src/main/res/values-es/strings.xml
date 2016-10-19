@@ -26,7 +26,7 @@
     <string name="profile_title">Perfil</string>
     <string name="profile_image_desc">Imagen de perfil</string>
     <string name="gatherings_tab_title">Reuniones</string>
-    <string name="messages_tab_title">Mensajes</string>
+    <string name="messages_tab_title">Mensajes directos</string>
     <string name="teams_tab_title">Equipos</string>
     <string name="help_title">Ayuda</string>
     <string name="account_title">Cuenta</string>
@@ -110,6 +110,9 @@
     <string name="slash_date">dd/MM/yy</string>
     <string name="yesterday">Ayer</string>
     <string name="new_message_title">Nuevo mensaje directo</string>
+    <string name="message_date">d \'de\' MMMM \'de\' yyyy \'·\' HH:mm </string>
+    <string name="message_date_today">\'Hoy ·\' HH:mm</string>
+    <string name="message_date_yesteday">\'Ayer ·\' HH:mm</string>
 
 
 </resources>
