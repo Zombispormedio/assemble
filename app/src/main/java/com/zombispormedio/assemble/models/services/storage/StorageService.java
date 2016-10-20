@@ -10,7 +10,6 @@ import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import java.util.ArrayList;
 
-import hugo.weaving.DebugLog;
 import io.realm.RealmObject;
 
 /**

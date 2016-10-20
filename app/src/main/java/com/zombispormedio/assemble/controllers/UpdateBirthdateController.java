@@ -1,10 +1,8 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.utils.DateUtils;
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IUpdateBirthdateView;
-
-import java.util.Calendar;
 
 
 /**
@@ -27,29 +25,24 @@ public class UpdateBirthdateController extends Controller {
     }
 
     private void initBirthdate() {
-        if (ctx != null) {
-            String birth = ctx.getInitBirthdate();
-            if (Utils.presenceOf(birth)) {
-                Calendar parsedDate = DateUtils.parse(birth);
-                int year = parsedDate.get(Calendar.YEAR);
-                int month = parsedDate.get(Calendar.MONTH);
-                int day = parsedDate.get(Calendar.DAY_OF_MONTH);
-                ctx.setDatepickerValue(year, month, day);
-            }
-        }
+        String birth = ctx.getInitBirthdate();
+        ISODate date = Utils.presenceOf(birth) ? new ISODate(birth) : ISODate.Now();
+        ctx.setDatepickerValue(date.getYear(), date.getMonth(), date.getDayOfMonth());
     }
 
 
     private void setMaxDate() {
-        ctx.setMaxDate(DateUtils.appendYearsToNow(-8));
+        ISODate date = ISODate.Now();
+        date.appendYears(-8);
+        ctx.setMaxDate(date.getTimeInMilliseconds());
     }
 
     public void save() {
         int year = ctx.getYearOfBirthdate();
         int month = ctx.getMonthOfBirthdate();
         int day = ctx.getDayOfBirthdate();
-        String date = DateUtils.convertToISOString(year, month, day);
-        ctx.finishWithResult(date);
+        ISODate date = new ISODate(year, month, day);
+        ctx.finishWithResult(date.toString());
     }
 
     @Override

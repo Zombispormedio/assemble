@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.models.editors;
 
-import com.zombispormedio.assemble.utils.DateUtils;
+import com.zombispormedio.assemble.utils.ISODate;
 
 /**
  * Created by Xavier Serrano on 28/09/2016.
@@ -34,16 +34,16 @@ public class EditMeeting {
 
         private int team;
 
-        private DateUtils.DateBuilder startAt;
+        private ISODate startAt;
 
-        private DateUtils.DateBuilder endAt;
+        private ISODate endAt;
 
         private boolean allDay;
 
         public Builder() {
             name = description = "";
-            startAt=new DateUtils.DateBuilder();
-            endAt=new DateUtils.DateBuilder();
+            startAt=ISODate.Now();
+            endAt=ISODate.Now();
             initDates();
             allDay=false;
         }
@@ -74,11 +74,11 @@ public class EditMeeting {
             return allDay;
         }
 
-        public DateUtils.DateBuilder getStartAt() {
+        public ISODate getStartAt() {
             return startAt;
         }
 
-        public DateUtils.DateBuilder getEndAt() {
+        public ISODate getEndAt() {
             return endAt;
         }
 
@@ -86,7 +86,7 @@ public class EditMeeting {
             this.allDay = allDay;
         }
 
-        private void resetHours(DateUtils.DateBuilder d){
+        private void resetHours(ISODate d){
             d.setMinutes(0);
             d.setHour(0);
         }
@@ -96,7 +96,7 @@ public class EditMeeting {
                 resetHours(startAt);
                 resetHours(endAt);
             }
-            return new EditMeeting(name, description, team, startAt.build(), endAt.build());
+            return new EditMeeting(name, description, team, startAt.toString(), endAt.toString());
         }
     }
 

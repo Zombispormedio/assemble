@@ -1,18 +1,13 @@
 package com.zombispormedio.assemble.models;
 
 
-import com.zombispormedio.assemble.utils.DateUtils;
+import com.zombispormedio.assemble.utils.ISODate;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
 
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
 public class Chat extends BaseModel implements Sorted<Chat> {
-
-    public final String created_at;
 
     public final UserProfile sender;
 
@@ -24,6 +19,11 @@ public class Chat extends BaseModel implements Sorted<Chat> {
 
     public int friend_id;
 
+    public final String created_at;
+
+    private final transient ISODate createdAt;
+
+
     public Chat(int id, String created_at, UserProfile sender, FriendProfile recipient,
             Message lastMessage) {
         super(id);
@@ -31,20 +31,27 @@ public class Chat extends BaseModel implements Sorted<Chat> {
         this.sender = sender;
         this.recipient = recipient;
         this.lastMessage = lastMessage;
+
+        createdAt = new ISODate(created_at);
     }
 
+    public ISODate getCreatedAt() {
+        return createdAt;
+    }
 
     @Override
     public int compareTo(Chat o) {
         int result;
         Message m2 = o.lastMessage;
+        ISODate createAt = getCreatedAt();
+
         if (m2 == null && lastMessage == null) {
-            result= DateUtils.compareISODateString(created_at, o.created_at);
+            result = createAt.compareTo(o.getCreatedAt());
         } else {
             if (m2 == null) {
-                result = DateUtils.compareISODateString(lastMessage.created_at, o.created_at);
+                result = lastMessage.getCreatedAt().compareTo(o.getCreatedAt());
             } else if (lastMessage == null) {
-                result = DateUtils.compareISODateString(created_at, m2.created_at);
+                result = createAt.compareTo(m2.getCreatedAt());
             } else {
                 result = lastMessage.compareTo(m2);
             }

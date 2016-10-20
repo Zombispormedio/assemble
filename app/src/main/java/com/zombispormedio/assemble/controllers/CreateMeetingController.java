@@ -8,6 +8,7 @@ import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.DateUtils;
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.views.activities.ICreateMeetingView;
 
 /**
@@ -23,10 +24,9 @@ public class CreateMeetingController extends Controller {
 
     private EditMeeting.Builder editor;
 
-    private  String imagePath;
+    private String imagePath;
 
     private DateUtils.DateError dateError;
-
 
 
     public CreateMeetingController(ICreateMeetingView ctx) {
@@ -35,13 +35,13 @@ public class CreateMeetingController extends Controller {
 
         teamResource = getResourceComponent().provideTeamResource();
 
-        meetingResource=getResourceComponent().provideMeetingResource();
+        meetingResource = getResourceComponent().provideMeetingResource();
 
         editor = new EditMeeting.Builder();
 
-        dateError=null;
+        dateError = null;
 
-        imagePath=null;
+        imagePath = null;
     }
 
     public void onTeamSelected(Team data) {
@@ -62,89 +62,84 @@ public class CreateMeetingController extends Controller {
     }
 
 
-
-
     private void renderDatesWithNow() {
 
-        DateUtils.DateBuilder startDate = editor.getStartAt();
-        DateUtils.DateBuilder endDate = editor.getEndAt();
+        ISODate startDate = editor.getStartAt();
+        ISODate endDate = editor.getEndAt();
 
-        ctx.setupStartDate(startDate.getYear(), startDate.getMonth(), startDate.getDay());
+        ctx.setupStartDate(startDate.getYear(), startDate.getMonth(), startDate.getDayOfMonth());
 
-        ctx.setupEndDate(endDate.getYear(), endDate.getMonth(), endDate.getDay());
+        ctx.setupEndDate(endDate.getYear(), endDate.getMonth(), endDate.getDayOfMonth());
 
         ctx.setupStartHour(startDate.getHour(), startDate.getMinutes());
 
         ctx.setupEndHour(endDate.getHour(), endDate.getMinutes());
 
-        String start=startDate.build();
 
-        String end=endDate.build();
+        ctx.bindStartDate(startDate);
 
-        ctx.bindStartDate(start);
+        ctx.bindEndDate(endDate);
 
-        ctx.bindEndDate(end);
+        ctx.bindStartHour(startDate);
 
-        ctx.bindStartHour(start);
-
-        ctx.bindEndHour(end);
+        ctx.bindEndHour(endDate);
     }
 
     public void onStartDateChanged(int year, int month, int dayOfMonth) {
-        DateUtils.DateBuilder start = editor.getStartAt();
-        start.setYear(year)
-                .setMonth(month)
-                .setDay(dayOfMonth);
-        ctx.bindStartDate(start.build());
+        ISODate start = editor.getStartAt();
+        start.setYear(year);
+        start.setMonth(month);
+        start.setDayOfMonth(dayOfMonth);
+        ctx.bindStartDate(start);
 
-        DateUtils.DateBuilder end=editor.getEndAt();
-        if(start.compare(end)>0){
+        ISODate end = editor.getEndAt();
+        if (start.compareTo(end) > 0) {
             ctx.updateEndDate(year, month, dayOfMonth);
             onEndDateChanged(year, month, dayOfMonth);
         }
     }
 
     public void onEndDateChanged(int year, int month, int dayOfMonth) {
-        DateUtils.DateBuilder end = editor.getEndAt();
-        end.setYear(year)
-                .setMonth(month)
-                .setDay(dayOfMonth);
-        ctx.bindEndDate(end.build());
+        ISODate end = editor.getEndAt();
+        end.setYear(year);
+        end.setMonth(month);
+        end.setDayOfMonth(dayOfMonth);
+        ctx.bindEndDate(end);
 
         checkEnd(end, false);
     }
 
     public void onStartHourChanged(int hourOfDay, int minute) {
-        DateUtils.DateBuilder start = editor.getStartAt();
-        start.setHour(hourOfDay)
-                .setMinutes(minute);
-        ctx.bindStartHour(start.build());
-        DateUtils.DateBuilder end=editor.getEndAt();
-        if(start.compare(end)>0){
-            int endHour=(hourOfDay+1)%24;
+        ISODate start = editor.getStartAt();
+        start.setHour(hourOfDay);
+        start.setMinutes(minute);
+        ctx.bindStartHour(start);
+        ISODate end = editor.getEndAt();
+        if (start.compareTo(end) > 0) {
+            int endHour = (hourOfDay + 1) % 24;
             ctx.updateEndHour(endHour, 0);
             onEndHourChanged(endHour, 0);
         }
     }
 
     public void onEndHourChanged(int hourOfDay, int minute) {
-        DateUtils.DateBuilder end = editor.getEndAt();
-        end.setHour(hourOfDay)
-                .setMinutes(minute);
-        ctx.bindEndHour(end.build());
+        ISODate end = editor.getEndAt();
+        end.setHour(hourOfDay);
+        end.setMinutes(minute);
+        ctx.bindEndHour(end);
         checkEnd(end, true);
     }
 
-    private void checkEnd(DateUtils.DateBuilder end, boolean hour) {
-        if(end.compare(editor.getStartAt())<0){
-            dateError=new DateUtils.DateError();
-            if(hour){
+    private void checkEnd(ISODate end, boolean hour) {
+        if (end.compareTo(editor.getStartAt()) < 0) {
+            dateError = new DateUtils.DateError();
+            if (hour) {
                 dateError.hour();
             }
             ctx.showErrorEndDate();
-        }else{
-            if(dateError!=null){
-                dateError=null;
+        } else {
+            if (dateError != null) {
+                dateError = null;
                 ctx.hideErrorEndDate();
             }
         }
@@ -152,9 +147,9 @@ public class CreateMeetingController extends Controller {
 
     public void onAllDayChanged(boolean isChecked) {
         editor.setAllDay(isChecked);
-        if(isChecked){
+        if (isChecked) {
             ctx.hideHours();
-        }else{
+        } else {
             ctx.showHours();
         }
     }
@@ -166,12 +161,12 @@ public class CreateMeetingController extends Controller {
     public void save() {
         editor.setName(ctx.getName());
 
-        if(dateError==null){
+        if (dateError == null) {
             createMeeting();
-        }else{
-           boolean isHour=dateError.isHour();
+        } else {
+            boolean isHour = dateError.isHour();
 
-            if(!(isHour&&editor.isAllDay())){
+            if (!(isHour && editor.isAllDay())) {
                 ctx.showDateErrorAlert();
             }
         }
@@ -182,7 +177,7 @@ public class CreateMeetingController extends Controller {
     private void createMeeting() {
         ctx.showProgress();
 
-        meetingResource.create(editor.build(), new ServiceHandler<Meeting, Error>(){
+        meetingResource.create(editor.build(), new ServiceHandler<Meeting, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);
@@ -191,7 +186,7 @@ public class CreateMeetingController extends Controller {
 
             @Override
             public void onSuccess(Meeting result) {
-                if(!uploadImage(result.id)){
+                if (!uploadImage(result.id)) {
                     afterCreateMeeting();
                 }
             }
@@ -199,16 +194,18 @@ public class CreateMeetingController extends Controller {
 
     }
 
-    private void afterCreateMeeting(){
+    private void afterCreateMeeting() {
         ctx.hideProgress();
         ctx.goHome();
     }
 
 
-    private boolean uploadImage(int id){
-        if(imagePath==null)return false;
+    private boolean uploadImage(int id) {
+        if (imagePath == null) {
+            return false;
+        }
 
-        meetingResource.uploadImage(id, imagePath, new ServiceHandler<Meeting, Error>(){
+        meetingResource.uploadImage(id, imagePath, new ServiceHandler<Meeting, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);
@@ -226,6 +223,6 @@ public class CreateMeetingController extends Controller {
 
     @Override
     public void onDestroy() {
-        ctx=null;
+        ctx = null;
     }
 }

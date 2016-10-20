@@ -11,7 +11,7 @@ import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.utils.DateUtils;
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
 import java.util.ArrayList;
@@ -95,7 +95,7 @@ public class ChatController extends Controller {
 
         UserProfile profile=profileResource.getProfile();
 
-        final int index=ctx.addPendingMessage(new Message(content, profile, DateUtils.Now.toDateString()));
+        final int index=ctx.addPendingMessage(new Message(content, profile, ISODate.Now().toString()));
 
         chatResource.createMessage(chatID, message, new ServiceHandler<Message, Error>(){
             @Override

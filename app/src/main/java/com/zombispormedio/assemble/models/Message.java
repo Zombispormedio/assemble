@@ -1,9 +1,8 @@
 package com.zombispormedio.assemble.models;
 
 
-import com.zombispormedio.assemble.utils.DateUtils;
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.StringUtils;
-import com.zombispormedio.assemble.utils.Utils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -36,6 +35,9 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
 
     public final String created_at;
 
+    private final transient ISODate createdAt;
+
+
     public Message(int id, String content, boolean is_read, boolean is_sent, boolean is_delivered, String created_at,
             Profile sender, Profile recipient, int chat_id) {
         super(id);
@@ -47,6 +49,8 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         this.sender = sender;
         this.recipient = recipient;
         this.chat_id = chat_id;
+
+        createdAt = new ISODate(created_at);
     }
 
     public Message(String content, Profile sender, String created_at) {
@@ -57,6 +61,8 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         this.is_sent = false;
         this.is_delivered = false;
         this.created_at = created_at;
+
+        createdAt = new ISODate(created_at);
     }
 
     public Message(int id, String content, boolean is_read, boolean is_sent, boolean is_delivered, String created_at,
@@ -72,6 +78,8 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         this.sender_id = sender_id;
         this.recipient_id = recipient_id;
         this.chat_id = chat_id;
+
+        createdAt = new ISODate(created_at);
     }
 
 
@@ -85,8 +93,14 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         sender_id = in.readInt();
         recipient_id = in.readInt();
         chat_id = in.readInt();
-        this.sender = null;
-        this.recipient = null;
+        sender = null;
+        recipient = null;
+
+        createdAt = new ISODate(created_at);
+    }
+
+    public ISODate getCreatedAt() {
+        return createdAt;
     }
 
     public static final Creator<Message> CREATOR = new Creator<Message>() {
@@ -110,15 +124,15 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
     }
 
     public boolean isCreatedToday() {
-        return DateUtils.isToday(created_at);
+        return getCreatedAt().isToday();
     }
 
     public boolean isCreatedYesterday() {
-        return DateUtils.isYesterday(created_at);
+        return getCreatedAt().isYesterday();
     }
 
     public String formatCreated(String format) {
-        return DateUtils.formatISODate(format, created_at);
+        return getCreatedAt().format(format);
     }
 
     @Override
@@ -141,7 +155,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
 
     @Override
     public int compareTo(Message o) {
-        return DateUtils.compareISODateString(created_at, o.created_at);
+        return getCreatedAt().compareTo(o.getCreatedAt());
     }
 
     @Override
@@ -152,6 +166,11 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
     @Override
     public int getIdentity() {
         return id;
+    }
+
+    public boolean diffDate(Message previous) {
+
+        return false;
     }
 
     public static class Builder {

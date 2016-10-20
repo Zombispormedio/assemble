@@ -143,12 +143,7 @@ public final class AndroidUtils {
                 ctx.setBio("");
             }
 
-            if (Utils.presenceOf(profile.birth_date)) {
-                String formatedDate = DateUtils.formatISODate(ctx.getDateFormat(), profile.birth_date);
-                ctx.setBirthDate(formatedDate);
-            } else {
-                ctx.setBirthDate("");
-            }
+            ctx.setBirthDate(profile.getBirth(), "");
 
         }
     }
@@ -318,11 +313,6 @@ public final class AndroidUtils {
         }
     }
 
-    public static String formatDate(Context ctx, int strID, String date) {
-        String format = ctx.getString(strID);
-        return DateUtils.formatISODate(format, date);
-    }
-
 
     public static BottomSheetDialog createImageUploaderBottomSheet(Context ctx, BottomSheetItemClickListener listener) {
         return new BottomSheetBuilder(ctx, R.style.AppTheme_BottomSheetDialog)
@@ -335,7 +325,7 @@ public final class AndroidUtils {
 
     public static HashMap<String, String> convertBundleToStringHashMap(Bundle bundle) {
 
-       return  Stream.of(bundle.keySet())
+        return Stream.of(bundle.keySet())
                 .filter(key -> bundle.get(key) instanceof String)
                 .reduce(new HashMap<String, String>(), (memo, key) -> {
                     memo.put(key, (String) bundle.get(key));
@@ -347,7 +337,7 @@ public final class AndroidUtils {
     public static HashMap<String, String> convertArrayMapToHashMap(ArrayMap<String, String> map) {
 
         return Stream.of(map.keySet())
-                .reduce(new HashMap<String, String>(), (memo, key)->{
+                .reduce(new HashMap<String, String>(), (memo, key) -> {
                     memo.put(key, map.get(key));
 
                     return memo;

@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.UpdateProfileController;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.utils.DateUtils;
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.activities.IUpdateProfileView;
 
@@ -87,13 +87,9 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
-    public void setBirthDate(String birth) {
-        birthdateInput.setText(birth);
-    }
-
-    @Override
-    public String getDateFormat() {
-        return getString(R.string.simple_date);
+    public void setBirthDate(ISODate birth, String def) {
+        String text=birth!=null?birth.format(getString(R.string.simple_date)):def;
+        birthdateInput.setText(text);
     }
 
     @Override

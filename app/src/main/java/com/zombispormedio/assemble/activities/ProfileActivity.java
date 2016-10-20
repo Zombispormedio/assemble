@@ -22,16 +22,13 @@ import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
 
-import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IProfileView;
 
-import java.text.ParseException;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -124,14 +121,11 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     @Override
-    public void setBirthDate(String birth) {
-        birthDateText.setText(birth);
+    public void setBirthDate(ISODate birth, String def) {
+        String text=birth!=null?birth.format(getString(R.string.born_at)):def;
+        birthDateText.setText(text);
     }
 
-    @Override
-    public String getDateFormat() {
-        return getString(R.string.born_at);
-    }
 
     @Override
     public void goToUpdateProfile() {

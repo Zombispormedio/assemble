@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.models;
 
-import com.zombispormedio.assemble.utils.DateUtils;
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.Utils;
 
 /**
@@ -14,6 +14,11 @@ public class Meeting extends Concept implements Sorted<Meeting> {
 
     public final Team team;
 
+    private final transient ISODate startAt;
+
+    private final transient ISODate endAt;
+
+
     public Meeting(int id, String name, String description, String created_at, String full_image_url,
             String large_image_url, String medium_image_url, String thumb_image_url, String start_at, String end_at,
             Team team) {
@@ -21,10 +26,22 @@ public class Meeting extends Concept implements Sorted<Meeting> {
         this.start_at = start_at;
         this.end_at = end_at;
         this.team = team;
+
+        startAt=new ISODate(start_at);
+
+        endAt=new ISODate(end_at);
+    }
+
+    public ISODate getStartAt() {
+        return startAt;
+    }
+
+    public ISODate getEndAt() {
+        return endAt;
     }
 
     public int compareTo(Meeting o) {
-        int result = DateUtils.compareISODateString(start_at, o.start_at);
+        int result = getStartAt().compareTo(o.getStartAt());
         if (result == 0) {
             result = name.compareToIgnoreCase(o.name);
         }

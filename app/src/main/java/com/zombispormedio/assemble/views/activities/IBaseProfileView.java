@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.views.activities;
 
-import java.text.ParseException;
+import com.zombispormedio.assemble.utils.ISODate;
+
 
 /**
  * Created by Xavier Serrano on 22/08/2016.
@@ -13,8 +14,6 @@ public interface IBaseProfileView extends IBaseView {
 
     void setBio(String bio);
 
-    void setBirthDate(String birth);
-
-    String getDateFormat();
+    void setBirthDate(ISODate birth, String def);
 
 }

@@ -6,6 +6,21 @@
         android:clickable="true"
         >
 
+    <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/overlay_label_shape"
+            android:elevation="2sp"
+            >
+        <TextView
+                android:id="@+id/date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/simple_date"
+                />
+    </FrameLayout>
+
     <LinearLayout
             android:id="@+id/friend_layout"
             android:layout_width="match_parent"

@@ -4,7 +4,6 @@ package com.zombispormedio.assemble.activities;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -13,23 +12,16 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.view.View;
-import android.widget.CompoundButton;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
-import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.CreateMeetingController;
 import com.zombispormedio.assemble.fragments.TeamDialogFragment;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.activities.ICreateMeetingView;
@@ -269,26 +261,26 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
     }
 
     @Override
-    public void bindStartDate(String start) {
-        String formatted = AndroidUtils.formatDate(this, R.string.simple_date_with_name_of_day, start);
+    public void bindStartDate(ISODate start) {
+        String formatted =start.format(getString(R.string.simple_date_with_name_of_day));
         startDateLabel.setText(formatted);
     }
 
     @Override
-    public void bindStartHour(String start) {
-        String formatted = AndroidUtils.formatDate(this, R.string.simple_hour, start);
+    public void bindStartHour(ISODate start) {
+        String formatted = start.format(getString( R.string.simple_hour));
         startHourLabel.setText(formatted);
     }
 
     @Override
-    public void bindEndDate(String start) {
-        String formatted = AndroidUtils.formatDate(this, R.string.simple_date_with_name_of_day, start);
+    public void bindEndDate(ISODate start) {
+        String formatted = start.format(getString(R.string.simple_date_with_name_of_day));
         endDateLabel.setText(formatted);
     }
 
     @Override
-    public void bindEndHour(String start) {
-        String formatted = AndroidUtils.formatDate(this, R.string.simple_hour, start);
+    public void bindEndHour(ISODate start) {
+        String formatted = start.format(getString(R.string.simple_hour));
         endHourLabel.setText(formatted);
     }
 

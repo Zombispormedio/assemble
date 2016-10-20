@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.views.activities;
 
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.views.activities.IBaseView;
 
 /**
@@ -11,13 +12,13 @@ public interface ICreateMeetingView extends IBaseView {
 
     void bindTeam(String name);
 
-    void bindStartDate(String start);
+    void bindStartDate(ISODate start);
 
-    void bindStartHour(String start);
+    void bindStartHour(ISODate start);
 
-    void bindEndDate(String start);
+    void bindEndDate(ISODate start);
 
-    void bindEndHour(String start);
+    void bindEndHour(ISODate start);
 
     boolean getAllDay();
 

@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.models;
 
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
@@ -13,8 +14,6 @@ public abstract class Concept extends BaseModel {
 
     public final String description;
 
-    public final String created_at;
-
     public final String full_image_url;
 
     public final String large_image_url;
@@ -22,6 +21,11 @@ public abstract class Concept extends BaseModel {
     public final String medium_image_url;
 
     public final String thumb_image_url;
+
+    public final String created_at;
+
+    private final transient ISODate createdAt;
+
 
     public Concept(int id, String name, String description, String created_at, String full_image_url,
             String large_image_url, String medium_image_url, String thumb_image_url) {
@@ -33,8 +37,13 @@ public abstract class Concept extends BaseModel {
         this.large_image_url = large_image_url;
         this.medium_image_url = medium_image_url;
         this.thumb_image_url = thumb_image_url;
+
+        createdAt = new ISODate(created_at);
     }
 
+    public ISODate getCreatedAt() {
+        return createdAt;
+    }
 
     public boolean haveMediumImage() {
         return have(medium_image_url);
@@ -88,9 +97,6 @@ public abstract class Concept extends BaseModel {
     }
 
     public boolean areContentTheSame(Concept o) {
-
-
-
         return id == o.id &&
                 Utils.safeEquals(name, o.name) &&
                 Utils.safeEquals(description, o.description) &&

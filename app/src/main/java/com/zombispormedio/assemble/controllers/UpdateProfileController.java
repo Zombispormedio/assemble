@@ -9,6 +9,7 @@ import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.views.activities.IUpdateProfileView;
 
 /**
@@ -90,7 +91,7 @@ public class UpdateProfileController extends Controller {
 
     public void updateBirthdate(String birthdate) {
         editor.setBirthDate(birthdate);
-        ctx.setBirthDate(birthdate);
+        ctx.setBirthDate(new ISODate(birthdate), "");
     }
 
     private void bindEditor() {

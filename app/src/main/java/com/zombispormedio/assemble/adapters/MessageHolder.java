@@ -48,11 +48,10 @@ public class MessageHolder extends AbstractHolder<Message> {
     @BindView(R.id.message_date_label)
     TextView messageDateLabel;
 
-    @BindView(R.id.user_bubble)
-    FrameLayout userBubble;
+    @BindView(R.id.date_label)
+    TextView dateLabel;
 
     private boolean isRoot;
-
 
     public MessageHolder(View itemView) {
         super(itemView);
@@ -62,18 +61,27 @@ public class MessageHolder extends AbstractHolder<Message> {
 
     private void setup() {
         ButterKnife.bind(this, itemView);
-
     }
 
     @Override
     public void bind(int position, Message message) {
         isRoot = true;
         renderData(message);
+        renderDate(message.created_at);
     }
+
 
     public void bind(int position, Message message, Message previous) {
         registerIfIsRoot(message, previous);
         renderData(message);
+       if( message.diffDate(previous)){
+           renderDate(message.created_at);
+       }
+    }
+
+    private void renderDate(String created_at) {
+
+
     }
 
 
