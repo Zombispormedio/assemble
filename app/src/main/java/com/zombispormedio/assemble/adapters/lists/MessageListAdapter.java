@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.adapters.lists;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.MessageHolder;
 import com.zombispormedio.assemble.models.Message;
@@ -18,7 +20,7 @@ import java.util.ArrayList;
 
 public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
 
-    protected ArrayList<Message> data;
+    protected ArrayList<MessageHolder.Container> data;
 
     public MessageListAdapter() {
         data=new ArrayList<>();
@@ -34,7 +36,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
 
     @Override
     public void onBindViewHolder(MessageHolder holder, int position) {
-        Message item = data.get(position);
+        MessageHolder.Container item = data.get(position);
         int prev = position - 1;
         if (position > 0) {
             holder.bind(position, item, data.get(prev));
@@ -49,14 +51,17 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
     }
 
     public void addAll(ArrayList<Message> data) {
-        this.data = data;
+        this.data= Stream.of(data)
+                .map(MessageHolder.Container::new)
+                .collect(Collectors.toCollection(ArrayList< MessageHolder.Container>::new));
+
         notifyDataSetChanged();
     }
 
     public int addPending(Message message) {
         int index = data.size();
 
-        data.add(message);
+        data.add(new MessageHolder.Container(message));
 
         notifyItemInserted(index);
 
@@ -64,10 +69,12 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
 
     }
 
+
+
     public void checkMessage(int index, Message message) {
-
-        data.set(index, message);
-
+        MessageHolder.Container container=data.get(index);
+        container.setMessage(message);
+        data.set(index, container);
         notifyItemChanged(index);
     }
 }

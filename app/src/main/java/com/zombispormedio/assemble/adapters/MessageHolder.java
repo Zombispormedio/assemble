@@ -1,18 +1,13 @@
 package com.zombispormedio.assemble.adapters;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.models.modules.LoaderModule;
+import com.zombispormedio.assemble.utils.ISODate;
 
 
-import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -25,7 +20,7 @@ import butterknife.ButterKnife;
  * Created by Xavier Serrano on 04/10/2016.
  */
 
-public class MessageHolder extends AbstractHolder<Message> {
+public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
 
     @BindView(R.id.friend_layout)
     LinearLayout friendLayout;
@@ -51,7 +46,11 @@ public class MessageHolder extends AbstractHolder<Message> {
     @BindView(R.id.date_label)
     TextView dateLabel;
 
+    @BindView(R.id.date_label_layout)
+    FrameLayout dateLabelLayout;
+
     private boolean isRoot;
+
 
     public MessageHolder(View itemView) {
         super(itemView);
@@ -64,24 +63,39 @@ public class MessageHolder extends AbstractHolder<Message> {
     }
 
     @Override
-    public void bind(int position, Message message) {
+    public void bind(int position, Container container) {
         isRoot = true;
+        setupOnClick(container);
+        Message message = container.getMessage();
         renderData(message);
-        renderDate(message.created_at);
+        renderDate(message.getCreatedAt());
     }
 
 
-    public void bind(int position, Message message, Message previous) {
+    public void bind(int position, Container container, Container previousContainer) {
+        setupOnClick(container);
+
+        Message message = container.getMessage();
+        Message previous = previousContainer.getMessage();
+
         registerIfIsRoot(message, previous);
+
         renderData(message);
-       if( message.diffDate(previous)){
-           renderDate(message.created_at);
-       }
+
+        if (message.beforeCreated(previous.getCreatedAt())) {
+            renderDate(message.getCreatedAt());
+        } else {
+            dateLabelLayout.setVisibility(View.GONE);
+        }
     }
 
-    private void renderDate(String created_at) {
+    private void renderDate(ISODate created) {
+        dateLabelLayout.setVisibility(View.VISIBLE);
 
-
+        String text = created.isToday() ? getString(R.string.today)
+                : created.isYesterday() ? getString(R.string.yesterday) :
+                        created.format(getString(R.string.simple_date));
+        dateLabel.setText(text);
     }
 
 
@@ -95,26 +109,26 @@ public class MessageHolder extends AbstractHolder<Message> {
 
         }
         bindDate(message);
-        setupOnClick(message);
+
 
     }
 
     private void bindDate(Message message) {
-        boolean isToday=message.isCreatedToday();
-        boolean isYesterday=message.isCreatedYesterday();
+        boolean isToday = message.isCreatedToday();
+        boolean isYesterday = message.isCreatedYesterday();
 
         String formatDate = isToday ? message.formatCreated(getString(R.string.message_date_today))
-                : isYesterday ? message.formatCreated(getString(R.string.message_date_yesteday))
+                : isYesterday ? message.formatCreated(getString(R.string.message_date_yesterday))
                         : message.formatCreated(getString(R.string.message_date));
         messageDateLabel.setText(formatDate);
 
         int marginLeft;
-        if((message.sender instanceof UserProfile) && (message.content.length() < 38)){
-            int shortDate=(int)getDimen(R.dimen.short_date_message_margin);
-            int nearDate= (int) getDimen(R.dimen.near_date_message_margin);
-            marginLeft= isToday||isYesterday?nearDate:shortDate;
-        }else{
-            marginLeft= (int) getDimen(R.dimen.date_message_margin_left);
+        if ((message.sender instanceof UserProfile) && (message.content.length() < 38)) {
+            int shortDate = (int) getDimen(R.dimen.short_date_message_margin);
+            int nearDate = (int) getDimen(R.dimen.near_date_message_margin);
+            marginLeft = isToday || isYesterday ? nearDate : shortDate;
+        } else {
+            marginLeft = (int) getDimen(R.dimen.date_message_margin_left);
         }
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) messageDateLabel.getLayoutParams();
         params.setMargins(marginLeft, params.topMargin, params.rightMargin, params.bottomMargin);
@@ -128,6 +142,7 @@ public class MessageHolder extends AbstractHolder<Message> {
         if (isRoot) {
             doIfRootFriendMessage(message);
             setTopToFriendLayout((int) getDimen(R.dimen.root_message_margin_top));
+
 
         } else {
             friendImageView.setVisibility(View.INVISIBLE);
@@ -160,7 +175,6 @@ public class MessageHolder extends AbstractHolder<Message> {
     }
 
 
-
     private void setTopToUserLayout(int top) {
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) userLayout.getLayoutParams();
         params.setMargins(params.leftMargin, top, params.rightMargin, params.bottomMargin);
@@ -190,30 +204,59 @@ public class MessageHolder extends AbstractHolder<Message> {
         isRoot = that.sender.id != previous.sender.id;
     }
 
-    private void setupOnClick(Message message) {
-        if(message.clicked){
+    private void setupOnClick(Container container) {
+        if (container.isClicked()) {
             showDate();
-        }else{
+        } else {
             hideDate();
         }
 
         getView().setOnClickListener(v -> {
-            if (message.clicked) {
-                message.clicked=false;
+            if (container.isClicked()) {
+                container.setClicked(false);
                 hideDate();
             } else {
-                message.clicked=true;
+                container.setClicked(true);
                 showDate();
             }
         });
     }
 
-    private void showDate(){
+    private void showDate() {
         messageDateLabel.setVisibility(View.VISIBLE);
     }
 
-    private void hideDate(){
+    private void hideDate() {
         messageDateLabel.setVisibility(View.GONE);
+    }
+
+
+    public static class Container {
+
+        private Message message;
+
+        private boolean clicked;
+
+        public Container(Message message) {
+            this.message = message;
+            clicked = false;
+        }
+
+        public boolean isClicked() {
+            return clicked;
+        }
+
+        public void setClicked(boolean clicked) {
+            this.clicked = clicked;
+        }
+
+        public Message getMessage() {
+            return message;
+        }
+
+        public void setMessage(Message message) {
+            this.message = message;
+        }
     }
 
 }

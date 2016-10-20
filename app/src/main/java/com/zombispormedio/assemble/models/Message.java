@@ -168,9 +168,8 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         return id;
     }
 
-    public boolean diffDate(Message previous) {
-
-        return false;
+    public boolean beforeCreated(ISODate previous) {
+        return createdAt.beforeDay(previous) || createdAt.beforeMonth(previous) || createdAt.beforeYear(previous);
     }
 
     public static class Builder {

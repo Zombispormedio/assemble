@@ -111,6 +111,7 @@
     <string name="new_message_title">New direct message</string>
     <string name="message_date">MMMM d yyyy \'·\' HH:mm </string>
     <string name="message_date_today">\'Today ·\' HH:mm</string>
-    <string name="message_date_yesteday">\'Yesterday ·\' HH:mm</string>
+    <string name="message_date_yesterday">\'Yesterday ·\' HH:mm</string>
+    <string name="today">Today</string>
 
 </resources>

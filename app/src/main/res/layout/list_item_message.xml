@@ -7,11 +7,15 @@
         >
 
     <FrameLayout
+            android:id="@+id/date_label_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/overlay_label_shape"
             android:elevation="2sp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="2.5dp"
+
             >
         <TextView
                 android:id="@+id/date_label"

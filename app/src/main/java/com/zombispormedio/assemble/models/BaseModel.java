@@ -9,14 +9,8 @@ public abstract class BaseModel{
 
     public final int id;
 
-    public boolean clicked;
-
     public BaseModel(int id) {
         this.id = id;
-        clicked=false;
     }
-
-
-
 
 }

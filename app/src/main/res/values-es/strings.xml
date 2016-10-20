@@ -112,7 +112,8 @@
     <string name="new_message_title">Nuevo mensaje directo</string>
     <string name="message_date">d \'de\' MMMM \'de\' yyyy \'·\' HH:mm </string>
     <string name="message_date_today">\'Hoy ·\' HH:mm</string>
-    <string name="message_date_yesteday">\'Ayer ·\' HH:mm</string>
+    <string name="message_date_yesterday">\'Ayer ·\' HH:mm</string>
+    <string name="today">Hoy</string>
 
 
 </resources>
