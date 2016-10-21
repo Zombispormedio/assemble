@@ -35,7 +35,7 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.LOADED;
 public class AssembleApplication extends Application implements IAssembleApplication {
 
 
-    private final static String[] REFERENCES_TO_RESET_ON_START = new String[]{
+    private final static String[] PREFERENCES_TO_RESET_ON_START = new String[]{
             LOADED,
             CHAT_ID
     };
@@ -47,6 +47,7 @@ public class AssembleApplication extends Application implements IAssembleApplica
     @Override
     public void onCreate() {
         super.onCreate();
+        //OneSignal.startInit(this).init();
         JodaTimeAndroid.init(this);
         ConnectionState.getInstance().setContext(this);
         registerActivityLifecycleCallbacks(new RunningActivity());
@@ -104,7 +105,7 @@ public class AssembleApplication extends Application implements IAssembleApplica
     }
 
     private void setupPreferences() {
-        for (String key : REFERENCES_TO_RESET_ON_START) {
+        for (String key : PREFERENCES_TO_RESET_ON_START) {
             preferencesManager.remove(key);
         }
     }

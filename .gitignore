@@ -44,3 +44,5 @@ captures/
 !.idea/codeStyleSettings.xml
 
 google-services.json
+
+app/env.properties
