@@ -16,7 +16,7 @@ import com.zombispormedio.assemble.models.services.interfaces.IAuthService;
  */
 public class AuthAPIService implements IAuthService {
 
-    private APIConfiguration api;
+    private final APIConfiguration api;
 
     public AuthAPIService() {
         api = APIConfiguration.getInstance();

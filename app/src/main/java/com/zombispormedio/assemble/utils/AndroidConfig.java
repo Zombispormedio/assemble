@@ -36,7 +36,7 @@ public class AndroidConfig {
 
         public static final String ON_MESSAGE_NOTIFY_HOME = "ON_MESSAGE_NOTIFY_HOME";
 
-        public static final String ON_MESSAGE_NOTIFY_EVERYWERE = "ON_MESSAGE_NOTIFY_EVERYWHERE";
+        public static final String ON_MESSAGE_NOTIFY_EVERYWHERE = "ON_MESSAGE_NOTIFY_EVERYWHERE";
     }
 
     public static class Codes{

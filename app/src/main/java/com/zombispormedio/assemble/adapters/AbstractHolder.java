@@ -8,6 +8,8 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by Xavier Serrano on 26/08/2016.
  */
@@ -15,6 +17,7 @@ public abstract class AbstractHolder<T> extends RecyclerView.ViewHolder {
 
     public AbstractHolder(View itemView) {
         super(itemView);
+        ButterKnife.bind(this, getView());
     }
 
     public void bind(int position, T itemData) {

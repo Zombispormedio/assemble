@@ -157,7 +157,7 @@ public final class AndroidUtils {
 
         private Context ctx;
 
-        private RecyclerView list;
+        private final RecyclerView list;
 
         private int orientationType;
 

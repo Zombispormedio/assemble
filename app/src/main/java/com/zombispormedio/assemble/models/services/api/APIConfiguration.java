@@ -7,9 +7,9 @@ import com.zombispormedio.assemble.net.Request;
  */
 public class APIConfiguration {
 
-    private static APIConfiguration ourInstance = new APIConfiguration();
+    private static final APIConfiguration ourInstance = new APIConfiguration();
 
-    private String baseUrl;
+    private final String baseUrl;
 
     private String token;
 

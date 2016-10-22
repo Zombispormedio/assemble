@@ -7,11 +7,10 @@ import com.annimon.stream.Stream;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.wrappers.okhttp.RestWrapper;
 
-import org.json.JSONException;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Map;
+
 
 /**
  * Created by Xavier Serrano on 26/07/2016.
