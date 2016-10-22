@@ -109,7 +109,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
     @Override
     public void bindTitle(String title) {
-        setTitle(title);
+        setToolbarTitle(title);
     }
 
     @Override

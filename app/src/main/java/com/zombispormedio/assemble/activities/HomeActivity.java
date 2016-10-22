@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -111,7 +110,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private void setupDrawer() {
         nav.setNavigationItemSelectedListener(NavListener());
-        drawer.addDrawerListener(DrawerListener());
+        drawer.addDrawerListener(new ActionBarDrawerToggle(this, drawer, R.string.open_drawer_desc, R.string.close_drawer_desc));
         headerView = nav.getHeaderView(0);
 
         usernameLabel = (TextView) headerView.findViewById(R.id.username_label);
@@ -208,14 +207,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         };
     }
 
-    private ActionBarDrawerToggle DrawerListener() {
-        return new ActionBarDrawerToggle(this, drawer, R.string.open_drawer_desc, R.string.close_drawer_desc) {
-            @Override
-            public void onDrawerOpened(View drawerView) {
-                super.onDrawerOpened(drawerView);
-            }
-        };
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

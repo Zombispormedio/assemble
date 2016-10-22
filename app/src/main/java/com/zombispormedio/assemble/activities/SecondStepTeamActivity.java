@@ -12,8 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
-import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.ParticipantsListAdapter;
 import com.zombispormedio.assemble.controllers.SecondStepTeamController;
@@ -60,7 +58,7 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
         setContentView(R.layout.activity_second_step_team);
         setupToolbar();
         bindActivity(this);
-        setSubtitle(R.string.add_name);
+        setToolbarSubtitle(R.string.add_name);
 
         Bundle extra=getIntent().getExtras();
 

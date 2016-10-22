@@ -6,12 +6,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.adapters.TeamFriendHolder;
-import com.zombispormedio.assemble.adapters.SelectedMemberHolder;
 import com.zombispormedio.assemble.adapters.lists.SelectedMembersListAdapter;
 import com.zombispormedio.assemble.adapters.lists.TeamFriendsListAdapter;
 import com.zombispormedio.assemble.controllers.FirstStepTeamController;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
@@ -106,13 +103,13 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
     @Override
     public void setParticipantsSubtitle(int number, int total) {
         String subtitle=String.format(getString(R.string.selected_participants), number,total);
-        setSubtitle(subtitle);
+        setToolbarSubtitle(subtitle);
 
     }
 
     @Override
     public void setDefaultSubtitle() {
-       setSubtitle(R.string.add_participants);
+       setToolbarSubtitle(R.string.add_participants);
     }
 
     @Override

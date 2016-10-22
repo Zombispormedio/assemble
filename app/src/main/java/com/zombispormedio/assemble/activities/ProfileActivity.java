@@ -13,12 +13,9 @@ import android.support.design.widget.FloatingActionButton;
 
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
-import com.github.rubensousa.bottomsheetbuilder.items.BottomSheetMenuItem;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
 

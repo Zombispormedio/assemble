@@ -7,7 +7,6 @@ import android.support.v7.widget.RecyclerView;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.PreviewFriendsListAdapter;
 import com.zombispormedio.assemble.controllers.CreateChatController;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
@@ -28,8 +27,6 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
 
     private PreviewFriendsListAdapter adapter;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +34,8 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
         setupToolbar();
         bindActivity(this);
 
-        ctrl=new CreateChatController(this);
+
+        ctrl = new CreateChatController(this);
 
         setupFriends();
 
@@ -47,7 +45,7 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
     }
 
     private void setupFriends() {
-        adapter=new PreviewFriendsListAdapter();
+        adapter = new PreviewFriendsListAdapter();
         AndroidUtils.createListConfiguration(this, friendsList)
                 .divider(true)
                 .itemAnimation(true)

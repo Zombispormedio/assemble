@@ -2,7 +2,6 @@ package com.zombispormedio.assemble.activities;
 
 
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -45,7 +44,7 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         setContentView(R.layout.activity_register);
         setupToolbar();
         bindActivity(this);
-        ((Toolbar) findViewById(R.id.toolbar)).setTitle("");
+        setToolbarTitle("");
 
         ctrl = new RegisterController(this);
 

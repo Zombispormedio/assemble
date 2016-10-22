@@ -4,20 +4,15 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.view.KeyEvent;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.NewFriendsListAdapter;
 import com.zombispormedio.assemble.controllers.NewFriendController;
-import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.holders.INewFriendHolder;
 import com.zombispormedio.assemble.views.activities.INewFriendView;
 
 import java.util.ArrayList;
@@ -33,8 +28,6 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
     RecyclerView friendsList;
 
     private NewFriendController ctrl;
-
-    private NewFriendsListAdapter.Factory friendsListFactory;
 
     private NewFriendsListAdapter friendsListAdapter;
 
@@ -93,7 +86,7 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
 
 
     private void setupList() {
-        friendsListFactory = new NewFriendsListAdapter.Factory();
+        NewFriendsListAdapter.Factory friendsListFactory = new NewFriendsListAdapter.Factory();
 
         AndroidUtils.createListConfiguration(this, friendsList)
                 .divider(true)

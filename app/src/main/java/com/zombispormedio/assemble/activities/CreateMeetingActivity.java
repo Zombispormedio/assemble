@@ -58,7 +58,6 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
     @BindView(R.id.name_input)
     EditText nameInput;
 
-
     @BindView(R.id.image_view)
     ImageView imageView;
 
@@ -262,13 +261,13 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
 
     @Override
     public void bindStartDate(ISODate start) {
-        String formatted =start.format(getString(R.string.simple_date_with_name_of_day));
+        String formatted = start.format(getString(R.string.simple_date_with_name_of_day));
         startDateLabel.setText(formatted);
     }
 
     @Override
     public void bindStartHour(ISODate start) {
-        String formatted = start.format(getString( R.string.simple_hour));
+        String formatted = start.format(getString(R.string.simple_hour));
         startHourLabel.setText(formatted);
     }
 

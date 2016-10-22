@@ -47,12 +47,12 @@ public class MainActivity extends BaseActivity implements IMainView {
 
     @Override
     public void goToLogin() {
-        runOnUiThread(() -> Login());
+        runOnUiThread(this::Login);
     }
 
     @Override
     public void goHome() {
-        runOnUiThread(() -> Home());
+        runOnUiThread(this::Home);
     }
 
 
