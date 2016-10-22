@@ -13,7 +13,7 @@ import com.zombispormedio.assemble.fragments.TeamsFragment;
  */
 public class HomePagerAdapter extends FragmentStatePagerAdapter {
 
-    private int numTabs;
+    private final int numTabs;
 
     public final static int TEAMS = 0;
 

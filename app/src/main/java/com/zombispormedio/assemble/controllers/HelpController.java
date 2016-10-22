@@ -13,4 +13,9 @@ public class HelpController extends Controller {
         super(ctx);
         this.ctx = ctx;
     }
+
+    @Override
+    public void onDestroy() {
+        ctx=null;
+    }
 }

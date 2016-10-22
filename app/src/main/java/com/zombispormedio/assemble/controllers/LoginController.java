@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.net.Error;
@@ -15,7 +14,7 @@ public class LoginController extends Controller {
 
     private ILoginView ctx;
 
-    private UserResource user;
+    private final UserResource user;
 
     public LoginController(ILoginView ctx) {
         super(ctx);

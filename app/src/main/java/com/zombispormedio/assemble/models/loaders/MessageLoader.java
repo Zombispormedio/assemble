@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 public class MessageLoader implements ILoader {
 
-    private IChatService apiService;
-    private IStorageService<Message> storageService;
+    private final IChatService apiService;
+    private final IStorageService<Message> storageService;
 
     public MessageLoader(IChatService apiService, IStorageService<Message> storageService) {
         this.apiService = apiService;

@@ -15,9 +15,9 @@ public class FirstStepTeamController extends Controller {
 
     private IFirstStepTeamView ctx;
 
-    private FriendResource friendResource;
+    private final FriendResource friendResource;
 
-    private LinkedList<Integer> memberIds;
+    private final LinkedList<Integer> memberIds;
 
     public FirstStepTeamController(IFirstStepTeamView ctx) {
         super(ctx);

@@ -9,7 +9,7 @@ import javax.inject.Inject;
  */
 public class TeamSubscription extends DataSubscription {
 
-    private TeamLoader loader;
+    private final TeamLoader loader;
 
     @Inject
     public TeamSubscription(TeamLoader loader) {

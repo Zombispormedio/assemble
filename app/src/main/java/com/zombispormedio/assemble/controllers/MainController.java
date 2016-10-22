@@ -9,7 +9,6 @@ import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
-import com.zombispormedio.assemble.models.services.api.APIConfiguration;
 import com.zombispormedio.assemble.views.activities.IMainView;
 
 import java.io.IOException;
@@ -21,7 +20,7 @@ public class MainController extends Controller {
 
     private IMainView ctx;
 
-    private UserResource user;
+    private final UserResource user;
 
     public MainController(IMainView ctx) {
         super(ctx);

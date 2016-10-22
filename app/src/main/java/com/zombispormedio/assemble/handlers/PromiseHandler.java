@@ -11,7 +11,7 @@ import java.io.IOException;
  */
 public class PromiseHandler<T extends AbstractResponse, R>  implements IPromiseHandler{
 
-    private IServiceHandler<R, Error> handler;
+    private final IServiceHandler<R, Error> handler;
 
     public PromiseHandler(IServiceHandler<R, Error> handler) {
         this.handler = handler;

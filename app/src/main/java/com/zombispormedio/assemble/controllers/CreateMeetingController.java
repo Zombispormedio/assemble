@@ -18,11 +18,11 @@ public class CreateMeetingController extends Controller {
 
     private ICreateMeetingView ctx;
 
-    private TeamResource teamResource;
+    private final TeamResource teamResource;
 
-    private MeetingResource meetingResource;
+    private final MeetingResource meetingResource;
 
-    private EditMeeting.Builder editor;
+    private final EditMeeting.Builder editor;
 
     private String imagePath;
 
@@ -186,7 +186,7 @@ public class CreateMeetingController extends Controller {
 
             @Override
             public void onSuccess(Meeting result) {
-                if (!uploadImage(result.id)) {
+                if (uploadImage(result.id)) {
                     afterCreateMeeting();
                 }
             }
@@ -202,7 +202,7 @@ public class CreateMeetingController extends Controller {
 
     private boolean uploadImage(int id) {
         if (imagePath == null) {
-            return false;
+            return true;
         }
 
         meetingResource.uploadImage(id, imagePath, new ServiceHandler<Meeting, Error>() {
@@ -218,7 +218,7 @@ public class CreateMeetingController extends Controller {
             }
         });
 
-        return true;
+        return false;
     }
 
     @Override

@@ -5,9 +5,6 @@ import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 
 import com.zombispormedio.assemble.models.FriendRequestProfile;
-import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.StringUtils;
-import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.holders.IFriendRequestHolder;
 
 import android.view.View;
@@ -17,7 +14,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Xavier Serrano on 26/08/2016.
@@ -51,12 +47,8 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
         this.listener = null;
         this.rejectListener = null;
         this.acceptListener = null;
-        setup();
     }
 
-    private void setup() {
-        ButterKnife.bind(this, getView());
-    }
 
     @Override
     public void bind(int position, FriendRequestProfile itemData) {

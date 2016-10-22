@@ -18,7 +18,7 @@ import javax.inject.Inject;
  */
 public class FriendResource extends ConceptResource<FriendProfile> {
 
-    private IFriendService apiService;
+    private final IFriendService apiService;
 
     private FriendSubscription friendSubscription;
 

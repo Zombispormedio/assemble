@@ -4,6 +4,7 @@ import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.FriendResource;
+import com.zombispormedio.assemble.net.ConnectionState;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.views.holders.INewFriendHolder;
@@ -18,7 +19,7 @@ public class NewFriendController extends Controller {
 
     private INewFriendView ctx;
 
-    private FriendResource friendResource;
+    private final FriendResource friendResource;
 
     public NewFriendController(INewFriendView ctx) {
         super(ctx);
@@ -30,7 +31,7 @@ public class NewFriendController extends Controller {
     public void onSearch() {
         String searchText=ctx.getSearchText();
 
-        if(searchText.isEmpty()){
+        if(searchText.isEmpty()|| !ConnectionState.getInstance().isConnected()){
            return;
         }
 

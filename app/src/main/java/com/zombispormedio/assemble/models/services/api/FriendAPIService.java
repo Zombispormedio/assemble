@@ -14,7 +14,7 @@ import java.util.ArrayList;
  */
 public class FriendAPIService implements IFriendService {
 
-    private APIConfiguration api;
+    private final APIConfiguration api;
 
     public FriendAPIService() {
         api = APIConfiguration.getInstance();

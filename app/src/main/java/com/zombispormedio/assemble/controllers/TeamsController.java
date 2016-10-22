@@ -17,11 +17,11 @@ public class TeamsController extends Controller {
 
     private ITeamsView ctx;
 
-    private TeamResource teamResource;
+    private final TeamResource teamResource;
 
-    private TeamSubscription teamSubscription;
+    private final TeamSubscription teamSubscription;
 
-    private TeamSubscriber teamSubscriber;
+    private final TeamSubscriber teamSubscriber;
 
     private boolean refreshing;
 

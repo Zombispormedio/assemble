@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 public class TeamLoader implements ILoader {
 
-    private ITeamService apiService;
+    private final ITeamService apiService;
 
-    private IStorageService<Team> storageService;
+    private final IStorageService<Team> storageService;
 
     public TeamLoader(ITeamService apiService,
             IStorageService<Team> storageService) {

@@ -1,13 +1,6 @@
 package com.zombispormedio.assemble.models.modules;
 
 
-import com.zombispormedio.assemble.models.loaders.ChatLoader;
-import com.zombispormedio.assemble.models.loaders.FriendLoader;
-import com.zombispormedio.assemble.models.loaders.FriendRequestLoader;
-import com.zombispormedio.assemble.models.loaders.MeetingLoader;
-import com.zombispormedio.assemble.models.loaders.MessageLoader;
-import com.zombispormedio.assemble.models.loaders.ProfileLoader;
-import com.zombispormedio.assemble.models.loaders.TeamLoader;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
@@ -15,18 +8,6 @@ import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
-import com.zombispormedio.assemble.models.services.api.ChatAPIService;
-import com.zombispormedio.assemble.models.services.api.FriendAPIService;
-import com.zombispormedio.assemble.models.services.api.MeetingAPIService;
-import com.zombispormedio.assemble.models.services.api.ProfileAPIService;
-import com.zombispormedio.assemble.models.services.api.TeamAPIService;
-import com.zombispormedio.assemble.models.services.storage.ChatStorageService;
-import com.zombispormedio.assemble.models.services.storage.FriendRequestStorageService;
-import com.zombispormedio.assemble.models.services.storage.FriendStorageService;
-import com.zombispormedio.assemble.models.services.storage.MeetingStorageService;
-import com.zombispormedio.assemble.models.services.storage.MessageStorageService;
-import com.zombispormedio.assemble.models.services.storage.ProfileStorageService;
-import com.zombispormedio.assemble.models.services.storage.TeamStorageService;
 
 import javax.inject.Singleton;
 

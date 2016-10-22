@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.models;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Xavier Serrano on 03/09/2016.
  */
@@ -21,8 +23,7 @@ public class Team extends Concept implements Sorted<Team> {
     }
 
     @Override
-    public int compareTo(Team o) {
-        int result=name.compareToIgnoreCase(o.name);
-        return result;
+    public int compareTo(@NonNull Team o) {
+        return name.compareToIgnoreCase(o.name);
     }
 }

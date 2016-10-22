@@ -2,19 +2,15 @@ package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.models.BaseModel;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.Sorted;
-import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.StringUtils;
-import com.zombispormedio.assemble.utils.Utils;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Xavier Serrano on 23/09/2016.
@@ -31,15 +27,9 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
 
     private IOnClickItemListHandler<Container> listener;
 
-
     public SelectedMemberHolder(View view) {
         super(view);
         this.listener=null;
-        setup();
-    }
-
-    private void setup() {
-        ButterKnife.bind(this, itemView);
     }
 
 
@@ -102,7 +92,7 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
         }
 
         @Override
-        public int compareTo(Container o) {
+        public int compareTo(@NonNull Container o) {
             return content.compareTo(o.getContent());
         }
     }

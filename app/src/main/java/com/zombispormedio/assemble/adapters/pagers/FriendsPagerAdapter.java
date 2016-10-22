@@ -12,7 +12,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
  */
 public class FriendsPagerAdapter extends FragmentStatePagerAdapter {
 
-    private int numPages;
+    private final int numPages;
 
     public FriendsPagerAdapter(FragmentManager fm, int numPages) {
         super(fm);

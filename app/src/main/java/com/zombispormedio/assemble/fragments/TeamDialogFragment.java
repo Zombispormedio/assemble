@@ -41,10 +41,6 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
     }
 
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

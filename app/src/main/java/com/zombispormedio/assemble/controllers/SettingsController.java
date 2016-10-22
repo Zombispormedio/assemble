@@ -18,7 +18,7 @@ public class SettingsController extends Controller {
 
     private ISettingsFragmentView fctx;
 
-    private UserResource user;
+    private final UserResource user;
 
     public SettingsController(ISettingsView ctx) {
         super(ctx);
@@ -48,10 +48,6 @@ public class SettingsController extends Controller {
 
     private class SignOutServiceHandler extends ServiceHandler<Result, Error> {
 
-        @Override
-        public void onError(Error error) {
-
-        }
 
         @Override
         public void onSuccess(Result result) {

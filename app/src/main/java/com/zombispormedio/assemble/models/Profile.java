@@ -3,6 +3,8 @@ package com.zombispormedio.assemble.models;
 import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.Utils;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Xavier Serrano on 30/07/2016.
  */
@@ -32,7 +34,7 @@ public class Profile<T extends Profile> extends People implements Sorted<T> {
 
 
     @Override
-    public int compareTo(T o) {
+    public int compareTo(@NonNull T o) {
         return username.compareToIgnoreCase(o.username);
     }
 

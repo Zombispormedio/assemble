@@ -2,8 +2,6 @@ package com.zombispormedio.assemble.wrappers.okhttp;
 
 import com.zombispormedio.assemble.net.FileBody;
 
-import org.json.JSONException;
-
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -19,9 +17,9 @@ import okhttp3.RequestBody;
  */
 public class RestWrapper {
 
-    private OkHttpClient client;
+    private final OkHttpClient client;
 
-    private Request.Builder builder;
+    private final Request.Builder builder;
 
     public RestWrapper() {
         client = new OkHttpClient.Builder()

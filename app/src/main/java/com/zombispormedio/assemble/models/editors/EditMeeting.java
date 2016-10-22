@@ -8,15 +8,15 @@ import com.zombispormedio.assemble.utils.ISODate;
 
 public class EditMeeting {
 
-    public String name;
+    public final String name;
 
-    public String description;
+    public final String description;
 
-    public int team;
+    public final int team;
 
-    public String start_at;
+    public final String start_at;
 
-    public String end_at;
+    public final String end_at;
 
 
     public EditMeeting(String name, String description, int team, String start_at, String end_at) {
@@ -34,9 +34,9 @@ public class EditMeeting {
 
         private int team;
 
-        private ISODate startAt;
+        private final ISODate startAt;
 
-        private ISODate endAt;
+        private final ISODate endAt;
 
         private boolean allDay;
 

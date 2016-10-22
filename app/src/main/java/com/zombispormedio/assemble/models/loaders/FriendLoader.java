@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 public class FriendLoader implements ILoader {
 
-    private IFriendService apiService;
+    private final IFriendService apiService;
 
-    private IStorageService<FriendProfile> storageService;
+    private final IStorageService<FriendProfile> storageService;
 
     public FriendLoader(IFriendService apiService,
             IStorageService<FriendProfile> storageService) {

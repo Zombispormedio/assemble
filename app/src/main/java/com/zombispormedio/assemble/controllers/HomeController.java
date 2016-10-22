@@ -12,12 +12,12 @@ import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.Subscription;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
+import com.zombispormedio.assemble.net.ConnectionState;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IHomeView;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 
 
@@ -47,7 +47,7 @@ public class HomeController extends Controller {
 
     private boolean isBackgroundLoading;
 
-    private HashMap<String, Utils.Pair<Subscription, Subscriber>> subscriptions;
+    private final HashMap<String, Utils.Pair<Subscription, Subscriber>> subscriptions;
 
     public HomeController(IHomeView ctx) {
         super(ctx);
@@ -69,7 +69,7 @@ public class HomeController extends Controller {
 
 
     private void loadData() {
-        if (!ctx.isLoaded()) {
+        if (!ctx.isLoaded() && ConnectionState.getInstance().isConnected()) {
 
             if (profileResource.getProfile() == null) {
                 loading();
@@ -97,7 +97,7 @@ public class HomeController extends Controller {
         final MessageSubscription messageSubscription = getResourceComponent().provideMessageSubscription();
 
 
-        addSubscription(profileSubscription, new Subscriber() {
+        addSubscription(profileSubscription, new HomeSubscriber() {
             @Override
             public void notifyChange() {
                 removeSubscription(this.getID());
@@ -107,7 +107,7 @@ public class HomeController extends Controller {
         });
 
 
-        addSubscription(friendSubscription, new Subscriber() {
+        addSubscription(friendSubscription, new HomeSubscriber() {
             @Override
             public void notifyChange() {
                 removeSubscription(this.getID());
@@ -116,7 +116,7 @@ public class HomeController extends Controller {
             }
         });
 
-        addSubscription(friendRequestSubscription, new Subscriber() {
+        addSubscription(friendRequestSubscription, new HomeSubscriber() {
             @Override
             public void notifyChange() {
                 removeSubscription(this.getID());
@@ -125,7 +125,7 @@ public class HomeController extends Controller {
             }
         });
 
-        addSubscription(teamSubscription, new Subscriber() {
+        addSubscription(teamSubscription, new HomeSubscriber() {
             @Override
             public void notifyChange() {
                 removeSubscription(this.getID());
@@ -134,7 +134,7 @@ public class HomeController extends Controller {
             }
         });
 
-        addSubscription(meetingSubscription, new Subscriber() {
+        addSubscription(meetingSubscription, new HomeSubscriber() {
             @Override
             public void notifyChange() {
                 removeSubscription(this.getID());
@@ -143,7 +143,7 @@ public class HomeController extends Controller {
             }
         });
 
-        addSubscription(meetingSubscription, new Subscriber() {
+        addSubscription(meetingSubscription, new HomeSubscriber() {
             @Override
             public void notifyChange() {
                 removeSubscription(this.getID());
@@ -152,7 +152,7 @@ public class HomeController extends Controller {
             }
         });
 
-        addSubscription(chatSubscription, new Subscriber() {
+        addSubscription(chatSubscription, new HomeSubscriber() {
             @Override
             public void notifyChange() {
                 removeSubscription(this.getID());
@@ -196,17 +196,20 @@ public class HomeController extends Controller {
 
     private void ready() {
         if (isReady()) {
-            if (isBackgroundLoading) {
-                isBackgroundLoading = false;
-                ctx.hideBackgroundLoading();
-            } else {
-                ctx.hideProgressDialog();
-            }
+            finishLoading();
             uncheckAll();
             ctx.notifyLoaded();
         }
     }
 
+    private void finishLoading() {
+        if (isBackgroundLoading) {
+            isBackgroundLoading = false;
+            ctx.hideBackgroundLoading();
+        } else {
+            ctx.hideProgressDialog();
+        }
+    }
 
 
     private void uncheckAll() {
@@ -293,6 +296,15 @@ public class HomeController extends Controller {
         Set<String> keys=subscriptions.keySet();
         for (String id: keys) {
             removeSubscription(id);
+        }
+    }
+
+    private class HomeSubscriber extends Subscriber{
+
+        @Override
+        public void notifyFail() {
+            finishLoading();
+            removeSubscription(this.getID());
         }
     }
 

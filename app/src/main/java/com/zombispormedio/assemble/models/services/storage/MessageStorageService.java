@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class MessageStorageService  extends StorageService<MessageDAO, Message> {
 
     public MessageStorageService() {
-        super(new LocalStorage<MessageDAO, Message>(MessageDAO.class, new MessageDAO.Factory()));
+        super(new LocalStorage<>(MessageDAO.class, new MessageDAO.Factory()));
     }
 
     public MessageStorageService(

@@ -15,9 +15,9 @@ import java.util.regex.Pattern;
  */
 public class Request {
 
-    private METHOD method;
+    private final METHOD method;
 
-    private String url;
+    private final String url;
 
     private HashMap<String, String> headers;
 
@@ -95,7 +95,7 @@ public class Request {
 
         private METHOD method;
 
-        private HashMap<String, Object> paramsMap;
+        private final HashMap<String, Object> paramsMap;
 
         private HashMap<String, String> headersMap;
 

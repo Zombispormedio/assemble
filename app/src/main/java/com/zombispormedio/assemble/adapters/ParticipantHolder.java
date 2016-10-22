@@ -2,16 +2,12 @@ package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.StringUtils;
-import com.zombispormedio.assemble.utils.Utils;
 
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Xavier Serrano on 25/09/2016.
@@ -30,11 +26,6 @@ public class ParticipantHolder extends AbstractHolder<FriendProfile> {
 
     public ParticipantHolder(View itemView) {
         super(itemView);
-        setup();
-    }
-
-    private void setup() {
-        ButterKnife.bind(this, getView());
     }
 
     @Override

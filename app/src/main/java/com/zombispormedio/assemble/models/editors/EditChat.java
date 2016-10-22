@@ -6,7 +6,7 @@ package com.zombispormedio.assemble.models.editors;
 
 public class EditChat {
 
-    public int friend;
+    public final int friend;
 
     public EditChat(int friend) {
         this.friend = friend;

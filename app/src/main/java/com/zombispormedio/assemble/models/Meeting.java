@@ -3,6 +3,8 @@ package com.zombispormedio.assemble.models;
 import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.Utils;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Xavier Serrano on 06/09/2016.
  */
@@ -40,7 +42,7 @@ public class Meeting extends Concept implements Sorted<Meeting> {
         return endAt;
     }
 
-    public int compareTo(Meeting o) {
+    public int compareTo(@NonNull Meeting o) {
         int result = getStartAt().compareTo(o.getStartAt());
         if (result == 0) {
             result = name.compareToIgnoreCase(o.name);

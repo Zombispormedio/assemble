@@ -12,9 +12,9 @@ import com.zombispormedio.assemble.models.services.storage.IStorageService;
  */
 public class ProfileLoader implements ILoader {
 
-    private IProfileService apiService;
+    private final IProfileService apiService;
 
-    private IStorageService<UserProfile> storageService;
+    private final IStorageService<UserProfile> storageService;
 
     public ProfileLoader(IProfileService apiService,
             IStorageService<UserProfile> storageService) {

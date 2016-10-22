@@ -6,7 +6,7 @@ package com.zombispormedio.assemble.models.editors;
 
 public class EditMessage {
 
-    public String content;
+    public final String content;
 
     public EditMessage(String content) {
         this.content = content;

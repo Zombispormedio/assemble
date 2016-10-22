@@ -18,9 +18,9 @@ import javax.inject.Inject;
  */
 public class ProfileResource {
 
-    private IStorageService<UserProfile> storage;
+    private final IStorageService<UserProfile> storage;
 
-    private IProfileService persistence;
+    private final IProfileService persistence;
 
     private Subscription subscription;
 

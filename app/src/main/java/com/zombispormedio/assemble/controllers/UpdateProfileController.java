@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.editors.EditProfile;
 import com.zombispormedio.assemble.models.UserProfile;
@@ -19,13 +18,13 @@ public class UpdateProfileController extends Controller {
 
     private IUpdateProfileView ctx;
 
-    private ProfileResource profileResource;
+    private final ProfileResource profileResource;
 
-    private ProfileSubscription profileSubscription;
+    private final ProfileSubscription profileSubscription;
 
-    private ProfileSubscriber profileSubscriber;
+    private final ProfileSubscriber profileSubscriber;
 
-    private EditProfile.Builder editor;
+    private final EditProfile.Builder editor;
 
 
     public UpdateProfileController(IUpdateProfileView ctx) {

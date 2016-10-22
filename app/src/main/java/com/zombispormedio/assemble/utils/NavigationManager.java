@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 
 
-import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.activities.ChatActivity;
 import com.zombispormedio.assemble.activities.CreateChatActivity;
 import com.zombispormedio.assemble.activities.CreateMeetingActivity;
@@ -22,7 +21,6 @@ import com.zombispormedio.assemble.activities.SecondStepTeamActivity;
 import com.zombispormedio.assemble.activities.SettingsActivity;
 import com.zombispormedio.assemble.activities.UpdateBirthdateActivity;
 import com.zombispormedio.assemble.activities.UpdateProfileActivity;
-import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 
 import java.util.HashMap;
 import java.util.Map;

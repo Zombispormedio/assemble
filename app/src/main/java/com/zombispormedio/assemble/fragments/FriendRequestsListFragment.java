@@ -13,11 +13,8 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.FriendsActivity;
 import com.zombispormedio.assemble.adapters.lists.FriendRequestsListAdapter;
 import com.zombispormedio.assemble.controllers.FriendRequestsListController;
-import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.holders.IFriendRequestHolder;
 import com.zombispormedio.assemble.views.fragments.IFriendRequestsListView;
 
 import java.util.ArrayList;

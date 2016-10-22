@@ -14,9 +14,9 @@ import java.util.ArrayList;
  */
 public class MeetingLoader implements ILoader {
 
-    private IMeetingService apiService;
+    private final IMeetingService apiService;
 
-    private IStorageService<Meeting> storageService;
+    private final IStorageService<Meeting> storageService;
 
     public MeetingLoader(IMeetingService apiService,
             IStorageService<Meeting> storageService) {

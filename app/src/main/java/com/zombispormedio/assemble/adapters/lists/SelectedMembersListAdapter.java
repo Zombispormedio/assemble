@@ -18,7 +18,7 @@ public class SelectedMembersListAdapter extends BaseSortedListAdapter<
 
     private IOnClickItemListHandler<SelectedMemberHolder.Container> listener;
 
-    private ArrayList<Integer> friendIndexes;
+    private final ArrayList<Integer> friendIndexes;
 
     public SelectedMembersListAdapter() {
         super(SelectedMemberHolder.Container.class);

@@ -17,11 +17,11 @@ public class MeetingsController extends Controller {
 
     private IMeetingsView ctx;
 
-    private MeetingResource meetingResource;
+    private final MeetingResource meetingResource;
 
-    private MeetingSubscription meetingSubscription;
+    private final MeetingSubscription meetingSubscription;
 
-    private MeetingSubscriber meetingSubscriber;
+    private final MeetingSubscriber meetingSubscriber;
 
     private boolean refreshing;
 

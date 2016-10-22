@@ -6,13 +6,13 @@ package com.zombispormedio.assemble.models.editors;
 
 public class EditTeam {
 
-    public String name;
+    public final String name;
 
-    public String description;
+    public final String description;
 
-    public int[] members;
+    public final int[] members;
 
-    public int admin;
+    public final int admin;
 
     public EditTeam(String name, String description, int[] members, int admin) {
         this.name = name;

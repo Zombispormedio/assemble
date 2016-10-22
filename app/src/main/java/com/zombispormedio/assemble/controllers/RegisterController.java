@@ -15,7 +15,7 @@ public class RegisterController extends Controller {
 
     private IRegisterView ctx;
 
-    private UserResource user;
+    private final UserResource user;
 
     public RegisterController(IRegisterView ctx) {
         super(ctx);

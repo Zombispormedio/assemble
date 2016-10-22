@@ -8,6 +8,7 @@ import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.net.ConnectionState;
 import com.zombispormedio.assemble.views.activities.IFriendsView;
 
 import java.util.ArrayList;
@@ -19,13 +20,13 @@ public class FriendsController extends Controller {
 
     private IFriendsView ctx;
 
-    private FriendResource friendResource;
+    private final FriendResource friendResource;
 
-    private FriendRequestResource friendRequestResource;
+    private final FriendRequestResource friendRequestResource;
 
-    private FriendSubscription friendSubscription;
+    private final FriendSubscription friendSubscription;
 
-    private FriendRequestSubscription friendRequestSubscription;
+    private final FriendRequestSubscription friendRequestSubscription;
 
     private boolean isLoading;
 
@@ -59,6 +60,9 @@ public class FriendsController extends Controller {
 
     private void setupFriendsAndRequests() {
 
+        if(!ConnectionState.getInstance().isConnected()){
+            return;
+        }
         ArrayList<FriendProfile> friends = friendResource.getAll();
         ArrayList<FriendRequestProfile> friendsRequests = friendRequestResource.getAll();
 

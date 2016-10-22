@@ -18,7 +18,7 @@ import io.realm.RealmObject;
 public class StorageService<D extends RealmObject, M extends BaseModel> implements IStorageService<M> {
 
 
-    protected LocalStorage<D, M> storage;
+    protected final LocalStorage<D, M> storage;
 
 
     public StorageService(LocalStorage<D, M> storage) {

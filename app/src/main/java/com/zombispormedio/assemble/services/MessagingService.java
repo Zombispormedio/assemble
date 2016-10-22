@@ -12,13 +12,11 @@ import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.utils.RunningActivity;
 
-import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.util.ArrayMap;
 import android.support.v4.app.NotificationCompat;
@@ -27,22 +25,14 @@ import java.util.HashMap;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_EVENT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_EVERYWERE;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_HOME;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Codes.NOTIFICATION_DEFAULT_ID;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CONTENT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.FOREGROUND_NOTIFICATION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_BUNDLE;
 
 
 public class MessagingService extends FirebaseMessagingService {
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-    }
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {

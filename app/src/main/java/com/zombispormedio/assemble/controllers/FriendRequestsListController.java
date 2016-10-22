@@ -18,11 +18,11 @@ public class FriendRequestsListController extends Controller {
 
     private IFriendRequestsListView ctx;
 
-    private FriendRequestResource friendRequestResource;
+    private final FriendRequestResource friendRequestResource;
 
-    private FriendRequestSubscription friendRequestSubscription;
+    private final FriendRequestSubscription friendRequestSubscription;
 
-    private FriendRequestSubscriber friendRequestSubscriber;
+    private final FriendRequestSubscriber friendRequestSubscriber;
 
     private boolean refreshing;
 

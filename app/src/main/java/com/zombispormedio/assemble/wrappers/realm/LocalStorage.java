@@ -17,11 +17,11 @@ import io.realm.RealmResults;
  */
 public class LocalStorage<D extends RealmObject, M extends BaseModel> {
 
-    private Class<? extends D> opClass;
+    private final Class<? extends D> opClass;
 
-    protected IDAOFactory<D> factory;
+    protected final IDAOFactory<D> factory;
 
-    private Realm database;
+    private final Realm database;
 
     public LocalStorage(Class<D> opClass, IDAOFactory<D> factory) {
         this.opClass = opClass;
@@ -170,7 +170,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
 
     public static class Configuration {
 
-        private static Configuration ourInstance = new Configuration();
+        private static final Configuration ourInstance = new Configuration();
 
         private Realm database;
 

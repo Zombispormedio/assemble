@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class TeamAPIService implements ITeamService {
 
-    private APIConfiguration api;
+    private final APIConfiguration api;
 
     public TeamAPIService() {
         api = APIConfiguration.getInstance();

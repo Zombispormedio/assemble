@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
 
-import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
@@ -9,8 +8,6 @@ import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.utils.StringUtils;
-import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IProfileView;
 
 /**
@@ -20,11 +17,11 @@ public class ProfileController extends Controller {
 
     private IProfileView ctx;
 
-    private ProfileResource profileResource;
+    private final ProfileResource profileResource;
 
-    private ProfileSubscription profileSubscription;
+    private final ProfileSubscription profileSubscription;
 
-    private ProfileSubscriber profileSubscriber;
+    private final ProfileSubscriber profileSubscriber;
 
 
     public ProfileController(IProfileView ctx) {

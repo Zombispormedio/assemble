@@ -1,8 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
-import com.annimon.stream.function.Function;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.editors.EditChat;
@@ -13,7 +11,6 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.activities.ICreateChatView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Xavier Serrano on 09/09/2016.
@@ -22,9 +19,9 @@ public class CreateChatController extends Controller {
 
     private ICreateChatView ctx;
 
-    private ChatResource chatResource;
+    private final ChatResource chatResource;
 
-    private FriendResource friendResource;
+    private final FriendResource friendResource;
 
     public CreateChatController(ICreateChatView ctx) {
         super(ctx);

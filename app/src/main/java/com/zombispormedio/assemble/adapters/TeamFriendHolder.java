@@ -2,16 +2,15 @@ package com.zombispormedio.assemble.adapters;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.models.BaseModel;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.Sorted;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Xavier Serrano on 21/09/2016.
@@ -34,12 +33,8 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     public TeamFriendHolder(View view) {
         super(view);
         this.listener = null;
-        setup();
     }
 
-    private void setup() {
-        ButterKnife.bind(this, getView());
-    }
 
 
     @Override
@@ -81,7 +76,7 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
 
     public static class SelectedContainer implements Sorted<SelectedContainer> {
 
-        private FriendProfile content;
+        private final FriendProfile content;
 
         private boolean selected;
 
@@ -129,7 +124,7 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
         }
 
         @Override
-        public int compareTo(SelectedContainer o) {
+        public int compareTo(@NonNull SelectedContainer o) {
             return content.compareTo(o.getContent());
         }
     }

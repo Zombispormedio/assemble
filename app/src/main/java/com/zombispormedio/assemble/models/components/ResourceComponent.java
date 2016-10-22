@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.models.components;
 
-import com.zombispormedio.assemble.models.modules.PersistenceModule;
 import com.zombispormedio.assemble.models.modules.ResourceModule;
 import com.zombispormedio.assemble.models.modules.SubscriptionModule;
 import com.zombispormedio.assemble.models.resources.ChatResource;
@@ -10,7 +9,6 @@ import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.resources.UserResource;
-import com.zombispormedio.assemble.models.services.storage.MessageStorageService;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;

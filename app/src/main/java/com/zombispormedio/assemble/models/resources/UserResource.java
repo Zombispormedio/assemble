@@ -17,7 +17,7 @@ import javax.inject.Inject;
  */
 public class UserResource {
 
-    private IAuthService service;
+    private final IAuthService service;
 
     @Inject
     public UserResource(IAuthService service) {

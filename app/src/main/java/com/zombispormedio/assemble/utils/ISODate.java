@@ -5,6 +5,8 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
 
+import android.support.annotation.NonNull;
+
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -14,7 +16,7 @@ import java.util.Locale;
 
 public class ISODate implements Comparable<ISODate> {
 
-    private Calendar cal;
+    private final Calendar cal;
 
     public ISODate(String iso) {
         cal = parse(iso);
@@ -174,7 +176,7 @@ public class ISODate implements Comparable<ISODate> {
     }
 
     @Override
-    public int compareTo(ISODate isoDate) {
+    public int compareTo(@NonNull ISODate isoDate) {
         return cal.compareTo(isoDate.getCalendar());
     }
 }

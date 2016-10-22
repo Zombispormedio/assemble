@@ -2,18 +2,15 @@ package com.zombispormedio.assemble.models.subscriptions;
 
 import com.annimon.stream.Stream;
 
-import android.support.annotation.NonNull;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Created by Xavier Serrano on 13/09/2016.
  */
 public class Subscription {
 
-    private HashMap<String, Subscriber> subscribers;
+    private final HashMap<String, Subscriber> subscribers;
 
 
     public Subscription() {
@@ -60,7 +57,7 @@ public class Subscription {
     }
 
     private ArrayList<Subscriber> getSubscribers() {
-        return new ArrayList<Subscriber>(subscribers.values());
+        return new ArrayList<>(subscribers.values());
     }
 
 }

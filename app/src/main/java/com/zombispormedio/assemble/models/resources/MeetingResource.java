@@ -18,7 +18,7 @@ import javax.inject.Inject;
  */
 public class MeetingResource extends ConceptResource<Meeting>{
 
-    private IMeetingService persistence;
+    private final IMeetingService persistence;
 
     @Inject
     public MeetingResource(IMeetingService persistence,

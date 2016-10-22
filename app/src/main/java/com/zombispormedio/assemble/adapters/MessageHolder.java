@@ -7,14 +7,12 @@ import com.zombispormedio.assemble.utils.ISODate;
 
 
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Xavier Serrano on 04/10/2016.
@@ -55,12 +53,8 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
     public MessageHolder(View itemView) {
         super(itemView);
         isRoot = false;
-        setup();
     }
 
-    private void setup() {
-        ButterKnife.bind(this, itemView);
-    }
 
     @Override
     public void bind(int position, Container container) {

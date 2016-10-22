@@ -11,7 +11,7 @@ import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 public class MeetingStorageService extends StorageService<MeetingDAO, Meeting> {
 
     public MeetingStorageService() {
-        super(new LocalStorage<MeetingDAO, Meeting>(MeetingDAO.class, new MeetingDAO.Factory()));
+        super(new LocalStorage<>(MeetingDAO.class, new MeetingDAO.Factory()));
     }
 
     public MeetingStorageService(

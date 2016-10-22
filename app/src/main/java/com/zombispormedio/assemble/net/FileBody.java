@@ -7,13 +7,13 @@ import java.io.File;
  */
 public class FileBody {
 
-    private File file;
+    private final File file;
 
-    private String mediaType;
+    private final String mediaType;
 
-    private String key;
+    private final String key;
 
-    private String filename;
+    private final String filename;
 
     public FileBody(File file, String mediaType, String key, String filename) {
         this.file = file;

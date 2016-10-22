@@ -7,7 +7,7 @@ import com.zombispormedio.assemble.models.loaders.ProfileLoader;
  */
 public class ProfileSubscription extends DataSubscription{
 
-    private ProfileLoader loader;
+    private final ProfileLoader loader;
 
     public ProfileSubscription(ProfileLoader loader) {
         this.loader = loader;

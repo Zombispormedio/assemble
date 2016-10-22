@@ -2,7 +2,6 @@ package com.zombispormedio.assemble.adapters.lists;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.ParticipantHolder;
-import com.zombispormedio.assemble.models.FriendProfile;
 
 import android.view.ViewGroup;
 

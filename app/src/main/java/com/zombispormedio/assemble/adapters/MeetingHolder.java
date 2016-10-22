@@ -15,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Xavier Serrano on 06/09/2016.
@@ -51,11 +50,6 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
     public MeetingHolder(View view) {
         super(view);
         this.listener = null;
-        setup();
-    }
-
-    private void setup() {
-        ButterKnife.bind(this, getView());
     }
 
 

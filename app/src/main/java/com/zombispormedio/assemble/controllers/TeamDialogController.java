@@ -14,7 +14,7 @@ public class TeamDialogController extends Controller {
 
     private ITeamDialogView ctx;
 
-    private TeamResource teamResource;
+    private final TeamResource teamResource;
 
     public TeamDialogController(ITeamDialogView ctx) {
         super(ctx.getParent());

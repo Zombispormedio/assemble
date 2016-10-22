@@ -21,7 +21,7 @@ import java.io.File;
  */
 public class ProfileAPIService implements IProfileService {
 
-    private APIConfiguration api;
+    private final APIConfiguration api;
 
     public ProfileAPIService() {
         api = APIConfiguration.getInstance();

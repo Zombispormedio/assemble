@@ -1,10 +1,6 @@
 package com.zombispormedio.assemble.models.subscriptions;
 
-import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.loaders.MessageLoader;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -14,7 +10,7 @@ import javax.inject.Inject;
 
 public class MessageSubscription extends DataSubscription {
 
-    private MessageLoader loader;
+    private final MessageLoader loader;
 
     @Inject
     public MessageSubscription(MessageLoader loader) {

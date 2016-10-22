@@ -1,26 +1,17 @@
 package com.zombispormedio.assemble.adapters;
 
 import com.varunest.sparkbutton.SparkButton;
-import com.varunest.sparkbutton.SparkEventListener;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.StringUtils;
-import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.holders.INewFriendHolder;
 
-import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import butterknife.BindDrawable;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Xavier Serrano on 17/09/2016.
@@ -43,20 +34,12 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     @BindView(R.id.add_friend_button)
     SparkButton addFriendButton;
 
-
-
-
     public NewFriendHolder(View view) {
         super(view);
         this.listener = null;
         this.addFriendListener = null;
-        setup();
-
     }
 
-    private void setup() {
-        ButterKnife.bind(this, getView());
-    }
 
     @Override
     public void bind(int position, FriendProfile itemData) {

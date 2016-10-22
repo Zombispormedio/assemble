@@ -9,7 +9,7 @@ import javax.inject.Inject;
  */
 public class FriendRequestSubscription extends DataSubscription {
 
-    private FriendRequestLoader loader;
+    private final FriendRequestLoader loader;
 
     @Inject
     public FriendRequestSubscription(FriendRequestLoader loader) {

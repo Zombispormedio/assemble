@@ -16,26 +16,25 @@ public class SecondStepTeamController extends Controller {
 
     private ISecondStepTeamView ctx;
 
-    private FriendResource friendResource;
+    private final FriendResource friendResource;
 
-    private TeamResource teamResource;
+    private final TeamResource teamResource;
 
-    private EditTeam.Builder editor;
+    private final EditTeam.Builder editor;
 
     private String imagePath;
-
 
 
     public SecondStepTeamController(ISecondStepTeamView ctx, int[] friendIds) {
         super(ctx);
         this.ctx = ctx;
 
-        friendResource=getResourceComponent().provideFriendResource();
-        teamResource=getResourceComponent().provideTeamResource();
-        editor=new EditTeam.Builder()
+        friendResource = getResourceComponent().provideFriendResource();
+        teamResource = getResourceComponent().provideTeamResource();
+        editor = new EditTeam.Builder()
                 .setMembers(friendIds);
 
-        imagePath=null;
+        imagePath = null;
     }
 
     @Override
@@ -44,7 +43,7 @@ public class SecondStepTeamController extends Controller {
     }
 
     private void renderParticipants() {
-        int[] members=editor.getMembers();
+        int[] members = editor.getMembers();
         ctx.setParticipantsTitle(members.length, friendResource.countAll());
         ctx.bindParticipants(friendResource.getFriendInArrayofIds(members));
     }
@@ -55,13 +54,12 @@ public class SecondStepTeamController extends Controller {
     }
 
 
-
     public void onCreateTeam() {
         editor.setName(ctx.getName());
 
-        if(!editor.getName().isEmpty()){
+        if (!editor.getName().isEmpty()) {
             beginCreatingTeam();
-        }else{
+        } else {
             ctx.showNameEmpty();
         }
     }
@@ -69,8 +67,7 @@ public class SecondStepTeamController extends Controller {
     private void beginCreatingTeam() {
         ctx.showProgress();
 
-
-        teamResource.create(editor.build(), new ServiceHandler<Team, Error>(){
+        teamResource.create(editor.build(), new ServiceHandler<Team, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);
@@ -79,7 +76,7 @@ public class SecondStepTeamController extends Controller {
 
             @Override
             public void onSuccess(Team result) {
-                if(!uploadImage(result.id)){
+                if (uploadImage(result.id)) {
                     afterCreateTeam();
                 }
             }
@@ -88,15 +85,17 @@ public class SecondStepTeamController extends Controller {
 
     }
 
-    private void afterCreateTeam(){
+    private void afterCreateTeam() {
         ctx.hideProgress();
         ctx.goHome();
     }
 
-    private boolean uploadImage(int id){
-        if(imagePath==null)return false;
+    private boolean uploadImage(int id) {
+        if (imagePath == null) {
+            return true;
+        }
 
-        teamResource.uploadImage(id, imagePath, new ServiceHandler<Team, Error>(){
+        teamResource.uploadImage(id, imagePath, new ServiceHandler<Team, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);
@@ -109,11 +108,11 @@ public class SecondStepTeamController extends Controller {
             }
         });
 
-        return true;
+        return false;
     }
 
     @Override
     public void onDestroy() {
-        ctx=null;
+        ctx = null;
     }
 }

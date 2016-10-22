@@ -9,7 +9,7 @@ import javax.inject.Inject;
  */
 public class MeetingSubscription extends DataSubscription{
 
-    private MeetingLoader loader;
+    private final MeetingLoader loader;
 
     @Inject
     public MeetingSubscription(MeetingLoader loader) {

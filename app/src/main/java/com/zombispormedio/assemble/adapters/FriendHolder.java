@@ -4,9 +4,6 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.StringUtils;
-import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.holders.IFriendHolder;
 
 
@@ -17,7 +14,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Xavier Serrano on 26/08/2016.
@@ -46,12 +42,6 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IFrie
     public FriendHolder(View view) {
         super(view);
         this.listener = null;
-        setup();
-
-    }
-
-    private void setup() {
-        ButterKnife.bind(this, getView());
     }
 
     @Override

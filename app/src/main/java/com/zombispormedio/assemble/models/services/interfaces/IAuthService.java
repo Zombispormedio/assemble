@@ -2,7 +2,6 @@ package com.zombispormedio.assemble.models.services.interfaces;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Auth;
-import com.zombispormedio.assemble.models.editors.EditGCM;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 

@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class JSONWrapper<T> {
 
-    private JsonAdapter<T> adapter;
+    private final JsonAdapter<T> adapter;
 
     public JSONWrapper(Class<T> klass) {
         Moshi moshi = new Moshi.Builder().build();

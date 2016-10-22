@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by Xavier Serrano on 06/09/2016.
  */
 public class MeetingAPIService implements IMeetingService {
-    private APIConfiguration api;
+    private final APIConfiguration api;
 
     public MeetingAPIService() {
         api=APIConfiguration.getInstance();

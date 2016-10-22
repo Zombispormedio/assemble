@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.utils.StringUtils;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 
 import java.util.HashMap;
 
@@ -154,7 +155,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
     }
 
     @Override
-    public int compareTo(Message o) {
+    public int compareTo(@NonNull Message o) {
         return getCreatedAt().compareTo(o.getCreatedAt());
     }
 

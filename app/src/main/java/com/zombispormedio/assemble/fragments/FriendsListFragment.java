@@ -12,11 +12,8 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.FriendsActivity;
 import com.zombispormedio.assemble.adapters.lists.FriendsListAdapter;
 import com.zombispormedio.assemble.controllers.FriendsListController;
-import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.holders.IFriendHolder;
 import com.zombispormedio.assemble.views.fragments.IFriendsListView;
 
 import java.util.ArrayList;

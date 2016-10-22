@@ -25,7 +25,7 @@ import java.io.File;
  */
 public class ImageUtils {
 
-    public static class CircleTransform implements Transformation {
+    private static class CircleTransform implements Transformation {
 
         @Override
         public Bitmap transform(Bitmap source) {
@@ -63,29 +63,27 @@ public class ImageUtils {
         }
     }
 
-    public static void applyRoundLetterImage(String letter, ImageView imageView) {
+    private static void applyRoundLetterImage(String letter, ImageView imageView) {
 
         imageView.setImageDrawable(getRoundLetterImage(letter));
     }
 
-    public static void applyLetterImage(String letter, ImageView imageView) {
+    private static void applyLetterImage(String letter, ImageView imageView) {
         imageView.setImageDrawable(getLetterImage(letter));
     }
 
-    public static Drawable getRoundLetterImage(String letter) {
+    private static Drawable getRoundLetterImage(String letter) {
         ColorGenerator generator = ColorGenerator.MATERIAL;
 
-        TextDrawable drawable = TextDrawable.builder()
+        return TextDrawable.builder()
                 .buildRound(letter.toUpperCase(), generator.getColor(letter));
-        return drawable;
     }
 
-    public static Drawable getLetterImage(String letter) {
+    private static Drawable getLetterImage(String letter) {
         ColorGenerator generator = ColorGenerator.MATERIAL;
 
-        TextDrawable drawable = TextDrawable.builder()
+        return TextDrawable.builder()
                 .buildRect(letter.toUpperCase(), generator.getColor(letter));
-        return drawable;
     }
 
     public static void applyRoundImage(Context ctx, String url, ImageView imageView) {

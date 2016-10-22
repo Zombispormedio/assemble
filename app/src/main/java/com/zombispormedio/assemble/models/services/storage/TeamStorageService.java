@@ -10,7 +10,7 @@ import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 public class TeamStorageService extends StorageService<TeamDAO, Team> {
 
     public TeamStorageService() {
-         super(new LocalStorage<TeamDAO, Team>(TeamDAO.class, new TeamDAO.Factory()));
+         super(new LocalStorage<>(TeamDAO.class, new TeamDAO.Factory()));
     }
 
     public TeamStorageService(

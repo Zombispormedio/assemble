@@ -18,7 +18,7 @@ import javax.inject.Inject;
  */
 public class TeamResource extends ConceptResource<Team> {
 
-    private ITeamService persistence;
+    private final ITeamService persistence;
 
     @Inject
     public TeamResource(ITeamService persistence,

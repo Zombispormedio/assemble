@@ -7,7 +7,7 @@ import java.util.UUID;
  */
 public class Subscriber {
 
-    private String uuid;
+    private final String uuid;
 
     public Subscriber() {
         uuid= UUID.randomUUID().toString();
