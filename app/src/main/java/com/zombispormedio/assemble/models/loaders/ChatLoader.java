@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class ChatLoader implements ILoader {
 
-    private IChatService apiService;
-    private ChatStorageService storageService;
+    private final IChatService apiService;
+    private final ChatStorageService storageService;
 
 
     public ChatLoader(IChatService apiService, ChatStorageService storageService) {

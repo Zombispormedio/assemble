@@ -45,7 +45,7 @@ public class ChatsListAdapter extends BaseSortedListAdapter<Chat, ChatHolder> {
         private IOnClickItemListHandler<Chat> listener;
 
         public ChatsListAdapter make(){
-            return make(new ArrayList<Chat>());
+            return make(new ArrayList<>());
         }
 
         public ChatsListAdapter make(ArrayList<Chat> data) {

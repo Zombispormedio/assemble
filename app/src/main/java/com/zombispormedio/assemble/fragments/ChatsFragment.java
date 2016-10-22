@@ -13,7 +13,6 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.adapters.lists.ChatsListAdapter;
 import com.zombispormedio.assemble.controllers.ChatsController;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
@@ -35,8 +34,6 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
 
     @BindView(R.id.chats_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
-
-    private ChatsListAdapter.Factory chatsListFactory;
 
     private ChatsListAdapter chatsListAdapter;
 
@@ -66,7 +63,7 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     }
 
     private void setupChats() {
-        chatsListFactory = new ChatsListAdapter.Factory();
+        ChatsListAdapter.Factory chatsListFactory = new ChatsListAdapter.Factory();
         AndroidUtils.createListConfiguration(view, chatsList)
                 .divider(true)
                 .itemAnimation(true)

@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 public class ConceptResource<T> {
 
-    protected IStorageService<T> storage;
+    protected final IStorageService<T> storage;
 
     public ConceptResource(IStorageService<T> storage) {
         this.storage = storage;

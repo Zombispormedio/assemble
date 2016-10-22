@@ -20,9 +20,9 @@ import javax.inject.Inject;
  */
 public class ChatResource extends ConceptResource<Chat> {
 
-    private IChatService persistence;
+    private final IChatService persistence;
 
-    private MessageStorageService storageMessage;
+    private final MessageStorageService storageMessage;
 
     @Inject
     public ChatResource(IChatService persistence, IStorageService<Chat> storage, MessageStorageService storageMessage) {

@@ -3,6 +3,8 @@ package com.zombispormedio.assemble.models;
 
 import com.zombispormedio.assemble.utils.ISODate;
 
+import android.support.annotation.NonNull;
+
 
 /**
  * Created by Xavier Serrano on 07/09/2016.
@@ -40,7 +42,7 @@ public class Chat extends BaseModel implements Sorted<Chat> {
     }
 
     @Override
-    public int compareTo(Chat o) {
+    public int compareTo(@NonNull Chat o) {
         int result;
         Message m2 = o.lastMessage;
         ISODate createAt = getCreatedAt();

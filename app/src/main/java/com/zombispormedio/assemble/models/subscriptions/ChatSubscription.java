@@ -1,9 +1,6 @@
 package com.zombispormedio.assemble.models.subscriptions;
 import com.zombispormedio.assemble.models.loaders.ChatLoader;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.inject.Inject;
 
 /**
@@ -11,7 +8,7 @@ import javax.inject.Inject;
  */
 public class ChatSubscription extends DataSubscription {
 
-    private ChatLoader loader;
+    private final ChatLoader loader;
 
     @Inject
     public ChatSubscription(ChatLoader loader) {

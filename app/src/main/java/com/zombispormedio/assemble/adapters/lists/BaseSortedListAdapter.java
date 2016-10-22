@@ -4,9 +4,7 @@ package com.zombispormedio.assemble.adapters.lists;
 import com.annimon.stream.Collectors;
 import com.annimon.stream.IntStream;
 import com.annimon.stream.Stream;
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.adapters.AbstractHolder;
-import com.zombispormedio.assemble.models.BaseModel;
 import com.zombispormedio.assemble.models.Sorted;
 
 import android.support.v7.util.SortedList;
@@ -24,7 +22,7 @@ import java.util.List;
 public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder<T>> extends RecyclerView.Adapter<E> {
 
 
-    protected SortedList<T> mData;
+    protected final SortedList<T> mData;
 
     public BaseSortedListAdapter(Class<T> tClass) {
         mData = new SortedList<>(tClass, new SortedList.Callback<T>() {
@@ -165,13 +163,13 @@ public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder
         return mData.removeItemAt(index) != null;
     }
 
-    public boolean removeByIdentity(int identity) {
+    public void removeByIdentity(int identity) {
         int index = indexByIdentity(identity);
-        return mData.removeItemAt(index) != null;
+        mData.removeItemAt(index);
     }
 
-    public T removeItemAt(int index) {
-        return mData.removeItemAt(index);
+    public void removeItemAt(int index) {
+        mData.removeItemAt(index);
     }
 
     public void clear() {

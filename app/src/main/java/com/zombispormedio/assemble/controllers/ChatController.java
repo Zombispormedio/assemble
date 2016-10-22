@@ -26,7 +26,7 @@ public class ChatController extends Controller {
 
     private IChatView ctx;
 
-    private int chatID;
+    private final int chatID;
 
     private ChatResource chatResource;
 

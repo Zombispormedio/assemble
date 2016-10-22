@@ -10,7 +10,7 @@ import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 public class ChatStorageService extends StorageService<ChatDAO, Chat> {
 
     public ChatStorageService() {
-        super(new LocalStorage<ChatDAO, Chat>(ChatDAO.class, new ChatDAO.Factory()));
+        super(new LocalStorage<>(ChatDAO.class, new ChatDAO.Factory()));
     }
 
     public ChatStorageService(

@@ -2,16 +2,12 @@ package com.zombispormedio.assemble.net;
 
 import com.zombispormedio.assemble.IAssembleApplication;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-
 /**
  * Created by Xavier Serrano on 13/09/2016.
  */
 public class ConnectionState {
 
-    private static ConnectionState ourInstance = new ConnectionState();
+    private static final ConnectionState ourInstance = new ConnectionState();
 
     public static ConnectionState getInstance() {
         return ourInstance;

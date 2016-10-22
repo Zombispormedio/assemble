@@ -15,17 +15,17 @@ import java.util.ArrayList;
  */
 public class ChatsController extends Controller {
 
-    private IChatsView ctx;
+    private final IChatsView ctx;
 
-    private ChatResource chatResource;
+    private final ChatResource chatResource;
 
-    private ChatSubscription chatSubscription;
+    private final ChatSubscription chatSubscription;
 
-    private ChatSubscriber chatSubscriber;
+    private final ChatSubscriber chatSubscriber;
 
-    private MessageSubscription messageSubscription;
+    private final MessageSubscription messageSubscription;
 
-    private MessageSubscriber messageSubscriber;
+    private final MessageSubscriber messageSubscriber;
 
     private boolean refreshing;
 

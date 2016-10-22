@@ -10,13 +10,11 @@ import com.zombispormedio.assemble.models.UserProfile;
 
 
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by Xavier Serrano on 07/09/2016.
@@ -42,11 +40,6 @@ public class ChatHolder extends AbstractHolder<Chat> {
     public ChatHolder(View view) {
         super(view);
         this.listener = null;
-        setup();
-    }
-
-    private void setup() {
-        ButterKnife.bind(this, getView());
     }
 
     @Override

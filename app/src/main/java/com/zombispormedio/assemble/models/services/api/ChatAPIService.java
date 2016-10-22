@@ -16,7 +16,7 @@ import java.util.ArrayList;
  */
 public class ChatAPIService implements IChatService {
 
-    private APIConfiguration api;
+    private final APIConfiguration api;
 
     public ChatAPIService() {
         api=APIConfiguration.getInstance();

@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.models.components.ResourceComponent;
-import com.zombispormedio.assemble.models.subscriptions.DataSubscription;
 import com.zombispormedio.assemble.views.IApplicationView;
 
 /**
