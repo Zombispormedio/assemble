@@ -29,6 +29,12 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         database = Configuration.getInstance().getDatabase();
     }
 
+    public LocalStorage(Class<D> opClass, IDAOFactory<D> factory, Realm database) {
+        this.opClass = opClass;
+        this.factory = factory;
+        this.database=database;
+    }
+
     public void create(M params) {
         D object = factory.create();
 

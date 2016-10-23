@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.onesignal.OneSignal;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.net.Error;
@@ -16,10 +17,13 @@ public class LoginController extends Controller {
 
     private final UserResource user;
 
+    private final Auth.Builder editor;
+
     public LoginController(ILoginView ctx) {
         super(ctx);
         this.ctx = ctx;
         user = getResourceComponent().provideUserResource();
+        editor=new Auth.Builder();
     }
 
     public void login() {
@@ -29,14 +33,10 @@ public class LoginController extends Controller {
         } else {
             whileLogin();
 
-            Auth auth = new Auth(ctx.getEmail(), ctx.getPassword());
+            editor.setEmail(ctx.getEmail())
+                    .setPassword(ctx.getPassword());
 
-            String gcmToken = ctx.getMessagingId();
-            if (!gcmToken.isEmpty()) {
-                auth.gcm_token = gcmToken;
-            }
-
-            user.login(auth, new LoginServiceHandler());
+            user.login(editor.build(), new LoginServiceHandler());
         }
     }
 
@@ -50,11 +50,8 @@ public class LoginController extends Controller {
 
         @Override
         public void onSuccess(Result result) {
-            ctx.setAuthToken(result.token);
-            ctx.removeMessagingId();
-
+            configureAuthentication(result.token);
             ctx.showSuccessfulLogin();
-
             ctx.goHome();
         }
 
@@ -73,6 +70,12 @@ public class LoginController extends Controller {
         ctx.hideProgressBar();
         ctx.showForm();
     }
+
+    private void configureAuthentication(String token){
+        ctx.setAuthToken(token);
+        OneSignal.syncHashedEmail(editor.getEmail());
+    }
+
 
     public void linkToRegister() {
         ctx.goToRegister();

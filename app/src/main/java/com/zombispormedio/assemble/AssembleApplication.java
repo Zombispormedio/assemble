@@ -3,6 +3,7 @@ package com.zombispormedio.assemble;
 
 import com.google.firebase.crash.FirebaseCrash;
 
+import com.onesignal.OneSignal;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
@@ -10,6 +11,8 @@ import com.zombispormedio.assemble.models.modules.ResourceModule;
 import com.zombispormedio.assemble.models.modules.SubscriptionModule;
 import com.zombispormedio.assemble.models.services.api.APIConfiguration;
 import com.zombispormedio.assemble.net.ConnectionState;
+import com.zombispormedio.assemble.services.NotificationOpenedEvent;
+import com.zombispormedio.assemble.services.NotificationReceivedEvent;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.utils.RunningActivity;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
@@ -47,9 +50,13 @@ public class AssembleApplication extends Application implements IAssembleApplica
     @Override
     public void onCreate() {
         super.onCreate();
-        //OneSignal.startInit(this).init();
+
+        configureOneSignal();
+
         JodaTimeAndroid.init(this);
+
         ConnectionState.getInstance().setContext(this);
+
         registerActivityLifecycleCallbacks(new RunningActivity());
 
         preferencesManager = new PreferencesManager(this);
@@ -66,6 +73,14 @@ public class AssembleApplication extends Application implements IAssembleApplica
         setupLocalStorage();
 
         setupAPI();
+    }
+
+    private void configureOneSignal() {
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.WARN);
+        OneSignal.startInit(this)
+                .setNotificationOpenedHandler(new NotificationOpenedEvent())
+                .setNotificationReceivedHandler(new NotificationReceivedEvent())
+                .init();
     }
 
 

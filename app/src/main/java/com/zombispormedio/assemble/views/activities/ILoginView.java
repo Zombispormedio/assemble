@@ -28,4 +28,5 @@ public interface ILoginView extends IBaseView {
     boolean validate();
 
     void showFailValidation();
+
 }

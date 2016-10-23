@@ -103,6 +103,10 @@ public final class NavigationManager {
         goTo(ctx, HomeActivity.class);
     }
 
+    public static void Home(Context ctx, HashMap<String, String> hash) {
+        goWithHash(ctx, HomeActivity.class, hash);
+    }
+
     public static void Register(Context ctx) {
         goTo(ctx, RegisterActivity.class);
     }

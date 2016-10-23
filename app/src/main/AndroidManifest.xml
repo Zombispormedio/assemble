@@ -189,19 +189,18 @@
                     />
         </activity>
 
-        <service android:name="com.zombispormedio.assemble.services.MessagingService"
+
+
+        <service
+                android:name="com.zombispormedio.assemble.services.NotificationInterceptorService"
                 android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+                <action android:name="com.onesignal.NotificationExtender" />
             </intent-filter>
         </service>
 
-        <service android:name="com.zombispormedio.assemble.services.MessagingIDService"
-                android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
+        <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
+
     </application>
 
 </manifest>

@@ -137,15 +137,6 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     /********************** Messaging ******************/
 
-    @Override
-    public String getMessagingId() {
-        return getPreferencesManager().getString(MESSAGING_ID);
-    }
-
-    @Override
-    public void removeMessagingId() {
-        getPreferencesManager().remove(MESSAGING_ID);
-    }
 
 
     protected void setupReceivers() {

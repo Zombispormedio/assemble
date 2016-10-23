@@ -16,6 +16,8 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.activities.ILoginView;
 
+import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.OnClick;
 

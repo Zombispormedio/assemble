@@ -49,12 +49,6 @@ public class RegisterController extends Controller {
 
             Auth auth = new Auth(email, pass);
 
-            String gcmToken = ctx.getMessagingId();
-
-            if (!gcmToken.isEmpty()) {
-                auth.gcm_token = gcmToken;
-            }
-
             user.signin(auth, new RegisterServiceHandler());
         }
     }
@@ -92,7 +86,6 @@ public class RegisterController extends Controller {
         @Override
         public void onSuccess(Result result) {
             ctx.showSuccessfulRegister();
-            ctx.removeMessagingId();
             ctx.goToLogin();
         }
     }
