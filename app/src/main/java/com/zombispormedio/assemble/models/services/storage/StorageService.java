@@ -118,6 +118,11 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
         return toModel(storage.notIn("id", Utils.toInteger(in)));
     }
 
+    @Override
+    public void close() {
+        storage.close();
+    }
+
 
     private ArrayList<M> toModel(ArrayList<D> objects) {
         return Stream.of(objects)

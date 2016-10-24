@@ -16,7 +16,7 @@ import javax.inject.Inject;
 /**
  * Created by Xavier Serrano on 04/09/2016.
  */
-public class TeamResource extends ConceptResource<Team> {
+public class TeamResource extends AbstractResource<Team> {
 
     private final ITeamService persistence;
 

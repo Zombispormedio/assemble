@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble;
 
 
-import com.google.firebase.crash.FirebaseCrash;
 
 import com.onesignal.OneSignal;
 import com.orhanobut.logger.Logger;
@@ -76,10 +75,12 @@ public class AssembleApplication extends Application implements IAssembleApplica
     }
 
     private void configureOneSignal() {
-        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.WARN);
+        OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.ERROR);
+
         OneSignal.startInit(this)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .setNotificationReceivedHandler(new NotificationReceivedEvent(this))
                 .setNotificationOpenedHandler(new NotificationOpenedEvent())
-                .setNotificationReceivedHandler(new NotificationReceivedEvent())
                 .init();
     }
 
@@ -103,12 +104,11 @@ public class AssembleApplication extends Application implements IAssembleApplica
     }
 
     private void setupUncaughtException() {
-        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-            FirebaseCrash.report(e);
+       /* Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
             Logger.d(e.getMessage());
             e.printStackTrace();
             //System.exit(0);
-        });
+        });*/
     }
 
     public PreferencesManager getPreferencesManager() {
@@ -142,6 +142,7 @@ public class AssembleApplication extends Application implements IAssembleApplica
         super.onTerminate();
         ConnectionState.getInstance().onTerminate();
         preferencesManager.onDestroy();
+        Realm.getDefaultInstance().close();
     }
 
 

@@ -7,11 +7,11 @@ import java.util.ArrayList;
 /**
  * Created by Xavier Serrano on 13/09/2016.
  */
-public class ConceptResource<T> {
+public abstract class AbstractResource<T>{
 
     protected final IStorageService<T> storage;
 
-    public ConceptResource(IStorageService<T> storage) {
+    public AbstractResource(IStorageService<T> storage) {
         this.storage = storage;
     }
 
@@ -22,4 +22,6 @@ public class ConceptResource<T> {
     public T getFirst(){
         return storage.getFirst();
     }
+
+    
 }

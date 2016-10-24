@@ -53,7 +53,7 @@ public class ChatController extends Controller {
 
     private int setupMessage(HashMap<String, String> messageMap) {
         Message newMessage=Message.createMessage(messageMap);
-        chatResource.storageMessage(newMessage);
+        chatResource.storeMessage(newMessage);
         return newMessage.chat_id;
     }
 

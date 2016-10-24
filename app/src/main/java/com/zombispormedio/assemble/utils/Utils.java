@@ -3,7 +3,12 @@ package com.zombispormedio.assemble.utils;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.annimon.stream.IntStream;
 import com.annimon.stream.Stream;
+import com.orhanobut.logger.Logger;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 import java.util.LinkedList;
 
 
@@ -70,6 +75,18 @@ public class Utils {
         }
     }
 
+
+    public static HashMap<String, String> convertJSONObjectToHashMap(JSONObject object){
+        return Stream.of(object.keys())
+                .reduce(new HashMap<String, String>(), (memo, key) -> {
+                    try {
+                        memo.put(key, String.valueOf(object.get(key)));
+                    } catch (JSONException e) {
+                        Logger.d(e);
+                    }
+                    return memo;
+                });
+    }
 
 
 

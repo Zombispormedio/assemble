@@ -1,8 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
 
-import com.google.firebase.crash.FirebaseCrash;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
@@ -38,12 +36,6 @@ public class MainController extends Controller {
                 @Override
                 public void onError(Error error){
                     ctx.clearAuthToken();
-                    try {
-                        FirebaseInstanceId.getInstance().deleteInstanceId();
-                    } catch (IOException e) {
-                        Logger.d(e.getMessage());
-                        FirebaseCrash.report(e);
-                    }
                     ctx.goToLogin();
                 }
 

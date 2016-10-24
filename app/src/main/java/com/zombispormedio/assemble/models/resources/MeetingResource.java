@@ -16,7 +16,7 @@ import javax.inject.Inject;
 /**
  * Created by Xavier Serrano on 06/09/2016.
  */
-public class MeetingResource extends ConceptResource<Meeting>{
+public class MeetingResource extends AbstractResource<Meeting> {
 
     private final IMeetingService persistence;
 

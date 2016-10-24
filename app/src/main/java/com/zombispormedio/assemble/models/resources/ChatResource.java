@@ -18,17 +18,17 @@ import javax.inject.Inject;
 /**
  * Created by Xavier Serrano on 07/09/2016.
  */
-public class ChatResource extends ConceptResource<Chat> {
+public class ChatResource extends AbstractResource<Chat> {
 
     private final IChatService persistence;
 
-    private final MessageStorageService storageMessage;
+    private final MessageStorageService messageStorage;
 
     @Inject
-    public ChatResource(IChatService persistence, IStorageService<Chat> storage, MessageStorageService storageMessage) {
+    public ChatResource(IChatService persistence, IStorageService<Chat> storage, MessageStorageService messageStorage) {
         super(storage);
         this.persistence = persistence;
-        this.storageMessage = storageMessage;
+        this.messageStorage = messageStorage;
     }
 
     public void getAll(IServiceHandler<ArrayList<Chat>, Error> handler) {
@@ -67,22 +67,22 @@ public class ChatResource extends ConceptResource<Chat> {
 
             @Override
             public void onSuccess(Message result) {
-                storageMessage.createOrUpdate(result);
+                messageStorage.createOrUpdate(result);
                 handler.onSuccess(result);
             }
         });
     }
 
     public Message getMessageById(int id) {
-        return storageMessage.getByID(id);
+        return messageStorage.getByID(id);
     }
 
-    public void storageMessage(Message message){
-        storageMessage.createOrUpdate(message);
+    public void storeMessage(Message message){
+        messageStorage.createOrUpdate(message);
     }
 
     public ArrayList<Message> getMessages(int id){
-        return storageMessage.getSortedMessagesByChat(id);
+        return messageStorage.getSortedMessagesByChat(id);
     }
 
 

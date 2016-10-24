@@ -23,6 +23,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.onesignal.OneSignal;
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.adapters.pagers.HomePagerAdapter;
 import com.zombispormedio.assemble.controllers.HomeController;
 import com.zombispormedio.assemble.utils.ImageUtils;
@@ -362,6 +363,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         @Override
         public void onReceive(Context context, Intent intent) {
+            Logger.d("Avida");
             getResourceComponent().provideChatSubscription().haveOneChanged(intent.getExtras().getInt(CHAT_ID));
             if(getState()!=HomePagerAdapter.CHATS){
                 moveToPosition(HomePagerAdapter.CHATS);

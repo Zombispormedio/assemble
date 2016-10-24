@@ -1,7 +1,5 @@
 package com.zombispormedio.assemble.activities;
 
-import com.google.firebase.crash.FirebaseCrash;
-import com.google.firebase.iid.FirebaseInstanceId;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -23,14 +21,11 @@ import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.activities.IBaseView;
 
-import java.io.IOException;
-
 import butterknife.ButterKnife;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_EVENT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.AUTH;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_BUNDLE;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGING_ID;
 
 public class BaseActivity extends AppCompatActivity implements IBaseView {
 
@@ -64,12 +59,6 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     public void clearAuthToken() {
         APIConfiguration.getInstance().clearToken();
         getPreferencesManager().clear();
-        try {
-            FirebaseInstanceId.getInstance().deleteInstanceId();
-        } catch (IOException e) {
-            Logger.d(e.getMessage());
-            FirebaseCrash.report(e);
-        }
     }
     /*******************/
 
@@ -159,7 +148,8 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         public void onReceive(Context context, Intent intent) {
             Bundle data = intent.getExtras();
             Message message = data.getParcelable(MESSAGE_BUNDLE);
-            getResourceComponent().provideChatResource().storageMessage(message);
+            Logger.d(message.id);
+            getResourceComponent().provideChatResource().storeMessage(message);
         }
     }
 
