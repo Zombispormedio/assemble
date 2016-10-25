@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.activities;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 
@@ -18,6 +19,8 @@ public class SettingsActivity extends BaseActivity implements ISettingsView {
 
     private SettingsController ctrl;
 
+    private ProgressDialog progressDialog;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +35,17 @@ public class SettingsActivity extends BaseActivity implements ISettingsView {
                 .replace(R.id.content_frame, frag)
                 .commit();
 
+        setupProgressDialog();
 
     }
+
+    private void setupProgressDialog() {
+        progressDialog = new ProgressDialog(this, R.style.AppCompatAlertDialogStyle);
+        progressDialog.setMessage(getString(R.string.loading_app_data));
+        progressDialog.setIndeterminate(true);
+        progressDialog.setCancelable(false);
+    }
+
 
     public SettingsController getController() {
         return ctrl;
@@ -61,6 +73,16 @@ public class SettingsActivity extends BaseActivity implements ISettingsView {
     @Override
     public void goToLogin() {
         NavigationManager.Login(this);
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void showProgressDialog() {
+        progressDialog.show();
     }
 
 }

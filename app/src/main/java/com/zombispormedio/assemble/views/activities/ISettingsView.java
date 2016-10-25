@@ -13,4 +13,8 @@ public interface ISettingsView extends IBaseView {
 
     void goToLogin();
 
+    void hideProgressDialog();
+
+    void showProgressDialog();
+
 }

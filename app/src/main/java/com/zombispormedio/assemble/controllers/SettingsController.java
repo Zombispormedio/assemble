@@ -37,6 +37,7 @@ public class SettingsController extends Controller {
     }
 
     public void signout() {
+        ctx.showProgressDialog();
         ctx.showConfirmSignOutDialog(new SignOutDialogEvent());
     }
 
@@ -54,6 +55,7 @@ public class SettingsController extends Controller {
         public void onSuccess(Result result) {
             ctx.clearAuthToken();
             ctx.showAlert(result.msg);
+            ctx.hideProgressDialog();
             ctx.goToLogin();
         }
     }
