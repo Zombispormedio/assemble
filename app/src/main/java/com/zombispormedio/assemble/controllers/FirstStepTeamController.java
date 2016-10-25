@@ -58,6 +58,7 @@ public class FirstStepTeamController extends Controller {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         ctx=null;
     }
 }

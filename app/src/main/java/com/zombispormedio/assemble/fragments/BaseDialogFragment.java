@@ -21,7 +21,7 @@ public class BaseDialogFragment extends DialogFragment implements IFragmentView 
 
 
     @Override
-    public IApplicationView getParent() {
+    public IBaseView getParent() {
         return view;
     }
 

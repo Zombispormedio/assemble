@@ -82,6 +82,7 @@ public class TeamsController extends Controller {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         teamSubscription.removeSubscriber(teamSubscriber);
         ctx=null;
     }

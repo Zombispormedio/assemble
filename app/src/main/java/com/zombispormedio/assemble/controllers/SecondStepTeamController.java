@@ -113,6 +113,7 @@ public class SecondStepTeamController extends Controller {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         ctx = null;
     }
 }

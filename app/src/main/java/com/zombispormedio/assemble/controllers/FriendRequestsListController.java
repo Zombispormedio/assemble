@@ -121,6 +121,7 @@ public class FriendRequestsListController extends Controller {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         ctx = null;
         friendRequestSubscription.removeSubscriber(friendRequestSubscriber);
     }

@@ -14,12 +14,14 @@ import com.zombispormedio.assemble.services.NotificationOpenedEvent;
 import com.zombispormedio.assemble.services.NotificationReceivedEvent;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.utils.RunningActivity;
+import com.zombispormedio.assemble.views.IApplicationView;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
@@ -34,7 +36,7 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.LOADED;
 /**
  * Created by Xavier Serrano on 18/09/2016.
  */
-public class AssembleApplication extends Application implements IAssembleApplication {
+public class AssembleApplication extends Application implements IApplicationView {
 
 
     private final static String[] PREFERENCES_TO_RESET_ON_START = new String[]{
@@ -65,20 +67,20 @@ public class AssembleApplication extends Application implements IAssembleApplica
                 .subscriptionModule(new SubscriptionModule())
                 .build();
 
-        setupUncaughtException();
 
         setupPreferences();
 
         setupLocalStorage();
 
         setupAPI();
+
     }
 
     private void configureOneSignal() {
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.ERROR);
 
         OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.None)
                 .setNotificationReceivedHandler(new NotificationReceivedEvent(this))
                 .setNotificationOpenedHandler(new NotificationOpenedEvent())
                 .init();
@@ -103,13 +105,6 @@ public class AssembleApplication extends Application implements IAssembleApplica
                 .setDatabase(Realm.getDefaultInstance());
     }
 
-    private void setupUncaughtException() {
-       /* Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
-            Logger.d(e.getMessage());
-            e.printStackTrace();
-            //System.exit(0);
-        });*/
-    }
 
     public PreferencesManager getPreferencesManager() {
         return preferencesManager;
@@ -138,12 +133,18 @@ public class AssembleApplication extends Application implements IAssembleApplica
     }
 
     @Override
+    public void sendBroadcastByIntent(Intent intent) {
+        sendBroadcast(intent);
+    }
+
+    @Override
     public void onTerminate() {
         super.onTerminate();
         ConnectionState.getInstance().onTerminate();
         preferencesManager.onDestroy();
         Realm.getDefaultInstance().close();
     }
+
 
 
 }

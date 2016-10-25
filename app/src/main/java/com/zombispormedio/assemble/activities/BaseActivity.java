@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.models.Message;
@@ -119,7 +118,8 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         return ((AssembleApplication) getApplication()).getResourceComponent();
     }
 
-    protected PreferencesManager getPreferencesManager() {
+
+    public PreferencesManager getPreferencesManager() {
         return ((AssembleApplication) getApplication()).getPreferencesManager();
     }
     /************************************************/
@@ -148,7 +148,6 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         public void onReceive(Context context, Intent intent) {
             Bundle data = intent.getExtras();
             Message message = data.getParcelable(MESSAGE_BUNDLE);
-            Logger.d(message.id);
             getResourceComponent().provideChatResource().storeMessage(message);
         }
     }

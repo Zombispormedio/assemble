@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble.net;
 
-import com.zombispormedio.assemble.IAssembleApplication;
+import com.zombispormedio.assemble.views.IApplicationView;
 
 /**
  * Created by Xavier Serrano on 13/09/2016.
@@ -13,12 +13,12 @@ public class ConnectionState {
         return ourInstance;
     }
 
-    private IAssembleApplication ctx;
+    private IApplicationView ctx;
 
     private ConnectionState() {
     }
 
-    public void setContext(IAssembleApplication ctx) {
+    public void setContext(IApplicationView ctx) {
         this.ctx = ctx;
     }
 

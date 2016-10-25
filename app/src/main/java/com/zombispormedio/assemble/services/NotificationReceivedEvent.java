@@ -1,28 +1,21 @@
 package com.zombispormedio.assemble.services;
 
-import com.annimon.stream.Stream;
 import com.onesignal.OSNotification;
 import com.onesignal.OneSignal;
 import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.AssembleApplication;
-import com.zombispormedio.assemble.IAssembleApplication;
+import com.zombispormedio.assemble.activities.ChatActivity;
+import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.models.services.storage.MessageStorageService;
+import com.zombispormedio.assemble.utils.RunningActivity;
 import com.zombispormedio.assemble.utils.Utils;
-import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
-import com.zombispormedio.assemble.wrappers.realm.dao.MessageDAO;
-
-import org.json.JSONException;
+import com.zombispormedio.assemble.views.IApplicationView;
 
 import android.content.Intent;
-import android.os.Looper;
-import android.util.Log;
 
 import java.util.HashMap;
 
-import io.realm.Realm;
-
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_EVENT;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_HOME;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_BUNDLE;
@@ -33,27 +26,66 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_BUNDL
 
 public class NotificationReceivedEvent extends AbstractNotificationEvent implements OneSignal.NotificationReceivedHandler {
 
-    private AssembleApplication application;
 
-    public NotificationReceivedEvent(AssembleApplication application) {
-        this.application = application;
+    public NotificationReceivedEvent(IApplicationView application) {
+        super(application);
     }
 
     @Override
     public void notificationReceived(OSNotification notification) {
 
-        HashMap<String, String> data = Utils.convertJSONObjectToHashMap(notification.payload.additionalData);
-        Message message = Message.createMessage(data);
+        if(isActive()){
+            HashMap<String, String> data = Utils.convertJSONObjectToHashMap(notification.payload.additionalData);
+            Message message = Message.createMessage(data);
+            saveMessage(message);
+            configureMessage(message);
+        }
+    }
+
+
+    private void configureMessage(Message message){
+
+        if(isRunning(HomeActivity.class.getName())){
+            notifyHome(message);
+        }else if(isRunning(ChatActivity.class.getName())){
+            notifyChat(message);
+        }else {
+            notifyEveryWhere(message);
+        }
+
+
+    }
+
+    private void notifyChat(Message message) {
+        int currentChatID=getPreferencesManager().getInt(CHAT_ID);
+
+        if (message.chat_id==currentChatID){
+            Intent intent=new Intent();
+            intent.setAction(ON_MESSAGE_NOTIFY_CHAT);
+            sendBroadcast(intent);
+        }else{
+            notifyEveryWhere(message);
+        }
+    }
+
+
+    private void notifyEveryWhere(Message message) {
+
+    }
+
+    private void notifyHome(Message message) {
         Intent intent = new Intent();
+        intent.setAction(ON_MESSAGE_NOTIFY_HOME);
+        intent.putExtra(CHAT_ID, message.chat_id);
+        sendBroadcast(intent);
+    }
+
+
+    private void saveMessage(Message message) {
+        Intent intent=new Intent();
         intent.setAction(ON_MESSAGE_EVENT);
         intent.putExtra(MESSAGE_BUNDLE, message);
-        application.sendBroadcast(intent);
-        Intent intent2 = new Intent();
-        intent2.setAction(ON_MESSAGE_NOTIFY_HOME);
-        intent2.putExtra(CHAT_ID, message.chat_id);
-        application.sendBroadcast(intent2);
-
-
+        sendBroadcast(intent);
     }
 
 }

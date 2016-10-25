@@ -35,6 +35,7 @@ public class TeamDialogController extends Controller {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         ctx=null;
     }
 }

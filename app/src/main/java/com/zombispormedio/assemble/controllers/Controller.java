@@ -1,16 +1,16 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.models.components.ResourceComponent;
-import com.zombispormedio.assemble.views.IApplicationView;
+import com.zombispormedio.assemble.views.activities.IBaseView;
 
 /**
  * Created by Xavier Serrano on 18/09/2016.
  */
 public class Controller extends AbstractController {
 
-    private IApplicationView app;
+    private IBaseView app;
 
-    public Controller(IApplicationView app) {
+    public Controller(IBaseView app) {
         this.app = app;
     }
 

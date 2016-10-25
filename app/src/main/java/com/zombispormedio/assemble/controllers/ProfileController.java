@@ -91,6 +91,7 @@ public class ProfileController extends Controller {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         ctx = null;
         profileSubscription.removeSubscriber(profileSubscriber);
     }

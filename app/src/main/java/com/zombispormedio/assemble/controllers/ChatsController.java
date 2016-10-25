@@ -104,6 +104,7 @@ public class ChatsController extends Controller {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         chatSubscription.removeSubscriber(chatSubscriber);
         messageSubscription.removeSubscriber(messageSubscriber);
     }

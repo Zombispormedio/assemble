@@ -23,7 +23,7 @@ public class BaseFragment  extends Fragment implements IFragmentView {
 
 
     @Override
-    public IApplicationView getParent() {
+    public IBaseView getParent() {
         return view;
     }
 

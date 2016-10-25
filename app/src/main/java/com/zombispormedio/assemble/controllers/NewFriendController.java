@@ -75,6 +75,7 @@ public class NewFriendController extends Controller {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         ctx=null;
     }
 }

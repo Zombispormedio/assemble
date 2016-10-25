@@ -83,6 +83,7 @@ public class CreateChatController extends Controller {
 
     @Override
     public void onDestroy() {
+        super.onDestroy();
         ctx=null;
     }
 }
