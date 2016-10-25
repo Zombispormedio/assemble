@@ -1,12 +1,12 @@
 package com.zombispormedio.assemble.services;
 
 
+import com.zombispormedio.assemble.activities.BaseActivity;
 import com.zombispormedio.assemble.utils.PreferencesManager;
-import com.zombispormedio.assemble.utils.RunningActivity;
 import com.zombispormedio.assemble.views.IApplicationView;
 
 import android.content.Intent;
-import android.os.Looper;
+import android.support.v4.app.NotificationCompat;
 
 /**
  * Created by Xavier Serrano on 24/10/2016.
@@ -25,14 +25,26 @@ public abstract class AbstractNotificationEvent {
     }
 
     protected boolean isActive(){
-        return !RunningActivity.whoIsRunning.isEmpty();
+        return application.isActive();
     }
 
     protected boolean isRunning(String running){
-        return RunningActivity.whoIsRunning.equals(running);
+        return application.isRunning(running);
     }
 
     protected PreferencesManager getPreferencesManager() {
         return application.getPreferencesManager();
     }
+
+    protected IApplicationView getApp(){
+        return application;
+    }
+
+    protected String getString(int id){
+        return application.getAppString(id);
+    }
+
+   protected int getColor(int id){
+       return application.getAppColor(id);
+   }
 }

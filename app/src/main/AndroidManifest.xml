@@ -188,6 +188,13 @@
                     />
         </activity>
 
+        <service
+                android:name="com.zombispormedio.assemble.services.NotificationInterceptorService"
+                android:exported="false">
+            <intent-filter>
+                <action android:name="com.onesignal.NotificationExtender" />
+            </intent-filter>
+        </service>
 
         <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
 

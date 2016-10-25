@@ -3,6 +3,9 @@ package com.zombispormedio.assemble.models;
 
 import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.StringUtils;
+import com.zombispormedio.assemble.utils.Utils;
+
+import org.json.JSONObject;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -285,4 +288,9 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
 
         return builder.build();
     }
+    public static Message createMessage(JSONObject messageMap) {
+        HashMap<String, String> data = Utils.convertJSONObjectToHashMap(messageMap);
+        return createMessage(data);
+    }
+
 }

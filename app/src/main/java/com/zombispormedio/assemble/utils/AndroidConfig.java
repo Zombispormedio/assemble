@@ -39,8 +39,10 @@ public class AndroidConfig {
         public static final String ON_MESSAGE_NOTIFY_EVERYWHERE = "ON_MESSAGE_NOTIFY_EVERYWHERE";
     }
 
-    public static class Codes{
-        public static int  NOTIFICATION_DEFAULT_ID=58129;
+    public static class Groups{
+        public static  final String Message="message";
     }
+
+
 
 }

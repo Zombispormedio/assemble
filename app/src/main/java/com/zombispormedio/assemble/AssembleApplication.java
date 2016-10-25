@@ -1,9 +1,9 @@
 package com.zombispormedio.assemble;
 
 
-
 import com.onesignal.OneSignal;
 import com.orhanobut.logger.Logger;
+import com.zombispormedio.assemble.activities.BaseActivity;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.models.modules.ResourceModule;
@@ -20,10 +20,14 @@ import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import android.app.Application;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
@@ -67,7 +71,6 @@ public class AssembleApplication extends Application implements IApplicationView
                 .subscriptionModule(new SubscriptionModule())
                 .build();
 
-
         setupPreferences();
 
         setupLocalStorage();
@@ -80,7 +83,7 @@ public class AssembleApplication extends Application implements IApplicationView
         OneSignal.setLogLevel(OneSignal.LOG_LEVEL.DEBUG, OneSignal.LOG_LEVEL.ERROR);
 
         OneSignal.startInit(this)
-                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.None)
+                .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
                 .setNotificationReceivedHandler(new NotificationReceivedEvent(this))
                 .setNotificationOpenedHandler(new NotificationOpenedEvent())
                 .init();
@@ -109,6 +112,7 @@ public class AssembleApplication extends Application implements IApplicationView
     public PreferencesManager getPreferencesManager() {
         return preferencesManager;
     }
+
 
     public ResourceComponent getResourceComponent() {
         return resourceComponent;
@@ -143,8 +147,29 @@ public class AssembleApplication extends Application implements IApplicationView
         ConnectionState.getInstance().onTerminate();
         preferencesManager.onDestroy();
         Realm.getDefaultInstance().close();
+
     }
 
+
+    @Override
+    public String getAppString(int id) {
+        return getString(id);
+    }
+
+    @Override
+    public int getAppColor(int id) {
+        return ContextCompat.getColor(this, id);
+    }
+
+    @Override
+    public boolean isRunning(String running) {
+        return RunningActivity.whoIsRunning.equals(running);
+    }
+
+    @Override
+    public boolean isActive() {
+        return !RunningActivity.whoIsRunning.isEmpty();
+    }
 
 
 }
