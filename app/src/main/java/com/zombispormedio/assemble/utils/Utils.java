@@ -88,6 +88,18 @@ public class Utils {
                 });
     }
 
+    public static String validateJSONValue(String key, JSONObject jsonObject){
+        String value="0";
+        try {
+            Object raw=jsonObject.get(key);
+            value=String.valueOf(raw);
+        } catch (JSONException e) {
+            Logger.d(e.getMessage());
+        }
+
+        return value;
+    }
+
 
 
 }

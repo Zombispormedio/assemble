@@ -45,8 +45,8 @@ public final class NavigationManager {
 
     }
 
-    public void onDestroy(){
-        ctx=null;
+    public void onDestroy() {
+        ctx = null;
     }
 
 
@@ -62,7 +62,7 @@ public final class NavigationManager {
 
     }
 
-     private static void goToWithResult(Activity ctx, Class<?> cls, String... extras) {
+    private static void goToWithResult(Activity ctx, Class<?> cls, String... extras) {
         Intent dst = new Intent(ctx, cls);
         dst.putExtra(SIZE, extras.length);
 
@@ -74,24 +74,18 @@ public final class NavigationManager {
     }
 
 
-    private static void goWithArg(Context ctx, Class<?> cls, int[] extras){
+    private static void goWithArg(Context ctx, Class<?> cls, int[] extras) {
         Intent dst = new Intent(ctx, cls);
-        dst.putExtra(ARGS+0, extras);
+        dst.putExtra(ARGS + 0, extras);
         ctx.startActivity(dst);
     }
 
-    private static void goWithArg(Context ctx, Class<?> cls, int extras){
-        Intent dst = new Intent(ctx, cls);
-        dst.putExtra(ARGS+0, extras);
-        ctx.startActivity(dst);
+    private static Intent createIntent(Context ctx, Class<?> cls) {
+        return new Intent(ctx, cls);
     }
 
-    private static void goWithHash(Context ctx, Class<?> cls, HashMap<String, String> hash) {
-        Intent dst = new Intent(ctx, cls);
-        for(Map.Entry<String, String> entry : hash.entrySet()){
-            dst.putExtra(entry.getKey(), entry.getValue());
-        }
-        ctx.startActivity(dst);
+    private static void goByIntent(Context ctx, Intent intent) {
+        ctx.startActivity(intent);
     }
 
 
@@ -103,17 +97,11 @@ public final class NavigationManager {
         goTo(ctx, HomeActivity.class);
     }
 
-    public static void Home(Context ctx, HashMap<String, String> hash) {
-        goWithHash(ctx, HomeActivity.class, hash);
-    }
 
     public static void Register(Context ctx) {
         goTo(ctx, RegisterActivity.class);
     }
 
-    public static void Main(Context ctx) {
-        goTo(ctx, MainActivity.class);
-    }
 
     public static void Profile(Context ctx) {
         goTo(ctx, ProfileActivity.class);
@@ -147,20 +135,26 @@ public final class NavigationManager {
         goTo(ctx, NewFriendActivity.class);
     }
 
-    public static void CreateChat(Context ctx){goTo(ctx, CreateChatActivity.class);}
+    public static void CreateChat(Context ctx) {
+        goTo(ctx, CreateChatActivity.class);
+    }
 
-    public static void FirstStepCreateTeam(Context ctx){goTo(ctx, FirstStepTeamActivity.class);}
+    public static void FirstStepCreateTeam(Context ctx) {
+        goTo(ctx, FirstStepTeamActivity.class);
+    }
 
-    public static void SecondStepCreateTeam(Context ctx, int[] friendIndexes){
+    public static void SecondStepCreateTeam(Context ctx, int[] friendIndexes) {
         goWithArg(ctx, SecondStepTeamActivity.class, friendIndexes);
     }
 
-    public static void CreateMeeting(Context ctx){goTo(ctx, CreateMeetingActivity.class);}
+    public static void CreateMeeting(Context ctx) {
+        goTo(ctx, CreateMeetingActivity.class);
+    }
 
-    public static void Chat(Context ctx, int id){
-        HashMap<String, String> hash=new HashMap<>();
-        hash.put(CHAT_ID, String.valueOf(id));
-        goWithHash(ctx, ChatActivity.class, hash);
+    public static void Chat(Context ctx, int id) {
+        Intent intent = createIntent(ctx, ChatActivity.class);
+        intent.putExtra(CHAT_ID, id);
+        goByIntent(ctx, intent);
     }
 
     public void Home() {
@@ -191,14 +185,20 @@ public final class NavigationManager {
         NavigationManager.NewFriend(ctx);
     }
 
-    public void CreateChat(){NavigationManager.CreateChat(ctx);}
+    public void CreateChat() {
+        NavigationManager.CreateChat(ctx);
+    }
 
-    public void CreateMeeting(){NavigationManager.CreateMeeting(ctx);}
+    public void CreateMeeting() {
+        NavigationManager.CreateMeeting(ctx);
+    }
 
-    public void FirstStepCreateTeam(){NavigationManager.FirstStepCreateTeam(ctx);}
+    public void FirstStepCreateTeam() {
+        NavigationManager.FirstStepCreateTeam(ctx);
+    }
 
-    public void SecondStepCreateTeam(int[] friendIndexes){
-       NavigationManager.SecondStepCreateTeam(ctx, friendIndexes);
+    public void SecondStepCreateTeam(int[] friendIndexes) {
+        NavigationManager.SecondStepCreateTeam(ctx, friendIndexes);
     }
 
     public void Help() {

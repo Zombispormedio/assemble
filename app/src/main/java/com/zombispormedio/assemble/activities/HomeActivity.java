@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -26,18 +27,24 @@ import com.onesignal.OneSignal;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.adapters.pagers.HomePagerAdapter;
 import com.zombispormedio.assemble.controllers.HomeController;
+import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.views.activities.IHomeView;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import butterknife.OnTouch;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_HOME;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.SEVERAL_MESSAGE_ACTION;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.SEVERAL_MESSAGE_ACTIVE_ACTION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.LOADED;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGES;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.STATE;
 
 public class HomeActivity extends BaseActivity implements IHomeView {
@@ -87,7 +94,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         setHomeUpIcon(R.drawable.menu_bar);
         bindActivity(this);
 
-        ctrl = new HomeController(this);
+        setupHomeController();
         navigation = new NavigationManager(this);
 
         setupProgressDialog();
@@ -100,6 +107,23 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         ctrl.onCreate();
 
+    }
+
+
+    private void setupHomeController() {
+        Intent intent = getIntent();
+        String action = intent.getAction();
+        Bundle extra = intent.getExtras();
+        if(SEVERAL_MESSAGE_ACTION.equals(action)){
+            ArrayList<Message> messages=extra.getParcelableArrayList(MESSAGES);
+            ctrl = new HomeController(this, messages);
+            setState(HomePagerAdapter.CHATS);
+        }else{
+            ctrl=new HomeController(this);
+            if(SEVERAL_MESSAGE_ACTIVE_ACTION.equals(action)){
+                setState(HomePagerAdapter.CHATS);
+            }
+        }
     }
 
 

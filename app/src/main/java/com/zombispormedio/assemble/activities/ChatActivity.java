@@ -28,10 +28,12 @@ import java.util.HashMap;
 import butterknife.BindView;
 import butterknife.OnClick;
 
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.MANY_MESSAGE_ACTION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.NEW_MESSAGE_ACTION;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ONE_MESSAGE_ACTION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.FOREGROUND_NOTIFICATION;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGES;
 
 public class ChatActivity extends BaseActivity implements IChatView {
 
@@ -72,20 +74,17 @@ public class ChatActivity extends BaseActivity implements IChatView {
     private int setupController() {
         Intent intent = getIntent();
         String action = intent.getAction();
-        int chatId;
         Bundle extra = intent.getExtras();
+        int chatId=extra.getInt(CHAT_ID);
 
-        if (NEW_MESSAGE_ACTION.equals(action)) {
-            HashMap<String, String> message = AndroidUtils.convertBundleToStringHashMap(extra);
-            ctrl = new ChatController(this, message);
-            chatId = Integer.parseInt(message.get(CHAT_ID));
-            fromNotification = true;
+        if (MANY_MESSAGE_ACTION.equals(action)) {
+            ArrayList<Message>messages=extra.getParcelableArrayList(MESSAGES);
+            ctrl = new ChatController(this, chatId, messages);
         } else {
-            String rawChatId=extra.getString(CHAT_ID);
-            chatId = Integer.parseInt(rawChatId);
             ctrl = new ChatController(this, chatId);
-            fromNotification=extra.getBoolean(FOREGROUND_NOTIFICATION);
         }
+
+        fromNotification=extra.getBoolean(FOREGROUND_NOTIFICATION);
 
         return chatId;
     }

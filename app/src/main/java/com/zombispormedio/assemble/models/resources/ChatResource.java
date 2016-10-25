@@ -81,6 +81,10 @@ public class ChatResource extends AbstractResource<Chat> {
         messageStorage.createOrUpdate(message);
     }
 
+    public void storeMessages(ArrayList<Message> messages){
+        messageStorage.createOrUpdateAll(messages);
+    }
+
     public ArrayList<Message> getMessages(int id){
         return messageStorage.getSortedMessagesByChat(id);
     }

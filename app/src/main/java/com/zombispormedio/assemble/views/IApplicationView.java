@@ -28,4 +28,8 @@ public interface IApplicationView {
 
     boolean isActive();
 
+    Intent createIntent(Class<? extends BaseActivity> activityClass);
+
+    void startIntent(Intent intent);
+
 }

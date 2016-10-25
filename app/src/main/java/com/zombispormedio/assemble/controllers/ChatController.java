@@ -43,19 +43,15 @@ public class ChatController extends Controller {
         setup();
     }
 
-    public ChatController(IChatView ctx, HashMap<String, String> messageMap) {
+    public ChatController(IChatView ctx, int chatID, ArrayList<Message> messages) {
         super(ctx);
         this.ctx=ctx;
         setup();
-
-        this.chatID=setupMessage(messageMap);
+        this.chatID=chatID;
+        chatResource.storeMessages(messages);
     }
 
-    private int setupMessage(HashMap<String, String> messageMap) {
-        Message newMessage=Message.createMessage(messageMap);
-        chatResource.storeMessage(newMessage);
-        return newMessage.chat_id;
-    }
+
 
     private void setup() {
         profileResource=getResourceComponent().provideProfileResource();

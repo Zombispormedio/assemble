@@ -6,7 +6,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-	<uses-feature android:name="android.hardware.camera" android:required="true" />
+
+    <uses-feature
+            android:name="android.hardware.camera"
+            android:required="true"
+            />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
@@ -32,7 +36,19 @@
         <activity
                 android:name=".activities.HomeActivity"
                 android:label="@string/home_title"
-                />
+                >
+            <intent-filter>
+                <action android:name="SEVERAL_MESSAGE_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
+            <intent-filter>
+                <action android:name="SEVERAL_MESSAGE_ACTIVE_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+
         <activity
                 android:name=".activities.LoginActivity"
                 android:theme="@style/AppTheme"
@@ -179,9 +195,15 @@
                 android:theme="@style/AppTheme"
                 >
             <intent-filter>
-                <action android:name="NEW_MESSAGE_ACTION" />
+                <action android:name="ONE_MESSAGE_ACTION" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="MANY_MESSAGE_ACTION" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
                     android:value="com.zombispormedio.assemble.activities.HomeActivity"
@@ -190,13 +212,17 @@
 
         <service
                 android:name="com.zombispormedio.assemble.services.NotificationInterceptorService"
-                android:exported="false">
+                android:exported="false"
+                >
             <intent-filter>
                 <action android:name="com.onesignal.NotificationExtender" />
             </intent-filter>
         </service>
 
-        <meta-data android:name="com.onesignal.NotificationOpened.DEFAULT" android:value="DISABLE" />
+        <meta-data
+                android:name="com.onesignal.NotificationOpened.DEFAULT"
+                android:value="DISABLE"
+                />
 
     </application>
 

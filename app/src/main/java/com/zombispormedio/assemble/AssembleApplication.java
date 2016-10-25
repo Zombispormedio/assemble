@@ -2,7 +2,6 @@ package com.zombispormedio.assemble;
 
 
 import com.onesignal.OneSignal;
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.activities.BaseActivity;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
@@ -11,7 +10,6 @@ import com.zombispormedio.assemble.models.modules.SubscriptionModule;
 import com.zombispormedio.assemble.models.services.api.APIConfiguration;
 import com.zombispormedio.assemble.net.ConnectionState;
 import com.zombispormedio.assemble.services.NotificationOpenedEvent;
-import com.zombispormedio.assemble.services.NotificationReceivedEvent;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.utils.RunningActivity;
 import com.zombispormedio.assemble.views.IApplicationView;
@@ -20,13 +18,10 @@ import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import android.app.Application;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
 
 import io.realm.Realm;
@@ -84,8 +79,7 @@ public class AssembleApplication extends Application implements IApplicationView
 
         OneSignal.startInit(this)
                 .inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification)
-                .setNotificationReceivedHandler(new NotificationReceivedEvent(this))
-                .setNotificationOpenedHandler(new NotificationOpenedEvent())
+                .setNotificationOpenedHandler(new NotificationOpenedEvent(this))
                 .init();
     }
 
@@ -169,6 +163,17 @@ public class AssembleApplication extends Application implements IApplicationView
     @Override
     public boolean isActive() {
         return !RunningActivity.whoIsRunning.isEmpty();
+    }
+
+    @Override
+    public Intent createIntent(Class<? extends BaseActivity> activityClass) {
+        return new Intent(getApplicationContext(),activityClass);
+    }
+
+    @Override
+    public void startIntent(Intent intent) {
+        intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
 

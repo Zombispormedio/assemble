@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 
+import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
@@ -17,6 +18,7 @@ import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IHomeView;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -52,14 +54,21 @@ public class HomeController extends Controller {
     public HomeController(IHomeView ctx) {
         super(ctx);
         this.ctx = ctx;
-
         profileResource = getResourceComponent().provideProfileResource();
-
         subscriptions=new HashMap<>();
-
         uncheckAll();
-
         isBackgroundLoading = false;
+    }
+
+    public HomeController(IHomeView ctx, ArrayList<Message> messages){
+        super(ctx);
+        this.ctx = ctx;
+        profileResource = getResourceComponent().provideProfileResource();
+        subscriptions=new HashMap<>();
+        uncheckAll();
+        isBackgroundLoading = false;
+
+        getResourceComponent().provideChatResource().storeMessages(messages);
     }
 
     @Override

@@ -1,16 +1,19 @@
 package com.zombispormedio.assemble.models;
 
 
+import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -176,6 +179,27 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         return createdAt.beforeDay(previous) || createdAt.beforeMonth(previous) || createdAt.beforeYear(previous);
     }
 
+    public static boolean isDistinctSender(ArrayList<Message> messages) {
+        boolean distinct=false;
+        int len=messages.size();
+        int i=0;
+        Message prev=null;
+        while (i<len&& !distinct){
+            if(prev==null){
+                prev=messages.get(i);
+            }else{
+                Message current=messages.get(i);
+                if(prev.sender_id!=current.sender_id){
+                    distinct=true;
+                }
+            }
+
+            i++;
+        }
+
+        return distinct;
+    }
+
     public static class Builder {
 
         public int id;
@@ -243,54 +267,59 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
     }
 
 
-    public static Message createMessage(HashMap<String, String> messageMap) {
-        Builder builder = new Builder();
-        for (String key : messageMap.keySet()) {
-            String value = messageMap.get(key);
-            switch (key) {
-                case "id":
-                    builder.setId(Integer.parseInt(value));
-                    break;
+    public static Builder resolveBuilder(String key, String value, Builder builder) {
+        switch (key) {
+            case "id":
+                builder.setId(Integer.parseInt(value));
+                break;
 
-                case "sender_id":
-                    builder.setSenderId(Integer.parseInt(value));
-                    break;
+            case "sender_id":
+                builder.setSenderId(Integer.parseInt(value));
+                break;
 
-                case "recipient_id":
-                    builder.setRecipientId(Integer.parseInt(value));
-                    break;
+            case "recipient_id":
+                builder.setRecipientId(Integer.parseInt(value));
+                break;
 
-                case "chat_id":
-                    builder.setChatId(Integer.parseInt(value));
-                    break;
+            case "chat_id":
+                builder.setChatId(Integer.parseInt(value));
+                break;
 
-                case "content":
-                    builder.setContent(value);
-                    break;
+            case "content":
+                builder.setContent(value);
+                break;
 
-                case "is_read":
-                    builder.setIsRead(Boolean.parseBoolean(value));
-                    break;
+            case "is_read":
+                builder.setIsRead(Boolean.parseBoolean(value));
+                break;
 
-                case "is_sent":
-                    builder.setIsSent(Boolean.parseBoolean(value));
-                    break;
+            case "is_sent":
+                builder.setIsSent(Boolean.parseBoolean(value));
+                break;
 
-                case "is_delivered":
-                    builder.setIsDelivered(Boolean.parseBoolean(value));
-                    break;
+            case "is_delivered":
+                builder.setIsDelivered(Boolean.parseBoolean(value));
+                break;
 
-                case "created_at":
-                    builder.setCreatedAt(value);
-                    break;
-            }
+            case "created_at":
+                builder.setCreatedAt(value);
+                break;
         }
-
-        return builder.build();
+        return builder;
     }
-    public static Message createMessage(JSONObject messageMap) {
-        HashMap<String, String> data = Utils.convertJSONObjectToHashMap(messageMap);
-        return createMessage(data);
+
+    public static Message createMessage(HashMap<String, String> messageMap) {
+        return Stream.of(messageMap)
+                .reduce(new Builder(), (memo, item) -> resolveBuilder(item.getKey(), item.getValue(), memo))
+                .build();
+    }
+
+    public static Message createMessage(JSONObject json) {
+
+            return Stream.of(json.keys())
+                    .reduce(new Builder(), (memo, key) -> resolveBuilder(key, Utils.validateJSONValue(key, json), memo))
+                    .build();
+
     }
 
 }

@@ -16,19 +16,15 @@ public class AndroidConfig {
 
         public final static String LOADED = "loaded";
 
-        public static final String MESSAGING_ID = "messaging:id";
-
         public static final String MESSAGE_BUNDLE="message:bundle";
 
         public static final String FOREGROUND_NOTIFICATION ="foreground_notification";
 
-        public static final String CONTENT="content";
+        public static final String MESSAGES="messages";
     }
 
 
     public static class Actions {
-
-        public static final String NEW_MESSAGE_ACTION = "NEW_MESSAGE_ACTION";
 
         public static final String ON_MESSAGE_EVENT = "ON_MESSAGE_EVENT";
 
@@ -36,7 +32,13 @@ public class AndroidConfig {
 
         public static final String ON_MESSAGE_NOTIFY_HOME = "ON_MESSAGE_NOTIFY_HOME";
 
-        public static final String ON_MESSAGE_NOTIFY_EVERYWHERE = "ON_MESSAGE_NOTIFY_EVERYWHERE";
+        public static final String ONE_MESSAGE_ACTION = "ONE_MESSAGE_ACTION";
+
+        public static final String MANY_MESSAGE_ACTION = "MANY_MESSAGE_ACTION";
+
+        public static final String SEVERAL_MESSAGE_ACTION = "SEVERAL_MESSAGE_ACTION";
+
+        public static final String SEVERAL_MESSAGE_ACTIVE_ACTION = "SEVERAL_MESSAGE_ACTIVE_ACTION";
     }
 
     public static class Groups{

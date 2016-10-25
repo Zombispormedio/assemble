@@ -20,15 +20,15 @@ public abstract class AbstractNotificationEvent {
         this.application = application;
     }
 
-    protected void sendBroadcast(Intent intent){
+    protected void sendBroadcast(Intent intent) {
         application.sendBroadcastByIntent(intent);
     }
 
-    protected boolean isActive(){
+    protected boolean isActive() {
         return application.isActive();
     }
 
-    protected boolean isRunning(String running){
+    protected boolean isRunning(String running) {
         return application.isRunning(running);
     }
 
@@ -36,15 +36,23 @@ public abstract class AbstractNotificationEvent {
         return application.getPreferencesManager();
     }
 
-    protected IApplicationView getApp(){
+    protected IApplicationView getApp() {
         return application;
     }
 
-    protected String getString(int id){
+    protected String getString(int id) {
         return application.getAppString(id);
     }
 
-   protected int getColor(int id){
-       return application.getAppColor(id);
-   }
+    protected int getColor(int id) {
+        return application.getAppColor(id);
+    }
+
+    protected Intent createIntent(Class<? extends BaseActivity> activityClass){
+        return application.createIntent(activityClass);
+    }
+
+    protected void startIntent(Intent intent){
+        application.startIntent(intent);
+    }
 }
