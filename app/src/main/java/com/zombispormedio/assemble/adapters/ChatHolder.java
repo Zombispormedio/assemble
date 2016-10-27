@@ -98,6 +98,8 @@ public class ChatHolder extends AbstractHolder<Chat> {
                     drawableID=R.drawable.message_check_all_layer;
                 }else if(last.is_sent){
                     drawableID=R.drawable.message_check_layer;
+                }else{
+                    drawableID=R.drawable.message_clock_layer;
                 }
                 Drawable drawable=getDrawable(drawableID, 20, 20);
 

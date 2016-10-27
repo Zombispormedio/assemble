@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.models.resources;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
@@ -80,14 +81,23 @@ public class ChatResource extends AbstractResource<Chat> {
     }
 
 
-    public void readMessages(int id, ChatEditor chatEditor, IServiceHandler<ArrayList<Message>, Error> handler) {
-        persistence.readMessages(id, chatEditor, new ServiceHandler<ArrayList<Message>, Error>(handler) {
+    public void readMessages(int id, ChatEditor chatEditor) {
+        persistence.readMessages(id, chatEditor, new ServiceHandler<ArrayList<Message>, Error>() {
+            @Override
+            public void onError(Error error) {
+                Logger.d(error.msg);
+            }
+
             @Override
             public void onSuccess(ArrayList<Message> result) {
                 messageStorage.createOrUpdateAll(result);
                 super.onSuccess(result);
             }
         });
+    }
+
+    public void haveBeenReadMessages(int[] messageIds){
+        messageStorage.read(messageIds);
     }
 
 

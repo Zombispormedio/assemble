@@ -23,7 +23,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
     protected ArrayList<MessageHolder.Container> data;
 
     public MessageListAdapter() {
-        data=new ArrayList<>();
+        data = new ArrayList<>();
     }
 
     @Override
@@ -50,12 +50,41 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
         return data.size();
     }
 
-    public void addAll(ArrayList<Message> data) {
-        this.data= Stream.of(data)
+    public void addAll(ArrayList<Message> messages) {
+        this.data = Stream.of(messages)
                 .map(MessageHolder.Container::new)
-                .collect(Collectors.toCollection(ArrayList< MessageHolder.Container>::new));
+                .collect(Collectors.toCollection(ArrayList<MessageHolder.Container>::new));
 
         notifyDataSetChanged();
+    }
+
+    public void add(Message message) {
+        int index = data.size();
+        data.add(new MessageHolder.Container(message));
+        notifyItemRangeChanged(index, data.size());
+    }
+
+    public void read(int id) {
+        int index = indexOfById(id);
+        MessageHolder.Container container = data.get(index);
+        container.read();
+        notifyItemChanged(index);
+    }
+
+
+    public int indexOfById(int id) {
+        int index = -1;
+        int len = data.size();
+        int i = 0;
+        while (i < len && index == -1) {
+            Message message = data.get(i).getMessage();
+            if (message.id == id) {
+                index = i;
+            }
+            i++;
+        }
+
+        return index;
     }
 
     public int addPending(Message message) {
@@ -70,9 +99,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
     }
 
 
-
     public void checkMessage(int index, Message message) {
-        MessageHolder.Container container=data.get(index);
+        MessageHolder.Container container = data.get(index);
         container.setMessage(message);
         data.set(index, container);
         notifyItemChanged(index);

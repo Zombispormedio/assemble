@@ -180,6 +180,8 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
             userImageView.setImageResource(R.drawable.message_check_all_layer);
         } else if (message.is_sent) {
             userImageView.setImageResource(R.drawable.message_check_layer);
+        }else{
+            userImageView.setImageResource(R.drawable.message_clock_layer);
         }
     }
 
@@ -234,6 +236,10 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
         public Container(Message message) {
             this.message = message;
             clicked = false;
+        }
+
+        public void read(){
+            message.is_read=true;
         }
 
         public boolean isClicked() {

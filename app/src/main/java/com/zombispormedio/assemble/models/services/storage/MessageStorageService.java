@@ -1,7 +1,10 @@
 package com.zombispormedio.assemble.models.services.storage;
 
 import com.annimon.stream.Collectors;
+import com.annimon.stream.IntStream;
 import com.annimon.stream.Stream;
+import com.orhanobut.logger.Logger;
+import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.wrappers.realm.dao.MessageDAO;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
@@ -40,5 +43,16 @@ public class MessageStorageService  extends StorageService<MessageDAO, Message> 
                 .equalTo("sender_id", friend)
                 .equalTo("is_read", false)
                 .count();
+    }
+
+    public void read(int[] messagesIds){
+        ArrayList<MessageDAO>messageDAOs=storage.in("id", Utils.toInteger(messagesIds));
+        storage.begin();
+        for (MessageDAO messageDAO:messageDAOs) {
+            messageDAO.is_read=true;
+        }
+        storage.commit();
+
+       Logger.d(storage.getById(messagesIds[0]).is_read);
     }
 }

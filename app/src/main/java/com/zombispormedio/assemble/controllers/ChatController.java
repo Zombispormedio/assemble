@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.annimon.stream.Stream;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.FriendProfile;
@@ -79,18 +78,23 @@ public class ChatController extends Controller {
 
         ctx.setAvatar(friend.getLargeImageBuilder());
 
+        renderMessages();
+    }
+
+    private void renderMessages() {
         ArrayList<Message> messages = chatResource.getMessages(chatID);
 
         ctx.bindMessages(messages);
 
         readMessages(messages);
-
-
     }
 
 
     public void onMessageSend() {
         String content = ctx.getMessageInputValue();
+        if(content.isEmpty()){
+            return;
+        }
         MessageEditor message = new MessageEditor.Builder()
                 .setContent(content)
                 .build();
@@ -107,7 +111,7 @@ public class ChatController extends Controller {
 
             @Override
             public void onSuccess(Message result) {
-                ctx.addMessage(index, chatResource.getMessageById(result.id));
+                ctx.updateMessage(index, chatResource.getMessageById(result.id));
             }
         });
 
@@ -118,30 +122,30 @@ public class ChatController extends Controller {
                 .filter(item -> !item.is_read && item.sender instanceof FriendProfile)
                 .mapToInt(item -> item.id)
                 .toArray();
+       readMessages(messagesIDs);
+
+    }
+
+    private void readMessages(int[] messagesIDs) {
         if (messagesIDs.length > 0) {
             ChatEditor.Builder builder = new ChatEditor.Builder()
                     .setMessages(messagesIDs);
-            chatResource.readMessages(chatID, builder.build(), new ServiceHandler<ArrayList<Message>, Error>() {
-                @Override
-                public void onSuccess(ArrayList<Message> result) {
-                    ctx.showAlert("read");
-                }
-
-                @Override
-                public void onError(Error error) {
-                    ctx.showAlert(error.msg);
-                }
-            });
+            chatResource.readMessages(chatID, builder.build());
         }
-
     }
 
 
     private class MessageSubscriber extends Subscriber {
 
         @Override
+        public void notifyOneChange(int id) {
+            ctx.addMessage(chatResource.getMessageById(id));
+            readMessages(new int[]{id});
+        }
+
+        @Override
         public void notifyChange() {
-            renderChat();
+            renderMessages();
         }
     }
 

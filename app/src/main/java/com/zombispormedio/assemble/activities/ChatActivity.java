@@ -34,6 +34,7 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ONE_MESSAGE_ACTION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.FOREGROUND_NOTIFICATION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGES;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_ID;
 
 public class ChatActivity extends BaseActivity implements IChatView {
 
@@ -75,16 +76,16 @@ public class ChatActivity extends BaseActivity implements IChatView {
         Intent intent = getIntent();
         String action = intent.getAction();
         Bundle extra = intent.getExtras();
-        int chatId=extra.getInt(CHAT_ID);
+        int chatId = extra.getInt(CHAT_ID);
 
         if (MANY_MESSAGE_ACTION.equals(action)) {
-            ArrayList<Message>messages=extra.getParcelableArrayList(MESSAGES);
+            ArrayList<Message> messages = extra.getParcelableArrayList(MESSAGES);
             ctrl = new ChatController(this, chatId, messages);
         } else {
             ctrl = new ChatController(this, chatId);
         }
 
-        fromNotification=extra.getBoolean(FOREGROUND_NOTIFICATION);
+        fromNotification = extra.getBoolean(FOREGROUND_NOTIFICATION);
 
         return chatId;
     }
@@ -121,7 +122,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
     @Override
     public void bindMessages(ArrayList<Message> messages) {
         messageListAdapter.addAll(messages);
-        messagesList.scrollToPosition(messages.size()-1);
+        messagesList.scrollToPosition(messages.size() - 1);
     }
 
 
@@ -140,8 +141,20 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
     @Override
-    public void addMessage(int index, Message message) {
+    public void updateMessage(int index, Message message) {
         messageListAdapter.checkMessage(index, message);
+    }
+
+    @Override
+    public void addMessage(Message message) {
+        int index = messageListAdapter.getItemCount();
+        messageListAdapter.add(message);
+        messagesList.scrollToPosition(index);
+    }
+
+    @Override
+    public void read(int id) {
+        messageListAdapter.read(id);
     }
 
     @OnClick(R.id.send_button)
@@ -197,8 +210,8 @@ public class ChatActivity extends BaseActivity implements IChatView {
     @Override
     protected void setupReceivers() {
         super.setupReceivers();
-        messageReceiver=new MessageReceiver();
-        IntentFilter intentFilter=new IntentFilter();
+        messageReceiver = new MessageReceiver();
+        IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(ON_MESSAGE_NOTIFY_CHAT);
         registerReceiver(messageReceiver, intentFilter);
     }
@@ -213,7 +226,23 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            getResourceComponent().provideMessageSubscription().haveChanged();
+
+            getResourceComponent().provideMessageSubscription().haveOneChanged(intent.getExtras().getInt(MESSAGE_ID));
+        }
+    }
+
+    private class ReadReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle data = intent.getExtras();
+            int[] messagesIds = data.getIntArray(MESSAGES);
+            if (messagesIds != null) {
+                for (int id : messagesIds) {
+                    read(id);
+                }
+            }
+
         }
     }
 

@@ -11,6 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.models.Message;
@@ -23,12 +24,14 @@ import com.zombispormedio.assemble.views.activities.IBaseView;
 import butterknife.ButterKnife;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_EVENT;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_READ_EVENT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.AUTH;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGES;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_BUNDLE;
 
 public class BaseActivity extends AppCompatActivity implements IBaseView {
 
-    private MessageSavingReceiver messageSavingReceiver;
+
 
 
     @Override
@@ -126,15 +129,23 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     /********************** Messaging ******************/
 
+    private MessageSavingReceiver messageSavingReceiver;
+    private ReadReceiver readReceiver;
 
 
     protected void setupReceivers() {
         messageSavingReceiver = new MessageSavingReceiver();
+        configureReceiver(messageSavingReceiver, ON_MESSAGE_EVENT);
+
+        readReceiver = new ReadReceiver();
+        configureReceiver(readReceiver, ON_READ_EVENT);
+    }
+
+
+    private void configureReceiver(BroadcastReceiver receiver, String action){
         IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(ON_MESSAGE_EVENT);
-        registerReceiver(messageSavingReceiver, intentFilter);
-
-
+        intentFilter.addAction(action);
+        registerReceiver(receiver, intentFilter);
     }
 
     protected void slashReceivers() {
@@ -151,6 +162,17 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
             getResourceComponent().provideChatResource().storeMessage(message);
         }
     }
+
+    private class ReadReceiver extends BroadcastReceiver {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle data = intent.getExtras();
+            getResourceComponent().provideChatResource().haveBeenReadMessages(data.getIntArray(MESSAGES));
+        }
+    }
+
+
 
 
 }

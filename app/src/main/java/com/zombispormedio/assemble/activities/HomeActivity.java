@@ -45,6 +45,7 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.SEVERAL_ME
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.LOADED;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGES;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.READ;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.STATE;
 
 public class HomeActivity extends BaseActivity implements IHomeView {
@@ -387,9 +388,9 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Logger.d("Avida");
-            getResourceComponent().provideChatSubscription().haveOneChanged(intent.getExtras().getInt(CHAT_ID));
-            if(getState()!=HomePagerAdapter.CHATS){
+            Bundle extras=intent.getExtras();
+            getResourceComponent().provideChatSubscription().haveOneChanged(extras.getInt(CHAT_ID));
+            if(getState()!=HomePagerAdapter.CHATS && !extras.getBoolean(READ)){
                 moveToPosition(HomePagerAdapter.CHATS);
             }
         }

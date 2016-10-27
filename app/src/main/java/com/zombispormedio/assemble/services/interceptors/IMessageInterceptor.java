@@ -16,6 +16,6 @@ public interface IMessageInterceptor extends InterceptorInterface {
 
     void notifyHomeForChat(int chatId);
 
-    void notifyChat();
+    void notifyChat(int messageId);
 
 }

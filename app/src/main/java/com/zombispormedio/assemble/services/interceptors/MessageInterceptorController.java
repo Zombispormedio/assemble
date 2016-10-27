@@ -1,9 +1,11 @@
 package com.zombispormedio.assemble.services.interceptors;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.Message;
 
 import org.json.JSONObject;
 
+import android.media.RingtoneManager;
 import android.support.v4.app.NotificationCompat;
 
 /**
@@ -26,6 +28,7 @@ public class MessageInterceptorController implements InterceptorControllerInterf
 
         if(interceptor.isApplicationActive()){
             Message message = Message.createMessage(data);
+            Logger.d(message.id);
             interceptor.saveMessage(message);
             boolean inHome=interceptor.isInHome();
             boolean inSameChat=interceptor.isInTheSameChat(message.chat_id);
@@ -34,7 +37,7 @@ public class MessageInterceptorController implements InterceptorControllerInterf
             if (inHome) {
                 interceptor.notifyHomeForChat(message.chat_id);
             } else if (inSameChat) {
-                interceptor.notifyChat();
+                interceptor.notifyChat(message.id);
             }
         }
 
@@ -48,6 +51,7 @@ public class MessageInterceptorController implements InterceptorControllerInterf
     @Override
     public NotificationCompat.Builder modifyNotificationBuilder(NotificationCompat.Builder builder) {
         return builder.setPriority(NotificationCompat.PRIORITY_MAX)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setVibrate(new long[]{1, 1, 1})
                 .setCategory(NotificationCompat.CATEGORY_MESSAGE)
                 .setAutoCancel(true);

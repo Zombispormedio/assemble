@@ -34,11 +34,11 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
 
     public final String content;
 
-    public final boolean is_read;
+    public boolean is_read;
 
-    public final boolean is_sent;
+    public boolean is_sent;
 
-    public final boolean is_delivered;
+    public boolean is_delivered;
 
     public final String created_at;
 

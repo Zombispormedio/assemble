@@ -1,16 +1,9 @@
 package com.zombispormedio.assemble.services;
 
-import com.annimon.stream.Collectors;
 import com.annimon.stream.Stream;
 import com.onesignal.OSNotificationOpenResult;
 import com.onesignal.OSNotificationPayload;
 import com.onesignal.OneSignal;
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.activities.BaseActivity;
-import com.zombispormedio.assemble.activities.ChatActivity;
-import com.zombispormedio.assemble.activities.HomeActivity;
-import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.services.events.INotificationEventController;
 import com.zombispormedio.assemble.services.events.MessageEventController;
 import com.zombispormedio.assemble.utils.AndroidConfig;
@@ -22,13 +15,6 @@ import android.content.Intent;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.MANY_MESSAGE_ACTION;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.SEVERAL_MESSAGE_ACTION;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.SEVERAL_MESSAGE_ACTIVE_ACTION;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.FOREGROUND_NOTIFICATION;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGES;
 
 /**
  * Created by Xavier Serrano on 23/10/2016.
@@ -56,7 +42,7 @@ public class NotificationOpenedEvent extends AbstractNotificationEvent implement
         }
 
         switch (payload.groupKey){
-            case AndroidConfig.Groups.Message: ctrl=new MessageEventController();
+            case AndroidConfig.Groups.MESSAGE_GROUP: ctrl=new MessageEventController();
                 break;
         }
         if(ctrl==null){

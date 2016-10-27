@@ -21,6 +21,11 @@ public interface IChatView extends IBaseView {
 
     int addPendingMessage(Message message);
 
-    void addMessage(int index, Message message);
+    void updateMessage(int index, Message message);
+
+    void addMessage(Message message);
+
+
+    void read(int id);
 
 }
