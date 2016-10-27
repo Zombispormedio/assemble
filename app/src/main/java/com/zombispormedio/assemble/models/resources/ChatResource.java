@@ -88,6 +88,7 @@ public class ChatResource extends AbstractResource<Chat> {
     public ArrayList<Message> getMessages(int id){
         return messageStorage.getSortedMessagesByChat(id);
     }
+    
 
 
 }

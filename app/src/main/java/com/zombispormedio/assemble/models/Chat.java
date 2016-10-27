@@ -25,15 +25,17 @@ public class Chat extends BaseModel implements Sorted<Chat> {
 
     private final transient ISODate createdAt;
 
+    public final int unreadCount;
+
 
     public Chat(int id, String created_at, UserProfile sender, FriendProfile recipient,
-            Message lastMessage) {
+            Message lastMessage, int unreadCount) {
         super(id);
         this.created_at = created_at;
         this.sender = sender;
         this.recipient = recipient;
         this.lastMessage = lastMessage;
-
+        this.unreadCount=unreadCount;
         createdAt = new ISODate(created_at);
     }
 

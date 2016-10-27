@@ -34,4 +34,11 @@ public class MessageStorageService  extends StorageService<MessageDAO, Message> 
         MessageDAO dao=storage.findOneByAndSort("chat_id", chatId, "created_at");
         return dao!=null?dao.toModel():null;
     }
+
+    public int getUnreadCount(int chatId, int friend){
+        return (int) storage.getQuery().equalTo("chat_id", chatId)
+                .equalTo("sender_id", friend)
+                .equalTo("is_read", false)
+                .count();
+    }
 }

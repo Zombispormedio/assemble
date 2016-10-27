@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.adapters;
 
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
@@ -35,6 +36,9 @@ public class ChatHolder extends AbstractHolder<Chat> {
     @BindView(R.id.date_label)
     TextView dateLabel;
 
+    @BindView(R.id.unread_count)
+    TextView unreadCountLabel;
+
     private IOnClickItemListHandler<Chat> listener;
 
     public ChatHolder(View view) {
@@ -58,13 +62,19 @@ public class ChatHolder extends AbstractHolder<Chat> {
 
     private void renderData(Chat chat) {
         FriendProfile recipient = chat.recipient;
-
         nameLabel.setText(recipient.username);
 
         recipient.getLargeImageBuilder()
                 .context(getContext())
                 .imageView(imageView)
                 .build();
+
+        if(chat.unreadCount>0){
+            unreadCountLabel.setVisibility(View.VISIBLE);
+            unreadCountLabel.setText(String.valueOf(chat.unreadCount));
+        }else{
+            unreadCountLabel.setVisibility(View.GONE);
+        }
 
         renderLastMessage(chat.lastMessage);
 

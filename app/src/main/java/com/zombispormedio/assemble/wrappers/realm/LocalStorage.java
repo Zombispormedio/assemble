@@ -170,11 +170,12 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         return (int) query.count();
     }
 
+
     public void close(){
         database.close();
     }
 
-    private RealmQuery<D> getQuery() {
+    public RealmQuery<D> getQuery() {
         return (RealmQuery<D>) database.where(opClass);
     }
 
