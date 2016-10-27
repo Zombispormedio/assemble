@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.models.services.interfaces;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.editors.EditMeeting;
+import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.net.Error;
 
@@ -15,7 +15,7 @@ public interface IMeetingService {
 
     void getAll(IServiceHandler<ArrayList<Meeting>, Error> handler);
 
-    void create(EditMeeting meeting, IServiceHandler<Meeting, Error> handler);
+    void create(MeetingEditor meeting, IServiceHandler<Meeting, Error> handler);
 
     void uploadImage(int meetingId, File file, IServiceHandler<Meeting, Error> handler);
 }

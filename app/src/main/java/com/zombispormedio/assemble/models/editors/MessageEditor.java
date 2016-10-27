@@ -4,11 +4,11 @@ package com.zombispormedio.assemble.models.editors;
  * Created by Xavier Serrano on 04/10/2016.
  */
 
-public class EditMessage {
+public class MessageEditor {
 
     public final String content;
 
-    public EditMessage(String content) {
+    public MessageEditor(String content) {
         this.content = content;
     }
 
@@ -20,8 +20,8 @@ public class EditMessage {
             return this;
         }
 
-        public EditMessage build(){
-            return new EditMessage(content);
+        public MessageEditor build(){
+            return new MessageEditor(content);
         }
     }
 

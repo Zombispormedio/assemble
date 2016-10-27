@@ -4,8 +4,8 @@ import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.models.editors.EditChat;
-import com.zombispormedio.assemble.models.editors.EditMessage;
+import com.zombispormedio.assemble.models.editors.ChatEditor;
+import com.zombispormedio.assemble.models.editors.MessageEditor;
 import com.zombispormedio.assemble.models.services.storage.MessageStorageService;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.models.services.interfaces.IChatService;
@@ -36,18 +36,13 @@ public class ChatResource extends AbstractResource<Chat> {
     }
 
 
-    public void create(EditChat chat, final IServiceHandler<Chat, Error> handler) {
+    public void create(ChatEditor chat, final IServiceHandler<Chat, Error> handler) {
 
-        persistence.create(chat, new ServiceHandler<Chat, Error>() {
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+        persistence.create(chat, new ServiceHandler<Chat, Error>(handler) {
             @Override
             public void onSuccess(Chat result) {
                 storage.createOrUpdate(result);
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
 
@@ -58,17 +53,12 @@ public class ChatResource extends AbstractResource<Chat> {
     }
 
 
-    public void createMessage(final int id, EditMessage message, final IServiceHandler<Message, Error> handler) {
-        persistence.sendMessage(id, message, new ServiceHandler<Message, Error>() {
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+    public void createMessage(final int id, MessageEditor message, final IServiceHandler<Message, Error> handler) {
+        persistence.sendMessage(id, message, new ServiceHandler<Message, Error>(handler) {
             @Override
             public void onSuccess(Message result) {
                 messageStorage.createOrUpdate(result);
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
     }
@@ -77,18 +67,28 @@ public class ChatResource extends AbstractResource<Chat> {
         return messageStorage.getByID(id);
     }
 
-    public void storeMessage(Message message){
+    public void storeMessage(Message message) {
         messageStorage.createOrUpdate(message);
     }
 
-    public void storeMessages(ArrayList<Message> messages){
+    public void storeMessages(ArrayList<Message> messages) {
         messageStorage.createOrUpdateAll(messages);
     }
 
-    public ArrayList<Message> getMessages(int id){
+    public ArrayList<Message> getMessages(int id) {
         return messageStorage.getSortedMessagesByChat(id);
     }
-    
+
+
+    public void readMessages(int id, ChatEditor chatEditor, IServiceHandler<ArrayList<Message>, Error> handler) {
+        persistence.readMessages(id, chatEditor, new ServiceHandler<ArrayList<Message>, Error>(handler) {
+            @Override
+            public void onSuccess(ArrayList<Message> result) {
+                messageStorage.createOrUpdateAll(result);
+                super.onSuccess(result);
+            }
+        });
+    }
 
 
 }

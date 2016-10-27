@@ -4,7 +4,7 @@ package com.zombispormedio.assemble.models.services.api;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 
 import com.zombispormedio.assemble.models.Auth;
-import com.zombispormedio.assemble.models.editors.EditGCM;
+import com.zombispormedio.assemble.models.editors.GCMEditor;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.Result;
@@ -56,7 +56,7 @@ public class AuthAPIService implements IAuthService {
     public void refreshGCM(String gcmToken, IServiceHandler<Result, Error> handler) {
         api.RestWithAuth("/gcm")
                 .handler(DeferUtils.defer(handler))
-                .patch(JsonBinder.fromEditGCM(new EditGCM(gcmToken)));
+                .patch(JsonBinder.fromEditGCM(new GCMEditor(gcmToken)));
     }
 
 

@@ -1,11 +1,14 @@
 package com.zombispormedio.assemble.controllers;
 
+import com.annimon.stream.Stream;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.models.editors.EditMessage;
+import com.zombispormedio.assemble.models.editors.ChatEditor;
+import com.zombispormedio.assemble.models.editors.MessageEditor;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
@@ -15,7 +18,6 @@ import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 
 /**
@@ -38,29 +40,28 @@ public class ChatController extends Controller {
 
     public ChatController(IChatView ctx, int chatID) {
         super(ctx);
-        this.ctx=ctx;
-        this.chatID=chatID;
+        this.ctx = ctx;
+        this.chatID = chatID;
         setup();
     }
 
     public ChatController(IChatView ctx, int chatID, ArrayList<Message> messages) {
         super(ctx);
-        this.ctx=ctx;
+        this.ctx = ctx;
         setup();
-        this.chatID=chatID;
+        this.chatID = chatID;
         chatResource.storeMessages(messages);
     }
 
 
-
     private void setup() {
-        profileResource=getResourceComponent().provideProfileResource();
+        profileResource = getResourceComponent().provideProfileResource();
 
-        chatResource=getResourceComponent().provideChatResource();
+        chatResource = getResourceComponent().provideChatResource();
 
-        messageSubscription =getResourceComponent().provideMessageSubscription();
+        messageSubscription = getResourceComponent().provideMessageSubscription();
 
-        messageSubscriber =new MessageSubscriber();
+        messageSubscriber = new MessageSubscriber();
 
         messageSubscription.addSubscriber(messageSubscriber);
     }
@@ -70,30 +71,35 @@ public class ChatController extends Controller {
         renderChat();
     }
 
+
     private void renderChat() {
-        Chat chat=chatResource.getById(chatID);
-        FriendProfile friend=chat.recipient;
+        Chat chat = chatResource.getById(chatID);
+        FriendProfile friend = chat.recipient;
         ctx.bindTitle(friend.username);
 
         ctx.setAvatar(friend.getLargeImageBuilder());
 
-        ArrayList<Message> messages=chatResource.getMessages(chatID);
+        ArrayList<Message> messages = chatResource.getMessages(chatID);
 
         ctx.bindMessages(messages);
 
+        readMessages(messages);
+
+
     }
 
+
     public void onMessageSend() {
-        String content=ctx.getMessageInputValue();
-        EditMessage message=new EditMessage.Builder()
+        String content = ctx.getMessageInputValue();
+        MessageEditor message = new MessageEditor.Builder()
                 .setContent(content)
                 .build();
 
-        UserProfile profile=profileResource.getProfile();
+        UserProfile profile = profileResource.getProfile();
 
-        final int index=ctx.addPendingMessage(new Message(content, profile, ISODate.Now().toString()));
+        final int index = ctx.addPendingMessage(new Message(content, profile, ISODate.Now().toString()));
 
-        chatResource.createMessage(chatID, message, new ServiceHandler<Message, Error>(){
+        chatResource.createMessage(chatID, message, new ServiceHandler<Message, Error>() {
             @Override
             public void onError(Error error) {
                 ctx.showAlert(error.msg);
@@ -107,8 +113,31 @@ public class ChatController extends Controller {
 
     }
 
+    private void readMessages(ArrayList<Message> messages) {
+        int[] messagesIDs = Stream.of(messages)
+                .filter(item -> !item.is_read && item.sender instanceof FriendProfile)
+                .mapToInt(item -> item.id)
+                .toArray();
+        if (messagesIDs.length > 0) {
+            ChatEditor.Builder builder = new ChatEditor.Builder()
+                    .setMessages(messagesIDs);
+            chatResource.readMessages(chatID, builder.build(), new ServiceHandler<ArrayList<Message>, Error>() {
+                @Override
+                public void onSuccess(ArrayList<Message> result) {
+                    ctx.showAlert("read");
+                }
 
-    private class MessageSubscriber extends Subscriber{
+                @Override
+                public void onError(Error error) {
+                    ctx.showAlert(error.msg);
+                }
+            });
+        }
+
+    }
+
+
+    private class MessageSubscriber extends Subscriber {
 
         @Override
         public void notifyChange() {
@@ -120,6 +149,6 @@ public class ChatController extends Controller {
     public void onDestroy() {
         super.onDestroy();
         messageSubscription.removeSubscriber(messageSubscriber);
-        ctx=null;
+        ctx = null;
     }
 }

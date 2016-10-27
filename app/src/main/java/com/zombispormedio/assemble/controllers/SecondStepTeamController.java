@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.EditTeam;
+import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
@@ -20,7 +20,7 @@ public class SecondStepTeamController extends Controller {
 
     private final TeamResource teamResource;
 
-    private final EditTeam.Builder editor;
+    private final TeamEditor.Builder editor;
 
     private String imagePath;
 
@@ -31,7 +31,7 @@ public class SecondStepTeamController extends Controller {
 
         friendResource = getResourceComponent().provideFriendResource();
         teamResource = getResourceComponent().provideTeamResource();
-        editor = new EditTeam.Builder()
+        editor = new TeamEditor.Builder()
                 .setMembers(friendIds);
 
         imagePath = null;

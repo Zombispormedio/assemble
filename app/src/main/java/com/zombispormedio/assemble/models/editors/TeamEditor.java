@@ -4,7 +4,7 @@ package com.zombispormedio.assemble.models.editors;
  * Created by Xavier Serrano on 26/09/2016.
  */
 
-public class EditTeam {
+public class TeamEditor {
 
     public final String name;
 
@@ -14,7 +14,7 @@ public class EditTeam {
 
     public final int admin;
 
-    public EditTeam(String name, String description, int[] members, int admin) {
+    public TeamEditor(String name, String description, int[] members, int admin) {
         this.name = name;
         this.description = description;
         this.members = members;
@@ -71,8 +71,8 @@ public class EditTeam {
             return admin;
         }
 
-        public EditTeam build() {
-            return new EditTeam(name, description, members, admin);
+        public TeamEditor build() {
+            return new TeamEditor(name, description, members, admin);
         }
 
 

@@ -2,9 +2,14 @@ package com.zombispormedio.assemble.services;
 
 import com.onesignal.NotificationExtenderService;
 import com.onesignal.OSNotificationReceivedResult;
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.activities.ChatActivity;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.models.Message;
+import com.zombispormedio.assemble.services.interceptors.IMessageInterceptor;
+import com.zombispormedio.assemble.services.interceptors.InterceptorControllerInterface;
+import com.zombispormedio.assemble.services.interceptors.MessageInterceptorController;
+import com.zombispormedio.assemble.utils.AndroidConfig;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.IApplicationView;
 
@@ -22,19 +27,23 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
  * Created by Xavier Serrano on 23/10/2016.
  */
 
-public class NotificationInterceptorService extends NotificationExtenderService {
+public class NotificationInterceptorService extends NotificationExtenderService implements IMessageInterceptor {
+
+    private InterceptorControllerInterface ctrl;
 
     @Override
     protected boolean onNotificationProcessing(OSNotificationReceivedResult notification) {
-
-        boolean display = true;
-        if (getView().isActive()) {
-            Message message = Message.createMessage(notification.payload.additionalData);
-            saveMessage(message);
-            display = showNotificationInActive(message);
+        JSONObject data=notification.payload.additionalData;
+        switch (notification.payload.groupKey){
+            case AndroidConfig.Groups.Message: ctrl=new MessageInterceptorController(this);
+                break;
         }
+        if(ctrl==null){
+            return true;
+        }
+        ctrl.init(data);
 
-        if (display) {
+        if (ctrl.permitDisplay()) {
             overrideNotification();
         }
 
@@ -43,51 +52,45 @@ public class NotificationInterceptorService extends NotificationExtenderService 
 
     private void overrideNotification() {
         OverrideSettings overrideSettings = new OverrideSettings();
-        overrideSettings.extender = builder -> builder.setPriority(NotificationCompat.PRIORITY_MAX)
-                .setVibrate(new long[]{1, 1, 1})
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setAutoCancel(true);
+        overrideSettings.extender = builder -> ctrl.modifyNotificationBuilder(builder);
 
         displayNotification(overrideSettings);
 
     }
 
-    private boolean showNotificationInActive(Message message) {
-        boolean show = true;
-
-        if (isInHome()) {
-            notifyHome(message.chat_id);
-            show = false;
-        } else if (isInTheSameChat(message.chat_id)) {
-            notifyChat();
-            show = false;
-        }
-
-        return show;
-    }
 
     private IApplicationView getView() {
         return (IApplicationView) getApplication();
     }
 
-    private boolean isInHome() {
+    @Override
+    public boolean isInHome() {
         return AndroidServiceTools.isInHome(getView());
     }
 
-    private boolean isInTheSameChat(int chatId) {
+    @Override
+    public boolean isInTheSameChat(int chatId) {
         return AndroidServiceTools.isInTheSameChat(getView(), chatId);
     }
 
-    private void notifyHome(int chatId) {
+    @Override
+    public void notifyHomeForChat(int chatId) {
         sendBroadcast(AndroidServiceTools.notifyHome(chatId));
     }
 
-    private void notifyChat() {
+    @Override
+    public void notifyChat() {
         sendBroadcast(AndroidServiceTools.notifyChat());
     }
 
-    private void saveMessage(Message message) {
-        sendBroadcast(AndroidServiceTools.saveMessage(message));
+
+    @Override
+    public boolean isApplicationActive() {
+        return getView().isActive();
     }
 
+    @Override
+    public void saveMessage(Message message) {
+        sendBroadcast(AndroidServiceTools.saveMessage(message));
+    }
 }

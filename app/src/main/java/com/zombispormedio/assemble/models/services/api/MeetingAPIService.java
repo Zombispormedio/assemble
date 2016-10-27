@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.models.services.api;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.editors.EditMeeting;
+import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.FileBody;
@@ -29,7 +29,7 @@ public class MeetingAPIService implements IMeetingService {
     }
 
     @Override
-    public void create(EditMeeting meeting, IServiceHandler<Meeting, Error> handler) {
+    public void create(MeetingEditor meeting, IServiceHandler<Meeting, Error> handler) {
         api.RestWithAuth("/meeting")
                 .handler(DeferUtils.deferMeeting(handler))
                 .post(JsonBinder.fromEditMeeting(meeting));

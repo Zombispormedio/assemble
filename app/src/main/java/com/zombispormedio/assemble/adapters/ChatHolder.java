@@ -103,6 +103,8 @@ public class ChatHolder extends AbstractHolder<Chat> {
 
                 lastMessageLabel.setCompoundDrawables(drawable, null, null, null);
                 lastMessageLabel.setCompoundDrawablePadding(5);
+            }else{
+                lastMessageLabel.setCompoundDrawables(null, null, null, null);
             }
 
         }

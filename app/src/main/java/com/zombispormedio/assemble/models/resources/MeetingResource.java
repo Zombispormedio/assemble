@@ -2,7 +2,7 @@ package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.EditMeeting;
+import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.models.services.interfaces.IMeetingService;
@@ -28,39 +28,29 @@ public class MeetingResource extends AbstractResource<Meeting> {
 
     }
 
-    public void getAll(IServiceHandler<ArrayList<Meeting>, Error> handler){
+    public void getAll(IServiceHandler<ArrayList<Meeting>, Error> handler) {
         persistence.getAll(handler);
     }
 
 
-    public void create(EditMeeting editMeeting, final IServiceHandler<Meeting, Error> handler){
+    public void create(MeetingEditor meetingEditor, final IServiceHandler<Meeting, Error> handler) {
 
-        persistence.create(editMeeting, new ServiceHandler<Meeting, Error>(){
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+        persistence.create(meetingEditor, new ServiceHandler<Meeting, Error>(handler) {
             @Override
             public void onSuccess(Meeting result) {
                 storage.createOrUpdate(result);
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
 
     }
 
-    public void uploadImage(int meetingId, String path, final IServiceHandler<Meeting, Error> handler){
-        persistence.uploadImage(meetingId, new File(path), new ServiceHandler<Meeting, Error>(){
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+    public void uploadImage(int meetingId, String path, final IServiceHandler<Meeting, Error> handler) {
+        persistence.uploadImage(meetingId, new File(path), new ServiceHandler<Meeting, Error>() {
             @Override
             public void onSuccess(Meeting result) {
                 storage.createOrUpdate(result);
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
     }

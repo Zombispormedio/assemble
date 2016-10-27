@@ -38,17 +38,12 @@ public class FriendResource extends AbstractResource<FriendProfile> {
     }
 
     public void deleteFriend(int id, final IServiceHandler<ArrayList<FriendProfile>, Error> handler){
-        apiService.deleteFriend(id, new ServiceHandler<ArrayList<FriendProfile>, Error>(){
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+        apiService.deleteFriend(id, new ServiceHandler<ArrayList<FriendProfile>, Error>(handler){
             @Override
             public void onSuccess(ArrayList<FriendProfile> result) {
                 storage.createOrUpdateOrDeleteAll(result);
                 haveChanged();
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
     }

@@ -1,12 +1,12 @@
 package com.zombispormedio.assemble.net;
 
 import com.zombispormedio.assemble.models.Auth;
-import com.zombispormedio.assemble.models.editors.EditChat;
-import com.zombispormedio.assemble.models.editors.EditGCM;
-import com.zombispormedio.assemble.models.editors.EditMeeting;
-import com.zombispormedio.assemble.models.editors.EditMessage;
-import com.zombispormedio.assemble.models.editors.EditProfile;
-import com.zombispormedio.assemble.models.editors.EditTeam;
+import com.zombispormedio.assemble.models.editors.ChatEditor;
+import com.zombispormedio.assemble.models.editors.GCMEditor;
+import com.zombispormedio.assemble.models.editors.MeetingEditor;
+import com.zombispormedio.assemble.models.editors.MessageEditor;
+import com.zombispormedio.assemble.models.editors.ProfileEditor;
+import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.responses.ChatResponse;
 import com.zombispormedio.assemble.net.responses.ChatsResponse;
@@ -41,34 +41,34 @@ public class JsonBinder{
         return userAdapter.toJSON(user);
     }
 
-    public static String fromEditProfile(EditProfile profile) {
-        JSONWrapper<EditProfile> editProfileAdapter = new JSONWrapper<>(EditProfile.class);
+    public static String fromEditProfile(ProfileEditor profile) {
+        JSONWrapper<ProfileEditor> editProfileAdapter = new JSONWrapper<>(ProfileEditor.class);
         return editProfileAdapter.toJSON(profile);
     }
 
-    public static String fromEditTeam(EditTeam team) {
-        JSONWrapper<EditTeam> jsonAdapter = new JSONWrapper<>(EditTeam.class);
+    public static String fromEditTeam(TeamEditor team) {
+        JSONWrapper<TeamEditor> jsonAdapter = new JSONWrapper<>(TeamEditor.class);
         return jsonAdapter.toJSON(team);
     }
 
-    public static String fromEditMeeting(EditMeeting meeting) {
-        JSONWrapper<EditMeeting> jsonAdapter = new JSONWrapper<>(EditMeeting.class);
+    public static String fromEditMeeting(MeetingEditor meeting) {
+        JSONWrapper<MeetingEditor> jsonAdapter = new JSONWrapper<>(MeetingEditor.class);
         return jsonAdapter.toJSON(meeting);
     }
 
 
-    public static String fromEditChat(EditChat chat) {
-        JSONWrapper<EditChat> jsonAdapter = new JSONWrapper<>(EditChat.class);
+    public static String fromEditChat(ChatEditor chat) {
+        JSONWrapper<ChatEditor> jsonAdapter = new JSONWrapper<>(ChatEditor.class);
         return jsonAdapter.toJSON(chat);
     }
 
-    public static String fromEditMeesage(EditMessage message) {
-        JSONWrapper<EditMessage> jsonAdapter = new JSONWrapper<>(EditMessage.class);
+    public static String fromEditMeesage(MessageEditor message) {
+        JSONWrapper<MessageEditor> jsonAdapter = new JSONWrapper<>(MessageEditor.class);
         return jsonAdapter.toJSON(message);
     }
 
-    public static String fromEditGCM(EditGCM gcm) {
-        JSONWrapper<EditGCM> jsonAdapter = new JSONWrapper<>(EditGCM.class);
+    public static String fromEditGCM(GCMEditor gcm) {
+        JSONWrapper<GCMEditor> jsonAdapter = new JSONWrapper<>(GCMEditor.class);
         return jsonAdapter.toJSON(gcm);
     }
 

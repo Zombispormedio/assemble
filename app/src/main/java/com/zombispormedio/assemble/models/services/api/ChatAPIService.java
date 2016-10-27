@@ -3,8 +3,8 @@ package com.zombispormedio.assemble.models.services.api;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.models.editors.EditChat;
-import com.zombispormedio.assemble.models.editors.EditMessage;
+import com.zombispormedio.assemble.models.editors.ChatEditor;
+import com.zombispormedio.assemble.models.editors.MessageEditor;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.models.services.interfaces.IChatService;
@@ -30,7 +30,7 @@ public class ChatAPIService implements IChatService {
     }
 
     @Override
-    public void create(EditChat chat, IServiceHandler<Chat, Error> handler) {
+    public void create(ChatEditor chat, IServiceHandler<Chat, Error> handler) {
         api.RestWithAuth("/chat")
                 .handler(DeferUtils.deferChat(handler))
                 .post(JsonBinder.fromEditChat(chat));
@@ -52,11 +52,19 @@ public class ChatAPIService implements IChatService {
     }
 
     @Override
-    public void sendMessage(int id, EditMessage message, IServiceHandler<Message, Error> handler) {
+    public void sendMessage(int id, MessageEditor message, IServiceHandler<Message, Error> handler) {
         api.RestWithAuth("/chat/:id/message")
                 .params("id", id)
                 .handler(DeferUtils.deferMessage(handler))
                 .put(JsonBinder.fromEditMeesage(message));
+    }
+
+    @Override
+    public void readMessages(int id, ChatEditor chatEditor, IServiceHandler<ArrayList<Message>, Error> handler) {
+        api.RestWithAuth("/chat/:id/messages/read")
+                .params("id", id)
+                .handler(DeferUtils.deferMessages(handler))
+                .put(JsonBinder.fromEditChat(chatEditor));
     }
 
 

@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.utils.ISODate;
  * Created by Xavier Serrano on 28/09/2016.
  */
 
-public class EditMeeting {
+public class MeetingEditor {
 
     public final String name;
 
@@ -19,7 +19,7 @@ public class EditMeeting {
     public final String end_at;
 
 
-    public EditMeeting(String name, String description, int team, String start_at, String end_at) {
+    public MeetingEditor(String name, String description, int team, String start_at, String end_at) {
         this.name = name;
         this.description = description;
         this.team = team;
@@ -91,12 +91,12 @@ public class EditMeeting {
             d.setHour(0);
         }
 
-        public EditMeeting build(){
+        public MeetingEditor build(){
             if(allDay){
                 resetHours(startAt);
                 resetHours(endAt);
             }
-            return new EditMeeting(name, description, team, startAt.toString(), endAt.toString());
+            return new MeetingEditor(name, description, team, startAt.toString(), endAt.toString());
         }
     }
 

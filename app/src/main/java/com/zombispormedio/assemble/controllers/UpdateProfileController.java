@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.EditProfile;
+import com.zombispormedio.assemble.models.editors.ProfileEditor;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
@@ -24,7 +24,7 @@ public class UpdateProfileController extends Controller {
 
     private final ProfileSubscriber profileSubscriber;
 
-    private final EditProfile.Builder editor;
+    private final ProfileEditor.Builder editor;
 
 
     public UpdateProfileController(IUpdateProfileView ctx) {
@@ -37,7 +37,7 @@ public class UpdateProfileController extends Controller {
         profileSubscriber = new ProfileSubscriber();
         profileSubscription.addSubscriber(profileSubscriber);
 
-        editor = new EditProfile.Builder();
+        editor = new ProfileEditor.Builder();
     }
 
     @Override
@@ -59,14 +59,14 @@ public class UpdateProfileController extends Controller {
 
         bindEditor();
 
-        EditProfile editProfile = editor.build();
+        ProfileEditor profileEditor = editor.build();
 
         if (!editor.hasChanged()) {
             ctx.closeProgressDialog();
             ctx.close();
         } else {
 
-            profileResource.updateProfile(editProfile, new ServiceHandler<UserProfile, Error>() {
+            profileResource.updateProfile(profileEditor, new ServiceHandler<UserProfile, Error>() {
                 @Override
                 public void onError(Error error) {
                     ctx.closeProgressDialog();

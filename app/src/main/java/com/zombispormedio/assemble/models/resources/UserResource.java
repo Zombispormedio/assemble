@@ -40,26 +40,20 @@ public class UserResource {
 
 
     public void signOut(final IServiceHandler<Result, Error> handler) {
-        service.signOut(new ServiceHandler<Result, Error>() {
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+        service.signOut(new ServiceHandler<Result, Error>(handler) {
             @Override
             public void onSuccess(Result result) {
                 LocalStorage.Configuration.deleteAll();
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
 
         });
 
     }
 
-    public void refreshGCM(String gcmToken, final IServiceHandler<Result, Error> handler){
+    public void refreshGCM(String gcmToken, final IServiceHandler<Result, Error> handler) {
         service.refreshGCM(gcmToken, handler);
     }
-
 
 
 }

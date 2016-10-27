@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.EditTeam;
+import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Team;
@@ -27,38 +27,28 @@ public class TeamResource extends AbstractResource<Team> {
         this.persistence = persistence;
     }
 
-    public void getAll(IServiceHandler<ArrayList<Team>, Error> handler){
+    public void getAll(IServiceHandler<ArrayList<Team>, Error> handler) {
         persistence.getAll(handler);
     }
 
-    public void create(EditTeam editTeam, final IServiceHandler<Team, Error> handler){
+    public void create(TeamEditor teamEditor, final IServiceHandler<Team, Error> handler) {
 
-        persistence.create(editTeam, new ServiceHandler<Team, Error>(){
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+        persistence.create(teamEditor, new ServiceHandler<Team, Error>(handler) {
             @Override
             public void onSuccess(Team result) {
                 storage.createOrUpdate(result);
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
 
     }
 
-    public void uploadImage(int teamId, String path, final IServiceHandler<Team, Error> handler){
-        persistence.uploadImage(teamId, new File(path), new ServiceHandler<Team, Error>(){
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+    public void uploadImage(int teamId, String path, final IServiceHandler<Team, Error> handler) {
+        persistence.uploadImage(teamId, new File(path), new ServiceHandler<Team, Error>(handler) {
             @Override
             public void onSuccess(Team result) {
                 storage.createOrUpdate(result);
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
     }

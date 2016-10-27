@@ -11,7 +11,12 @@ import com.zombispormedio.assemble.activities.ChatActivity;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.Message;
+import com.zombispormedio.assemble.services.events.INotificationEventController;
+import com.zombispormedio.assemble.services.events.MessageEventController;
+import com.zombispormedio.assemble.utils.AndroidConfig;
 import com.zombispormedio.assemble.views.IApplicationView;
+
+import org.json.JSONObject;
 
 import android.content.Intent;
 
@@ -35,36 +40,38 @@ public class NotificationOpenedEvent extends AbstractNotificationEvent implement
         super(application);
     }
 
+    private INotificationEventController ctrl;
+
     @Override
     public void notificationOpened(OSNotificationOpenResult result) {
         OSNotificationPayload payload = result.notification.payload;
         List<OSNotificationPayload> notifications = result.notification.groupedNotifications;
-        ArrayList<Message> messages = new ArrayList<>();
+        ArrayList<JSONObject> data = new ArrayList<>();
 
         if (notifications == null) {
-            messages.add(Message.createMessage(payload.additionalData));
+            data.add(payload.additionalData);
         } else {
             Stream.of(notifications)
-                    .forEach(p -> messages.add(Message.createMessage(p.additionalData)));
-        }
-        boolean isDistinct = Message.isDistinctSender(messages);
-        Class<? extends BaseActivity> classIntent = isDistinct ? HomeActivity.class : ChatActivity.class;
-        Intent intent = createIntent(classIntent);
-        if (!isActive()) {
-            String action = isDistinct ? SEVERAL_MESSAGE_ACTION : MANY_MESSAGE_ACTION;
-            intent.setAction(action);
-            intent.putExtra(MESSAGES, messages);
-
-        } else if (isDistinct) {
-            intent.setAction(SEVERAL_MESSAGE_ACTIVE_ACTION);
+                    .forEach(p -> data.add(p.additionalData));
         }
 
-        if (!isDistinct) {
-            intent.putExtra(CHAT_ID, messages.get(0).chat_id);
-            intent.putExtra(FOREGROUND_NOTIFICATION, true);
+        switch (payload.groupKey){
+            case AndroidConfig.Groups.Message: ctrl=new MessageEventController();
+                break;
+        }
+        if(ctrl==null){
+            return;
+        }
+        ctrl.init(data);
+
+        if(ctrl.permitIntent()){
+            Intent intent = createIntent(ctrl.getIntentClass());
+
+            intent=ctrl.modifyIntent(intent, isActive());
+
+            startIntent(intent);
         }
 
-        startIntent(intent);
 
     }
 }

@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.EditMeeting;
+import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.MeetingResource;
@@ -22,7 +22,7 @@ public class CreateMeetingController extends Controller {
 
     private final MeetingResource meetingResource;
 
-    private final EditMeeting.Builder editor;
+    private final MeetingEditor.Builder editor;
 
     private String imagePath;
 
@@ -37,7 +37,7 @@ public class CreateMeetingController extends Controller {
 
         meetingResource = getResourceComponent().provideMeetingResource();
 
-        editor = new EditMeeting.Builder();
+        editor = new MeetingEditor.Builder();
 
         dateError = null;
 

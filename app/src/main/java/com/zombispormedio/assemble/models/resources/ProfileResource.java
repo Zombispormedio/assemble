@@ -2,7 +2,7 @@ package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.EditProfile;
+import com.zombispormedio.assemble.models.editors.ProfileEditor;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.subscriptions.Subscription;
 import com.zombispormedio.assemble.net.Error;
@@ -37,33 +37,23 @@ public class ProfileResource {
     }
 
     public void changeAvatar(String path, final IServiceHandler<UserProfile, Error> handler) {
-        persistence.changeAvatar(new File(path), new ServiceHandler<UserProfile, Error>() {
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+        persistence.changeAvatar(new File(path), new ServiceHandler<UserProfile, Error>(handler) {
             @Override
             public void onSuccess(UserProfile result) {
                 storage.update(result);
                 haveChanged();
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
     }
 
-    public void updateProfile(EditProfile profile, final IServiceHandler<UserProfile, Error> handler) {
-        persistence.update(profile, new ServiceHandler<UserProfile, Error>() {
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+    public void updateProfile(ProfileEditor profile, final IServiceHandler<UserProfile, Error> handler) {
+        persistence.update(profile, new ServiceHandler<UserProfile, Error>(handler) {
             @Override
             public void onSuccess(UserProfile result) {
                 storage.update(result);
                 haveChanged();
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
     }

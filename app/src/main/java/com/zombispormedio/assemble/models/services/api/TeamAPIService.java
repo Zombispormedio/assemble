@@ -1,7 +1,7 @@
 package com.zombispormedio.assemble.models.services.api;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.editors.EditTeam;
+import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.FileBody;
@@ -30,7 +30,7 @@ public class TeamAPIService implements ITeamService {
     }
 
     @Override
-    public void create(EditTeam team, IServiceHandler<Team, Error> handler) {
+    public void create(TeamEditor team, IServiceHandler<Team, Error> handler) {
         api.RestWithAuth("/team")
                 .handler(DeferUtils.deferTeam(handler))
                 .post(JsonBinder.fromEditTeam(team));

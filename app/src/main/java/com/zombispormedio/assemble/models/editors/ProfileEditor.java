@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.models.Profile;
 /**
  * Created by Xavier Serrano on 23/08/2016.
  */
-public class EditProfile {
+public class ProfileEditor {
 
     public String username;
 
@@ -15,11 +15,11 @@ public class EditProfile {
 
     public String birth_date;
 
-    public EditProfile(){
+    public ProfileEditor(){
 
     }
 
-    public EditProfile(String username, String bio, String location, String birth_date) {
+    public ProfileEditor(String username, String bio, String location, String birth_date) {
         this.username = username;
         this.bio = bio;
         this.location = location;
@@ -112,7 +112,7 @@ public class EditProfile {
             return username;
         }
 
-        public EditProfile build() {
+        public ProfileEditor build() {
             if (username == null) {
                 username = profile.username;
             }
@@ -129,7 +129,7 @@ public class EditProfile {
                 birth_date = profile.birth_date;
             }
 
-            return new EditProfile(username, bio, location, birth_date);
+            return new ProfileEditor(username, bio, location, birth_date);
         }
     }
 }

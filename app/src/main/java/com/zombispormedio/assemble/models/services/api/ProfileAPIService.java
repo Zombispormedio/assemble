@@ -2,7 +2,7 @@ package com.zombispormedio.assemble.models.services.api;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.editors.EditProfile;
+import com.zombispormedio.assemble.models.editors.ProfileEditor;
 
 
 import com.zombispormedio.assemble.models.UserProfile;
@@ -43,7 +43,7 @@ public class ProfileAPIService implements IProfileService {
 
 
     @Override
-    public void update(EditProfile profile, final IServiceHandler<UserProfile, Error> handler) {
+    public void update(ProfileEditor profile, final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile")
                 .handler(DeferUtils.deferProfile(handler))
                 .put(JsonBinder.fromEditProfile(profile));

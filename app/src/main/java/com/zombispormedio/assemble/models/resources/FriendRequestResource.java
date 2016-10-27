@@ -30,33 +30,23 @@ public class FriendRequestResource extends AbstractResource<FriendRequestProfile
 
 
     public void rejectRequest(int id, final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler){
-        apiService.rejectRequest(id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>(){
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+        apiService.rejectRequest(id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>(handler){
             @Override
             public void onSuccess(ArrayList<FriendRequestProfile> result) {
                 storage.createOrUpdateOrDeleteAll(result);
                 haveChanged();
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
     }
 
     public void acceptRequest(int id, final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler){
-        apiService.acceptRequest(id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>(){
-            @Override
-            public void onError(Error error) {
-                handler.onError(error);
-            }
-
+        apiService.acceptRequest(id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>(handler){
             @Override
             public void onSuccess(ArrayList<FriendRequestProfile> result) {
                 storage.createOrUpdateOrDeleteAll(result);
                 haveChanged();
-                handler.onSuccess(result);
+                super.onSuccess(result);
             }
         });
     }

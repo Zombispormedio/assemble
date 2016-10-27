@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.controllers;
 import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.editors.EditChat;
+import com.zombispormedio.assemble.models.editors.ChatEditor;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.FriendResource;
@@ -61,7 +61,10 @@ public class CreateChatController extends Controller {
     private void createChat(FriendProfile data) {
         ctx.showProgress();
 
-        chatResource.create(new EditChat(data.id), new ServiceHandler<Chat, Error>(){
+        ChatEditor.Builder builder=new ChatEditor.Builder()
+                .setFriend(data.id);
+
+        chatResource.create(builder.build(), new ServiceHandler<Chat, Error>(){
 
             @Override
             public void onError(Error error) {
