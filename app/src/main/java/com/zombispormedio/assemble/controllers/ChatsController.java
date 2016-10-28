@@ -80,6 +80,7 @@ public class ChatsController extends Controller {
         public void notifyOneChange(int id) {
             Chat chat=chatResource.getById(id);
             ctx.updateChat(chat);
+            messageSubscription.load();
         }
     }
 
