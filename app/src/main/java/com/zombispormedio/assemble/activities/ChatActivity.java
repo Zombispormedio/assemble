@@ -30,6 +30,7 @@ import butterknife.OnClick;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.MANY_MESSAGE_ACTION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_READ_NOTIFY_CHAT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ONE_MESSAGE_ACTION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.FOREGROUND_NOTIFICATION;
@@ -52,8 +53,6 @@ public class ChatActivity extends BaseActivity implements IChatView {
     private MessageListAdapter messageListAdapter;
 
     private boolean fromNotification;
-
-    private MessageReceiver messageReceiver;
 
 
     @Override
@@ -210,17 +209,11 @@ public class ChatActivity extends BaseActivity implements IChatView {
     @Override
     protected void setupReceivers() {
         super.setupReceivers();
-        messageReceiver = new MessageReceiver();
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(ON_MESSAGE_NOTIFY_CHAT);
-        registerReceiver(messageReceiver, intentFilter);
+        configureReceiver(new MessageReceiver(), ON_MESSAGE_NOTIFY_CHAT);
+        configureReceiver(new ReadReceiver(), ON_READ_NOTIFY_CHAT);
     }
 
-    @Override
-    protected void slashReceivers() {
-        super.slashReceivers();
-        unregisterReceiver(messageReceiver);
-    }
+
 
     private class MessageReceiver extends BroadcastReceiver {
 

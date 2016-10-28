@@ -85,7 +85,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private HomeController ctrl;
 
-    private MessageReceiver messageReceiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -372,17 +372,9 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     @Override
     protected void setupReceivers() {
         super.setupReceivers();
-        messageReceiver=new MessageReceiver();
-        IntentFilter intentFilter=new IntentFilter();
-        intentFilter.addAction(ON_MESSAGE_NOTIFY_HOME);
-        registerReceiver(messageReceiver, intentFilter);
+        configureReceiver(new MessageReceiver(), ON_MESSAGE_NOTIFY_HOME);
     }
 
-    @Override
-    protected void slashReceivers() {
-        super.slashReceivers();
-        unregisterReceiver(messageReceiver);
-    }
 
     private class MessageReceiver extends BroadcastReceiver{
 

@@ -28,7 +28,6 @@ public class MessageInterceptorController implements InterceptorControllerInterf
 
         if(interceptor.isApplicationActive()){
             Message message = Message.createMessage(data);
-            Logger.d(message.id);
             interceptor.saveMessage(message);
             boolean inHome=interceptor.isInHome();
             boolean inSameChat=interceptor.isInTheSameChat(message.chat_id);

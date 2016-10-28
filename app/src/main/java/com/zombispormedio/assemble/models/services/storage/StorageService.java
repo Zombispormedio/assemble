@@ -27,7 +27,6 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
 
     @Override
     public void create(M params) {
-
         storage.create(params);
     }
 

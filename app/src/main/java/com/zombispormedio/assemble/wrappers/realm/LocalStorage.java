@@ -36,15 +36,18 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
     }
 
     public void create(M params) {
-        D object = factory.create();
-
         database.beginTransaction();
+        D object = factory.create();
 
         ((IBaseDAO<M>) object).fromModel(params);
 
-        database.copyToRealm(object);
+        database.copyToRealmOrUpdate(object);
 
         database.commitTransaction();
+    }
+
+    public void save(D object){
+        database.copyToRealmOrUpdate(object);
     }
 
     public void begin() {
@@ -89,6 +92,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
 
         return toArrayList(query.findAllSorted(sortKey));
     }
+
 
     public D findOneByAndSort(String keyId, int valueId, String sortKey) {
         RealmQuery<D> query = getQuery();

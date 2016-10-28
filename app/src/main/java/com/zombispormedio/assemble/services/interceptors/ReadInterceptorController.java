@@ -1,5 +1,10 @@
 package com.zombispormedio.assemble.services.interceptors;
 
+import com.annimon.stream.IntStream;
+import com.orhanobut.logger.Logger;
+import com.zombispormedio.assemble.utils.Utils;
+
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.support.v4.app.NotificationCompat;
@@ -18,8 +23,32 @@ public class ReadInterceptorController implements InterceptorControllerInterface
 
     @Override
     public void init(JSONObject obj) {
+        if (interceptor.isApplicationActive()) {
+            int[] messageIds = getMessageIDs(obj);
+            interceptor.readMessages(messageIds);
 
+            int chatId=Utils.safeGetValue("chat_id", obj);
+
+            boolean inHome=interceptor.isInHome();
+            boolean inSameChat=interceptor.isInTheSameChat(chatId);
+
+            if (inHome) {
+                interceptor.notifyHomeForChat(chatId);
+            } else if (inSameChat) {
+                interceptor.notifyReadToChat(messageIds);
+            }
+        }
     }
+
+    private int[] getMessageIDs(JSONObject obj) {
+
+        int count = Utils.safeGetValue("read_count", obj);
+
+        return IntStream.range(0, count)
+                .map(i -> Utils.safeGetValue("read_" + i, obj))
+                .toArray();
+    }
+
 
     @Override
     public boolean permitDisplay() {

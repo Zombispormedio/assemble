@@ -10,12 +10,4 @@ public interface IMessageInterceptor extends InterceptorInterface {
 
     void saveMessage(Message message);
 
-    boolean isInHome();
-
-    boolean isInTheSameChat(int chatId);
-
-    void notifyHomeForChat(int chatId);
-
-    void notifyChat(int messageId);
-
 }

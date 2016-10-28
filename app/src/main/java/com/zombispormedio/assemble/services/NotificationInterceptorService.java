@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.services.interceptors.InterceptorControllerIn
 import com.zombispormedio.assemble.services.interceptors.MessageInterceptorController;
 import com.zombispormedio.assemble.services.interceptors.ReadInterceptorController;
 import com.zombispormedio.assemble.utils.AndroidConfig;
+import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.IApplicationView;
 
 import org.json.JSONObject;
@@ -87,6 +88,11 @@ public class NotificationInterceptorService extends NotificationExtenderService 
     }
 
     @Override
+    public PreferencesManager getPreferencesManager() {
+        return getView().getPreferencesManager();
+    }
+
+    @Override
     public void saveMessage(Message message) {
         sendBroadcast(AndroidServiceTools.saveMessage(message));
     }
@@ -99,5 +105,10 @@ public class NotificationInterceptorService extends NotificationExtenderService 
     @Override
     public void readMessages(int[] messageIds) {
         sendBroadcast(AndroidServiceTools.readMessages(messageIds));
+    }
+
+    @Override
+    public void notifyReadToChat(int[] messageIds) {
+        sendBroadcast(AndroidServiceTools.notifyReadToChat(messageIds));
     }
 }

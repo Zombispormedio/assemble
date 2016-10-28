@@ -52,7 +52,5 @@ public class MessageStorageService  extends StorageService<MessageDAO, Message> 
             messageDAO.is_read=true;
         }
         storage.commit();
-
-       Logger.d(storage.getById(messagesIds[0]).is_read);
     }
 }

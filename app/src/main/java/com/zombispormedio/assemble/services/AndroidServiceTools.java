@@ -12,6 +12,7 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_HOME;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_READ_EVENT;
+import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_READ_NOTIFY_CHAT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGES;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_BUNDLE;
@@ -55,6 +56,13 @@ public class AndroidServiceTools {
         Intent intent = new Intent();
         intent.setAction(ON_MESSAGE_NOTIFY_CHAT);
         intent.putExtra(MESSAGE_ID, messageId);
+        return intent;
+    }
+
+    public static Intent notifyReadToChat(int[] messageIds) {
+        Intent intent = new Intent();
+        intent.setAction(ON_READ_NOTIFY_CHAT);
+        intent.putExtra(MESSAGES, messageIds);
         return intent;
     }
 

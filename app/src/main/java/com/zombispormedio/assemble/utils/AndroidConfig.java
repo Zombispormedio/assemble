@@ -46,6 +46,8 @@ public class AndroidConfig {
         public static final String SEVERAL_MESSAGE_ACTIVE_ACTION = "SEVERAL_MESSAGE_ACTIVE_ACTION";
 
         public static final String ON_READ_EVENT = "ON_READ_EVENT";
+
+        public static final String ON_READ_NOTIFY_CHAT = "ON_READ_EVENT";
     }
 
     public static class Groups{

@@ -6,8 +6,8 @@ package com.zombispormedio.assemble.services.interceptors;
 
 public interface IReadInterceptor extends InterceptorInterface {
 
-    void notifyHomeForChat(int chatId, boolean read);
-
     void readMessages(int[] messageIds);
+
+    void notifyReadToChat(int[] messageIds);
 
 }

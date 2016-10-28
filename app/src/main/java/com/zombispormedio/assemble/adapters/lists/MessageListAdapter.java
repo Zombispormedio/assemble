@@ -66,9 +66,12 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
 
     public void read(int id) {
         int index = indexOfById(id);
-        MessageHolder.Container container = data.get(index);
-        container.read();
-        notifyItemChanged(index);
+        if(index>-1){
+            MessageHolder.Container container = data.get(index);
+            container.read();
+            notifyItemChanged(index);
+        }
+
     }
 
 

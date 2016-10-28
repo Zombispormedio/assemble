@@ -21,6 +21,8 @@ import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.activities.IBaseView;
 
+import java.util.ArrayList;
+
 import butterknife.ButterKnife;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_EVENT;
@@ -31,7 +33,7 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_BUNDL
 
 public class BaseActivity extends AppCompatActivity implements IBaseView {
 
-
+    protected ArrayList<BroadcastReceiver> receivers;
 
 
     @Override
@@ -129,27 +131,28 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
 
     /********************** Messaging ******************/
 
-    private MessageSavingReceiver messageSavingReceiver;
-    private ReadReceiver readReceiver;
+
+
 
 
     protected void setupReceivers() {
-        messageSavingReceiver = new MessageSavingReceiver();
-        configureReceiver(messageSavingReceiver, ON_MESSAGE_EVENT);
-
-        readReceiver = new ReadReceiver();
-        configureReceiver(readReceiver, ON_READ_EVENT);
+        receivers= new ArrayList<>();
+        configureReceiver(new MessageSavingReceiver(), ON_MESSAGE_EVENT);
+        configureReceiver(new ReadReceiver(), ON_READ_EVENT);
     }
 
 
-    private void configureReceiver(BroadcastReceiver receiver, String action){
+    protected void configureReceiver(BroadcastReceiver receiver, String action){
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(action);
         registerReceiver(receiver, intentFilter);
+        receivers.add(receiver);
     }
 
     protected void slashReceivers() {
-        unregisterReceiver(messageSavingReceiver);
+        for (BroadcastReceiver receiver : receivers) {
+            unregisterReceiver(receiver);
+        }
     }
 
 

@@ -100,6 +100,17 @@ public class Utils {
         return value;
     }
 
+    public static int safeGetValue(String key, JSONObject jsonObject){
+        int value=0;
+        try {
+            value=jsonObject.getInt(key);
+        } catch (JSONException e) {
+            Logger.d(e.getMessage());
+        }
+
+        return value;
+    }
+
 
 
 }

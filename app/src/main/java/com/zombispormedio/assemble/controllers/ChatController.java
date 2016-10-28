@@ -139,8 +139,10 @@ public class ChatController extends Controller {
 
         @Override
         public void notifyOneChange(int id) {
-            ctx.addMessage(chatResource.getMessageById(id));
+            Message message=chatResource.getMessageById(id);
+            ctx.addMessage(message);
             readMessages(new int[]{id});
+            messageSubscription.load();
         }
 
         @Override
