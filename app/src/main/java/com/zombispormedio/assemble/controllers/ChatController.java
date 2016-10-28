@@ -142,7 +142,6 @@ public class ChatController extends Controller {
             Message message=chatResource.getMessageById(id);
             ctx.addMessage(message);
             readMessages(new int[]{id});
-            messageSubscription.load();
         }
 
         @Override
@@ -155,6 +154,7 @@ public class ChatController extends Controller {
     public void onDestroy() {
         super.onDestroy();
         messageSubscription.removeSubscriber(messageSubscriber);
+        messageSubscription.load();
         ctx = null;
     }
 }

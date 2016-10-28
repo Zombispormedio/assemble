@@ -80,7 +80,6 @@ public class ChatsController extends Controller {
         public void notifyOneChange(int id) {
             Chat chat=chatResource.getById(id);
             ctx.updateChat(chat);
-            messageSubscription.load();
         }
     }
 
@@ -112,5 +111,6 @@ public class ChatsController extends Controller {
         super.onDestroy();
         chatSubscription.removeSubscriber(chatSubscriber);
         messageSubscription.removeSubscriber(messageSubscriber);
+        messageSubscription.load();
     }
 }

@@ -163,6 +163,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
             Bundle data = intent.getExtras();
             Message message = data.getParcelable(MESSAGE_BUNDLE);
             getResourceComponent().provideChatResource().storeMessage(message);
+            getResourceComponent().provideMessageSubscription().load();
         }
     }
 
