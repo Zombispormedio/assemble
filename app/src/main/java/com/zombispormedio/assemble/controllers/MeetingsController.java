@@ -2,10 +2,13 @@ package com.zombispormedio.assemble.controllers;
 
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.subscriptions.MeetingSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
+import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.views.fragments.IMeetingsView;
 
 import java.util.ArrayList;
@@ -47,16 +50,23 @@ public class MeetingsController extends Controller {
     }
 
 
-    public IOnClickItemListHandler<Meeting> getOnClickOneTeam() {
-        return (position, data) -> {
-            Logger.d(position);
-            Logger.d(data);
-        };
+    public void onClickOneTeam(int position, Meeting meeting) {
+
     }
 
     public void onRefresh() {
         refreshing = true;
         meetingSubscription.load();
+    }
+
+    public void onBookmark(int i, Meeting meeting) {
+
+        meetingResource.bookmark(meeting.id, new ServiceHandler<Result, Error>() {
+            @Override
+            public void onSuccess(Result result) {
+                renderMeetings();
+            }
+        });
     }
 
     private class MeetingSubscriber extends Subscriber {

@@ -63,7 +63,8 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        meetingsListFactory.setOnClickListener(ctrl.getOnClickOneTeam());
+        meetingsListFactory.setOnClickListener(ctrl::onClickOneTeam);
+        meetingsListFactory.setBookmarkListener(ctrl::onBookmark);
         meetingsListAdapter = meetingsListFactory.make();
         meetingsList.setAdapter(meetingsListAdapter);
     }

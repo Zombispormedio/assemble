@@ -47,6 +47,8 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
     private IOnClickItemListHandler<Meeting> listener;
 
+    private IOnClickItemListHandler<Meeting> bookmarkListener;
+
     public MeetingHolder(View view) {
         super(view);
         this.listener = null;
@@ -57,6 +59,16 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
     public void bind(int position, Meeting itemData) {
         renderData(itemData);
         setupOnClickListener(position, itemData);
+        setupOnBookmark(position, itemData);
+    }
+
+    private void setupOnBookmark(int position, Meeting itemData) {
+        bookmarkButton.setEventListener((button, buttonState) -> {
+            if(bookmarkListener!=null){
+                bookmarkListener.onClick(position, itemData);
+            }
+        });
+
     }
 
     private void setupOnClickListener(final int position, final Meeting itemData) {
@@ -81,6 +93,8 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
         renderTeam(meeting.team);
 
+        bookmarkButton.setChecked(meeting.bookmark);
+
     }
 
     private void renderTeam(Team team) {
@@ -91,6 +105,8 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
                 .context(getContext())
                 .imageView(teamImage)
                 .build();
+
+
     }
 
     private void renderMeetingImage(Meeting meeting) {
@@ -110,4 +126,8 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
         this.listener = listener;
     }
 
+    public void setBookmarkListener(
+            IOnClickItemListHandler<Meeting> bookmarkListener) {
+        this.bookmarkListener = bookmarkListener;
+    }
 }

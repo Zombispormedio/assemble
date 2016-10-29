@@ -16,6 +16,8 @@ public class MeetingsListAdapter extends BaseSortedListAdapter<Meeting, MeetingH
 
     private IOnClickItemListHandler<Meeting> listener;
 
+    private IOnClickItemListHandler<Meeting> bookmarkListener;
+
     private MeetingsListAdapter(ArrayList<Meeting> data) {
         super(Meeting.class);
         addAll(data);
@@ -24,43 +26,52 @@ public class MeetingsListAdapter extends BaseSortedListAdapter<Meeting, MeetingH
     @Override
     public MeetingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        MeetingHolder holder = new MeetingHolder(getView(parent,R.layout.list_item_meetings));
-        if (listener != null) {
-            holder.setOnClickListener(listener);
-        }
+        MeetingHolder holder = new MeetingHolder(getView(parent, R.layout.list_item_meetings));
+
+        holder.setOnClickListener(listener);
+
+        holder.setBookmarkListener(bookmarkListener);
+
         return holder;
     }
 
-
-    @Override
-    protected int compareItems(Meeting o1, Meeting o2) {
-        return -super.compareItems(o1, o2);
-    }
 
     public void setOnClickListener(
             IOnClickItemListHandler<Meeting> listener) {
         this.listener = listener;
     }
 
+    public void setBookmarkListener(
+            IOnClickItemListHandler<Meeting> bookmarkListener) {
+        this.bookmarkListener = bookmarkListener;
+    }
 
-
-    public static class Factory  {
+    public static class Factory {
 
         private IOnClickItemListHandler<Meeting> listener;
 
-        public MeetingsListAdapter make(){
+        private IOnClickItemListHandler<Meeting> bookmarkListener;
+
+
+        public MeetingsListAdapter make() {
             return make(new ArrayList<>());
         }
 
         public MeetingsListAdapter make(ArrayList<Meeting> data) {
             MeetingsListAdapter adapter = new MeetingsListAdapter(data);
             adapter.setOnClickListener(listener);
+            adapter.setBookmarkListener(bookmarkListener);
             return adapter;
         }
 
         public void setOnClickListener(
                 IOnClickItemListHandler<Meeting> listener) {
             this.listener = listener;
+        }
+
+        public void setBookmarkListener(
+                IOnClickItemListHandler<Meeting> bookmarkListener) {
+            this.bookmarkListener = bookmarkListener;
         }
     }
 }
