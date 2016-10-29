@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class TeamsListAdapter extends BaseSortedListAdapter<Team, TeamHolder> {
 
     private IOnClickItemListHandler<Team> listener;
+    private IOnClickItemListHandler<Team> starCheckerListener;
 
     public TeamsListAdapter(ArrayList<Team> data) {
         super(Team.class);
@@ -25,9 +26,9 @@ public class TeamsListAdapter extends BaseSortedListAdapter<Team, TeamHolder> {
     public TeamHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         TeamHolder holder = new TeamHolder(getView(parent, R.layout.list_item_teams));
-        if (listener != null) {
-            holder.setOnClickListener(listener);
-        }
+        holder.setOnClickListener(listener);
+        holder.setStarCheckerListener(starCheckerListener);
+
         return holder;
     }
 
@@ -36,9 +37,16 @@ public class TeamsListAdapter extends BaseSortedListAdapter<Team, TeamHolder> {
         this.listener = listener;
     }
 
-    public static class Factory{
+    public void setStarCheckerListener(
+            IOnClickItemListHandler<Team> starCheckerListener) {
+        this.starCheckerListener = starCheckerListener;
+    }
+
+    public static class Factory {
 
         private IOnClickItemListHandler<Team> listener;
+
+        private IOnClickItemListHandler<Team> starCheckerListener;
 
         public TeamsListAdapter make() {
             return make(new ArrayList<>());
@@ -47,12 +55,18 @@ public class TeamsListAdapter extends BaseSortedListAdapter<Team, TeamHolder> {
         public TeamsListAdapter make(ArrayList<Team> data) {
             TeamsListAdapter adapter = new TeamsListAdapter(data);
             adapter.setOnClickListener(listener);
+            adapter.setStarCheckerListener(starCheckerListener);
             return adapter;
         }
 
         public void setOnClickListener(
                 IOnClickItemListHandler<Team> listener) {
             this.listener = listener;
+        }
+
+        public void setStarCheckerListener(
+                IOnClickItemListHandler<Team> starCheckerListener) {
+            this.starCheckerListener = starCheckerListener;
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.zombispormedio.assemble.adapters;
 
+import com.varunest.sparkbutton.SparkButton;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 
@@ -26,11 +27,17 @@ public class TeamHolder extends AbstractHolder<Team> {
     @BindView(R.id.card_view)
     CardView cardView;
 
+    @BindView(R.id.star_checker)
+    SparkButton starChecker;
+
+    private IOnClickItemListHandler<Team> starCheckerListener;
+
     private IOnClickItemListHandler<Team> listener;
 
     public TeamHolder(View view) {
         super(view);
         this.listener = null;
+        this.starCheckerListener=null;
     }
 
 
@@ -38,6 +45,15 @@ public class TeamHolder extends AbstractHolder<Team> {
     public void bind(int position, Team itemData) {
         renderData(itemData);
         setupOnClickListener(position, itemData);
+        setupOnStarred(position, itemData);
+    }
+
+    private void setupOnStarred(int position, Team itemData) {
+        starChecker.setEventListener((button, buttonState) -> {
+            if(starCheckerListener!=null){
+                starCheckerListener.onClick(position, itemData);
+            }
+        });
     }
 
     private void setupOnClickListener(final int position, final Team itemData) {
@@ -54,9 +70,15 @@ public class TeamHolder extends AbstractHolder<Team> {
                 .context(getContext())
                 .imageView(imageView)
                 .build();
+        starChecker.setChecked(team.starred);
     }
 
     public void setOnClickListener(IOnClickItemListHandler<Team> listener) {
         this.listener = listener;
+    }
+
+    public void setStarCheckerListener(
+            IOnClickItemListHandler<Team> starCheckerListener) {
+        this.starCheckerListener = starCheckerListener;
     }
 }

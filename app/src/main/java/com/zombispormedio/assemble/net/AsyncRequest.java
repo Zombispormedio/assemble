@@ -39,43 +39,35 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
 
                 case POST: {
                     String body = req.getBody();
-
-                    if (body != null) {
-                        result = rest.post(req.getBody());
-                    } else {
-                        FileBody file = req.getFile();
-                        if (file != null) {
-                            result = rest.post(file);
-                        } else {
-                            result = rest.post();
-                        }
-                    }
+                    FileBody file = req.getFile();
+                    result = body != null ?
+                            rest.post(body) :
+                            file != null ?
+                                    rest.post(file) :
+                                    rest.post();
 
                     break;
                 }
 
                 case PUT: {
                     String body = req.getBody();
-
-                    if (body != null) {
-                        result = rest.put(req.getBody());
-                    } else {
-                        FileBody file = req.getFile();
-
-                        result = rest.put(file);
-                    }
+                    FileBody file = req.getFile();
+                    result = body != null ?
+                            rest.put(body) :
+                            file != null ?
+                                    rest.put(file) :
+                                    rest.put();
                     break;
                 }
 
                 case PATCH: {
                     String body = req.getBody();
-
-                    if (body != null) {
-                        result = rest.patch(req.getBody());
-                    } else {
-                        FileBody file = req.getFile();
-                        result = rest.patch(file);
-                    }
+                    FileBody file = req.getFile();
+                    result = body != null ?
+                            rest.patch(body) :
+                            file != null ?
+                                    rest.patch(file) :
+                                    rest.patch();
                     break;
                 }
 

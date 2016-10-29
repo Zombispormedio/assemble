@@ -29,11 +29,13 @@ public class TeamDAO extends RealmObject implements IBaseDAO<Team>{
 
     public String thumb_image_url;
 
+    public boolean starred;
+
 
     @Override
     public Team toModel() {
         return new Team(id, name, description, created_at,
-                full_image_url, large_image_url, medium_image_url, thumb_image_url);
+                full_image_url, large_image_url, medium_image_url, thumb_image_url, starred);
     }
 
     @Override
@@ -46,6 +48,7 @@ public class TeamDAO extends RealmObject implements IBaseDAO<Team>{
         this.medium_image_url = model.medium_image_url;
         this.full_image_url = model.full_image_url;
         this.thumb_image_url = model.thumb_image_url;
+        this.starred=model.starred;
         return this;
     }
 

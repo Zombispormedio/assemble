@@ -104,6 +104,18 @@ public class RestWrapper {
         return res.body().string();
     }
 
+    public String put() throws IOException {
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody reqBody = RequestBody.create(mediaType, "{}");
+
+        Request req = builder.put(reqBody)
+                .build();
+
+        okhttp3.Response res = client.newCall(req).execute();
+
+        return res.body().string();
+    }
+
     public String put(FileBody file) throws IOException{
         MediaType mediaType = MediaType.parse(file.getMediaType());
         RequestBody reqBody = new MultipartBody.Builder()
@@ -111,6 +123,18 @@ public class RestWrapper {
                 .addFormDataPart(file.getKey(), file.getFilename(),
                         RequestBody.create(mediaType, file.getFile()))
                 .build();
+
+        Request req = builder.put(reqBody)
+                .build();
+
+        okhttp3.Response res = client.newCall(req).execute();
+
+        return res.body().string();
+    }
+
+    public String patch() throws IOException {
+        MediaType mediaType = MediaType.parse("application/json");
+        RequestBody reqBody = RequestBody.create(mediaType, "{}");
 
         Request req = builder.put(reqBody)
                 .build();

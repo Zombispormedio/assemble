@@ -2,10 +2,14 @@ package com.zombispormedio.assemble.controllers;
 
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
+import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
+import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.views.fragments.ITeamsView;
 
 import java.util.ArrayList;
@@ -46,16 +50,23 @@ public class TeamsController extends Controller {
     }
 
 
-    public IOnClickItemListHandler<Team> getOnClickOneTeam() {
-        return (position, data) -> {
-            Logger.d(position);
-            Logger.d(data);
-        };
+    public void onClickOneTeam(int position, Team team) {
+
     }
 
     public void onRefresh() {
         refreshing = true;
         teamSubscription.load();
+    }
+
+    public void onStarChecker(int position, Team team) {
+
+        teamResource.star(team.id, new ServiceHandler<Result, Error>() {
+            @Override
+            public void onSuccess(Result result) {
+                renderTeams();
+            }
+        });
     }
 
     private class TeamSubscriber extends Subscriber {

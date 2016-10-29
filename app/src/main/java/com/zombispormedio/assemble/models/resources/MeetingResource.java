@@ -4,9 +4,11 @@ import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.models.services.storage.MeetingStorageService;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.models.services.interfaces.IMeetingService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
+import com.zombispormedio.assemble.net.Result;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -53,6 +55,20 @@ public class MeetingResource extends AbstractResource<Meeting> {
                 super.onSuccess(result);
             }
         });
+    }
+
+    public void bookmark(int meetingId,   final IServiceHandler<Result, Error> handler){
+        persistence.bookmark(meetingId, new ServiceHandler<Result, Error>(){
+            @Override
+            public void onSuccess(Result result) {
+                getMeetingStorage().bookmark(meetingId);
+                handler.onSuccess(result);
+            }
+        });
+    }
+
+    private MeetingStorageService getMeetingStorage(){
+        return (MeetingStorageService) storage;
     }
 
 }

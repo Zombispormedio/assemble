@@ -37,10 +37,12 @@ public class MeetingDAO extends RealmObject implements IBaseDAO<Meeting> {
 
     public TeamDAO team;
 
+    public boolean bookmark;
+
     @Override
     public Meeting toModel(){
         return new Meeting(id, name, description, created_at,
-                full_image_url, large_image_url, medium_image_url, thumb_image_url, start_at, end_at, team.toModel());
+                full_image_url, large_image_url, medium_image_url, thumb_image_url, start_at, end_at, team.toModel(), bookmark);
     }
 
     @Override
@@ -56,6 +58,7 @@ public class MeetingDAO extends RealmObject implements IBaseDAO<Meeting> {
         this.start_at = model.start_at;
         this.end_at=model.end_at;
         bindTeam(model.team);
+        this.bookmark=model.bookmark;
         return this;
     }
 

@@ -135,8 +135,19 @@ public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder
 
             mData.beginBatchedUpdates();
             Stream.of(items)
-                    .forEach(mData::add);
+                    .forEach(this::addOrUpdate);
             mData.endBatchedUpdates();
+        }
+    }
+
+    public void addOrUpdate(T newItem){
+        int index=indexByIdentity(newItem.getIdentity());
+        if(index==-1){
+            add(newItem);
+        }else{
+            if(!get(index).areTheSame(newItem)){
+                updateItemAt(index, newItem);
+            }
         }
     }
 

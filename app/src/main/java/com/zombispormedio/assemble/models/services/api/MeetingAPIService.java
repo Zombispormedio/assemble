@@ -7,6 +7,7 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.FileBody;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.models.services.interfaces.IMeetingService;
+import com.zombispormedio.assemble.net.Result;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -41,6 +42,14 @@ public class MeetingAPIService implements IMeetingService {
                 .params("id", meetingId)
                 .handler(DeferUtils.deferMeeting(handler))
                 .patch(new FileBody(file, "image/*", "image", file.getName()));
+    }
+
+    @Override
+    public void bookmark(int meetingId, IServiceHandler<Result, Error> handler) {
+        api.RestWithAuth("/meeting/:id/bookmark")
+                .params("id", meetingId)
+                .handler(DeferUtils.defer(handler))
+                .put();
     }
 
 

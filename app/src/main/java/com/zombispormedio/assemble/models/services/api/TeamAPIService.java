@@ -7,6 +7,7 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.FileBody;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.models.services.interfaces.ITeamService;
+import com.zombispormedio.assemble.net.Result;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -42,6 +43,14 @@ public class TeamAPIService implements ITeamService {
                 .params("id", teamId)
                 .handler(DeferUtils.deferTeam(handler))
                 .patch(new FileBody(file, "image/*", "image", file.getName()));
+    }
+
+    @Override
+    public void star(int teamId, IServiceHandler<Result, Error> handler) {
+        api.RestWithAuth("/team/:id/star")
+                .params("id", teamId)
+                .handler(DeferUtils.defer(handler))
+                .put();
     }
 
 

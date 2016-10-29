@@ -58,7 +58,7 @@
 
 
             <com.varunest.sparkbutton.SparkButton
-                    android:id="@+id/bookmark_button"
+                    android:id="@+id/star_checker"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginRight="10dp"

@@ -67,7 +67,9 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
                 .itemAnimation(true)
                 .scrolling(false)
                 .configure();
-        teamsListFactory.setOnClickListener(ctrl.getOnClickOneTeam());
+        teamsListFactory.setOnClickListener(ctrl::onClickOneTeam);
+
+        teamsListFactory.setStarCheckerListener(ctrl::onStarChecker);
         teamsListAdapter = teamsListFactory.make();
         teamsList.setAdapter(teamsListAdapter);
     }
@@ -77,6 +79,12 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     public void bindTeams(ArrayList<Team> data) {
         teamsListAdapter.addAll(data);
     }
+
+    @Override
+    public void updateTeam(int position, Team team) {
+        teamsListAdapter.updateItemAt(position, team);
+    }
+
 
     @Override
     public void finishRefresh() {
