@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.services.interceptors;
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.models.Message;
 
 import org.json.JSONObject;

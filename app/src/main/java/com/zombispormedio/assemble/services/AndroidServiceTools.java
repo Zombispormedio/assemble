@@ -5,7 +5,6 @@ import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.views.IApplicationView;
 
-import android.content.Context;
 import android.content.Intent;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_EVENT;

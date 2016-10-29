@@ -6,7 +6,6 @@ import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.os.Parcel;

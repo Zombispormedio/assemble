@@ -11,7 +11,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
-import com.orhanobut.logger.Logger;
+import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.models.Message;
@@ -150,9 +150,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     }
 
     protected void slashReceivers() {
-        for (BroadcastReceiver receiver : receivers) {
-            unregisterReceiver(receiver);
-        }
+        Stream.of(receivers).forEach(this::unregisterReceiver);
     }
 
 

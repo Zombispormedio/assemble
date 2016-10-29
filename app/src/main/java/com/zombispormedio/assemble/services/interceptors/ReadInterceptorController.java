@@ -1,10 +1,8 @@
 package com.zombispormedio.assemble.services.interceptors;
 
 import com.annimon.stream.IntStream;
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.utils.Utils;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.support.v4.app.NotificationCompat;

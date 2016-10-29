@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.services.events;
 
 import com.zombispormedio.assemble.activities.BaseActivity;
-import com.zombispormedio.assemble.models.Message;
 
 import org.json.JSONObject;
 

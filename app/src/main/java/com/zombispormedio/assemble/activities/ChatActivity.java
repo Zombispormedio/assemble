@@ -3,7 +3,6 @@ package com.zombispormedio.assemble.activities;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
@@ -23,7 +22,6 @@ import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,7 +30,6 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.MANY_MESSA
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_READ_NOTIFY_CHAT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
-import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ONE_MESSAGE_ACTION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.FOREGROUND_NOTIFICATION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGES;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_ID;

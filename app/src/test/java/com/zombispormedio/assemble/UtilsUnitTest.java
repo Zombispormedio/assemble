@@ -1,6 +1,4 @@
 package com.zombispormedio.assemble;
-import com.zombispormedio.assemble.wrappers.realm.dao.UserProfileDAO;
-import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.utils.Utils;
 
 import org.junit.Test;

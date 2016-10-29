@@ -1,6 +1,7 @@
 package com.zombispormedio.assemble.controllers;
 
 
+import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
@@ -303,10 +304,8 @@ public class HomeController extends Controller {
     }
 
     private void clearSubscriptions() {
-        Set<String> keys=subscriptions.keySet();
-        for (String id: keys) {
-            removeSubscription(id);
-        }
+        Stream.of(subscriptions.keySet())
+                .forEach(this::removeSubscription);
     }
 
     private class HomeSubscriber extends Subscriber{

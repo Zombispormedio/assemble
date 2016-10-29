@@ -2,14 +2,12 @@ package com.zombispormedio.assemble.controllers;
 
 
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.views.activities.IMainView;
 
-import java.io.IOException;
 
 /**
  * Created by Xavier Serrano on 08/07/2016.

@@ -16,7 +16,6 @@
     <string name="rep_pass_empty">Repeat password is empty</string>
     <string name="pass_equals">Repeat password is not equal.</string>
     <string name="success_signing_up">Sign up successfully</string>
-    <string name="icon_user">Profile icon</string>
     <string name="settings_title">Settings</string>
     <string name="signout">Sign out</string>
     <string name="open_drawer_desc">Drawer opened</string>
@@ -33,14 +32,12 @@
     <string name="yes_title">Yes</string>
     <string name="no_title">No</string>
     <string name="unknow_error">Unknow Error</string>
-    <string name="image_profile">Profile picture</string>
     <string name="gallery">Gallery</string>
     <string name="camera">Camera</string>
     <string name="select_picture">Select picture</string>
     <string name="invalid_email">Enter a valid email address</string>
     <string name="fail_login"> Fail Login!</string>
     <string name="invalid_password">Password between 6 and 50 alphanumeric characters</string>
-    <string name="start_login">Starting login&#8230;</string>
     <string name="update_profile_title">Update Profile</string>
     <string name="username_example">Zombispormedio</string>
     <string name="location_example">Elche</string>
@@ -68,13 +65,11 @@
     <string name="create_meeting_title">Create meeting</string>
     <string name="create_team_title">Create team</string>
     <string name="create_chat_title">Create chat</string>
-    <string name="no_more_results">No more results</string>
     <string name="no_more_friends">No more friends</string>
     <string name="new_title">New</string>
     <string name="request_friend_title">Requests</string>
     <string name="no_more_req_friends">No more requests</string>
     <string name="no_more_meetings">No more meetings</string>
-    <string name="date_example_with_hour">20/09/2016 15:00</string>
     <string name="no_more_teams">No more teams</string>
     <string name="no_more_chats">No more chats</string>
     <string name="new_friend_search_hint">Search by email or name</string>
@@ -108,7 +103,6 @@
     <string name="type_your_message">Type your message&#8230;</string>
     <string name="slash_date">dd/MM/yy</string>
     <string name="yesterday">Yesterday</string>
-    <string name="new_message_title">New direct message</string>
     <string name="message_date">MMMM d yyyy \'·\' HH:mm </string>
     <string name="message_date_today">\'Today ·\' HH:mm</string>
     <string name="message_date_yesterday">\'Yesterday ·\' HH:mm</string>

@@ -6,8 +6,6 @@ import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.IApplicationView;
 
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
-
 /**
  * Created by Xavier Serrano on 24/10/2016.
  */

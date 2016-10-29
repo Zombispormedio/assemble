@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.views.activities;
 
 import com.zombispormedio.assemble.models.components.ResourceComponent;
-import com.zombispormedio.assemble.views.IApplicationView;
 
 /**
  * Created by Xavier Serrano on 25/07/2016.

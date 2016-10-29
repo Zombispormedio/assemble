@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.adapters;
 
 
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
@@ -98,8 +97,6 @@ public class ChatHolder extends AbstractHolder<Chat> {
                     drawableID=R.drawable.message_check_all_layer;
                 }else if(last.is_sent){
                     drawableID=R.drawable.message_check_layer;
-                }else{
-                    drawableID=R.drawable.message_clock_layer;
                 }
                 Drawable drawable=getDrawable(drawableID, 20, 20);
 

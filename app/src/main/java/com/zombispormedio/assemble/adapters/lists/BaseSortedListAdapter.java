@@ -135,7 +135,7 @@ public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder
 
             mData.beginBatchedUpdates();
             Stream.of(items)
-                    .forEach(item -> mData.add(item));
+                    .forEach(mData::add);
             mData.endBatchedUpdates();
         }
     }

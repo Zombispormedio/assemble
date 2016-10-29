@@ -17,7 +17,6 @@
     <string name="rep_pass_empty">El Repite contraseña está en blanco</string>
     <string name="pass_equals">Las contraseñas no son iguales</string>
     <string name="success_signing_up">Registro con éxito</string>
-    <string name="icon_user">Icono de usuario</string>
     <string name="settings_title">Configuración</string>
     <string name="signout">Cerrar Sesión</string>
     <string name="open_drawer_desc">Menu lateral abierto</string>
@@ -34,7 +33,6 @@
     <string name="yes_title">Sí</string>
     <string name="no_title">No</string>
     <string name="unknow_error">Error Desconocido</string>
-    <string name="image_profile">Foto de Perfil</string>
     <string name="gallery">Galería</string>
     <string name="camera">Cámara</string>
     <string name="select_picture">Selecciona una imagen</string>
@@ -47,7 +45,6 @@
     <string name="invalid_password">Contraseña entre 6 y 50 caracteres alfanúmericos</string>
     <string name="location_example">Elche</string>
     <string name="lorem_impsum">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</string>
-    <string name="start_login">Iniciando sesión…</string>
     <string name="username_example">Zombispormedio</string>
     <string name="hint_username">Nombre de usuario</string>
     <string name="hint_bio">Biografía</string>
@@ -69,13 +66,11 @@
     <string name="create_chat_title">Crear conversación</string>
     <string name="create_meeting_title">Crear reunión</string>
     <string name="create_team_title">Crear equipo</string>
-    <string name="no_more_results">No tienes más resultados</string>
     <string name="no_more_friends">No tienes más amigos</string>
     <string name="new_title">Nuevo</string>
     <string name="request_friend_title">Peticiones</string>
     <string name="no_more_req_friends">No tienes más peticiones</string>
     <string name="no_more_meetings">No tienes más reuniones</string>
-    <string name="date_example_with_hour">20/09/2016 15:00</string>
     <string name="no_more_teams">No tienes más equipos</string>
     <string name="no_more_chats">No tienes más conversaciones</string>
     <string name="new_friend_search_hint">Busca a tus amiguetes…</string>
@@ -88,12 +83,12 @@
     <string name="selected_participants">%1$d de %2$d seleccionado</string>
     <string name="need_more_than_one_members">Necesitas más de un miembro</string>
     <string name="add_name">Añadir nombre</string>
-    <string name="write_the_name_here">Escribe el nombre aquí...</string>
+    <string name="write_the_name_here">Escribe el nombre aquí…</string>
     <string name="provide_name_and_logo">Proporciona un <u>nombre</u> para el equipo y un icono</string>
     <string name="participants_number">Participantes: %1$d /%2$d</string>
     <string name="name_is_needed">Se necesita un nombre para el equipo</string>
     <string name="creating_team">Estamos creando tu equipo. Un momento, por favor…</string>
-    <string name="titles_people_places">Escribe títulos, personas, lugares...</string>
+    <string name="titles_people_places">Escribe títulos, personas, lugares…</string>
     <string name="one_string_complete">(%1$s)</string>
     <string name="simple_date">d \'de\' MMMM \'de\' yyyy</string>
     <string name="simple_date_with_hours">"d 'de' MMMM 'de' yyyy 'a las' HH:mm "</string>
@@ -109,7 +104,6 @@
     <string name="type_your_message">Escribe tu mensaje&#8230;</string>
     <string name="slash_date">dd/MM/yy</string>
     <string name="yesterday">Ayer</string>
-    <string name="new_message_title">Nuevo mensaje directo</string>
     <string name="message_date">d \'de\' MMMM \'de\' yyyy \'·\' HH:mm </string>
     <string name="message_date_today">\'Hoy ·\' HH:mm</string>
     <string name="message_date_yesterday">\'Ayer ·\' HH:mm</string>

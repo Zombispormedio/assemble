@@ -1,9 +1,7 @@
 package com.zombispormedio.assemble.models.services.storage;
 
 import com.annimon.stream.Collectors;
-import com.annimon.stream.IntStream;
 import com.annimon.stream.Stream;
-import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.wrappers.realm.dao.MessageDAO;
 import com.zombispormedio.assemble.models.Message;

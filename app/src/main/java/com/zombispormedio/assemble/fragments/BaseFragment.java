@@ -1,6 +1,5 @@
 package com.zombispormedio.assemble.fragments;
 
-import com.zombispormedio.assemble.views.IApplicationView;
 import com.zombispormedio.assemble.views.activities.IBaseView;
 import com.zombispormedio.assemble.views.fragments.IFragmentView;
 

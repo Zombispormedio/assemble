@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.adapters.lists;
 
+import com.annimon.stream.Collectors;
+import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.TeamFriendHolder;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
@@ -38,13 +40,10 @@ public class TeamFriendsListAdapter extends BaseSortedListAdapter<
     }
 
     public ArrayList<TeamFriendHolder.SelectedContainer> apply(ArrayList<FriendProfile> data) {
-        ArrayList<TeamFriendHolder.SelectedContainer> result = new ArrayList<>();
 
-        for (FriendProfile elem : data) {
-            result.add(new TeamFriendHolder.SelectedContainer(elem));
-        }
-
-        return result;
+        return Stream.of(data)
+                .map(TeamFriendHolder.SelectedContainer::new)
+                .collect(Collectors.toCollection(ArrayList<TeamFriendHolder.SelectedContainer>::new));
     }
 
 

@@ -13,7 +13,6 @@ import com.zombispormedio.assemble.activities.FriendsActivity;
 import com.zombispormedio.assemble.activities.HelpActivity;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.activities.LoginActivity;
-import com.zombispormedio.assemble.activities.MainActivity;
 import com.zombispormedio.assemble.activities.NewFriendActivity;
 import com.zombispormedio.assemble.activities.ProfileActivity;
 import com.zombispormedio.assemble.activities.RegisterActivity;
@@ -21,9 +20,6 @@ import com.zombispormedio.assemble.activities.SecondStepTeamActivity;
 import com.zombispormedio.assemble.activities.SettingsActivity;
 import com.zombispormedio.assemble.activities.UpdateBirthdateActivity;
 import com.zombispormedio.assemble.activities.UpdateProfileActivity;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 
