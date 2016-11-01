@@ -23,11 +23,9 @@ import butterknife.BindView;
 
 public class NewFriendActivity extends BaseActivity implements INewFriendView {
 
-    @Nullable
     @BindView(R.id.search_view)
     EditText searchView;
 
-    @Nullable
     @BindView(R.id.new_friends_list)
     RecyclerView friendsList;
 

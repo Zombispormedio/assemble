@@ -21,39 +21,39 @@ import butterknife.BindView;
 
 public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
 
-    @Nullable
+
     @BindView(R.id.friend_layout)
     LinearLayout friendLayout;
 
-    @Nullable
+
     @BindView(R.id.user_layout)
     FrameLayout userLayout;
 
-    @Nullable
+
     @BindView(R.id.friend_image_view)
     ImageView friendImageView;
 
-    @Nullable
+
     @BindView(R.id.friend_content_text)
     TextView friendContent;
 
-    @Nullable
+
     @BindView(R.id.user_content_text)
     TextView userContent;
 
-    @Nullable
+
     @BindView(R.id.message_state)
     ImageView userImageView;
 
-    @Nullable
+
     @BindView(R.id.message_date_label)
     TextView messageDateLabel;
 
-    @Nullable
+
     @BindView(R.id.date_label)
     TextView dateLabel;
 
-    @Nullable
+
     @BindView(R.id.date_label_layout)
     FrameLayout dateLabelLayout;
 

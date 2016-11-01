@@ -81,10 +81,10 @@ public final class AndroidUtils {
 
     public static class InputLayoutHelper {
 
-        @Nullable
+
         private EditText input;
 
-        @Nullable
+
         private TextInputLayout layout;
 
         public InputLayoutHelper(EditText input, TextInputLayout layout) {
@@ -92,12 +92,12 @@ public final class AndroidUtils {
             this.layout = layout;
         }
 
-        @Nullable
+
         public EditText getInput() {
             return input;
         }
 
-        @Nullable
+
         public TextInputLayout getLayout() {
             return layout;
         }
@@ -128,7 +128,7 @@ public final class AndroidUtils {
         }
     }
 
-    public static void fillProfile(@Nullable IBaseProfileView ctx, @Nullable UserProfile profile) {
+    public static void fillProfile( IBaseProfileView ctx,  UserProfile profile) {
         if (ctx != null && profile != null) {
 
             if (Utils.presenceOf(profile.username)) {
@@ -162,7 +162,7 @@ public final class AndroidUtils {
 
     public static class ListConfiguration {
 
-        @Nullable
+
         private Context ctx;
 
         private final RecyclerView list;
@@ -183,10 +183,10 @@ public final class AndroidUtils {
 
         private int spanCount;
 
-        @Nullable
+
         private RecyclerView.ItemDecoration dividerItemDecoration;
 
-        @Nullable
+
         private RecyclerView.ItemAnimator itemAnimator;
 
 

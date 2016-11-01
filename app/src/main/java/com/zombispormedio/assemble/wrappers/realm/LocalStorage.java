@@ -98,7 +98,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
     }
 
 
-    @Nullable
+
     public D findOneByAndSort(@NonNull String keyId, int valueId, @NonNull String sortKey) {
         RealmQuery<D> query = getQuery();
 
@@ -141,7 +141,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         }
     }
 
-    public void delete(@Nullable D object) {
+    public void delete( D object) {
         if (object != null) {
             database.beginTransaction();
             object.deleteFromRealm();

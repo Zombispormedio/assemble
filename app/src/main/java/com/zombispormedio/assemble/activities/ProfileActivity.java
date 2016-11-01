@@ -31,27 +31,21 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     private ProfileController ctrl;
 
-    @Nullable
     @BindView(R.id.image_profile)
     ImageView imageProfile;
 
-    @Nullable
     @BindView(R.id.image_upload_button)
     FloatingActionButton imageFab;
 
-    @Nullable
     @BindView(R.id.profile_username_text)
     TextView usernameText;
 
-    @Nullable
     @BindView(R.id.profile_location_text)
     TextView locationText;
 
-    @Nullable
     @BindView(R.id.profile_bio_text)
     TextView bioText;
 
-    @Nullable
     @BindView(R.id.profile_birth_date_text)
     TextView birthDateText;
 
@@ -118,7 +112,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     @Override
-    public void setBirthDate(@Nullable ISODate birth, String def) {
+    public void setBirthDate( ISODate birth, String def) {
         String text = birth != null ? birth.format(getString(R.string.born_at)) : def;
         birthDateText.setText(text);
     }

@@ -23,40 +23,31 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity implements ILoginView {
 
 
-    @Nullable
     @BindView(R.id.login_button)
     Button loginButton;
 
-    @Nullable
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
-    @Nullable
     @BindView(R.id.register_link)
     TextView linkToRegister;
 
-    @Nullable
     @BindView(R.id.email_input)
     EditText emailInput;
 
-    @Nullable
     @BindView(R.id.pass_input)
     EditText passwordInput;
 
-    @Nullable
     @BindView(R.id.email_input_layout)
     TextInputLayout emailInputLayout;
 
-    @Nullable
     @BindView(R.id.pass_input_layout)
     TextInputLayout passwordInputLayout;
 
     private LoginController ctrl;
 
-    @Nullable
     private AndroidUtils.InputLayoutHelper emailInputHelper;
 
-    @Nullable
     private AndroidUtils.InputLayoutHelper passwordInputHelper;
 
     @Override
@@ -109,7 +100,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     @Override
     public String getEmail() {
         return emailInputHelper.getValue();
-
     }
 
     @NonNull
@@ -161,7 +151,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
 
     public void goToRegister() {
         NavigationManager.Register(this);
-
     }
 
 

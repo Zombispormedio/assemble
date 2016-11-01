@@ -9,7 +9,7 @@ import android.support.annotation.Nullable;
  */
 public class HelpController extends Controller {
 
-    @Nullable
+
     private IHelpView ctx;
 
     public HelpController(IHelpView ctx) {

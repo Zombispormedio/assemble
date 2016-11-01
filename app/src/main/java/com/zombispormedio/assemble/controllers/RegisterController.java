@@ -16,7 +16,7 @@ import android.support.annotation.Nullable;
  */
 public class RegisterController extends Controller {
 
-    @Nullable
+
     private IRegisterView ctx;
 
     private final UserResource user;

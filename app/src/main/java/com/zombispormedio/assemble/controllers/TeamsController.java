@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class TeamsController extends Controller {
 
-    @Nullable
+
     private ITeamsView ctx;
 
     private final TeamResource teamResource;

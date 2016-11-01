@@ -15,7 +15,7 @@ import android.support.annotation.Nullable;
  */
 public class MainController extends Controller {
 
-    @Nullable
+
     private IMainView ctx;
 
     private final UserResource user;

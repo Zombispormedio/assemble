@@ -12,7 +12,7 @@ public class Auth {
 
     public final String password;
 
-    @Nullable
+
     public final String gcm_token;
 
     public Auth(String email, String password) {

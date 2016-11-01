@@ -22,7 +22,6 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
 
     private CreateChatController ctrl;
 
-    @Nullable
     @BindView(R.id.friends_list)
     RecyclerView friendsList;
 
@@ -55,7 +54,9 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
 
         adapter.setOnClickListener((position, data) -> ctrl.onFriend(data));
 
-        friendsList.setAdapter(adapter);
+        if (friendsList != null) {
+            friendsList.setAdapter(adapter);
+        }
 
     }
 

@@ -15,7 +15,7 @@ public class APIConfiguration {
     @NonNull
     private final String baseUrl;
 
-    @Nullable
+
     private String token;
 
     @NonNull
@@ -33,7 +33,7 @@ public class APIConfiguration {
         return baseUrl + path;
     }
 
-    @Nullable
+
     public String getToken() {
         return token;
     }

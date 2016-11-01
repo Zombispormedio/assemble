@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class NewFriendController extends Controller {
 
-    @Nullable
+
     private INewFriendView ctx;
 
     private final FriendResource friendResource;

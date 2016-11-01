@@ -22,32 +22,31 @@ import butterknife.BindView;
 public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> implements IFriendRequestHolder {
 
 
-    @Nullable
     private IOnClickItemListHandler<FriendRequestProfile> listener;
 
-    @Nullable
+
     private IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder> acceptListener;
 
-    @Nullable
+
     private IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder> rejectListener;
 
-    @Nullable
+
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
-    @Nullable
+
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
+
     @BindView(R.id.accept_fab)
     ImageButton acceptButton;
 
-    @Nullable
+
     @BindView(R.id.reject_fab)
     ImageButton rejectButton;
 
-    @Nullable
+
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 

@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class TeamDialogController extends Controller {
 
-    @Nullable
+
     private ITeamDialogView ctx;
 
     private final TeamResource teamResource;

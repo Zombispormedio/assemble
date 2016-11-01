@@ -18,15 +18,15 @@ import butterknife.BindView;
 
 public class TeamDialogHolder extends AbstractHolder<Team> {
 
-    @Nullable
+
     @BindView(R.id.name_label)
     TextView nameLabel;
 
-    @Nullable
+
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
+
     private IOnClickItemListHandler<Team> listener;
 
     public TeamDialogHolder(@NonNull View view) {

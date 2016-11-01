@@ -29,11 +29,11 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
 
     private MeetingsController ctrl;
 
-    @Nullable
+
     @BindView(R.id.meetings_list)
     RecyclerView meetingsList;
 
-    @Nullable
+
     @BindView(R.id.meetings_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -46,7 +46,7 @@ public class MeetingsFragment extends BaseFragment implements IMeetingsView {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         view = (HomeActivity) getActivity();
         bindView(this, view);

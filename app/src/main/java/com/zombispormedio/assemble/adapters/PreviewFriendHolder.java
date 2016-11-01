@@ -18,15 +18,15 @@ import butterknife.BindView;
 
 public class PreviewFriendHolder extends AbstractHolder<FriendProfile> {
 
-    @Nullable
+
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
-    @Nullable
+
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
+
     private IOnClickItemListHandler<FriendProfile> listener;
 
     public PreviewFriendHolder(@NonNull View itemView) {

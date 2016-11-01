@@ -10,14 +10,14 @@ import android.support.annotation.Nullable;
  */
 public class Controller extends AbstractController {
 
-    @Nullable
+
     private IBaseView app;
 
     public Controller(IBaseView app) {
         this.app = app;
     }
 
-    @Nullable
+
     protected ResourceComponent getResourceComponent() {
         return app != null ? app.getResourceComponent() : null;
     }

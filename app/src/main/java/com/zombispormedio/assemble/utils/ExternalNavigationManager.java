@@ -44,7 +44,7 @@ public class ExternalNavigationManager {
         public static final int CAMERA = 1;
     }
 
-    @Nullable
+
     private Activity ctx;
 
     public ExternalNavigationManager(Activity ctx) {

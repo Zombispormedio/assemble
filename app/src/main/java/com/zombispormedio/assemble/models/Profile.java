@@ -20,7 +20,7 @@ public class Profile<T extends Profile> extends People implements Sorted<T> {
 
     public final String sign_up_at;
 
-    @Nullable
+
     private final transient ISODate birth;
 
     public Profile(int id, String email, String username, String full_avatar_url, String large_avatar_url,
@@ -59,7 +59,7 @@ public class Profile<T extends Profile> extends People implements Sorted<T> {
         return id;
     }
 
-    @Nullable
+
     public ISODate getBirth() {
         return birth;
     }

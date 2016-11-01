@@ -20,11 +20,11 @@ import java.util.LinkedList;
  */
 public class Utils {
 
-    public static boolean presenceOf(@Nullable Object obj) {
+    public static boolean presenceOf( Object obj) {
         return obj != null;
     }
 
-    public static boolean presenceOf(@Nullable String obj) {
+    public static boolean presenceOf( String obj) {
         boolean it_is = true;
 
         if (obj == null) {
@@ -37,7 +37,7 @@ public class Utils {
         return it_is;
     }
 
-    public static boolean safeEquals(@Nullable Object o1, Object o2) {
+    public static boolean safeEquals( Object o1, Object o2) {
         boolean equals = o1 != null;
         if (equals) {
             equals = o1.equals(o2);

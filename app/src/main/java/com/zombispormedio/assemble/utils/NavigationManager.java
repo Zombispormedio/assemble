@@ -29,7 +29,7 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
  */
 public final class NavigationManager {
 
-    @Nullable
+
     private Context ctx;
 
     public static final int ACTIVITY_RESULT_CODE = 5956;

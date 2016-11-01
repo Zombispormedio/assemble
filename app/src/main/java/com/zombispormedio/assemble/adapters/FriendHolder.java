@@ -21,28 +21,22 @@ import butterknife.BindView;
  */
 public class FriendHolder extends AbstractHolder<FriendProfile> implements IFriendHolder {
 
-    @Nullable
     private IOnClickItemListHandler<FriendProfile> listener;
 
     private IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener;
 
-    @Nullable
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
-    @Nullable
     @BindView(R.id.email_label)
     TextView emailLabel;
 
-    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
     @BindView(R.id.remove_friend_button)
     ImageButton removeButton;
 
-    @Nullable
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 

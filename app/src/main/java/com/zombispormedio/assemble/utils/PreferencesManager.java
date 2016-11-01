@@ -12,7 +12,7 @@ public class PreferencesManager {
 
     public static final String PREFERENCES = "Prefs";
 
-    @Nullable
+
     private Context ctx;
 
     public PreferencesManager(Context ctx) {
@@ -39,7 +39,7 @@ public class PreferencesManager {
         editor.apply();
     }
 
-    @Nullable
+
     public String getString(String key) {
         return getPreferences().getString(key, "");
     }

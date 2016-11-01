@@ -19,7 +19,7 @@ import android.support.annotation.Nullable;
  */
 public class UpdateProfileController extends Controller {
 
-    @Nullable
+
     private IUpdateProfileView ctx;
 
     private final ProfileResource profileResource;

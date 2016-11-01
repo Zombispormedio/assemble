@@ -18,7 +18,7 @@ import android.support.annotation.Nullable;
  */
 public class ProfileController extends Controller {
 
-    @Nullable
+
     private IProfileView ctx;
 
     private final ProfileResource profileResource;

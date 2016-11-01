@@ -19,7 +19,7 @@ import android.support.annotation.Nullable;
  */
 public class CreateMeetingController extends Controller {
 
-    @Nullable
+
     private ICreateMeetingView ctx;
 
     private final TeamResource teamResource;
@@ -29,10 +29,10 @@ public class CreateMeetingController extends Controller {
     @NonNull
     private final MeetingEditor.Builder editor;
 
-    @Nullable
+
     private String imagePath;
 
-    @Nullable
+
     private DateUtils.DateError dateError;
 
 

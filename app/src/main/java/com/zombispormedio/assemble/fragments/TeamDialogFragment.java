@@ -32,7 +32,7 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
 
     private TeamDialogController ctrl;
 
-    @Nullable
+
     @BindView(R.id.teams_list)
     RecyclerView teamsList;
 

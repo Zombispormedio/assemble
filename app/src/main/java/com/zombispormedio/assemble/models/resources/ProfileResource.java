@@ -35,7 +35,7 @@ public class ProfileResource {
         this.storage = storage;
     }
 
-    @Nullable
+
     public UserProfile getProfile() {
         return storage.getFirst();
     }

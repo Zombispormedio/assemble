@@ -19,7 +19,6 @@ public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirt
 
     private UpdateBirthdateController ctrl;
 
-    @Nullable
     @BindView(R.id.birthdate_picker)
     DatePicker datePicker;
 

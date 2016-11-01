@@ -17,7 +17,7 @@ import android.support.annotation.Nullable;
  */
 public class SettingsController extends Controller {
 
-    @Nullable
+
     private ISettingsView ctx;
 
     private ISettingsFragmentView fctx;

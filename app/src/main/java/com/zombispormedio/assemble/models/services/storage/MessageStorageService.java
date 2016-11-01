@@ -33,7 +33,7 @@ public class MessageStorageService extends StorageService<MessageDAO, Message> {
                 .collect(Collectors.toCollection(ArrayList<Message>::new));
     }
 
-    @Nullable
+
     public Message getLastMessage(int chatId) {
         MessageDAO dao = storage.findOneByAndSort("chat_id", chatId, "created_at");
         return dao != null ? dao.toModel() : null;

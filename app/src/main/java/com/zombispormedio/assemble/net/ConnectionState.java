@@ -17,7 +17,7 @@ public class ConnectionState {
         return ourInstance;
     }
 
-    @Nullable
+
     private IApplicationView ctx;
 
     private ConnectionState() {

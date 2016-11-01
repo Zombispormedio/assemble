@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 public class ChatController extends Controller {
 
-    @Nullable
+
     private IChatView ctx;
 
     private final int chatID;

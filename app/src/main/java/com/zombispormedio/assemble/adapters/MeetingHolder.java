@@ -22,39 +22,39 @@ import butterknife.BindView;
  */
 public class MeetingHolder extends AbstractHolder<Meeting> {
 
-    @Nullable
+
     @BindView(R.id.name_label)
     TextView nameLabel;
 
-    @Nullable
+
     @BindView(R.id.frame_view)
     FrameLayout frameView;
 
-    @Nullable
+
     @BindView(R.id.date_label)
     TextView dateLabel;
 
-    @Nullable
+
     @BindView(R.id.team_image)
     ImageView teamImage;
 
-    @Nullable
+
     @BindView(R.id.team_label)
     TextView teamLabel;
 
-    @Nullable
+
     @BindView(R.id.meeting_image)
     ImageView meetingImage;
 
-    @Nullable
+
     @BindView(R.id.card_view)
     CardView cardView;
 
-    @Nullable
+
     @BindView(R.id.bookmark_button)
     SparkButton bookmarkButton;
 
-    @Nullable
+
     private IOnClickItemListHandler<Meeting> listener;
 
     private IOnClickItemListHandler<Meeting> bookmarkListener;

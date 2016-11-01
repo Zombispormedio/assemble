@@ -16,7 +16,7 @@ import android.support.annotation.Nullable;
  */
 public class LoginController extends Controller {
 
-    @Nullable
+
     private ILoginView ctx;
 
     private final UserResource user;

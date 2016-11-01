@@ -98,26 +98,26 @@ public class ImageUtils {
 
     public static class ImageBuilder {
 
-        @Nullable
+
         private Context mCtx;
 
         private ImageView mImageView;
 
-        @Nullable
+
         private String mUrl;
 
-        @Nullable
+
         private String mLetter;
 
         private boolean isCircle;
 
-        @Nullable
+
         private Drawable mDrawable;
 
-        @Nullable
+
         private ISuccessHandler handler;
 
-        @Nullable
+
         private File mFile;
 
         private int mDrawableId;

@@ -27,11 +27,11 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
 
     private FriendsActivity view;
 
-    @Nullable
+
     @BindView(R.id.req_friends_list)
     RecyclerView friendRequestsList;
 
-    @Nullable
+
     @BindView(R.id.friend_requests_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -46,7 +46,7 @@ public class FriendRequestsListFragment extends BaseFragment implements IFriendR
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         view = (FriendsActivity) getActivity();
         bindView(this, view);

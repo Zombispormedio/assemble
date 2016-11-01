@@ -20,15 +20,15 @@ import butterknife.BindView;
 public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Container> {
 
 
-    @Nullable
+
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
-    @Nullable
+
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
+
     private IOnClickItemListHandler<Container> listener;
 
     public SelectedMemberHolder(@NonNull View view) {

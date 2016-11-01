@@ -31,19 +31,19 @@ public class ProfileEditor {
 
     public static class Builder {
 
-        @Nullable
+
         private Profile profile;
 
-        @Nullable
+
         private String username;
 
-        @Nullable
+
         private String bio;
 
-        @Nullable
+
         private String location;
 
-        @Nullable
+
         private String birth_date;
 
         public Builder(Profile profile) {
@@ -88,7 +88,7 @@ public class ProfileEditor {
             this.birth_date = birth_date;
         }
 
-        @Nullable
+
         public String getBirthdate() {
             return birth_date;
         }
@@ -107,22 +107,22 @@ public class ProfileEditor {
             return changed;
         }
 
-        @Nullable
+
         public String getLocation() {
             return location;
         }
 
-        @Nullable
+
         public String getBio() {
             return bio;
         }
 
-        @Nullable
+
         public String getUsername() {
             return username;
         }
 
-        @Nullable
+
         public ProfileEditor build() {
             if (username == null) {
                 username = profile.username;

@@ -25,15 +25,12 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
 
     private FirstStepTeamController ctrl;
 
-    @Nullable
     @BindView(R.id.members_list)
     RecyclerView membersList;
 
-    @Nullable
     @BindView(R.id.friends_list)
     RecyclerView friendsList;
 
-    @Nullable
     @BindView(R.id.divider)
     View divider;
 

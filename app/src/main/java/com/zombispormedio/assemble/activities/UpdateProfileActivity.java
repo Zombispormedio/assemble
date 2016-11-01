@@ -25,19 +25,15 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
 
     private UpdateProfileController ctrl;
 
-    @Nullable
     @BindView(R.id.username_input)
     EditText usernameInput;
 
-    @Nullable
     @BindView(R.id.bio_input)
     EditText bioInput;
 
-    @Nullable
     @BindView(R.id.location_input)
     EditText locationInput;
 
-    @Nullable
     @BindView(R.id.birthdate_input)
     EditText birthdateInput;
 
@@ -91,7 +87,7 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
-    public void setBirthDate(@Nullable ISODate birth, String def) {
+    public void setBirthDate( ISODate birth, String def) {
         String text = birth != null ? birth.format(getString(R.string.simple_date)) : def;
         birthdateInput.setText(text);
     }

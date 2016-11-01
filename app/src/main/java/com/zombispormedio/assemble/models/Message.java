@@ -28,10 +28,10 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
 
     public int chat_id;
 
-    @Nullable
+
     public final Profile sender;
 
-    @Nullable
+
     public Profile recipient;
 
     public final String content;
@@ -174,7 +174,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
     }
 
     @Override
-    public boolean areTheSame(@Nullable Message obj) {
+    public boolean areTheSame( Message obj) {
         return obj != null && id == obj.id;
     }
 

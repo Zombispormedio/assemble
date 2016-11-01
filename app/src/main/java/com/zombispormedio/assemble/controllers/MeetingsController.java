@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class MeetingsController extends Controller {
 
-    @Nullable
+
     private IMeetingsView ctx;
 
     private final MeetingResource meetingResource;

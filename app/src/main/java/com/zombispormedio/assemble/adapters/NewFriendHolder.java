@@ -20,25 +20,25 @@ import butterknife.BindView;
  */
 public class NewFriendHolder extends AbstractHolder<FriendProfile> implements INewFriendHolder {
 
-    @Nullable
+
     private IOnClickItemListHandler<FriendProfile> listener;
 
-    @Nullable
+
     private IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener;
 
-    @Nullable
+
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
-    @Nullable
+
     @BindView(R.id.email_label)
     TextView emailLabel;
 
-    @Nullable
+
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
+
     @BindView(R.id.add_friend_button)
     SparkButton addFriendButton;
 

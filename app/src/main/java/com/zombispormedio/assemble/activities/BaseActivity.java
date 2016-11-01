@@ -51,7 +51,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     }
 
     /********* Authentication *****/
-    @Nullable
+
     public String getAuthToken() {
         return getPreferencesManager().getString(AUTH);
     }
@@ -160,7 +160,9 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         public void onReceive(Context context, @NonNull Intent intent) {
             Bundle data = intent.getExtras();
             Message message = data.getParcelable(MESSAGE_BUNDLE);
-            getResourceComponent().provideChatResource().storeMessage(message);
+            if (message != null) {
+                getResourceComponent().provideChatResource().storeMessage(message);
+            }
             getResourceComponent().provideMessageSubscription().load();
         }
     }

@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class CreateChatController extends Controller {
 
-    @Nullable
+
     private ICreateChatView ctx;
 
     private final ChatResource chatResource;

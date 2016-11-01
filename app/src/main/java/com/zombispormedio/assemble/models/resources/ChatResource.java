@@ -52,7 +52,7 @@ public class ChatResource extends AbstractResource<Chat> {
 
     }
 
-    @Nullable
+
     public Chat getById(int id) {
         return storage.getByID(id);
     }
@@ -68,7 +68,7 @@ public class ChatResource extends AbstractResource<Chat> {
         });
     }
 
-    @Nullable
+
     public Message getMessageById(int id) {
         return messageStorage.getByID(id);
     }

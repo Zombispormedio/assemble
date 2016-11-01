@@ -29,7 +29,7 @@ public class HomePagerAdapter extends FragmentStatePagerAdapter {
     }
 
 
-    @Nullable
+
     @Override
     public Fragment getItem(int position) {
 

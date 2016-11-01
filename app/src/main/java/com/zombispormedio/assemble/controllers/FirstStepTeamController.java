@@ -16,7 +16,7 @@ import java.util.LinkedList;
  */
 public class FirstStepTeamController extends Controller {
 
-    @Nullable
+
     private IFirstStepTeamView ctx;
 
     private final FriendResource friendResource;

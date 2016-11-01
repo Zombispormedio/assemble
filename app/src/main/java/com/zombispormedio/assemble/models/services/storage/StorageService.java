@@ -78,7 +78,7 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
 
     }
 
-    @Nullable
+
     @Override
     public M getFirst() {
         M result = null;
@@ -95,7 +95,7 @@ public class StorageService<D extends RealmObject, M extends BaseModel> implemen
         return toModel(objects);
     }
 
-    @Nullable
+
     @Override
     public M getByID(int id) {
         M result = null;

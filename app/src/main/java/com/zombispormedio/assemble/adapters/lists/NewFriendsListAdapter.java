@@ -52,7 +52,7 @@ public class NewFriendsListAdapter extends FriendProfileAdapter<NewFriendHolder>
 
     public static class Factory {
 
-        @Nullable
+
         private IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener;
 
         private IOnClickItemListHandler<FriendProfile> listener;

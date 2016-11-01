@@ -9,10 +9,10 @@ public class Error {
 
     public final String msg;
 
-    @Nullable
+
     public final String[] password;
 
-    @Nullable
+
     public final String[] email;
 
     public Error(String msg, String[] password, String[] email) {

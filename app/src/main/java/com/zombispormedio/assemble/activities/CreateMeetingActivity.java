@@ -39,35 +39,27 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
 
     private TeamDialogFragment teamDialogFragment;
 
-    @Nullable
     @BindView(R.id.team_name)
     TextView teamName;
 
-    @Nullable
     @BindView(R.id.start_date_label)
     TextView startDateLabel;
 
-    @Nullable
     @BindView(R.id.start_hour_label)
     TextView startHourLabel;
 
-    @Nullable
     @BindView(R.id.end_date_label)
     TextView endDateLabel;
 
-    @Nullable
     @BindView(R.id.end_hour_label)
     TextView endHourLabel;
 
-    @Nullable
     @BindView(R.id.is_every_day)
     SwitchCompat isEveryDay;
 
-    @Nullable
     @BindView(R.id.name_input)
     EditText nameInput;
 
-    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 

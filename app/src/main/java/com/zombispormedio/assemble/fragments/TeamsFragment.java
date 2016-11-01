@@ -29,11 +29,11 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
 
     private TeamsController ctrl;
 
-    @Nullable
+
     @BindView(R.id.teams_list)
     RecyclerView teamsList;
 
-    @Nullable
+
     @BindView(R.id.teams_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -46,7 +46,7 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         view = (HomeActivity) getActivity();
         bindView(this, view);

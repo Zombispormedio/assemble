@@ -31,24 +31,20 @@ import butterknife.OnClick;
 
 public class SecondStepTeamActivity extends BaseActivity implements ISecondStepTeamView {
 
-    @Nullable
+
     private SecondStepTeamController ctrl;
 
     private ExternalNavigationManager externalNavigationManager;
 
-    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
     @BindView(R.id.participants_label)
     TextView participantsLabel;
 
-    @Nullable
     @BindView(R.id.name_input)
     EditText nameInput;
 
-    @Nullable
     @BindView(R.id.participants_list)
     RecyclerView participantsList;
 

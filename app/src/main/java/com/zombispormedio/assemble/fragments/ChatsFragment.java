@@ -30,11 +30,11 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
 
     private ChatsController ctrl;
 
-    @Nullable
+
     @BindView(R.id.chats_list)
     RecyclerView chatsList;
 
-    @Nullable
+
     @BindView(R.id.chats_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -48,7 +48,7 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated( Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         view = (HomeActivity) getActivity();
         bindView(this, view);

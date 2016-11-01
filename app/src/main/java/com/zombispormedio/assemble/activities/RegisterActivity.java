@@ -23,23 +23,18 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     private RegisterController ctrl;
 
-    @Nullable
     @BindView(R.id.email_input)
     EditText emailInput;
 
-    @Nullable
     @BindView(R.id.pass_input)
     EditText passwordInput;
 
-    @Nullable
     @BindView(R.id.repeat_pass_input)
     EditText repPasswordInput;
 
-    @Nullable
     @BindView(R.id.register_button)
     Button registerButton;
 
-    @Nullable
     @BindView(R.id.register_progress_bar)
     ProgressBar progressBar;
 
@@ -104,7 +99,6 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
     @Override
     public void hideProgressBar() {
         progressBar.setVisibility(View.GONE);
-
     }
 
     @Override
@@ -113,7 +107,6 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         passwordInput.setVisibility(View.VISIBLE);
         repPasswordInput.setVisibility(View.VISIBLE);
         registerButton.setVisibility(View.VISIBLE);
-
     }
 
     @Override

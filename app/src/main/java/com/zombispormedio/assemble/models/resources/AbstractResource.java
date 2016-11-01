@@ -21,7 +21,7 @@ public abstract class AbstractResource<T> {
         return storage.getAll();
     }
 
-    @Nullable
+
     public T getFirst() {
         return storage.getFirst();
     }

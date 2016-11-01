@@ -37,18 +37,14 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_ID;
 
 public class ChatActivity extends BaseActivity implements IChatView {
 
-    @Nullable
     private ChatController ctrl;
 
-    @Nullable
     @BindView(R.id.messages_list)
     RecyclerView messagesList;
 
-    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
     @BindView(R.id.message_input)
     EditText messageInput;
 

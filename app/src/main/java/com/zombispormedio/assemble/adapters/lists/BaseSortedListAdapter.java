@@ -78,7 +78,7 @@ public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder
         return o1.compareTo(o2);
     }
 
-    @Nullable
+
     @Override
     public E onCreateViewHolder(ViewGroup parent, int viewType) {
         return null;

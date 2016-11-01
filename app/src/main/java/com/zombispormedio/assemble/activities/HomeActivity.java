@@ -49,7 +49,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private NavigationManager navigation;
 
-    @Nullable
     @BindView(R.id.drawer_layout_home)
     DrawerLayout drawer;
 
@@ -61,33 +60,28 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private View headerView;
 
-    @Nullable
     @BindView(R.id.nav_view)
     NavigationView nav;
 
-    @Nullable
     @BindView(R.id.overlay_home_layout)
     FrameLayout overlay;
 
-    @Nullable
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
-    @Nullable
     @BindView(R.id.home_tab_layout)
     TabLayout tabLayout;
 
-    @Nullable
     @BindView(R.id.home_pager)
     ViewPager viewTabPager;
 
-    @Nullable
+
     @BindView(R.id.background_loading)
     ProgressBar backgroundProgressBar;
 
     private ProgressDialog progressDialog;
 
-    @Nullable
+
     private HomeController ctrl;
 
 
@@ -208,7 +202,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private int getState() {
         String value = getPreferencesManager().getString(STATE);
-        return value.isEmpty() ? -1 : Integer.parseInt(value);
+        return (value != null && value.isEmpty()) ? -1 : Integer.parseInt(value);
     }
 
 
@@ -344,7 +338,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
 
     @OnTouch(R.id.alpha_layer)
-    public boolean onAlphaLayerClick(View view, MotionEvent motionEvent) {
+    public boolean onAlphaLayerClick() {
         hideOverlay();
         return false;
     }

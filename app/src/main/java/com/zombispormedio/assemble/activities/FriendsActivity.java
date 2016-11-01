@@ -21,23 +21,18 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
     private FriendsController ctrl;
 
-    @Nullable
     @BindView(R.id.loading_label)
     TextView _progressLabel;
 
-    @Nullable
     @BindView(R.id.progress_bar)
     ProgressBar _progressBar;
 
-    @Nullable
     @BindView(R.id.friends_pager)
     ViewPager friendsPager;
 
-    @Nullable
     @BindView(R.id.friends_button_tab)
     Button friendsTab;
 
-    @Nullable
     @BindView(R.id.friend_requests_button_tab)
     Button friendRequestsTab;
 

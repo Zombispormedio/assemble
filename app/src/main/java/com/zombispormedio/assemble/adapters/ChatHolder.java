@@ -24,27 +24,21 @@ public class ChatHolder extends AbstractHolder<Chat> {
 
     private static final int CONTENT_LIMIT = 25;
 
-    @Nullable
     @BindView(R.id.username_label)
     TextView nameLabel;
 
-    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
     @BindView(R.id.last_message_label)
     TextView lastMessageLabel;
 
-    @Nullable
     @BindView(R.id.date_label)
     TextView dateLabel;
 
-    @Nullable
     @BindView(R.id.unread_count)
     TextView unreadCountLabel;
 
-    @Nullable
     private IOnClickItemListHandler<Chat> listener;
 
     public ChatHolder(View view) {
@@ -86,7 +80,7 @@ public class ChatHolder extends AbstractHolder<Chat> {
 
     }
 
-    private void renderLastMessage(@Nullable Message last) {
+    private void renderLastMessage( Message last) {
         String content = "";
         String formatDate = "";
 

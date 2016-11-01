@@ -20,13 +20,13 @@ public class Request {
 
     private final String url;
 
-    @Nullable
+
     private HashMap<String, String> headers;
 
-    @Nullable
+
     private String body;
 
-    @Nullable
+
     private FileBody file;
 
     private IPromiseHandler handler;
@@ -51,7 +51,7 @@ public class Request {
         return headers.get(key);
     }
 
-    @Nullable
+
     public HashMap<String, String> getHeaders() {
         return headers;
     }
@@ -64,7 +64,7 @@ public class Request {
         this.handler = handler;
     }
 
-    @Nullable
+
     public String getBody() {
         return body;
     }
@@ -73,7 +73,7 @@ public class Request {
         this.body = body;
     }
 
-    @Nullable
+
     public FileBody getFile() {
         return file;
     }
@@ -105,13 +105,13 @@ public class Request {
         @NonNull
         private final HashMap<String, Object> paramsMap;
 
-        @Nullable
+
         private HashMap<String, String> headersMap;
 
-        @Nullable
+
         private IPromiseHandler handler;
 
-        @Nullable
+
         private String body;
 
         private FileBody file;

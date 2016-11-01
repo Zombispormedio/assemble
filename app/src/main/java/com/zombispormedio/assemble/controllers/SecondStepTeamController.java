@@ -17,7 +17,7 @@ import android.support.annotation.Nullable;
 
 public class SecondStepTeamController extends Controller {
 
-    @Nullable
+
     private ISecondStepTeamView ctx;
 
     private final FriendResource friendResource;
@@ -27,7 +27,7 @@ public class SecondStepTeamController extends Controller {
     @NonNull
     private final TeamEditor.Builder editor;
 
-    @Nullable
+
     private String imagePath;
 
 

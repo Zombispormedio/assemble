@@ -19,26 +19,26 @@ import butterknife.BindView;
  */
 public class TeamHolder extends AbstractHolder<Team> {
 
-    @Nullable
+
     @BindView(R.id.name_label)
     TextView nameLabel;
 
-    @Nullable
+
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
+
     @BindView(R.id.card_view)
     CardView cardView;
 
-    @Nullable
+
     @BindView(R.id.star_checker)
     SparkButton starChecker;
 
-    @Nullable
+
     private IOnClickItemListHandler<Team> starCheckerListener;
 
-    @Nullable
+
     private IOnClickItemListHandler<Team> listener;
 
     public TeamHolder(View view) {

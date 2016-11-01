@@ -32,7 +32,7 @@ import java.util.HashMap;
 public class HomeController extends Controller {
 
 
-    @Nullable
+
     private IHomeView ctx;
 
     private final ProfileResource profileResource;

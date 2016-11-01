@@ -20,7 +20,7 @@ public class FriendsPagerAdapter extends FragmentStatePagerAdapter {
         this.numPages = numPages;
     }
 
-    @Nullable
+
     @Override
     public Fragment getItem(int position) {
 

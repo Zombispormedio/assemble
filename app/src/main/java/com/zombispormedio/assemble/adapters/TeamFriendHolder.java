@@ -20,18 +20,18 @@ import butterknife.BindView;
 public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedContainer> {
 
 
-    @Nullable
+
     private IOnClickItemListHandler<SelectedContainer> listener;
 
-    @Nullable
+
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
-    @Nullable
+
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @Nullable
+
     @BindView(R.id.selected_icon)
     ImageView selectedIcon;
 

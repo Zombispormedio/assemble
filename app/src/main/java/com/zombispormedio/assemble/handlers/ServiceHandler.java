@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
  */
 public class ServiceHandler<T, E> implements IServiceHandler<T, E> {
 
-    @Nullable
+
     private IServiceHandler<T, E> init;
 
     public ServiceHandler(IServiceHandler<T, E> init) {

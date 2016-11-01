@@ -20,11 +20,11 @@ public class ParticipantHolder extends AbstractHolder<FriendProfile> {
 
     private static final int USERNAME_LIMIT = 10;
 
-    @Nullable
+
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
-    @Nullable
+
     @BindView(R.id.image_view)
     ImageView imageView;
 

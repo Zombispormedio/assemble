@@ -12,7 +12,7 @@ import android.support.annotation.Nullable;
  */
 public class UpdateBirthdateController extends Controller {
 
-    @Nullable
+
     private IUpdateBirthdateView ctx;
 
     public UpdateBirthdateController(IUpdateBirthdateView ctx) {

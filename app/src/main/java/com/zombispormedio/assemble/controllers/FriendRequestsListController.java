@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class FriendRequestsListController extends Controller {
 
-    @Nullable
+
     private IFriendRequestsListView ctx;
 
     private final FriendRequestResource friendRequestResource;
