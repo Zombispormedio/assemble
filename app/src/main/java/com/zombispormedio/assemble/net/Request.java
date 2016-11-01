@@ -4,7 +4,7 @@ import com.zombispormedio.assemble.handlers.IPromiseHandler;
 import com.zombispormedio.assemble.utils.StringUtils;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,10 +16,10 @@ import java.util.regex.Pattern;
  */
 public class Request {
 
-    private final METHOD method;
+    @HTTPMethod.Def
+    private final String method;
 
     private final String url;
-
 
     private HashMap<String, String> headers;
 
@@ -31,7 +31,7 @@ public class Request {
 
     private IPromiseHandler handler;
 
-    public Request(String url, METHOD method) {
+    public Request(String url, @HTTPMethod.Def String method) {
         this.url = url;
         this.method = method;
         headers = null;
@@ -39,7 +39,8 @@ public class Request {
         file = null;
     }
 
-    public METHOD getMethod() {
+    @HTTPMethod.Def
+    public String getMethod() {
         return method;
     }
 
@@ -50,7 +51,6 @@ public class Request {
     public String getHeader(String key) {
         return headers.get(key);
     }
-
 
     public HashMap<String, String> getHeaders() {
         return headers;
@@ -64,7 +64,6 @@ public class Request {
         this.handler = handler;
     }
 
-
     public String getBody() {
         return body;
     }
@@ -72,7 +71,6 @@ public class Request {
     private void setBody(String body) {
         this.body = body;
     }
-
 
     public FileBody getFile() {
         return file;
@@ -100,7 +98,8 @@ public class Request {
 
         private String url;
 
-        private METHOD method;
+        @HTTPMethod.Def
+        private String method;
 
         @NonNull
         private final HashMap<String, Object> paramsMap;
@@ -121,7 +120,7 @@ public class Request {
             headersMap = null;
             handler = null;
             body = null;
-            method = METHOD.GET;
+            method = HTTPMethod.GET;
             url = "www.google.com";
         }
 
@@ -132,80 +131,80 @@ public class Request {
         }
 
         @NonNull
-        public Builder method(METHOD method) {
+        public Builder method(@HTTPMethod.Def String method) {
             this.method = method;
             return this;
         }
 
         public void get() {
-            this.method = METHOD.GET;
+            this.method = HTTPMethod.GET;
             build()
                     .start();
         }
 
         public void post() {
-            this.method = METHOD.POST;
+            this.method = HTTPMethod.POST;
             build()
                     .start();
         }
 
         public void post(String body) {
-            this.method = METHOD.POST;
+            this.method = HTTPMethod.POST;
             this.body = body;
             build()
                     .start();
         }
 
         public void post(FileBody file) {
-            this.method = METHOD.POST;
+            this.method = HTTPMethod.POST;
             this.file = file;
             build()
                     .start();
         }
 
         public void patch() {
-            this.method = METHOD.PATCH;
+            this.method = HTTPMethod.PATCH;
             build()
                     .start();
         }
 
         public void patch(String body) {
-            this.method = METHOD.PATCH;
+            this.method = HTTPMethod.PATCH;
             this.body = body;
             build()
                     .start();
         }
 
         public void patch(FileBody file) {
-            this.method = METHOD.PATCH;
+            this.method = HTTPMethod.PATCH;
             this.file = file;
             build()
                     .start();
         }
 
         public void put() {
-            this.method = METHOD.PUT;
+            this.method = HTTPMethod.PUT;
             build()
                     .start();
 
         }
 
         public void put(String body) {
-            this.method = METHOD.PUT;
+            this.method = HTTPMethod.PUT;
             this.body = body;
             build()
                     .start();
         }
 
         public void put(FileBody file) {
-            this.method = METHOD.PUT;
+            this.method = HTTPMethod.PUT;
             this.file = file;
             build()
                     .start();
         }
 
         public void delete() {
-            this.method = METHOD.DELETE;
+            this.method = HTTPMethod.DELETE;
             build()
                     .start();
         }

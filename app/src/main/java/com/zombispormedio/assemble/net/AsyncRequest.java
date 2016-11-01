@@ -34,11 +34,11 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
         try {
 
             switch (req.getMethod()) {
-                case GET:
+                case HTTPMethod.GET:
                     result = rest.get();
                     break;
 
-                case POST: {
+                case HTTPMethod.POST: {
                     String body = req.getBody();
                     FileBody file = req.getFile();
                     result = body != null ?
@@ -50,7 +50,7 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
                     break;
                 }
 
-                case PUT: {
+                case HTTPMethod.PUT: {
                     String body = req.getBody();
                     FileBody file = req.getFile();
                     result = body != null ?
@@ -61,7 +61,7 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
                     break;
                 }
 
-                case PATCH: {
+                case HTTPMethod.PATCH: {
                     String body = req.getBody();
                     FileBody file = req.getFile();
                     result = body != null ?
@@ -72,7 +72,7 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
                     break;
                 }
 
-                case DELETE:
+                case HTTPMethod.DELETE:
                     result = rest.delete();
                     break;
             }
