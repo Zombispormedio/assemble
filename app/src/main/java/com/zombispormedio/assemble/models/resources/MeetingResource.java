@@ -2,13 +2,15 @@ package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.Meeting;
-import com.zombispormedio.assemble.models.services.storage.MeetingStorageService;
-import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.services.interfaces.IMeetingService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
+import com.zombispormedio.assemble.models.services.storage.MeetingStorageService;
+import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
+
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -47,7 +49,7 @@ public class MeetingResource extends AbstractResource<Meeting> {
 
     }
 
-    public void uploadImage(int meetingId, String path, final IServiceHandler<Meeting, Error> handler) {
+    public void uploadImage(int meetingId, @NonNull String path, final IServiceHandler<Meeting, Error> handler) {
         persistence.uploadImage(meetingId, new File(path), new ServiceHandler<Meeting, Error>() {
             @Override
             public void onSuccess(Meeting result) {
@@ -57,8 +59,8 @@ public class MeetingResource extends AbstractResource<Meeting> {
         });
     }
 
-    public void bookmark(int meetingId,   final IServiceHandler<Result, Error> handler){
-        persistence.bookmark(meetingId, new ServiceHandler<Result, Error>(){
+    public void bookmark(int meetingId, @NonNull final IServiceHandler<Result, Error> handler) {
+        persistence.bookmark(meetingId, new ServiceHandler<Result, Error>() {
             @Override
             public void onSuccess(Result result) {
                 getMeetingStorage().bookmark(meetingId);
@@ -67,7 +69,8 @@ public class MeetingResource extends AbstractResource<Meeting> {
         });
     }
 
-    private MeetingStorageService getMeetingStorage(){
+    @NonNull
+    private MeetingStorageService getMeetingStorage() {
         return (MeetingStorageService) storage;
     }
 

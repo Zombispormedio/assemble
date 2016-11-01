@@ -2,6 +2,8 @@ package com.zombispormedio.assemble.wrappers.realm.dao;
 
 import com.zombispormedio.assemble.models.UserProfile;
 
+import android.support.annotation.NonNull;
+
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
@@ -37,6 +39,7 @@ public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile>
     public String sign_up_at;
 
 
+    @NonNull
     @Override
     public UserProfile toModel() {
         return new UserProfile(id, email, username,
@@ -44,8 +47,9 @@ public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile>
                 birth_date, location, bio, sign_up_at);
     }
 
+    @NonNull
     @Override
-    public UserProfileDAO fromModel(UserProfile model) {
+    public UserProfileDAO fromModel(@NonNull UserProfile model) {
         this.id = model.id;
         this.email = model.email;
         this.username = model.username;
@@ -67,6 +71,7 @@ public class UserProfileDAO extends RealmObject implements IBaseDAO<UserProfile>
 
     public static class Factory implements IDAOFactory<UserProfileDAO> {
 
+        @NonNull
         @Override
         public UserProfileDAO create() {
             return new UserProfileDAO();

@@ -1,13 +1,15 @@
 package com.zombispormedio.assemble.models.services.api;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.models.editors.MeetingEditor;
+import com.zombispormedio.assemble.models.services.interfaces.IMeetingService;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.FileBody;
 import com.zombispormedio.assemble.net.JsonBinder;
-import com.zombispormedio.assemble.models.services.interfaces.IMeetingService;
 import com.zombispormedio.assemble.net.Result;
+
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,10 +18,12 @@ import java.util.ArrayList;
  * Created by Xavier Serrano on 06/09/2016.
  */
 public class MeetingAPIService implements IMeetingService {
+
+    @NonNull
     private final APIConfiguration api;
 
     public MeetingAPIService() {
-        api=APIConfiguration.getInstance();
+        api = APIConfiguration.getInstance();
     }
 
     @Override
@@ -37,7 +41,7 @@ public class MeetingAPIService implements IMeetingService {
     }
 
     @Override
-    public void uploadImage(int meetingId, File file, IServiceHandler<Meeting, Error> handler) {
+    public void uploadImage(int meetingId, @NonNull File file, IServiceHandler<Meeting, Error> handler) {
         api.RestWithAuth("/meeting/:id/image")
                 .params("id", meetingId)
                 .handler(DeferUtils.deferMeeting(handler))

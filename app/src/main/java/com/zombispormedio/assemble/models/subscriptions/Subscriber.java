@@ -10,22 +10,22 @@ public class Subscriber {
     private final String uuid;
 
     public Subscriber() {
-        uuid= UUID.randomUUID().toString();
+        uuid = UUID.randomUUID().toString();
     }
 
     public String getID() {
         return uuid;
     }
 
-    public void notifyChange(){
+    public void notifyChange() {
 
     }
 
-    public void notifyFail(){
+    public void notifyFail() {
 
     }
 
-    public void notifyOneChange(int id){
-        
+    public void notifyOneChange(int id) {
+
     }
 }

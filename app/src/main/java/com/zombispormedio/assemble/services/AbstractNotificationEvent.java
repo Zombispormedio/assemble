@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.IApplicationView;
 
 import android.content.Intent;
+
 /**
  * Created by Xavier Serrano on 24/10/2016.
  */
@@ -46,11 +47,11 @@ public abstract class AbstractNotificationEvent {
         return application.getAppColor(id);
     }
 
-    protected Intent createIntent(Class<? extends BaseActivity> activityClass){
+    protected Intent createIntent(Class<? extends BaseActivity> activityClass) {
         return application.createIntent(activityClass);
     }
 
-    protected void startIntent(Intent intent){
+    protected void startIntent(Intent intent) {
         application.startIntent(intent);
     }
 }

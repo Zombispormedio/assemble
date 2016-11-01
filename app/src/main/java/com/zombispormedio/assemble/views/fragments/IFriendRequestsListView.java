@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.views.fragments;
 
 import com.zombispormedio.assemble.models.FriendRequestProfile;
-import com.zombispormedio.assemble.views.fragments.IFragmentView;
 
 import java.util.ArrayList;
 

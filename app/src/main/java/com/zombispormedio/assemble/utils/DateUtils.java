@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.utils;
 
+import android.support.annotation.NonNull;
+
 import java.util.Calendar;
 
 
@@ -22,26 +24,31 @@ public class DateUtils {
             this.code = 0;
         }
 
+        @NonNull
         public DateError year() {
             code = Calendar.YEAR;
             return this;
         }
 
+        @NonNull
         public DateError month() {
             code = Calendar.MONTH;
             return this;
         }
 
+        @NonNull
         public DateError day() {
             code = Calendar.DAY_OF_MONTH;
             return this;
         }
 
+        @NonNull
         public DateError hour() {
             code = Calendar.HOUR_OF_DAY;
             return this;
         }
 
+        @NonNull
         public DateError minute() {
             code = Calendar.MINUTE;
             return this;

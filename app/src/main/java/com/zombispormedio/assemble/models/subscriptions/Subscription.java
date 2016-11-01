@@ -2,6 +2,8 @@ package com.zombispormedio.assemble.models.subscriptions;
 
 import com.annimon.stream.Stream;
 
+import android.support.annotation.NonNull;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,6 +12,7 @@ import java.util.HashMap;
  */
 public class Subscription {
 
+    @NonNull
     private final HashMap<String, Subscriber> subscribers;
 
 
@@ -17,17 +20,20 @@ public class Subscription {
         subscribers = new HashMap<>();
     }
 
-    public Subscription addSubscriber(Subscriber subscriber) {
+    @NonNull
+    public Subscription addSubscriber(@NonNull Subscriber subscriber) {
         subscribers.put(subscriber.getID(), subscriber);
         return this;
     }
 
+    @NonNull
     public Subscription removeSubscriber(String id) {
         subscribers.remove(id);
         return this;
     }
 
-    public Subscription removeSubscriber(Subscriber subscriber) {
+    @NonNull
+    public Subscription removeSubscriber(@NonNull Subscriber subscriber) {
         subscribers.remove(subscriber.getID());
         return this;
     }
@@ -56,6 +62,7 @@ public class Subscription {
         notifyFailToSubscribers();
     }
 
+    @NonNull
     private ArrayList<Subscriber> getSubscribers() {
         return new ArrayList<>(subscribers.values());
     }

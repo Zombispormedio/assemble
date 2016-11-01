@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.adapters.lists;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.ParticipantHolder;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 
@@ -12,8 +13,9 @@ import android.view.ViewGroup;
 
 public class ParticipantsListAdapter extends FriendProfileAdapter<ParticipantHolder> {
 
+    @NonNull
     @Override
-    public ParticipantHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return   new ParticipantHolder(getView(parent, R.layout.list_item_participants));
+    public ParticipantHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ParticipantHolder(getView(parent, R.layout.list_item_participants));
     }
 }

@@ -9,11 +9,11 @@ import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.activities.IUpdateProfileView;
 
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -25,15 +25,19 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
 
     private UpdateProfileController ctrl;
 
+    @Nullable
     @BindView(R.id.username_input)
     EditText usernameInput;
 
+    @Nullable
     @BindView(R.id.bio_input)
     EditText bioInput;
 
+    @Nullable
     @BindView(R.id.location_input)
     EditText locationInput;
 
+    @Nullable
     @BindView(R.id.birthdate_input)
     EditText birthdateInput;
 
@@ -87,8 +91,8 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
-    public void setBirthDate(ISODate birth, String def) {
-        String text=birth!=null?birth.format(getString(R.string.simple_date)):def;
+    public void setBirthDate(@Nullable ISODate birth, String def) {
+        String text = birth != null ? birth.format(getString(R.string.simple_date)) : def;
         birthdateInput.setText(text);
     }
 
@@ -98,17 +102,20 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
 
+    @NonNull
     @Override
     public String getUsername() {
         return usernameInput.getText().toString();
     }
 
+    @NonNull
     @Override
     public String getBio() {
         return bioInput.getText().toString();
     }
 
 
+    @NonNull
     @Override
     public String getLocation() {
         return locationInput.getText().toString();
@@ -136,7 +143,7 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
-    public void showRejectChangesDialog(ISuccessHandler listener) {
+    public void showRejectChangesDialog(@NonNull ISuccessHandler listener) {
         String msg = getResources().getString(R.string.reject_changes_title);
 
         String positive = getResources().getString(R.string.delete_title);
@@ -153,7 +160,7 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 ctrl.checkChanges();
@@ -163,7 +170,7 @@ public class UpdateProfileActivity extends BaseActivity implements IUpdateProfil
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @NonNull Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == NavigationManager.ACTIVITY_RESULT_CODE) {

@@ -1,10 +1,5 @@
 package com.zombispormedio.assemble.utils;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-
-
 import com.zombispormedio.assemble.activities.ChatActivity;
 import com.zombispormedio.assemble.activities.CreateChatActivity;
 import com.zombispormedio.assemble.activities.CreateMeetingActivity;
@@ -21,6 +16,12 @@ import com.zombispormedio.assemble.activities.SettingsActivity;
 import com.zombispormedio.assemble.activities.UpdateBirthdateActivity;
 import com.zombispormedio.assemble.activities.UpdateProfileActivity;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 
 /**
@@ -28,6 +29,7 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
  */
 public final class NavigationManager {
 
+    @Nullable
     private Context ctx;
 
     public static final int ACTIVITY_RESULT_CODE = 5956;
@@ -46,19 +48,19 @@ public final class NavigationManager {
     }
 
 
-    private static void goTo(Context ctx, Class<?> cls) {
+    private static void goTo(@NonNull Context ctx, Class<?> cls) {
         Intent dst = new Intent(ctx, cls);
         ctx.startActivity(dst);
 
     }
 
-    private static void goToWithResult(Activity ctx, Class<?> cls) {
+    private static void goToWithResult(@NonNull Activity ctx, Class<?> cls) {
         Intent dst = new Intent(ctx, cls);
         ctx.startActivityForResult(dst, ACTIVITY_RESULT_CODE);
 
     }
 
-    private static void goToWithResult(Activity ctx, Class<?> cls, String... extras) {
+    private static void goToWithResult(@NonNull Activity ctx, Class<?> cls, @NonNull String... extras) {
         Intent dst = new Intent(ctx, cls);
         dst.putExtra(SIZE, extras.length);
 
@@ -70,84 +72,85 @@ public final class NavigationManager {
     }
 
 
-    private static void goWithArg(Context ctx, Class<?> cls, int[] extras) {
+    private static void goWithArg(@NonNull Context ctx, Class<?> cls, int[] extras) {
         Intent dst = new Intent(ctx, cls);
         dst.putExtra(ARGS + 0, extras);
         ctx.startActivity(dst);
     }
 
+    @NonNull
     private static Intent createIntent(Context ctx, Class<?> cls) {
         return new Intent(ctx, cls);
     }
 
-    private static void goByIntent(Context ctx, Intent intent) {
+    private static void goByIntent(@NonNull Context ctx, Intent intent) {
         ctx.startActivity(intent);
     }
 
 
-    public static void Login(Context ctx) {
+    public static void Login(@NonNull Context ctx) {
         goTo(ctx, LoginActivity.class);
     }
 
-    public static void Home(Context ctx) {
+    public static void Home(@NonNull Context ctx) {
         goTo(ctx, HomeActivity.class);
     }
 
 
-    public static void Register(Context ctx) {
+    public static void Register(@NonNull Context ctx) {
         goTo(ctx, RegisterActivity.class);
     }
 
 
-    public static void Profile(Context ctx) {
+    public static void Profile(@NonNull Context ctx) {
         goTo(ctx, ProfileActivity.class);
     }
 
-    public static void Settings(Context ctx) {
+    public static void Settings(@NonNull Context ctx) {
         goTo(ctx, SettingsActivity.class);
     }
 
-    public static void UpdateProfile(Context ctx) {
+    public static void UpdateProfile(@NonNull Context ctx) {
         goTo(ctx, UpdateProfileActivity.class);
     }
 
-    public static void UpdateBirthdate(Activity ctx) {
+    public static void UpdateBirthdate(@NonNull Activity ctx) {
         goToWithResult(ctx, UpdateBirthdateActivity.class);
     }
 
-    public static void UpdateBirthdate(Activity ctx, String... extras) {
+    public static void UpdateBirthdate(@NonNull Activity ctx, String... extras) {
         goToWithResult(ctx, UpdateBirthdateActivity.class, extras);
     }
 
-    public static void Friends(Context ctx) {
+    public static void Friends(@NonNull Context ctx) {
         goTo(ctx, FriendsActivity.class);
     }
 
-    public static void Help(Context ctx) {
+    public static void Help(@NonNull Context ctx) {
         goTo(ctx, HelpActivity.class);
     }
 
-    public static void NewFriend(Context ctx) {
+    public static void NewFriend(@NonNull Context ctx) {
         goTo(ctx, NewFriendActivity.class);
     }
 
-    public static void CreateChat(Context ctx) {
+    public static void CreateChat(@NonNull Context ctx) {
         goTo(ctx, CreateChatActivity.class);
     }
 
-    public static void FirstStepCreateTeam(Context ctx) {
+    public static void FirstStepCreateTeam(@NonNull Context ctx) {
         goTo(ctx, FirstStepTeamActivity.class);
     }
 
-    public static void SecondStepCreateTeam(Context ctx, int[] friendIndexes) {
+    public static void SecondStepCreateTeam(@NonNull Context ctx, int[] friendIndexes) {
         goWithArg(ctx, SecondStepTeamActivity.class, friendIndexes);
     }
 
-    public static void CreateMeeting(Context ctx) {
+    public static void CreateMeeting(@NonNull Context ctx) {
         goTo(ctx, CreateMeetingActivity.class);
     }
 
-    public static void Chat(Context ctx, int id) {
+    public static void Chat(@NonNull Context ctx, int id) {
         Intent intent = createIntent(ctx, ChatActivity.class);
         intent.putExtra(CHAT_ID, id);
         goByIntent(ctx, intent);
@@ -201,7 +204,7 @@ public final class NavigationManager {
         NavigationManager.Help(ctx);
     }
 
-    public static void finishWithResult(Activity ctx, String... args) {
+    public static void finishWithResult(@NonNull Activity ctx, @NonNull String... args) {
         Intent intent = new Intent();
         intent.putExtra(SIZE, args.length);
 

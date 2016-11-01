@@ -2,6 +2,8 @@ package com.zombispormedio.assemble.wrappers.okhttp;
 
 import com.zombispormedio.assemble.net.FileBody;
 
+import android.support.annotation.NonNull;
+
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
@@ -17,8 +19,10 @@ import okhttp3.RequestBody;
  */
 public class RestWrapper {
 
+    @NonNull
     private final OkHttpClient client;
 
+    @NonNull
     private final Request.Builder builder;
 
     public RestWrapper() {
@@ -31,17 +35,20 @@ public class RestWrapper {
         builder = new Request.Builder();
     }
 
-    public RestWrapper url(String url) {
+    @NonNull
+    public RestWrapper url(@NonNull String url) {
         builder.url(url);
         return this;
     }
 
-    public RestWrapper header(String key, String value) {
+    @NonNull
+    public RestWrapper header(@NonNull String key, @NonNull String value) {
         builder.addHeader(key, value);
         return this;
     }
 
 
+    @NonNull
     public String get() throws IOException {
         Request req = builder.get()
                 .build();
@@ -51,7 +58,8 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String post(String obj) throws IOException {
+    @NonNull
+    public String post(@NonNull String obj) throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, obj);
 
@@ -64,6 +72,7 @@ public class RestWrapper {
     }
 
 
+    @NonNull
     public String post() throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, "{}");
@@ -76,7 +85,8 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String post(FileBody file) throws IOException {
+    @NonNull
+    public String post(@NonNull FileBody file) throws IOException {
         MediaType mediaType = MediaType.parse(file.getMediaType());
         RequestBody reqBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -92,7 +102,8 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String put(String obj) throws IOException {
+    @NonNull
+    public String put(@NonNull String obj) throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, obj);
 
@@ -104,6 +115,7 @@ public class RestWrapper {
         return res.body().string();
     }
 
+    @NonNull
     public String put() throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, "{}");
@@ -116,7 +128,8 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String put(FileBody file) throws IOException{
+    @NonNull
+    public String put(@NonNull FileBody file) throws IOException {
         MediaType mediaType = MediaType.parse(file.getMediaType());
         RequestBody reqBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -132,6 +145,7 @@ public class RestWrapper {
         return res.body().string();
     }
 
+    @NonNull
     public String patch() throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, "{}");
@@ -144,7 +158,8 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String patch(String obj) throws IOException {
+    @NonNull
+    public String patch(@NonNull String obj) throws IOException {
         MediaType mediaType = MediaType.parse("application/json");
         RequestBody reqBody = RequestBody.create(mediaType, obj);
 
@@ -156,7 +171,8 @@ public class RestWrapper {
         return res.body().string();
     }
 
-    public String patch(FileBody file) throws IOException {
+    @NonNull
+    public String patch(@NonNull FileBody file) throws IOException {
         MediaType mediaType = MediaType.parse(file.getMediaType());
         RequestBody reqBody = new MultipartBody.Builder()
                 .setType(MultipartBody.FORM)
@@ -172,6 +188,7 @@ public class RestWrapper {
         return res.body().string();
     }
 
+    @NonNull
     public String delete() throws IOException {
         Request req = builder.delete()
                 .build();

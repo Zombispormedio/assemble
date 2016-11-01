@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.utils.Utils;
 
 import org.json.JSONObject;
 
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 
 /**
@@ -20,15 +21,15 @@ public class ReadInterceptorController implements InterceptorControllerInterface
     }
 
     @Override
-    public void init(JSONObject obj) {
+    public void init(@NonNull JSONObject obj) {
         if (interceptor.isApplicationActive()) {
             int[] messageIds = getMessageIDs(obj);
             interceptor.readMessages(messageIds);
 
-            int chatId=Utils.safeGetValue("chat_id", obj);
+            int chatId = Utils.safeGetValue("chat_id", obj);
 
-            boolean inHome=interceptor.isInHome();
-            boolean inSameChat=interceptor.isInTheSameChat(chatId);
+            boolean inHome = interceptor.isInHome();
+            boolean inSameChat = interceptor.isInTheSameChat(chatId);
 
             if (inHome) {
                 interceptor.notifyHomeForChat(chatId);
@@ -38,7 +39,7 @@ public class ReadInterceptorController implements InterceptorControllerInterface
         }
     }
 
-    private int[] getMessageIDs(JSONObject obj) {
+    private int[] getMessageIDs(@NonNull JSONObject obj) {
 
         int count = Utils.safeGetValue("read_count", obj);
 

@@ -1,14 +1,13 @@
 package com.zombispormedio.assemble.views.activities;
 
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.views.activities.IBaseView;
 
 import java.util.ArrayList;
 
 /**
  * Created by Xavier Serrano on 25/09/2016.
  */
-public interface ISecondStepTeamView  extends IBaseView {
+public interface ISecondStepTeamView extends IBaseView {
 
     void setParticipantsTitle(int number, int total);
 

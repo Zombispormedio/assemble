@@ -4,6 +4,9 @@ import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.views.fragments.ITeamDialogView;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 
 /**
@@ -12,13 +15,14 @@ import java.util.ArrayList;
 
 public class TeamDialogController extends Controller {
 
+    @Nullable
     private ITeamDialogView ctx;
 
     private final TeamResource teamResource;
 
-    public TeamDialogController(ITeamDialogView ctx) {
+    public TeamDialogController(@NonNull ITeamDialogView ctx) {
         super(ctx.getParent());
-        this.ctx=ctx;
+        this.ctx = ctx;
 
         teamResource = getResourceComponent().provideTeamResource();
     }
@@ -36,6 +40,6 @@ public class TeamDialogController extends Controller {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ctx=null;
+        ctx = null;
     }
 }

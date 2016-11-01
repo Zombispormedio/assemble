@@ -8,7 +8,7 @@ import com.zombispormedio.assemble.net.Error;
 /**
  * Created by Xavier Serrano on 04/09/2016.
  */
-public class TeamsResponse extends ArrayResponse<Team>  {
+public class TeamsResponse extends ArrayResponse<Team> {
 
     public TeamsResponse(boolean success, Error error,
             Team[] result) {

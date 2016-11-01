@@ -5,6 +5,9 @@ import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IFirstStepTeamView;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -13,17 +16,19 @@ import java.util.LinkedList;
  */
 public class FirstStepTeamController extends Controller {
 
+    @Nullable
     private IFirstStepTeamView ctx;
 
     private final FriendResource friendResource;
 
+    @NonNull
     private final LinkedList<Integer> memberIds;
 
     public FirstStepTeamController(IFirstStepTeamView ctx) {
         super(ctx);
         this.ctx = ctx;
         friendResource = getResourceComponent().provideFriendResource();
-        memberIds=new LinkedList<>();
+        memberIds = new LinkedList<>();
     }
 
     @Override
@@ -36,22 +41,22 @@ public class FirstStepTeamController extends Controller {
         ctx.bindFriends(friends);
     }
 
-    public void onFriendAddedToMembers(int position, FriendProfile data) {
+    public void onFriendAddedToMembers(int position, @NonNull FriendProfile data) {
         ctx.addMember(data, position);
         memberIds.add(Integer.valueOf(data.id));
         ctx.setParticipantsSubtitle(memberIds.size(), ctx.getFriendsSize());
     }
 
-    public void onMemberRemoved(int friendIndex, FriendProfile data) {
+    public void onMemberRemoved(int friendIndex, @NonNull FriendProfile data) {
         ctx.removeMember(friendIndex);
         memberIds.remove(Integer.valueOf(data.id));
         ctx.setParticipantsSubtitle(memberIds.size(), ctx.getFriendsSize());
     }
 
     public void onNext() {
-        if(memberIds.size()>1){
+        if (memberIds.size() > 1) {
             ctx.goToNextStep(Utils.toArray(memberIds));
-        }else{
+        } else {
             ctx.showNeedMembers();
         }
     }
@@ -59,6 +64,6 @@ public class FirstStepTeamController extends Controller {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ctx=null;
+        ctx = null;
     }
 }

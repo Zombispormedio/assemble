@@ -7,7 +7,7 @@ import javax.inject.Inject;
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
-public class MeetingSubscription extends DataSubscription{
+public class MeetingSubscription extends DataSubscription {
 
     private final MeetingLoader loader;
 

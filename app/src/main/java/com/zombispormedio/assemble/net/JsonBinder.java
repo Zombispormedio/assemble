@@ -1,13 +1,13 @@
 package com.zombispormedio.assemble.net;
 
 import com.zombispormedio.assemble.models.Auth;
+import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.editors.ChatEditor;
 import com.zombispormedio.assemble.models.editors.GCMEditor;
 import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.editors.MessageEditor;
 import com.zombispormedio.assemble.models.editors.ProfileEditor;
 import com.zombispormedio.assemble.models.editors.TeamEditor;
-import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.responses.ChatResponse;
 import com.zombispormedio.assemble.net.responses.ChatsResponse;
 import com.zombispormedio.assemble.net.responses.DefaultResponse;
@@ -27,9 +27,9 @@ import java.io.IOException;
 /**
  * Created by Xavier Serrano on 26/07/2016.
  */
-public class JsonBinder{
+public class JsonBinder {
 
-    /***FROM***/
+    /*** FROM ***/
 
     public static String fromUserProfile(UserProfile userProfile) {
         JSONWrapper<UserProfile> userAdapter = new JSONWrapper<>(UserProfile.class);
@@ -73,7 +73,7 @@ public class JsonBinder{
     }
 
 
-    /***TO***/
+    /*** TO ***/
     public static DefaultResponse toDefaultResponse(String raw) throws IOException {
         JSONWrapper<DefaultResponse> jsonAdapter = new JSONWrapper<>(DefaultResponse.class);
         return jsonAdapter.fromJSON(raw);
@@ -115,30 +115,24 @@ public class JsonBinder{
     }
 
     public static ChatsResponse toChatsResponse(String arg) throws IOException {
-        JSONWrapper<ChatsResponse> jsonAdapter=new JSONWrapper<>(ChatsResponse.class);
+        JSONWrapper<ChatsResponse> jsonAdapter = new JSONWrapper<>(ChatsResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
 
     public static ChatResponse toChatResponse(String arg) throws IOException {
-        JSONWrapper<ChatResponse> jsonAdapter=new JSONWrapper<>(ChatResponse.class);
+        JSONWrapper<ChatResponse> jsonAdapter = new JSONWrapper<>(ChatResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
 
     public static MessagesResponse toMessagesResponse(String arg) throws IOException {
-        JSONWrapper<MessagesResponse> jsonAdapter=new JSONWrapper<>(MessagesResponse.class);
+        JSONWrapper<MessagesResponse> jsonAdapter = new JSONWrapper<>(MessagesResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
 
     public static MessageResponse toMessageResponse(String arg) throws IOException {
-        JSONWrapper<MessageResponse> jsonAdapter=new JSONWrapper<>(MessageResponse.class);
+        JSONWrapper<MessageResponse> jsonAdapter = new JSONWrapper<>(MessageResponse.class);
         return jsonAdapter.fromJSON(arg);
     }
-
-
-
-
-
-
 
 
 }

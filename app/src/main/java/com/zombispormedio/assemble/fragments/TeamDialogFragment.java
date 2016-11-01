@@ -1,15 +1,5 @@
 package com.zombispormedio.assemble.fragments;
 
-import android.app.Activity;
-import android.app.Dialog;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.TeamListDialogAdapter;
 import com.zombispormedio.assemble.controllers.TeamDialogController;
@@ -17,6 +7,18 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.fragments.ITeamDialogView;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 
 import java.util.ArrayList;
 
@@ -30,6 +32,7 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
 
     private TeamDialogController ctrl;
 
+    @Nullable
     @BindView(R.id.teams_list)
     RecyclerView teamsList;
 
@@ -41,9 +44,8 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
     }
 
 
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         setupDialog();
         View view = inflater.inflate(R.layout.fragment_team_dialog, container, false);
@@ -54,10 +56,10 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        view =  getActivity();
+        view = getActivity();
         bindView(view);
 
-        ctrl=new TeamDialogController(this);
+        ctrl = new TeamDialogController(this);
 
         setupTeams();
 
@@ -72,7 +74,7 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
                 .divider(true)
                 .configure();
         teamsListFactory.setOnClickListener((position, data) -> {
-            if(listener!=null){
+            if (listener != null) {
                 listener.onClick(position, data);
             }
             dismiss();
@@ -102,12 +104,12 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
         }
     }
 
-    private void setupSize(){
+    private void setupSize() {
         Window window = getDialog().getWindow();
 
-        if(window!=null){
-            window.setLayout((int)getResources().getDimension(R.dimen.spinner_dialog_width)
-                    , (int)getResources().getDimension(R.dimen.spinner_dialog_height));
+        if (window != null) {
+            window.setLayout((int) getResources().getDimension(R.dimen.spinner_dialog_width)
+                    , (int) getResources().getDimension(R.dimen.spinner_dialog_height));
             window.setGravity(Gravity.CENTER);
         }
 
@@ -115,7 +117,7 @@ public class TeamDialogFragment extends BaseDialogFragment implements ITeamDialo
 
 
     @Override
-    public void bindTeams(ArrayList<Team> data) {
+    public void bindTeams(@NonNull ArrayList<Team> data) {
         teamsListAdapter.addAll(data);
     }
 

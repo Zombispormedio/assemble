@@ -1,19 +1,19 @@
 package com.zombispormedio.assemble.activities;
 
 
+import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.controllers.RegisterController;
+import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.utils.NavigationManager;
+import com.zombispormedio.assemble.views.activities.IRegisterView;
+
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-
-
-import com.zombispormedio.assemble.controllers.RegisterController;
-import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.R;
-
-import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.activities.IRegisterView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,18 +23,23 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
 
     private RegisterController ctrl;
 
+    @Nullable
     @BindView(R.id.email_input)
     EditText emailInput;
 
+    @Nullable
     @BindView(R.id.pass_input)
     EditText passwordInput;
 
+    @Nullable
     @BindView(R.id.repeat_pass_input)
     EditText repPasswordInput;
 
+    @Nullable
     @BindView(R.id.register_button)
     Button registerButton;
 
+    @Nullable
     @BindView(R.id.register_progress_bar)
     ProgressBar progressBar;
 
@@ -119,16 +124,19 @@ public class RegisterActivity extends BaseActivity implements IRegisterView {
         registerButton.setVisibility(View.GONE);
     }
 
+    @NonNull
     @Override
     public String getEmail() {
         return emailInput.getText().toString();
     }
 
+    @NonNull
     @Override
     public String getPassword() {
         return passwordInput.getText().toString();
     }
 
+    @NonNull
     @Override
     public String getRepPassword() {
         return repPasswordInput.getText().toString();

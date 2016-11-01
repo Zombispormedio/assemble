@@ -1,5 +1,8 @@
 package com.zombispormedio.assemble.models;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 /**
  * Created by Xavier Serrano on 30/07/2016.
  */
@@ -9,6 +12,7 @@ public class Auth {
 
     public final String password;
 
+    @Nullable
     public final String gcm_token;
 
     public Auth(String email, String password) {
@@ -23,8 +27,9 @@ public class Auth {
         this.gcm_token = gcm_token;
     }
 
-    public static class Builder{
-        private  String email;
+    public static class Builder {
+
+        private String email;
 
         private String password;
 
@@ -42,22 +47,26 @@ public class Auth {
             return gcmToken;
         }
 
+        @NonNull
         public Builder setEmail(String email) {
             this.email = email;
             return this;
         }
 
+        @NonNull
         public Builder setPassword(String password) {
             this.password = password;
             return this;
         }
 
+        @NonNull
         public Builder setGcmToken(String gcmToken) {
             this.gcmToken = gcmToken;
             return this;
         }
 
-        public Auth build(){
+        @NonNull
+        public Auth build() {
             return new Auth(email, password, gcmToken);
         }
     }

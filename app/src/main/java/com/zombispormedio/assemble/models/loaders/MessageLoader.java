@@ -3,9 +3,11 @@ package com.zombispormedio.assemble.models.loaders;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.SuccessHandler;
 import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.models.services.interfaces.IChatService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
+import com.zombispormedio.assemble.net.Error;
+
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -16,6 +18,7 @@ import java.util.ArrayList;
 public class MessageLoader implements ILoader {
 
     private final IChatService apiService;
+
     private final IStorageService<Message> storageService;
 
     public MessageLoader(IChatService apiService, IStorageService<Message> storageService) {
@@ -24,7 +27,7 @@ public class MessageLoader implements ILoader {
     }
 
     @Override
-    public void retrieve(final SuccessHandler handler) {
+    public void retrieve(@NonNull final SuccessHandler handler) {
         apiService.getMessages(new IServiceHandler<ArrayList<Message>, Error>() {
             @Override
             public void onError(Error error) {

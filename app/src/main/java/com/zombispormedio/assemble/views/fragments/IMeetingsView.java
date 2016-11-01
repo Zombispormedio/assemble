@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.views.fragments;
 
 import com.zombispormedio.assemble.models.Meeting;
-import com.zombispormedio.assemble.views.fragments.IFragmentView;
 
 import java.util.ArrayList;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
  */
 public interface IMeetingsView extends IFragmentView {
 
-    void bindMeetings(ArrayList<Meeting> data );
+    void bindMeetings(ArrayList<Meeting> data);
 
     void finishRefresh();
 

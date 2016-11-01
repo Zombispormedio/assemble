@@ -2,6 +2,8 @@ package com.zombispormedio.assemble.wrappers.realm.dao;
 
 import com.zombispormedio.assemble.models.FriendProfile;
 
+import android.support.annotation.NonNull;
+
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
@@ -9,7 +11,7 @@ import io.realm.annotations.PrimaryKey;
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
-public class FriendProfileDAO extends RealmObject implements IBaseDAO<FriendProfile>{
+public class FriendProfileDAO extends RealmObject implements IBaseDAO<FriendProfile> {
 
     @PrimaryKey
     public int id;
@@ -39,15 +41,17 @@ public class FriendProfileDAO extends RealmObject implements IBaseDAO<FriendProf
     public boolean in_request;
 
 
+    @NonNull
     @Override
     public FriendProfile toModel() {
-        return  new FriendProfile(id, email, username,
+        return new FriendProfile(id, email, username,
                 full_avatar_url, large_avatar_url, medium_avatar_url, thumb_avatar_url,
                 birth_date, location, bio, sign_up_at, in_request);
     }
 
+    @NonNull
     @Override
-    public FriendProfileDAO fromModel(FriendProfile model)  {
+    public FriendProfileDAO fromModel(@NonNull FriendProfile model) {
         this.id = model.id;
         this.email = model.email;
         this.username = model.username;
@@ -59,7 +63,7 @@ public class FriendProfileDAO extends RealmObject implements IBaseDAO<FriendProf
         this.location = model.location;
         this.bio = model.bio;
         this.sign_up_at = model.sign_up_at;
-        this.in_request=model.in_request;
+        this.in_request = model.in_request;
         return this;
     }
 
@@ -68,8 +72,9 @@ public class FriendProfileDAO extends RealmObject implements IBaseDAO<FriendProf
         return id;
     }
 
-    public static class Factory implements IDAOFactory<FriendProfileDAO>{
+    public static class Factory implements IDAOFactory<FriendProfileDAO> {
 
+        @NonNull
         @Override
         public FriendProfileDAO create() {
             return new FriendProfileDAO();

@@ -13,7 +13,7 @@ public class ProfileResponse extends AbstractResponse<UserProfile> {
     }
 
 
-    public UserProfile getResult(){
+    public UserProfile getResult() {
         return result;
     }
 }

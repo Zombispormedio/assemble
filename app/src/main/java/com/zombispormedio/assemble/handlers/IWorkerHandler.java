@@ -5,5 +5,6 @@ package com.zombispormedio.assemble.handlers;
  */
 
 public interface IWorkerHandler {
+
     void done();
 }

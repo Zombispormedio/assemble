@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.models.editors;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Xavier Serrano on 04/10/2016.
  */
@@ -12,15 +14,18 @@ public class MessageEditor {
         this.content = content;
     }
 
-    public static class Builder{
+    public static class Builder {
+
         private String content;
 
+        @NonNull
         public Builder setContent(String content) {
             this.content = content;
             return this;
         }
 
-        public MessageEditor build(){
+        @NonNull
+        public MessageEditor build() {
             return new MessageEditor(content);
         }
     }

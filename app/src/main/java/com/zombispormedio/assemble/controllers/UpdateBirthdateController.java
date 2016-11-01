@@ -4,12 +4,15 @@ import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IUpdateBirthdateView;
 
+import android.support.annotation.Nullable;
+
 
 /**
  * Created by Xavier Serrano on 23/08/2016.
  */
 public class UpdateBirthdateController extends Controller {
 
+    @Nullable
     private IUpdateBirthdateView ctx;
 
     public UpdateBirthdateController(IUpdateBirthdateView ctx) {

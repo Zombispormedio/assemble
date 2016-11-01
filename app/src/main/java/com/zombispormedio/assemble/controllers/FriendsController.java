@@ -11,6 +11,8 @@ import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.ConnectionState;
 import com.zombispormedio.assemble.views.activities.IFriendsView;
 
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 
 /**
@@ -18,6 +20,7 @@ import java.util.ArrayList;
  */
 public class FriendsController extends Controller {
 
+    @Nullable
     private IFriendsView ctx;
 
     private final FriendResource friendResource;
@@ -60,7 +63,7 @@ public class FriendsController extends Controller {
 
     private void setupFriendsAndRequests() {
 
-        if(!ConnectionState.getInstance().isConnected()){
+        if (!ConnectionState.getInstance().isConnected()) {
             return;
         }
         ArrayList<FriendProfile> friends = friendResource.getAll();

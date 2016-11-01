@@ -13,12 +13,12 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.Result;
+import com.zombispormedio.assemble.net.responses.ArrayResponse;
 import com.zombispormedio.assemble.net.responses.ChatResponse;
 import com.zombispormedio.assemble.net.responses.ChatsResponse;
 import com.zombispormedio.assemble.net.responses.DefaultResponse;
 import com.zombispormedio.assemble.net.responses.FriendRequestsResponse;
 import com.zombispormedio.assemble.net.responses.FriendsResponse;
-import com.zombispormedio.assemble.net.responses.ArrayResponse;
 import com.zombispormedio.assemble.net.responses.MeetingResponse;
 import com.zombispormedio.assemble.net.responses.MeetingsResponse;
 import com.zombispormedio.assemble.net.responses.MessageResponse;
@@ -26,6 +26,8 @@ import com.zombispormedio.assemble.net.responses.MessagesResponse;
 import com.zombispormedio.assemble.net.responses.ProfileResponse;
 import com.zombispormedio.assemble.net.responses.TeamResponse;
 import com.zombispormedio.assemble.net.responses.TeamsResponse;
+
+import android.support.annotation.NonNull;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -36,11 +38,13 @@ import java.util.ArrayList;
 
 class DeferUtils {
 
+    @NonNull
     static PromiseHandler defer(IServiceHandler<Result, Error> handler) {
         return new PromiseHandler<DefaultResponse, Result>(handler);
     }
 
 
+    @NonNull
     static PromiseHandler deferProfile(IServiceHandler<UserProfile, Error> handler) {
         return new PromiseHandler<ProfileResponse, UserProfile>(handler) {
             @Override
@@ -50,6 +54,7 @@ class DeferUtils {
         };
     }
 
+    @NonNull
     static PromiseHandler deferFriends(IServiceHandler<ArrayList<FriendProfile>, Error> handler) {
         return new ArrayPromiseHandler<FriendsResponse, FriendProfile>(handler) {
             @Override
@@ -59,6 +64,7 @@ class DeferUtils {
         };
     }
 
+    @NonNull
     static PromiseHandler deferFriendRequests(IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler) {
 
         return new ArrayPromiseHandler<FriendRequestsResponse, FriendRequestProfile>(handler) {
@@ -70,6 +76,7 @@ class DeferUtils {
     }
 
 
+    @NonNull
     static PromiseHandler deferChats(IServiceHandler<ArrayList<Chat>, Error> handler) {
         return new ArrayPromiseHandler<ChatsResponse, Chat>(handler) {
             @Override
@@ -79,6 +86,7 @@ class DeferUtils {
         };
     }
 
+    @NonNull
     static PromiseHandler deferChat(IServiceHandler<Chat, Error> handler) {
         return new PromiseHandler<ChatResponse, Chat>(handler) {
             @Override
@@ -88,6 +96,7 @@ class DeferUtils {
         };
     }
 
+    @NonNull
     static PromiseHandler deferMeetings(IServiceHandler<ArrayList<Meeting>, Error> handler) {
         return new ArrayPromiseHandler<MeetingsResponse, Meeting>(handler) {
             @Override
@@ -98,6 +107,7 @@ class DeferUtils {
         };
     }
 
+    @NonNull
     static PromiseHandler deferMeeting(IServiceHandler<Meeting, Error> handler) {
         return new PromiseHandler<MeetingResponse, Meeting>(handler) {
 
@@ -108,6 +118,7 @@ class DeferUtils {
         };
     }
 
+    @NonNull
     static PromiseHandler deferTeams(IServiceHandler<ArrayList<Team>, Error> handler) {
         return new ArrayPromiseHandler<TeamsResponse, Team>(handler) {
 
@@ -118,6 +129,7 @@ class DeferUtils {
         };
     }
 
+    @NonNull
     static PromiseHandler deferTeam(IServiceHandler<Team, Error> handler) {
         return new PromiseHandler<TeamResponse, Team>(handler) {
 
@@ -129,6 +141,7 @@ class DeferUtils {
     }
 
 
+    @NonNull
     static PromiseHandler deferMessages(IServiceHandler<ArrayList<Message>, Error> handler) {
         return new ArrayPromiseHandler<MessagesResponse, Message>(handler) {
 
@@ -139,6 +152,7 @@ class DeferUtils {
         };
     }
 
+    @NonNull
     static PromiseHandler deferMessage(IServiceHandler<Message, Error> handler) {
         return new PromiseHandler<MessageResponse, Message>(handler) {
 
@@ -158,8 +172,9 @@ class DeferUtils {
             super(handler);
         }
 
+        @NonNull
         @Override
-        protected ArrayList<M> getResult(R res) {
+        protected ArrayList<M> getResult(@NonNull R res) {
             return res.getResult();
         }
     }

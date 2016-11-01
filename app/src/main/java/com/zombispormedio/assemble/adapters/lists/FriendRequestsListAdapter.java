@@ -4,10 +4,10 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.FriendRequestsHolder;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.views.holders.IFriendRequestHolder;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -25,13 +25,14 @@ public class FriendRequestsListAdapter
     private IOnClickItemListHandler<FriendRequestProfile> listener;
 
 
-    public FriendRequestsListAdapter(ArrayList<FriendRequestProfile> data) {
+    public FriendRequestsListAdapter(@NonNull ArrayList<FriendRequestProfile> data) {
         super(FriendRequestProfile.class);
         addAll(data);
     }
 
+    @NonNull
     @Override
-    public FriendRequestsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public FriendRequestsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         FriendRequestsHolder holder = new FriendRequestsHolder(getView(parent, R.layout.list_item_friend_requests));
         if (listener != null) {
             holder.setOnClickListener(listener);
@@ -66,11 +67,13 @@ public class FriendRequestsListAdapter
 
         private IOnClickItemListHandler<FriendRequestProfile> listener;
 
-        public FriendRequestsListAdapter make(){
+        @NonNull
+        public FriendRequestsListAdapter make() {
             return make(new ArrayList<>());
         }
 
-        public FriendRequestsListAdapter make(ArrayList<FriendRequestProfile> data) {
+        @NonNull
+        public FriendRequestsListAdapter make(@NonNull ArrayList<FriendRequestProfile> data) {
             FriendRequestsListAdapter adapter = new FriendRequestsListAdapter(data);
             adapter.setRejectListener(rejectListener);
             adapter.setAcceptListener(acceptListener);

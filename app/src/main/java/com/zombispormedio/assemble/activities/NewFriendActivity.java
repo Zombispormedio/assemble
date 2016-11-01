@@ -1,13 +1,5 @@
 package com.zombispormedio.assemble.activities;
 
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.NewFriendsListAdapter;
 import com.zombispormedio.assemble.controllers.NewFriendController;
@@ -15,15 +7,27 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.activities.INewFriendView;
 
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
 
 public class NewFriendActivity extends BaseActivity implements INewFriendView {
 
+    @Nullable
     @BindView(R.id.search_view)
     EditText searchView;
 
+    @Nullable
     @BindView(R.id.new_friends_list)
     RecyclerView friendsList;
 
@@ -101,11 +105,12 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
     }
 
     @Override
-    public void bindSearchResults(ArrayList<FriendProfile> results) {
+    public void bindSearchResults(@NonNull ArrayList<FriendProfile> results) {
         friendsListAdapter.addAll(results);
         friendsListAdapter.notifyDataSetChanged();
     }
 
+    @NonNull
     @Override
     public String getSearchText() {
         return searchView.getText().toString();

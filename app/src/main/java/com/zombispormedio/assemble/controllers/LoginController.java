@@ -3,27 +3,32 @@ package com.zombispormedio.assemble.controllers;
 import com.onesignal.OneSignal;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Auth;
-import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.models.resources.UserResource;
+import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.views.activities.ILoginView;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Xavier Serrano on 09/07/2016.
  */
 public class LoginController extends Controller {
 
+    @Nullable
     private ILoginView ctx;
 
     private final UserResource user;
 
+    @NonNull
     private final Auth.Builder editor;
 
     public LoginController(ILoginView ctx) {
         super(ctx);
         this.ctx = ctx;
         user = getResourceComponent().provideUserResource();
-        editor=new Auth.Builder();
+        editor = new Auth.Builder();
     }
 
     public void login() {
@@ -43,13 +48,13 @@ public class LoginController extends Controller {
     private class LoginServiceHandler extends ServiceHandler<Result, Error> {
 
         @Override
-        public void onError(Error error) {
+        public void onError(@NonNull Error error) {
             ctx.showAlert(error.msg);
             afterTryLogin();
         }
 
         @Override
-        public void onSuccess(Result result) {
+        public void onSuccess(@NonNull Result result) {
             configureAuthentication(result.token);
             ctx.showSuccessfulLogin();
             ctx.goHome();
@@ -71,7 +76,7 @@ public class LoginController extends Controller {
         ctx.showForm();
     }
 
-    private void configureAuthentication(String token){
+    private void configureAuthentication(String token) {
         ctx.setAuthToken(token);
         OneSignal.syncHashedEmail(editor.getEmail());
     }

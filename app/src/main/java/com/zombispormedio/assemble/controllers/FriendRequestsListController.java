@@ -6,8 +6,11 @@ import com.zombispormedio.assemble.models.resources.FriendRequestResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.views.holders.IFriendRequestHolder;
 import com.zombispormedio.assemble.views.fragments.IFriendRequestsListView;
+import com.zombispormedio.assemble.views.holders.IFriendRequestHolder;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -16,18 +19,20 @@ import java.util.ArrayList;
  */
 public class FriendRequestsListController extends Controller {
 
+    @Nullable
     private IFriendRequestsListView ctx;
 
     private final FriendRequestResource friendRequestResource;
 
     private final FriendRequestSubscription friendRequestSubscription;
 
+    @NonNull
     private final FriendRequestSubscriber friendRequestSubscriber;
 
     private boolean refreshing;
 
 
-    public FriendRequestsListController(IFriendRequestsListView ctx) {
+    public FriendRequestsListController(@NonNull IFriendRequestsListView ctx) {
         super(ctx.getParent());
         this.ctx = ctx;
 
@@ -57,11 +62,11 @@ public class FriendRequestsListController extends Controller {
 
     }
 
-    public void onAcceptRequest(int position, FriendRequestProfile data, final IFriendRequestHolder holder) {
+    public void onAcceptRequest(int position, @NonNull FriendRequestProfile data, @NonNull final IFriendRequestHolder holder) {
         holder.showProgress();
         friendRequestResource.acceptRequest(data.id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 holder.hideProgress();
                 ctx.showAlert(error.msg);
             }
@@ -75,11 +80,11 @@ public class FriendRequestsListController extends Controller {
         });
     }
 
-    public void onRejectRequest(int position, FriendRequestProfile data, final IFriendRequestHolder holder) {
+    public void onRejectRequest(int position, @NonNull FriendRequestProfile data, @NonNull final IFriendRequestHolder holder) {
         holder.showProgress();
         friendRequestResource.rejectRequest(data.id, new ServiceHandler<ArrayList<FriendRequestProfile>, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 holder.hideProgress();
                 ctx.showAlert(error.msg);
             }

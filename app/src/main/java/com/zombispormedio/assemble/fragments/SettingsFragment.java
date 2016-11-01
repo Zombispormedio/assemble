@@ -1,14 +1,14 @@
 package com.zombispormedio.assemble.fragments;
 
 
-import android.os.Bundle;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.SettingsActivity;
 import com.zombispormedio.assemble.controllers.SettingsController;
 import com.zombispormedio.assemble.views.fragments.ISettingsFragmentView;
+
+import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceFragment;
 
 
 public class SettingsFragment extends PreferenceFragment implements ISettingsFragmentView {

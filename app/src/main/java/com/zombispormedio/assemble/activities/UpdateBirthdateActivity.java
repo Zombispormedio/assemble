@@ -3,15 +3,12 @@ package com.zombispormedio.assemble.activities;
 
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.UpdateBirthdateController;
-
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.activities.IUpdateBirthdateView;
 
 import android.os.Bundle;
-
-
+import android.support.annotation.Nullable;
 import android.view.View;
-
 import android.widget.DatePicker;
 
 import butterknife.BindView;
@@ -22,6 +19,7 @@ public class UpdateBirthdateActivity extends BaseActivity implements IUpdateBirt
 
     private UpdateBirthdateController ctrl;
 
+    @Nullable
     @BindView(R.id.birthdate_picker)
     DatePicker datePicker;
 

@@ -14,8 +14,8 @@ public class BaseDialogFragment extends DialogFragment implements IFragmentView 
 
     private IBaseView view;
 
-    protected void bindView(Activity view){
-        this.view= (IBaseView) view;
+    protected void bindView(Activity view) {
+        this.view = (IBaseView) view;
     }
 
 

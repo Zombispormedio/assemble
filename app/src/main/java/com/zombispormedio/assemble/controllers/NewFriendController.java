@@ -7,8 +7,11 @@ import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.net.ConnectionState;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
-import com.zombispormedio.assemble.views.holders.INewFriendHolder;
 import com.zombispormedio.assemble.views.activities.INewFriendView;
+import com.zombispormedio.assemble.views.holders.INewFriendHolder;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -17,6 +20,7 @@ import java.util.ArrayList;
  */
 public class NewFriendController extends Controller {
 
+    @Nullable
     private INewFriendView ctx;
 
     private final FriendResource friendResource;
@@ -24,21 +28,21 @@ public class NewFriendController extends Controller {
     public NewFriendController(INewFriendView ctx) {
         super(ctx);
         this.ctx = ctx;
-        friendResource=getResourceComponent().provideFriendResource();
+        friendResource = getResourceComponent().provideFriendResource();
     }
 
 
     public void onSearch() {
-        String searchText=ctx.getSearchText();
+        String searchText = ctx.getSearchText();
 
-        if(searchText.isEmpty()|| !ConnectionState.getInstance().isConnected()){
-           return;
+        if (searchText.isEmpty() || !ConnectionState.getInstance().isConnected()) {
+            return;
         }
 
         ctx.showProgress();
-        friendResource.searchNewFriends(searchText, new ServiceHandler<ArrayList<FriendProfile>, Error>(){
+        friendResource.searchNewFriends(searchText, new ServiceHandler<ArrayList<FriendProfile>, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 ctx.hideProgress();
                 ctx.showAlert(error.msg);
             }
@@ -56,11 +60,11 @@ public class NewFriendController extends Controller {
         Logger.d(data);
     }
 
-    public void onAddFriendClick(int position, FriendProfile data, final INewFriendHolder holder) {
+    public void onAddFriendClick(int position, @NonNull FriendProfile data, @NonNull final INewFriendHolder holder) {
         holder.setFriendChecked(true);
         friendResource.requestNewFriend(data.id, new ServiceHandler<Result, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 ctx.showAlert(error.msg);
             }
 
@@ -76,6 +80,6 @@ public class NewFriendController extends Controller {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ctx=null;
+        ctx = null;
     }
 }

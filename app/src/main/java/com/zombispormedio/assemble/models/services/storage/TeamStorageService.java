@@ -1,11 +1,8 @@
 package com.zombispormedio.assemble.models.services.storage;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.wrappers.realm.dao.TeamDAO;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
-
-import java.util.ArrayList;
+import com.zombispormedio.assemble.wrappers.realm.dao.TeamDAO;
 
 /**
  * Created by Xavier Serrano on 13/09/2016.
@@ -13,7 +10,7 @@ import java.util.ArrayList;
 public class TeamStorageService extends StorageService<TeamDAO, Team> {
 
     public TeamStorageService() {
-         super(new LocalStorage<>(TeamDAO.class, new TeamDAO.Factory()));
+        super(new LocalStorage<>(TeamDAO.class, new TeamDAO.Factory()));
     }
 
     public TeamStorageService(
@@ -21,11 +18,11 @@ public class TeamStorageService extends StorageService<TeamDAO, Team> {
         super(storage);
     }
 
-    public void star(int teamId){
-        TeamDAO teamDAO=storage.getById(teamId);
+    public void star(int teamId) {
+        TeamDAO teamDAO = storage.getById(teamId);
         storage.begin();
 
-        teamDAO.starred=!teamDAO.starred;
+        teamDAO.starred = !teamDAO.starred;
 
         storage.commit();
 

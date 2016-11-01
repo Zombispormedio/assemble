@@ -1,10 +1,10 @@
 package com.zombispormedio.assemble.activities;
 
-import android.os.Bundle;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.HelpController;
 import com.zombispormedio.assemble.views.activities.IHelpView;
+
+import android.os.Bundle;
 
 public class HelpActivity extends BaseActivity implements IHelpView {
 

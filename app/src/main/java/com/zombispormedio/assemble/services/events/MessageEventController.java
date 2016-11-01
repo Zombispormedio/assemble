@@ -10,6 +10,7 @@ import com.zombispormedio.assemble.models.Message;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -31,21 +32,23 @@ public class MessageEventController implements INotificationEventController {
     private boolean isDistinct;
 
     @Override
-    public void init(ArrayList<JSONObject> data) {
+    public void init(@NonNull ArrayList<JSONObject> data) {
 
-        messages= Stream.of(data)
+        messages = Stream.of(data)
                 .map(Message::createMessage)
                 .collect(Collectors.toCollection(ArrayList<Message>::new));
-        isDistinct=Message.isDistinctSender(messages);
+        isDistinct = Message.isDistinctSender(messages);
     }
 
+    @NonNull
     @Override
     public Class<? extends BaseActivity> getIntentClass() {
         return isDistinct ? HomeActivity.class : ChatActivity.class;
     }
 
+    @NonNull
     @Override
-    public Intent modifyIntent(Intent intent, boolean isApplicationActive) {
+    public Intent modifyIntent(@NonNull Intent intent, boolean isApplicationActive) {
 
         if (!isApplicationActive) {
             String action = isDistinct ? SEVERAL_MESSAGE_ACTION : MANY_MESSAGE_ACTION;
@@ -60,7 +63,6 @@ public class MessageEventController implements INotificationEventController {
             intent.putExtra(CHAT_ID, messages.get(0).chat_id);
             intent.putExtra(FOREGROUND_NOTIFICATION, true);
         }
-
 
         return intent;
     }

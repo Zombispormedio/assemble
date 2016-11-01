@@ -5,6 +5,8 @@ import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Xavier Serrano on 03/09/2016.
  */
@@ -22,12 +24,14 @@ public abstract class Concept extends BaseModel {
 
     public final String thumb_image_url;
 
+    @NonNull
     public final String created_at;
 
+    @NonNull
     private final transient ISODate createdAt;
 
 
-    public Concept(int id, String name, String description, String created_at, String full_image_url,
+    public Concept(int id, String name, String description, @NonNull String created_at, String full_image_url,
             String large_image_url, String medium_image_url, String thumb_image_url) {
         super(id);
         this.name = name;
@@ -41,6 +45,7 @@ public abstract class Concept extends BaseModel {
         createdAt = new ISODate(created_at);
     }
 
+    @NonNull
     public ISODate getCreatedAt() {
         return createdAt;
     }
@@ -65,23 +70,28 @@ public abstract class Concept extends BaseModel {
         return Utils.presenceOf(path);
     }
 
+    @NonNull
     public ImageUtils.ImageBuilder getLargeImageBuilder() {
         return getImageBuilder(large_image_url);
     }
 
+    @NonNull
     public ImageUtils.ImageBuilder getFullImageBuilder() {
         return getImageBuilder(full_image_url);
     }
 
+    @NonNull
     public ImageUtils.ImageBuilder getMediumImageBuilder() {
         return getImageBuilder(medium_image_url);
     }
 
+    @NonNull
     public ImageUtils.ImageBuilder getThumbImageBuilder() {
         return getImageBuilder(thumb_image_url);
     }
 
 
+    @NonNull
     private ImageUtils.ImageBuilder getImageBuilder(String path) {
         ImageUtils.ImageBuilder builder = new ImageUtils.ImageBuilder();
         if (Utils.presenceOf(path)) {
@@ -92,18 +102,19 @@ public abstract class Concept extends BaseModel {
                 .circle(true);
     }
 
+    @NonNull
     public String getNameFirstLetter() {
         return StringUtils.firstLetter(name);
     }
 
-    public boolean areContentTheSame(Concept o) {
+    public boolean areContentTheSame(@NonNull Concept o) {
         return id == o.id &&
                 Utils.safeEquals(name, o.name) &&
                 Utils.safeEquals(description, o.description) &&
                 Utils.safeEquals(full_image_url, o.full_image_url) &&
                 Utils.safeEquals(large_image_url, o.large_image_url) &&
-                Utils.safeEquals(medium_image_url,o.medium_image_url) &&
-                Utils.safeEquals(thumb_image_url,o.thumb_image_url);
+                Utils.safeEquals(medium_image_url, o.medium_image_url) &&
+                Utils.safeEquals(thumb_image_url, o.thumb_image_url);
     }
 
 }

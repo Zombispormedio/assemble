@@ -5,8 +5,9 @@ import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.subscriptions.ChatSubscription;
 import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
-
 import com.zombispormedio.assemble.views.fragments.IChatsView;
+
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -15,30 +16,33 @@ import java.util.ArrayList;
  */
 public class ChatsController extends Controller {
 
+    @NonNull
     private final IChatsView ctx;
 
     private final ChatResource chatResource;
 
     private final ChatSubscription chatSubscription;
 
+    @NonNull
     private final ChatSubscriber chatSubscriber;
 
     private final MessageSubscription messageSubscription;
 
+    @NonNull
     private final MessageSubscriber messageSubscriber;
 
     private boolean refreshing;
 
-    public ChatsController(IChatsView ctx) {
+    public ChatsController(@NonNull IChatsView ctx) {
         super(ctx.getParent());
         this.ctx = ctx;
         chatResource = getResourceComponent().provideChatResource();
 
         chatSubscription = getResourceComponent().provideChatSubscription();
-        messageSubscription=getResourceComponent().provideMessageSubscription();
+        messageSubscription = getResourceComponent().provideMessageSubscription();
         chatSubscriber = new ChatSubscriber();
         chatSubscription.addSubscriber(chatSubscriber);
-        messageSubscriber=new MessageSubscriber();
+        messageSubscriber = new MessageSubscriber();
         messageSubscription.addSubscriber(messageSubscriber);
 
         refreshing = false;
@@ -55,7 +59,7 @@ public class ChatsController extends Controller {
     }
 
 
-    public void onChatItem(int position, Chat chat) {
+    public void onChatItem(int position, @NonNull Chat chat) {
         ctx.goToChat(chat.id);
     }
 
@@ -65,6 +69,7 @@ public class ChatsController extends Controller {
     }
 
     private class ChatSubscriber extends Subscriber {
+
         @Override
         public void notifyChange() {
             renderChats();
@@ -78,17 +83,18 @@ public class ChatsController extends Controller {
 
         @Override
         public void notifyOneChange(int id) {
-            Chat chat=chatResource.getById(id);
+            Chat chat = chatResource.getById(id);
             ctx.updateChat(chat);
         }
     }
 
     private class MessageSubscriber extends Subscriber {
+
         @Override
         public void notifyChange() {
-            if(refreshing){
-                chatSubscription.load();}
-            else{
+            if (refreshing) {
+                chatSubscription.load();
+            } else {
                 renderChats();
             }
         }

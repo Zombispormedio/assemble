@@ -4,6 +4,8 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Team;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,21 +18,24 @@ import butterknife.BindView;
 
 public class TeamDialogHolder extends AbstractHolder<Team> {
 
+    @Nullable
     @BindView(R.id.name_label)
     TextView nameLabel;
 
+    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
+    @Nullable
     private IOnClickItemListHandler<Team> listener;
 
-    public TeamDialogHolder(View view) {
+    public TeamDialogHolder(@NonNull View view) {
         super(view);
         this.listener = null;
     }
 
     @Override
-    public void bind(int position, Team itemData) {
+    public void bind(int position, @NonNull Team itemData) {
         renderData(itemData);
         setupOnClickListener(position, itemData);
     }
@@ -43,7 +48,7 @@ public class TeamDialogHolder extends AbstractHolder<Team> {
         });
     }
 
-    private void renderData(Team team) {
+    private void renderData(@NonNull Team team) {
         nameLabel.setText(team.name);
 
         team.getLargeImageBuilder()

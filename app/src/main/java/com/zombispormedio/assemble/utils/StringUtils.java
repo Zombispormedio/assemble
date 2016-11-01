@@ -1,12 +1,15 @@
 package com.zombispormedio.assemble.utils;
 
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Xavier Serrano on 25/07/2016.
  */
 public class StringUtils {
 
-    public static String join(String delimiter, Object[] in) {
+    @NonNull
+    public static String join(String delimiter, @NonNull Object[] in) {
         String out = "";
 
         if (in.length > 0) {
@@ -24,15 +27,18 @@ public class StringUtils {
         return out;
     }
 
-    public static String capitalize(final String line) {
+    @NonNull
+    public static String capitalize(@NonNull final String line) {
         return Character.toUpperCase(line.charAt(0)) + line.substring(1).toLowerCase();
     }
 
-    public static String firstLetter(String word){
-        return !word.isEmpty()?String.valueOf(word.charAt(0)): "X";
+    @NonNull
+    public static String firstLetter(@NonNull String word) {
+        return !word.isEmpty() ? String.valueOf(word.charAt(0)) : "X";
     }
 
-    public static String ellipse(String str, int limit){
-       return str.substring(0, limit) + "…";
+    @NonNull
+    public static String ellipse(@NonNull String str, int limit) {
+        return str.substring(0, limit) + "…";
     }
 }

@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.adapters.TeamDialogHolder;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Team;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -17,13 +18,14 @@ public class TeamListDialogAdapter extends BaseSortedListAdapter<Team, TeamDialo
 
     private IOnClickItemListHandler<Team> listener;
 
-    public TeamListDialogAdapter(ArrayList<Team> data) {
+    public TeamListDialogAdapter(@NonNull ArrayList<Team> data) {
         super(Team.class);
         addAll(data);
     }
 
+    @NonNull
     @Override
-    public TeamDialogHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TeamDialogHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         TeamDialogHolder holder = new TeamDialogHolder(getView(parent, R.layout.list_item_team_dialog));
         if (listener != null) {
@@ -37,15 +39,17 @@ public class TeamListDialogAdapter extends BaseSortedListAdapter<Team, TeamDialo
         this.listener = listener;
     }
 
-    public static class Factory{
+    public static class Factory {
 
         private IOnClickItemListHandler<Team> listener;
 
+        @NonNull
         public TeamListDialogAdapter make() {
             return make(new ArrayList<>());
         }
 
-        public TeamListDialogAdapter make(ArrayList<Team> data) {
+        @NonNull
+        public TeamListDialogAdapter make(@NonNull ArrayList<Team> data) {
             TeamListDialogAdapter adapter = new TeamListDialogAdapter(data);
             adapter.setOnClickListener(listener);
             return adapter;

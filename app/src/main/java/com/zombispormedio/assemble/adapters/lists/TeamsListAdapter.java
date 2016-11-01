@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.adapters.TeamHolder;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Team;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 public class TeamsListAdapter extends BaseSortedListAdapter<Team, TeamHolder> {
 
     private IOnClickItemListHandler<Team> listener;
+
     private IOnClickItemListHandler<Team> starCheckerListener;
 
     public TeamsListAdapter(ArrayList<Team> data) {
@@ -22,6 +24,7 @@ public class TeamsListAdapter extends BaseSortedListAdapter<Team, TeamHolder> {
         addAll(data);
     }
 
+    @NonNull
     @Override
     public TeamHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -48,10 +51,12 @@ public class TeamsListAdapter extends BaseSortedListAdapter<Team, TeamHolder> {
 
         private IOnClickItemListHandler<Team> starCheckerListener;
 
+        @NonNull
         public TeamsListAdapter make() {
             return make(new ArrayList<>());
         }
 
+        @NonNull
         public TeamsListAdapter make(ArrayList<Team> data) {
             TeamsListAdapter adapter = new TeamsListAdapter(data);
             adapter.setOnClickListener(listener);

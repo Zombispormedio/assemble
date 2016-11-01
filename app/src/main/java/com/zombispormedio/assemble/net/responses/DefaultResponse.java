@@ -13,7 +13,7 @@ public class DefaultResponse extends AbstractResponse<Result> {
 
     }
 
-    public Result getResult(){
+    public Result getResult() {
         return result;
     }
 

@@ -1,8 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.TeamResource;
@@ -12,6 +9,9 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.views.fragments.ITeamsView;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 
 /**
@@ -19,17 +19,19 @@ import java.util.ArrayList;
  */
 public class TeamsController extends Controller {
 
+    @Nullable
     private ITeamsView ctx;
 
     private final TeamResource teamResource;
 
     private final TeamSubscription teamSubscription;
 
+    @NonNull
     private final TeamSubscriber teamSubscriber;
 
     private boolean refreshing;
 
-    public TeamsController(ITeamsView ctx) {
+    public TeamsController(@NonNull ITeamsView ctx) {
         super(ctx.getParent());
         this.ctx = ctx;
         teamResource = getResourceComponent().provideTeamResource();
@@ -59,7 +61,7 @@ public class TeamsController extends Controller {
         teamSubscription.load();
     }
 
-    public void onStarChecker(int position, Team team) {
+    public void onStarChecker(int position, @NonNull Team team) {
 
         teamResource.star(team.id, new ServiceHandler<Result, Error>() {
             @Override
@@ -95,6 +97,6 @@ public class TeamsController extends Controller {
     public void onDestroy() {
         super.onDestroy();
         teamSubscription.removeSubscriber(teamSubscriber);
-        ctx=null;
+        ctx = null;
     }
 }

@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.models.services.storage;
 
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 
 /**
@@ -17,10 +19,12 @@ public interface IStorageService<T> {
 
     void createOrUpdateOrDeleteAll(ArrayList<T> params);
 
+    @Nullable
     T getFirst();
 
     ArrayList<T> getAll();
 
+    @Nullable
     T getByID(int id);
 
     int countAll();

@@ -1,19 +1,18 @@
 package com.zombispormedio.assemble.activities;
 
+import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.adapters.pagers.FriendsPagerAdapter;
+import com.zombispormedio.assemble.controllers.FriendsController;
+import com.zombispormedio.assemble.utils.NavigationManager;
+import com.zombispormedio.assemble.views.activities.IFriendsView;
+
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-
-import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.adapters.pagers.FriendsPagerAdapter;
-import com.zombispormedio.assemble.controllers.FriendsController;
-
-import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.views.activities.IFriendsView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -22,18 +21,23 @@ public class FriendsActivity extends BaseActivity implements IFriendsView {
 
     private FriendsController ctrl;
 
+    @Nullable
     @BindView(R.id.loading_label)
     TextView _progressLabel;
 
+    @Nullable
     @BindView(R.id.progress_bar)
     ProgressBar _progressBar;
 
+    @Nullable
     @BindView(R.id.friends_pager)
     ViewPager friendsPager;
 
+    @Nullable
     @BindView(R.id.friends_button_tab)
     Button friendsTab;
 
+    @Nullable
     @BindView(R.id.friend_requests_button_tab)
     Button friendRequestsTab;
 

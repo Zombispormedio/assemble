@@ -4,6 +4,8 @@ import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.services.storage.TeamStorageService;
 
+import android.support.annotation.NonNull;
+
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
@@ -39,32 +41,35 @@ public class MeetingDAO extends RealmObject implements IBaseDAO<Meeting> {
 
     public boolean bookmark;
 
+    @NonNull
     @Override
-    public Meeting toModel(){
+    public Meeting toModel() {
         return new Meeting(id, name, description, created_at,
-                full_image_url, large_image_url, medium_image_url, thumb_image_url, start_at, end_at, team.toModel(), bookmark);
+                full_image_url, large_image_url, medium_image_url, thumb_image_url, start_at, end_at, team.toModel(),
+                bookmark);
     }
 
+    @NonNull
     @Override
-    public MeetingDAO fromModel(Meeting model) {
+    public MeetingDAO fromModel(@NonNull Meeting model) {
         this.id = model.id;
         this.name = model.name;
-        this.description=model.description;
-        this.created_at=model.created_at;
+        this.description = model.description;
+        this.created_at = model.created_at;
         this.large_image_url = model.large_image_url;
         this.medium_image_url = model.medium_image_url;
         this.full_image_url = model.full_image_url;
         this.thumb_image_url = model.thumb_image_url;
         this.start_at = model.start_at;
-        this.end_at=model.end_at;
+        this.end_at = model.end_at;
         bindTeam(model.team);
-        this.bookmark=model.bookmark;
+        this.bookmark = model.bookmark;
         return this;
     }
 
-    private void bindTeam(Team team){
-        TeamStorageService service=new TeamStorageService();
-        this.team=service.getStorage()
+    private void bindTeam(@NonNull Team team) {
+        TeamStorageService service = new TeamStorageService();
+        this.team = service.getStorage()
                 .getById(team.id);
     }
 
@@ -73,8 +78,9 @@ public class MeetingDAO extends RealmObject implements IBaseDAO<Meeting> {
         return id;
     }
 
-    public static class Factory implements IDAOFactory<MeetingDAO>{
+    public static class Factory implements IDAOFactory<MeetingDAO> {
 
+        @NonNull
         @Override
         public MeetingDAO create() {
             return new MeetingDAO();

@@ -1,8 +1,8 @@
 package com.zombispormedio.assemble.models.services.interfaces;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.Meeting;
+import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 

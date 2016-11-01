@@ -7,6 +7,7 @@ import com.zombispormedio.assemble.adapters.TeamFriendHolder;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -20,13 +21,14 @@ public class TeamFriendsListAdapter extends BaseSortedListAdapter<
 
     private IOnClickItemListHandler<TeamFriendHolder.SelectedContainer> listener;
 
-    public TeamFriendsListAdapter(ArrayList<FriendProfile> data) {
+    public TeamFriendsListAdapter(@NonNull ArrayList<FriendProfile> data) {
         super(TeamFriendHolder.SelectedContainer.class);
         addAll(apply(data));
     }
 
+    @NonNull
     @Override
-    public TeamFriendHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TeamFriendHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         TeamFriendHolder holder = new TeamFriendHolder(getView(parent, R.layout.list_item_team_friends));
         holder.setOnClickListener(listener);
 
@@ -39,7 +41,7 @@ public class TeamFriendsListAdapter extends BaseSortedListAdapter<
         this.listener = listener;
     }
 
-    public ArrayList<TeamFriendHolder.SelectedContainer> apply(ArrayList<FriendProfile> data) {
+    public ArrayList<TeamFriendHolder.SelectedContainer> apply(@NonNull ArrayList<FriendProfile> data) {
 
         return Stream.of(data)
                 .map(TeamFriendHolder.SelectedContainer::new)
@@ -47,34 +49,34 @@ public class TeamFriendsListAdapter extends BaseSortedListAdapter<
     }
 
 
-    public void setFriendProfiles(ArrayList<FriendProfile> data) {
+    public void setFriendProfiles(@NonNull ArrayList<FriendProfile> data) {
         super.addAll(apply(data));
     }
 
-    public void selectFriend(int index){
-        TeamFriendHolder.SelectedContainer container= mData.get(index);
+    public void selectFriend(int index) {
+        TeamFriendHolder.SelectedContainer container = mData.get(index);
         container.select();
         notifyItemChanged(index);
     }
 
-    public void deselectFriend(int index){
-        TeamFriendHolder.SelectedContainer container= mData.get(index);
+    public void deselectFriend(int index) {
+        TeamFriendHolder.SelectedContainer container = mData.get(index);
         container.deselect();
         notifyItemChanged(index);
     }
-
-
 
 
     public static class Factory {
 
         private IOnClickItemListHandler<TeamFriendHolder.SelectedContainer> listener;
 
+        @NonNull
         public TeamFriendsListAdapter make() {
             return make(new ArrayList<>());
         }
 
-        public TeamFriendsListAdapter make(ArrayList<FriendProfile> data) {
+        @NonNull
+        public TeamFriendsListAdapter make(@NonNull ArrayList<FriendProfile> data) {
             TeamFriendsListAdapter adapter = new TeamFriendsListAdapter(data);
             adapter.setOnClickListener(listener);
             return adapter;

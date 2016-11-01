@@ -1,13 +1,5 @@
 package com.zombispormedio.assemble.fragments;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.FriendsActivity;
 import com.zombispormedio.assemble.adapters.lists.FriendsListAdapter;
@@ -15,6 +7,15 @@ import com.zombispormedio.assemble.controllers.FriendsListController;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.fragments.IFriendsListView;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -24,9 +25,11 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
 
     private FriendsActivity view;
 
+    @Nullable
     @BindView(R.id.friends_list)
     RecyclerView friendsList;
 
+    @Nullable
     @BindView(R.id.friends_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -36,7 +39,7 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_friends_list, container, false);
     }
@@ -74,7 +77,7 @@ public class FriendsListFragment extends BaseFragment implements IFriendsListVie
     }
 
     @Override
-    public void bindFriends(ArrayList<FriendProfile> data) {
+    public void bindFriends(@NonNull ArrayList<FriendProfile> data) {
         friendsListAdapter.addAll(data);
     }
 

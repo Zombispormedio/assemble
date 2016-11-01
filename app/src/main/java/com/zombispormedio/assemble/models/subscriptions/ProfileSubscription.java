@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.models.loaders.ProfileLoader;
 /**
  * Created by Xavier Serrano on 12/09/2016.
  */
-public class ProfileSubscription extends DataSubscription{
+public class ProfileSubscription extends DataSubscription {
 
     private final ProfileLoader loader;
 
@@ -14,7 +14,7 @@ public class ProfileSubscription extends DataSubscription{
     }
 
     @Override
-    public void load(){
+    public void load() {
         loader.retrieve(deferSubscribers());
     }
 

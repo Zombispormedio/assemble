@@ -9,6 +9,8 @@ import com.zombispormedio.assemble.models.subscriptions.MessageSubscription;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 
+import android.support.annotation.NonNull;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -20,45 +22,52 @@ import dagger.Provides;
 @Module
 public class SubscriptionModule extends LoaderModule {
 
+    @NonNull
     @Provides
     @Singleton
     ProfileSubscription provideProfileSubscription() {
-        return new  ProfileSubscription(provideProfileLoader());
+        return new ProfileSubscription(provideProfileLoader());
     }
 
+    @NonNull
     @Provides
     @Singleton
     FriendSubscription provideFriendSubscription() {
-        return new  FriendSubscription(provideFriendLoader());
+        return new FriendSubscription(provideFriendLoader());
     }
 
+    @NonNull
     @Provides
     @Singleton
     FriendRequestSubscription provideFriendRequestSubscription() {
-        return new  FriendRequestSubscription(provideFriendRequestLoader());
+        return new FriendRequestSubscription(provideFriendRequestLoader());
     }
 
+    @NonNull
     @Provides
     @Singleton
     TeamSubscription provideTeamSubscription() {
-        return new  TeamSubscription(provideTeamLoader());
+        return new TeamSubscription(provideTeamLoader());
     }
 
+    @NonNull
     @Provides
     @Singleton
     MeetingSubscription provideMeetingSubscription() {
-        return new  MeetingSubscription(provideMeetingLoader());
+        return new MeetingSubscription(provideMeetingLoader());
     }
 
+    @NonNull
     @Provides
     @Singleton
     ChatSubscription provideChatSubscription() {
-        return new  ChatSubscription(provideChatLoader());
+        return new ChatSubscription(provideChatLoader());
     }
 
+    @NonNull
     @Provides
     @Singleton
     MessageSubscription provideMessageSubscription() {
-        return new  MessageSubscription(provideMessageLoader());
+        return new MessageSubscription(provideMessageLoader());
     }
 }

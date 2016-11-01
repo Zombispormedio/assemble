@@ -6,7 +6,8 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.views.holders.IFriendHolder;
 
-
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -20,22 +21,28 @@ import butterknife.BindView;
  */
 public class FriendHolder extends AbstractHolder<FriendProfile> implements IFriendHolder {
 
+    @Nullable
     private IOnClickItemListHandler<FriendProfile> listener;
 
     private IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener;
 
+    @Nullable
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
+    @Nullable
     @BindView(R.id.email_label)
     TextView emailLabel;
 
+    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
+    @Nullable
     @BindView(R.id.remove_friend_button)
     ImageButton removeButton;
 
+    @Nullable
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
@@ -45,12 +52,11 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IFrie
     }
 
     @Override
-    public void bind(int position, FriendProfile itemData) {
+    public void bind(int position, @NonNull FriendProfile itemData) {
         renderData(itemData);
         setupOnClickListener(position, itemData);
         setupOnClickRemoveButton(position, itemData);
     }
-
 
 
     private void setupOnClickListener(final int position, final FriendProfile itemData) {
@@ -63,16 +69,16 @@ public class FriendHolder extends AbstractHolder<FriendProfile> implements IFrie
     }
 
     private void setupOnClickRemoveButton(final int position, final FriendProfile itemData) {
-        final IFriendHolder holder=this;
+        final IFriendHolder holder = this;
         removeButton.setOnClickListener(v -> {
-            if(removeButtonListener!=null){
+            if (removeButtonListener != null) {
                 removeButtonListener.onClick(position, itemData, holder);
             }
         });
     }
 
 
-    private void renderData(FriendProfile friend) {
+    private void renderData(@NonNull FriendProfile friend) {
         usernameLabel.setText(friend.username);
         emailLabel.setText(friend.email);
 

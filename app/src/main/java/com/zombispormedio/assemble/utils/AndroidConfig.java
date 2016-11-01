@@ -18,14 +18,14 @@ public class AndroidConfig {
 
         public final static String LOADED = "loaded";
 
-        public static final String MESSAGE_BUNDLE="message:bundle";
+        public static final String MESSAGE_BUNDLE = "message:bundle";
 
-        public static final String FOREGROUND_NOTIFICATION ="foreground_notification";
+        public static final String FOREGROUND_NOTIFICATION = "foreground_notification";
 
-        public static final String MESSAGES="messages";
+        public static final String MESSAGES = "messages";
 
 
-        public static final String READ="read";
+        public static final String READ = "read";
     }
 
 
@@ -50,11 +50,12 @@ public class AndroidConfig {
         public static final String ON_READ_NOTIFY_CHAT = "ON_READ_EVENT";
     }
 
-    public static class Groups{
-        public static  final String MESSAGE_GROUP ="message";
-        public static  final String READ_GROUP ="read_message";
-    }
+    public static class Groups {
 
+        public static final String MESSAGE_GROUP = "message";
+
+        public static final String READ_GROUP = "read_message";
+    }
 
 
 }

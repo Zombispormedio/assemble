@@ -7,6 +7,7 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.views.holders.IFriendHolder;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class FriendsListAdapter
         super(data);
     }
 
+    @NonNull
     @Override
     public FriendHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -47,16 +49,18 @@ public class FriendsListAdapter
         this.listener = listener;
     }
 
-    public static class Factory{
+    public static class Factory {
 
         private IOnClickComponentItemHandler<FriendProfile, IFriendHolder> removeButtonListener;
 
         private IOnClickItemListHandler<FriendProfile> listener;
 
-        public FriendsListAdapter make(){
-            return  make(new ArrayList<>());
+        @NonNull
+        public FriendsListAdapter make() {
+            return make(new ArrayList<>());
         }
 
+        @NonNull
         public FriendsListAdapter make(ArrayList<FriendProfile> data) {
             FriendsListAdapter adapter = new FriendsListAdapter(data);
             adapter.setRemoveButtonListener(removeButtonListener);

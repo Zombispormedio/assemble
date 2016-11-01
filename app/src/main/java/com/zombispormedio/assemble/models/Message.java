@@ -11,6 +11,7 @@ import org.json.JSONObject;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,8 +28,10 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
 
     public int chat_id;
 
+    @Nullable
     public final Profile sender;
 
+    @Nullable
     public Profile recipient;
 
     public final String content;
@@ -41,10 +44,11 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
 
     public final String created_at;
 
+    @NonNull
     private final transient ISODate createdAt;
 
 
-    public Message(int id, String content, boolean is_read, boolean is_sent, boolean is_delivered, String created_at,
+    public Message(int id, String content, boolean is_read, boolean is_sent, boolean is_delivered, @NonNull String created_at,
             Profile sender, Profile recipient, int chat_id) {
         super(id);
         this.content = content;
@@ -59,7 +63,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         createdAt = new ISODate(created_at);
     }
 
-    public Message(String content, Profile sender, String created_at) {
+    public Message(String content, Profile sender, @NonNull String created_at) {
         super(0);
         this.sender = sender;
         this.content = content;
@@ -71,7 +75,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         createdAt = new ISODate(created_at);
     }
 
-    public Message(int id, String content, boolean is_read, boolean is_sent, boolean is_delivered, String created_at,
+    public Message(int id, String content, boolean is_read, boolean is_sent, boolean is_delivered, @NonNull String created_at,
             int sender_id, int recipient_id, int chat_id) {
         super(id);
         this.content = content;
@@ -89,7 +93,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
     }
 
 
-    protected Message(Parcel in) {
+    protected Message(@NonNull Parcel in) {
         super(in.readInt());
         content = in.readString();
         is_read = in.readByte() != 0;
@@ -105,26 +109,31 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         createdAt = new ISODate(created_at);
     }
 
+    @NonNull
     public ISODate getCreatedAt() {
         return createdAt;
     }
 
     public static final Creator<Message> CREATOR = new Creator<Message>() {
+        @NonNull
         @Override
-        public Message createFromParcel(Parcel in) {
+        public Message createFromParcel(@NonNull Parcel in) {
             return new Message(in);
         }
 
+        @NonNull
         @Override
         public Message[] newArray(int size) {
             return new Message[size];
         }
     };
 
+    @NonNull
     public String getLimitedContent(int limit) {
         return content.length() > limit ? ellipseContent(limit) : content;
     }
 
+    @NonNull
     private String ellipseContent(int limit) {
         return StringUtils.ellipse(content, limit);
     }
@@ -137,7 +146,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         return getCreatedAt().isYesterday();
     }
 
-    public String formatCreated(String format) {
+    public String formatCreated(@NonNull String format) {
         return getCreatedAt().format(format);
     }
 
@@ -147,7 +156,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(content);
         dest.writeByte((byte) (is_read ? 1 : 0));
@@ -165,7 +174,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
     }
 
     @Override
-    public boolean areTheSame(Message obj) {
+    public boolean areTheSame(@Nullable Message obj) {
         return obj != null && id == obj.id;
     }
 
@@ -174,22 +183,22 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         return id;
     }
 
-    public boolean beforeCreated(ISODate previous) {
+    public boolean beforeCreated(@NonNull ISODate previous) {
         return createdAt.beforeDay(previous) || createdAt.beforeMonth(previous) || createdAt.beforeYear(previous);
     }
 
-    public static boolean isDistinctSender(ArrayList<Message> messages) {
-        boolean distinct=false;
-        int len=messages.size();
-        int i=0;
-        Message prev=null;
-        while (i<len&& !distinct){
-            if(prev==null){
-                prev=messages.get(i);
-            }else{
-                Message current=messages.get(i);
-                if(prev.sender_id!=current.sender_id){
-                    distinct=true;
+    public static boolean isDistinctSender(@NonNull ArrayList<Message> messages) {
+        boolean distinct = false;
+        int len = messages.size();
+        int i = 0;
+        Message prev = null;
+        while (i < len && !distinct) {
+            if (prev == null) {
+                prev = messages.get(i);
+            } else {
+                Message current = messages.get(i);
+                if (prev.sender_id != current.sender_id) {
+                    distinct = true;
                 }
             }
 
@@ -258,6 +267,7 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         }
 
 
+        @NonNull
         public Message build() {
             return new Message(id, content, is_read, is_sent, is_delivered, created_at,
                     sender_id, recipient_id, chat_id);
@@ -266,7 +276,8 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
     }
 
 
-    public static Builder resolveBuilder(String key, String value, Builder builder) {
+    @NonNull
+    public static Builder resolveBuilder(@NonNull String key, String value, @NonNull Builder builder) {
         switch (key) {
             case "id":
                 builder.setId(Integer.parseInt(value));
@@ -307,17 +318,19 @@ public class Message extends BaseModel implements Parcelable, Sorted<Message> {
         return builder;
     }
 
-    public static Message createMessage(HashMap<String, String> messageMap) {
+    @NonNull
+    public static Message createMessage(@NonNull HashMap<String, String> messageMap) {
         return Stream.of(messageMap)
                 .reduce(new Builder(), (memo, item) -> resolveBuilder(item.getKey(), item.getValue(), memo))
                 .build();
     }
 
-    public static Message createMessage(JSONObject json) {
+    @NonNull
+    public static Message createMessage(@NonNull JSONObject json) {
 
-            return Stream.of(json.keys())
-                    .reduce(new Builder(), (memo, key) -> resolveBuilder(key, Utils.validateJSONValue(key, json), memo))
-                    .build();
+        return Stream.of(json.keys())
+                .reduce(new Builder(), (memo, key) -> resolveBuilder(key, Utils.validateJSONValue(key, json), memo))
+                .build();
 
     }
 

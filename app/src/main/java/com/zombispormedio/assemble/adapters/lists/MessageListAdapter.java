@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.MessageHolder;
 import com.zombispormedio.assemble.models.Message;
 
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,8 +27,9 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
         data = new ArrayList<>();
     }
 
+    @NonNull
     @Override
-    public MessageHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public MessageHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.list_item_message, parent, false);
         return new MessageHolder(view);
@@ -35,7 +37,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
 
 
     @Override
-    public void onBindViewHolder(MessageHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MessageHolder holder, int position) {
         MessageHolder.Container item = data.get(position);
         int prev = position - 1;
         if (position > 0) {
@@ -50,7 +52,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
         return data.size();
     }
 
-    public void addAll(ArrayList<Message> messages) {
+    public void addAll(@NonNull ArrayList<Message> messages) {
         this.data = Stream.of(messages)
                 .map(MessageHolder.Container::new)
                 .collect(Collectors.toCollection(ArrayList<MessageHolder.Container>::new));
@@ -66,7 +68,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
 
     public void read(int id) {
         int index = indexOfById(id);
-        if(index>-1){
+        if (index > -1) {
             MessageHolder.Container container = data.get(index);
             container.read();
             notifyItemChanged(index);

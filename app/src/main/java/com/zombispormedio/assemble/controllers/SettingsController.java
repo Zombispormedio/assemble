@@ -4,16 +4,20 @@ package com.zombispormedio.assemble.controllers;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.resources.UserResource;
-import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.views.fragments.ISettingsFragmentView;
+import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.views.activities.ISettingsView;
+import com.zombispormedio.assemble.views.fragments.ISettingsFragmentView;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Xavier Serrano on 16/07/2016.
  */
 public class SettingsController extends Controller {
 
+    @Nullable
     private ISettingsView ctx;
 
     private ISettingsFragmentView fctx;
@@ -42,6 +46,7 @@ public class SettingsController extends Controller {
     }
 
     private class SignOutDialogEvent implements ISuccessHandler {
+
         @Override
         public void onSuccess() {
             user.signOut(new SignOutServiceHandler());
@@ -52,7 +57,7 @@ public class SettingsController extends Controller {
 
 
         @Override
-        public void onSuccess(Result result) {
+        public void onSuccess(@NonNull Result result) {
             ctx.clearAuthToken();
             ctx.showAlert(result.msg);
             ctx.hideProgressDialog();

@@ -1,9 +1,5 @@
 package com.zombispormedio.assemble.activities;
 
-import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.PreviewFriendsListAdapter;
 import com.zombispormedio.assemble.controllers.CreateChatController;
@@ -11,6 +7,12 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.activities.ICreateChatView;
+
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -20,6 +22,7 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
 
     private CreateChatController ctrl;
 
+    @Nullable
     @BindView(R.id.friends_list)
     RecyclerView friendsList;
 
@@ -33,7 +36,6 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
         setContentView(R.layout.activity_create_chat);
         setupToolbar();
         bindActivity(this);
-
 
         ctrl = new CreateChatController(this);
 
@@ -66,7 +68,7 @@ public class CreateChatActivity extends BaseActivity implements ICreateChatView 
     }
 
     @Override
-    public void bindFriends(ArrayList<FriendProfile> friends) {
+    public void bindFriends(@NonNull ArrayList<FriendProfile> friends) {
         adapter.addAll(friends);
     }
 

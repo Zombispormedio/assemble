@@ -1,9 +1,12 @@
 package com.zombispormedio.assemble.wrappers.realm;
 
 
+import com.zombispormedio.assemble.models.BaseModel;
 import com.zombispormedio.assemble.wrappers.realm.dao.IBaseDAO;
 import com.zombispormedio.assemble.wrappers.realm.dao.IDAOFactory;
-import com.zombispormedio.assemble.models.BaseModel;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -32,7 +35,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
     public LocalStorage(Class<D> opClass, IDAOFactory<D> factory, Realm database) {
         this.opClass = opClass;
         this.factory = factory;
-        this.database=database;
+        this.database = database;
     }
 
     public void create(M params) {
@@ -46,7 +49,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         database.commitTransaction();
     }
 
-    public void save(D object){
+    public void save(@NonNull D object) {
         database.copyToRealmOrUpdate(object);
     }
 
@@ -58,14 +61,14 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         database.commitTransaction();
     }
 
-    public void update(D object, M params) {
+    public void update(@NonNull D object, M params) {
         database.beginTransaction();
         ((IBaseDAO<M>) object).fromModel(params);
         database.copyToRealmOrUpdate(object);
         database.commitTransaction();
     }
 
-    public void updateAll(ArrayList<M> params) {
+    public void updateAll(@NonNull ArrayList<M> params) {
         database.beginTransaction();
         ArrayList<D> objects = new ArrayList<>();
         for (int i = 0; i < params.size(); i++) {
@@ -85,7 +88,8 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         return query.findFirst();
     }
 
-    public ArrayList<D> findByAndSort(String keyId, int valueId, String sortKey) {
+    @NonNull
+    public ArrayList<D> findByAndSort(@NonNull String keyId, int valueId, @NonNull String sortKey) {
         RealmQuery<D> query = getQuery();
 
         query.equalTo(keyId, valueId);
@@ -94,14 +98,15 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
     }
 
 
-    public D findOneByAndSort(String keyId, int valueId, String sortKey) {
+    @Nullable
+    public D findOneByAndSort(@NonNull String keyId, int valueId, @NonNull String sortKey) {
         RealmQuery<D> query = getQuery();
 
         query.equalTo(keyId, valueId);
-        RealmResults<D> results=query.findAllSorted(sortKey);
-        D result=null;
-        if(results.size()>0){
-            result=results.last();
+        RealmResults<D> results = query.findAllSorted(sortKey);
+        D result = null;
+        if (results.size() > 0) {
+            result = results.last();
         }
 
         return result;
@@ -113,6 +118,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         return query.findFirst();
     }
 
+    @NonNull
     public ArrayList<D> getAll() {
         RealmQuery<D> query = getQuery();
 
@@ -135,7 +141,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         }
     }
 
-    public void delete(D object) {
+    public void delete(@Nullable D object) {
         if (object != null) {
             database.beginTransaction();
             object.deleteFromRealm();
@@ -143,7 +149,8 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         }
     }
 
-    public ArrayList<D> in(String key, Integer[] values) {
+    @NonNull
+    public ArrayList<D> in(@NonNull String key, @NonNull Integer[] values) {
         RealmQuery<D> query = getQuery().in(key, values);
 
         RealmResults<D> results = query.findAll();
@@ -151,7 +158,8 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
         return toArrayList(results);
     }
 
-    public ArrayList<D> notIn(String key, Integer[] values) {
+    @NonNull
+    public ArrayList<D> notIn(@NonNull String key, @NonNull Integer[] values) {
         RealmQuery<D> query = getQuery().not().in(key, values);
 
         RealmResults<D> results = query.findAll();
@@ -160,7 +168,8 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
     }
 
 
-    private ArrayList<D> toArrayList(RealmResults<D> realmResults) {
+    @NonNull
+    private ArrayList<D> toArrayList(@NonNull RealmResults<D> realmResults) {
         ArrayList<D> results = new ArrayList<>();
 
         for (int i = 0; i < realmResults.size(); i++) {
@@ -175,10 +184,11 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
     }
 
 
-    public void close(){
+    public void close() {
         database.close();
     }
 
+    @NonNull
     public RealmQuery<D> getQuery() {
         return (RealmQuery<D>) database.where(opClass);
     }
@@ -189,6 +199,7 @@ public class LocalStorage<D extends RealmObject, M extends BaseModel> {
 
         private Realm database;
 
+        @NonNull
         public static Configuration getInstance() {
             return ourInstance;
         }

@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.views.activities;
 
 import com.zombispormedio.assemble.models.FriendProfile;
-import com.zombispormedio.assemble.views.activities.IBaseView;
 
 import java.util.ArrayList;
 

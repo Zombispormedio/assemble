@@ -5,7 +5,6 @@ import android.app.Activity;
 import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
-
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -14,7 +13,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.io.ByteArrayOutputStream;
 
@@ -44,14 +44,15 @@ public class ExternalNavigationManager {
         public static final int CAMERA = 1;
     }
 
+    @Nullable
     private Activity ctx;
 
     public ExternalNavigationManager(Activity ctx) {
         this.ctx = ctx;
     }
 
-    public void onDestroy(){
-        ctx=null;
+    public void onDestroy() {
+        ctx = null;
     }
 
 
@@ -95,7 +96,7 @@ public class ExternalNavigationManager {
     }
 
 
-    public Uri resolveGalleryPath(int requestCode, Intent data) {
+    public Uri resolveGalleryPath(int requestCode, @NonNull Intent data) {
         Uri originalUri = data.getData();
 
         if (requestCode == INTERNAL_REQUEST_CODE.GALLERY_MORE_THAN_19) {
@@ -113,21 +114,21 @@ public class ExternalNavigationManager {
         return originalUri;
     }
 
-    public Uri resolveCameraPath(Intent data) {
+    public Uri resolveCameraPath(@NonNull Intent data) {
         Bundle extras = data.getExtras();
         Bitmap imageBitmap = (Bitmap) extras.get("mData");
 
         return getImageCameraURI(ctx.getApplicationContext(), imageBitmap);
     }
 
-    private Uri getImageCameraURI(Context ctx, Bitmap img) {
+    private Uri getImageCameraURI(@NonNull Context ctx, @NonNull Bitmap img) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         img.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
         String path = MediaStore.Images.Media.insertImage(ctx.getContentResolver(), img, "Title", null);
         return Uri.parse(path);
     }
 
-    public String getRealPathFromCameraUri(Uri uri) {
+    public String getRealPathFromCameraUri(@NonNull Uri uri) {
         String result = "";
         String[] fields = {MediaStore.Images.Media.DATA};
         Cursor cursor = ctx.getContentResolver().query(uri, fields, null, null, null);
@@ -145,7 +146,7 @@ public class ExternalNavigationManager {
         return result;
     }
 
-    public String getPath(final Uri uri) {
+    public String getPath(@NonNull final Uri uri) {
         String result = "";
 
         if (fromKitKat && DocumentsContract.isDocumentUri(ctx, uri)) {
@@ -197,7 +198,7 @@ public class ExternalNavigationManager {
         return result;
     }
 
-    private String getDataColumn(Uri uri, String selection, String[] selectionArgs) {
+    private String getDataColumn(@NonNull Uri uri, String selection, String[] selectionArgs) {
         String result = "";
         Cursor cursor = null;
         final String column = "_data";
@@ -218,19 +219,19 @@ public class ExternalNavigationManager {
         return result;
     }
 
-    public static boolean isExternalStorageDocument(Uri uri) {
+    public static boolean isExternalStorageDocument(@NonNull Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
     }
 
-    public static boolean isDownloadsDocument(Uri uri) {
+    public static boolean isDownloadsDocument(@NonNull Uri uri) {
         return "com.android.providers.downloads.documents".equals(uri.getAuthority());
     }
 
-    public static boolean isMediaDocument(Uri uri) {
+    public static boolean isMediaDocument(@NonNull Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
 
-    public static boolean isGooglePhotosUri(Uri uri) {
+    public static boolean isGooglePhotosUri(@NonNull Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 

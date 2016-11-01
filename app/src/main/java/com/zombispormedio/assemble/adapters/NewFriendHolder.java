@@ -7,6 +7,8 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.views.holders.INewFriendHolder;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,23 +20,29 @@ import butterknife.BindView;
  */
 public class NewFriendHolder extends AbstractHolder<FriendProfile> implements INewFriendHolder {
 
+    @Nullable
     private IOnClickItemListHandler<FriendProfile> listener;
 
+    @Nullable
     private IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener;
 
+    @Nullable
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
+    @Nullable
     @BindView(R.id.email_label)
     TextView emailLabel;
 
+    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
+    @Nullable
     @BindView(R.id.add_friend_button)
     SparkButton addFriendButton;
 
-    public NewFriendHolder(View view) {
+    public NewFriendHolder(@NonNull View view) {
         super(view);
         this.listener = null;
         this.addFriendListener = null;
@@ -42,7 +50,7 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
 
 
     @Override
-    public void bind(int position, FriendProfile itemData) {
+    public void bind(int position, @NonNull FriendProfile itemData) {
         renderData(itemData);
         setupOnClickListener(position, itemData);
         setupAddFriendButton(position, itemData);
@@ -61,7 +69,7 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     private void setupAddFriendButton(final int position, final FriendProfile itemData) {
         final INewFriendHolder holder = this;
         addFriendButton.setEventListener((button, buttonState) -> {
-            if(buttonState){
+            if (buttonState) {
                 if (addFriendListener != null) {
                     addFriendListener.onClick(position, itemData, holder);
                 }
@@ -70,7 +78,7 @@ public class NewFriendHolder extends AbstractHolder<FriendProfile> implements IN
     }
 
 
-    private void renderData(FriendProfile friend) {
+    private void renderData(@NonNull FriendProfile friend) {
         usernameLabel.setText(friend.username);
         emailLabel.setText(friend.email);
         friend.getLargeImageBuilder()

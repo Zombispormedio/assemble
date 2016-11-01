@@ -2,17 +2,14 @@ package com.zombispormedio.assemble.models.services.api;
 
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.editors.ProfileEditor;
-
-
 import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.models.editors.ProfileEditor;
+import com.zombispormedio.assemble.models.services.interfaces.IProfileService;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.FileBody;
 import com.zombispormedio.assemble.net.JsonBinder;
 
-
-import com.zombispormedio.assemble.models.services.interfaces.IProfileService;
-
+import android.support.annotation.NonNull;
 
 import java.io.File;
 
@@ -21,6 +18,7 @@ import java.io.File;
  */
 public class ProfileAPIService implements IProfileService {
 
+    @NonNull
     private final APIConfiguration api;
 
     public ProfileAPIService() {
@@ -35,7 +33,7 @@ public class ProfileAPIService implements IProfileService {
     }
 
     @Override
-    public void changeAvatar(File file, final IServiceHandler<UserProfile, Error> handler) {
+    public void changeAvatar(@NonNull File file, final IServiceHandler<UserProfile, Error> handler) {
         api.RestWithAuth("/profile/avatar")
                 .handler(DeferUtils.deferProfile(handler))
                 .patch(new FileBody(file, "image/*", "avatar", file.getName()));
@@ -48,8 +46,6 @@ public class ProfileAPIService implements IProfileService {
                 .handler(DeferUtils.deferProfile(handler))
                 .put(JsonBinder.fromEditProfile(profile));
     }
-
-
 
 
 }

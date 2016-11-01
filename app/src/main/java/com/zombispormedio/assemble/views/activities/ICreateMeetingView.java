@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.views.activities;
 
 import com.zombispormedio.assemble.utils.ISODate;
-import com.zombispormedio.assemble.views.activities.IBaseView;
 
 /**
  * Created by Xavier Serrano on 09/09/2016.
@@ -30,17 +29,17 @@ public interface ICreateMeetingView extends IBaseView {
 
     void setupEndDate(int year, int month, int day);
 
-    void setupStartHour( int hour, int minutes);
+    void setupStartHour(int hour, int minutes);
 
-    void setupEndHour( int hour, int minutes);
+    void setupEndHour(int hour, int minutes);
 
     void updateStartDate(int year, int month, int day);
 
     void updateEndDate(int year, int month, int day);
 
-    void updateStartHour( int hour, int minutes);
+    void updateStartHour(int hour, int minutes);
 
-    void updateEndHour( int hour, int minutes);
+    void updateEndHour(int hour, int minutes);
 
     void showErrorEndDate();
 

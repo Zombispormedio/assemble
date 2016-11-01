@@ -1,18 +1,17 @@
 package com.zombispormedio.assemble.activities;
 
 
+import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.controllers.SettingsController;
+import com.zombispormedio.assemble.fragments.SettingsFragment;
+import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.utils.NavigationManager;
+import com.zombispormedio.assemble.views.activities.ISettingsView;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
-
-
-import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.fragments.SettingsFragment;
-import com.zombispormedio.assemble.controllers.SettingsController;
-
-import com.zombispormedio.assemble.handlers.ISuccessHandler;
-import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.activities.ISettingsView;
+import android.support.annotation.NonNull;
 
 
 public class SettingsActivity extends BaseActivity implements ISettingsView {
@@ -59,7 +58,7 @@ public class SettingsActivity extends BaseActivity implements ISettingsView {
         ctrl.onDestroy();
     }
 
-    public void showConfirmSignOutDialog(ISuccessHandler listener) {
+    public void showConfirmSignOutDialog(@NonNull ISuccessHandler listener) {
         String msg = getResources().getString(R.string.signout_dialog_msg);
 
         String positive = getResources().getString(R.string.yes_title);

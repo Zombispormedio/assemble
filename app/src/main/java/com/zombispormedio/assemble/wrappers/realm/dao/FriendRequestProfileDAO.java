@@ -2,6 +2,8 @@ package com.zombispormedio.assemble.wrappers.realm.dao;
 
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 
+import android.support.annotation.NonNull;
+
 import io.realm.RealmObject;
 import io.realm.annotations.Index;
 import io.realm.annotations.PrimaryKey;
@@ -37,15 +39,17 @@ public class FriendRequestProfileDAO extends RealmObject implements IBaseDAO<Fri
     public String sign_up_at;
 
 
+    @NonNull
     @Override
     public FriendRequestProfile toModel() {
-        return  new FriendRequestProfile(id, email, username,
+        return new FriendRequestProfile(id, email, username,
                 full_avatar_url, large_avatar_url, medium_avatar_url, thumb_avatar_url,
                 birth_date, location, bio, sign_up_at);
     }
 
+    @NonNull
     @Override
-    public FriendRequestProfileDAO fromModel(FriendRequestProfile model) {
+    public FriendRequestProfileDAO fromModel(@NonNull FriendRequestProfile model) {
         this.id = model.id;
         this.email = model.email;
         this.username = model.username;
@@ -65,8 +69,9 @@ public class FriendRequestProfileDAO extends RealmObject implements IBaseDAO<Fri
         return id;
     }
 
-    public static class Factory implements IDAOFactory<FriendRequestProfileDAO>{
+    public static class Factory implements IDAOFactory<FriendRequestProfileDAO> {
 
+        @NonNull
         @Override
         public FriendRequestProfileDAO create() {
             return new FriendRequestProfileDAO();

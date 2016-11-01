@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.adapters.PreviewFriendHolder;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 
@@ -16,8 +17,9 @@ public class PreviewFriendsListAdapter extends FriendProfileAdapter<PreviewFrien
 
     private IOnClickItemListHandler<FriendProfile> listener;
 
+    @NonNull
     @Override
-    public PreviewFriendHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public PreviewFriendHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         PreviewFriendHolder holder = new PreviewFriendHolder(getView(parent, R.layout.list_item_preview_friends));
 

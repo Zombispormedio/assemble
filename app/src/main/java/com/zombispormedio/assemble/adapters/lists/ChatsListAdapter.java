@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.adapters.ChatHolder;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Chat;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class ChatsListAdapter extends BaseSortedListAdapter<Chat, ChatHolder> {
         addAll(data);
     }
 
+    @NonNull
     @Override
     public ChatHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ChatHolder holder = new ChatHolder(getView(parent, R.layout.list_item_chats));
@@ -40,14 +42,16 @@ public class ChatsListAdapter extends BaseSortedListAdapter<Chat, ChatHolder> {
         this.listener = listener;
     }
 
-    public static class Factory{
+    public static class Factory {
 
         private IOnClickItemListHandler<Chat> listener;
 
-        public ChatsListAdapter make(){
+        @NonNull
+        public ChatsListAdapter make() {
             return make(new ArrayList<>());
         }
 
+        @NonNull
         public ChatsListAdapter make(ArrayList<Chat> data) {
             ChatsListAdapter adapter = new ChatsListAdapter(data);
             adapter.setOnClickListener(listener);

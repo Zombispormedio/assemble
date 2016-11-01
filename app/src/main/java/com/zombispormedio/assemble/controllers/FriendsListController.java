@@ -6,8 +6,11 @@ import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.views.holders.IFriendHolder;
 import com.zombispormedio.assemble.views.fragments.IFriendsListView;
+import com.zombispormedio.assemble.views.holders.IFriendHolder;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -16,17 +19,19 @@ import java.util.ArrayList;
  */
 public class FriendsListController extends Controller {
 
+    @Nullable
     private IFriendsListView ctx;
 
     private final FriendResource friendResource;
 
     private final FriendSubscription friendSubscription;
 
+    @NonNull
     private final FriendSubscriber friendSubscriber;
 
     private boolean refreshing;
 
-    public FriendsListController(IFriendsListView ctx) {
+    public FriendsListController(@NonNull IFriendsListView ctx) {
         super(ctx.getParent());
         this.ctx = ctx;
         friendResource = getResourceComponent().provideFriendResource();
@@ -54,11 +59,11 @@ public class FriendsListController extends Controller {
         friendSubscription.load();
     }
 
-    public void onRemoveFriend(int position, FriendProfile data, final IFriendHolder holder) {
+    public void onRemoveFriend(int position, @NonNull FriendProfile data, @NonNull final IFriendHolder holder) {
         holder.showProgress();
-        friendResource.deleteFriend(data.id, new ServiceHandler<ArrayList<FriendProfile>, Error>(){
+        friendResource.deleteFriend(data.id, new ServiceHandler<ArrayList<FriendProfile>, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 holder.hideProgress();
                 ctx.showAlert(error.msg);
             }

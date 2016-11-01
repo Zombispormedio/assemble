@@ -1,9 +1,9 @@
 package com.zombispormedio.assemble.models.services.storage;
 
 
-import com.zombispormedio.assemble.wrappers.realm.dao.FriendRequestProfileDAO;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
+import com.zombispormedio.assemble.wrappers.realm.dao.FriendRequestProfileDAO;
 
 /**
  * Created by Xavier Serrano on 13/09/2016.
@@ -11,8 +11,8 @@ import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
 public class FriendRequestStorageService extends StorageService<FriendRequestProfileDAO, FriendRequestProfile> {
 
     public FriendRequestStorageService() {
-      super(new LocalStorage<>(FriendRequestProfileDAO.class,
-              new FriendRequestProfileDAO.Factory()));
+        super(new LocalStorage<>(FriendRequestProfileDAO.class,
+                new FriendRequestProfileDAO.Factory()));
     }
 
 

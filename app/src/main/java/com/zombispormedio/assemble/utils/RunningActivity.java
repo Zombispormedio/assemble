@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.utils;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 /**
  * Created by Xavier Serrano on 14/10/2016.
@@ -10,11 +11,11 @@ import android.os.Bundle;
 
 public class RunningActivity implements Application.ActivityLifecycleCallbacks {
 
-    public static String whoIsRunning="";
+    public static String whoIsRunning = "";
 
     @Override
-    public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-        whoIsRunning=activity.getClass().getName();
+    public void onActivityCreated(@NonNull Activity activity, Bundle savedInstanceState) {
+        whoIsRunning = activity.getClass().getName();
     }
 
     @Override

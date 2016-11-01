@@ -1,21 +1,21 @@
 package com.zombispormedio.assemble.activities;
 
+import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.controllers.LoginController;
+import com.zombispormedio.assemble.utils.AndroidUtils;
+import com.zombispormedio.assemble.utils.NavigationManager;
+import com.zombispormedio.assemble.views.activities.ILoginView;
+
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.zombispormedio.assemble.controllers.LoginController;
-import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.utils.AndroidUtils;
-import com.zombispormedio.assemble.views.activities.ILoginView;
-
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -23,31 +23,40 @@ import butterknife.OnClick;
 public class LoginActivity extends BaseActivity implements ILoginView {
 
 
+    @Nullable
     @BindView(R.id.login_button)
     Button loginButton;
 
+    @Nullable
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
+    @Nullable
     @BindView(R.id.register_link)
     TextView linkToRegister;
 
+    @Nullable
     @BindView(R.id.email_input)
     EditText emailInput;
 
+    @Nullable
     @BindView(R.id.pass_input)
     EditText passwordInput;
 
+    @Nullable
     @BindView(R.id.email_input_layout)
     TextInputLayout emailInputLayout;
 
+    @Nullable
     @BindView(R.id.pass_input_layout)
     TextInputLayout passwordInputLayout;
 
     private LoginController ctrl;
 
+    @Nullable
     private AndroidUtils.InputLayoutHelper emailInputHelper;
 
+    @Nullable
     private AndroidUtils.InputLayoutHelper passwordInputHelper;
 
     @Override
@@ -96,12 +105,14 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         linkToRegister.setVisibility(View.GONE);
     }
 
+    @NonNull
     @Override
     public String getEmail() {
         return emailInputHelper.getValue();
 
     }
 
+    @NonNull
     @Override
     public String getPassword() {
         return passwordInputHelper.getValue();
@@ -122,16 +133,18 @@ public class LoginActivity extends BaseActivity implements ILoginView {
         if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailInputHelper.setError(email.isEmpty() ? getString(R.string.email_empty) : getString(R.string.invalid_email));
             valid = false;
-        } else
+        } else {
             emailInputHelper.setError(null);
+        }
 
         if (password.isEmpty() || password.length() < 6 || password.length() > 50) {
             passwordInputHelper
                     .setError(password.isEmpty() ? getString(R.string.pass_empty) : getString(R.string.invalid_password));
 
             valid = false;
-        } else
+        } else {
             passwordInputHelper.setError(null);
+        }
 
         return valid;
     }
@@ -164,7 +177,6 @@ public class LoginActivity extends BaseActivity implements ILoginView {
     public void onBackPressed() {
         moveTaskToBack(true);
     }
-
 
 
 }

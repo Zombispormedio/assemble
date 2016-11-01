@@ -3,6 +3,8 @@ package com.zombispormedio.assemble.wrappers.moshi;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 
+import android.support.annotation.NonNull;
+
 import java.io.IOException;
 
 /**
@@ -18,10 +20,11 @@ public class JSONWrapper<T> {
 
     }
 
-    public T fromJSON(String json) throws IOException {
+    public T fromJSON(@NonNull String json) throws IOException {
         return adapter.fromJson(json);
     }
 
+    @NonNull
     public String toJSON(T obj) {
         return adapter.toJson(obj);
     }

@@ -1,9 +1,20 @@
 package com.zombispormedio.assemble.activities;
 
+import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.adapters.pagers.HomePagerAdapter;
+import com.zombispormedio.assemble.controllers.HomeController;
+import com.zombispormedio.assemble.models.Message;
+import com.zombispormedio.assemble.utils.ImageUtils;
+import com.zombispormedio.assemble.utils.NavigationManager;
+import com.zombispormedio.assemble.views.activities.IHomeView;
+
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -11,8 +22,6 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,14 +29,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
-import com.zombispormedio.assemble.adapters.pagers.HomePagerAdapter;
-import com.zombispormedio.assemble.controllers.HomeController;
-import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.utils.ImageUtils;
-import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.views.activities.IHomeView;
 
 import java.util.ArrayList;
 
@@ -48,6 +49,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private NavigationManager navigation;
 
+    @Nullable
     @BindView(R.id.drawer_layout_home)
     DrawerLayout drawer;
 
@@ -59,28 +61,34 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private View headerView;
 
+    @Nullable
     @BindView(R.id.nav_view)
     NavigationView nav;
 
+    @Nullable
     @BindView(R.id.overlay_home_layout)
     FrameLayout overlay;
 
+    @Nullable
     @BindView(R.id.fab)
     FloatingActionButton fab;
 
+    @Nullable
     @BindView(R.id.home_tab_layout)
     TabLayout tabLayout;
 
+    @Nullable
     @BindView(R.id.home_pager)
     ViewPager viewTabPager;
 
+    @Nullable
     @BindView(R.id.background_loading)
     ProgressBar backgroundProgressBar;
 
     private ProgressDialog progressDialog;
 
+    @Nullable
     private HomeController ctrl;
-
 
 
     @Override
@@ -111,13 +119,13 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         Intent intent = getIntent();
         String action = intent.getAction();
         Bundle extra = intent.getExtras();
-        if(SEVERAL_MESSAGE_ACTION.equals(action)){
-            ArrayList<Message> messages=extra.getParcelableArrayList(MESSAGES);
+        if (SEVERAL_MESSAGE_ACTION.equals(action)) {
+            ArrayList<Message> messages = extra.getParcelableArrayList(MESSAGES);
             ctrl = new HomeController(this, messages);
             setState(HomePagerAdapter.CHATS);
-        }else{
-            ctrl=new HomeController(this);
-            if(SEVERAL_MESSAGE_ACTIVE_ACTION.equals(action)){
+        } else {
+            ctrl = new HomeController(this);
+            if (SEVERAL_MESSAGE_ACTIVE_ACTION.equals(action)) {
                 setState(HomePagerAdapter.CHATS);
             }
         }
@@ -133,7 +141,8 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
     private void setupDrawer() {
         nav.setNavigationItemSelectedListener(NavListener());
-        drawer.addDrawerListener(new ActionBarDrawerToggle(this, drawer, R.string.open_drawer_desc, R.string.close_drawer_desc));
+        drawer.addDrawerListener(
+                new ActionBarDrawerToggle(this, drawer, R.string.open_drawer_desc, R.string.close_drawer_desc));
         headerView = nav.getHeaderView(0);
 
         usernameLabel = (TextView) headerView.findViewById(R.id.username_label);
@@ -171,7 +180,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             @Override
-            public void onTabSelected(TabLayout.Tab tab) {
+            public void onTabSelected(@NonNull TabLayout.Tab tab) {
                 int position = tab.getPosition();
                 moveToPosition(position);
             }
@@ -203,7 +212,6 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     }
 
 
-
     private NavigationView.OnNavigationItemSelectedListener NavListener() {
         return item -> {
             switch (item.getItemId()) {
@@ -232,7 +240,7 @@ public class HomeActivity extends BaseActivity implements IHomeView {
 
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawer.openDrawer(GravityCompat.START);
@@ -372,13 +380,13 @@ public class HomeActivity extends BaseActivity implements IHomeView {
     }
 
 
-    private class MessageReceiver extends BroadcastReceiver{
+    private class MessageReceiver extends BroadcastReceiver {
 
         @Override
-        public void onReceive(Context context, Intent intent) {
-            Bundle extras=intent.getExtras();
+        public void onReceive(Context context, @NonNull Intent intent) {
+            Bundle extras = intent.getExtras();
             getResourceComponent().provideChatSubscription().haveOneChanged(extras.getInt(CHAT_ID));
-            if(getState()!=HomePagerAdapter.CHATS && !extras.getBoolean(READ)){
+            if (getState() != HomePagerAdapter.CHATS && !extras.getBoolean(READ)) {
                 moveToPosition(HomePagerAdapter.CHATS);
             }
         }

@@ -3,10 +3,11 @@ package com.zombispormedio.assemble.adapters;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickComponentItemHandler;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-
 import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.views.holders.IFriendRequestHolder;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -21,28 +22,36 @@ import butterknife.BindView;
 public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> implements IFriendRequestHolder {
 
 
+    @Nullable
     private IOnClickItemListHandler<FriendRequestProfile> listener;
 
+    @Nullable
     private IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder> acceptListener;
 
+    @Nullable
     private IOnClickComponentItemHandler<FriendRequestProfile, IFriendRequestHolder> rejectListener;
 
+    @Nullable
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
+    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
+    @Nullable
     @BindView(R.id.accept_fab)
     ImageButton acceptButton;
 
+    @Nullable
     @BindView(R.id.reject_fab)
     ImageButton rejectButton;
 
+    @Nullable
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
-    public FriendRequestsHolder(View view) {
+    public FriendRequestsHolder(@NonNull View view) {
         super(view);
         this.listener = null;
         this.rejectListener = null;
@@ -51,7 +60,7 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
 
 
     @Override
-    public void bind(int position, FriendRequestProfile itemData) {
+    public void bind(int position, @NonNull FriendRequestProfile itemData) {
         renderData(itemData);
         setupOnClickListener(position, itemData);
         setupAcceptButton(position, itemData);
@@ -87,7 +96,7 @@ public class FriendRequestsHolder extends AbstractHolder<FriendRequestProfile> i
     }
 
 
-    private void renderData(FriendRequestProfile friendRequest) {
+    private void renderData(@NonNull FriendRequestProfile friendRequest) {
         usernameLabel.setText(friendRequest.username);
 
         friendRequest.getLargeImageBuilder()

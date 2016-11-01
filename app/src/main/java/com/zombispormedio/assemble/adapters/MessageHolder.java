@@ -5,7 +5,8 @@ import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.utils.ISODate;
 
-
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -20,30 +21,39 @@ import butterknife.BindView;
 
 public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
 
+    @Nullable
     @BindView(R.id.friend_layout)
     LinearLayout friendLayout;
 
+    @Nullable
     @BindView(R.id.user_layout)
     FrameLayout userLayout;
 
+    @Nullable
     @BindView(R.id.friend_image_view)
     ImageView friendImageView;
 
+    @Nullable
     @BindView(R.id.friend_content_text)
     TextView friendContent;
 
+    @Nullable
     @BindView(R.id.user_content_text)
     TextView userContent;
 
+    @Nullable
     @BindView(R.id.message_state)
     ImageView userImageView;
 
+    @Nullable
     @BindView(R.id.message_date_label)
     TextView messageDateLabel;
 
+    @Nullable
     @BindView(R.id.date_label)
     TextView dateLabel;
 
+    @Nullable
     @BindView(R.id.date_label_layout)
     FrameLayout dateLabelLayout;
 
@@ -57,7 +67,7 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
 
 
     @Override
-    public void bind(int position, Container container) {
+    public void bind(int position, @NonNull Container container) {
         isRoot = true;
         setupOnClick(container);
         Message message = container.getMessage();
@@ -66,7 +76,7 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
     }
 
 
-    public void bind(int position, Container container, Container previousContainer) {
+    public void bind(int position, @NonNull Container container, @NonNull Container previousContainer) {
         setupOnClick(container);
 
         Message message = container.getMessage();
@@ -83,7 +93,7 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
         }
     }
 
-    private void renderDate(ISODate created) {
+    private void renderDate(@NonNull ISODate created) {
         dateLabelLayout.setVisibility(View.VISIBLE);
 
         String text = created.isToday() ? getString(R.string.today)
@@ -93,7 +103,7 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
     }
 
 
-    public void renderData(Message message) {
+    public void renderData(@NonNull Message message) {
 
         if (message.sender instanceof UserProfile) {
             renderUserMessage(message);
@@ -107,7 +117,7 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
 
     }
 
-    private void bindDate(Message message) {
+    private void bindDate(@NonNull Message message) {
         boolean isToday = message.isCreatedToday();
         boolean isYesterday = message.isCreatedYesterday();
 
@@ -129,7 +139,7 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
         messageDateLabel.setLayoutParams(params);
     }
 
-    private void renderFriendMessage(Message message) {
+    private void renderFriendMessage(@NonNull Message message) {
         showFriend();
 
         friendContent.setText(message.content);
@@ -151,7 +161,7 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
     }
 
 
-    private void doIfRootFriendMessage(Message message) {
+    private void doIfRootFriendMessage(@NonNull Message message) {
         friendImageView.setVisibility(View.VISIBLE);
         message.sender.getMediumImageBuilder()
                 .context(getContext())
@@ -159,7 +169,7 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
                 .build();
     }
 
-    private void renderUserMessage(Message message) {
+    private void renderUserMessage(@NonNull Message message) {
         showUser();
         userContent.setText(message.content);
         renderUserMessageState(message);
@@ -175,12 +185,12 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
         userLayout.setLayoutParams(params);
     }
 
-    private void renderUserMessageState(Message message) {
+    private void renderUserMessageState(@NonNull Message message) {
         if (message.is_read) {
             userImageView.setImageResource(R.drawable.message_check_all_layer);
         } else if (message.is_sent) {
             userImageView.setImageResource(R.drawable.message_check_layer);
-        }else{
+        } else {
             userImageView.setImageResource(R.drawable.message_clock_layer);
         }
     }
@@ -196,11 +206,11 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
         friendLayout.setVisibility(View.GONE);
     }
 
-    private void registerIfIsRoot(Message that, Message previous) {
+    private void registerIfIsRoot(@NonNull Message that, @NonNull Message previous) {
         isRoot = that.sender.id != previous.sender.id;
     }
 
-    private void setupOnClick(Container container) {
+    private void setupOnClick(@NonNull Container container) {
         if (container.isClicked()) {
             showDate();
         } else {
@@ -238,8 +248,8 @@ public class MessageHolder extends AbstractHolder<MessageHolder.Container> {
             clicked = false;
         }
 
-        public void read(){
-            message.is_read=true;
+        public void read() {
+            message.is_read = true;
         }
 
         public boolean isClicked() {

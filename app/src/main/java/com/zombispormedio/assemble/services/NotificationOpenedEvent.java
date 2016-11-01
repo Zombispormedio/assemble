@@ -12,6 +12,7 @@ import com.zombispormedio.assemble.views.IApplicationView;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +30,7 @@ public class NotificationOpenedEvent extends AbstractNotificationEvent implement
     private INotificationEventController ctrl;
 
     @Override
-    public void notificationOpened(OSNotificationOpenResult result) {
+    public void notificationOpened(@NonNull OSNotificationOpenResult result) {
         OSNotificationPayload payload = result.notification.payload;
         List<OSNotificationPayload> notifications = result.notification.groupedNotifications;
         ArrayList<JSONObject> data = new ArrayList<>();
@@ -41,19 +42,20 @@ public class NotificationOpenedEvent extends AbstractNotificationEvent implement
                     .forEach(p -> data.add(p.additionalData));
         }
 
-        switch (payload.groupKey){
-            case AndroidConfig.Groups.MESSAGE_GROUP: ctrl=new MessageEventController();
+        switch (payload.groupKey) {
+            case AndroidConfig.Groups.MESSAGE_GROUP:
+                ctrl = new MessageEventController();
                 break;
         }
-        if(ctrl==null){
+        if (ctrl == null) {
             return;
         }
         ctrl.init(data);
 
-        if(ctrl.permitIntent()){
+        if (ctrl.permitIntent()) {
             Intent intent = createIntent(ctrl.getIntentClass());
 
-            intent=ctrl.modifyIntent(intent, isActive());
+            intent = ctrl.modifyIntent(intent, isActive());
 
             startIntent(intent);
         }

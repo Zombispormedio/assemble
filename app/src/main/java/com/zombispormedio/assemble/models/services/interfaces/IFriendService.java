@@ -12,6 +12,7 @@ import java.util.ArrayList;
  * Created by Xavier Serrano on 19/09/2016.
  */
 public interface IFriendService {
+
     void getFriends(final IServiceHandler<ArrayList<FriendProfile>, Error> handler);
 
     void getFriendRequests(final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler);
@@ -20,10 +21,10 @@ public interface IFriendService {
 
     void requestNewFriend(int friendId, final IServiceHandler<Result, Error> handler);
 
-    void acceptRequest(int friendId, final  IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler);
+    void acceptRequest(int friendId, final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler);
 
-    void rejectRequest(int friendId, final  IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler);
+    void rejectRequest(int friendId, final IServiceHandler<ArrayList<FriendRequestProfile>, Error> handler);
 
-    void deleteFriend(int friendId,  final IServiceHandler<ArrayList<FriendProfile>, Error> handler);
+    void deleteFriend(int friendId, final IServiceHandler<ArrayList<FriendProfile>, Error> handler);
 
 }

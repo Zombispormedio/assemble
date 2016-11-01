@@ -1,8 +1,8 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.ProfileEditor;
 import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.models.editors.ProfileEditor;
 import com.zombispormedio.assemble.models.resources.ProfileResource;
 import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
@@ -11,19 +11,25 @@ import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.views.activities.IUpdateProfileView;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 /**
  * Created by Xavier Serrano on 04/08/2016.
  */
 public class UpdateProfileController extends Controller {
 
+    @Nullable
     private IUpdateProfileView ctx;
 
     private final ProfileResource profileResource;
 
     private final ProfileSubscription profileSubscription;
 
+    @NonNull
     private final ProfileSubscriber profileSubscriber;
 
+    @NonNull
     private final ProfileEditor.Builder editor;
 
 
@@ -68,7 +74,7 @@ public class UpdateProfileController extends Controller {
 
             profileResource.updateProfile(profileEditor, new ServiceHandler<UserProfile, Error>() {
                 @Override
-                public void onError(Error error) {
+                public void onError(@NonNull Error error) {
                     ctx.closeProgressDialog();
                     ctx.showAlert(error.msg);
                 }
@@ -88,7 +94,7 @@ public class UpdateProfileController extends Controller {
         ctx.goToUpdateBirthdate(editor.getBirthdate());
     }
 
-    public void updateBirthdate(String birthdate) {
+    public void updateBirthdate(@NonNull String birthdate) {
         editor.setBirthDate(birthdate);
         ctx.setBirthDate(new ISODate(birthdate), "");
     }

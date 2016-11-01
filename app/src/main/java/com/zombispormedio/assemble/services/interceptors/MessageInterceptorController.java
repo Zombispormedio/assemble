@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.models.Message;
 import org.json.JSONObject;
 
 import android.media.RingtoneManager;
+import android.support.annotation.NonNull;
 import android.support.v4.app.NotificationCompat;
 
 /**
@@ -19,18 +20,18 @@ public class MessageInterceptorController implements InterceptorControllerInterf
 
     public MessageInterceptorController(IMessageInterceptor interceptor) {
         this.interceptor = interceptor;
-        display=true;
+        display = true;
     }
 
     @Override
-    public void init(JSONObject data) {
+    public void init(@NonNull JSONObject data) {
 
-        if(interceptor.isApplicationActive()){
+        if (interceptor.isApplicationActive()) {
             Message message = Message.createMessage(data);
             interceptor.saveMessage(message);
-            boolean inHome=interceptor.isInHome();
-            boolean inSameChat=interceptor.isInTheSameChat(message.chat_id);
-            display=!(inHome||inSameChat);
+            boolean inHome = interceptor.isInHome();
+            boolean inSameChat = interceptor.isInTheSameChat(message.chat_id);
+            display = !(inHome || inSameChat);
 
             if (inHome) {
                 interceptor.notifyHomeForChat(message.chat_id);
@@ -47,7 +48,7 @@ public class MessageInterceptorController implements InterceptorControllerInterf
     }
 
     @Override
-    public NotificationCompat.Builder modifyNotificationBuilder(NotificationCompat.Builder builder) {
+    public NotificationCompat.Builder modifyNotificationBuilder(@NonNull NotificationCompat.Builder builder) {
         return builder.setPriority(NotificationCompat.PRIORITY_MAX)
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setVibrate(new long[]{1, 1, 1})

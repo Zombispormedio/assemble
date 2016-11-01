@@ -1,21 +1,6 @@
 package com.zombispormedio.assemble.activities;
 
 
-import android.app.DatePickerDialog;
-import android.app.ProgressDialog;
-import android.app.TimePickerDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.design.widget.BottomSheetDialog;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.SwitchCompat;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.CreateMeetingController;
 import com.zombispormedio.assemble.fragments.TeamDialogFragment;
@@ -25,6 +10,23 @@ import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.activities.ICreateMeetingView;
+
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,27 +39,35 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
 
     private TeamDialogFragment teamDialogFragment;
 
+    @Nullable
     @BindView(R.id.team_name)
     TextView teamName;
 
+    @Nullable
     @BindView(R.id.start_date_label)
     TextView startDateLabel;
 
+    @Nullable
     @BindView(R.id.start_hour_label)
     TextView startHourLabel;
 
+    @Nullable
     @BindView(R.id.end_date_label)
     TextView endDateLabel;
 
+    @Nullable
     @BindView(R.id.end_hour_label)
     TextView endHourLabel;
 
+    @Nullable
     @BindView(R.id.is_every_day)
     SwitchCompat isEveryDay;
 
+    @Nullable
     @BindView(R.id.name_input)
     EditText nameInput;
 
+    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
@@ -193,7 +203,7 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
     }
 
     @Override
-    public void bindImage(String path) {
+    public void bindImage(@NonNull String path) {
         new ImageUtils.ImageBuilder(this, imageView)
                 .circle(true)
                 .file(path)
@@ -215,6 +225,7 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
         NavigationManager.Home(this);
     }
 
+    @NonNull
     @Override
     public String getName() {
         String value = nameInput.getText().toString();
@@ -260,25 +271,25 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
     }
 
     @Override
-    public void bindStartDate(ISODate start) {
+    public void bindStartDate(@NonNull ISODate start) {
         String formatted = start.format(getString(R.string.simple_date_with_name_of_day));
         startDateLabel.setText(formatted);
     }
 
     @Override
-    public void bindStartHour(ISODate start) {
+    public void bindStartHour(@NonNull ISODate start) {
         String formatted = start.format(getString(R.string.simple_hour));
         startHourLabel.setText(formatted);
     }
 
     @Override
-    public void bindEndDate(ISODate start) {
+    public void bindEndDate(@NonNull ISODate start) {
         String formatted = start.format(getString(R.string.simple_date_with_name_of_day));
         endDateLabel.setText(formatted);
     }
 
     @Override
-    public void bindEndHour(ISODate start) {
+    public void bindEndHour(@NonNull ISODate start) {
         String formatted = start.format(getString(R.string.simple_hour));
         endHourLabel.setText(formatted);
     }
@@ -315,7 +326,7 @@ public class CreateMeetingActivity extends BaseActivity implements ICreateMeetin
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @NonNull Intent data) {
         if (resultCode == RESULT_OK) {
             String path = null;
             int type = ExternalNavigationManager.getType(requestCode);

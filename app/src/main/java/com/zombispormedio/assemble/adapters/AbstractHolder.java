@@ -4,6 +4,7 @@ package com.zombispormedio.assemble.adapters;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -15,7 +16,7 @@ import butterknife.ButterKnife;
  */
 public abstract class AbstractHolder<T> extends RecyclerView.ViewHolder {
 
-    public AbstractHolder(View itemView) {
+    public AbstractHolder(@NonNull View itemView) {
         super(itemView);
         ButterKnife.bind(this, getView());
     }
@@ -31,6 +32,7 @@ public abstract class AbstractHolder<T> extends RecyclerView.ViewHolder {
         return itemView;
     }
 
+    @NonNull
     protected String getString(int id) {
         return getContext().getString(id);
     }
@@ -56,7 +58,7 @@ public abstract class AbstractHolder<T> extends RecyclerView.ViewHolder {
         return drawable;
     }
 
-    protected float getDimen(int id){
+    protected float getDimen(int id) {
         return getContext().getResources().getDimension(id);
     }
 

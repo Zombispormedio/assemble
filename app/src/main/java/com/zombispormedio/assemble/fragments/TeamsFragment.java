@@ -1,14 +1,6 @@
 package com.zombispormedio.assemble.fragments;
 
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.adapters.lists.TeamsListAdapter;
@@ -16,6 +8,15 @@ import com.zombispormedio.assemble.controllers.TeamsController;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.fragments.ITeamsView;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -28,16 +29,18 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
 
     private TeamsController ctrl;
 
+    @Nullable
     @BindView(R.id.teams_list)
     RecyclerView teamsList;
 
+    @Nullable
     @BindView(R.id.teams_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
     private TeamsListAdapter teamsListAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_teams, container, false);
     }
@@ -76,7 +79,7 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
 
 
     @Override
-    public void bindTeams(ArrayList<Team> data) {
+    public void bindTeams(@NonNull ArrayList<Team> data) {
         teamsListAdapter.addAll(data);
     }
 

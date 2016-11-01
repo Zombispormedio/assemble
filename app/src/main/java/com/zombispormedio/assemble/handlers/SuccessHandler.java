@@ -11,7 +11,7 @@ public class SuccessHandler implements ISuccessHandler {
 
     }
 
-    public void onError(){
+    public void onError() {
 
     }
 }

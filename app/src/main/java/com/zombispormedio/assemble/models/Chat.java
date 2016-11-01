@@ -21,24 +21,27 @@ public class Chat extends BaseModel implements Sorted<Chat> {
 
     public int friend_id;
 
+    @NonNull
     public final String created_at;
 
+    @NonNull
     private final transient ISODate createdAt;
 
     public final int unreadCount;
 
 
-    public Chat(int id, String created_at, UserProfile sender, FriendProfile recipient,
+    public Chat(int id, @NonNull String created_at, UserProfile sender, FriendProfile recipient,
             Message lastMessage, int unreadCount) {
         super(id);
         this.created_at = created_at;
         this.sender = sender;
         this.recipient = recipient;
         this.lastMessage = lastMessage;
-        this.unreadCount=unreadCount;
+        this.unreadCount = unreadCount;
         createdAt = new ISODate(created_at);
     }
 
+    @NonNull
     public ISODate getCreatedAt() {
         return createdAt;
     }
@@ -64,7 +67,7 @@ public class Chat extends BaseModel implements Sorted<Chat> {
     }
 
     @Override
-    public boolean areTheSame(Chat o) {
+    public boolean areTheSame(@NonNull Chat o) {
         return id == o.id &&
                 safeCompareLastMessage(o.lastMessage);
     }

@@ -2,6 +2,7 @@ package com.zombispormedio.assemble.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Xavier Serrano on 07/10/2016.
@@ -11,6 +12,7 @@ public class PreferencesManager {
 
     public static final String PREFERENCES = "Prefs";
 
+    @Nullable
     private Context ctx;
 
     public PreferencesManager(Context ctx) {
@@ -21,7 +23,7 @@ public class PreferencesManager {
         return ctx.getSharedPreferences(PREFERENCES, Context.MODE_PRIVATE);
     }
 
-    public SharedPreferences.Editor getEditor(){
+    public SharedPreferences.Editor getEditor() {
         return getPreferences().edit();
     }
 
@@ -37,28 +39,29 @@ public class PreferencesManager {
         editor.apply();
     }
 
-    public String getString( String key){
+    @Nullable
+    public String getString(String key) {
         return getPreferences().getString(key, "");
     }
 
-    public int getInt(String key){
+    public int getInt(String key) {
         return getPreferences().getInt(key, 0);
     }
 
-    public void remove(String key){
+    public void remove(String key) {
         SharedPreferences.Editor editor = getEditor();
         editor.remove(key);
         editor.apply();
     }
 
-    public void clear(){
+    public void clear() {
         SharedPreferences.Editor editor = getEditor();
         editor.clear();
         editor.apply();
     }
 
-    public void onDestroy(){
-        ctx=null;
+    public void onDestroy() {
+        ctx = null;
     }
 
 }

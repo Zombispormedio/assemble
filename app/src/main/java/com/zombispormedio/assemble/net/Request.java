@@ -1,9 +1,10 @@
 package com.zombispormedio.assemble.net;
 
 import com.zombispormedio.assemble.handlers.IPromiseHandler;
-
 import com.zombispormedio.assemble.utils.StringUtils;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -19,10 +20,13 @@ public class Request {
 
     private final String url;
 
+    @Nullable
     private HashMap<String, String> headers;
 
+    @Nullable
     private String body;
 
+    @Nullable
     private FileBody file;
 
     private IPromiseHandler handler;
@@ -47,6 +51,7 @@ public class Request {
         return headers.get(key);
     }
 
+    @Nullable
     public HashMap<String, String> getHeaders() {
         return headers;
     }
@@ -59,6 +64,7 @@ public class Request {
         this.handler = handler;
     }
 
+    @Nullable
     public String getBody() {
         return body;
     }
@@ -67,6 +73,7 @@ public class Request {
         this.body = body;
     }
 
+    @Nullable
     public FileBody getFile() {
         return file;
     }
@@ -80,9 +87,9 @@ public class Request {
     }
 
     public void start() {
-        if(ConnectionState.getInstance().isConnected()){
+        if (ConnectionState.getInstance().isConnected()) {
             new AsyncRequest().execute(this);
-        }else {
+        } else {
             handler.onNotConnected();
         }
 
@@ -95,12 +102,16 @@ public class Request {
 
         private METHOD method;
 
+        @NonNull
         private final HashMap<String, Object> paramsMap;
 
+        @Nullable
         private HashMap<String, String> headersMap;
 
+        @Nullable
         private IPromiseHandler handler;
 
+        @Nullable
         private String body;
 
         private FileBody file;
@@ -114,11 +125,13 @@ public class Request {
             url = "www.google.com";
         }
 
+        @NonNull
         public Builder url(String url) {
             this.url = url;
             return this;
         }
 
+        @NonNull
         public Builder method(METHOD method) {
             this.method = method;
             return this;
@@ -197,6 +210,7 @@ public class Request {
                     .start();
         }
 
+        @NonNull
         public Builder params(String key, Object param) {
             paramsMap.put(key, param);
             return this;
@@ -218,14 +232,17 @@ public class Request {
             headersMap.clear();
         }
 
+        @NonNull
         public String[] paramsKeys() {
             return (String[]) paramsMap.keySet().toArray();
         }
 
+        @NonNull
         public String[] headersKeys() {
             return (String[]) headersMap.keySet().toArray();
         }
 
+        @NonNull
         public Builder headers(String k, String v) {
             if (headersMap == null) {
                 headersMap = new HashMap<>();
@@ -235,11 +252,13 @@ public class Request {
             return this;
         }
 
+        @NonNull
         public Builder body(String body) {
             this.body = body;
             return this;
         }
 
+        @NonNull
         public Builder file(FileBody file) {
             this.file = file;
             return this;
@@ -272,12 +291,14 @@ public class Request {
 
         }
 
+        @NonNull
         public Builder handler(IPromiseHandler handler) {
             this.handler = handler;
             return this;
         }
 
 
+        @NonNull
         public Request build() {
             if (paramsMap.size() > 0) {
                 buildUrl();

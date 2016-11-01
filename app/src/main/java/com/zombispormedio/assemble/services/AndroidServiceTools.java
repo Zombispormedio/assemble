@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.views.IApplicationView;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_EVENT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
@@ -24,10 +25,12 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.READ;
 
 public class AndroidServiceTools {
 
+    @NonNull
     public static Intent notifyHome(int chatId) {
         return notifyHome(chatId, false);
     }
 
+    @NonNull
     public static Intent notifyHome(int chatId, boolean read) {
         Intent intent = new Intent();
         intent.setAction(ON_MESSAGE_NOTIFY_HOME);
@@ -36,6 +39,7 @@ public class AndroidServiceTools {
         return intent;
     }
 
+    @NonNull
     public static Intent saveMessage(Message message) {
         Intent intent = new Intent();
         intent.setAction(ON_MESSAGE_EVENT);
@@ -43,6 +47,7 @@ public class AndroidServiceTools {
         return intent;
     }
 
+    @NonNull
     public static Intent readMessages(int[] messageIds) {
         Intent intent = new Intent();
         intent.setAction(ON_READ_EVENT);
@@ -51,6 +56,7 @@ public class AndroidServiceTools {
     }
 
 
+    @NonNull
     public static Intent notifyChat(int messageId) {
         Intent intent = new Intent();
         intent.setAction(ON_MESSAGE_NOTIFY_CHAT);
@@ -58,6 +64,7 @@ public class AndroidServiceTools {
         return intent;
     }
 
+    @NonNull
     public static Intent notifyReadToChat(int[] messageIds) {
         Intent intent = new Intent();
         intent.setAction(ON_READ_NOTIFY_CHAT);
@@ -66,11 +73,11 @@ public class AndroidServiceTools {
     }
 
 
-    public static boolean isInHome(IApplicationView view) {
+    public static boolean isInHome(@NonNull IApplicationView view) {
         return view.isRunning(HomeActivity.class.getName());
     }
 
-    public static boolean isInTheSameChat(IApplicationView view, int chatId) {
+    public static boolean isInTheSameChat(@NonNull IApplicationView view, int chatId) {
         boolean isInSomeChat = view.isRunning(ChatActivity.class.getName());
         if (isInSomeChat) {
             int currentChatID = view.getPreferencesManager().getInt(CHAT_ID);

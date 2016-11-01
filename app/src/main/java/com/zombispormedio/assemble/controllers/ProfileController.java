@@ -10,17 +10,22 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.views.activities.IProfileView;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 /**
  * Created by Xavier Serrano on 10/07/2016.
  */
 public class ProfileController extends Controller {
 
+    @Nullable
     private IProfileView ctx;
 
     private final ProfileResource profileResource;
 
     private final ProfileSubscription profileSubscription;
 
+    @NonNull
     private final ProfileSubscriber profileSubscriber;
 
 
@@ -45,13 +50,13 @@ public class ProfileController extends Controller {
     }
 
 
-    public void uploadAvatar(String path) {
+    public void uploadAvatar(@NonNull String path) {
 
         ctx.showImageProgressDialog();
 
         profileResource.changeAvatar(path, new ServiceHandler<UserProfile, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 ctx.hideImageProgressDialog();
                 ctx.showAlert(error.msg);
             }

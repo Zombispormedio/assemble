@@ -1,7 +1,5 @@
 package com.zombispormedio.assemble.controllers;
 
-import com.orhanobut.logger.Logger;
-import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.resources.MeetingResource;
@@ -11,6 +9,9 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.views.fragments.IMeetingsView;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 
 /**
@@ -18,17 +19,19 @@ import java.util.ArrayList;
  */
 public class MeetingsController extends Controller {
 
+    @Nullable
     private IMeetingsView ctx;
 
     private final MeetingResource meetingResource;
 
     private final MeetingSubscription meetingSubscription;
 
+    @NonNull
     private final MeetingSubscriber meetingSubscriber;
 
     private boolean refreshing;
 
-    public MeetingsController(IMeetingsView ctx) {
+    public MeetingsController(@NonNull IMeetingsView ctx) {
         super(ctx.getParent());
         this.ctx = ctx;
         meetingResource = getResourceComponent().provideMeetingResource();
@@ -59,7 +62,7 @@ public class MeetingsController extends Controller {
         meetingSubscription.load();
     }
 
-    public void onBookmark(int i, Meeting meeting) {
+    public void onBookmark(int i, @NonNull Meeting meeting) {
 
         meetingResource.bookmark(meeting.id, new ServiceHandler<Result, Error>() {
             @Override
@@ -94,6 +97,6 @@ public class MeetingsController extends Controller {
     public void onDestroy() {
         super.onDestroy();
         meetingSubscription.removeSubscriber(meetingSubscriber);
-        ctx=null;
+        ctx = null;
     }
 }

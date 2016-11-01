@@ -19,7 +19,7 @@ public interface IAuthService {
 
     void signOut(final IServiceHandler<Result, Error> handler);
 
-    void refreshGCM(String gcmToken, final IServiceHandler<Result, Error> handler );
+    void refreshGCM(String gcmToken, final IServiceHandler<Result, Error> handler);
 
 
 }

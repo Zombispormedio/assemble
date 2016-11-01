@@ -6,6 +6,7 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.Sorted;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,29 +20,32 @@ import butterknife.BindView;
 public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Container> {
 
 
+    @Nullable
     @BindView(R.id.username_label)
     TextView usernameLabel;
 
+    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
+    @Nullable
     private IOnClickItemListHandler<Container> listener;
 
-    public SelectedMemberHolder(View view) {
+    public SelectedMemberHolder(@NonNull View view) {
         super(view);
-        this.listener=null;
+        this.listener = null;
     }
 
 
     @Override
-    public void bind(int position, Container itemData) {
+    public void bind(int position, @NonNull Container itemData) {
         renderData(itemData);
         setupOnClickListener(position, itemData);
     }
 
 
-    private void renderData(Container data) {
-        FriendProfile friend=data.getContent();
+    private void renderData(@NonNull Container data) {
+        FriendProfile friend = data.getContent();
         usernameLabel.setText(friend.username);
 
         friend.getLargeImageBuilder()
@@ -52,7 +56,7 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
 
     private void setupOnClickListener(final int position, final Container itemData) {
         itemView.setOnClickListener(view -> {
-            if(listener!=null){
+            if (listener != null) {
                 listener.onClick(position, itemData);
             }
         });
@@ -64,8 +68,10 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
         this.listener = listener;
     }
 
-    public static class Container implements Sorted<Container>{
+    public static class Container implements Sorted<Container> {
+
         private FriendProfile content;
+
         private int friendIndex;
 
         public Container(FriendProfile content, int friendIndex) {
@@ -82,7 +88,7 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
         }
 
         @Override
-        public boolean areTheSame(Container o) {
+        public boolean areTheSame(@NonNull Container o) {
             return content.areTheSame(o.getContent());
         }
 

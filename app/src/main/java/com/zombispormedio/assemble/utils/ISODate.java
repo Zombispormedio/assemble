@@ -18,7 +18,7 @@ public class ISODate implements Comparable<ISODate> {
 
     private final Calendar cal;
 
-    public ISODate(String iso) {
+    public ISODate(@NonNull String iso) {
         cal = parse(iso);
     }
 
@@ -60,16 +60,16 @@ public class ISODate implements Comparable<ISODate> {
                 && getDayOfMonth() == now.getDayOfMonth();
     }
 
-    public boolean beforeDay(ISODate d2){
-        return getDayOfMonth()>d2.getDayOfMonth();
+    public boolean beforeDay(@NonNull ISODate d2) {
+        return getDayOfMonth() > d2.getDayOfMonth();
     }
 
-    public boolean beforeMonth(ISODate d2){
+    public boolean beforeMonth(@NonNull ISODate d2) {
         return getMonth() > d2.getMonth();
     }
 
-    public boolean beforeYear(ISODate d2){
-        return getYear()>d2.getYear();
+    public boolean beforeYear(@NonNull ISODate d2) {
+        return getYear() > d2.getYear();
     }
 
     public void setYear(int y) {
@@ -139,33 +139,35 @@ public class ISODate implements Comparable<ISODate> {
     }
 
 
-    private Calendar parse(String inDate) {
+    private Calendar parse(@NonNull String inDate) {
         DateTime d = ISODateTimeFormat.dateTime().parseDateTime(inDate);
         Calendar outDate = Calendar.getInstance();
         outDate.setTimeInMillis(d.getMillis());
         return outDate;
     }
 
+    @NonNull
     public static ISODate Now() {
         return new ISODate(Calendar.getInstance());
     }
 
+    @NonNull
     public static ISODate Yesterday() {
         Calendar c1 = Calendar.getInstance();
         c1.add(Calendar.DAY_OF_YEAR, -1);
         return new ISODate(c1);
     }
 
-    public String format(String format) {
+    public String format(@NonNull String format) {
         DateTimeFormatter formatter = DateTimeFormat.forPattern(format).withLocale(Locale.getDefault());
         return formatter.print(cal.getTimeInMillis());
     }
 
-    public void appendYears(int o){
+    public void appendYears(int o) {
         cal.add(Calendar.YEAR, o);
     }
 
-    public long getTimeInMilliseconds(){
+    public long getTimeInMilliseconds() {
         return cal.getTimeInMillis();
     }
 

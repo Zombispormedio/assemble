@@ -6,6 +6,8 @@ import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.services.storage.FriendStorageService;
 import com.zombispormedio.assemble.models.services.storage.ProfileStorageService;
 
+import android.support.annotation.NonNull;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -35,41 +37,42 @@ public class MessageDAO extends RealmObject implements IBaseDAO<Message> {
     public int chat_id;
 
 
+    @NonNull
     @Override
     public Message toModel() {
         Profile sender, recipient;
 
-        ProfileStorageService profileService= new ProfileStorageService();
+        ProfileStorageService profileService = new ProfileStorageService();
 
-        FriendStorageService friendService= new FriendStorageService();
+        FriendStorageService friendService = new FriendStorageService();
 
-        UserProfile userProfile=profileService.getFirst();
+        UserProfile userProfile = profileService.getFirst();
 
-        if(userProfile.id==sender_id){
-            sender=userProfile;
-            recipient=friendService.getByID(recipient_id);
-        }else{
-            recipient=userProfile;
-            sender=friendService.getByID(sender_id);
+        if (userProfile.id == sender_id) {
+            sender = userProfile;
+            recipient = friendService.getByID(recipient_id);
+        } else {
+            recipient = userProfile;
+            sender = friendService.getByID(sender_id);
         }
 
-
         return new Message(id, content,
-                is_read, is_sent, is_delivered,created_at,
+                is_read, is_sent, is_delivered, created_at,
                 sender, recipient, chat_id);
     }
 
+    @NonNull
     @Override
-    public IBaseDAO fromModel(Message model) {
-        this.id=model.id;
-        this.created_at=model.created_at;
-        this.sender_id=model.sender_id;
-        this.recipient_id=model.recipient_id;
-        this.content=model.content;
-        this.is_read=model.is_read;
-        this.is_sent=model.is_sent;
-        this.is_delivered=model.is_delivered;
-        this.chat_id=model.chat_id;
+    public IBaseDAO fromModel(@NonNull Message model) {
+        this.id = model.id;
+        this.created_at = model.created_at;
+        this.sender_id = model.sender_id;
+        this.recipient_id = model.recipient_id;
+        this.content = model.content;
+        this.is_read = model.is_read;
+        this.is_sent = model.is_sent;
+        this.is_delivered = model.is_delivered;
+        this.chat_id = model.chat_id;
         return this;
     }
 
@@ -79,7 +82,9 @@ public class MessageDAO extends RealmObject implements IBaseDAO<Message> {
         return id;
     }
 
-    public static class Factory implements IDAOFactory<MessageDAO>{
+    public static class Factory implements IDAOFactory<MessageDAO> {
+
+        @NonNull
         @Override
         public MessageDAO create() {
             return new MessageDAO();

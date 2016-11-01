@@ -3,9 +3,10 @@ package com.zombispormedio.assemble.adapters;
 import com.varunest.sparkbutton.SparkButton;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
-
 import com.zombispormedio.assemble.models.Team;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,31 +19,37 @@ import butterknife.BindView;
  */
 public class TeamHolder extends AbstractHolder<Team> {
 
+    @Nullable
     @BindView(R.id.name_label)
     TextView nameLabel;
 
+    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
+    @Nullable
     @BindView(R.id.card_view)
     CardView cardView;
 
+    @Nullable
     @BindView(R.id.star_checker)
     SparkButton starChecker;
 
+    @Nullable
     private IOnClickItemListHandler<Team> starCheckerListener;
 
+    @Nullable
     private IOnClickItemListHandler<Team> listener;
 
     public TeamHolder(View view) {
         super(view);
         this.listener = null;
-        this.starCheckerListener=null;
+        this.starCheckerListener = null;
     }
 
 
     @Override
-    public void bind(int position, Team itemData) {
+    public void bind(int position, @NonNull Team itemData) {
         renderData(itemData);
         setupOnClickListener(position, itemData);
         setupOnStarred(position, itemData);
@@ -50,7 +57,7 @@ public class TeamHolder extends AbstractHolder<Team> {
 
     private void setupOnStarred(int position, Team itemData) {
         starChecker.setEventListener((button, buttonState) -> {
-            if(starCheckerListener!=null){
+            if (starCheckerListener != null) {
                 starCheckerListener.onClick(position, itemData);
             }
         });
@@ -64,7 +71,7 @@ public class TeamHolder extends AbstractHolder<Team> {
         });
     }
 
-    private void renderData(Team team) {
+    private void renderData(@NonNull Team team) {
         nameLabel.setText(team.name);
         team.getLargeImageBuilder()
                 .context(getContext())

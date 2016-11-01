@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 import io.realm.Realm;
@@ -145,6 +146,7 @@ public class AssembleApplication extends Application implements IApplicationView
     }
 
 
+    @NonNull
     @Override
     public String getAppString(int id) {
         return getString(id);
@@ -165,13 +167,14 @@ public class AssembleApplication extends Application implements IApplicationView
         return !RunningActivity.whoIsRunning.isEmpty();
     }
 
+    @NonNull
     @Override
     public Intent createIntent(Class<? extends BaseActivity> activityClass) {
-        return new Intent(getApplicationContext(),activityClass);
+        return new Intent(getApplicationContext(), activityClass);
     }
 
     @Override
-    public void startIntent(Intent intent) {
+    public void startIntent(@NonNull Intent intent) {
         intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }

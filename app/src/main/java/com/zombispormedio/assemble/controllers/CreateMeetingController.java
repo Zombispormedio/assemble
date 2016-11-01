@@ -1,9 +1,9 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
+import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.resources.MeetingResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.net.Error;
@@ -11,21 +11,28 @@ import com.zombispormedio.assemble.utils.DateUtils;
 import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.views.activities.ICreateMeetingView;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 /**
  * Created by Xavier Serrano on 09/09/2016.
  */
 public class CreateMeetingController extends Controller {
 
+    @Nullable
     private ICreateMeetingView ctx;
 
     private final TeamResource teamResource;
 
     private final MeetingResource meetingResource;
 
+    @NonNull
     private final MeetingEditor.Builder editor;
 
+    @Nullable
     private String imagePath;
 
+    @Nullable
     private DateUtils.DateError dateError;
 
 
@@ -44,7 +51,7 @@ public class CreateMeetingController extends Controller {
         imagePath = null;
     }
 
-    public void onTeamSelected(Team data) {
+    public void onTeamSelected(@NonNull Team data) {
         editor.setTeam(data.id);
         ctx.bindTeam(data.name);
     }
@@ -74,7 +81,6 @@ public class CreateMeetingController extends Controller {
         ctx.setupStartHour(startDate.getHour(), startDate.getMinutes());
 
         ctx.setupEndHour(endDate.getHour(), endDate.getMinutes());
-
 
         ctx.bindStartDate(startDate);
 
@@ -130,7 +136,7 @@ public class CreateMeetingController extends Controller {
         checkEnd(end, true);
     }
 
-    private void checkEnd(ISODate end, boolean hour) {
+    private void checkEnd(@NonNull ISODate end, boolean hour) {
         if (end.compareTo(editor.getStartAt()) < 0) {
             dateError = new DateUtils.DateError();
             if (hour) {
@@ -179,13 +185,13 @@ public class CreateMeetingController extends Controller {
 
         meetingResource.create(editor.build(), new ServiceHandler<Meeting, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 ctx.showAlert(error.msg);
                 afterCreateMeeting();
             }
 
             @Override
-            public void onSuccess(Meeting result) {
+            public void onSuccess(@NonNull Meeting result) {
                 if (uploadImage(result.id)) {
                     afterCreateMeeting();
                 }
@@ -207,7 +213,7 @@ public class CreateMeetingController extends Controller {
 
         meetingResource.uploadImage(id, imagePath, new ServiceHandler<Meeting, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 ctx.showAlert(error.msg);
                 afterCreateMeeting();
             }

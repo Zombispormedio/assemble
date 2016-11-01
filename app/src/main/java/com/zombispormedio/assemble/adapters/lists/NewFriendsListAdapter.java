@@ -7,6 +7,8 @@ import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.views.holders.INewFriendHolder;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -25,9 +27,10 @@ public class NewFriendsListAdapter extends FriendProfileAdapter<NewFriendHolder>
     }
 
 
+    @NonNull
     @Override
-    public NewFriendHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        NewFriendHolder holder = new NewFriendHolder(getView(parent,R.layout.list_item_new_friends));
+    public NewFriendHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        NewFriendHolder holder = new NewFriendHolder(getView(parent, R.layout.list_item_new_friends));
         if (listener != null) {
             holder.setOnClickListener(listener);
         }
@@ -47,26 +50,30 @@ public class NewFriendsListAdapter extends FriendProfileAdapter<NewFriendHolder>
         this.listener = listener;
     }
 
-    public static class Factory  {
+    public static class Factory {
 
+        @Nullable
         private IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener;
 
         private IOnClickItemListHandler<FriendProfile> listener;
 
         public Factory() {
-            addFriendListener=null;
+            addFriendListener = null;
         }
 
+        @NonNull
         public Factory setAddFriendListener(
                 IOnClickComponentItemHandler<FriendProfile, INewFriendHolder> addFriendListener) {
             this.addFriendListener = addFriendListener;
             return this;
         }
 
+        @NonNull
         public NewFriendsListAdapter make() {
             return make(new ArrayList<>());
         }
 
+        @NonNull
         public NewFriendsListAdapter make(ArrayList<FriendProfile> data) {
             NewFriendsListAdapter adapter = new NewFriendsListAdapter(data);
 

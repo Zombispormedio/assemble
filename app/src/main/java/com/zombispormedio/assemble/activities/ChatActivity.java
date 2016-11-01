@@ -1,18 +1,5 @@
 package com.zombispormedio.assemble.activities;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
-
-import android.view.MenuItem;
-import android.widget.EditText;
-import android.widget.ImageView;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.MessageListAdapter;
 import com.zombispormedio.assemble.controllers.ChatController;
@@ -20,6 +7,20 @@ import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.views.activities.IChatView;
+
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.NavUtils;
+import android.support.v4.app.TaskStackBuilder;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SimpleItemAnimator;
+import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.util.ArrayList;
 
@@ -36,14 +37,18 @@ import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_ID;
 
 public class ChatActivity extends BaseActivity implements IChatView {
 
+    @Nullable
     private ChatController ctrl;
 
+    @Nullable
     @BindView(R.id.messages_list)
     RecyclerView messagesList;
 
+    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
+    @Nullable
     @BindView(R.id.message_input)
     EditText messageInput;
 
@@ -109,19 +114,20 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
     @Override
-    public void setAvatar(ImageUtils.ImageBuilder builder) {
+    public void setAvatar(@NonNull ImageUtils.ImageBuilder builder) {
         builder.context(this)
                 .imageView(imageView)
                 .build();
     }
 
     @Override
-    public void bindMessages(ArrayList<Message> messages) {
+    public void bindMessages(@NonNull ArrayList<Message> messages) {
         messageListAdapter.addAll(messages);
         messagesList.scrollToPosition(messages.size() - 1);
     }
 
 
+    @NonNull
     @Override
     public String getMessageInputValue() {
         String value = messageInput.getText().toString();
@@ -177,7 +183,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
                 goBack();
@@ -211,11 +217,10 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
 
-
     private class MessageReceiver extends BroadcastReceiver {
 
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, @NonNull Intent intent) {
 
             getResourceComponent().provideMessageSubscription().haveOneChanged(intent.getExtras().getInt(MESSAGE_ID));
         }
@@ -224,7 +229,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
     private class ReadReceiver extends BroadcastReceiver {
 
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, @NonNull Intent intent) {
             Bundle data = intent.getExtras();
             int[] messagesIds = data.getIntArray(MESSAGES);
             if (messagesIds != null) {

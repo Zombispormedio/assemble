@@ -1,24 +1,7 @@
 package com.zombispormedio.assemble.activities;
 
-import android.app.ProgressDialog;
-
-import android.content.Intent;
-
-
-import android.net.Uri;
-import android.os.Bundle;
-
-import android.support.design.widget.BottomSheetDialog;
-import android.support.design.widget.FloatingActionButton;
-
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
-
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ProfileController;
-
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ISODate;
@@ -26,6 +9,17 @@ import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.activities.IProfileView;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.design.widget.FloatingActionButton;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -37,21 +31,27 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
     private ProfileController ctrl;
 
+    @Nullable
     @BindView(R.id.image_profile)
     ImageView imageProfile;
 
+    @Nullable
     @BindView(R.id.image_upload_button)
     FloatingActionButton imageFab;
 
+    @Nullable
     @BindView(R.id.profile_username_text)
     TextView usernameText;
 
+    @Nullable
     @BindView(R.id.profile_location_text)
     TextView locationText;
 
+    @Nullable
     @BindView(R.id.profile_bio_text)
     TextView bioText;
 
+    @Nullable
     @BindView(R.id.profile_birth_date_text)
     TextView birthDateText;
 
@@ -118,8 +118,8 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     @Override
-    public void setBirthDate(ISODate birth, String def) {
-        String text=birth!=null?birth.format(getString(R.string.born_at)):def;
+    public void setBirthDate(@Nullable ISODate birth, String def) {
+        String text = birth != null ? birth.format(getString(R.string.born_at)) : def;
         birthDateText.setText(text);
     }
 
@@ -143,7 +143,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     @Override
-    public void setProfileImage(ImageUtils.ImageBuilder builder) {
+    public void setProfileImage(@NonNull ImageUtils.ImageBuilder builder) {
         builder.context(this)
                 .imageView(imageProfile)
                 .build();
@@ -170,7 +170,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @NonNull Intent data) {
         if (resultCode == RESULT_OK) {
             int type = ExternalNavigationManager.getType(requestCode);
             switch (type) {

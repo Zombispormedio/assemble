@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.adapters.SelectedMemberHolder;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class SelectedMembersListAdapter extends BaseSortedListAdapter<
 
     private IOnClickItemListHandler<SelectedMemberHolder.Container> listener;
 
+    @NonNull
     private final ArrayList<Integer> friendIndexes;
 
     public SelectedMembersListAdapter() {
@@ -25,8 +27,9 @@ public class SelectedMembersListAdapter extends BaseSortedListAdapter<
         friendIndexes = new ArrayList<>();
     }
 
+    @NonNull
     @Override
-    public SelectedMemberHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public SelectedMemberHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         SelectedMemberHolder holder = new SelectedMemberHolder(getView(parent, R.layout.list_item_selected_members));
         holder.setOnClickListener(listener);
         return holder;

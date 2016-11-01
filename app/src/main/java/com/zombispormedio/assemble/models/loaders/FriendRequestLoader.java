@@ -3,9 +3,11 @@ package com.zombispormedio.assemble.models.loaders;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.handlers.SuccessHandler;
 import com.zombispormedio.assemble.models.FriendRequestProfile;
-import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.models.services.interfaces.IFriendService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
+import com.zombispormedio.assemble.net.Error;
+
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -25,7 +27,7 @@ public class FriendRequestLoader implements ILoader {
     }
 
     @Override
-    public void retrieve(final SuccessHandler handler) {
+    public void retrieve(@NonNull final SuccessHandler handler) {
         apiService.getFriendRequests(new ServiceHandler<ArrayList<FriendRequestProfile>, Error>() {
             @Override
             public void onSuccess(ArrayList<FriendRequestProfile> result) {

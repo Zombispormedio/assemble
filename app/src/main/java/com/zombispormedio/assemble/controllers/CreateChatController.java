@@ -3,12 +3,15 @@ package com.zombispormedio.assemble.controllers;
 import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Chat;
-import com.zombispormedio.assemble.models.editors.ChatEditor;
 import com.zombispormedio.assemble.models.FriendProfile;
+import com.zombispormedio.assemble.models.editors.ChatEditor;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.activities.ICreateChatView;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -17,6 +20,7 @@ import java.util.ArrayList;
  */
 public class CreateChatController extends Controller {
 
+    @Nullable
     private ICreateChatView ctx;
 
     private final ChatResource chatResource;
@@ -27,8 +31,8 @@ public class CreateChatController extends Controller {
         super(ctx);
         this.ctx = ctx;
 
-        chatResource=getResourceComponent().provideChatResource();
-        friendResource=getResourceComponent().provideFriendResource();
+        chatResource = getResourceComponent().provideChatResource();
+        friendResource = getResourceComponent().provideFriendResource();
     }
 
     @Override
@@ -37,37 +41,37 @@ public class CreateChatController extends Controller {
     }
 
     private void renderFriends() {
-        ArrayList<Chat> chats=chatResource.getAll();
+        ArrayList<Chat> chats = chatResource.getAll();
         ArrayList<FriendProfile> friends;
 
-        if(chats.size()>0){
-          int[] friendInChatIds=Stream.of(chats)
-                  .map(item->item.recipient.id)
-                  .mapToInt(i->i)
-                  .toArray();
+        if (chats.size() > 0) {
+            int[] friendInChatIds = Stream.of(chats)
+                    .map(item -> item.recipient.id)
+                    .mapToInt(i -> i)
+                    .toArray();
 
-            friends=friendResource.notIn(friendInChatIds);
-        }else{
-            friends=friendResource.getAll();
+            friends = friendResource.notIn(friendInChatIds);
+        } else {
+            friends = friendResource.getAll();
         }
 
         ctx.bindFriends(friends);
     }
 
-    public void onFriend(FriendProfile data) {
+    public void onFriend(@NonNull FriendProfile data) {
         createChat(data);
     }
 
-    private void createChat(FriendProfile data) {
+    private void createChat(@NonNull FriendProfile data) {
         ctx.showProgress();
 
-        ChatEditor.Builder builder=new ChatEditor.Builder()
+        ChatEditor.Builder builder = new ChatEditor.Builder()
                 .setFriend(data.id);
 
-        chatResource.create(builder.build(), new ServiceHandler<Chat, Error>(){
+        chatResource.create(builder.build(), new ServiceHandler<Chat, Error>() {
 
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 ctx.showAlert(error.msg);
                 afterCreate();
             }
@@ -79,7 +83,7 @@ public class CreateChatController extends Controller {
         });
     }
 
-    private void afterCreate(){
+    private void afterCreate() {
         ctx.hideProgress();
         ctx.goHome();
     }
@@ -87,6 +91,6 @@ public class CreateChatController extends Controller {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        ctx=null;
+        ctx = null;
     }
 }

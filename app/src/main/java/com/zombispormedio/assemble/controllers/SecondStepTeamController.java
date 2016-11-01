@@ -1,12 +1,15 @@
 package com.zombispormedio.assemble.controllers;
 
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.models.Team;
+import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.views.activities.ISecondStepTeamView;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 /**
  * Created by Xavier Serrano on 25/09/2016.
@@ -14,14 +17,17 @@ import com.zombispormedio.assemble.views.activities.ISecondStepTeamView;
 
 public class SecondStepTeamController extends Controller {
 
+    @Nullable
     private ISecondStepTeamView ctx;
 
     private final FriendResource friendResource;
 
     private final TeamResource teamResource;
 
+    @NonNull
     private final TeamEditor.Builder editor;
 
+    @Nullable
     private String imagePath;
 
 
@@ -69,13 +75,13 @@ public class SecondStepTeamController extends Controller {
 
         teamResource.create(editor.build(), new ServiceHandler<Team, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 ctx.showAlert(error.msg);
                 afterCreateTeam();
             }
 
             @Override
-            public void onSuccess(Team result) {
+            public void onSuccess(@NonNull Team result) {
                 if (uploadImage(result.id)) {
                     afterCreateTeam();
                 }
@@ -97,7 +103,7 @@ public class SecondStepTeamController extends Controller {
 
         teamResource.uploadImage(id, imagePath, new ServiceHandler<Team, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 ctx.showAlert(error.msg);
                 afterCreateTeam();
             }

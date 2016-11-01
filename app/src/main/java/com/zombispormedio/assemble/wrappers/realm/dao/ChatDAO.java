@@ -6,6 +6,8 @@ import com.zombispormedio.assemble.models.services.storage.FriendStorageService;
 import com.zombispormedio.assemble.models.services.storage.MessageStorageService;
 import com.zombispormedio.assemble.models.services.storage.ProfileStorageService;
 
+import android.support.annotation.NonNull;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -23,19 +25,21 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
     public FriendProfileDAO recipient;
 
+    @NonNull
     @Override
     public Chat toModel() {
-        MessageStorageService messageStorage=new MessageStorageService();
+        MessageStorageService messageStorage = new MessageStorageService();
 
-        Message message=messageStorage.getLastMessage(id);
+        Message message = messageStorage.getLastMessage(id);
 
-        int unreads=messageStorage.getUnreadCount(id, recipient.id);
+        int unreads = messageStorage.getUnreadCount(id, recipient.id);
 
         return new Chat(id, created_at, sender.toModel(), recipient.toModel(), message, unreads);
     }
 
+    @NonNull
     @Override
-    public ChatDAO fromModel(Chat model) {
+    public ChatDAO fromModel(@NonNull Chat model) {
 
         this.id = model.id;
         this.created_at = model.created_at;
@@ -64,6 +68,7 @@ public class ChatDAO extends RealmObject implements IBaseDAO<Chat> {
 
     public static class Factory implements IDAOFactory<ChatDAO> {
 
+        @NonNull
         @Override
         public ChatDAO create() {
             return new ChatDAO();

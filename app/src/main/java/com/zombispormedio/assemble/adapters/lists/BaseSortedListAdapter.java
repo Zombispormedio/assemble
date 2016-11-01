@@ -7,6 +7,8 @@ import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.adapters.AbstractHolder;
 import com.zombispormedio.assemble.models.Sorted;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.util.SortedList;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -22,12 +24,13 @@ import java.util.List;
 public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder<T>> extends RecyclerView.Adapter<E> {
 
 
+    @NonNull
     protected final SortedList<T> mData;
 
     public BaseSortedListAdapter(Class<T> tClass) {
         mData = new SortedList<>(tClass, new SortedList.Callback<T>() {
             @Override
-            public int compare(T o1, T o2) {
+            public int compare(@NonNull T o1, @NonNull T o2) {
                 return compareItems(o1, o2);
             }
 
@@ -37,12 +40,12 @@ public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder
             }
 
             @Override
-            public boolean areContentsTheSame(T oldItem, T newItem) {
+            public boolean areContentsTheSame(@NonNull T oldItem, T newItem) {
                 return areItemsAndContentsTheSame(oldItem, newItem);
             }
 
             @Override
-            public boolean areItemsTheSame(T item1, T item2) {
+            public boolean areItemsTheSame(@NonNull T item1, @NonNull T item2) {
                 return areItemsEquals(item1, item2);
             }
 
@@ -63,30 +66,31 @@ public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder
         });
     }
 
-    private boolean areItemsEquals(T item1, T item2) {
+    private boolean areItemsEquals(@NonNull T item1, @NonNull T item2) {
         return item1.getIdentity() == item2.getIdentity();
     }
 
-    private boolean areItemsAndContentsTheSame(T oldItem, T newItem) {
+    private boolean areItemsAndContentsTheSame(@NonNull T oldItem, T newItem) {
         return oldItem.areTheSame(newItem);
     }
 
-    protected int compareItems(T o1, T o2) {
+    protected int compareItems(@NonNull T o1, @NonNull T o2) {
         return o1.compareTo(o2);
     }
 
+    @Nullable
     @Override
     public E onCreateViewHolder(ViewGroup parent, int viewType) {
         return null;
     }
 
-    protected View getView(ViewGroup parent, int layout) {
+    protected View getView(@NonNull ViewGroup parent, int layout) {
         return LayoutInflater.from(parent.getContext())
                 .inflate(layout, parent, false);
     }
 
     @Override
-    public void onBindViewHolder(E holder, int position) {
+    public void onBindViewHolder(@NonNull E holder, int position) {
         T item = mData.get(position);
         holder.bind(position, item);
     }
@@ -104,7 +108,7 @@ public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder
         return mData.add(item);
     }
 
-    public int indexOf(T item) {
+    public int indexOf(@NonNull T item) {
         return indexByIdentity(item.getIdentity());
     }
 
@@ -127,7 +131,7 @@ public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder
         mData.updateItemAt(index, item);
     }
 
-    public void addAll(List<T> items) {
+    public void addAll(@NonNull List<T> items) {
         if (items.size() == 0) {
             clear();
         } else {
@@ -140,18 +144,18 @@ public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder
         }
     }
 
-    public void addOrUpdate(T newItem){
-        int index=indexByIdentity(newItem.getIdentity());
-        if(index==-1){
+    public void addOrUpdate(@NonNull T newItem) {
+        int index = indexByIdentity(newItem.getIdentity());
+        if (index == -1) {
             add(newItem);
-        }else{
-            if(!get(index).areTheSame(newItem)){
+        } else {
+            if (!get(index).areTheSame(newItem)) {
                 updateItemAt(index, newItem);
             }
         }
     }
 
-    private void removeComparingWithList(List<T> items) {
+    private void removeComparingWithList(@NonNull List<T> items) {
         ArrayList<Integer> ids = Stream.of(items)
                 .map(Sorted::getIdentity)
                 .collect(Collectors.toCollection(ArrayList<Integer>::new));
@@ -169,7 +173,7 @@ public class BaseSortedListAdapter<T extends Sorted<T>, E extends AbstractHolder
     }
 
 
-    public boolean remove(T item) {
+    public boolean remove(@NonNull T item) {
         int index = indexOf(item);
         return mData.removeItemAt(index) != null;
     }

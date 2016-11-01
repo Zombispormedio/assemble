@@ -9,7 +9,6 @@ public class WorkerHandler implements IWorkerHandler {
     private SuccessHandler handler;
 
 
-
     @Override
     public void done() {
 

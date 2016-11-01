@@ -1,17 +1,6 @@
 package com.zombispormedio.assemble.activities;
 
 
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.Bundle;
-import android.support.design.widget.BottomSheetDialog;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.ParticipantsListAdapter;
 import com.zombispormedio.assemble.controllers.SecondStepTeamController;
@@ -22,6 +11,19 @@ import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.activities.ISecondStepTeamView;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.BottomSheetDialog;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 
 import butterknife.BindView;
@@ -29,19 +31,24 @@ import butterknife.OnClick;
 
 public class SecondStepTeamActivity extends BaseActivity implements ISecondStepTeamView {
 
+    @Nullable
     private SecondStepTeamController ctrl;
 
     private ExternalNavigationManager externalNavigationManager;
 
+    @Nullable
     @BindView(R.id.image_view)
     ImageView imageView;
 
+    @Nullable
     @BindView(R.id.participants_label)
     TextView participantsLabel;
 
+    @Nullable
     @BindView(R.id.name_input)
     EditText nameInput;
 
+    @Nullable
     @BindView(R.id.participants_list)
     RecyclerView participantsList;
 
@@ -60,9 +67,9 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
         bindActivity(this);
         setToolbarSubtitle(R.string.add_name);
 
-        Bundle extra=getIntent().getExtras();
+        Bundle extra = getIntent().getExtras();
 
-        ctrl=new SecondStepTeamController(this, extra.getIntArray(NavigationManager.ARGS+0));
+        ctrl = new SecondStepTeamController(this, extra.getIntArray(NavigationManager.ARGS + 0));
         externalNavigationManager = new ExternalNavigationManager(this);
 
         setupParticipants();
@@ -81,7 +88,7 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
                 .itemAnimation(true)
                 .configure();
 
-        participantsListAdapter= new ParticipantsListAdapter();
+        participantsListAdapter = new ParticipantsListAdapter();
         participantsList.setAdapter(participantsListAdapter);
     }
 
@@ -94,22 +101,23 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
 
     @Override
     public void setParticipantsTitle(int number, int total) {
-        String participants=String.format(getString(R.string.participants_number), number,total);
+        String participants = String.format(getString(R.string.participants_number), number, total);
         participantsLabel.setText(participants);
     }
 
+    @NonNull
     @Override
     public String getName() {
         return nameInput.getText().toString();
     }
 
     @Override
-    public void bindParticipants(ArrayList<FriendProfile> data) {
+    public void bindParticipants(@NonNull ArrayList<FriendProfile> data) {
         participantsListAdapter.addAll(data);
     }
 
     @Override
-    public void bindImage(String path) {
+    public void bindImage(@NonNull String path) {
         new ImageUtils.ImageBuilder(this, imageView)
                 .circle(true)
                 .file(path)
@@ -152,20 +160,20 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
     }
 
     @OnClick(R.id.image_view)
-    public void onClickImage(View view){
+    public void onClickImage(View view) {
         imageUploaderBottomSheet.show();
     }
 
 
     @OnClick(R.id.fab)
-    public void onClickFab(View view){
+    public void onClickFab(View view) {
         ctrl.onCreateTeam();
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @NonNull Intent data) {
         if (resultCode == RESULT_OK) {
-            String path=null;
+            String path = null;
             int type = ExternalNavigationManager.getType(requestCode);
             switch (type) {
 
@@ -182,7 +190,7 @@ public class SecondStepTeamActivity extends BaseActivity implements ISecondStepT
                 }
             }
 
-            if(path!=null){
+            if (path != null) {
                 ctrl.setImagePath(path);
                 bindImage(path);
             }

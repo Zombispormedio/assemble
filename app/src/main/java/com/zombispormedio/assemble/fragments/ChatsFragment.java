@@ -1,14 +1,6 @@
 package com.zombispormedio.assemble.fragments;
 
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.activities.HomeActivity;
 import com.zombispormedio.assemble.adapters.lists.ChatsListAdapter;
@@ -17,6 +9,15 @@ import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.fragments.IChatsView;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -29,9 +30,11 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
 
     private ChatsController ctrl;
 
+    @Nullable
     @BindView(R.id.chats_list)
     RecyclerView chatsList;
 
+    @Nullable
     @BindView(R.id.chats_refresh)
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -39,7 +42,7 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_chats, container, false);
     }
@@ -79,13 +82,13 @@ public class ChatsFragment extends BaseFragment implements IChatsView {
     }
 
     @Override
-    public void bindChats(ArrayList<Chat> data) {
+    public void bindChats(@NonNull ArrayList<Chat> data) {
         chatsListAdapter.addAll(data);
     }
 
     @Override
-    public void updateChat(Chat chat) {
-        int index=chatsListAdapter.indexOf(chat);
+    public void updateChat(@NonNull Chat chat) {
+        int index = chatsListAdapter.indexOf(chat);
         chatsListAdapter.updateItemAt(index, chat);
     }
 

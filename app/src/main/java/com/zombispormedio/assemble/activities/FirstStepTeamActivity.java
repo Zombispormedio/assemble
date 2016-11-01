@@ -1,10 +1,5 @@
 package com.zombispormedio.assemble.activities;
 
-import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.adapters.lists.SelectedMembersListAdapter;
 import com.zombispormedio.assemble.adapters.lists.TeamFriendsListAdapter;
@@ -13,6 +8,13 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.NavigationManager;
 import com.zombispormedio.assemble.views.activities.IFirstStepTeamView;
+
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import java.util.ArrayList;
 
@@ -23,12 +25,15 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
 
     private FirstStepTeamController ctrl;
 
+    @Nullable
     @BindView(R.id.members_list)
     RecyclerView membersList;
 
+    @Nullable
     @BindView(R.id.friends_list)
     RecyclerView friendsList;
 
+    @Nullable
     @BindView(R.id.divider)
     View divider;
 
@@ -46,7 +51,7 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
         bindActivity(this);
         setDefaultSubtitle();
 
-        ctrl=new FirstStepTeamController(this);
+        ctrl = new FirstStepTeamController(this);
 
         setupFriends();
 
@@ -54,7 +59,6 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
 
         ctrl.onCreate();
     }
-
 
 
     private void setupFriends() {
@@ -67,9 +71,9 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
 
         friendsListFactory.setOnClickListener(
                 (position, data) -> {
-                    if(!data.isSelected()){
+                    if (!data.isSelected()) {
                         ctrl.onFriendAddedToMembers(position, data.getContent());
-                    }else{
+                    } else {
                         ctrl.onMemberRemoved(position, data.getContent());
                     }
                 });
@@ -80,7 +84,7 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
     }
 
     private void setupMembers() {
-        membersListAdapter= new SelectedMembersListAdapter();
+        membersListAdapter = new SelectedMembersListAdapter();
 
         AndroidUtils.createListConfiguration(this, membersList)
                 .orientation(LinearLayoutManager.HORIZONTAL)
@@ -95,25 +99,25 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
     }
 
     @OnClick(R.id.fab)
-    public void onNextPage(View view){
+    public void onNextPage(View view) {
         ctrl.onNext();
     }
 
 
     @Override
     public void setParticipantsSubtitle(int number, int total) {
-        String subtitle=String.format(getString(R.string.selected_participants), number,total);
+        String subtitle = String.format(getString(R.string.selected_participants), number, total);
         setToolbarSubtitle(subtitle);
 
     }
 
     @Override
     public void setDefaultSubtitle() {
-       setToolbarSubtitle(R.string.add_participants);
+        setToolbarSubtitle(R.string.add_participants);
     }
 
     @Override
-    public void bindFriends(ArrayList<FriendProfile> friends) {
+    public void bindFriends(@NonNull ArrayList<FriendProfile> friends) {
         friendsListAdapter.setFriendProfiles(friends);
         membersListAdapter.clear();
     }
@@ -123,14 +127,14 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
         membersListAdapter.addMember(member, friendIndex);
         friendsListAdapter.selectFriend(friendIndex);
 
-        int itemCount=membersListAdapter.getItemCount();
-        if(itemCount>0){
-            if(divider.getVisibility()!=View.VISIBLE){
+        int itemCount = membersListAdapter.getItemCount();
+        if (itemCount > 0) {
+            if (divider.getVisibility() != View.VISIBLE) {
                 divider.setVisibility(View.VISIBLE);
             }
 
-            if(itemCount>3){
-                membersList.scrollToPosition(itemCount-1);
+            if (itemCount > 3) {
+                membersList.scrollToPosition(itemCount - 1);
             }
 
         }
@@ -142,7 +146,7 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
         membersListAdapter.removeMemberByFriend(friendIndex);
         friendsListAdapter.deselectFriend(friendIndex);
 
-        if(membersListAdapter.getItemCount()==0){
+        if (membersListAdapter.getItemCount() == 0) {
             divider.setVisibility(View.GONE);
         }
     }

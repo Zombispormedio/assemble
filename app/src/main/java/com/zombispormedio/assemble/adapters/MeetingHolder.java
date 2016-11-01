@@ -7,7 +7,8 @@ import com.zombispormedio.assemble.models.Meeting;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.utils.Utils;
 
-
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.CardView;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -21,30 +22,39 @@ import butterknife.BindView;
  */
 public class MeetingHolder extends AbstractHolder<Meeting> {
 
+    @Nullable
     @BindView(R.id.name_label)
     TextView nameLabel;
 
+    @Nullable
     @BindView(R.id.frame_view)
     FrameLayout frameView;
 
+    @Nullable
     @BindView(R.id.date_label)
     TextView dateLabel;
 
+    @Nullable
     @BindView(R.id.team_image)
     ImageView teamImage;
 
+    @Nullable
     @BindView(R.id.team_label)
     TextView teamLabel;
 
+    @Nullable
     @BindView(R.id.meeting_image)
     ImageView meetingImage;
 
+    @Nullable
     @BindView(R.id.card_view)
     CardView cardView;
 
+    @Nullable
     @BindView(R.id.bookmark_button)
     SparkButton bookmarkButton;
 
+    @Nullable
     private IOnClickItemListHandler<Meeting> listener;
 
     private IOnClickItemListHandler<Meeting> bookmarkListener;
@@ -56,7 +66,7 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
 
     @Override
-    public void bind(int position, Meeting itemData) {
+    public void bind(int position, @NonNull Meeting itemData) {
         renderData(itemData);
         setupOnClickListener(position, itemData);
         setupOnBookmark(position, itemData);
@@ -64,7 +74,7 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
     private void setupOnBookmark(int position, Meeting itemData) {
         bookmarkButton.setEventListener((button, buttonState) -> {
-            if(bookmarkListener!=null){
+            if (bookmarkListener != null) {
                 bookmarkListener.onClick(position, itemData);
             }
         });
@@ -79,14 +89,14 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
         });
     }
 
-    private void renderData(Meeting meeting) {
+    private void renderData(@NonNull Meeting meeting) {
 
         String meetingName = meeting.name;
 
         nameLabel.setText(meetingName);
         frameView.setBackgroundColor(Utils.getColorByString(meetingName));
 
-        String dateFormatted=meeting.getStartAt().format(getString(R.string.simple_date_with_hours));
+        String dateFormatted = meeting.getStartAt().format(getString(R.string.simple_date_with_hours));
         dateLabel.setText(dateFormatted);
 
         renderMeetingImage(meeting);
@@ -97,7 +107,7 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
     }
 
-    private void renderTeam(Team team) {
+    private void renderTeam(@NonNull Team team) {
 
         teamLabel.setText(team.name);
 
@@ -109,7 +119,7 @@ public class MeetingHolder extends AbstractHolder<Meeting> {
 
     }
 
-    private void renderMeetingImage(Meeting meeting) {
+    private void renderMeetingImage(@NonNull Meeting meeting) {
         if (meeting.haveLargeImage()) {
             meeting.getLargeImageBuilder()
                     .context(getContext())

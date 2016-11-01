@@ -1,4 +1,5 @@
 package com.zombispormedio.assemble.models.subscriptions;
+
 import com.zombispormedio.assemble.models.loaders.ChatLoader;
 
 import javax.inject.Inject;

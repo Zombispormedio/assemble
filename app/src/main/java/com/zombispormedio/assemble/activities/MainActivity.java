@@ -1,14 +1,13 @@
 package com.zombispormedio.assemble.activities;
 
+import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.controllers.MainController;
+import com.zombispormedio.assemble.utils.NavigationManager;
+import com.zombispormedio.assemble.views.activities.IMainView;
+
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.Window;
-
-import com.zombispormedio.assemble.controllers.MainController;
-
-import com.zombispormedio.assemble.utils.NavigationManager;
-import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.views.activities.IMainView;
 
 
 public class MainActivity extends BaseActivity implements IMainView {

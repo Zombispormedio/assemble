@@ -1,7 +1,6 @@
 package com.zombispormedio.assemble.views.fragments;
 
 import com.zombispormedio.assemble.models.Team;
-import com.zombispormedio.assemble.views.fragments.IFragmentView;
 
 import java.util.ArrayList;
 
@@ -10,9 +9,9 @@ import java.util.ArrayList;
  */
 public interface ITeamsView extends IFragmentView {
 
-     void bindTeams(ArrayList<Team> data );
+    void bindTeams(ArrayList<Team> data);
 
-     void updateTeam(int position, Team team);
+    void updateTeam(int position, Team team);
 
-     void finishRefresh();
+    void finishRefresh();
 }

@@ -1,12 +1,13 @@
 package com.zombispormedio.assemble.controllers;
 
 
-
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.resources.UserResource;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.views.activities.IMainView;
+
+import android.support.annotation.Nullable;
 
 
 /**
@@ -14,6 +15,7 @@ import com.zombispormedio.assemble.views.activities.IMainView;
  */
 public class MainController extends Controller {
 
+    @Nullable
     private IMainView ctx;
 
     private final UserResource user;
@@ -32,7 +34,7 @@ public class MainController extends Controller {
 
             user.checkAccess(new ServiceHandler<Result, Error>() {
                 @Override
-                public void onError(Error error){
+                public void onError(Error error) {
                     ctx.clearAuthToken();
                     ctx.goToLogin();
                 }

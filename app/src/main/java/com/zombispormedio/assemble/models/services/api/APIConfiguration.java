@@ -2,6 +2,9 @@ package com.zombispormedio.assemble.models.services.api;
 
 import com.zombispormedio.assemble.net.Request;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 /**
  * Created by Xavier Serrano on 26/07/2016.
  */
@@ -9,10 +12,13 @@ public class APIConfiguration {
 
     private static final APIConfiguration ourInstance = new APIConfiguration();
 
+    @NonNull
     private final String baseUrl;
 
+    @Nullable
     private String token;
 
+    @NonNull
     public static APIConfiguration getInstance() {
         return ourInstance;
     }
@@ -22,10 +28,12 @@ public class APIConfiguration {
         token = null;
     }
 
+    @NonNull
     public String getPath(String path) {
         return baseUrl + path;
     }
 
+    @Nullable
     public String getToken() {
         return token;
     }
@@ -46,16 +54,19 @@ public class APIConfiguration {
         token = null;
     }
 
+    @NonNull
     public Request.Builder Rest(String path) {
         return new Request.Builder()
                 .url(getPath(path));
     }
 
+    @NonNull
     public Request.Builder RestWithAuth(String path) {
         return Rest(path)
                 .headers("Authorization", token);
     }
 
+    @NonNull
     public String getBaseUrl() {
         return baseUrl;
     }

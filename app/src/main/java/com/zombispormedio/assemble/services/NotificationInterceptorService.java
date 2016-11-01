@@ -15,6 +15,8 @@ import com.zombispormedio.assemble.views.IApplicationView;
 
 import org.json.JSONObject;
 
+import android.support.annotation.NonNull;
+
 
 /**
  * Created by Xavier Serrano on 23/10/2016.
@@ -23,9 +25,10 @@ import org.json.JSONObject;
 public class NotificationInterceptorService extends NotificationExtenderService implements IMessageInterceptor,
         IReadInterceptor {
 
-    private  InterceptorControllerInterface ctrl;
+    private InterceptorControllerInterface ctrl;
+
     @Override
-    protected boolean onNotificationProcessing(OSNotificationReceivedResult notification) {
+    protected boolean onNotificationProcessing(@NonNull OSNotificationReceivedResult notification) {
         try {
             JSONObject data = notification.payload.additionalData;
             switch (notification.payload.groupKey) {
@@ -34,7 +37,7 @@ public class NotificationInterceptorService extends NotificationExtenderService 
                     break;
 
                 case AndroidConfig.Groups.READ_GROUP:
-                    ctrl= new ReadInterceptorController(this);
+                    ctrl = new ReadInterceptorController(this);
                     break;
             }
             if (ctrl == null) {
@@ -47,16 +50,14 @@ public class NotificationInterceptorService extends NotificationExtenderService 
                 overrideSettings.extender = builder -> ctrl.modifyNotificationBuilder(builder);
                 displayNotification(overrideSettings);
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             Logger.d(e.getMessage());
         }
         return true;
     }
 
 
-
-
-
+    @NonNull
     private IApplicationView getView() {
         return (IApplicationView) getApplication();
     }

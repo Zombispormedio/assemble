@@ -1,16 +1,6 @@
 package com.zombispormedio.assemble.activities;
 
 
-import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.Bundle;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.AssembleApplication;
 import com.zombispormedio.assemble.R;
@@ -20,6 +10,18 @@ import com.zombispormedio.assemble.models.services.api.APIConfiguration;
 import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.views.activities.IBaseView;
+
+import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     }
 
     /********* Authentication *****/
+    @Nullable
     public String getAuthToken() {
         return getPreferencesManager().getString(AUTH);
     }
@@ -88,7 +91,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
         }
     }
 
-    protected void bindActivity(Activity target) {
+    protected void bindActivity(@NonNull Activity target) {
         ButterKnife.bind(target);
     }
 
@@ -132,17 +135,14 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     /********************** Messaging ******************/
 
 
-
-
-
     protected void setupReceivers() {
-        receivers= new ArrayList<>();
+        receivers = new ArrayList<>();
         configureReceiver(new MessageSavingReceiver(), ON_MESSAGE_EVENT);
         configureReceiver(new ReadReceiver(), ON_READ_EVENT);
     }
 
 
-    protected void configureReceiver(BroadcastReceiver receiver, String action){
+    protected void configureReceiver(BroadcastReceiver receiver, String action) {
         IntentFilter intentFilter = new IntentFilter();
         intentFilter.addAction(action);
         registerReceiver(receiver, intentFilter);
@@ -157,7 +157,7 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     private class MessageSavingReceiver extends BroadcastReceiver {
 
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, @NonNull Intent intent) {
             Bundle data = intent.getExtras();
             Message message = data.getParcelable(MESSAGE_BUNDLE);
             getResourceComponent().provideChatResource().storeMessage(message);
@@ -168,13 +168,11 @@ public class BaseActivity extends AppCompatActivity implements IBaseView {
     private class ReadReceiver extends BroadcastReceiver {
 
         @Override
-        public void onReceive(Context context, Intent intent) {
+        public void onReceive(Context context, @NonNull Intent intent) {
             Bundle data = intent.getExtras();
             getResourceComponent().provideChatResource().haveBeenReadMessages(data.getIntArray(MESSAGES));
         }
     }
-
-
 
 
 }

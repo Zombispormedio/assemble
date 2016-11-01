@@ -1,14 +1,16 @@
 package com.zombispormedio.assemble.models.resources;
 
-import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.TeamEditor;
-import com.zombispormedio.assemble.models.services.storage.TeamStorageService;
-import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
+import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Team;
+import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.models.services.interfaces.ITeamService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
+import com.zombispormedio.assemble.models.services.storage.TeamStorageService;
+import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
+
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -45,7 +47,7 @@ public class TeamResource extends AbstractResource<Team> {
 
     }
 
-    public void uploadImage(int teamId, String path, final IServiceHandler<Team, Error> handler) {
+    public void uploadImage(int teamId, @NonNull String path, final IServiceHandler<Team, Error> handler) {
         persistence.uploadImage(teamId, new File(path), new ServiceHandler<Team, Error>(handler) {
             @Override
             public void onSuccess(Team result) {
@@ -55,8 +57,8 @@ public class TeamResource extends AbstractResource<Team> {
         });
     }
 
-    public void star(int teamId,  final IServiceHandler<Result, Error> handler){
-        persistence.star(teamId, new ServiceHandler<Result, Error>(){
+    public void star(int teamId, @NonNull final IServiceHandler<Result, Error> handler) {
+        persistence.star(teamId, new ServiceHandler<Result, Error>() {
             @Override
             public void onSuccess(Result result) {
                 getTeamStorage().star(teamId);
@@ -66,7 +68,8 @@ public class TeamResource extends AbstractResource<Team> {
     }
 
 
-    private TeamStorageService getTeamStorage(){
+    @NonNull
+    private TeamStorageService getTeamStorage() {
         return (TeamStorageService) storage;
     }
 

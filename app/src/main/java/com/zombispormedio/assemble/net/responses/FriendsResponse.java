@@ -4,7 +4,6 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.net.Error;
 
 
-
 /**
  * Created by Xavier Serrano on 25/08/2016.
  */

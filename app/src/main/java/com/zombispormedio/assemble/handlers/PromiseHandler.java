@@ -4,12 +4,14 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.JsonBinder;
 import com.zombispormedio.assemble.net.responses.AbstractResponse;
 
+import android.support.annotation.NonNull;
+
 import java.io.IOException;
 
 /**
  * Created by Xavier Serrano on 13/09/2016.
  */
-public class PromiseHandler<T extends AbstractResponse, R>  implements IPromiseHandler{
+public class PromiseHandler<T extends AbstractResponse, R> implements IPromiseHandler {
 
     private final IServiceHandler<R, Error> handler;
 
@@ -24,7 +26,7 @@ public class PromiseHandler<T extends AbstractResponse, R>  implements IPromiseH
             T res = getResponse(args[0]);
 
             if (res.success) {
-                R result=getResult(res);
+                R result = getResult(res);
                 handler.onSuccess(result);
             } else {
                 handler.onError(res.error);
@@ -38,7 +40,8 @@ public class PromiseHandler<T extends AbstractResponse, R>  implements IPromiseH
         return (T) JsonBinder.toDefaultResponse(arg);
     }
 
-    protected R getResult(T res){
+    @NonNull
+    protected R getResult(@NonNull T res) {
         return (R) res.result;
     }
 

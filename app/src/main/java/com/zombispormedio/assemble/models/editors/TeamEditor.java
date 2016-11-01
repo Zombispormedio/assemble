@@ -1,5 +1,7 @@
 package com.zombispormedio.assemble.models.editors;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by Xavier Serrano on 26/09/2016.
  */
@@ -35,21 +37,25 @@ public class TeamEditor {
             name = description = "";
         }
 
+        @NonNull
         public Builder setName(String name) {
             this.name = name;
             return this;
         }
 
+        @NonNull
         public Builder setDescription(String description) {
             this.description = description;
             return this;
         }
 
+        @NonNull
         public Builder setMembers(int[] members) {
             this.members = members;
             return this;
         }
 
+        @NonNull
         public Builder setAdmin(int admin) {
             this.admin = admin;
             return this;
@@ -71,6 +77,7 @@ public class TeamEditor {
             return admin;
         }
 
+        @NonNull
         public TeamEditor build() {
             return new TeamEditor(name, description, members, admin);
         }

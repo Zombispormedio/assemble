@@ -1,13 +1,15 @@
 package com.zombispormedio.assemble.models.services.api;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
-import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.models.Team;
+import com.zombispormedio.assemble.models.editors.TeamEditor;
+import com.zombispormedio.assemble.models.services.interfaces.ITeamService;
 import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.FileBody;
 import com.zombispormedio.assemble.net.JsonBinder;
-import com.zombispormedio.assemble.models.services.interfaces.ITeamService;
 import com.zombispormedio.assemble.net.Result;
+
+import android.support.annotation.NonNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class TeamAPIService implements ITeamService {
     }
 
     @Override
-    public void uploadImage(int teamId, File file, IServiceHandler<Team, Error> handler) {
+    public void uploadImage(int teamId, @NonNull File file, IServiceHandler<Team, Error> handler) {
         api.RestWithAuth("/team/:id/image")
                 .params("id", teamId)
                 .handler(DeferUtils.deferTeam(handler))

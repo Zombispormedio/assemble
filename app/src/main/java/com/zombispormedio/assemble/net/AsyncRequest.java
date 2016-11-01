@@ -1,12 +1,12 @@
 package com.zombispormedio.assemble.net;
 
 
-import android.os.AsyncTask;
-
 import com.annimon.stream.Stream;
 import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.wrappers.okhttp.RestWrapper;
 
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -17,6 +17,7 @@ import java.util.HashMap;
  */
 public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
 
+    @NonNull
     @Override
     protected Promise doInBackground(Request... requests) {
         Request req = requests[0];
@@ -83,7 +84,7 @@ public class AsyncRequest extends AsyncTask<Request, Void, Promise> {
         return new Promise(result, req.getHandler());
     }
 
-    protected void onPostExecute(Promise promise) {
+    protected void onPostExecute(@NonNull Promise promise) {
         super.onPostExecute(promise);
         promise.handle();
     }

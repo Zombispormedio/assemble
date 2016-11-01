@@ -1,14 +1,5 @@
 package com.zombispormedio.assemble.utils;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.drawable.Drawable;
-import android.widget.ImageView;
-
-
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.amulyakhare.textdrawable.util.ColorGenerator;
 import com.squareup.picasso.Callback;
@@ -17,6 +8,16 @@ import com.squareup.picasso.RequestCreator;
 import com.squareup.picasso.Transformation;
 import com.zombispormedio.assemble.handlers.ISuccessHandler;
 import com.zombispormedio.assemble.net.ConnectionState;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.widget.ImageView;
 
 import java.io.File;
 
@@ -28,7 +29,7 @@ public class ImageUtils {
     private static class CircleTransform implements Transformation {
 
         @Override
-        public Bitmap transform(Bitmap source) {
+        public Bitmap transform(@NonNull Bitmap source) {
             int size = Math.min(source.getWidth(), source.getHeight());
 
             int x = (source.getWidth() - size) / 2;
@@ -57,29 +58,30 @@ public class ImageUtils {
             return bitmap;
         }
 
+        @NonNull
         @Override
         public String key() {
             return "circle";
         }
     }
 
-    private static void applyRoundLetterImage(String letter, ImageView imageView) {
+    private static void applyRoundLetterImage(@NonNull String letter, @NonNull ImageView imageView) {
 
         imageView.setImageDrawable(getRoundLetterImage(letter));
     }
 
-    private static void applyLetterImage(String letter, ImageView imageView) {
+    private static void applyLetterImage(@NonNull String letter, @NonNull ImageView imageView) {
         imageView.setImageDrawable(getLetterImage(letter));
     }
 
-    private static Drawable getRoundLetterImage(String letter) {
+    private static Drawable getRoundLetterImage(@NonNull String letter) {
         ColorGenerator generator = ColorGenerator.MATERIAL;
 
         return TextDrawable.builder()
                 .buildRound(letter.toUpperCase(), generator.getColor(letter));
     }
 
-    private static Drawable getLetterImage(String letter) {
+    private static Drawable getLetterImage(@NonNull String letter) {
         ColorGenerator generator = ColorGenerator.MATERIAL;
 
         return TextDrawable.builder()
@@ -96,20 +98,26 @@ public class ImageUtils {
 
     public static class ImageBuilder {
 
+        @Nullable
         private Context mCtx;
 
         private ImageView mImageView;
 
+        @Nullable
         private String mUrl;
 
+        @Nullable
         private String mLetter;
 
         private boolean isCircle;
 
+        @Nullable
         private Drawable mDrawable;
 
+        @Nullable
         private ISuccessHandler handler;
 
+        @Nullable
         private File mFile;
 
         private int mDrawableId;
@@ -129,47 +137,56 @@ public class ImageUtils {
         public ImageBuilder() {
         }
 
+        @NonNull
         public ImageBuilder context(Context ctx) {
             this.mCtx = ctx;
             return this;
         }
 
+        @NonNull
         public ImageBuilder imageView(ImageView _imageView) {
             this.mImageView = _imageView;
             return this;
         }
 
+        @NonNull
         public ImageBuilder url(String _url) {
             this.mUrl = _url;
             return this;
         }
 
+        @NonNull
         public ImageBuilder letter(String _letter) {
             this.mLetter = _letter;
             return this;
         }
 
-        public ImageBuilder file(String path) {
+        @NonNull
+        public ImageBuilder file(@NonNull String path) {
             this.mFile = new File(path);
             return this;
         }
 
 
+        @NonNull
         public ImageBuilder circle(boolean isCircle) {
             this.isCircle = isCircle;
             return this;
         }
 
+        @NonNull
         public ImageBuilder drawable(Drawable _drawable) {
             this.mDrawable = _drawable;
             return this;
         }
 
+        @NonNull
         public ImageBuilder drawableID(int d) {
             this.mDrawableId = d;
             return this;
         }
 
+        @NonNull
         public ImageBuilder handle(ISuccessHandler handler) {
             this.handler = handler;
             return this;
@@ -221,7 +238,7 @@ public class ImageUtils {
 
             }
 
-            mCtx =null;
+            mCtx = null;
         }
 
         private void buildNormal() {

@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.activities.BaseActivity;
 import org.json.JSONObject;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
@@ -16,8 +17,10 @@ public interface INotificationEventController {
 
     void init(ArrayList<JSONObject> data);
 
+    @NonNull
     Class<? extends BaseActivity> getIntentClass();
 
+    @NonNull
     Intent modifyIntent(Intent intent, boolean isApplicationActive);
 
     boolean permitIntent();

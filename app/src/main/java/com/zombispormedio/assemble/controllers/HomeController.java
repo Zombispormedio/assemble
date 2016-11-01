@@ -19,9 +19,11 @@ import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IHomeView;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
 
 
 /**
@@ -30,6 +32,7 @@ import java.util.Set;
 public class HomeController extends Controller {
 
 
+    @Nullable
     private IHomeView ctx;
 
     private final ProfileResource profileResource;
@@ -50,22 +53,23 @@ public class HomeController extends Controller {
 
     private boolean isBackgroundLoading;
 
+    @NonNull
     private final HashMap<String, Utils.Pair<Subscription, Subscriber>> subscriptions;
 
     public HomeController(IHomeView ctx) {
         super(ctx);
         this.ctx = ctx;
         profileResource = getResourceComponent().provideProfileResource();
-        subscriptions=new HashMap<>();
+        subscriptions = new HashMap<>();
         uncheckAll();
         isBackgroundLoading = false;
     }
 
-    public HomeController(IHomeView ctx, ArrayList<Message> messages){
+    public HomeController(IHomeView ctx, ArrayList<Message> messages) {
         super(ctx);
         this.ctx = ctx;
         profileResource = getResourceComponent().provideProfileResource();
-        subscriptions=new HashMap<>();
+        subscriptions = new HashMap<>();
         uncheckAll();
         isBackgroundLoading = false;
 
@@ -98,14 +102,13 @@ public class HomeController extends Controller {
 
     private void loadAllAndAddSubscriptions() {
 
-        final ProfileSubscription profileSubscription=getResourceComponent().provideProfileSubscription();
+        final ProfileSubscription profileSubscription = getResourceComponent().provideProfileSubscription();
         final FriendSubscription friendSubscription = getResourceComponent().provideFriendSubscription();
         final FriendRequestSubscription friendRequestSubscription = getResourceComponent().provideFriendRequestSubscription();
         final TeamSubscription teamSubscription = getResourceComponent().provideTeamSubscription();
         final MeetingSubscription meetingSubscription = getResourceComponent().provideMeetingSubscription();
         final ChatSubscription chatSubscription = getResourceComponent().provideChatSubscription();
         final MessageSubscription messageSubscription = getResourceComponent().provideMessageSubscription();
-
 
         addSubscription(profileSubscription, new HomeSubscriber() {
             @Override
@@ -115,7 +118,6 @@ public class HomeController extends Controller {
                 friendSubscription.load();
             }
         });
-
 
         addSubscription(friendSubscription, new HomeSubscriber() {
             @Override
@@ -174,14 +176,14 @@ public class HomeController extends Controller {
 
     }
 
-    private void addSubscription(Subscription subscription, Subscriber subscriber){
+    private void addSubscription(@NonNull Subscription subscription, @NonNull Subscriber subscriber) {
         subscription.addSubscriber(subscriber);
         subscriptions.put(subscriber.getID(), new Utils.Pair<>(subscription, subscriber));
     }
 
-    private void removeSubscription(String id){
-        Utils.Pair<Subscription, Subscriber> pair=subscriptions.get(id);
-        Subscription subscription=pair.first;
+    private void removeSubscription(String id) {
+        Utils.Pair<Subscription, Subscriber> pair = subscriptions.get(id);
+        Subscription subscription = pair.first;
         subscription.removeSubscriber(id);
         subscriptions.remove(id);
     }
@@ -265,7 +267,6 @@ public class HomeController extends Controller {
     }
 
 
-
     private void renderProfile() {
         UserProfile profile = profileResource.getProfile();
 
@@ -308,7 +309,7 @@ public class HomeController extends Controller {
                 .forEach(this::removeSubscription);
     }
 
-    private class HomeSubscriber extends Subscriber{
+    private class HomeSubscriber extends Subscriber {
 
         @Override
         public void notifyFail() {

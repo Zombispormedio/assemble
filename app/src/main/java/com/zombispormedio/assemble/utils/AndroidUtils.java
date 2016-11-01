@@ -1,12 +1,21 @@
 package com.zombispormedio.assemble.utils;
 
+import com.annimon.stream.Stream;
+import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
+import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
+import com.zombispormedio.assemble.R;
+import com.zombispormedio.assemble.handlers.ISuccessHandler;
+import com.zombispormedio.assemble.models.UserProfile;
+import com.zombispormedio.assemble.views.activities.IBaseProfileView;
+
 import android.app.AlertDialog;
 import android.content.Context;
-
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.util.ArrayMap;
@@ -18,15 +27,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
-import com.annimon.stream.Stream;
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetBuilder;
-import com.github.rubensousa.bottomsheetbuilder.BottomSheetItemClickListener;
-import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.handlers.ISuccessHandler;
-import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.views.activities.IBaseProfileView;
-
 import java.util.HashMap;
 
 
@@ -36,7 +36,7 @@ import java.util.HashMap;
 public final class AndroidUtils {
 
 
-    public static void showAlert(Context ctx, int msg) {
+    public static void showAlert(@NonNull Context ctx, int msg) {
         Toast toast = Toast.makeText(ctx, ctx.getResources().getString(msg), Toast.LENGTH_SHORT);
         toast.show();
     }
@@ -46,6 +46,7 @@ public final class AndroidUtils {
         toast.show();
     }
 
+    @NonNull
     public static AlertDialog.Builder createConfirmDialog(Context ctx, String msg, String positiveLabel, String negativeLabel,
             DialogInterface.OnClickListener listener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
@@ -58,7 +59,7 @@ public final class AndroidUtils {
     }
 
 
-    public static DialogInterface.OnClickListener createDialogClickListener(final ISuccessHandler listener) {
+    public static DialogInterface.OnClickListener createDialogClickListener(@NonNull final ISuccessHandler listener) {
         return (dialogInterface, i) -> {
             switch (i) {
                 case DialogInterface.BUTTON_POSITIVE:
@@ -70,7 +71,7 @@ public final class AndroidUtils {
         };
     }
 
-    public static void runOnUiThread(final Runnable runnable) {
+    public static void runOnUiThread(@NonNull final Runnable runnable) {
         if (Looper.myLooper() != Looper.getMainLooper()) {
             new Handler(Looper.getMainLooper()).post(runnable);
         } else {
@@ -80,8 +81,10 @@ public final class AndroidUtils {
 
     public static class InputLayoutHelper {
 
+        @Nullable
         private EditText input;
 
+        @Nullable
         private TextInputLayout layout;
 
         public InputLayoutHelper(EditText input, TextInputLayout layout) {
@@ -89,10 +92,12 @@ public final class AndroidUtils {
             this.layout = layout;
         }
 
+        @Nullable
         public EditText getInput() {
             return input;
         }
 
+        @Nullable
         public TextInputLayout getLayout() {
             return layout;
         }
@@ -107,6 +112,7 @@ public final class AndroidUtils {
             layout.setVisibility(View.VISIBLE);
         }
 
+        @NonNull
         public String getValue() {
             return input.getText()
                     .toString();
@@ -122,7 +128,7 @@ public final class AndroidUtils {
         }
     }
 
-    public static void fillProfile(IBaseProfileView ctx, UserProfile profile) {
+    public static void fillProfile(@Nullable IBaseProfileView ctx, @Nullable UserProfile profile) {
         if (ctx != null && profile != null) {
 
             if (Utils.presenceOf(profile.username)) {
@@ -149,12 +155,14 @@ public final class AndroidUtils {
     }
 
 
+    @NonNull
     public static ListConfiguration createListConfiguration(Context ctx, RecyclerView list) {
         return new ListConfiguration(ctx, list);
     }
 
     public static class ListConfiguration {
 
+        @Nullable
         private Context ctx;
 
         private final RecyclerView list;
@@ -175,8 +183,10 @@ public final class AndroidUtils {
 
         private int spanCount;
 
+        @Nullable
         private RecyclerView.ItemDecoration dividerItemDecoration;
 
+        @Nullable
         private RecyclerView.ItemAnimator itemAnimator;
 
 
@@ -195,59 +205,70 @@ public final class AndroidUtils {
             stackFromEnd = false;
         }
 
+        @NonNull
         public ListConfiguration orientation(int orientation) {
             this.orientationType = orientation;
             return this;
         }
 
+        @NonNull
         public ListConfiguration divider(boolean haveDivider) {
             this.haveDivider = haveDivider;
             return this;
         }
 
+        @NonNull
         public ListConfiguration setDividerOrientation(int dividerOrientation) {
             this.dividerOrientation = dividerOrientation;
             return this;
         }
 
+        @NonNull
         public ListConfiguration itemAnimation(boolean haveItemAnimation) {
             this.haveItemAnimation = haveItemAnimation;
             return this;
         }
 
+        @NonNull
         public ListConfiguration scrolling(boolean haveScroll) {
             this.haveScroll = haveScroll;
             return this;
         }
 
+        @NonNull
         public ListConfiguration grid(boolean g) {
             this.isGrid = g;
             return this;
         }
 
+        @NonNull
         public ListConfiguration span(int s) {
             this.spanCount = s;
             return this;
         }
 
+        @NonNull
         public ListConfiguration startAtEnd(boolean start) {
             this.stackFromEnd = start;
             return this;
         }
 
 
+        @NonNull
         public ListConfiguration setItemAnimator(RecyclerView.ItemAnimator itemAnimator) {
             haveItemAnimation = true;
             this.itemAnimator = itemAnimator;
             return this;
         }
 
+        @NonNull
         public ListConfiguration setDividerItemDecoration(RecyclerView.ItemDecoration dividerItemDecoration) {
             haveDivider = true;
             this.dividerItemDecoration = dividerItemDecoration;
             return this;
         }
 
+        @NonNull
         private LinearLayoutManager getLinearNoScroll() {
             return new LinearLayoutManager(ctx, orientationType, false) {
                 @Override
@@ -257,10 +278,12 @@ public final class AndroidUtils {
             };
         }
 
+        @NonNull
         private LinearLayoutManager getLinear() {
             return haveScroll ? new LinearLayoutManager(ctx, orientationType, false) : getLinearNoScroll();
         }
 
+        @NonNull
         private GridLayoutManager getGridNoScroll() {
             return new GridLayoutManager(ctx, spanCount, orientationType, false) {
                 @Override
@@ -270,6 +293,7 @@ public final class AndroidUtils {
             };
         }
 
+        @NonNull
         private GridLayoutManager getGrid() {
             return haveScroll ? new GridLayoutManager(ctx, spanCount, orientationType, false) : getGridNoScroll();
         }
@@ -323,7 +347,7 @@ public final class AndroidUtils {
                 .createDialog();
     }
 
-    public static HashMap<String, String> convertBundleToStringHashMap(Bundle bundle) {
+    public static HashMap<String, String> convertBundleToStringHashMap(@NonNull Bundle bundle) {
 
         return Stream.of(bundle.keySet())
                 .filter(key -> bundle.get(key) instanceof String)
@@ -334,7 +358,7 @@ public final class AndroidUtils {
 
     }
 
-    public static HashMap<String, String> convertArrayMapToHashMap(ArrayMap<String, String> map) {
+    public static HashMap<String, String> convertArrayMapToHashMap(@NonNull ArrayMap<String, String> map) {
 
         return Stream.of(map.keySet())
                 .reduce(new HashMap<String, String>(), (memo, key) -> {

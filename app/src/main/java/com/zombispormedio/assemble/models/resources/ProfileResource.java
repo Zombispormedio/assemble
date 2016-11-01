@@ -2,12 +2,15 @@ package com.zombispormedio.assemble.models.resources;
 
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
-import com.zombispormedio.assemble.models.editors.ProfileEditor;
 import com.zombispormedio.assemble.models.UserProfile;
-import com.zombispormedio.assemble.models.subscriptions.Subscription;
-import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.models.editors.ProfileEditor;
 import com.zombispormedio.assemble.models.services.interfaces.IProfileService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
+import com.zombispormedio.assemble.models.subscriptions.Subscription;
+import com.zombispormedio.assemble.net.Error;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.io.File;
 
@@ -32,11 +35,12 @@ public class ProfileResource {
         this.storage = storage;
     }
 
+    @Nullable
     public UserProfile getProfile() {
         return storage.getFirst();
     }
 
-    public void changeAvatar(String path, final IServiceHandler<UserProfile, Error> handler) {
+    public void changeAvatar(@NonNull String path, final IServiceHandler<UserProfile, Error> handler) {
         persistence.changeAvatar(new File(path), new ServiceHandler<UserProfile, Error>(handler) {
             @Override
             public void onSuccess(UserProfile result) {

@@ -3,6 +3,7 @@ package com.zombispormedio.assemble.adapters.pagers;
 import com.zombispormedio.assemble.fragments.FriendRequestsListFragment;
 import com.zombispormedio.assemble.fragments.FriendsListFragment;
 
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -19,6 +20,7 @@ public class FriendsPagerAdapter extends FragmentStatePagerAdapter {
         this.numPages = numPages;
     }
 
+    @Nullable
     @Override
     public Fragment getItem(int position) {
 

@@ -8,11 +8,15 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.net.Result;
 import com.zombispormedio.assemble.views.activities.IRegisterView;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 /**
  * Created by Xavier Serrano on 09/07/2016.
  */
 public class RegisterController extends Controller {
 
+    @Nullable
     private IRegisterView ctx;
 
     private final UserResource user;
@@ -32,14 +36,14 @@ public class RegisterController extends Controller {
 
         if (email.isEmpty() || pass.isEmpty() || rep_pass.isEmpty()) {
             afterTryLogin();
-            if (!email.isEmpty())
+            if (!email.isEmpty()) {
                 if (pass.isEmpty()) {
                     ctx.showEmptyPassword();
                 } else if (rep_pass.isEmpty()) {
                     ctx.showEmptyRepPassword();
+                } else {
+                    ctx.showEmptyEmail();
                 }
-            else {
-                ctx.showEmptyEmail();
             }
         } else if (!pass.equals(rep_pass)) {
             afterTryLogin();
@@ -56,7 +60,7 @@ public class RegisterController extends Controller {
     private class RegisterServiceHandler extends ServiceHandler<Result, Error> {
 
         @Override
-        public void onError(Error error) {
+        public void onError(@NonNull Error error) {
             String alert = "";
             boolean alerted = false;
 
@@ -75,10 +79,11 @@ public class RegisterController extends Controller {
                 }
             }
 
-            if (!alerted)
+            if (!alerted) {
                 ctx.showUnknowError();
-            else
+            } else {
                 ctx.showAlert(alert);
+            }
 
             afterTryLogin();
         }

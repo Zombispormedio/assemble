@@ -5,6 +5,7 @@ import com.zombispormedio.assemble.adapters.MeetingHolder;
 import com.zombispormedio.assemble.handlers.IOnClickItemListHandler;
 import com.zombispormedio.assemble.models.Meeting;
 
+import android.support.annotation.NonNull;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class MeetingsListAdapter extends BaseSortedListAdapter<Meeting, MeetingH
         addAll(data);
     }
 
+    @NonNull
     @Override
     public MeetingHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -53,10 +55,12 @@ public class MeetingsListAdapter extends BaseSortedListAdapter<Meeting, MeetingH
         private IOnClickItemListHandler<Meeting> bookmarkListener;
 
 
+        @NonNull
         public MeetingsListAdapter make() {
             return make(new ArrayList<>());
         }
 
+        @NonNull
         public MeetingsListAdapter make(ArrayList<Meeting> data) {
             MeetingsListAdapter adapter = new MeetingsListAdapter(data);
             adapter.setOnClickListener(listener);

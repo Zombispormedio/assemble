@@ -4,6 +4,7 @@ import com.zombispormedio.assemble.views.activities.IBaseView;
 import com.zombispormedio.assemble.views.fragments.IFragmentView;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
 import butterknife.ButterKnife;
@@ -11,13 +12,13 @@ import butterknife.ButterKnife;
 /**
  * Created by Xavier Serrano on 09/09/2016.
  */
-public class BaseFragment  extends Fragment implements IFragmentView {
+public class BaseFragment extends Fragment implements IFragmentView {
 
     private IBaseView view;
 
-    protected void bindView(Object ctx, Activity view){
+    protected void bindView(@NonNull Object ctx, @NonNull Activity view) {
         ButterKnife.bind(ctx, view);
-        this.view= (IBaseView) view;
+        this.view = (IBaseView) view;
     }
 
 

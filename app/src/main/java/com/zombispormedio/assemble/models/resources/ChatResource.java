@@ -7,10 +7,13 @@ import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.editors.ChatEditor;
 import com.zombispormedio.assemble.models.editors.MessageEditor;
-import com.zombispormedio.assemble.models.services.storage.MessageStorageService;
-import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.models.services.interfaces.IChatService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
+import com.zombispormedio.assemble.models.services.storage.MessageStorageService;
+import com.zombispormedio.assemble.net.Error;
+
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -49,6 +52,7 @@ public class ChatResource extends AbstractResource<Chat> {
 
     }
 
+    @Nullable
     public Chat getById(int id) {
         return storage.getByID(id);
     }
@@ -57,18 +61,19 @@ public class ChatResource extends AbstractResource<Chat> {
     public void createMessage(final int id, MessageEditor message, final IServiceHandler<Message, Error> handler) {
         persistence.sendMessage(id, message, new ServiceHandler<Message, Error>(handler) {
             @Override
-            public void onSuccess(Message result) {
+            public void onSuccess(@NonNull Message result) {
                 messageStorage.createOrUpdate(result);
                 super.onSuccess(result);
             }
         });
     }
 
+    @Nullable
     public Message getMessageById(int id) {
         return messageStorage.getByID(id);
     }
 
-    public void storeMessage(Message message) {
+    public void storeMessage(@NonNull Message message) {
         messageStorage.createOrUpdate(message);
     }
 
@@ -84,7 +89,7 @@ public class ChatResource extends AbstractResource<Chat> {
     public void readMessages(int id, ChatEditor chatEditor) {
         persistence.readMessages(id, chatEditor, new ServiceHandler<ArrayList<Message>, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 Logger.d(error.msg);
             }
 
@@ -96,7 +101,7 @@ public class ChatResource extends AbstractResource<Chat> {
         });
     }
 
-    public void haveBeenReadMessages(int[] messageIds){
+    public void haveBeenReadMessages(int[] messageIds) {
         messageStorage.read(messageIds);
     }
 

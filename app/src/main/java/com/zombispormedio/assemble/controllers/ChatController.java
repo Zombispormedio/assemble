@@ -16,6 +16,9 @@ import com.zombispormedio.assemble.net.Error;
 import com.zombispormedio.assemble.utils.ISODate;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 
 
@@ -25,6 +28,7 @@ import java.util.ArrayList;
 
 public class ChatController extends Controller {
 
+    @Nullable
     private IChatView ctx;
 
     private final int chatID;
@@ -92,7 +96,7 @@ public class ChatController extends Controller {
 
     public void onMessageSend() {
         String content = ctx.getMessageInputValue();
-        if(content.isEmpty()){
+        if (content.isEmpty()) {
             return;
         }
         MessageEditor message = new MessageEditor.Builder()
@@ -105,28 +109,28 @@ public class ChatController extends Controller {
 
         chatResource.createMessage(chatID, message, new ServiceHandler<Message, Error>() {
             @Override
-            public void onError(Error error) {
+            public void onError(@NonNull Error error) {
                 ctx.showAlert(error.msg);
             }
 
             @Override
-            public void onSuccess(Message result) {
+            public void onSuccess(@NonNull Message result) {
                 ctx.updateMessage(index, chatResource.getMessageById(result.id));
             }
         });
 
     }
 
-    private void readMessages(ArrayList<Message> messages) {
+    private void readMessages(@NonNull ArrayList<Message> messages) {
         int[] messagesIDs = Stream.of(messages)
                 .filter(item -> !item.is_read && item.sender instanceof FriendProfile)
                 .mapToInt(item -> item.id)
                 .toArray();
-       readMessages(messagesIDs);
+        readMessages(messagesIDs);
 
     }
 
-    private void readMessages(int[] messagesIDs) {
+    private void readMessages(@NonNull int[] messagesIDs) {
         if (messagesIDs.length > 0) {
             ChatEditor.Builder builder = new ChatEditor.Builder()
                     .setMessages(messagesIDs);
@@ -139,7 +143,7 @@ public class ChatController extends Controller {
 
         @Override
         public void notifyOneChange(int id) {
-            Message message=chatResource.getMessageById(id);
+            Message message = chatResource.getMessageById(id);
             ctx.addMessage(message);
             readMessages(new int[]{id});
         }
