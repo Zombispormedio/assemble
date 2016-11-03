@@ -5,11 +5,10 @@ import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.resources.TeamResource;
-import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.network.Error;
 import com.zombispormedio.assemble.views.activities.ISecondStepTeamView;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 /**
  * Created by Xavier Serrano on 25/09/2016.

@@ -1,6 +1,6 @@
 package com.zombispormedio.assemble;
-import com.zombispormedio.assemble.net.HTTPMethod;
-import com.zombispormedio.assemble.net.Request;
+import com.zombispormedio.assemble.network.HTTPMethod;
+import com.zombispormedio.assemble.network.Request;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

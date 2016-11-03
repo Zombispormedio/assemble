@@ -5,9 +5,9 @@ import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.models.editors.GCMEditor;
 import com.zombispormedio.assemble.models.services.interfaces.IAuthService;
-import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.net.JsonBinder;
-import com.zombispormedio.assemble.net.Result;
+import com.zombispormedio.assemble.network.Error;
+import com.zombispormedio.assemble.network.JsonBinder;
+import com.zombispormedio.assemble.network.Result;
 
 
 /**

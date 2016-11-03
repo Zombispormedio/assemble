@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clickable="true"
+        >
+
+    <include layout="@layout/message_top_date_component"/>
+
+    <LinearLayout
+            android:id="@+id/friend_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/message_margin_right"
+            android:orientation="horizontal"
+            >
+
+
+        <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/message_padding"
+                >
+
+            <ImageView
+                    android:id="@+id/friend_image_view"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/camera_layer_list"
+                    />
+        </FrameLayout>
+
+
+        <FrameLayout
+                android:id="@+id/friend_bubble"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginBottom="2.5dp"
+                android:layout_marginTop="2.5dp"
+                android:background="@drawable/left_message_bubble"
+                android:elevation="2dp"
+                android:padding="@dimen/message_padding"
+                >
+
+            <TextView
+                    android:id="@+id/friend_content_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lorem_impsum"
+                    android:textSize="@dimen/message_text_size"
+                    />
+        </FrameLayout>
+
+    </LinearLayout>
+
+    <include layout="@layout/message_bottom_date_component"/>
+
+</LinearLayout>

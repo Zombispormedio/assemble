@@ -5,9 +5,7 @@ import com.annimon.stream.Stream;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
-import com.zombispormedio.assemble.wrappers.realm.dao.MessageDAO;
-
-import android.support.annotation.Nullable;
+import com.zombispormedio.assemble.models.services.storage.dao.MessageDAO;
 
 import java.util.ArrayList;
 

@@ -15,13 +15,13 @@ import com.zombispormedio.assemble.models.services.storage.MessageStorageService
 import com.zombispormedio.assemble.models.services.storage.ProfileStorageService;
 import com.zombispormedio.assemble.models.services.storage.TeamStorageService;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
-import com.zombispormedio.assemble.wrappers.realm.dao.ChatDAO;
-import com.zombispormedio.assemble.wrappers.realm.dao.FriendProfileDAO;
-import com.zombispormedio.assemble.wrappers.realm.dao.FriendRequestProfileDAO;
-import com.zombispormedio.assemble.wrappers.realm.dao.MeetingDAO;
-import com.zombispormedio.assemble.wrappers.realm.dao.MessageDAO;
-import com.zombispormedio.assemble.wrappers.realm.dao.TeamDAO;
-import com.zombispormedio.assemble.wrappers.realm.dao.UserProfileDAO;
+import com.zombispormedio.assemble.models.services.storage.dao.ChatDAO;
+import com.zombispormedio.assemble.models.services.storage.dao.FriendProfileDAO;
+import com.zombispormedio.assemble.models.services.storage.dao.FriendRequestProfileDAO;
+import com.zombispormedio.assemble.models.services.storage.dao.MeetingDAO;
+import com.zombispormedio.assemble.models.services.storage.dao.MessageDAO;
+import com.zombispormedio.assemble.models.services.storage.dao.TeamDAO;
+import com.zombispormedio.assemble.models.services.storage.dao.UserProfileDAO;
 
 import android.support.annotation.NonNull;
 

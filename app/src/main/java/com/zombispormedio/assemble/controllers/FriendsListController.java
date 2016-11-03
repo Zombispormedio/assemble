@@ -5,12 +5,11 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
-import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.network.Error;
 import com.zombispormedio.assemble.views.fragments.IFriendsListView;
 import com.zombispormedio.assemble.views.holders.IFriendHolder;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 

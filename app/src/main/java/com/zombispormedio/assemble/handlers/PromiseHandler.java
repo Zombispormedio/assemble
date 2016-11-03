@@ -1,8 +1,8 @@
 package com.zombispormedio.assemble.handlers;
 
-import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.net.JsonBinder;
-import com.zombispormedio.assemble.net.responses.AbstractResponse;
+import com.zombispormedio.assemble.network.Error;
+import com.zombispormedio.assemble.network.JsonBinder;
+import com.zombispormedio.assemble.network.responses.AbstractResponse;
 
 import android.support.annotation.NonNull;
 

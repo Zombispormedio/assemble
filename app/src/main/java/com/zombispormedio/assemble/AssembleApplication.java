@@ -8,7 +8,7 @@ import com.zombispormedio.assemble.models.components.ResourceComponent;
 import com.zombispormedio.assemble.models.modules.ResourceModule;
 import com.zombispormedio.assemble.models.modules.SubscriptionModule;
 import com.zombispormedio.assemble.models.services.api.APIConfiguration;
-import com.zombispormedio.assemble.net.ConnectionState;
+import com.zombispormedio.assemble.network.ConnectionState;
 import com.zombispormedio.assemble.services.NotificationOpenedEvent;
 import com.zombispormedio.assemble.utils.PreferencesManager;
 import com.zombispormedio.assemble.utils.RunningActivity;

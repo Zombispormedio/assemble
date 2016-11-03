@@ -4,14 +4,13 @@ import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.resources.FriendResource;
-import com.zombispormedio.assemble.net.ConnectionState;
-import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.net.Result;
+import com.zombispormedio.assemble.network.ConnectionState;
+import com.zombispormedio.assemble.network.Error;
+import com.zombispormedio.assemble.network.Result;
 import com.zombispormedio.assemble.views.activities.INewFriendView;
 import com.zombispormedio.assemble.views.holders.INewFriendHolder;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 

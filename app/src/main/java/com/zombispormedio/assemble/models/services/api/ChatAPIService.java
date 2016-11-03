@@ -6,8 +6,8 @@ import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.editors.ChatEditor;
 import com.zombispormedio.assemble.models.editors.MessageEditor;
 import com.zombispormedio.assemble.models.services.interfaces.IChatService;
-import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.net.JsonBinder;
+import com.zombispormedio.assemble.network.Error;
+import com.zombispormedio.assemble.network.JsonBinder;
 
 import java.util.ArrayList;
 

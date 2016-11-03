@@ -1,6 +1,8 @@
 package com.zombispormedio.assemble.adapters;
 
 
+import com.zombispormedio.assemble.models.Sorted;
+
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
@@ -60,6 +62,55 @@ public abstract class AbstractHolder<T> extends RecyclerView.ViewHolder {
 
     protected float getDimen(int id) {
         return getContext().getResources().getDimension(id);
+    }
+
+
+    public static class Container<T extends Sorted<T>> {
+
+        protected   T content;
+
+        protected int index;
+
+        protected boolean clicked;
+
+        public Container(T content) {
+            this.content = content;
+            index=-1;
+            clicked = false;
+        }
+
+        public Container(T content, int index) {
+            this.content = content;
+            this.index = index;
+            clicked = false;
+        }
+
+        public int getIndex() {
+            return index;
+        }
+
+        public void setIndex(int index) {
+            this.index = index;
+        }
+
+        public T getContent() {
+            return content;
+        }
+
+        public void setContent(T content) {
+            this.content = content;
+        }
+
+        public boolean isClicked() {
+            return clicked;
+        }
+
+        public void setClicked(boolean clicked) {
+            this.clicked = clicked;
+        }
+
+
+
     }
 
 }

@@ -68,7 +68,7 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
 
         friendsListFactory.setOnClickListener(
                 (position, data) -> {
-                    if (!data.isSelected()) {
+                    if (!data.isClicked()) {
                         ctrl.onFriendAddedToMembers(position, data.getContent());
                     } else {
                         ctrl.onMemberRemoved(position, data.getContent());
@@ -89,7 +89,7 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
                 .configure();
 
         membersListAdapter.setOnClickListener(
-                (position, data) -> ctrl.onMemberRemoved(data.getFriendIndex(), data.getContent()));
+                (position, data) -> ctrl.onMemberRemoved(data.getIndex(), data.getContent()));
 
         membersList.setAdapter(membersListAdapter);
 
@@ -129,13 +129,10 @@ public class FirstStepTeamActivity extends BaseActivity implements IFirstStepTea
             if (divider.getVisibility() != View.VISIBLE) {
                 divider.setVisibility(View.VISIBLE);
             }
-
             if (itemCount > 3) {
                 membersList.scrollToPosition(itemCount - 1);
             }
-
         }
-
     }
 
     @Override

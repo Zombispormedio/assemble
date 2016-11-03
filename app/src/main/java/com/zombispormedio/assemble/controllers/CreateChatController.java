@@ -7,11 +7,10 @@ import com.zombispormedio.assemble.models.FriendProfile;
 import com.zombispormedio.assemble.models.editors.ChatEditor;
 import com.zombispormedio.assemble.models.resources.ChatResource;
 import com.zombispormedio.assemble.models.resources.FriendResource;
-import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.network.Error;
 import com.zombispormedio.assemble.views.activities.ICreateChatView;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 

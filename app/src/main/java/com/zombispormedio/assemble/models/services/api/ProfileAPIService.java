@@ -5,9 +5,9 @@ import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.editors.ProfileEditor;
 import com.zombispormedio.assemble.models.services.interfaces.IProfileService;
-import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.net.FileBody;
-import com.zombispormedio.assemble.net.JsonBinder;
+import com.zombispormedio.assemble.network.Error;
+import com.zombispormedio.assemble.network.FileBody;
+import com.zombispormedio.assemble.network.JsonBinder;
 
 import android.support.annotation.NonNull;
 

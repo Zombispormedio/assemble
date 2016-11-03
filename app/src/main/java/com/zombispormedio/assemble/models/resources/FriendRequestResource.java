@@ -6,7 +6,7 @@ import com.zombispormedio.assemble.models.FriendRequestProfile;
 import com.zombispormedio.assemble.models.services.interfaces.IFriendService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
-import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.network.Error;
 
 import java.util.ArrayList;
 

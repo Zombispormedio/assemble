@@ -2,11 +2,10 @@ package com.zombispormedio.assemble.wrappers.realm;
 
 
 import com.zombispormedio.assemble.models.BaseModel;
-import com.zombispormedio.assemble.wrappers.realm.dao.IBaseDAO;
-import com.zombispormedio.assemble.wrappers.realm.dao.IDAOFactory;
+import com.zombispormedio.assemble.models.services.storage.dao.IBaseDAO;
+import com.zombispormedio.assemble.models.services.storage.dao.IDAOFactory;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 

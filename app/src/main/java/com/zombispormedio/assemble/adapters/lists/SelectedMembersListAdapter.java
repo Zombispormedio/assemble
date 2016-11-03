@@ -66,7 +66,7 @@ public class SelectedMembersListAdapter extends BaseSortedListAdapter<
 
             while (i < mData.size() && index == -1) {
                 SelectedMemberHolder.Container t = mData.get(i);
-                if (t.getFriendIndex() == friendIndex) {
+                if (t.getIndex() == friendIndex) {
                     index = i;
                 }
                 i++;

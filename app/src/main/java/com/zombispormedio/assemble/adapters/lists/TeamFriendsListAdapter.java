@@ -31,7 +31,6 @@ public class TeamFriendsListAdapter extends BaseSortedListAdapter<
     public TeamFriendHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         TeamFriendHolder holder = new TeamFriendHolder(getView(parent, R.layout.list_item_team_friends));
         holder.setOnClickListener(listener);
-
         return holder;
     }
 
@@ -55,13 +54,13 @@ public class TeamFriendsListAdapter extends BaseSortedListAdapter<
 
     public void selectFriend(int index) {
         TeamFriendHolder.SelectedContainer container = mData.get(index);
-        container.select();
+        container.setClicked(true);
         notifyItemChanged(index);
     }
 
     public void deselectFriend(int index) {
         TeamFriendHolder.SelectedContainer container = mData.get(index);
-        container.deselect();
+        container.setClicked(false);
         notifyItemChanged(index);
     }
 

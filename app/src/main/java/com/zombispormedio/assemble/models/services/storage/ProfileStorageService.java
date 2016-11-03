@@ -2,7 +2,7 @@ package com.zombispormedio.assemble.models.services.storage;
 
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.wrappers.realm.LocalStorage;
-import com.zombispormedio.assemble.wrappers.realm.dao.UserProfileDAO;
+import com.zombispormedio.assemble.models.services.storage.dao.UserProfileDAO;
 
 /**
  * Created by Xavier Serrano on 12/09/2016.

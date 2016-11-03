@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.models.Chat;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.editors.ChatEditor;
 import com.zombispormedio.assemble.models.editors.MessageEditor;
-import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.network.Error;
 
 import java.util.ArrayList;
 

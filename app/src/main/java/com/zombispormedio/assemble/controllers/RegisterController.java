@@ -4,12 +4,11 @@ package com.zombispormedio.assemble.controllers;
 import com.zombispormedio.assemble.handlers.ServiceHandler;
 import com.zombispormedio.assemble.models.Auth;
 import com.zombispormedio.assemble.models.resources.UserResource;
-import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.net.Result;
+import com.zombispormedio.assemble.network.Error;
+import com.zombispormedio.assemble.network.Result;
 import com.zombispormedio.assemble.views.activities.IRegisterView;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 /**
  * Created by Xavier Serrano on 09/07/2016.

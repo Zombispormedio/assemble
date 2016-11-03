@@ -68,27 +68,14 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
         this.listener = listener;
     }
 
-    public static class Container implements Sorted<Container> {
+    public static class Container extends AbstractHolder.Container<FriendProfile> implements Sorted<Container> {
 
-        private FriendProfile content;
-
-        private int friendIndex;
-
-        public Container(FriendProfile content, int friendIndex) {
-            this.content = content;
-            this.friendIndex = friendIndex;
-        }
-
-        public FriendProfile getContent() {
-            return content;
-        }
-
-        public int getFriendIndex() {
-            return friendIndex;
+        public Container(FriendProfile content, int friendIndex)  {
+            super(content, friendIndex);
         }
 
         @Override
-        public boolean areTheSame(@NonNull Container o) {
+        public boolean areTheSame(Container o) {
             return content.areTheSame(o.getContent());
         }
 
@@ -98,9 +85,10 @@ public class SelectedMemberHolder extends AbstractHolder<SelectedMemberHolder.Co
         }
 
         @Override
-        public int compareTo(@NonNull Container o) {
-            return content.compareTo(o.getContent());
+        public int compareTo(@NonNull Container tContainer) {
+            return content.compareTo(tContainer.getContent());
         }
+
     }
 
 }

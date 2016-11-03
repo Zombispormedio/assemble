@@ -5,12 +5,11 @@ import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.resources.TeamResource;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
-import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.net.Result;
+import com.zombispormedio.assemble.network.Error;
+import com.zombispormedio.assemble.network.Result;
 import com.zombispormedio.assemble.views.fragments.ITeamsView;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 

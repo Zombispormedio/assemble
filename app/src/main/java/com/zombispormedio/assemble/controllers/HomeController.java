@@ -14,13 +14,12 @@ import com.zombispormedio.assemble.models.subscriptions.ProfileSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
 import com.zombispormedio.assemble.models.subscriptions.Subscription;
 import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
-import com.zombispormedio.assemble.net.ConnectionState;
+import com.zombispormedio.assemble.network.ConnectionState;
 import com.zombispormedio.assemble.utils.StringUtils;
 import com.zombispormedio.assemble.utils.Utils;
 import com.zombispormedio.assemble.views.activities.IHomeView;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;

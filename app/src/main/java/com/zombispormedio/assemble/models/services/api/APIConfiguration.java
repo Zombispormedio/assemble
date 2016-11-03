@@ -1,9 +1,8 @@
 package com.zombispormedio.assemble.models.services.api;
 
-import com.zombispormedio.assemble.net.Request;
+import com.zombispormedio.assemble.network.Request;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 /**
  * Created by Xavier Serrano on 26/07/2016.

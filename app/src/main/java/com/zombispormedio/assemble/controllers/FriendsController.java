@@ -8,10 +8,8 @@ import com.zombispormedio.assemble.models.resources.FriendResource;
 import com.zombispormedio.assemble.models.subscriptions.FriendRequestSubscription;
 import com.zombispormedio.assemble.models.subscriptions.FriendSubscription;
 import com.zombispormedio.assemble.models.subscriptions.Subscriber;
-import com.zombispormedio.assemble.net.ConnectionState;
+import com.zombispormedio.assemble.network.ConnectionState;
 import com.zombispormedio.assemble.views.activities.IFriendsView;
-
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 

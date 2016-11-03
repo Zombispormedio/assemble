@@ -7,10 +7,9 @@ import com.zombispormedio.assemble.models.editors.ProfileEditor;
 import com.zombispormedio.assemble.models.services.interfaces.IProfileService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
 import com.zombispormedio.assemble.models.subscriptions.Subscription;
-import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.network.Error;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.io.File;
 

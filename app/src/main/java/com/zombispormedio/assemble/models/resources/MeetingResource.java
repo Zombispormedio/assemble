@@ -7,8 +7,8 @@ import com.zombispormedio.assemble.models.editors.MeetingEditor;
 import com.zombispormedio.assemble.models.services.interfaces.IMeetingService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
 import com.zombispormedio.assemble.models.services.storage.MeetingStorageService;
-import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.net.Result;
+import com.zombispormedio.assemble.network.Error;
+import com.zombispormedio.assemble.network.Result;
 
 import android.support.annotation.NonNull;
 

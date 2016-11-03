@@ -5,7 +5,7 @@ import com.zombispormedio.assemble.handlers.SuccessHandler;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.models.services.interfaces.IChatService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
-import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.network.Error;
 
 import android.support.annotation.NonNull;
 

@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.models.services.interfaces;
 import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.UserProfile;
 import com.zombispormedio.assemble.models.editors.ProfileEditor;
-import com.zombispormedio.assemble.net.Error;
+import com.zombispormedio.assemble.network.Error;
 
 import java.io.File;
 

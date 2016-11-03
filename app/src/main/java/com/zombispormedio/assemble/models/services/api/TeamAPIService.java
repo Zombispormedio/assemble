@@ -4,10 +4,10 @@ import com.zombispormedio.assemble.handlers.IServiceHandler;
 import com.zombispormedio.assemble.models.Team;
 import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.models.services.interfaces.ITeamService;
-import com.zombispormedio.assemble.net.Error;
-import com.zombispormedio.assemble.net.FileBody;
-import com.zombispormedio.assemble.net.JsonBinder;
-import com.zombispormedio.assemble.net.Result;
+import com.zombispormedio.assemble.network.Error;
+import com.zombispormedio.assemble.network.FileBody;
+import com.zombispormedio.assemble.network.JsonBinder;
+import com.zombispormedio.assemble.network.Result;
 
 import android.support.annotation.NonNull;
 

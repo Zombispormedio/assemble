@@ -64,7 +64,7 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
                 .imageView(imageView)
                 .build();
 
-        if (data.isSelected()) {
+        if (data.isClicked()) {
             selectedIcon.setVisibility(View.VISIBLE);
         } else {
             selectedIcon.setVisibility(View.GONE);
@@ -78,44 +78,13 @@ public class TeamFriendHolder extends AbstractHolder<TeamFriendHolder.SelectedCo
     }
 
 
-    public static class SelectedContainer implements Sorted<SelectedContainer> {
+    public static class SelectedContainer extends AbstractHolder.Container<FriendProfile> implements Sorted<SelectedContainer> {
 
-        private final FriendProfile content;
-
-        private boolean selected;
-
-        private int selectedMemberIndex;
 
         public SelectedContainer(FriendProfile content) {
-            this.content = content;
-            this.selected = false;
-            selectedMemberIndex = -1;
+            super(content);
         }
 
-        public FriendProfile getContent() {
-            return content;
-        }
-
-
-        public void select() {
-            selected = true;
-        }
-
-        public void deselect() {
-            selected = false;
-        }
-
-        public boolean isSelected() {
-            return selected;
-        }
-
-        public int getSelectedMemberIndex() {
-            return selectedMemberIndex;
-        }
-
-        public void setSelectedMemberIndex(int selectedMemberIndex) {
-            this.selectedMemberIndex = selectedMemberIndex;
-        }
 
         @Override
         public boolean areTheSame(@NonNull SelectedContainer o) {
