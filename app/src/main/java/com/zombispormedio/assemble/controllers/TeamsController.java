@@ -37,6 +37,7 @@ public class TeamsController extends Controller {
         teamSubscription = getResourceComponent().provideTeamSubscription();
         teamSubscriber = new TeamSubscriber();
         teamSubscription.addSubscriber(teamSubscriber);
+        teamResource.setTeamSubscription(teamSubscription);
         refreshing = false;
     }
 
@@ -62,12 +63,7 @@ public class TeamsController extends Controller {
 
     public void onStarChecker(int position, @NonNull Team team) {
 
-        teamResource.star(team.id, new ServiceHandler<Result, Error>() {
-            @Override
-            public void onSuccess(Result result) {
-                renderTeams();
-            }
-        });
+        teamResource.star(team.id);
     }
 
     private class TeamSubscriber extends Subscriber {
@@ -76,6 +72,11 @@ public class TeamsController extends Controller {
         public void notifyChange() {
             renderTeams();
             finishRefresh();
+        }
+
+        @Override
+        public void notifyOneChange(int id) {
+            ctx.updateTeam(teamResource.getById(id));
         }
 
         @Override

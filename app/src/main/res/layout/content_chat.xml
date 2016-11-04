@@ -11,12 +11,15 @@
         android:orientation="vertical"
         >
 
-    <android.support.v7.widget.RecyclerView
-            android:id="@+id/messages_list"
+
+
+    <fragment android:name="com.zombispormedio.assemble.fragments.ConversationFragment"
+            android:id="@+id/conversation"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:dividerHeight="0dp"
             android:layout_above="@+id/message_form"
+            tools:layout="@layout/fragment_conversation"
             />
 
     <LinearLayout

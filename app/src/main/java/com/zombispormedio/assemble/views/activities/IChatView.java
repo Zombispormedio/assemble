@@ -9,13 +9,11 @@ import java.util.ArrayList;
  * Created by Xavier Serrano on 02/10/2016.
  */
 
-public interface IChatView extends IBaseView {
+public interface IChatView extends IBaseView{
 
     void bindTitle(String title);
 
     void setAvatar(ImageUtils.ImageBuilder builder);
-
-    void bindMessages(ArrayList<Message> messages);
 
     String getMessageInputValue();
 
@@ -25,7 +23,8 @@ public interface IChatView extends IBaseView {
 
     void addMessage(Message message);
 
-
     void read(int id);
+
+    void bindMessages(ArrayList<Message> messages);
 
 }

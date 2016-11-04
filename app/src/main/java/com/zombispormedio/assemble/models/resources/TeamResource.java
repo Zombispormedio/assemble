@@ -7,6 +7,7 @@ import com.zombispormedio.assemble.models.editors.TeamEditor;
 import com.zombispormedio.assemble.models.services.interfaces.ITeamService;
 import com.zombispormedio.assemble.models.services.storage.IStorageService;
 import com.zombispormedio.assemble.models.services.storage.TeamStorageService;
+import com.zombispormedio.assemble.models.subscriptions.TeamSubscription;
 import com.zombispormedio.assemble.network.Error;
 import com.zombispormedio.assemble.network.Result;
 
@@ -23,6 +24,8 @@ import javax.inject.Inject;
 public class TeamResource extends AbstractResource<Team> {
 
     private final ITeamService persistence;
+
+    private TeamSubscription teamSubscription;
 
     @Inject
     public TeamResource(ITeamService persistence,
@@ -57,12 +60,12 @@ public class TeamResource extends AbstractResource<Team> {
         });
     }
 
-    public void star(int teamId, @NonNull final IServiceHandler<Result, Error> handler) {
+    public void star(int teamId) {
         persistence.star(teamId, new ServiceHandler<Result, Error>() {
             @Override
             public void onSuccess(Result result) {
                 getTeamStorage().star(teamId);
-                handler.onSuccess(result);
+                haveOneChanged(teamId);
             }
         });
     }
@@ -71,6 +74,20 @@ public class TeamResource extends AbstractResource<Team> {
     @NonNull
     private TeamStorageService getTeamStorage() {
         return (TeamStorageService) storage;
+    }
+
+    public void setTeamSubscription(TeamSubscription teamSubscription) {
+        this.teamSubscription = teamSubscription;
+    }
+
+    public void haveOneChanged(int id) {
+        if (teamSubscription != null) {
+            teamSubscription.haveOneChanged(id);
+        }
+    }
+
+    public Team getById(int id){
+        return getTeamStorage().getByID(id);
     }
 
 }

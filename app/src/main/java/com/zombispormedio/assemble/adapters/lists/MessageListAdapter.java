@@ -70,6 +70,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageHolder> {
                 if(isRoot(message, previous)){
                     viewType=FRIEND_WITH_IMAGE;
                 }
+            }else{
+                viewType=FRIEND_WITH_IMAGE;
             }
         }
 

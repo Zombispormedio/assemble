@@ -84,8 +84,8 @@ public class TeamsFragment extends BaseFragment implements ITeamsView {
     }
 
     @Override
-    public void updateTeam(int position, Team team) {
-        teamsListAdapter.updateItemAt(position, team);
+    public void updateTeam( Team team) {
+        teamsListAdapter.addOrUpdate(team);
     }
 
 

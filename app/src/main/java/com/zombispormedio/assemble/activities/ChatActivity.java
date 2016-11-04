@@ -1,10 +1,9 @@
 package com.zombispormedio.assemble.activities;
 
 import com.zombispormedio.assemble.R;
-import com.zombispormedio.assemble.adapters.lists.MessageListAdapter;
 import com.zombispormedio.assemble.controllers.ChatController;
+import com.zombispormedio.assemble.fragments.ConversationFragment;
 import com.zombispormedio.assemble.models.Message;
-import com.zombispormedio.assemble.utils.AndroidUtils;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
@@ -13,11 +12,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SimpleItemAnimator;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -39,18 +35,15 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
     private ChatController ctrl;
 
-    @BindView(R.id.messages_list)
-    RecyclerView messagesList;
-
     @BindView(R.id.image_view)
     ImageView imageView;
 
     @BindView(R.id.message_input)
     EditText messageInput;
 
-    private MessageListAdapter messageListAdapter;
-
     private boolean fromNotification;
+
+    private ConversationFragment conversationFragment;
 
 
     @Override
@@ -59,12 +52,12 @@ public class ChatActivity extends BaseActivity implements IChatView {
         setContentView(R.layout.activity_chat);
         setupToolbar();
         bindActivity(this);
-        fromNotification = false;
+
         int chatId = setupController();
 
         registerIDToMessagingService(chatId);
 
-        setupMessages();
+        conversationFragment= (ConversationFragment) getSupportFragmentManager().findFragmentById(R.id.conversation);
 
         ctrl.onCreate();
     }
@@ -74,7 +67,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
         String action = intent.getAction();
         Bundle extra = intent.getExtras();
         int chatId = extra.getInt(CHAT_ID);
-
+        fromNotification = false;
         if (MANY_MESSAGE_ACTION.equals(action)) {
             ArrayList<Message> messages = extra.getParcelableArrayList(MESSAGES);
             ctrl = new ChatController(this, chatId, messages);
@@ -85,22 +78,6 @@ public class ChatActivity extends BaseActivity implements IChatView {
         fromNotification = extra.getBoolean(FOREGROUND_NOTIFICATION);
 
         return chatId;
-    }
-
-
-    private void setupMessages() {
-        AndroidUtils.createListConfiguration(this, messagesList)
-                .startAtEnd(true)
-                .configure();
-
-        RecyclerView.ItemAnimator animator = messagesList.getItemAnimator();
-        if (animator instanceof SimpleItemAnimator) {
-            ((SimpleItemAnimator) animator).setSupportsChangeAnimations(false);
-        }
-
-        messageListAdapter = new MessageListAdapter();
-
-        messagesList.setAdapter(messageListAdapter);
     }
 
 
@@ -115,13 +92,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
                 .imageView(imageView)
                 .build();
     }
-
-    @Override
-    public void bindMessages(@NonNull ArrayList<Message> messages) {
-        messageListAdapter.addAll(messages);
-        messagesList.scrollToPosition(messages.size() - 1);
-    }
-
+    
 
     @NonNull
     @Override
@@ -133,27 +104,34 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
     @Override
     public int addPendingMessage(Message message) {
-        int index = messageListAdapter.addPending(message);
-        messagesList.scrollToPosition(index);
-        return index;
+        return getConversation().addPendingMessage(message);
     }
 
     @Override
     public void updateMessage(int index, Message message) {
-        messageListAdapter.checkMessage(index, message);
+        getConversation().updateMessage(index, message);
     }
 
     @Override
     public void addMessage(Message message) {
-        int index = messageListAdapter.getItemCount();
-        messageListAdapter.add(message);
-        messagesList.scrollToPosition(index);
+        getConversation().addMessage(message);
     }
 
     @Override
     public void read(int id) {
-        messageListAdapter.read(id);
+        getConversation().read(id);
     }
+
+    @Override
+    public void bindMessages(ArrayList<Message> messages) {
+        getConversation().bindMessages(messages);
+    }
+
+
+    protected ConversationFragment getConversation() {
+        return  conversationFragment;
+    }
+
 
     @OnClick(R.id.send_button)
     public void onSend() {
@@ -230,7 +208,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
             int[] messagesIds = data.getIntArray(MESSAGES);
             if (messagesIds != null) {
                 for (int id : messagesIds) {
-                    read(id);
+                    getConversation().read(id);
                 }
             }
 

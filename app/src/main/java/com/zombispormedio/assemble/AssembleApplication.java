@@ -1,7 +1,10 @@
 package com.zombispormedio.assemble;
 
 
+import com.google.firebase.crash.FirebaseCrash;
+
 import com.onesignal.OneSignal;
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.activities.BaseActivity;
 import com.zombispormedio.assemble.models.components.DaggerResourceComponent;
 import com.zombispormedio.assemble.models.components.ResourceComponent;
@@ -73,6 +76,8 @@ public class AssembleApplication extends Application implements IApplicationView
 
         setupAPI();
 
+        setupUncaughtException();
+
     }
 
     private void configureOneSignal() {
@@ -101,6 +106,14 @@ public class AssembleApplication extends Application implements IApplicationView
         LocalStorage.Configuration
                 .getInstance()
                 .setDatabase(Realm.getDefaultInstance());
+    }
+
+    private void setupUncaughtException() {
+        Thread.setDefaultUncaughtExceptionHandler((t, e) -> {
+            FirebaseCrash.report(e);
+            e.printStackTrace();
+            //System.exit(0);
+        });
     }
 
 
