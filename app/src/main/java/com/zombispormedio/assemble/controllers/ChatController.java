@@ -93,8 +93,7 @@ public class ChatController extends Controller {
     }
 
 
-    public void onMessageSend() {
-        String content = ctx.getMessageInputValue();
+    public void onMessageSend(String content) {
         if (content.isEmpty()) {
             return;
         }

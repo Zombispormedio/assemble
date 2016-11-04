@@ -15,8 +15,6 @@ public interface IChatView extends IBaseView{
 
     void setAvatar(ImageUtils.ImageBuilder builder);
 
-    String getMessageInputValue();
-
     int addPendingMessage(Message message);
 
     void updateMessage(int index, Message message);

@@ -83,7 +83,6 @@ public class NewFriendActivity extends BaseActivity implements INewFriendView {
         searchView.clearFocus();
         InputMethodManager im = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         im.hideSoftInputFromWindow(getWindow().getDecorView().getWindowToken(), 0);
-
     }
 
 

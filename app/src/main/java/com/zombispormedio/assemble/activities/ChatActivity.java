@@ -3,6 +3,8 @@ package com.zombispormedio.assemble.activities;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ChatController;
 import com.zombispormedio.assemble.fragments.ConversationFragment;
+import com.zombispormedio.assemble.fragments.MenuFormChatFragment;
+import com.zombispormedio.assemble.fragments.MessageFormFragment;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.views.activities.IChatView;
@@ -12,20 +14,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.view.MenuItem;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.MANY_MESSAGE_ACTION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_READ_NOTIFY_CHAT;
+import static com.zombispormedio.assemble.utils.AndroidConfig.FragmentStates.MENU_CHAT;
+import static com.zombispormedio.assemble.utils.AndroidConfig.FragmentStates.MESSAGE_INPUT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.FOREGROUND_NOTIFICATION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGES;
@@ -38,12 +41,11 @@ public class ChatActivity extends BaseActivity implements IChatView {
     @BindView(R.id.image_view)
     ImageView imageView;
 
-    @BindView(R.id.message_input)
-    EditText messageInput;
-
     private boolean fromNotification;
 
     private ConversationFragment conversationFragment;
+
+    private MessageFormFragment messageFormFragment;
 
 
     @Override
@@ -59,8 +61,12 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
         conversationFragment= (ConversationFragment) getSupportFragmentManager().findFragmentById(R.id.conversation);
 
+        setupForm();
+
         ctrl.onCreate();
     }
+
+
 
     private int setupController() {
         Intent intent = getIntent();
@@ -80,6 +86,30 @@ public class ChatActivity extends BaseActivity implements IChatView {
         return chatId;
     }
 
+    private void setupForm() {
+        messageFormFragment=new MessageFormFragment();
+        messageFormFragment.setSendButtonListener(ctrl::onMessageSend);
+        messageFormFragment.setPlusButtonListener(this::openPlusMenu);
+
+        goToMessageInput();
+    }
+
+    private void openPlusMenu() {
+        MenuFormChatFragment fragment= new MenuFormChatFragment();
+        fragment.setBackButtonListener(this::goToMessageInput);
+        replaceInputContainer(fragment, MENU_CHAT);
+    }
+
+    private void replaceInputContainer(Fragment fragment, String tag){
+        replaceUI(R.id.message_input_container, fragment, tag);
+    }
+
+    private void goToMessageInput(){
+        replaceInputContainer( messageFormFragment, MESSAGE_INPUT);
+    }
+
+
+
 
     @Override
     public void bindTitle(String title) {
@@ -94,13 +124,6 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
     
 
-    @NonNull
-    @Override
-    public String getMessageInputValue() {
-        String value = messageInput.getText().toString();
-        messageInput.setText("");
-        return value;
-    }
 
     @Override
     public int addPendingMessage(Message message) {
@@ -133,10 +156,6 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
 
-    @OnClick(R.id.send_button)
-    public void onSend() {
-        ctrl.onMessageSend();
-    }
 
 
     private void registerIDToMessagingService(int dataId) {

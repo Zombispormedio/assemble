@@ -1,15 +1,61 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout android:id="@+id/message_form"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.zombispormedio.assemble.fragments.MessageFormFragment"
-        >
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="5dp"
+        android:orientation="horizontal"
+        android:background="@drawable/message_input_bubble"
+        android:elevation="5dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:padding="2dp"
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-            android:layout_width="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        >
+    <FrameLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            >
+        <ImageButton
+                android:id="@+id/plus_button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/plus_chat"
+
+                />
+    </FrameLayout>
+
+
+    <EditText
+            android:id="@+id/message_input"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/type_your_message"
+            android:layout_weight="1"
+            android:maxHeight="120dp"
+            android:isScrollContainer="true"
+            android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+            android:textSize="18sp"
+            android:backgroundTint="@android:color/transparent"
             />
 
-</FrameLayout>
+    <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            >
+        <ImageButton
+                android:id="@+id/send_button"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="40dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/send_chat"
+
+                />
+    </FrameLayout>
+</LinearLayout>
