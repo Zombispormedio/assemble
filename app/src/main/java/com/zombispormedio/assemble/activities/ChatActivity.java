@@ -3,7 +3,7 @@ package com.zombispormedio.assemble.activities;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ChatController;
 import com.zombispormedio.assemble.fragments.ConversationFragment;
-import com.zombispormedio.assemble.fragments.MenuFormChatFragment;
+import com.zombispormedio.assemble.fragments.MediaMessageContainerFragment;
 import com.zombispormedio.assemble.fragments.MessageFormFragment;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.utils.ImageUtils;
@@ -95,7 +95,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
     }
 
     private void openPlusMenu() {
-        MenuFormChatFragment fragment= new MenuFormChatFragment();
+        MediaMessageContainerFragment fragment= new MediaMessageContainerFragment();
         fragment.setBackButtonListener(this::goToMessageInput);
         replaceInputContainer(fragment, MENU_CHAT);
     }

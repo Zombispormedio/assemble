@@ -44,7 +44,7 @@
                         android:id="@+id/friend_image_view"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
-                        android:src="@drawable/camera_layer_list"
+                        android:src="@drawable/camera_container"
                         />
             </FrameLayout>
 

@@ -10,14 +10,13 @@ import android.view.ViewGroup;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.handlers.IOnClickHandler;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MenuFormChatFragment extends Fragment {
+public class MediaMessageContainerFragment extends Fragment {
 
 
     private IOnClickHandler backButtonListener;
@@ -27,7 +26,7 @@ public class MenuFormChatFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_menu_form_chat, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_media_message_container, container, false);
 
         ButterKnife.bind(this, rootView);
 

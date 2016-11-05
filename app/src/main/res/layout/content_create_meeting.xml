@@ -206,7 +206,7 @@
                 android:layout_height="60dp"
                 android:layout_gravity="right"
                 android:layout_marginRight="20dp"
-                android:src="@drawable/camera_layer_list"
+                android:src="@drawable/camera_container"
                 />
 
     </FrameLayout>
