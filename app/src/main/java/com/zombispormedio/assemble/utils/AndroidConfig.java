@@ -60,7 +60,8 @@ public class AndroidConfig {
 
     public static class FragmentStates{
         public static final String MESSAGE_INPUT="message_input_fragment";
-        public static final String MENU_CHAT="menu_chat_fragment";
+        public static final String MEDIA_MESSAGE_CAMERA ="media_message_camera_fragment";
+        public static final String MEDIA_MESSAGE_MENU ="media_message_menu_fragment";
     }
 
 }

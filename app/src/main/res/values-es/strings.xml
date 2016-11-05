@@ -109,6 +109,11 @@
     <string name="message_date_yesterday">\'Ayer ·\' HH:mm</string>
     <string name="today">Hoy</string>
     <string name="go_back">Volver atrás</string>
+    <string name="audio">Audio</string>
+    <string name="buzz">Zumbido</string>
+    <string name="file">Archivo</string>
+    <string name="location">Ubicación</string>
+    <string name="video">Vídeo</string>
 
 
 </resources>

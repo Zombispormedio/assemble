@@ -1,9 +1,11 @@
 package com.zombispormedio.assemble.activities;
 
+import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ChatController;
 import com.zombispormedio.assemble.fragments.ConversationFragment;
-import com.zombispormedio.assemble.fragments.MediaMessageContainerFragment;
+import com.zombispormedio.assemble.fragments.MediaMessageCameraFragment;
+import com.zombispormedio.assemble.fragments.MediaMessageMenuFragment;
 import com.zombispormedio.assemble.fragments.MessageFormFragment;
 import com.zombispormedio.assemble.models.Message;
 import com.zombispormedio.assemble.utils.ImageUtils;
@@ -27,14 +29,15 @@ import butterknife.BindView;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.MANY_MESSAGE_ACTION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_READ_NOTIFY_CHAT;
-import static com.zombispormedio.assemble.utils.AndroidConfig.FragmentStates.MENU_CHAT;
+import static com.zombispormedio.assemble.utils.AndroidConfig.FragmentStates.MEDIA_MESSAGE_CAMERA;
+import static com.zombispormedio.assemble.utils.AndroidConfig.FragmentStates.MEDIA_MESSAGE_MENU;
 import static com.zombispormedio.assemble.utils.AndroidConfig.FragmentStates.MESSAGE_INPUT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.FOREGROUND_NOTIFICATION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGES;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.MESSAGE_ID;
 
-public class ChatActivity extends BaseActivity implements IChatView {
+public class ChatActivity extends BaseActivity implements IChatView{
 
     private ChatController ctrl;
 
@@ -48,6 +51,7 @@ public class ChatActivity extends BaseActivity implements IChatView {
     private MessageFormFragment messageFormFragment;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,12 +63,11 @@ public class ChatActivity extends BaseActivity implements IChatView {
 
         registerIDToMessagingService(chatId);
 
-        conversationFragment= (ConversationFragment) getSupportFragmentManager().findFragmentById(R.id.conversation);
-
-        setupForm();
+        setupFragments();
 
         ctrl.onCreate();
     }
+
 
 
 
@@ -86,29 +89,43 @@ public class ChatActivity extends BaseActivity implements IChatView {
         return chatId;
     }
 
+    private void setupFragments() {
+        conversationFragment= (ConversationFragment) getSupportFragmentManager().findFragmentById(R.id.conversation);
+        setupForm();
+    }
+
     private void setupForm() {
         messageFormFragment=new MessageFormFragment();
         messageFormFragment.setSendButtonListener(ctrl::onMessageSend);
         messageFormFragment.setPlusButtonListener(this::openPlusMenu);
-
         goToMessageInput();
     }
 
     private void openPlusMenu() {
-        MediaMessageContainerFragment fragment= new MediaMessageContainerFragment();
-        fragment.setBackButtonListener(this::goToMessageInput);
-        replaceInputContainer(fragment, MENU_CHAT);
+        replaceInputContainer(MediaMessageMenuFragment.newInstance(this::onClickMediaMessageMenu), MEDIA_MESSAGE_MENU);
     }
 
     private void replaceInputContainer(Fragment fragment, String tag){
         replaceUI(R.id.message_input_container, fragment, tag);
     }
 
-    private void goToMessageInput(){
-        replaceInputContainer( messageFormFragment, MESSAGE_INPUT);
+    private void onClickMediaMessageMenu(int i) {
+        switch (i){
+            case R.id.back_button: goToMessageInput();
+                break;
+            case R.id.camera_button: startMediaMessageCamera();
+                break;
+        }
     }
 
 
+    public void goToMessageInput(){
+        replaceInputContainer( messageFormFragment, MESSAGE_INPUT);
+    }
+
+    public void startMediaMessageCamera() {
+        //replaceInputContainer(new MediaMessageCameraFragment(), MEDIA_MESSAGE_CAMERA);
+    }
 
 
     @Override
@@ -154,8 +171,6 @@ public class ChatActivity extends BaseActivity implements IChatView {
     protected ConversationFragment getConversation() {
         return  conversationFragment;
     }
-
-
 
 
     private void registerIDToMessagingService(int dataId) {

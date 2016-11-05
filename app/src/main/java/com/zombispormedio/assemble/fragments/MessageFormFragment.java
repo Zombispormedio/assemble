@@ -39,7 +39,6 @@ public class MessageFormFragment extends Fragment {
     @OnClick(R.id.send_button)
     public void onSend(){
         if(sendButtonListener!=null){
-            hideKeyboard();
             sendButtonListener.onClick(getMessageValue());
         }
     }

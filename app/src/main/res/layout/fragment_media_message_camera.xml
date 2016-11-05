@@ -1,0 +1,35 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="10dp"
+        tools:context="com.zombispormedio.assemble.fragments.MediaMessageCameraFragment"
+        >
+
+    <FrameLayout
+            android:id="@+id/camera_preview"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            />
+
+
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+        <ImageButton
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:id="@+id/button_capture"
+                android:alpha="0.45"
+                android:src="@drawable/target_camera"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                />
+    </FrameLayout>
+
+
+</RelativeLayout>
