@@ -4,10 +4,10 @@ import com.orhanobut.logger.Logger;
 import com.zombispormedio.assemble.R;
 import com.zombispormedio.assemble.controllers.ChatController;
 import com.zombispormedio.assemble.fragments.ConversationFragment;
-import com.zombispormedio.assemble.fragments.MediaMessageCameraFragment;
 import com.zombispormedio.assemble.fragments.MediaMessageMenuFragment;
 import com.zombispormedio.assemble.fragments.MessageFormFragment;
 import com.zombispormedio.assemble.models.Message;
+import com.zombispormedio.assemble.utils.ExternalNavigationManager;
 import com.zombispormedio.assemble.utils.ImageUtils;
 import com.zombispormedio.assemble.views.activities.IChatView;
 
@@ -29,7 +29,6 @@ import butterknife.BindView;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.MANY_MESSAGE_ACTION;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_MESSAGE_NOTIFY_CHAT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Actions.ON_READ_NOTIFY_CHAT;
-import static com.zombispormedio.assemble.utils.AndroidConfig.FragmentStates.MEDIA_MESSAGE_CAMERA;
 import static com.zombispormedio.assemble.utils.AndroidConfig.FragmentStates.MEDIA_MESSAGE_MENU;
 import static com.zombispormedio.assemble.utils.AndroidConfig.FragmentStates.MESSAGE_INPUT;
 import static com.zombispormedio.assemble.utils.AndroidConfig.Keys.CHAT_ID;
@@ -50,6 +49,8 @@ public class ChatActivity extends BaseActivity implements IChatView{
 
     private MessageFormFragment messageFormFragment;
 
+    private ExternalNavigationManager externalNavigationManager;
+
 
 
     @Override
@@ -62,6 +63,8 @@ public class ChatActivity extends BaseActivity implements IChatView{
         int chatId = setupController();
 
         registerIDToMessagingService(chatId);
+
+        externalNavigationManager=new ExternalNavigationManager(this);
 
         setupFragments();
 
@@ -115,16 +118,29 @@ public class ChatActivity extends BaseActivity implements IChatView{
                 break;
             case R.id.camera_button: startMediaMessageCamera();
                 break;
+
+            case R.id.gallery_button: startMediaMessageGallery();
+                break;
         }
     }
-
 
     public void goToMessageInput(){
         replaceInputContainer( messageFormFragment, MESSAGE_INPUT);
     }
 
     public void startMediaMessageCamera() {
-        //replaceInputContainer(new MediaMessageCameraFragment(), MEDIA_MESSAGE_CAMERA);
+        externalNavigationManager.dispatchTakePicture();
+    }
+
+    private void startMediaMessageGallery() {
+        externalNavigationManager.dispatchGalleryToSelectImage(R.string.select_picture);
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @NonNull Intent data) {
+        String path = externalNavigationManager.getTrustedPath(requestCode, resultCode, data);
+        Logger.d(path);
     }
 
 
@@ -187,6 +203,7 @@ public class ChatActivity extends BaseActivity implements IChatView{
     protected void onDestroy() {
         super.onDestroy();
         ctrl.onDestroy();
+        externalNavigationManager.onDestroy();
         unregisterIDToMessagingService();
     }
 

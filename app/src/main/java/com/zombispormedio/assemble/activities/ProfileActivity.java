@@ -112,7 +112,7 @@ public class ProfileActivity extends BaseActivity implements IProfileView {
     }
 
     @Override
-    public void setBirthDate( ISODate birth, String def) {
+    public void setBirthDate(ISODate birth, String def) {
         String text = birth != null ? birth.format(getString(R.string.born_at)) : def;
         birthDateText.setText(text);
     }

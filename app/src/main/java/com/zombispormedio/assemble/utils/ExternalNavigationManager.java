@@ -18,6 +18,8 @@ import android.support.annotation.Nullable;
 
 import java.io.ByteArrayOutputStream;
 
+import static android.app.Activity.RESULT_OK;
+
 
 /**
  * Created by Xavier Serrano on 01/08/2016.
@@ -116,7 +118,7 @@ public class ExternalNavigationManager {
 
     public Uri resolveCameraPath(@NonNull Intent data) {
         Bundle extras = data.getExtras();
-        Bitmap imageBitmap = (Bitmap) extras.get("mData");
+        Bitmap imageBitmap = (Bitmap) extras.get("data");
 
         return getImageCameraURI(ctx.getApplicationContext(), imageBitmap);
     }
@@ -233,6 +235,29 @@ public class ExternalNavigationManager {
 
     public static boolean isGooglePhotosUri(@NonNull Uri uri) {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
+    }
+
+
+    public String getTrustedPath(int requestCode, int resultCode, Intent data){
+        String path="";
+
+        if (resultCode == RESULT_OK) {
+            int type = ExternalNavigationManager.getType(requestCode);
+            switch (type) {
+                case ExternalNavigationManager.REQUEST_CODE.GALLERY: {
+                    Uri uri = resolveGalleryPath(requestCode, data);
+                    path =getPath(uri);
+                    break;
+                }
+
+                case ExternalNavigationManager.REQUEST_CODE.CAMERA: {
+                    Uri uri = resolveCameraPath(data);
+                    path = getRealPathFromCameraUri(uri);
+                    break;
+                }
+            }
+        }
+        return path;
     }
 
 
