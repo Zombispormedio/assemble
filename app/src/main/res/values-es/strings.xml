@@ -38,7 +38,7 @@
     <string name="select_picture">Selecciona una imagen</string>
     <string name="update_profile_title">Editar Perfil</string>
     <string name="invalid_email">Introducir un correo electrónico válido</string>
-    <string name="fail_login"> Inicio de sesión fallido</string>
+    <string name="fail_login">Inicio de sesión fallido</string>
     <string name="born_at">\'Nació el\' d \'de\' MMMM \'de\' yyyy</string>
     <string name="biografy_title">Biografía</string>
     <string name="birth_date_example">11/09/1994</string>
@@ -114,6 +114,9 @@
     <string name="file">Archivo</string>
     <string name="location">Ubicación</string>
     <string name="video">Vídeo</string>
+    <string name="appwidget_text">EJEMPLO</string>
+    <string name="add_widget">Añadir Widget</string>
+    <string name="number_of_chats">%1$d conversaciones</string>
 
 
 </resources>

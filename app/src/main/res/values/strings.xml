@@ -36,7 +36,7 @@
     <string name="camera">Camera</string>
     <string name="select_picture">Select picture</string>
     <string name="invalid_email">Enter a valid email address</string>
-    <string name="fail_login"> Fail Login!</string>
+    <string name="fail_login">Fail Login!</string>
     <string name="invalid_password">Password between 6 and 50 alphanumeric characters</string>
     <string name="update_profile_title">Update Profile</string>
     <string name="username_example">Zombispormedio</string>
@@ -119,6 +119,8 @@
     <string name="location">Location</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="number_of_chats">%1$d chats</string>
 
 </resources>

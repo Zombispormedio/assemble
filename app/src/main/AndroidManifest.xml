@@ -11,6 +11,7 @@
             android:name="android.hardware.camera"
             android:required="true"
             />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -31,6 +32,7 @@
                 >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -40,16 +42,15 @@
                 >
             <intent-filter>
                 <action android:name="SEVERAL_MESSAGE_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="SEVERAL_MESSAGE_ACTIVE_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-
         <activity
                 android:name=".activities.LoginActivity"
                 android:theme="@style/AppTheme"
@@ -190,18 +191,19 @@
                     />
         </activity>
         <activity
-                android:name="com.zombispormedio.assemble.activities.ChatActivity"
+                android:name=".activities.ChatActivity"
                 android:label="@string/app_name"
-                android:parentActivityName="com.zombispormedio.assemble.activities.HomeActivity"
+                android:parentActivityName=".activities.HomeActivity"
                 android:theme="@style/AppTheme"
                 >
             <intent-filter>
                 <action android:name="ONE_MESSAGE_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-
             <intent-filter>
                 <action android:name="MANY_MESSAGE_ACTION" />
+
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
 
@@ -212,7 +214,7 @@
         </activity>
 
         <service
-                android:name="com.zombispormedio.assemble.services.NotificationInterceptorService"
+                android:name=".services.NotificationInterceptorService"
                 android:exported="false"
                 >
             <intent-filter>
@@ -225,6 +227,16 @@
                 android:value="DISABLE"
                 />
 
+        <receiver android:name=".AssembleChatWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.appwidget.provider"
+                    android:resource="@xml/assemble_chat_widget_info"
+                    />
+        </receiver>
     </application>
 
 </manifest>
