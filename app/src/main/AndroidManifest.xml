@@ -237,6 +237,12 @@
                     android:resource="@xml/assemble_chat_widget_info"
                     />
         </receiver>
+
+        <service
+                android:name=".WidgetService"
+                android:permission="android.permission.BIND_REMOTEVIEWS"
+                />
+
     </application>
 
 </manifest>

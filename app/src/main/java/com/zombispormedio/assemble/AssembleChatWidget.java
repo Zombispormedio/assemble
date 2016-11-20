@@ -1,8 +1,13 @@
 package com.zombispormedio.assemble;
 
+import com.zombispormedio.assemble.activities.MainActivity;
+
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.widget.RemoteViews;
 
 /**
@@ -36,6 +41,19 @@ public class AssembleChatWidget extends AppWidgetProvider {
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.assemble_chat_widget);
         views.setTextViewText(R.id.number_chats, widgetText);
+
+        Intent  serviceIntent=new Intent(context, WidgetService.class);
+
+        serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        serviceIntent.setData(Uri.parse(serviceIntent.toUri(Intent.URI_INTENT_SCHEME)));
+
+        views.setRemoteAdapter(R.id.chats, serviceIntent);
+
+        Intent clickIntent=new Intent(context, MainActivity.class);
+        PendingIntent clickPI=PendingIntent.getActivity(context, 0, clickIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        views.setPendingIntentTemplate(R.id.chats, clickPI);
+
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
