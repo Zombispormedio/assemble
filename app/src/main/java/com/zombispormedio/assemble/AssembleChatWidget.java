@@ -37,7 +37,8 @@ public class AssembleChatWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
             int appWidgetId) {
 
-        CharSequence widgetText = String.format(context.getString(R.string.number_of_chats), 5);
+        int chatNumber=((AssembleApplication)context.getApplicationContext()).getResourceComponent().provideChatResource().getAll().size();
+        CharSequence widgetText = String.format(context.getString(R.string.number_of_chats), chatNumber);
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.assemble_chat_widget);
         views.setTextViewText(R.id.number_chats, widgetText);

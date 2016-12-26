@@ -38,7 +38,6 @@ public class WidgetService extends RemoteViewsService {
 
         @Override
         public void onCreate() {
-           Logger.d(((AssembleApplication)ctx).getResourceComponent().provideChatResource().getAll());
         }
 
         @Override
